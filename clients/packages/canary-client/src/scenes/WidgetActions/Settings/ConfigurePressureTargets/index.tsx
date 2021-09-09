@@ -1,26 +1,30 @@
 import React from "react";
 import {
-	Header,
-	Text,
-	toast,
-	Success
+	Heading,
+  Text,
+  toast,
+  Box,
+  Grid,
+  GridItem,
+  Flex,
+  Success,
+  Button,
+  RadioField,
+  Stack,
+  Radio
 } from 'bonde-components';
 import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
 import slugify from 'slugify';
 import { useTranslation } from 'react-i18next';
-import { Container, Row, Col, Visible } from 'react-grid-system';
 
-import ButtonStyled from "../../../../components/ButtonStyled";
-import Panel from "../../../../components/Panel";
-import RadioField, { Radio } from '../../../../components/Radio';
+// import RadioField, { Radio } from '../../../../components/Radio';
 import SpyField from '../../../../components/SpyField';
 import { Widget } from '../../FetchWidgets';
 import SettingsForm from '../SettingsForm';
 import UniqueFormFields, { UniqueFormExplainCard } from "./UniqueForm";
 import GroupFormFields from './GroupForm';
 import { Targets } from "../../../Community/Domains/Icons";
-import { Flex } from "../Sending/Flex";
 
 const upsertPressureTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {
@@ -43,32 +47,32 @@ const upsertPressureTargets = gql`
 `;
 
 type GroupTarget = {
-	identify: string
+  identify: string
 }
 
 const diff = (arr1: GroupTarget[], arr2: GroupTarget[]): GroupTarget[] => {
-	const ret: GroupTarget[] = [];
-	arr1.forEach((g1: any) => {
-		const g2 = arr2.find((g: any) => g.identify === g1.identify);
+  const ret: GroupTarget[] = [];
+  arr1.forEach((g1: any) => {
+    const g2 = arr2.find((g: any) => g.identify === g1.identify);
 
-		if (!!g2 && !Object.is(g2, g1)) {
-			ret.push(g1);
-		} else if (!g2) {
-			ret.push(g1);
-		}
-	})
+    if (!!g2 && !Object.is(g2, g1)) {
+      ret.push(g1);
+    } else if (!g2) {
+      ret.push(g1);
+    }
+  })
 
-	return ret;
+  return ret;
 }
 
 type Props = {
-	widget: Widget
-	updateCache: (widget: Widget) => any
+  widget: Widget
+  updateCache: (widget: Widget) => any
 }
 
 const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactElement => {
-	const [upsert] = useMutation(upsertPressureTargets);
-	const { t } = useTranslation('widgetActions');
+  const [upsert] = useMutation(upsertPressureTargets);
+  const { t } = useTranslation('widgetActions');
 
 	return (
 		<SettingsForm
@@ -97,7 +101,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
 						await upsert({ variables });
 						updateCache({ ...widget, settings, groups });
 						toast(<Success message={t('settings.pressure.targets.success')} />, { type: toast.TYPE.SUCCESS });
-					} catch (err) {
+					} catch (err: any) {
 						console.error('err', { err });
 						toast(err.message, { type: toast.TYPE.ERROR });
 					}
@@ -107,62 +111,56 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
 			}}
 		>
 			{({ form, submitting, dirty }: any) => (
-				<Panel>
-					<Container fluid style={{ width: "100%", padding: "0" }}>
-						<Row justify="between">
-							<Col sm={12} md={12} lg={6}>
-								<SpyField field='settings.pressure_type'>
-									{({ value }: any) => (
-										<Flex spacing="32px">
-											<Visible lg xl>
-												<Targets />
-											</Visible>
-											<div style={{ flex: 1 }}>
-												<div style={{ marginBottom: "10px" }}>
-													<Header.H3>Alvos</Header.H3>
-												</div>
-												<Text style={{ marginBottom: '27px' }}>
-													Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
-												</Text>
-												<RadioField
-													name='settings.pressure_type'
-													label={t('settings.pressure.label.pressure_type')}
-													columns="auto auto"
-												>
-													<Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
-													<Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
-												</RadioField>
+				<Box bg="white" p={6} boxShadow="sm">
+					<Grid templateColumns="repeat(12, 1fr)" gap={16}>
+						<GridItem colSpan={[12, 12, 1]}>
+							<Targets />
+						</GridItem>
+						<GridItem colSpan={[12, 12, 6]}>
+							<SpyField field='settings.pressure_type'>
+								{({ value }: any) => (
+									<>
+										<Stack spacing={2} mb={4}>
+											<Heading as="h3" size="xl">Alvos</Heading>
+											<Text>
+												Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
+											</Text>
+										</Stack>
+										<RadioField
+											name='settings.pressure_type'
+											label={t('settings.pressure.label.pressure_type')}
+										>
+											<Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
+											<Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
+										</RadioField>
 
-												{value === 'unique'
-													? <UniqueFormFields />
-													: <GroupFormFields form={form} />
-												}
+                    {value === 'unique'
+                      ? <UniqueFormFields />
+                      : <GroupFormFields form={form} />
+                    }
 
-												<RadioField
-													name='settings.disable_edit_field'
-													label={t('settings.pressure.label.disable_edit_field')}
-													columns="auto auto 1fr"
-												>
-													<Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
-													<Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
-												</RadioField>
-											</div>
-										</Flex>
-									)}
-								</SpyField>
-								<Row justify='end'>
-									<ButtonStyled disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</ButtonStyled>
-								</Row>
-							</Col>
-							<Col sm={12} md={12} lg={5}>
-								<UniqueFormExplainCard />
-							</Col>
-						</Row>
-					</Container>
-				</Panel>
-			)}
-		</SettingsForm>
-	);
+                    <RadioField
+                      name='settings.disable_edit_field'
+                      label={t('settings.pressure.label.disable_edit_field')}
+                    >
+                      <Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
+                      <Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
+                    </RadioField>
+                  </>
+                )}
+              </SpyField>
+              <Flex justify='end'>
+                <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
+              </Flex>
+            </GridItem>
+            <GridItem colSpan={[12, 12, 5]}>
+              <UniqueFormExplainCard />
+            </GridItem>
+          </Grid>
+        </Box>
+      )}
+    </SettingsForm>
+  );
 };
 
 export default ConfigurePressureTargets;

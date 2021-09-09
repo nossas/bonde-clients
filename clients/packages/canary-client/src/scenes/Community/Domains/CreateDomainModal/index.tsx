@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, gql, useSession } from 'bonde-core-tools';
 import { Button, Modal } from 'bonde-components';
-// import { FORM_ERROR } from 'final-form';
 import { DNSHostedZone } from '../types';
 import DomainForm from './DomainForm';
 import ConnectDNS from './ConnectDNS';

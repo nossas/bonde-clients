@@ -3,7 +3,16 @@ import "./ReactToastify.css";
 import React from "react";
 import { BrowserRouter as Router, Switch } from "react-router-dom";
 import { BondeSessionProvider, BondeSessionUI } from "bonde-core-tools";
-import { Loading, Main, Body, ToastContainer } from "bonde-components";
+import {
+  Loading,
+  ToastContainer,
+  Main,
+  Body,
+  ChakraProvider,
+  chakraTheme,
+  FontsLoader,
+  CSSReset
+} from 'bonde-components';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as types from "styled-components/cssprop";
 
@@ -46,43 +55,47 @@ const App = (): React.ReactElement => {
   };
 
   return (
-    <BondeSessionProvider
-      fetchData
-      environment={environment as Environment}
-      loading={SessionLoading}
-      extraConfig={config}
-    >
-      <FilterProvider>
-        <CommunityExtraProvider>
-          <Router>
-            <BondeSessionUI indexRoute={adminUrl}>
-              <Main style={{ minWidth: "100%" }}>
-                <Header />
-                <ToastContainer
-                  className='BondeToastify'
-                  hideProgressBar={true}
-                />
-                <Body style={{ paddingTop: "20px", display: "unset" }}>
-                  <Switch>
-                    <SelectMapaOrRedes exact path="/" component={Home} />
-                    <SelectMapaOrRedes path="/matches" component={Relations} />
-                    <SelectMapaOrRedes
-                      path="/pessoas"
-                      component={Individuals}
-                    />
-                    <SelectMapaOrRedes path="/match" component={Match} />
-                    <SelectMapaOrRedes
-                      path="/configuracoes"
-                      component={Settings}
-                    />
-                  </Switch>
-                </Body>
-              </Main>
-            </BondeSessionUI>
-          </Router>
-        </CommunityExtraProvider>
-      </FilterProvider>
-    </BondeSessionProvider>
+    <ChakraProvider theme={chakraTheme}>
+      <CSSReset />
+      <FontsLoader />
+      <BondeSessionProvider
+        fetchData
+        environment={environment as Environment}
+        loading={SessionLoading}
+        extraConfig={config}
+      >
+        <FilterProvider>
+          <CommunityExtraProvider>
+            <Router>
+              <BondeSessionUI indexRoute={adminUrl}>
+                <Main style={{ minWidth: "100%" }}>
+                  <Header />
+                  <ToastContainer
+                    className='BondeToastify'
+                    hideProgressBar={true}
+                  />
+                  <Body style={{ paddingTop: "20px", display: "unset" }}>
+                    <Switch>
+                      <SelectMapaOrRedes exact path="/" component={Home} />
+                      <SelectMapaOrRedes path="/matches" component={Relations} />
+                      <SelectMapaOrRedes
+                        path="/pessoas"
+                        component={Individuals}
+                      />
+                      <SelectMapaOrRedes path="/match" component={Match} />
+                      <SelectMapaOrRedes
+                        path="/configuracoes"
+                        component={Settings}
+                      />
+                    </Switch>
+                  </Body>
+                </Main>
+              </BondeSessionUI>
+            </Router>
+          </CommunityExtraProvider>
+        </FilterProvider>
+      </BondeSessionProvider>
+    </ChakraProvider>
   );
 };
 

@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { useTranslation } from "react-i18next";
 
 const Preview = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #fff;
   padding: 2rem;
   border-radius: 3px;

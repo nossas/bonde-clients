@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import { Bonde, Header, Text } from 'bonde-components';
+import { Bonde, Header } from 'bonde-components';
 import BackgroundImage from './bg@2x.png';
 import * as Flag from './Flag';
 
@@ -68,14 +68,6 @@ const WrapperStyled = styled.div<WrapperStyledProps>`
       color: #fff;
     }
   `}
-
-  ${Text} {
-    a {
-      color: #dc82bf;
-      text-decoration: none;
-      font-weight: bold;
-    }
-  }
 
   @media only screen and (min-width: 768px) {
     width: 50%;

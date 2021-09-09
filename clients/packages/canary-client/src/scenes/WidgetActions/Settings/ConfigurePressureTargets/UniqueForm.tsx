@@ -1,31 +1,31 @@
 import React from 'react';
-import { Header, Text } from 'bonde-components';
+import { Heading, Text, Stack } from 'bonde-components';
 import SubjectBodyFields from './SubjectBodyFields';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const UniqueFormExplainCard = () => (
-  <>
-    <Header.H4 style={{ marginBottom: "10px" }}>
-      Como adicionar alvos
-    </Header.H4>
-    <Text>Escreva nome e email de contato dos alvos segundo o formato abaixo.</Text>
-    <Header.H4 style={{ marginBottom: "10px", marginTop: "10px" }}>
-      Formato do alvo
-    </Header.H4>
-    <Text style={{ marginBottom: "10px" }}>
-      {`Nome <email@provedor.com> (obrigatório usar os caractéres 
-        < e >; para agrupar os alvos).`}
-    </Text>
-    <Text style={{ marginBottom: "10px" }}>
-      {`Quando acabar, salve as alterações clicando no botão no canto 
-      superior direito da tela.`}
-    </Text>
-    <Text>
-      {`Os alvos serão exibidos em ordem aleatória na widget de pressão. 
-      Ou seja, cada vez que a mobilização for acessada, a ordem de exibição 
-      será diferente.`}
-    </Text>
-  </>
+  <Stack spacing={4}>
+    <Stack spacing={2}>
+      <Heading as="h4" size="lg">Como adicionar alvos</Heading>
+      <Text>Escreva nome e email de contato dos alvos segundo o formato abaixo.</Text>
+    </Stack>
+    <Stack spacing={2}>
+      <Heading as="h4" size="lg">Formato do alvo</Heading>
+      <Text>
+        {`Nome <email@provedor.com> (obrigatório usar os caractéres 
+          < e >; para agrupar os alvos).`}
+      </Text>
+      <Text>
+        {`Quando acabar, salve as alterações clicando no botão no canto 
+        superior direito da tela.`}
+      </Text>
+      <Text>
+        {`Os alvos serão exibidos em ordem aleatória na widget de pressão. 
+        Ou seja, cada vez que a mobilização for acessada, a ordem de exibição 
+        será diferente.`}
+      </Text>
+    </Stack>
+  </Stack>
 )
 
 const UniqueForm = () => (

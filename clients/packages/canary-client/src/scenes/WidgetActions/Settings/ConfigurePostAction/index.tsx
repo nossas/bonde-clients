@@ -1,13 +1,19 @@
 import React from "react";
-import { Header, TextareaField } from "bonde-components"
+import {
+	Box,
+	Button,
+	Flex,
+	Heading,
+	TextareaField,
+	Grid,
+	GridItem,
+	RadioField,
+	Radio
+} from "bonde-components";
 import { useTranslation } from "react-i18next";
-import { Container, Row, Col } from 'react-grid-system';
 
 import { Widget } from "../../FetchWidgets";
-import ButtonStyled from "../../../../components/ButtonStyled";
 import SpyField from "../../../../components/SpyField";
-import RadioField, { Radio } from "../../../../components/Radio";
-import Panel from "../../../../components/Panel";
 import SettingsForm from '../SettingsForm';
 import DefaultPostAction from "./DefaultPostAction";
 import RichInputField from "./RichInputField";
@@ -42,20 +48,20 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 			}}
 		>
 			{({ submitting, dirty }: any) => (
-				<Panel>
-					<Container fluid style={{ width: "100%", padding: "0" }}>
+				<Box bg="white" boxShadow="sm" p={6}>
+					<Grid templateColumns="repeat(12, 1fr)" gap={16}>
 						<SpyField field='settings.finish_message_type'>
 							{({ value }) => (
-								<Row justify="between">
-									<Col sm={12} md={12} lg={6}>
+								<>
+									<GridItem colSpan={[12, 12, 6]}>
 										<div style={{ display: "flex", flexDirection: "column" }}>
 											<div style={{ marginBottom: "25px" }}>
-												<Header.H3>Pós-ação</Header.H3>
+												<Heading as="h3" size="xl">Pós-ação</Heading>
 											</div>
 											<RadioField
 												name='settings.finish_message_type'
 												label={t("settings.finish.title")}
-												columns="auto auto 1fr">
+											>
 												<Radio value='share'>
 													{t("settings.finish.radio.share")}
 												</Radio>
@@ -72,19 +78,19 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 											) : (
 												<RichInputField name='settings.finish_message' />
 											)}
-											<Row justify='end'>
-												<ButtonStyled disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</ButtonStyled>
-											</Row>
+											<Flex justify='end'>
+												<Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
+											</Flex>
 										</div>
-									</Col>
-									<Col sm={12} md={12} lg={5}>
+									</GridItem>
+									<GridItem colSpan={[12, 12, 6]}>
 										{value === 'share' && <DefaultPostAction />}
-									</Col>
-								</Row>
+									</GridItem>
+								</>
 							)}
 						</SpyField>
-					</Container>
-				</Panel>
+					</Grid>
+				</Box>
 			)}
 		</SettingsForm>
 	);

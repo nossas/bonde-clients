@@ -1,53 +1,13 @@
 import React from "react";
-import styled from "styled-components";
 import { useQuery, useSession } from "bonde-core-tools";
-import { Header } from "bonde-components";
+import { SimpleGrid } from "bonde-components";
 import { useTranslation } from "react-i18next";
-import MobilizationCard, { Mobilization } from "./MobilizationCard";
+import MobilizationBox, { MobilizationProps } from "./MobilizationCard";
 import mobilizationsLastUpdated from "./query.graphql";
 import LoadingCards from "./Loading";
+import GadgetHeader from "../GadgetHeader";
 
-const Styles = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  .header {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    height: 39px;
-    margin-bottom: 15px;
-  }
-
-  ${Header.H5} {
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-`;
-
-const GadgetWrap = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-between;
-
-  @media (min-width: 769px) {
-    ${MobilizationCard}:nth-child(odd) {
-      padding: 0 0.5rem 1rem 0;
-    }
-    ${MobilizationCard}:nth-child(even) {
-      padding: 0 0 1rem 0.5rem;
-    }
-  }
-
-  @media only screen and (max-width: 768px) {
-    ${MobilizationCard} {
-      padding-bottom: 1rem;
-    }
-  }
-`;
-
-const MobilizationsGadget = () => {
+const MobilizationsGadget = (): React.ReactElement => {
   const { t } = useTranslation("home");
   const { user, storage, communities } = useSession();
   const { data, loading } = useQuery(mobilizationsLastUpdated, {
@@ -56,7 +16,7 @@ const MobilizationsGadget = () => {
 
   if (loading) return <LoadingCards />;
 
-  const parse = (m: any): Mobilization => ({
+  const parse = (m: any): MobilizationProps => ({
     id: m.id,
     name: m.name,
     goal: m.goal,
@@ -69,13 +29,11 @@ const MobilizationsGadget = () => {
   const { mobilizations } = data;
 
   return (
-    <Styles>
-      <div className="header">
-        <Header.H5>{t("gadgets.mobilizations.title")}</Header.H5>
-      </div>
-      <GadgetWrap>
-        {mobilizations.map(parse).map((mobilization: Mobilization) => (
-          <MobilizationCard
+    <>
+      <GadgetHeader title={t("gadgets.mobilizations.title")} />
+      <SimpleGrid columns={[1, null, 2]} spacing={4}>
+        {mobilizations.map(parse).map((mobilization: MobilizationProps) => (
+          <MobilizationBox
             key={mobilization.id}
             mobilization={mobilization}
             onClick={() => {
@@ -93,8 +51,8 @@ const MobilizationsGadget = () => {
             }}
           />
         ))}
-      </GadgetWrap>
-    </Styles>
+      </SimpleGrid>
+    </>
   );
 };
 

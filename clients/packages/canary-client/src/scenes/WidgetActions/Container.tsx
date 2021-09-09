@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Header, Tab, Navigation } from 'bonde-components';
-import { Container as GridContainer } from 'react-grid-system';
-import Content from "../../components/Content";
+import { Header, Tab, Navigation, Container as Content } from 'bonde-components';
 import TabRoute from './TabRoute';
 
 
@@ -39,7 +37,7 @@ export type NavigationArgs = {
   is: (regex: any) => boolean
 }
 
-const Container = ({ children, title, navigation }: Props) => {
+const Container: React.FC<Props> = ({ children, title, navigation }): React.ReactElement => {
   return (
     <TabRoute>
       {({ push, is }) => (
@@ -51,9 +49,7 @@ const Container = ({ children, title, navigation }: Props) => {
             </Navigation>
           </SubHeader>
           <Content>
-            <GridContainer fluid style={{ width: "100%", padding: "0" }}>
-              {children}
-            </GridContainer>
+            {children}
           </Content>
         </PageWrap>
       )}

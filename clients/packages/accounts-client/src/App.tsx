@@ -1,7 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { BondeSessionProvider as Session } from "bonde-core-tools";
-import { Loading } from "bonde-components";
+import {
+  Loading,
+  ChakraProvider,
+  chakraTheme,
+  FontsLoader,
+  CSSReset
+} from 'bonde-components';
 import { useTranslation } from "react-i18next";
 // Scenes and Components to make your application
 import BaseLayout from './components/BaseLayout';
@@ -53,29 +59,35 @@ function App() {
 
   return (
     <React.Suspense fallback={Loading}>
-      <Session environment={envConfig} loading={AppLoading} extraConfig={config}>
-        <Router>
-          <SessionRedirect loading={TextLoading} paths={['/auth/login']} to={appUrl}>
-            <BaseLayout>
-              <Route exact path='/'>
-                <Redirect to='/login' />
-              </Route>
-              <Route exact path='/login'>
-                <LoginPage to={appUrl} />
-              </Route>
-              <Route exact path='/register'>
-                <RegisterPage to={appUrl} />
-              </Route>
-              <Route exact path='/forget-password'>
-                <ForgetPasswordPage />
-              </Route>
-              <Route exact path='/reset-password'>
-                <ResetPasswordPage />
-              </Route>
-            </BaseLayout>
-          </SessionRedirect>
-        </Router>
-      </Session>
+      <>
+        <FontsLoader />
+        <ChakraProvider theme={chakraTheme}>
+          <CSSReset />
+          <Session environment={envConfig} loading={AppLoading} extraConfig={config}>
+            <Router>
+              <SessionRedirect loading={TextLoading} paths={['/auth/login']} to={appUrl}>
+                <BaseLayout>
+                  <Route exact path='/'>
+                    <Redirect to='/login' />
+                  </Route>
+                  <Route exact path='/login'>
+                    <LoginPage to={appUrl} />
+                  </Route>
+                  <Route exact path='/register'>
+                    <RegisterPage to={appUrl} />
+                  </Route>
+                  <Route exact path='/forget-password'>
+                    <ForgetPasswordPage />
+                  </Route>
+                  <Route exact path='/reset-password'>
+                    <ResetPasswordPage />
+                  </Route>
+                </BaseLayout>
+              </SessionRedirect>
+            </Router>
+          </Session>
+        </ChakraProvider>
+      </>
     </React.Suspense>
   );
 }
