@@ -1,6 +1,6 @@
 {
   "name": "bonde-client",
-  "version": "0.1.0",
+  "version": "4.1.6",
   "license": "AGPL-3.0",
   "scripts": {
     "test": "pnpm m run test",
