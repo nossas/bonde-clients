@@ -6,11 +6,11 @@ import SubjectBodyFields from './SubjectBodyFields';
 export const UniqueFormExplainCard = () => (
   <Stack spacing={4}>
     <Stack spacing={2}>
-      <Heading as="h4" size="sm">Como adicionar alvos</Heading>
+      <Heading as="h4" size="lg">Como adicionar alvos</Heading>
       <Text>Escreva nome e email de contato dos alvos segundo o formato abaixo.</Text>
     </Stack>
     <Stack spacing={2}>
-      <Heading as="h4" size="sm">Formato do alvo</Heading>
+      <Heading as="h4" size="lg">Formato do alvo</Heading>
       <Text>
         {`Nome <email@provedor.com> (obrigatório usar os caractéres 
           < e >; para agrupar os alvos).`}
