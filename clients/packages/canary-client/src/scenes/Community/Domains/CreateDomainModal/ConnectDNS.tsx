@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from 'bonde-core-tools';
-import { Button, toast, Success, Flex, Stack } from 'bonde-components';
+import {
+  Button,
+  toast,
+  Success,
+  Stack,
+  ModalHeader,
+  ModalContent,
+  ModalBody,
+  ModalFooter
+} from 'bonde-components';
 import { DNSHostedZone } from '../types';
 import NameServersForm from './NameServersForm';
 import IPConnectForm from './IPConnectForm';
@@ -24,7 +33,7 @@ type Props = {
   dnsHostedZone: DNSHostedZone
 }
 
-const ConnectDNS = ({ dnsHostedZone, onClose }: Props) => {
+const ConnectDNS: React.FC<Props> = ({ dnsHostedZone, onClose }) => {
   const [status, setStatus] = useState();
   const [isNameServers, setIsNameServers] = useState(true);
   const [setPropagating] = useMutation(propagatingDNSGQL);
@@ -39,19 +48,25 @@ const ConnectDNS = ({ dnsHostedZone, onClose }: Props) => {
   }
 
   return (
-    <>
+    <ModalContent>
       {isNameServers
-        ? <NameServersForm status={status} changeStatus={changeStatus} connectByIP={connectByIP} dnsHostedZone={dnsHostedZone} />
-        : <IPConnectForm status={status} changeStatus={changeStatus} />
+        ? <ModalHeader maxW="50%">Agora, precisamos da sua ajuda para conectá-lo ao BONDE</ModalHeader>
+        : <ModalHeader>Conectar por IP</ModalHeader>
       }
-      <Flex direction="row" justify="space-between" align="center" pt={6}>
+      <ModalBody>
+        {isNameServers
+          ? <NameServersForm status={status} changeStatus={changeStatus} connectByIP={connectByIP} dnsHostedZone={dnsHostedZone} />
+          : <IPConnectForm status={status} changeStatus={changeStatus} />
+        }
+      </ModalBody>
+      <ModalFooter justifyContent="space-between" alignItems="center">
         <Button variant="link" colorScheme="black" onClick={onClose}>Voltar</Button>
         <Stack direction="row" spacing={4}>
           <Button variant="link" colorScheme="black" onClick={done}>Deixar para depois</Button>
           <Button onClick={done} disabled={status !== 'registered'} type='button'>Pronto!</Button>
         </Stack>
-      </Flex>
-    </>
+      </ModalFooter>
+    </ModalContent>
   )
 }
 

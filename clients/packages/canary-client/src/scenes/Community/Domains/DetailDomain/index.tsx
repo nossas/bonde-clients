@@ -1,5 +1,4 @@
 import React from 'react';
-// import { Container, Row, Col } from 'react-grid-system';
 import { useParams, Redirect } from 'react-router-dom';
 import { Stack } from "bonde-components";
 import NameServers from '../NameServers';
@@ -15,7 +14,7 @@ type Props = {
   dnsHostedZones: DNSHostedZone[]
 }
 
-const DetailDomain = ({ dnsHostedZones, refetch }: Props) => {
+const DetailDomain: React.FC<Props> = ({ dnsHostedZones, refetch }) => {
   const { hostedZoneId }: any = useParams();
   const dnsHostedZone = dnsHostedZones.filter((hZ: any) => hZ.id === Number(hostedZoneId))[0];
 

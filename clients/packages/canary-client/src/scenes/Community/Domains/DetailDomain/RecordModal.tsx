@@ -1,7 +1,11 @@
 import React from 'react';
 import {
   Modal,
-  Header,
+  ModalContent,
+  ModalBody,
+  ModalOverlay,
+  ModalFooter,
+  ModalHeader,
   Text,
   Button,
   Link,
@@ -12,12 +16,12 @@ import {
   Grid,
   GridItem,
   Validators,
-  Flex,
+  Stack,
+  FormLabel,
   toast,
   useField
 } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
-import { InputGroup, Addon } from '../InputGroup';
 import { DNSHostedZone } from '../types';
 
 const createRecordGQL = gql`
@@ -55,26 +59,26 @@ const TTLRecordTypeField = (props: any) => {
 }
 
 const NameField = ({ domainName, name, ...props }: any) => {
-  // const { input } = useField(name);
-
   return (
-    <InputGroup>
+    <Stack direction="row" bg="gray.50" align="end" p={2} spacing={1}>
       <InputField
         {...props}
+        variant="outline"
         name={name}
       />
-      <Addon>{`.${domainName}`}</Addon>
-    </InputGroup>
+      <FormLabel pb={4}>{`.${domainName}`}</FormLabel>
+    </Stack>
   );
 }
 
 const { required } = Validators;
 
-const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
+const RecordModal: React.FC<Props> = ({ dnsHostedZone, open, onClose, refetch }) => {
   const [createRecord] = useMutation(createRecordGQL);
 
   return (
-    <Modal width='50%' isOpen={open} onClose={onClose}>
+    <Modal size="lg" isOpen={open} onClose={onClose}>
+      <ModalOverlay />
       <ConnectedForm
         initialValues={{
           record_type: 'A',
@@ -103,58 +107,58 @@ const RecordModal = ({ dnsHostedZone, open, onClose, refetch }: Props) => {
         }}
       >
         {({ submitting }: any) => (
-        <Grid templateColumns="repeat(12, 1fr)" gap={4} rowGap={4}>
-          <GridItem colSpan={12}>
-            <Header.H2>Adicionar registro</Header.H2>
-          </GridItem>
-          <GridItem colSpan={12}>
-            <Text>Pra começar, você precisa comprar um domínio em um site como GoDaddy ou RegistroBR. Se isso tudo é novo pra você, clique aqui pra saber mais.</Text>
-          </GridItem>
-          <GridItem colSpan={12}>
-            <NameField
-              name='name'
-              type='text'
-              label='Nome'
-              domainName={dnsHostedZone.domain_name}
-              validate={required('Nome deve ser preenchido')}
-            />
-          </GridItem>
-          <GridItem colSpan={3}>
-            <SelectField
-              name='record_type'
-              label='Tipo'
-            >
-              <option value='A'>A</option>
-              <option value='CNAME'>CNAME</option>
-              <option value='MX'>MX</option>
-              <option value='TXT'>TXT</option>
-              <option value='AAA'>AAA</option>
-            </SelectField>
-          </GridItem>
-          <GridItem colSpan={6}>
-            <ValueRecordTypeField
-              name='value'
-              type='text'
-              label='Valor'
-              validate={required('Valor deve ser preenchido')}
-            />
-          </GridItem>
-          <GridItem colSpan={3}>
-            <TTLRecordTypeField
-              name='ttl'
-              type='number'
-              label='TTL'
-            />
-          </GridItem>
-          <GridItem colSpan={3}>
-            <Flex direction="row" justify="space-between">
-              <Link onClick={onClose}>Cancelar</Link>
-              <Button type='submit' disabled={submitting}>Continuar</Button>
-            </Flex>
-          </GridItem>
-        </Grid>
-        )}
-      </ConnectedForm>
+          <ModalContent>
+            <ModalHeader>Adicionar registro</ModalHeader>
+            <ModalBody>
+              <Grid templateColumns="repeat(12, 1fr)" gap={4} rowGap={4}>
+                <GridItem colSpan={12}>
+                  <Text>Pra começar, você precisa comprar um domínio em um site como GoDaddy ou RegistroBR. Se isso tudo é novo pra você, clique aqui pra saber mais.</Text>
+                </GridItem>
+                <GridItem colSpan={12}>
+                  <NameField
+                    name='name'
+                    type='text'
+                    label='Nome'
+                    domainName={dnsHostedZone.domain_name}
+                    validate={required('Nome deve ser preenchido')}
+                  />
+                </GridItem>
+                <GridItem colSpan={3}>
+                  <SelectField
+                    name='record_type'
+                    label='Tipo'
+                  >
+                    <option value='A'>A</option>
+                    <option value='CNAME'>CNAME</option>
+                    <option value='MX'>MX</option>
+                    <option value='TXT'>TXT</option>
+                    <option value='AAA'>AAA</option>
+                  </SelectField>
+                </GridItem>
+                <GridItem colSpan={6}>
+                  <ValueRecordTypeField
+                    name='value'
+                    type='text'
+                    label='Valor'
+                    validate={required('Valor deve ser preenchido')}
+                  />
+                </GridItem>
+                <GridItem colSpan={3}>
+                  <TTLRecordTypeField
+                    name='ttl'
+                    type='number'
+                    label='TTL'
+                  />
+                </GridItem>
+              </Grid>
+              </ModalBody>
+              <ModalFooter justifyContent="space-between">
+                <Link onClick={onClose}>Cancelar</Link>
+                <Button type='submit' disabled={submitting}>Continuar</Button>
+              </ModalFooter>
+            </ModalContent>
+          )}
+        </ConnectedForm>
     </Modal>
   );
 }

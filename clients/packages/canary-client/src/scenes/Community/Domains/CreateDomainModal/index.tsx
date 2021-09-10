@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, gql, useSession } from 'bonde-core-tools';
-import { Button, Modal } from 'bonde-components';
+import { Button, Modal, ModalOverlay } from 'bonde-components';
 import { DNSHostedZone } from '../types';
 import DomainForm from './DomainForm';
 import ConnectDNS from './ConnectDNS';
@@ -20,7 +20,12 @@ const createDomainGQL = gql`
   }
 `;
 
-const CreateDomainModal = ({ btnText, refetch }: any) => {
+type Props = {
+  btnText: string;
+  refetch: any;
+}
+
+const CreateDomainModal: React.FC<Props> = ({ btnText, refetch }) => {
   const [open, setOpen] = useState(false);
   const [dnsHostedZone, setDnsHostedZone] = useState<DNSHostedZone>();
   const [createDomain] = useMutation(createDomainGQL);
@@ -38,8 +43,8 @@ const CreateDomainModal = ({ btnText, refetch }: any) => {
         }
       });
       setDnsHostedZone(data.create_domain);
-    } catch (err) {
-      if (err && err.message === 'domain_name_exists') {
+    } catch (err: any) {
+      if (err?.message === 'domain_name_exists') {
         return { "FINAL_FORM/form-error": 'Esse domínio já existe no BONDE!' };
       }
     }
@@ -53,7 +58,8 @@ const CreateDomainModal = ({ btnText, refetch }: any) => {
   return (
     <>
       <Button onClick={() => setOpen(true)}>{btnText}</Button>
-      <Modal width={!dnsHostedZone ? '40%' : '60%'} isOpen={open} onClose={onClose}>
+      <Modal size={!dnsHostedZone ? 'lg' : '4xl'} isOpen={open} onClose={onClose}>
+        <ModalOverlay />
         {!dnsHostedZone
           ? <DomainForm onClose={onClose} onSubmit={onSubmit} />
           : <ConnectDNS

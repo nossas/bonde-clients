@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
-  Header,
+  Heading,
   Text,
   Button,
   Stack,
@@ -29,14 +29,16 @@ type Props = {
   dnsHostedZone: DNSHostedZone
 }
 
-const NameServersForm = ({ status, changeStatus, connectByIP, dnsHostedZone }: Props) => {
+const NameServersForm: React.FC<Props> = ({
+  status,
+  changeStatus,
+  connectByIP,
+  dnsHostedZone
+}) => {
   return (
-    <Grid templateColumns="repeat(12, 1fr)" gap={20} rowGap={6}>
-      <GridItem colSpan={12} colStart={1} colEnd={6}>
-        <Header.H2>Agora, precisamos da sua ajuda para conectá-lo ao BONDE</Header.H2>
-      </GridItem>
-      <GridItem colSpan={6} rowStart={2}>
-        <Header.H4>Passo a passo</Header.H4>
+    <Grid templateColumns="repeat(2, 1fr)" gap={20} rowGap={6}>
+      <GridItem colSpan={1}>
+        <Heading as="h4" size="xl">Passo a passo</Heading>
         <TopicList>
           <li>
             <Text>Abra o site onde comprou o domínio, (GoDaddy.com, por exemplo), e entre nas <b>configurações do domínio</b>.</Text>
@@ -55,7 +57,7 @@ const NameServersForm = ({ status, changeStatus, connectByIP, dnsHostedZone }: P
           </li>
         </TopicList>
       </GridItem>
-      <GridItem colSpan={6} rowStart={2}>
+      <GridItem colSpan={1}>
         <Stack direction="column" spacing={4}>
           <NameServers dnsHostedZone={dnsHostedZone} />
           <Radio>
@@ -69,7 +71,7 @@ const NameServersForm = ({ status, changeStatus, connectByIP, dnsHostedZone }: P
           </Radio>
         </Stack>
       </GridItem>
-      <GridItem colSpan={12}>
+      <GridItem colSpan={2}>
         <Button
           isFullWidth
           justifyContent="space-between"

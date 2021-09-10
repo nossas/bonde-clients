@@ -1,17 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import {
-  Header,
+  Heading,
   Text,
   toast,
   Success,
-  Stack,
   Icon,
   Grid,
   GridItem,
   Button
 } from 'bonde-components';
-// import { Row, Col } from 'react-grid-system';
 import copy from 'clipboard-copy';
 import Radio from './Radio';
 import { MainTitle } from '../Styles';
@@ -26,17 +24,14 @@ type Props = {
   changeStatus: any
 }
 
-const IPConnectForm = ({ status, changeStatus }: Props) => {
+const IPConnectForm: React.FC<Props> = ({ status, changeStatus }) => {
   return (
-    <Grid templateColumns="repeat(12, 1fr)" gap={6} rowGap={6}>
+    <Grid templateColumns="repeat(12, 1fr)" gap={6} rowGap={2}>
       <GridItem colSpan={6}>
-        <Stack direction="column" spacing={2}>
-          <Header.H2>Conectar por IP</Header.H2>
-          <Text>Para gerenciar ser domínio externamente, você precisa apontá-lo para o IP do BONDE, assim podemos encontrá-lo e conectá-lo à sua página.</Text>
-        </Stack>
+        <Text>Para gerenciar ser domínio externamente, você precisa apontá-lo para o IP do BONDE, assim podemos encontrá-lo e conectá-lo à sua página.</Text>
       </GridItem>
       <GridItem colSpan={6} rowSpan={2}>
-        <Header.H4>Passo a passo</Header.H4>
+        <Heading as="h4" size="xl">Passo a passo</Heading>
         <TopicList>
           <li>
             <Text>{`Abra o site onde comprou o domínio, (GoDaddy.com, por exemplo), e entre nas configurações do domínio.`}</Text>
