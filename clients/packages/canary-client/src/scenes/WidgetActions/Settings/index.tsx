@@ -13,12 +13,13 @@ import Autofire from "./Autofire";
 import ConfigurePressureTargets from "./ConfigurePressureTargets";
 import ConfigurePostAction from "./ConfigurePostAction";
 import Sending from "./Sending";
+import Performance from "./Performance";
 
 type Props = {
   widgets: Widget[];
 };
 
-const Settings = ({ widgets }: Props) => {
+const Settings: React.FC<Props> = ({ widgets }) => {
   const [widgetsCached, setWidgetsCached] = useState(widgets);
   const match = useRouteMatch();
   const { t } = useTranslation('widgetActions');
@@ -80,6 +81,9 @@ const Settings = ({ widgets }: Props) => {
         <Col xs={12}>
           <Switch>
             <Route exact path={`${match.path}`}>
+              <Performance widget={widget} />
+            </Route>
+            <Route exact path={`${match.path}/targets`}>
               {widget.kind === "pressure" && (
                 <ConfigurePressureTargets
                   widget={widget}
