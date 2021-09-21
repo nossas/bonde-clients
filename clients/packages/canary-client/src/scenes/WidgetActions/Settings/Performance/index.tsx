@@ -3,10 +3,11 @@ import { Stack } from "bonde-components";
 import TargetsStatistics from "./TargetsStatistics";
 import { Widget } from "../../FetchWidgets";
 import Card from "./Card";
+import PressureCountCard from "./PressureCountCard";
 import EventsCards from "./EventsCards";
 
 const CARDS_LABELS = [
-  "Pressões",
+  // "Pressões",
   "Alvos",
   // "Envios totais",
   // "Entregues",
@@ -23,6 +24,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
   return (
     <Stack spacing={6} mt={4}>
       <Stack direction="row" spacing={4}>
+        <PressureCountCard widget={widget} />
         {CARDS_LABELS.map((label: string, index: number) => (
           <Card
             key={`card-item-${index}`}
