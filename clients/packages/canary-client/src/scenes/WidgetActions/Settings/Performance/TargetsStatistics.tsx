@@ -107,7 +107,15 @@ const TargetsStatistics: React.FC<Props> = ({ widgetId, offset }) => {
 
   return (
     <Stack spacing={4}>
-      <Heading as="h5" size="sm" color="gray.300" textTransform="uppercase">Todos os alvos</Heading>
+      <Heading
+        as="h5"
+        size="xs"
+        fontWeight="normal"
+        color="gray.400"
+        textTransform="uppercase"
+      >
+        Todos os alvos
+      </Heading>
       <Table variant="simple" bg="white">
         {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
         <Thead>
