@@ -8,7 +8,12 @@ type Props = {
 
 const Card: React.FC<Props> = ({ label, value }) => (
   <Stack flex={1} spacing={2} maxW="204px" minH="103px">
-    <Heading as="h5" size="sm" color="gray.300" textTransform="uppercase">
+    <Heading
+      as="h5"
+      size="xs"
+      fontWeight="normal"
+      color="gray.400"
+      textTransform="uppercase">
       {label}
     </Heading>
     <Flex
@@ -19,7 +24,13 @@ const Card: React.FC<Props> = ({ label, value }) => (
       py={2}
       align="end"
     >
-      <Text fontSize="2xl" fontWeight="extrabold">{value}</Text>
+      <Text
+        fontSize="2xl"
+        color="black"
+        fontWeight="extrabold"
+      >
+        {value}
+      </Text>
     </Flex>
   </Stack>
 );
