@@ -2,8 +2,9 @@ import React from "react";
 import { useHistory } from 'react-router-dom';
 import {
   Empty,
-  Button,
   // Chakra UI
+  Button,
+  Flex,
   Box,
   Heading,
   List,
@@ -89,7 +90,9 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
           ))}
         </List>
       ) : (
-        <Empty message="Nenhuma comunidade encontrada" />
+        <Flex h="100%">
+          <Empty message="Nenhuma comunidade encontrada" />
+        </Flex>
       )}
     </Box>
   );
