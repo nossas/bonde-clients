@@ -4,17 +4,19 @@ import {
   Heading,
   Flex,
   Text,
+  Spinner,
   Tooltip,
   InfoIcon
 } from "bonde-components";
 
-type Props = {
+export interface CardProps {
   label: string
   helpText?: string
   value: number | string
+  isLoading?: boolean
 }
 
-const Card: React.FC<Props> = ({ label, helpText, value }) => (
+const Card: React.FC<CardProps> = ({ label, helpText, value, isLoading }) => (
   <Flex direction="column" flex={1} maxW="204px" minH="123px">
     <Stack direction="row" spacing={2} minH={6}>
       <Heading
@@ -38,14 +40,19 @@ const Card: React.FC<Props> = ({ label, helpText, value }) => (
       px={6}
       py={2}
       align="end"
+      justifyContent={isLoading ? "center" : null}
     >
-      <Text
-        fontSize="2xl"
-        color="black"
-        fontWeight="extrabold"
-      >
-        {value}
-      </Text>
+      {!isLoading ? (
+        <Text
+          fontSize="2xl"
+          color="black"
+          fontWeight="extrabold"
+        >
+          {value}
+        </Text>
+      ) : (
+        <Spinner boxSize={4} speed="0.65s" />
+      )}
     </Flex>
   </Flex>
 );
