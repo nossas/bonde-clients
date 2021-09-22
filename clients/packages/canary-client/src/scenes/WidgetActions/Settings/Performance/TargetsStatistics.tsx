@@ -10,7 +10,8 @@ import {
   Tr,
   Th,
   Td,
-  Button
+  Button,
+  Tooltip
 } from "bonde-components";
 
 const ACTIVITY_FEED_GQL = gql`
@@ -56,27 +57,42 @@ type Props = {
 // ]
 
 const OpenedLabel: React.FC<{ activityFeed: ActivityFeed }> = ({ activityFeed }) => {
-  const isOpened = activityFeed.events.filter(
-    (evt) => evt.event_type === "open" || evt.event_type === "click"
-  ).length > 0;
+  const isOpened = activityFeed.events.filter((evt) => evt.event_type === "open").length > 0;
 
   return (
-    <Button variant="tag" colorScheme={isOpened ? "green" : "yellow"}>
-      {isOpened ? "Abriu" : "Não abriu"}
-    </Button>
+    <Tooltip
+      label={
+        isOpened
+          ? "O alvo recebeu os e-mails e abriu ao menos um deles."
+          : "O alvo recebeu os e-mails, mas não abriu nenhum deles."
+      }
+      maxW="220px"
+    >
+      <Button variant="tag" colorScheme={isOpened ? "green" : "yellow"}>
+        {isOpened ? "Abriu" : "Não abriu"}
+      </Button>
+    </Tooltip>
   )
 }
 
 const DeliveredLabel: React.FC<{ activityFeed: ActivityFeed }> = ({ activityFeed }) => {
-  const total = activityFeed.events.filter((evt) => [
-    "open",
-    "delivered",
-    "click"
-  ].filter(e => e === evt.event_type).length).map((evt) => evt.total).reduce((a, b) => a + b, 0);
+  const processed = activityFeed.events.filter((evt) => evt.event_type === "processed")[0];
+  const delivered = activityFeed.events.filter(evt => evt.event_type === "delivered")[0];
+
+  const valor = delivered?.total ? Math.round((delivered.total / processed.total) * 100) : 0;
 
   return (
     <span>
-      {total ? `${Math.round((total / activityFeed.total) * 100)}% entregue` : "0% entregue"}
+      {`${valor > 100 ? 100 : valor}% entregue`}
+    </span>
+  );
+}
+
+const ProcessedLabel: React.FC<{ activityFeed: ActivityFeed }> = ({ activityFeed }) => {
+  const processed = activityFeed.events.filter((evt) => evt.event_type === "processed")[0];
+  return (
+    <span>
+      {`${processed?.total || 0} envios`}
     </span>
   );
 }
@@ -131,7 +147,9 @@ const TargetsStatistics: React.FC<Props> = ({ widgetId, offset }) => {
           {data.activity_feed.data.map((activityFeed: ActivityFeed, index: number) => (
             <Tr key={`activity-feed-${index}`}>
               <Td>{activityFeed.email}</Td>
-              <Td>{`${activityFeed.total} envios`}</Td>
+              <Td>
+                <ProcessedLabel activityFeed={activityFeed} />
+              </Td>
               <Td>
                 <DeliveredLabel activityFeed={activityFeed} />
               </Td>
