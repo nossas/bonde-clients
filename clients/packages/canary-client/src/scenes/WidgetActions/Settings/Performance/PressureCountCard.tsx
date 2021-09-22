@@ -30,21 +30,17 @@ const PressureCountCard: React.FC<Props> = ({ widget }) => {
     }
   });
 
-  if (loading) {
-    return <Text>Loading...</Text>;
-  }
   if (error) {
-    console.log("EventsCards: ", error);
+    console.log("PressureCountCard: ", error);
     return <Text>Failed!</Text>;
   }
 
   return (
-    <>
-      <Card
-        value={data.activist_pressures_aggregate.aggregate.count}
-        label={'Pressões'}
-      />
-    </>
+    <Card
+      label="Pressões"
+      isLoading={loading}
+      value={loading ? 0 : data.activist_pressures_aggregate.aggregate.count}
+    />
   );
 }
 

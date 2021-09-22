@@ -4,6 +4,7 @@ import {
   // Box,
   Heading,
   Stack,
+  Skeleton,
   Table,
   Thead,
   Tbody,
@@ -105,7 +106,7 @@ const TargetsStatistics: React.FC<Props> = ({ widgetId, offset }) => {
     }
   });
 
-  if (loading) return <p>Carregando...</p>;
+  // if (loading) return <p>Carregando...</p>;
   if (errors) {
     console.log("errors", errors);
     return <p>Error!</p>;
@@ -132,50 +133,54 @@ const TargetsStatistics: React.FC<Props> = ({ widgetId, offset }) => {
       >
         Todos os alvos
       </Heading>
-      <Table variant="simple" bg="white">
-        {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
-        <Thead>
-          <Tr>
-            <Th>Email</Th>
-            <Th>Enviados</Th>
-            <Th>Entregues</Th>
-            <Th>Abertura</Th>
-            {/* {EVENTS_TYPES.map((label) => (<Th key={label} isNumeric>{label}</Th>))} */}
-          </Tr>
-        </Thead>
-        <Tbody>
-          {data.activity_feed.data.map((activityFeed: ActivityFeed, index: number) => (
-            <Tr key={`activity-feed-${index}`}>
-              <Td>{activityFeed.email}</Td>
-              <Td>
-                <ProcessedLabel activityFeed={activityFeed} />
-              </Td>
-              <Td>
-                <DeliveredLabel activityFeed={activityFeed} />
-              </Td>
-              <Td>
-                <OpenedLabel activityFeed={activityFeed} />
-              </Td>
-              {/* {EVENTS_TYPES.map((eventType: string, index: number) => {
-                const event = activityFeed.events.filter((evt: any) => evt.event_type === eventType)[0]
-
-                if (event) {
-                  return <Td key={index} isNumeric>{event.total}</Td>
-                }
-                return <Td key={index} isNumeric>0</Td>
-              })} */}
+      <Skeleton isLoaded={!loading}>
+        <Table variant="simple" bg="white">
+          {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
+          <Thead>
+            <Tr>
+              <Th>Email</Th>
+              <Th>Enviados</Th>
+              <Th>Entregues</Th>
+              <Th>Abertura</Th>
+              {/* {EVENTS_TYPES.map((label) => (<Th key={label} isNumeric>{label}</Th>))} */}
             </Tr>
-          ))}
-        </Tbody>
-      </Table>
-      <Button
-        disabled={data.activity_feed.data.length % (offset as any) > 0}
-        variant="link"
-        colorScheme="gray"
-        onClick={onLoadMore}
-      >
-        Carregar mais
-      </Button>
+          </Thead>
+          <Tbody>
+            {data?.activity_feed.data.map((activityFeed: ActivityFeed, index: number) => (
+              <Tr key={`activity-feed-${index}`}>
+                <Td>{activityFeed.email}</Td>
+                <Td>
+                  <ProcessedLabel activityFeed={activityFeed} />
+                </Td>
+                <Td>
+                  <DeliveredLabel activityFeed={activityFeed} />
+                </Td>
+                <Td>
+                  <OpenedLabel activityFeed={activityFeed} />
+                </Td>
+                {/* {EVENTS_TYPES.map((eventType: string, index: number) => {
+                  const event = activityFeed.events.filter((evt: any) => evt.event_type === eventType)[0]
+
+                  if (event) {
+                    return <Td key={index} isNumeric>{event.total}</Td>
+                  }
+                  return <Td key={index} isNumeric>0</Td>
+                })} */}
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
+        <Button
+          disabled={data?.activity_feed.data.length % (offset as any) > 0}
+          variant="link"
+          colorScheme="gray"
+          isFullWidth
+          onClick={onLoadMore}
+          py={4}
+        >
+          Carregar mais
+        </Button>
+      </Skeleton>
     </Stack>
   );
 }
