@@ -20,7 +20,6 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
       <Stack direction="row" spacing={4}>
         <BondePressureCards widget={widget} />
 
-
         <EventsCards widget={widget} />
       </Stack>
 
