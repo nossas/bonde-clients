@@ -7,16 +7,14 @@ type Props = {
 
 type OutputProps = {
   data: {
-    // Contagem de pressões
     pressuresAggregateCount: number
-    // Contagem de alvos
+
     pressureTargetsCount: number
   }
   loading: boolean
   error: any
 }
 
-// Tipagem da query
 type BondePressures = {
   activist_pressures_aggregate: {
     aggregate: {
@@ -28,7 +26,6 @@ type BondePressures = {
   }[]
 }
 
-// Query da contagem de pressões e contagem de alvos
 const PRESSURES_AND_TARGETS_COUNT = gql`
   query activist_pressures ($widgetId: Int!) {
     activist_pressures_aggregate(where: {
@@ -66,7 +63,7 @@ export function useBondePressures({ widget }: Props): OutputProps {
   let pressureTargetsCount;
 
   if (widget.settings.pressure_type === 'unique') {
-    pressureTargetsCount = typeof widget.settings.targets === "string" // TODO: retorna string ou um array de strings
+    pressureTargetsCount = typeof widget.settings.targets === "string"
       ? widget.settings.targets.split(";").length
       : widget.settings.targets.length
   }
