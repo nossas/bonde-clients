@@ -2,38 +2,28 @@ import React from "react";
 import { Stack } from "bonde-components";
 import TargetsStatistics from "./TargetsStatistics";
 import { Widget } from "../../FetchWidgets";
-import Card from "./Card";
-import PressureCountCard from "./PressureCountCard";
 import EventsCards from "./EventsCards";
-
-const CARDS_LABELS = [
-  // "Pressões",
-  "Alvos",
-  // "Envios totais",
-  // "Entregues",
-  // "SPAM",
-  // "Falha"
-]
+import BondePressureCards from "./BondePressureCards";
 
 type Props = {
   widget: Widget
 }
 
-const PerformanceScene: React.FC<Props> = ({ widget }) => {
+// Widget.settings.pressureType possui dois tipos: unique e group
+// Quando o tipo é 'unique' os alvos estarão salvos no atributo widget.settings.targets
+// Quando o tipo é 'group' os alvos estarão salvos na tabela pressure_targets
 
+const PerformanceScene: React.FC<Props> = ({ widget }) => {
+  console.log('Widget:', { widget })
   return (
     <Stack spacing={6} mt={4}>
       <Stack direction="row" spacing={4}>
-        <PressureCountCard widget={widget} />
-        {CARDS_LABELS.map((label: string, index: number) => (
-          <Card
-            key={`card-item-${index}`}
-            label={label}
-            value={label === "Alvos" ? widget.settings.targets?.length : Math.round(Math.random() * 100000)}
-          />
-        ))}
+        <BondePressureCards widget={widget} />
+
+
         <EventsCards widget={widget} />
       </Stack>
+
       <TargetsStatistics widgetId={widget.id} />
     </Stack>
   );
