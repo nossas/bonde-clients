@@ -69,7 +69,6 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
     }
   });
 
-  // if (loading) return <Text>Loading...</Text>;
   if (error) {
     console.log("EventsCards: ", error);
     return <Text>Failed!</Text>;
