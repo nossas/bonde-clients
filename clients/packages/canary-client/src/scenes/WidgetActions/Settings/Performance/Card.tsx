@@ -20,7 +20,7 @@ export interface CardProps {
 const Card: React.FC<CardProps> = ({ label, helpText, value, isLoading }) => (
 
   <Flex direction="column" flex={1} maxW="204px" minH="123px">
-    <Skeleton isLoaded={!isLoading} color="gray.50">
+    <Skeleton isLoaded={!isLoading} startColor="gray.50" endColor="gray.100">
       <Stack direction="row" spacing={2} minH={6}>
         <Heading
           as="h5"
