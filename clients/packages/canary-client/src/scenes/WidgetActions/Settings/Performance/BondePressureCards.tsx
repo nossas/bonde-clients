@@ -19,9 +19,10 @@ const BondePressureCards: React.FC<Props> = ({ widget }) => {
   return (
     <>
       <Card
+        label="Pressões"
+        helpText="Pressões são as inscrições feitas na sua campanha."
         isLoading={loading}
         value={data?.pressuresAggregateCount}
-        label="Pressões"
       />
       <Card
         isLoading={loading}
