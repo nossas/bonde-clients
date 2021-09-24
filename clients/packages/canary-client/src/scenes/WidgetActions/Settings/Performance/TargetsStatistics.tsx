@@ -133,7 +133,7 @@ const TargetsStatistics: React.FC<Props> = ({ widgetId, offset }) => {
       >
         Todos os alvos
       </Heading>
-      <Skeleton isLoaded={!loading}>
+      <Skeleton isLoaded={!loading} color="gray.50">
         <Table variant="simple" bg="white">
           {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
           <Thead>
