@@ -64,7 +64,7 @@ export function useBondePressures({ widget }: Props): OutputProps {
 
   if (widget.settings.pressure_type === 'unique') {
     pressureTargetsCount = typeof widget.settings.targets === "string"
-      ? widget.settings.targets.split(";").length
+      ? widget.settings.targets.split(";").filter((value) => value !== '').length
       : widget.settings.targets.length
   }
   else {
