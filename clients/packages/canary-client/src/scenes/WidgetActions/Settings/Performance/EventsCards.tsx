@@ -95,6 +95,7 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
       />
       <CardIsLoading
         label="Entregues"
+        helpText="O total de emails que chegaram com sucesso na caixa dos alvos."
         data={data}
         isLoading={loading}
         acessor={(data: any) => ({
@@ -108,6 +109,7 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
       />
       <CardIsLoading
         label="Bounce"
+        helpText="Bounce é um tipo de falha no envio do email. Pode ocorrer porque o e-mail do alvo está incorreto, a caixa está cheia ou porque ele pediu para se desinscrever dos seus envios."
         data={data}
         isLoading={loading}
         acessor={(data: any) => ({
@@ -118,7 +120,7 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
       />
       <CardIsLoading
         label="Falha"
-        helpText="Tentativas mal-sucedidas podem ocorrer porque o e-mail do alvo está incorreto ou por um bloqueio do destinatário."
+        helpText="Falhas podem ocorrer porque o e-mail do alvo está incorreto, a caixa de entrada está cheia ou o alvo bloqueou seus envios marcando como spam."
         data={data}
         isLoading={loading}
         acessor={(data: any) => ({
