@@ -91,7 +91,7 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
         data={data}
         isLoading={loading}
         acessor={processed}
-        render={(eventsProcessed: any) => eventsProcessed?.total}
+        render={(eventsProcessed: any) => eventsProcessed ? eventsProcessed.total : 0}
       />
       <CardIsLoading
         label="Entregues"
