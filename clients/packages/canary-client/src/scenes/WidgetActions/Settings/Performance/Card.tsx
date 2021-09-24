@@ -28,14 +28,14 @@ const Card: React.FC<CardProps> = ({ label, helpText, value, isLoading }) => (
         {label}
       </Heading>
       {helpText && (
-        <Tooltip label={helpText} maxW="220px">
-          <InfoIcon boxSize={6} />
+        <Tooltip label={helpText} maxW="220px" >
+          <InfoIcon boxSize={6} color="gray.400" />
         </Tooltip>
       )}
     </Stack>
     <Flex
       bg="white"
-      boxShadow="sm"                                                                                                                                
+      boxShadow="sm"
       flex={1}
       px={6}
       py={2}
