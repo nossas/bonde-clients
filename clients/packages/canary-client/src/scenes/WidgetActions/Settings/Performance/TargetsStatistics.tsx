@@ -1,7 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "bonde-core-tools";
 import {
-  // Box,
   Heading,
   Stack,
   Skeleton,
@@ -77,10 +76,16 @@ const OpenedLabel: React.FC<{ activityFeed: ActivityFeed }> = ({ activityFeed })
 }
 
 const DeliveredLabel: React.FC<{ activityFeed: ActivityFeed }> = ({ activityFeed }) => {
-  const processed = activityFeed.events.filter((evt) => evt.event_type === "processed")[0];
+  const processed = activityFeed
+    .events
+    .filter((evt) => evt.event_type === "processed" || evt.event_type === "dropped")
+    .map((evt) => evt.total)
+    .reduce((a, b) => a + b, 0)
+  ;
+
   const delivered = activityFeed.events.filter(evt => evt.event_type === "delivered")[0];
 
-  const valor = delivered?.total ? Math.round((delivered.total / processed.total) * 100) : 0;
+  const valor = delivered?.total ? Math.round((delivered.total / processed) * 100) : 0;
 
   return (
     <span>
@@ -90,10 +95,16 @@ const DeliveredLabel: React.FC<{ activityFeed: ActivityFeed }> = ({ activityFeed
 }
 
 const ProcessedLabel: React.FC<{ activityFeed: ActivityFeed }> = ({ activityFeed }) => {
-  const processed = activityFeed.events.filter((evt) => evt.event_type === "processed")[0];
+  const processed = activityFeed
+    .events
+    .filter((evt) => evt.event_type === "processed" || evt.event_type === "dropped")
+    .map((evt) => evt.total)
+    .reduce((a, b) => a + b, 0)
+  ;
+
   return (
     <span>
-      {`${processed?.total || 0} envios`}
+      {`${processed} envios`}
     </span>
   );
 }
@@ -135,14 +146,12 @@ const TargetsStatistics: React.FC<Props> = ({ widgetId, offset }) => {
       </Heading>
       <Skeleton isLoaded={!loading} startColor="gray.50" endColor="gray.100">
         <Table variant="simple" bg="white">
-          {/* <TableCaption>Imperial to metric conversion factors</TableCaption> */}
           <Thead>
             <Tr>
               <Th>Email</Th>
               <Th>Enviados</Th>
               <Th>Entregues</Th>
               <Th>Abertura</Th>
-              {/* {EVENTS_TYPES.map((label) => (<Th key={label} isNumeric>{label}</Th>))} */}
             </Tr>
           </Thead>
           <Tbody>
@@ -158,14 +167,6 @@ const TargetsStatistics: React.FC<Props> = ({ widgetId, offset }) => {
                 <Td>
                   <OpenedLabel activityFeed={activityFeed} />
                 </Td>
-                {/* {EVENTS_TYPES.map((eventType: string, index: number) => {
-                  const event = activityFeed.events.filter((evt: any) => evt.event_type === eventType)[0]
-
-                  if (event) {
-                    return <Td key={index} isNumeric>{event.total}</Td>
-                  }
-                  return <Td key={index} isNumeric>0</Td>
-                })} */}
               </Tr>
             ))}
           </Tbody>
