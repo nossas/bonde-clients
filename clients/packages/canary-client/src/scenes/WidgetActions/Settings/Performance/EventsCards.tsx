@@ -74,7 +74,13 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
     return <Text>Failed!</Text>;
   }
 
-  const processed = (data: any) => data?.activity_feed_total.events.filter((evt: ActivityFeedEvent) => evt.event_type === "processed")[0];
+  const processed = (data: any) => {
+    return data?.activity_feed_total
+      .events
+      .filter((evt: ActivityFeedEvent) => evt.event_type === "processed" || evt.event_type === "dropped")
+      .map((evt: ActivityFeedEvent) => evt.total)
+      .reduce((a: number, b: number) => a + b, 0)
+  };
   const dropped = (data: any) => data?.activity_feed_total.events.filter((evt: ActivityFeedEvent) => evt.event_type === "dropped")[0];
   const bounce = (data: any) => data?.activity_feed_total.events.filter((evt: ActivityFeedEvent) => evt.event_type === "bounce")[0];
   const delivered = (data: any) => data?.activity_feed_total.events.filter((evt: ActivityFeedEvent) => evt.event_type === "delivered")[0];
@@ -83,15 +89,11 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
     <>
       <CardIsLoading
         label="Emails enviados"
-        helpText={`
-          O total de emails enviados varia de acordo com o número de pressões realizadas, a quantidade de alvos e se o envio otimizado está ativado ou não.
-
-          Captura de eventos começou a partir de ${!loading ? new Date(data.activity_feed_total.min_timestamp).toLocaleString() : 0};
-        `}
+        helpText="O total de emails enviados varia de acordo com o número de pressões realizadas, a quantidade de alvos e se o envio otimizado está ativado ou não."
         data={data}
         isLoading={loading}
         acessor={processed}
-        render={(eventsProcessed: any) => eventsProcessed ? eventsProcessed.total : 0}
+        render={(eventsProcessed: number) => eventsProcessed}
       />
       <CardIsLoading
         label="Entregues"
@@ -103,7 +105,7 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
           eventsDelivered: delivered(data)
         })}
         render={({ eventsProcessed, eventsDelivered }: any) => {
-          const value = Math.round(eventsDelivered?.total ? (eventsDelivered?.total / eventsProcessed?.total) * 100 : 0);
+          const value = Math.round(eventsDelivered?.total ? (eventsDelivered?.total / eventsProcessed) * 100 : 0);
           return `${value > 100 ? "100" : value}%`;
         }}
       />
@@ -116,7 +118,7 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
           eventsProcessed: processed(data),
           eventsBounce: bounce(data)
         })}
-        render={({ eventsProcessed, eventsBounce }: any) => `${Math.round(eventsBounce?.total ? (eventsBounce?.total / eventsProcessed?.total) * 100 : 0)}%`}
+        render={({ eventsProcessed, eventsBounce }: any) => `${Math.round(eventsBounce?.total ? (eventsBounce?.total / eventsProcessed) * 100 : 0)}%`}
       />
       <CardIsLoading
         label="Falha"
@@ -127,7 +129,7 @@ const EventsCards: React.FC<Props> = ({ widget }) => {
           eventsProcessed: processed(data),
           eventsDropped: dropped(data)
         })}
-        render={({ eventsProcessed, eventsDropped }: any) => `${Math.round(eventsDropped?.total ? (eventsDropped?.total / eventsProcessed?.total) * 100 : 0)}%`}
+        render={({ eventsProcessed, eventsDropped }: any) => `${Math.round(eventsDropped?.total ? (eventsDropped?.total / eventsProcessed) * 100 : 0)}%`}
       />
     </>
   );
