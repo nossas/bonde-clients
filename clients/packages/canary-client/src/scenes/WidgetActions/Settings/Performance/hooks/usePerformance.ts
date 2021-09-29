@@ -68,12 +68,17 @@ interface PerformanceResult {
 }
 
 const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
+
   const { data, loading, error } = useQuery(PERFORMANCE_GQL, {
-    variables: { widgetId: widget.id }
+    variables: {
+      widgetId: widget.id
+    }
   });
 
-  if (loading) return { loading, error };
-  
+  if (loading || error) {
+    return { loading, error }
+  }
+
   // Parse performance data queries
   const {
     activity_feed_total: activityFeedTotal,
@@ -109,6 +114,7 @@ const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
 
   // Parse targets count
   let targetsCount: number;
+
   if (widget.settings.pressure_type === 'unique') {
     targetsCount = typeof widget.settings.targets === "string"
       ? widget.settings.targets.split(";").filter((value) => value !== '').length
