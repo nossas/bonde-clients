@@ -30,7 +30,7 @@ import WidgetsActionsPage from './scenes/WidgetActions';
 import NotFound from './components/NotFound';
 import LanguageTool from './LanguageTool';
 import * as Flag from './Flag';
-import policies from './policies';
+// import policies from './policies';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as types from "styled-components/cssprop";
 
@@ -153,7 +153,7 @@ const App: React.FC = () => {
             environment={envConfig}
             loading={AppLoading}
             extraConfig={config}
-            policies={policies}
+            // policies={policies}
           >
             <Router>
               <PageRouting />
