@@ -23,7 +23,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
     aggregateEvents,
     aggregateEmails,
     pressuresCount,
-    targetsCount
+    activeTargets
   }: any = data;
 
   const hasntEventHistory = firstEventTimestamp > widgetCreatedAt && aggregateEvents.length === 0;
@@ -37,12 +37,12 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
         />
       )}
       <Stack direction="row" spacing={4}>
-        <BondePressureCards targetsCount={targetsCount} pressuresCount={pressuresCount} />
+        <BondePressureCards targetsCount={activeTargets.length} pressuresCount={pressuresCount} />
         {!hasntEventHistory && (
           <EventsCards aggregateEvents={aggregateEvents} />
         )}
       </Stack>
-      <TargetsStatistics aggregateEmails={aggregateEmails} />
+      <TargetsStatistics aggregateEmails={aggregateEmails} activeTargets={activeTargets} />
     </Stack>
   );
 }
