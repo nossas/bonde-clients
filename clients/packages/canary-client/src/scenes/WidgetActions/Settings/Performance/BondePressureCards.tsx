@@ -1,34 +1,20 @@
 import React from "react";
-import { Text } from "bonde-components";
-import { Widget } from "../../FetchWidgets";
 import Card from "./Card";
-import { useBondePressures } from './hooks/useBondePressures'
 
 type Props = {
-  widget: Widget
+  targetsCount: number
+  pressuresCount: number
 }
 
-const BondePressureCards: React.FC<Props> = ({ widget }) => {
-  const { data, loading, error } = useBondePressures({ widget })
-
-  if (error) {
-    console.log("EventsCards: ", error);
-    return <Text>Failed!</Text>;
-  }
-
+const BondePressureCards: React.FC<Props> = ({ targetsCount, pressuresCount }) => {
   return (
     <>
       <Card
         label="Pressões"
         helpText="Pressões são as inscrições feitas na sua campanha."
-        isLoading={loading}
-        value={data?.pressuresAggregateCount}
+        value={pressuresCount}
       />
-      <Card
-        isLoading={loading}
-        value={data?.pressureTargetsCount}
-        label="Alvos"
-      />
+      <Card value={targetsCount} label="Alvos" />
     </>
   )
 }
