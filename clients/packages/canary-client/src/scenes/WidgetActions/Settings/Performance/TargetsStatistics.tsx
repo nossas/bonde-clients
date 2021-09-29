@@ -32,82 +32,74 @@ const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
   )
 }
 
-const DeliveredLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
-  const processed = activityFeed
-    .events
-    .filter((evt) => evt.eventType === "processed" || evt.eventType === "dropped")
-    .map((evt) => evt.total)
-    .reduce((a, b) => a + b, 0)
-  ;
-
-  const delivered = activityFeed.events.filter(evt => evt.eventType === "delivered")[0];
-
-  const valor = delivered?.total ? Math.round((delivered.total / processed) * 100) : 0;
-
-  return (
-    <span>
-      {`${valor > 100 ? 100 : valor}% entregue`}
-    </span>
-  );
-}
-
-const ProcessedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
-  const processed = activityFeed
-    .events
-    .filter((evt) => evt.eventType === "processed" || evt.eventType === "dropped")
-    .map((evt) => evt.total)
-    .reduce((a, b) => a + b, 0)
-  ;
-
-  return (
-    <span>
-      {`${processed} envios`}
-    </span>
-  );
-}
-
 interface Props {
   aggregateEmails: ActivityFeedEmail[]
+  activeTargets: string[]
 }
 
-const TargetsStatistics: React.FC<Props> = ({ aggregateEmails }) => (
-  <Stack spacing={4}>
-    <Heading
-      as="h5"
-      size="xs"
-      fontWeight="normal"
-      color="gray.400"
-      textTransform="uppercase"
-    >
-      Todos os alvos
-    </Heading>
-    <Table variant="simple" bg="white">
-      <Thead>
-        <Tr>
-          <Th>Email</Th>
-          <Th>Enviados</Th>
-          <Th>Entregues</Th>
-          <Th>Abertura</Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {aggregateEmails.map((activityFeed: ActivityFeedEmail, index: number) => (
-          <Tr key={`activity-feed-${index}`}>
-            <Td>{activityFeed.email}</Td>
-            <Td>
-              <ProcessedLabel activityFeed={activityFeed} />
-            </Td>
-            <Td>
-              <DeliveredLabel activityFeed={activityFeed} />
-            </Td>
-            <Td>
-              <OpenedLabel activityFeed={activityFeed} />
-            </Td>
+interface ActivityFeedEmailWithDisabled extends ActivityFeedEmail {
+  disabled: boolean
+}
+
+const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) => {
+  const activeEmails = activeTargets.map((target) => (target.match(/^[\w ]+<([\w\.@]+)>$/) || [])[1]);
+
+  return (
+    <Stack spacing={4}>
+      <Heading
+        as="h5"
+        size="xs"
+        fontWeight="normal"
+        color="gray.400"
+        textTransform="uppercase"
+      >
+        Todos os alvos
+      </Heading>
+      <Table variant="simple" bg="white">
+        <Thead>
+          <Tr>
+            <Th>Email</Th>
+            <Th>Enviados</Th>
+            <Th>Entregues</Th>
+            <Th>Abertura</Th>
           </Tr>
-        ))}
-      </Tbody>
-    </Table>
-  </Stack>
-);
+        </Thead>
+        <Tbody>
+          {aggregateEmails
+            .map((activityFeed: ActivityFeedEmail) => ({
+              ...activityFeed,
+              disabled: activeEmails.findIndex((email) => email === activityFeed.email) === -1
+            }))
+            .sort((a) => a.disabled ? 1 : -1)
+            .map((activityFeed: ActivityFeedEmailWithDisabled, index: number) => {
+              const processed = activityFeed
+                .events
+                .filter((evt) => evt.eventType === "processed" || evt.eventType === "dropped")
+                .map((evt) => evt.total)
+                .reduce((a, b) => a + b, 0)
+              ;
+              
+              const delivered = activityFeed.events.filter(evt => evt.eventType === "delivered")[0];
+              const deliveredPercentage = delivered?.total ? Math.round((delivered.total / processed) * 100) : 0;
+              
+              return (
+                <Tr key={`activity-feed-${index}`} color={activityFeed.disabled ? "gray.300" : "inherit"}>
+                  <Td>{activityFeed.email}</Td>
+                  <Td>{processed}</Td>
+                  <Td>
+                    {`${deliveredPercentage}% entregue`}
+                  </Td>
+                  <Td>
+                    <OpenedLabel activityFeed={activityFeed} />
+                  </Td>
+                </Tr>
+              );
+            })
+          }
+        </Tbody>
+      </Table>
+    </Stack>
+  );
+}
 
 export default TargetsStatistics;

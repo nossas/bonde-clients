@@ -58,7 +58,7 @@ interface PerformanceData {
   firstEventTimestamp: Date
   widgetCreatedAt: Date
   pressuresCount: number
-  targetsCount: number
+  activeTargets: string[]
 }
 
 interface PerformanceResult {
@@ -112,17 +112,16 @@ const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
   // Parse pressures count
   const pressuresCount: number = activistPressuresAggregate.aggregate.count;
 
-  // Parse targets count
-  let targetsCount: number;
-
+  // Parse active targets
+  let activeTargets: string[];
   if (widget.settings.pressure_type === 'unique') {
-    targetsCount = typeof widget.settings.targets === "string"
-      ? widget.settings.targets.split(";").filter((value) => value !== '').length
-      : widget.settings.targets.length
+    activeTargets = typeof widget.settings.targets === "string"
+      ? widget.settings.targets.split(";").filter((value) => value !== '')
+      : widget.settings.targets
   } else {
-    targetsCount = widget.groups
-      .map((group) => group.targets.length)
-      .reduce((previous, current) => previous + current, 0)
+    activeTargets = widget.groups
+      .map((group) => group.targets)
+      .reduce((previous, current) => [...previous, ...current], [])
   }
 
   return {
@@ -132,7 +131,7 @@ const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
       firstEventTimestamp,
       widgetCreatedAt,
       pressuresCount,
-      targetsCount
+      activeTargets
     },
     loading,
     error
