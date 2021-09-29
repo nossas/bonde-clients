@@ -4,6 +4,7 @@ import TargetsStatistics from "./TargetsStatistics";
 import { Widget } from "../../FetchWidgets";
 import EventsCards from "./EventsCards";
 import BondePressureCards from "./BondePressureCards";
+import DisclaimerRelease from "./DisclaimerRelease";
 
 type Props = {
   widget: Widget
@@ -17,12 +18,11 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
   console.log('Widget:', { widget })
   return (
     <Stack spacing={6} mt={4}>
+      <DisclaimerRelease widget={widget} />
       <Stack direction="row" spacing={4}>
         <BondePressureCards widget={widget} />
-
         <EventsCards widget={widget} />
       </Stack>
-
       <TargetsStatistics widgetId={widget.id} />
     </Stack>
   );
