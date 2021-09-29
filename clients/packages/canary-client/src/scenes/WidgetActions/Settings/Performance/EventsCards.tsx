@@ -8,9 +8,9 @@ type Props = {
 
 const EventsCards: React.FC<Props> = ({ aggregateEvents }) => {
   const processed: number = aggregateEvents
-      .filter((evt: ActivityFeedEvent) => evt.eventType === "processed" || evt.eventType === "dropped")
-      .map((evt: ActivityFeedEvent) => evt.total)
-      .reduce((a: number, b: number) => a + b, 0);
+    .filter((evt: ActivityFeedEvent) => evt.eventType === "processed" || evt.eventType === "dropped")
+    .map((evt: ActivityFeedEvent) => evt.total)
+    .reduce((a: number, b: number) => a + b, 0);
 
   // Filter events
   const dropped: ActivityFeedEvent | undefined = aggregateEvents.filter((evt: ActivityFeedEvent) => evt.eventType === "dropped")[0];
@@ -34,12 +34,12 @@ const EventsCards: React.FC<Props> = ({ aggregateEvents }) => {
         value={`${deliveredPercentage}%`}
       />
       <Card
-        label="Bounce"
+        label="Bloqueados"
         helpText="Bounce é um tipo de falha no envio do email. Pode ocorrer porque o e-mail do alvo está incorreto, a caixa está cheia ou porque ele pediu para se desinscrever dos seus envios."
         value={`${bouncePercentage}%`}
       />
       <Card
-        label="Falha"
+        label="Falha de envio"
         helpText="Falhas podem ocorrer porque o e-mail do alvo está incorreto, a caixa de entrada está cheia ou o alvo bloqueou seus envios marcando como spam."
         value={`${droppedPercetage}%`}
       />
