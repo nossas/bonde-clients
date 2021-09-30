@@ -1,11 +1,12 @@
 import React from "react";
-import { Stack, Loading } from "bonde-components";
+import { Stack, Skeleton, Flex } from "bonde-components";
 import TargetsStatistics from "./TargetsStatistics";
 import { Widget } from "../../FetchWidgets";
 import EventsCards from "./EventsCards";
 import BondePressureCards from "./BondePressureCards";
 import DisclaimerRelease from "./DisclaimerRelease";
 import usePerformance from "./hooks/usePerformance";
+import Card from "./Card";
 
 type Props = {
   widget: Widget
@@ -13,10 +14,26 @@ type Props = {
 
 const PerformanceScene: React.FC<Props> = ({ widget }) => {
   const { data, loading, error } = usePerformance({ widget });
-  
-  if (loading) return <Loading />;
+
+  if (loading || !data) {
+    return (
+      <Stack spacing={12}>
+        <Stack direction="row" spacing={4}>
+          {[1, 2, 3, 4, 5, 6].map(id => (
+            <Skeleton key={id} isLoading startColor="gray.50" endColor="gray.100">
+              <Card />
+            </Skeleton>))}
+        </Stack>
+
+        <Skeleton isLoading startColor="gray.50" endColor="gray.100">
+          <Flex minH="131px" w="100%" />
+        </Skeleton>
+      </Stack>
+    )
+  }
+
   if (error) return <span>Failed</span>;
-  
+
   const {
     firstEventTimestamp,
     widgetCreatedAt,
@@ -24,7 +41,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
     aggregateEmails,
     pressuresCount,
     activeTargets
-  }: any = data;
+  } = data;
 
   const hasntEventHistory = firstEventTimestamp > widgetCreatedAt && aggregateEvents.length === 0;
 

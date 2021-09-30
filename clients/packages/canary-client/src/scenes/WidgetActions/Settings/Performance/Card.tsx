@@ -10,9 +10,9 @@ import {
 } from "bonde-components";
 
 export interface CardProps {
-  label: string
+  label?: string
   helpText?: string
-  value: number | string
+  value?: number | string
   isLoading?: boolean
 }
 
@@ -43,6 +43,7 @@ const Card: React.FC<CardProps> = ({ label, helpText, value, isLoading }) => (
         py={2}
         align="end"
         minH="131px"
+        minW="175px"
       >
         <Text
           fontSize="3xl"
