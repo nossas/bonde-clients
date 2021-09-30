@@ -1,25 +1,25 @@
 import React from 'react';
 import {
   InputField,
-  Tooltip,
   Success,
   Validators,
   Text,
   Header,
   Box,
-  Flex
+  Flex,
+  S3UploadField,
+  Image
 } from 'bonde-components';
 import { useSession } from 'bonde-core-tools';
 import { useTranslation } from "react-i18next";
-import UploadField, { Image } from "../../../components/UploadFile";
 import CommunityForm from '../BaseForm';
 import ButtonStyled from '../../../components/ButtonStyled';
 const { isEmail } = Validators;
 
-export const isValidFromEmail = (value: any): string | undefined => {
+export const isValidFromEmail = (value: string): string | undefined => {
   const regex = /^[a-zà-úA-ZÀ-Ú0-9 ]+<(.*)>$/
   if (regex.test(value)) {
-    const email = value.match(regex)[1]
+    const email = (value.match(regex) || [])[1]
     return isEmail('E-mail inválido')(email);
   } else {
     return 'Padrão inválido. Ex: Nome do remente <email@host.com>';
@@ -27,7 +27,7 @@ export const isValidFromEmail = (value: any): string | undefined => {
 }
 
 const SettingsPage: React.FC = () => {
-  const { t } = useTranslation('community');
+  const { t } = useTranslation(['community', 'app']);
   const { user } = useSession();
 
   return (
@@ -39,10 +39,12 @@ const SettingsPage: React.FC = () => {
         <Box bg="white" p={6} w="50%">
           {user.isAdmin ? (
             <>
-              <UploadField
+              <S3UploadField
                 label={t('info.form.fields.image.label')}
+                helpText={t('app:upload.information')}
                 name='community.image'
                 disabled={!user.isAdmin}
+                signingUrl={process.env.REACT_APP_UPLOADS_URL}
               />
               <InputField
                 name='community.name'
@@ -52,12 +54,10 @@ const SettingsPage: React.FC = () => {
             </>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '20px', alignItems: 'flex-end' }}>
-              <Image scale={0.7}>
-                <img
-                  src={values.community.image || `https://via.placeholder.com/100?text=${values.community.name.charAt(0)}`}
-                  alt={values.community.name}
-                />
-              </Image>
+              <Image
+                src={values.community.image || `https://via.placeholder.com/100?text=${values.community.name.charAt(0)}`}
+                alt={values.community.name}
+              />
               <div style={{ marginLeft: '30px' }}>
                 <Header.H3 style={{ marginBottom: '5px' }}>{values.community.name}</Header.H3>
                 <Text>Para alterar logo, nome ou assinatura da sua comunidade, entre em contato com o suporte.</Text>
@@ -76,17 +76,11 @@ const SettingsPage: React.FC = () => {
           />
           <InputField
             name='community.email_template_from'
-            label={(
-              <Tooltip
-                label={t('info.form.fields.email_template_from.label')}
-                info={(
-                  <>
-                    <p>{`Escolha um email ao qual tenha fácil acesso. Ele só será usado pelo BONDE quando não for definido um email específico em uma ferramenta da sua comunidade.`}</p>
-                    <p>{`Preencha com `}<b>{`Nome do Remetente <nome@mail.com>`}</b></p>
-                  </>
-                )}
-              />
-            )}
+            label={t('info.form.fields.email_template_from.label')}
+            helpText={`
+              Escolha um email ao qual tenha fácil acesso. Ele só será usado pelo BONDE quando não for definido um email específico em uma ferramenta da sua comunidade.
+              Preencha com: Nome do Remetente <nome@mail.com>
+            `}
             placeholder={t('info.form.fields.email_template_from.placeholder')}
             validate={isValidFromEmail}
           />
