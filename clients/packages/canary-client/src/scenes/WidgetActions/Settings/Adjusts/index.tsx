@@ -2,9 +2,9 @@ import React from 'react';
 import {
   Button,
   Box,
+  ColorField,
   InputField,
   Flex,
-  Tooltip,
   RadioField,
   Radio,
   Heading,
@@ -12,7 +12,6 @@ import {
   GridItem
 } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
-import ColorField from '../../../../components/ColorField';
 import SettingsForm from '../SettingsForm';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -50,12 +49,8 @@ const AdjustsFields = ({ widget, updateCache }: any) => {
               />
               <InputField
                 name='settings.count_text'
-                label={
-                  <Tooltip
-                    label={t('settings.adjusts.fields.count_text.label')}
-                    info={t('settings.adjusts.fields.count_text.tooltip')}
-                  />
-                }
+                label={t('settings.adjusts.fields.count_text.label')}
+                helpText={t('settings.adjusts.fields.count_text.tooltip')}
                 placeholder={t('settings.adjusts.fields.count_text.placeholder')}
               />
 
@@ -82,12 +77,8 @@ const AdjustsFields = ({ widget, updateCache }: any) => {
               )}
               <ColorField
                 name='settings.main_color'
-                label={
-                  <Tooltip
-                    label={t('settings.adjusts.fields.main_color.label')}
-                    info={t('settings.adjusts.fields.main_color.tooltip')}
-                  />
-                }
+                label={t('settings.adjusts.fields.main_color.label')}
+                helpText={t('settings.adjusts.fields.main_color.tooltip')}
               />
               <Flex justify='end'>
                 <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
