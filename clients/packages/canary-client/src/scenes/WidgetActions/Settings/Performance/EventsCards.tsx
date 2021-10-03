@@ -35,12 +35,12 @@ const EventsCards: React.FC<Props> = ({ aggregateEvents }) => {
       />
       <Card
         label="Bloqueados"
-        helpText="Bounce é um tipo de falha no envio do email. Pode ocorrer porque o e-mail do alvo está incorreto, a caixa está cheia ou porque ele pediu para se desinscrever dos seus envios."
+        helpText="O e-mail do alvo está correto, mas foi bloqueado porque ele se desinscreveu ou porque muitos emails foram marcados como spam."
         value={`${bouncePercentage}%`}
       />
       <Card
-        label="Falha de envio"
-        helpText="Falhas podem ocorrer porque o e-mail do alvo está incorreto, a caixa de entrada está cheia ou o alvo bloqueou seus envios marcando como spam."
+        label="Falhas"
+        helpText="O famoso bounce! Ocorre porque o e-mail do alvo está incorreto ou porque a caixa de entrada dele está cheia."
         value={`${droppedPercetage}%`}
       />
     </>
