@@ -77,6 +77,7 @@ interface ActivityFeedEmailWithDisabled extends ActivityFeedEmail {
 
 const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) => {
   const activeEmails = activeTargets.map((target) => (target.match(/^[\w ]+<([\w.@]+)>$/) || [])[1]);
+  const targetsCount = aggregateEmails.length
 
   return (
     <Stack spacing={4}>
@@ -87,7 +88,7 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
         color="gray.400"
         textTransform="uppercase"
       >
-        Todos os alvos
+        Todos os alvos ({targetsCount})
       </Heading>
       <Table variant="simple" bg="white">
         <Thead>
