@@ -14,7 +14,7 @@ const BondePressureCards: React.FC<Props> = ({ targetsCount, pressuresCount }) =
         helpText="Pressões são as inscrições feitas na sua campanha."
         value={pressuresCount}
       />
-      <Card value={targetsCount} label="Alvos" />
+      <Card value={targetsCount} label="Alvos ativos" />
     </>
   )
 }
