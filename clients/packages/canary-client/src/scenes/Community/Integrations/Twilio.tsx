@@ -5,7 +5,6 @@ import {
   Heading,
   Text,
   Button,
-  Tooltip,
   Success,
   Grid,
   GridItem,
@@ -44,53 +43,41 @@ const TwilioPanel = () => {
                 <Heading as="h4" size="sm">Conectar</Heading>
                 <InputField
                   name='community.twilio_account_sid'
-                  label={(
-                    <Tooltip
-                      label={t('integrations.form.fields.twilio_account_sid.label')}
-                      info={(
-                        <>
-                          <p><b>Onde encontro essa informação?</b></p>
-                          <p>Faça login na sua conta no Twilio e acesse o <b>Dashboard</b>.</p>
-                          <p>Logo abaixo de <b>Project Info</b> está o campo “ACCOUNT SID”.</p>
-                          <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
-                        </>
-                      )}
-                    />
-                  )}
+                  label={t('integrations.form.fields.twilio_account_sid.label')}
+                  helpText={
+                    <>
+                      <p><b>Onde encontro essa informação?</b></p>
+                      <p>Faça login na sua conta no Twilio e acesse o <b>Dashboard</b>.</p>
+                      <p>Logo abaixo de <b>Project Info</b> está o campo “ACCOUNT SID”.</p>
+                      <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                    </>
+                  }
                   placeholder='Ex: ACe4________6835_______2277_______'
                 />
                 <InputField
                   name='community.twilio_auth_token'
-                  label={(
-                    <Tooltip
-                      label={t('integrations.form.fields.twilio_auth_token.label')}
-                      info={(
-                        <>
-                          <p><b>Onde encontro essa informação?</b></p>
-                          <p>Faça login na sua conta no Twilio e acesse o <b>Dashboard</b>.</p>
-                          <p>Logo abaixo de <b>Project Info</b> está o campo “AUTH TOKEN”.</p>
-                          <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
-                        </>
-                      )}
-                    />
-                  )}
+                  label={t('integrations.form.fields.twilio_auth_token.label')}
+                  helpText={
+                    <>
+                      <p><b>Onde encontro essa informação?</b></p>
+                      <p>Faça login na sua conta no Twilio e acesse o <b>Dashboard</b></p>
+                      <p>Logo abaixo de <b>Project Info</b> está o campo “AUTH TOKEN”.</p>
+                      <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                    </>
+                  }
                   placeholder='Ex: ecd5_______a82c_______b9c9______'
                 />
                 <InputField
                   name='community.twilio_number'
-                  label={(
-                    <Tooltip
-                      label={t('integrations.form.fields.twilio_number.label')}
-                      info={(
-                        <>
-                          <p><b>Onde encontro essa informação?</b></p>
-                          <p>Faça login na sua conta no Twilio e acesse o <b>Dashboard</b>.</p>
-                          <p>Logo abaixo de <b>Project Info</b> está o campo “TRIAL NUMBER”.</p>
-                          <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
-                        </>
-                      )}
-                    />
-                  )}
+                  label={t('integrations.form.fields.twilio_number.label')}
+                  helpText={
+                    <>
+                      <p><b>Onde encontro essa informação?</b></p>
+                      <p>Faça login na sua conta no Twilio e acesse o <b>Dashboard</b>.</p>
+                      <p>Logo abaixo de <b>Project Info</b> está o campo “TRIAL NUMBER”.</p>
+                      <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                    </>
+                  }
                   placeholder='Ex: +5511956781234'
                 />
                 <Flex justifyContent="flex-end">

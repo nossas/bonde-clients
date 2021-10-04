@@ -1,6 +1,15 @@
 import React from 'react';
 import { useSession } from 'bonde-core-tools';
-import { Header, Icon, Text, Tooltip, Message, Hint } from 'bonde-components';
+import {
+  Header,
+  Icon,
+  Text,
+  Tooltip,
+  InfoIcon,
+  Stack,
+  Message,
+  Hint
+} from 'bonde-components';
 import { Container, Row, Col } from 'react-grid-system';
 import styled from 'styled-components';
 import NumberFormat from 'react-number-format';
@@ -40,24 +49,24 @@ type PositionProps = {
 const Position = styled.div<PositionProps>`
   ${Message} {
     ${props => props.direction === 'right' ? 'right: -20px' : 'left: -20px'};
-  }
+  }Heading
 `
 Position.defaultProps = {
   direction: 'left'
 }
 
-const AnalyticsCard = ({ label, tooltip, children, full, direction }: any) => {
+const AnalyticsCard = ({ label, tooltip, children, full }: any) => {
   const Label = <Header.H5 style={{ fontWeight: 600, marginBottom: '12px', whiteSpace: 'nowrap' }} uppercase>{label}</Header.H5>;
   return (
     <Styles full={full}>
-      {tooltip ? (
-        <Position direction={direction} style={{ marginTop: '27px' }}>
-          <Tooltip
-            label={Label}
-            info={tooltip}
-          />
-        </Position>
-      ) : Label}
+      <Stack direction="row" spacing={2} mt={4} align="center">
+        {Label}
+        {tooltip && (
+          <Tooltip label={label}>
+            <InfoIcon color="gray.200" boxSize={3} />
+          </Tooltip>
+        )}
+      </Stack>
       <Panel>
         {children}
       </Panel>
@@ -206,7 +215,6 @@ const Analytics = ():JSX.Element => (
               full
               label='Total arrecadado (R$)'
               tooltip='Valor total de doações únicas e recorrentes arrecadadas pela comunidade até agora.'
-              direction='right'
             >
               <Number query={TotalDonations} format='money'>
                 <Text>(Confirmadas / Aguardando pagamento)</Text>

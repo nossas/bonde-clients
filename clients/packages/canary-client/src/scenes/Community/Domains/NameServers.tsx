@@ -2,6 +2,7 @@ import React from 'react';
 import {
   Text,
   Tooltip,
+  InfoIcon,
   toast,
   Success,
   Icon,
@@ -12,15 +13,16 @@ import {
   Button
 } from 'bonde-components';
 import copy from 'clipboard-copy';
-import { MainTitle } from './Styles';
 
 const NameServers = ({ dnsHostedZone }: any) => {
   return (
     <Stack direction="column" spacing={2}>
-      <MainTitle>
-        {`Registros de nome (Name servers)`}
-        <Tooltip info='Os registros de nome ("name servers" na gringa) são usados para conectar seu domínio ao BONDE.' />
-      </MainTitle>
+      <Stack direction="row" spacing={2} align="center">
+        <Text fontWeight="semibold" fontSize="sm" textTransform="uppercase">{`Registros de nome (Name servers)`}</Text>
+        <Tooltip label='Os registros de nome ("name servers" na gringa) são usados para conectar seu domínio ao BONDE.'>
+          <InfoIcon color="gray.300" boxSize={3} />
+        </Tooltip>
+      </Stack>
       <Box bg="white" boxShadow="sm" p={4}>
         <Grid templateColumns='1fr auto' rowGap={4}>
           {dnsHostedZone.name_servers.map((ns: string) => (
