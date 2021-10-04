@@ -186,12 +186,63 @@ pipeline:
       status: success
       event: [push]
 
+  accounts-production-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/accounts
+    group: deploying
+    docker_image: nossas/bonde:${DRONE_TAG##v}
+    timeout: 360
+    confirm: true
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
+    when:
+      status: success
+      event: tag
+
+  admin-production-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/admin
+    group: deploying
+    docker_image: nossas/bonde-deprecated:${DRONE_TAG##v}
+    timeout: 360
+    confirm: true
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
+    when:
+      status: success
+      event: tag
+
+  canary-production-deploy:
+    image: peloton/drone-rancher
+    url: http://cluster.bonde.org
+    service: clients/canary
+    group: deploying
+    docker_image: nossas/bonde:${DRONE_TAG##v}
+    timeout: 360
+    confirm: true
+    secrets:
+      - source: rancher_access_key_prod
+        target: rancher_access_key
+      - source: rancher_secret_key_prod
+        target: rancher_secret_key
+    when:
+      status: success
+      event: tag
+
   redes-production-deploy:
     image: peloton/drone-rancher
     url: http://cluster.bonde.org
     service: clients/redes
     group: deploying
-    docker_image: nossas/bonde:${DRONE_BRANCH/\//-}
+    docker_image: nossas/bonde:${DRONE_TAG##v}
     timeout: 360
     confirm: true
     secrets:
