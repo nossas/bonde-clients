@@ -46,7 +46,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
   const hasntEventHistory = firstEventTimestamp > widgetCreatedAt && aggregateEvents.length === 0;
 
   return (
-    <Stack spacing={6} mt={4}>
+    <Stack spacing={6}>
       {!hasntEventHistory && (
         <DisclaimerRelease
           firstEventTimestamp={firstEventTimestamp}

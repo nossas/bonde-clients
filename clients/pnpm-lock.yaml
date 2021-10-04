@@ -135,7 +135,6 @@ importers:
       '@chakra-ui/visually-hidden': ^1.0.14
       '@emotion/react': ^11
       '@emotion/styled': ^11
-      '@rjsf/core': ^3.1.0
       '@storybook/addon-actions': ^5.3.17
       '@storybook/addon-links': ^5.3.17
       '@storybook/addons': ^5.3.17
@@ -151,7 +150,6 @@ importers:
       framer-motion: ^4
       husky: ^4.2.3
       lint-staged: ^10.2.11
-      lodash-es: ^4.17.21
       react: ^16.13.0
       react-color: ^2.19.3
       react-dom: ^16.13.0
@@ -214,10 +212,8 @@ importers:
       '@chakra-ui/visually-hidden': 1.0.14_028a66c6943feeac513e9f773a9f0096
       '@emotion/react': 11.4.1_6c55e818a21c3363ecf7da4f6ec1f859
       '@emotion/styled': 11.3.0_d53d9b5532f3cb09ba2cd08c113358d5
-      '@rjsf/core': 3.1.0_react@16.14.0
       final-form: 4.20.2
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
-      lodash-es: 4.17.21
       react-color: 2.19.3_react@16.14.0
       react-final-form: 6.5.3_final-form@4.20.2+react@16.14.0
       react-google-font-loader: 1.1.0_react-dom@16.14.0+react@16.14.0
