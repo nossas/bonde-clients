@@ -14,7 +14,8 @@ import {
 import { ActivityFeedEmail } from "./hooks/usePerformance";
 
 const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
-  const isOpened = activityFeed.events.filter((evt) => evt.eventType === "open").length > 0;
+  const openingCount = activityFeed.events.filter((evt) => evt.eventType === "open").length
+  const isOpened = openingCount > 0;
 
   return (
     <Tooltip
@@ -26,7 +27,7 @@ const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
       maxW="220px"
     >
       <Button variant="tag" colorScheme={isOpened ? "green" : "yellow"}>
-        {isOpened ? "Abriu" : "Não abriu"}
+        {isOpened ? `Abriu ${openingCount}x` : "Não abriu"}
       </Button>
     </Tooltip>
   )
