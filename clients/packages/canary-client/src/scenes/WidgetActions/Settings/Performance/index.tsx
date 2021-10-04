@@ -15,6 +15,8 @@ type Props = {
 const PerformanceScene: React.FC<Props> = ({ widget }) => {
   const { data, loading, error } = usePerformance({ widget });
 
+  if (error) return <span>Failed</span>;
+
   if (loading || !data) {
     return (
       <Stack spacing={12}>
@@ -31,8 +33,6 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
       </Stack>
     )
   }
-
-  if (error) return <span>Failed</span>;
 
   const {
     firstEventTimestamp,
