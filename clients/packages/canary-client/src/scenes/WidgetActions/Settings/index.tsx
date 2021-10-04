@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { Tab, Header } from "bonde-components";
+import { Tab, Header, Heading } from "bonde-components";
 import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
-import { Row, Col } from "react-grid-system";
 import { useTranslation } from 'react-i18next';
 import { useSession } from 'bonde-core-tools';
 import Container, { NavigationArgs } from "../Container";
@@ -34,7 +33,7 @@ const Settings: React.FC<Props> = ({ widgets }) => {
 
   const updateCache = (updated: Widget) => {
 
-    setWidgetsCached(widgets.map((w: Widget) => w.id === updated.id ? {...w, ...updated} : w));
+    setWidgetsCached(widgets.map((w: Widget) => w.id === updated.id ? { ...w, ...updated } : w));
   }
 
   return (
@@ -58,7 +57,7 @@ const Settings: React.FC<Props> = ({ widgets }) => {
           >
             {t('settings.navigation.edit')}
           </Tab>
-       
+
           <Tab
             active={is(/\/widgets\/\d+\/settings\/*/)}
             onClick={() => push(`settings`)}
@@ -69,43 +68,42 @@ const Settings: React.FC<Props> = ({ widgets }) => {
       )}
     >
       {/* Corpo */}
-      <Row style={{ marginBottom: "4px", marginTop: "16px" }}>
-        <Col xs={12}>
-          <Header.H3>{t('settings.header', { label: label.title.toLowerCase() })}</Header.H3>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12}>
-          <Navigation />
-        </Col>
-        <Col xs={12}>
-          <Switch>
-            <Route exact path={`${match.path}`}>
-              <Performance widget={widget} />
-            </Route>
-            <Route exact path={`${match.path}/targets`}>
-              {widget.kind === "pressure" && (
-                <ConfigurePressureTargets
-                  widget={widget}
-                  updateCache={updateCache}
-                />
-              )}
-            </Route>
-            <Route exact path={`${match.path}/sending`}>
-              <Sending widget={widget} updateCache={updateCache}/>
-            </Route>
-            <Route exact path={`${match.path}/adjusts`}>
-              <Adjusts widget={widget} updateCache={updateCache}/>
-            </Route>
-            <Route exact path={`${match.path}/autofire`}>
-              <Autofire widget={widget} updateCache={updateCache}/>
-            </Route>
-            <Route exact path={`${match.path}/finish`}>
-              <ConfigurePostAction widget={widget} updateCache={updateCache}/>
-            </Route>
-          </Switch>
-        </Col>
-      </Row>
+      <Heading
+        as="h3"
+        size="xl"
+        mt={2.4}
+        mb={2}
+      >
+        {t('settings.header', { label: label.title.toLowerCase() })}
+      </Heading>
+
+      <Navigation />
+
+      <Switch>
+        <Route exact path={`${match.path}`}>
+          <Performance widget={widget} />
+        </Route>
+        <Route exact path={`${match.path}/targets`}>
+          {widget.kind === "pressure" && (
+            <ConfigurePressureTargets
+              widget={widget}
+              updateCache={updateCache}
+            />
+          )}
+        </Route>
+        <Route exact path={`${match.path}/sending`}>
+          <Sending widget={widget} updateCache={updateCache} />
+        </Route>
+        <Route exact path={`${match.path}/adjusts`}>
+          <Adjusts widget={widget} updateCache={updateCache} />
+        </Route>
+        <Route exact path={`${match.path}/autofire`}>
+          <Autofire widget={widget} updateCache={updateCache} />
+        </Route>
+        <Route exact path={`${match.path}/finish`}>
+          <ConfigurePostAction widget={widget} updateCache={updateCache} />
+        </Route>
+      </Switch>
     </Container>
   );
 };
