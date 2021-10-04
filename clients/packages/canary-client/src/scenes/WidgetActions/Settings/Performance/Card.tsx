@@ -4,7 +4,6 @@ import {
   Heading,
   Flex,
   Text,
-  Skeleton,
   Tooltip,
   InfoIcon
 } from "bonde-components";
@@ -16,8 +15,7 @@ export interface CardProps {
   isLoading?: boolean
 }
 
-const Card: React.FC<CardProps> = ({ label, helpText, value, isLoading }) => (
-
+const Card: React.FC<CardProps> = ({ label, helpText, value }) => (
   <Flex direction="column" flex={1} maxW="204px">
     <Stack direction="row" spacing={2} minH={6}>
       <Heading
@@ -34,28 +32,26 @@ const Card: React.FC<CardProps> = ({ label, helpText, value, isLoading }) => (
         </Tooltip>
       )}
     </Stack>
-    <Skeleton isLoaded={!isLoading} startColor="gray.50" endColor="gray.100">
-      <Flex
-        bg="white"
-        boxShadow="sm"
-        flex={1}
-        px={6}
-        py={2}
-        align="end"
-        minH="131px"
-        minW="175px"
-      >
-        <Text
-          fontSize="3xl"
-          color="black"
-          fontWeight="extrabold"
-        >
-          {value}
-        </Text>
-      </Flex>
-    </Skeleton>
-  </Flex>
 
+    <Flex
+      bg="white"
+      boxShadow="sm"
+      flex={1}
+      px={6}
+      py={2}
+      align="end"
+      minH="131px"
+      minW="175px"
+    >
+      <Text
+        fontSize="3xl"
+        color="black"
+        fontWeight="extrabold"
+      >
+        {value}
+      </Text>
+    </Flex>
+  </Flex>
 );
 
 export default Card;
