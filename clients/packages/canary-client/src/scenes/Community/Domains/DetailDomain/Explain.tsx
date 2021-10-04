@@ -1,15 +1,11 @@
 import React from 'react';
-import { Header, Icon, Grid, GridItem, Box, Stack } from 'bonde-components';
+import { Header, Icon, Grid, GridItem, Box, Stack, Text } from 'bonde-components';
 import {
   ConnectDomainIcon,
   InsertDomainIcon,
   PropagateDomainIcon
 } from '../Icons';
-import {
-  Status,
-  MainTitle,
-  SmallText
-} from '../Styles';
+import { Status, SmallText } from '../Styles';
 import { DNSHostedZone } from '../types';
 
 type Props = {
@@ -20,7 +16,9 @@ type Props = {
 const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
   return (
     <Stack direction="column" spacing={2}>
-      <MainTitle>{!dnsIsActivated ? 'Entenda o processo' : 'Detalhes'}</MainTitle>
+      <Text fontWeight="semibold" fontSize="sm" textTransform="uppercase">
+        {!dnsIsActivated ? 'Entenda o processo' : 'Detalhes'}
+      </Text>
       <Box bg="white" boxShadow="sm" px={4} py={6}>
         <Grid
           templateColumns='auto 50px auto 50px auto'

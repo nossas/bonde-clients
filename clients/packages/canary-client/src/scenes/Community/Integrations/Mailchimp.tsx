@@ -4,7 +4,6 @@ import {
   Heading,
   Text,
   Button,
-  Tooltip,
   Success,
   Grid,
   GridItem,
@@ -44,36 +43,28 @@ const MailchimpPanel = () => {
                 <Heading as="h4" size="sm">Integrar</Heading>
                 <InputField
                   name='community.mailchimp_api_key'
-                  label={(
-                    <Tooltip
-                      label={t('integrations.form.fields.mailchimp_api_key.label')}
-                      info={(
-                        <>
-                          <p><b>Onde encontro essa informação?</b></p>
-                          <p>Faça login na sua conta no Mailchimp e <b>clique no seu nome</b> de usuário.</p>
-                          <p>Você vai ver um menu surgir, clique na opção account.</p>
-                          <p>{`Depois, siga os passos: `}<b>{`Extras > API keys > Your API keys > Create a Key`}</b></p>
-                          <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
-                        </>
-                      )}
-                    />
-                  )}
+                  label={t('integrations.form.fields.mailchimp_api_key.label')}
+                  helpText={
+                    <>
+                      <p><b>Onde encontro essa informação?</b></p>
+                      <p>Faça login na sua conta no Mailchimp e <b>clique no seu nome</b> de usuário.</p>
+                      <p>Você vai ver um menu surgir, clique na opção account.</p>
+                      <p>Depois, siga os passos: <b>{`Extras > API keys > Your API keys > Create a Key`}</b></p>
+                      <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                    </>
+                  }
                   placeholder={t('integrations.form.fields.mailchimp_api_key.placeholder')}
                 />
                 <InputField
                   name='community.mailchimp_list_id'
-                  label={(
-                    <Tooltip
-                      label={t('integrations.form.fields.mailchimp_list_id.label')}
-                      info={(
-                        <>
-                          <p><b>Onde encontro essa informação?</b></p>
-                          <p>Faça login na sua conta no Mailchimp e <b>clique em Audience</b>.</p>
-                          <p>Selecione a audiência correspondente e <b>clique em Settings</b>.</p>
-                          <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
-                        </>
-                      )}
-                    />
+                  label={t('integrations.form.fields.mailchimp_list_id.label')}
+                  helpText={(
+                    <>
+                      <p><b>Onde encontro essa informação?</b></p>
+                      <p>Faça login na sua conta no Mailchimp e <b>clique em Audience</b>.</p>
+                      <p>Selecione a audiência correspondente e <b>clique em Settings</b>.</p>
+                      <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                    </>
                   )}
                   placeholder={t('integrations.form.fields.mailchimp_list_id.placeholder')}
                 />
