@@ -12,12 +12,12 @@ const DisclaimerRelease: React.FC<Props> = ({ firstEventTimestamp, widgetCreated
       <Alert status="success">
         <Stack direction="row" spacing={4} align="center">
           <ChartIcon />
-          <Text>{`Os dados abaixo correspondem à performance da sua campanha desde o dia ${firstEventTimestamp.toLocaleDateString()}, quando o BONDE lançou essa funcionalidade para tornar sua estratégia mais eficaz.`}</Text>
+          <Text>{`Os dados de envio de e-mail abaixo começaram a ser coletados no dia  ${firstEventTimestamp.toLocaleDateString()} para te dar mais visibilidade da performance das suas campanhas.`}</Text>
         </Stack>
       </Alert>
     )
     : null
-  ;
+    ;
 }
 
 export default DisclaimerRelease;
