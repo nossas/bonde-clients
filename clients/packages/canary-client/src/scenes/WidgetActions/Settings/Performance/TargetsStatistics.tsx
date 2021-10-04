@@ -32,6 +32,39 @@ const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
   )
 }
 
+const FailedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
+  const isFailed = activityFeed.events.filter((evt) => evt.eventType === "bounce").length > 0;
+  const isDropped = activityFeed.events.filter((evt) => evt.eventType === "dropped").length > 0;
+
+  if (isFailed) {
+    return (
+      <Tooltip
+        label="O e-mail do alvo está incorreto ou a caixa de entrada dele está cheia. Confira o e-mail do alvo para conseguir pressioná-lo."
+        maxW="220px"
+      >
+        <Button variant="tag" bg="red.100">
+          Falhou
+        </Button>
+      </Tooltip>
+    )
+  }
+
+  if (isDropped) {
+    return (
+      <Tooltip
+        label="O e-mail do alvo está correto, mas foi bloqueado porque ele se desinscreveu ou porque muitos emails foram marcados como spam."
+        maxW="220px"
+      >
+        <Button variant="tag" bg="red.100">
+          Bloqueou
+        </Button>
+      </Tooltip>
+    )
+  } else {
+    return null
+  }
+}
+
 interface Props {
   aggregateEmails: ActivityFeedEmail[]
   activeTargets: string[]
@@ -61,6 +94,7 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
             <Th>Email</Th>
             <Th>Enviados</Th>
             <Th>Entregues</Th>
+            <Th>Falha</Th>
             <Th>Abertura</Th>
           </Tr>
         </Thead>
@@ -77,17 +111,20 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
                 .filter((evt) => evt.eventType === "processed" || evt.eventType === "dropped")
                 .map((evt) => evt.total)
                 .reduce((a, b) => a + b, 0)
-              ;
-              
+                ;
+
               const delivered = activityFeed.events.filter(evt => evt.eventType === "delivered")[0];
               const deliveredPercentage = delivered?.total ? Math.round((delivered.total / processed) * 100) : 0;
-              
+
               return (
                 <Tr key={`activity-feed-${index}`} color={activityFeed.disabled ? "gray.300" : "inherit"}>
                   <Td>{activityFeed.email}</Td>
                   <Td>{`${processed} envios`}</Td>
                   <Td color={!activityFeed.disabled && deliveredPercentage === 0 ? "red.300" : "inherit"}>
                     {`${deliveredPercentage}% entregue`}
+                  </Td>
+                  <Td>
+                    <FailedLabel activityFeed={activityFeed} />
                   </Td>
                   <Td>
                     <OpenedLabel activityFeed={activityFeed} />
