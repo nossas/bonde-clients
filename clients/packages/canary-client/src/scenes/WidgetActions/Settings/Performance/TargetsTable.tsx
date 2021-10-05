@@ -3,10 +3,8 @@ import {
   Heading,
   Stack,
   Table,
-  Thead,
   Tbody,
   Tr,
-  Th,
   Td,
 } from "bonde-components";
 import { ActivityFeedEmail } from "./hooks/usePerformance";
@@ -36,11 +34,6 @@ const TargetsTable: React.FC<Props> = ({ aggregateEmails, activeTargets }) => {
         Todos os alvos ({targetsCount})
       </Heading>
       <Table variant="simple" bg="white">
-        <Thead>
-          <Tr>
-            <Th>Email</Th>
-          </Tr>
-        </Thead>
         <Tbody>
           {aggregateEmails
             .map((activityFeed: ActivityFeedEmail) => ({
