@@ -12,7 +12,7 @@ const SubHeader = styled.div`
 
   h3 {
     color: #fff;
-    margin: 10px 0 30px;
+    margin: 3px 0 6px;
   }
 
   ${Tab} {
