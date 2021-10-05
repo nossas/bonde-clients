@@ -7,6 +7,7 @@ import BondePressureCards from "./BondePressureCards";
 import DisclaimerRelease from "./DisclaimerRelease";
 import usePerformance from "./hooks/usePerformance";
 import Card from "./Card";
+import TargetsTable from "./TargetsTable";
 
 type Props = {
   widget: Widget
@@ -59,7 +60,12 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
           <EventsCards aggregateEvents={aggregateEvents} />
         )}
       </Stack>
-      <TargetsStatistics aggregateEmails={aggregateEmails} activeTargets={activeTargets} />
+      {!hasntEventHistory ? (
+        <TargetsStatistics aggregateEmails={aggregateEmails} activeTargets={activeTargets} />
+      ) : (
+        <TargetsTable aggregateEmails={aggregateEmails} activeTargets={activeTargets} />
+      )}
+
     </Stack>
   );
 }
