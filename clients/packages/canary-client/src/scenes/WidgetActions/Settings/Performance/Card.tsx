@@ -17,7 +17,7 @@ export interface CardProps {
 
 const Card: React.FC<CardProps> = ({ label, helpText, value }) => (
   <Flex direction="column" flex={1} maxW="204px">
-    <Stack direction="row" spacing={2} minH={6}>
+    <Stack direction="row" spacing={1} minH={6} alignItems="center">
       <Heading
         as="h5"
         size="xs"
@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = ({ label, helpText, value }) => (
       </Heading>
       {helpText && (
         <Tooltip label={helpText} maxW="220px" >
-          <InfoIcon boxSize={6} color="gray.400" />
+          <InfoIcon boxSize={4} color="gray.400" />
         </Tooltip>
       )}
     </Stack>
