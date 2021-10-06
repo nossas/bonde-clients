@@ -16,6 +16,7 @@ const EventsCards: React.FC<Props> = ({ aggregateEvents }) => {
   const dropped: ActivityFeedEvent | undefined = aggregateEvents.filter((evt: ActivityFeedEvent) => evt.eventType === "dropped")[0];
   const bounce: ActivityFeedEvent | undefined = aggregateEvents.filter((evt: ActivityFeedEvent) => evt.eventType === "bounce")[0];
   const delivered: ActivityFeedEvent | undefined = aggregateEvents.filter((evt: ActivityFeedEvent) => evt.eventType === "delivered")[0];
+
   // Parse events to percentage
   const droppedPercetage: number = Math.round(dropped?.total ? (dropped?.total / processed) * 100 : 0);
   const bouncePercentage: number = Math.round(bounce?.total ? (bounce?.total / processed) * 100 : 0);
@@ -36,12 +37,12 @@ const EventsCards: React.FC<Props> = ({ aggregateEvents }) => {
       <Card
         label="Bloqueados"
         helpText="O e-mail do alvo está correto, mas foi bloqueado porque ele se desinscreveu ou porque muitos emails foram marcados como spam."
-        value={`${bouncePercentage}%`}
+        value={`${droppedPercetage}%`}
       />
       <Card
         label="Falhas"
         helpText="O famoso bounce! Ocorre porque o e-mail do alvo está incorreto ou porque a caixa de entrada dele está cheia."
-        value={`${droppedPercetage}%`}
+        value={`${bouncePercentage}%`}
       />
     </>
   );
