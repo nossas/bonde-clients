@@ -26,7 +26,11 @@ const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
       }
       maxW="220px"
     >
-      <Button variant="tag" colorScheme={isOpened ? "green" : "yellow"}>
+      <Button
+        variant="tag"
+        colorScheme={isOpened ? "green" : "yellow"}
+        textTransform="none"
+        fontWeight="400">
         {isOpened ? `Abriu ${openingCount}x` : "Não abriu"}
       </Button>
     </Tooltip>
@@ -43,7 +47,11 @@ const FailedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
         label="O e-mail do alvo está incorreto ou a caixa de entrada dele está cheia. Confira o e-mail do alvo para conseguir pressioná-lo."
         maxW="220px"
       >
-        <Button variant="tag" bg="red.100">
+        <Button
+          variant="tag"
+          bg="red.100"
+          textTransform="none"
+          fontWeight="400">
           Falhou
         </Button>
       </Tooltip>
@@ -56,7 +64,11 @@ const FailedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
         label="O e-mail do alvo está correto, mas foi bloqueado porque ele se desinscreveu ou porque muitos emails foram marcados como spam."
         maxW="220px"
       >
-        <Button variant="tag" bg="red.100">
+        <Button
+          variant="tag"
+          bg="red.100"
+          textTransform="none"
+          fontWeight="400">
           Bloqueou
         </Button>
       </Tooltip>
