@@ -91,6 +91,26 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
   const activeEmails = activeTargets.map((target) => (target.match(/^[\w ]+<([\w.@]+)>$/) || [])[1]);
   const targetsCount = aggregateEmails.length
 
+  // Transforma e-mails ativos em eventos
+  const items: ActivityFeedEmail[] = [...activeEmails.map((email: string) => {
+    const activityFeed = aggregateEmails.filter((activityFeed) => activityFeed.email === email)[0]
+    if (!activityFeed) {
+      return {
+        email,
+        total: 0,
+        events: []
+      }
+    }
+    return activityFeed
+  }), ...aggregateEmails]
+
+  const uniqueItems = items.reduce((acc, item) => {
+    if (!acc.filter((itemAcc) => itemAcc.email === item.email)[0]) {
+      acc.push(item);
+    }
+    return acc;
+  }, [] as ActivityFeedEmail[])
+
   return (
     <Stack spacing={4}>
       <Heading
@@ -113,7 +133,7 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
           </Tr>
         </Thead>
         <Tbody>
-          {aggregateEmails
+          {uniqueItems
             .map((activityFeed: ActivityFeedEmail) => ({
               ...activityFeed,
               disabled: activeEmails.findIndex((email) => email === activityFeed.email) === -1
@@ -138,7 +158,7 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
                     <Td>{activityFeed.email}</Td>
                   )}
                   <Td>{`${processed} envios`}</Td>
-                  <Td color={!activityFeed.disabled && deliveredPercentage === 0 ? "red.300" : "inherit"}>
+                  <Td>
                     {`${deliveredPercentage}% entregue`}
                   </Td>
                   <Td>
