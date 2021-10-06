@@ -35,6 +35,7 @@ const Card: React.FC<CardProps> = ({ label, helpText, value }) => (
 
     <Flex
       bg="white"
+      borderRadius="4px"
       boxShadow="sm"
       flex={1}
       px={6}
