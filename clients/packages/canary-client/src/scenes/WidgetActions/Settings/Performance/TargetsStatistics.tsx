@@ -120,7 +120,11 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
 
               return (
                 <Tr key={`activity-feed-${index}`} color={activityFeed.disabled ? "gray.300" : "inherit"}>
-                  <Td>{activityFeed.email}</Td>
+                  {activityFeed.disabled ? (
+                    <Td>{activityFeed.email} (Inativo)</Td>
+                  ) : (
+                    <Td>{activityFeed.email}</Td>
+                  )}
                   <Td>{`${processed} envios`}</Td>
                   <Td color={!activityFeed.disabled && deliveredPercentage === 0 ? "red.300" : "inherit"}>
                     {`${deliveredPercentage}% entregue`}
