@@ -1,0 +1,68 @@
+// {
+//   "include": [
+//     "src",
+//     "types",
+//     "test"
+//   ],
+//   "compilerOptions": {
+//     "target": "es5",
+//     "module": "esnext",
+//     "lib": [
+//       "dom",
+//       "dom.iterable",
+//       "esnext"
+//     ],
+//     "importHelpers": true,
+//     "declaration": true,
+//     "sourceMap": true,
+//     "rootDir": "./src",
+//     "strict": true,
+//     "noImplicitAny": true,
+//     "strictNullChecks": true,
+//     "strictFunctionTypes": true,
+//     "strictPropertyInitialization": true,
+//     "noImplicitThis": true,
+//     "alwaysStrict": true,
+//     "noUnusedLocals": true,
+//     "noUnusedParameters": true,
+//     "noImplicitReturns": true,
+//     "noFallthroughCasesInSwitch": true,
+//     "moduleResolution": "node",
+//     "baseUrl": "./",
+//     "jsx": "react-jsx",
+//     "esModuleInterop": true,
+//     "allowJs": true,
+//     "skipLibCheck": true,
+//     "allowSyntheticDefaultImports": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "resolveJsonModule": true,
+//     "isolatedModules": true,
+//     "noEmit": true
+//   }
+// }
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx"
+  },
+  "include": [
+    "src"
+  ]
+}
