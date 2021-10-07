@@ -1,4 +1,40 @@
-const theme = {
+export interface ThemeColorScheme {
+  main: string
+  dark: string
+  light: string
+}
+
+export interface ThemeBody {
+  padding: number | string
+  background: ThemeColorScheme
+}
+
+export interface ThemeOverVariation {
+  main: string
+  hover?: string
+  focus?: string
+}
+
+export interface ThemeVariation {
+  color?: ThemeOverVariation
+  border?: ThemeOverVariation
+  background?: ThemeOverVariation
+  disabled?: ThemeVariation
+}
+
+export interface Theme {
+  brand: ThemeColorScheme,
+  commons: ThemeColorScheme
+  fontFamily: string
+  body: ThemeBody
+  default: ThemeVariation
+  dark: ThemeVariation
+  light: ThemeVariation
+  secondary: ThemeVariation
+  error?: string
+}
+
+const theme: Theme = {
   brand: {
     main: '#ee0099',
     dark: '#000',
