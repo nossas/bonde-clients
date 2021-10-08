@@ -7,20 +7,14 @@ import {
   Tr,
   Td,
 } from "bonde-components";
-import { ActivityFeedEmail } from "./hooks/usePerformance";
 
 interface Props {
-  aggregateEmails: ActivityFeedEmail[]
   activeTargets: string[]
 }
 
-interface ActivityFeedEmailWithDisabled extends ActivityFeedEmail {
-  disabled: boolean
-}
-
-const TargetsTable: React.FC<Props> = ({ aggregateEmails, activeTargets }) => {
+const TargetsTable: React.FC<Props> = ({ activeTargets }) => {
   const activeEmails = activeTargets.map((target) => (target.match(/^[\w ]+<([\w.@]+)>$/) || [])[1]);
-  const targetsCount = aggregateEmails.length
+  const targetsCount = activeTargets.length
 
   return (
     <Stack spacing={4}>
@@ -35,16 +29,11 @@ const TargetsTable: React.FC<Props> = ({ aggregateEmails, activeTargets }) => {
       </Heading>
       <Table variant="simple" bg="white">
         <Tbody>
-          {aggregateEmails
-            .map((activityFeed: ActivityFeedEmail) => ({
-              ...activityFeed,
-              disabled: activeEmails.findIndex((email) => email === activityFeed.email) === -1
-            }))
-            .sort((a) => a.disabled ? 1 : -1)
-            .map((activityFeed: ActivityFeedEmailWithDisabled, index: number) => {
+          {activeEmails
+            .map((email: string, index: number) => {
               return (
-                <Tr key={`activity-feed-${index}`} color={activityFeed.disabled ? "gray.300" : "inherit"}>
-                  <Td>{activityFeed.email}</Td>
+                <Tr key={`activity-feed-${index}`}>
+                  <Td>{email}</Td>
                 </Tr>
               );
             })
