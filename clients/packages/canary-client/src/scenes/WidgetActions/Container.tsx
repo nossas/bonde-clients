@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Header, Tab, Navigation, Container as Content } from 'bonde-components';
+import { Header, Navigation, Container as Content } from 'bonde-components';
 import TabRoute from './TabRoute';
 
 
@@ -14,16 +14,12 @@ const SubHeader = styled.div`
     color: #fff;
     margin: 3px 0 6px;
   }
-
-  ${Tab} {
-    outline: none;
-  }
 `;
 
 const PageWrap = styled.div`
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
+  flex: 1;
 `;
 
 type Props = {
@@ -41,7 +37,7 @@ const Container: React.FC<Props> = ({ children, title, navigation }): React.Reac
   return (
     <TabRoute>
       {({ push, is }) => (
-        <PageWrap>
+        <PageWrap className="page-wrap">
           <SubHeader>
             <Header.H3>{title}</Header.H3>
             <Navigation>
