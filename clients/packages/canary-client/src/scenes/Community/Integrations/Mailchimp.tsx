@@ -1,4 +1,5 @@
 import React from 'react';
+import { useMutation, gql } from 'bonde-core-tools';
 import {
   InputField,
   Heading,
@@ -10,14 +11,34 @@ import {
   Flex,
   Stack,
   UnorderedList,
-  ListItem
+  ListItem,
+  toast,
 } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import MailchimpIcon from './MailchimpIcon';
 
-const MailchimpPanel = () => {
+const propagatingDNSGQL = gql`
+query($id:Int, $community_id:Int) {
+  resync(id:9,iscommunity:true) {
+    status
+  }
+}
+`;
+
+type Props = {
+  onClose: any;
+  dnsHostedZone: any
+}
+
+const MailchimpPanel: React.FC<Props> = ({ dnsHostedZone }) => {
   const { t } = useTranslation('community');
+  const [setPropagating] = useMutation(propagatingDNSGQL);
+
+  const done = async () => {
+    await setPropagating({ variables: { dns_hosted_zone_id: dnsHostedZone.id } });
+    toast(<Success message='Atualização da base de contatos do mailchimp iniciada com sucesso!' />, { type: toast.TYPE.SUCCESS });
+  }
 
   return (
     <CommunityForm
@@ -76,7 +97,7 @@ const MailchimpPanel = () => {
                 <Heading as="h4" size="sm">Forçar sincronização</Heading>
                 <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
                 <Flex justifyContent="flex-end">
-                  <Button type='button' marginTop={4}>Sincronizar</Button>
+                  <Button onClick={done} type='button' marginTop={4}>Sincronizar</Button>
                 </Flex>
               </Stack>
             </Stack>
