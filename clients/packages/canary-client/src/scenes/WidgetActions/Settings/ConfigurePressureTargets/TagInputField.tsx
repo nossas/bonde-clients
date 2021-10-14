@@ -19,7 +19,7 @@ interface Props {
   label?: string
   placeholder?: string
   defaultValue?: string | string[]
-  onChange: (tags: string[]) => void 
+  onChange: (tags: string[]) => void
 }
 
 class TagInput extends React.Component<Props, State> {
@@ -57,10 +57,10 @@ class TagInput extends React.Component<Props, State> {
     if (evt.key === 'Enter' && value) {
       evt.preventDefault();
       if (this.state.tags.find(tag => tag === value.trim())) {
-        return; 
+        return;
       }
       const newTags = [...this.state.tags, value.trim()]
-      this.setState({ tags: newTags, value: "" });  
+      this.setState({ tags: newTags, value: "" });
       this.props.onChange(newTags);
     } else if (evt.key === 'Backspace' && !value) {
       this.onRemove(this.state.tags.length - 1);
@@ -69,7 +69,7 @@ class TagInput extends React.Component<Props, State> {
 
   onPaste(evt: any): void {
     const value = evt.clipboardData.getData("Text");
-    
+
     if (value && value.includes(";")) {
       // Special paste
       evt.preventDefault();
@@ -102,6 +102,7 @@ class TagInput extends React.Component<Props, State> {
           <Flex direction="row" flexWrap="wrap" flex={1}>
             {this.state.tags.map((tag: string, index: number) => (
               <Box
+                borderRadius={100}
                 key={tag}
                 bg="gray.100"
                 display="flex"
