@@ -28,7 +28,7 @@ class TagInput extends React.Component<Props, State> {
     super(props)
     if (typeof props.defaultValue === "string") {
       this.state = {
-        tags: props.defaultValue.split(";"),
+        tags: props.defaultValue.split(";").filter((target: string) => target !== ""),
         value: ""
       }
     } else {
