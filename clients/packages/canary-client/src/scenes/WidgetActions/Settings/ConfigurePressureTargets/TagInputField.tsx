@@ -103,8 +103,10 @@ class TagInput extends React.Component<Props, State> {
             {this.state.tags.map((tag: string, index: number) => (
               <Box
                 borderRadius={100}
+                border="1px"
+                borderColor="gray.100"
                 key={tag}
-                bg="gray.100"
+                bg="gray.50"
                 display="flex"
                 alignItems="center"
                 mr={2}
