@@ -120,9 +120,9 @@ class TagInput extends React.Component<Props, State> {
                   variant="ghost"
                   onClick={() => this.onRemove(index)}
                   colorScheme="gray"
-                  icon={<CloseIcon boxSize={3} />}
+                  icon={<CloseIcon boxSize={2} color="gray.400" />}
                   size={1}
-                  ml={1}
+                  ml={2}
                 />
               </Box>
             ))}
