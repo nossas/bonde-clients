@@ -185,9 +185,11 @@ type Props = {
   isClearable?: boolean;
   maxMenuHeight?: number;
   menuPlacement?: 'auto' | 'top' | 'bottom';
+  theme?: any
+  menuHeight?: any
 };
 
-const RoundSelect = ({ ...props }: Props) => {
+const RoundSelect: React.FC<Props> = ({ ...props }) => {
   const [show, toggle] = useState(false);
   return (
     <ReactSelect
@@ -211,7 +213,7 @@ const RoundSelect = ({ ...props }: Props) => {
 
 RoundSelect.defaultProps = {
   theme,
-  menuHeight: 300,
+  menuHeight: 300
 };
 
 RoundSelect.displayName = 'RoundSelect';

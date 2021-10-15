@@ -3,19 +3,18 @@ import styled from '@emotion/styled';
 import { css } from "@emotion/react";
 import { useField } from 'react-final-form';
 import FormField from './FormField';
-import Hint from './Hint';
 import RoundInput from './RoundInput';
-import Label from './Label';
 import theme from '../base/theme';
 
-type Props = {
-  name: string;
-  type?: string;
-  label?: string;
-  placeholder?: string;
-  disabled?: boolean;
-  onBlur?: (e: any) => void;
-};
+// interface Props extends Record<string, any> {
+//   name: string;
+//   type?: string;
+//   label?: string;
+//   helpText?: string;
+//   placeholder?: string;
+//   disabled?: boolean;
+//   onBlur?: (e: any) => void;
+// };
 
 const StyledFormField = styled(FormField)<{
   invalid?: boolean;
@@ -52,25 +51,20 @@ StyledFormField.defaultProps = {
   theme,
 };
 
-const RoundInputField = ({
+const RoundInputField: React.FC<any> = ({
   name,
   type,
   label,
+  helpText,
   placeholder,
   disabled,
   onBlur,
   ...config
-}: Props) => {
+}) => {
   const { input, meta } = useField(name, config);
+
   return (
-    <StyledFormField
-      value={input.value}
-      invalid={(meta.error || meta.submitError) && meta.touched}
-    >
-      {label && <Label>{label}</Label>}
-      {(meta.error || meta.submitError) && meta.touched && (
-        <Hint color="error">{meta.error || meta.submitError}</Hint>
-      )}
+    <FormField label={label} helpText={helpText}>
       <RoundInput
         {...input}
         placeholder={placeholder}
@@ -82,7 +76,7 @@ const RoundInputField = ({
           input.onBlur(e);
         }}
       />
-    </StyledFormField>
+    </FormField>
   );
 };
 

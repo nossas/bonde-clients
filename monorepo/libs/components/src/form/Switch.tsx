@@ -7,7 +7,7 @@ interface SwitchProps {
   disabled?: boolean
 }
 
-const Switch = ({ onClick, checked, disabled }: SwitchProps) => {
+const Switch: React.FC<SwitchProps> = ({ onClick, checked, disabled }) => {
   return (
     <Label>
       <input onClick={onClick} type="checkbox" checked={checked} disabled={disabled}/>

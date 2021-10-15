@@ -1,9 +1,7 @@
 import React from 'react';
 import { useField } from 'react-final-form';
 import FormField from './FormField';
-import Hint from './Hint';
 import RoundSelect from './RoundSelect';
-import Label from './Label';
 
 type Props = {
   name: string;
@@ -12,6 +10,7 @@ type Props = {
     label: string | number;
   }>;
   label?: string;
+  helpText?: string;
   placeholder?: string;
   disabled?: boolean;
   menuPortalTarget?: HTMLBodyElement | null;
@@ -21,8 +20,9 @@ type Props = {
   menuPlacement?: 'auto' | 'top' | 'bottom';
 };
 
-const RoundSelectField = ({
+const RoundSelectField: React.FC<Props> = ({
   label,
+  helpText,
   name,
   placeholder,
   disabled,
@@ -36,11 +36,7 @@ const RoundSelectField = ({
 }: Props) => {
   const { input, meta } = useField(name, config);
   return (
-    <FormField>
-      {label && <Label>{label}</Label>}
-      {(meta.error || meta.submitError) && meta.touched && (
-        <Hint color="error">{meta.error || meta.submitError}</Hint>
-      )}
+    <FormField label={label} helpText={helpText} meta={meta}>
       <RoundSelect
         {...input}
         options={options}

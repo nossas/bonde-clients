@@ -1,50 +1,43 @@
 import React from 'react';
 import { useField } from 'react-final-form';
-import styled from '@emotion/styled';
-
+import { Stack, Text } from "@chakra-ui/react";
 import FormField from './FormField';
-import Hint from './Hint';
 import Switch from './Switch';
-import Label from './Label';
 
-const SwitchField = (props: any) => {
-  const { label, name, disabled, textOff, textOn, ...config } = props;
+interface SwitchFieldProps extends Record<string, any>{
+  name: string
+  label?: string
+  helpText?: string
+  disabled?: boolean
+  textOff: string
+  textOn: string
+}
+
+const SwitchField: React.FC<SwitchFieldProps> = (props) => {
+  const {
+    label,
+    name,
+    disabled,
+    textOff,
+    textOn,
+    helpText,
+    children: _children,
+    ...config
+  } = props;
   const { input, meta } = useField(name, config);
 
   return (
-    <FormField>
-      {(meta.error || meta.submitError) && meta.touched && (
-        <Hint color="error">{meta.error || meta.submitError}</Hint>
-      )}
-      <Container disabled={!input.value}>
-        {label && <Label>{label}</Label>}
-
-        <span className="text">{input.value ? textOn : textOff}</span>
-
+    <FormField label={label} helpText={helpText} meta={meta}>
+      <Stack direction="row" spacing={2} align="center">
+        <Text color={disabled ? "gray.200" : "green.200"}>{input.value ? textOn : textOff}</Text>
         <Switch
           disabled={disabled}
           onClick={() => input.onChange(!input.value)}
           checked={input.value}
         />
-      </Container>
+      </Stack>
     </FormField>
   );
 };
-
-type ContainerProps = {
-  disabled: boolean;
-};
-
-const Container = styled.div<ContainerProps>`
-  display: flex;
-  align-items: center;
-
-  .text {
-    font-size: '13px';
-    font-weight: 800;
-    margin-right: 8px;
-    color: ${({ disabled }) => (disabled ? '#858585' : '#50E3C2')};
-  }
-`;
 
 export default SwitchField;

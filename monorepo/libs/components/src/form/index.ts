@@ -1,9 +1,7 @@
 export * from "react-final-form";
 export { default as ColorField } from "./ColorField";
 export { default as FormField } from "./FormField";
-export { default as Hint } from "./Hint";
 export { default as InputField } from "./InputField";
-export { default as Label } from "./Label";
 export { default as RadioField } from "./RadioField";
 export { default as RoundInput } from "./RoundInput";
 export { default as RoundInputField } from "./RoundInputField";
