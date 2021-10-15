@@ -110,7 +110,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
         }
       }}
     >
-      {({ form, submitting, dirty }: any) => (
+      {({ form, submitting, dirty, invalid }: any) => (
         <Box bg="white" p={6} boxShadow="sm">
           <Grid templateColumns="repeat(12, 1fr)" gap={16}>
             <GridItem colSpan={[12, 12, 1]}>
@@ -150,7 +150,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
                 )}
               </SpyField>
               <Flex justify='end'>
-                <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
+                <Button disabled={submitting || !dirty || invalid} type='submit'>{t('settings.defaultForm.submit')}</Button>
               </Flex>
             </GridItem>
             <GridItem colSpan={[12, 12, 5]}>

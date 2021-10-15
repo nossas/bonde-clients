@@ -20,6 +20,7 @@ interface Props {
   placeholder?: string
   defaultValue?: string | string[]
   onChange: (tags: string[]) => void
+  errors?: string[]
 }
 
 class TagInput extends React.Component<Props, State> {
@@ -60,7 +61,10 @@ class TagInput extends React.Component<Props, State> {
         return;
       }
       const newTags = [...this.state.tags, value.trim()]
-      this.setState({ tags: newTags, value: "" });
+      this.setState({
+        tags: newTags,
+        value: ""
+      });
       this.props.onChange(newTags);
     } else if (evt.key === 'Backspace' && !value) {
       this.onRemove(this.state.tags.length - 1);
@@ -86,7 +90,7 @@ class TagInput extends React.Component<Props, State> {
   }
 
   render(): React.ReactElement {
-    const { label, placeholder } = this.props;
+    const { label, placeholder, errors } = this.props;
 
     return (
       <FormControl mb={2}>
@@ -104,9 +108,9 @@ class TagInput extends React.Component<Props, State> {
               <Box
                 borderRadius={100}
                 border="1px"
-                borderColor="gray.100"
+                borderColor={(errors || []).includes(tag) ? "red.100" : "gray.100"}
                 key={tag}
-                bg="gray.50"
+                bg={(errors || []).includes(tag) ? "red.50" : "gray.50"}
                 display="flex"
                 alignItems="center"
                 mr={2}
@@ -149,15 +153,17 @@ export interface TagInputFieldProps {
   name: string
   label?: string
   placeholder?: string
+  validate: (value?: any, allValues?: any, meta?: any) => any
 }
 
-const TagInputField: React.FC<TagInputFieldProps> = ({ name, ...props }) => {
-  const { input } = useField(name);
+const TagInputField: React.FC<TagInputFieldProps> = ({ name, validate, ...props }) => {
+  const { input, meta } = useField(name, { validate });
 
   return (
     <TagInput
       defaultValue={input.value}
       onChange={(tags) => input.onChange(tags)}
+      errors={meta.error}
       {...props}
     />
   );
