@@ -1,6 +1,5 @@
+export * from "react-final-form";
 export { default as ColorField } from "./ColorField";
-export { default as ConnectedForm } from "./ConnectedForm";
-export { default as Form } from "./Form";
 export { default as FormField } from "./FormField";
 export { default as Hint } from "./Hint";
 export { default as InputField } from "./InputField";
