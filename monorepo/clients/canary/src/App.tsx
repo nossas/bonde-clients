@@ -1,29 +1,39 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
-  Button,
-  Loading,
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
+import {
+  Box,
+  BondeIcon,
   ChakraProvider,
   Container,
   CSSReset,
   FontsLoader,
+  Flex,
   customTheme
 } from "@bonde/components";
-import IconsList from "./IconsList";
+import Home from "./scenes/Home";
 
 const App: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
 
   return (
     <ChakraProvider theme={customTheme}>
       <CSSReset />
       <FontsLoader />
-      <Container>
-        <Button onClick={() => setIsLoading(!isLoading)}>
-          {isLoading ? `Hide Loading` : `Show Loading`}
-        </Button>
-        {isLoading && <Loading message="Carregando ação..." />}
-        <IconsList />
-      </Container>
+      <Flex direction="column" h="100vh">
+        <Box bg="black" px="60px">
+          <BondeIcon boxSize={16} />
+        </Box>
+        <Container bg="gray.50" flex={1}>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Home} />
+            </Switch>
+          </Router>        
+        </Container>
+      </Flex>
     </ChakraProvider>
   );
 }

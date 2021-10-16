@@ -6,6 +6,7 @@ import {
   Text,
   ArrowDownIcon,
   ArrowUpIcon,
+  BondeIcon,
   ChartIcon,
   CloseIcon,
   CloudIcon,
@@ -30,6 +31,7 @@ import {
 const iconsComponentList: any[] = [
   ArrowDownIcon,
   ArrowUpIcon,
+  BondeIcon,
   ChartIcon,
   CloseIcon,
   CloudIcon,
