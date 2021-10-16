@@ -8,7 +8,7 @@ import {
   FormHelperText,
   Stack
 } from "@chakra-ui/react";
-import { useField, FieldInputProps } from "react-final-form";
+import { useField } from "react-final-form";
 import ReactS3Uploader from "react-s3-uploader";
 import { PencilIcon as EditIcon, UploadImageIcon } from "../icons";
 
@@ -18,7 +18,7 @@ interface S3UploadFileFieldProps {
   disabled?: boolean;
 }
 
-const S3UploadFileField: React.FC<S3UploadFileFieldProps> = ({
+export const S3UploadFileField: React.FC<S3UploadFileFieldProps> = ({
   children,
   onChange,
   signingUrl,
@@ -62,13 +62,14 @@ const S3UploadFileField: React.FC<S3UploadFileFieldProps> = ({
   );
 }
 
-interface S3UploadFieldProps extends FieldInputProps<string> {
+interface S3UploadFieldProps extends Record<string, any> {
+  name: string
   label?: string
   helpText?: string
   disabled?: boolean
   alt?: string
   signingUrl: string
-  uploadImageIcon: any
+  uploadImageIcon?: any
   removeTextButton?: string
   borderRadius?: any
   boxSize?: any
@@ -125,13 +126,13 @@ const S3UploadField = (props: S3UploadFieldProps) => {
             {helpText}
           </FormHelperText>
         )}
-        {props.formData && (
+        {input.value && (
           <Button
             type="button"
             variant="link"
             fontWeight="normal"
             colorScheme="gray"
-            onClick={() => props.onChange(null)}
+            onClick={() => input.onChange(null)}
           >
             {removeTextButton}
           </Button>

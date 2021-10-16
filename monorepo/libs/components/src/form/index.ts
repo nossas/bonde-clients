@@ -7,7 +7,7 @@ export { default as RoundInput } from "./RoundInput";
 export { default as RoundInputField } from "./RoundInputField";
 export { default as RoundSelect } from "./RoundSelect";
 export { default as RoundSelectField } from "./RoundSelectField";
-export { default as S3UploadField } from "./S3UploadField";
+export { default as S3UploadField, S3UploadFileField } from "./S3UploadField";
 // export { default as SelectField } from "./SelectField";
 // export { default as Switch } from "./Switch";
 export { default as SwitchField } from "./SwitchField";

@@ -52,21 +52,6 @@ export const FallbackImage: React.FC = () => {
   )
 };
 
-export type MobilizationProps = {
-  id: number
-  name: string
-  goal?: string
-  facebookShareImage?: string
-  customDomain?: string
-  slug: string
-  community: any
-}
-
-export type MobilizationBoxProps = {
-  mobilization: MobilizationProps
-  onClick?: any
-}
-
 export interface ImageBoxProps {
   imageSrc?: string
   title: string
