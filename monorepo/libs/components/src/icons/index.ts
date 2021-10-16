@@ -1,9 +1,11 @@
 export { default as ArrowDownIcon } from "./ArrowDownIcon";
 export { default as ArrowUpIcon } from "./ArrowUpIcon";
+export { default as BondeIcon } from "./BondeIcon";
 export { default as ChartIcon } from "./ChartIcon";
 export { default as CloseIcon } from "./CloseIcon";
 export { default as CloudIcon } from "./CloudIcon";
 export { default as CopyIcon } from "./CopyIcon";
+export { default as EmptyIcon } from "./EmptyIcon";
 export { default as EyeIcon } from "./EyeIcon";
 export { default as InfoIcon } from "./InfoIcon";
 export { default as NetworkIcon } from "./NetworkIcon";
