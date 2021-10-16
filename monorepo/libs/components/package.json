@@ -9,7 +9,9 @@
   ],
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll false",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
     "clean": "rimraf dist",
     "build": "npm run clean && rollup -c"
   },
