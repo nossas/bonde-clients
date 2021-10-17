@@ -15,6 +15,7 @@ import {
   customTheme
 } from "@bonde/components";
 import Home from "./scenes/Home";
+import Community from "./scenes/Community";
 
 const App: React.FC = () => {
 
@@ -30,6 +31,7 @@ const App: React.FC = () => {
           <Router>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/community" component={Community} />
             </Switch>
           </Router>        
         </Container>
