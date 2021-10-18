@@ -112,8 +112,6 @@ const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
   // Parse pressures count
   const pressuresCount: number = activistPressuresAggregate.aggregate.count;
 
-  console.log("data ->", data)
-  console.log("widget ->", widget)
   // Parse active targets
   let activeTargets: string[];
   if (widget.settings.pressure_type === 'group') {
