@@ -13,7 +13,7 @@ const validate = (targets: string[]) => {
   // eslint-disable-next-line
   const re = new RegExp(/[a-zA-Zá-ú 0-9]+<(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})>/);
 
-  if (targets != undefined) {
+  if (targets !== undefined) {
     const invalidTargets = targets.filter((target) => !re.test(target));
 
     if (invalidTargets.length > 0) return invalidTargets;
