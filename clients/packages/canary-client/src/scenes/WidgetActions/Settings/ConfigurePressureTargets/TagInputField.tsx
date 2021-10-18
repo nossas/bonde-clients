@@ -27,16 +27,9 @@ class TagInput extends React.Component<Props, State> {
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
   constructor(props: any) {
     super(props)
-    if (typeof props.defaultValue === "string") {
-      this.state = {
-        tags: props.defaultValue.split(";").filter((target: string) => target !== ""),
-        value: ""
-      }
-    } else {
-      this.state = {
-        tags: props.defaultValue || [],
-        value: ""
-      }
+    this.state = {
+      tags: props.defaultValue || [],
+      value: ""
     }
   }
 
