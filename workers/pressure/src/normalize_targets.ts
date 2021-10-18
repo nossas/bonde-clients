@@ -1,4 +1,7 @@
 import { GraphQLClient, gql } from 'graphql-request'
+import dotenv from "dotenv";
+
+dotenv.config()
 
 // Client GraphQL
 
@@ -23,17 +26,19 @@ const updateWidgetsQuery = gql`
       }
     ) {
       affected_rows
+      returning {
+        id
+        settings
+        targets: settings(path: "targets")
+      }
     }
   }
 `;
 
-const client = new GraphQLClient(
-  "http://api-graphql.staging.bonde.org/v1/graphql",
-  // "https://api-graphql.bonde.org/v1/graphql",
+const client = new GraphQLClient(process.env.GRAPHQL_API_URL || "<config-graphql-api-url>",
   {
     headers: {
-      // authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwb3N0Z3JhcGhxbCIsInJvbGUiOiJhZG1pbiIsInVzZXJfaWQiOjE1MiwiaXNfYWRtaW4iOjEsImlhdCI6MTYzMTkwMDQ1MywiYXVkIjoicG9zdGdyYXBoaWxlIn0.EB5YNSO9W-8Ug-TEKKY0PeSKFFIMylUpndMoNU4QMXM"
-      authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwb3N0Z3JhcGhxbCIsInJvbGUiOiJhZG1pbiIsInVzZXJfaWQiOjE1MiwiaXNfYWRtaW4iOjEsImlhdCI6MTYzMzYzNTMwMCwiYXVkIjoicG9zdGdyYXBoaWxlIn0.z82e8P1_bovXoPQJQXG0UuclnkjKSAbZY4-tPr9zMRQ"
+      authorization: `Bearer ${process.env.GRAPHQL_API_TOKEN}`
     }
   }
 );
@@ -135,6 +140,11 @@ const main = async () => {
     const response = await client.request(updateWidgetsQuery, { objects: widgets });
   
     console.log("Update is done: ", response);
+    console.log("Returning:");
+    response.insert_widgets.returning.forEach((w: any) => {
+      console.log(w.id);
+      console.log(w.targets);
+    });
   } catch (errors) {
     console.log("Errors: ", errors);
   }
