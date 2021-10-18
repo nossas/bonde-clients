@@ -112,16 +112,16 @@ const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
   // Parse pressures count
   const pressuresCount: number = activistPressuresAggregate.aggregate.count;
 
+  console.log("data ->", data)
+  console.log("widget ->", widget)
   // Parse active targets
   let activeTargets: string[];
-  if (widget.settings.pressure_type === 'unique') {
-    activeTargets = typeof widget.settings.targets === "string"
-      ? widget.settings.targets.split(";").filter((value) => value !== '')
-      : widget.settings.targets
-  } else {
+  if (widget.settings.pressure_type === 'group') {
     activeTargets = widget.groups
       .map((group) => group.targets)
       .reduce((previous, current) => [...previous, ...current], [])
+  } else {
+    activeTargets = widget.settings.targets
   }
 
   return {
