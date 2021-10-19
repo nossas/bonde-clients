@@ -116,10 +116,10 @@ const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
   let activeTargets: string[];
   if (widget.settings.pressure_type === 'group') {
     activeTargets = widget.groups
-      .map((group) => group.targets)
-      .reduce((previous, current) => [...previous, ...current], [])
+      .map((group) => (group.targets || []))
+      .reduce((previous, current) => [...previous, ...current], []);
   } else {
-    activeTargets = widget.settings.targets
+    activeTargets = widget.settings.targets || [];
   }
 
   return {
