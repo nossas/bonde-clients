@@ -18,7 +18,7 @@ const Container: React.FC<Props> = ({ children, title, navigation }): React.Reac
     <TabRoute>
       {({ push, is }) => (
         <Flex direction="column" flex={1}>
-          <Stack spacing={5} bg="black" px={12} pt={4}>
+          <Stack spacing={4} bg="black" px="61px">
             <Heading as="h2" size="2xl" color="white" fontWeight="extrabold">{title}</Heading>
             <DarkMode>
               <Flex direction="row">
