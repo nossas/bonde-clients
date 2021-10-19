@@ -16,6 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test --watchAll false",
     "test:watch": "react-scripts test",
+    "test:coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -25,8 +26,12 @@
     ]
   },
   "jest": {
-    "collectCoverage": true,
-    "collectCoverageFrom": ["src/**/*.{ts,tsx}"]
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "src/**/**/*.{js,jsx,ts,tsx}",
+      "src/**/**/**/*.{js,jsx,ts,tsx}",
+      "!<rootDir>/node_modules/"
+    ]
   },
   "browserslist": {
     "production": [
