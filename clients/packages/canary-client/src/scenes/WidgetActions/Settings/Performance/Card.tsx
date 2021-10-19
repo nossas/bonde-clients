@@ -27,7 +27,7 @@ const Card: React.FC<CardProps> = ({ label, helpText, value }) => (
         {label}
       </Heading>
       {helpText && (
-        <Tooltip label={helpText} maxW="220px" >
+        <Tooltip label={helpText} maxW="220px" backgroundColor="gray.400">
           <InfoIcon boxSize={4} color="gray.400" />
         </Tooltip>
       )}

@@ -1,30 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Header, Tab, Navigation, Container as Content } from 'bonde-components';
+import { Heading, Stack, Flex, DarkMode, Container as Content } from 'bonde-components';
 import TabRoute from './TabRoute';
-
-
-const SubHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-  padding: 0 60px;
-
-  h3 {
-    color: #fff;
-    margin: 3px 0 6px;
-  }
-
-  ${Tab} {
-    outline: none;
-  }
-`;
-
-const PageWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
 
 type Props = {
   title: string
@@ -41,17 +17,19 @@ const Container: React.FC<Props> = ({ children, title, navigation }): React.Reac
   return (
     <TabRoute>
       {({ push, is }) => (
-        <PageWrap>
-          <SubHeader>
-            <Header.H3>{title}</Header.H3>
-            <Navigation>
-              {navigation({ push, is })}
-            </Navigation>
-          </SubHeader>
+        <Flex direction="column" flex={1}>
+          <Stack spacing={5} bg="black" px={12} pt={4}>
+            <Heading as="h2" size="2xl" color="white" fontWeight="extrabold">{title}</Heading>
+            <DarkMode>
+              <Flex direction="row">
+                {navigation({ push, is })}
+              </Flex>
+            </DarkMode>
+          </Stack>
           <Content>
             {children}
           </Content>
-        </PageWrap>
+        </Flex>
       )}
     </TabRoute>
   );

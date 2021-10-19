@@ -1,6 +1,7 @@
 import React from 'react';
 import { InputField, TextareaField } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
+import TagInputField from "./TagInputField";
 
 type SubjectBodyFieldsProps = {
   prefix?: string
@@ -8,15 +9,19 @@ type SubjectBodyFieldsProps = {
   emailBodyName?: string
 }
 
-const targetsFormart = (value: any) => {
-  return value && typeof value !== 'string' ? value.join(';') : value;
+const validate = (targets: string[]) => {
+  // eslint-disable-next-line
+  const re = new RegExp(/[a-zA-Zá-ú 0-9]+<(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})>/);
+
+  if (targets !== undefined) {
+    const invalidTargets = targets.filter((target) => !re.test(target));
+
+    if (invalidTargets.length > 0) return invalidTargets;
+    else return undefined
+  }
 }
 
-const targetsParse = (value: any) => {
-  return value.split(';');
-}
-
-const SubjectBodyFields = ({ prefix, emailSubjectName, emailBodyName }: SubjectBodyFieldsProps) => {
+const SubjectBodyFields: React.FC<SubjectBodyFieldsProps> = ({ prefix, emailSubjectName, emailBodyName }) => {
   const { t } = useTranslation('widgetActions');
 
   const emailSubject = emailSubjectName ? emailSubjectName : 'pressure_subject';
@@ -24,12 +29,11 @@ const SubjectBodyFields = ({ prefix, emailSubjectName, emailBodyName }: SubjectB
 
   return (
     <>
-      <InputField
-        name={prefix ? prefix + ".targets" : "targets"}
-        placeholder={t('settings.pressure.placeholder.targets')}
+      <TagInputField
         label={t('settings.pressure.label.targets')}
-        format={targetsFormart}
-        parse={targetsParse}
+        placeholder="Nome do alvo <nome@alvo.org>"
+        name={prefix ? prefix + ".targets" : "targets"}
+        validate={validate}
       />
       <InputField
         name={prefix ? prefix + `.${emailSubject}` : emailSubject}

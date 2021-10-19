@@ -1,6 +1,6 @@
 import React from "react";
 import {
-	Heading,
+  Heading,
   Text,
   toast,
   Box,
@@ -74,65 +74,65 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
   const [upsert] = useMutation(upsertPressureTargets);
   const { t } = useTranslation('widgetActions');
 
-	return (
-		<SettingsForm
-			widget={widget}
-			initialValues={{
-				settings: {
-					...widget.settings,
-					pressure_type: widget.settings.pressure_type || 'unique'
-				},
-				groups: widget.groups
-			}}
-			mutators={{ ...arrayMutators }}
-			afterSubmit={async ({ groups, settings }: any) => {
-				if (groups && JSON.stringify(groups) !== JSON.stringify(widget.groups)) {
-					try {
-						const variables = {
-							input: diff(groups, widget.groups as any).map((g: any) => ({
-								email_subject: g.email_subject,
-								email_body: g.email_body,
-								targets: g.targets,
-								label: g.label,
-								identify: !g.identify ? slugify(g.label, { lower: true }) : g.identify,
-								widget_id: widget.id
-							}))
-						}
-						await upsert({ variables });
-						updateCache({ ...widget, settings, groups });
-						toast(<Success message={t('settings.pressure.targets.success')} />, { type: toast.TYPE.SUCCESS });
-					} catch (err: any) {
-						console.error('err', { err });
-						toast(err.message, { type: toast.TYPE.ERROR });
-					}
-				} else {
-					updateCache({ ...widget, settings });
-				}
-			}}
-		>
-			{({ form, submitting, dirty }: any) => (
-				<Box bg="white" p={6} boxShadow="sm">
-					<Grid templateColumns="repeat(12, 1fr)" gap={16}>
-						<GridItem colSpan={[12, 12, 1]}>
-							<Targets />
-						</GridItem>
-						<GridItem colSpan={[12, 12, 6]}>
-							<SpyField field='settings.pressure_type'>
-								{({ value }: any) => (
-									<>
-										<Stack spacing={2} mb={4}>
-											<Heading as="h3" size="xl">Alvos</Heading>
-											<Text>
-												Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
-											</Text>
-										</Stack>
-										<RadioField
-											name='settings.pressure_type'
-											label={t('settings.pressure.label.pressure_type')}
-										>
-											<Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
-											<Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
-										</RadioField>
+  return (
+    <SettingsForm
+      widget={widget}
+      initialValues={{
+        settings: {
+          ...widget.settings,
+          pressure_type: widget.settings.pressure_type || 'unique'
+        },
+        groups: widget.groups
+      }}
+      mutators={{ ...arrayMutators }}
+      afterSubmit={async ({ groups, settings }: any) => {
+        if (groups && JSON.stringify(groups) !== JSON.stringify(widget.groups)) {
+          try {
+            const variables = {
+              input: diff(groups, widget.groups as any).map((g: any) => ({
+                email_subject: g.email_subject,
+                email_body: g.email_body,
+                targets: g.targets,
+                label: g.label,
+                identify: !g.identify ? slugify(g.label, { lower: true }) : g.identify,
+                widget_id: widget.id
+              }))
+            }
+            await upsert({ variables });
+            updateCache({ ...widget, settings, groups });
+            toast(<Success message={t('settings.pressure.targets.success')} />, { type: toast.TYPE.SUCCESS });
+          } catch (err: any) {
+            console.error('err', { err });
+            toast(err.message, { type: toast.TYPE.ERROR });
+          }
+        } else {
+          updateCache({ ...widget, settings });
+        }
+      }}
+    >
+      {({ form, submitting, dirty, invalid }: any) => (
+        <Box bg="white" p={6} boxShadow="sm">
+          <Grid templateColumns="repeat(12, 1fr)" gap={16}>
+            <GridItem colSpan={[12, 12, 1]}>
+              <Targets />
+            </GridItem>
+            <GridItem colSpan={[12, 12, 6]}>
+              <SpyField field='settings.pressure_type'>
+                {({ value }: any) => (
+                  <>
+                    <Stack spacing={2} mb={4}>
+                      <Heading as="h3" size="xl">Alvos</Heading>
+                      <Text fontSize="18px" color="gray.400">
+                        Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
+                      </Text>
+                    </Stack>
+                    <RadioField
+                      name='settings.pressure_type'
+                      label={t('settings.pressure.label.pressure_type')}
+                    >
+                      <Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
+                      <Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
+                    </RadioField>
 
                     {value === 'unique'
                       ? <UniqueFormFields />
@@ -150,7 +150,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
                 )}
               </SpyField>
               <Flex justify='end'>
-                <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
+                <Button disabled={submitting || !dirty || invalid} type='submit'>{t('settings.defaultForm.submit')}</Button>
               </Flex>
             </GridItem>
             <GridItem colSpan={[12, 12, 5]}>

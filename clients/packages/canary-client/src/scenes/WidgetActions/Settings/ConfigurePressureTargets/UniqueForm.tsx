@@ -1,32 +1,30 @@
 import React from 'react';
 import { Heading, Text, Stack } from 'bonde-components';
+import { useTranslation } from 'react-i18next';
 import SubjectBodyFields from './SubjectBodyFields';
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
-export const UniqueFormExplainCard = () => (
-  <Stack spacing={4}>
-    <Stack spacing={2}>
-      <Heading as="h4" size="lg">Como adicionar alvos</Heading>
-      <Text>Escreva nome e email de contato dos alvos segundo o formato abaixo.</Text>
+export const UniqueFormExplainCard = () => {
+  const { t } = useTranslation('widgetActions');
+
+  return (
+    <Stack spacing={4}>
+      <Stack spacing={2}>
+        <Heading as="h4" size="lg">{t("settings.pressure.explain.title")}</Heading>
+        <Text>{t("settings.pressure.explain.description")}</Text>
+      </Stack>
+      <Stack spacing={2}>
+        <Heading as="h4" size="lg">{t("settings.pressure.explain.target_format")}</Heading>
+        <Text>{t("settings.pressure.explain.controllers.format")}</Text>
+        <Text>{t("settings.pressure.explain.controllers.add")}</Text>
+        <Text>{t("settings.pressure.explain.controllers.delete")}</Text>
+        <Text>{t("settings.pressure.explain.controllers.comma")}</Text>
+        <Text>{t("settings.pressure.explain.save_form")}</Text>
+        <Text>{t("settings.pressure.explain.ordering")}</Text>
+      </Stack>
     </Stack>
-    <Stack spacing={2}>
-      <Heading as="h4" size="lg">Formato do alvo</Heading>
-      <Text>
-        {`Nome <email@provedor.com> (obrigatório usar os caractéres 
-          < e >; para agrupar os alvos).`}
-      </Text>
-      <Text>
-        {`Quando acabar, salve as alterações clicando no botão no canto 
-        superior direito da tela.`}
-      </Text>
-      <Text>
-        {`Os alvos serão exibidos em ordem aleatória na widget de pressão. 
-        Ou seja, cada vez que a mobilização for acessada, a ordem de exibição 
-        será diferente.`}
-      </Text>
-    </Stack>
-  </Stack>
-)
+  );
+}
 
 const UniqueForm = () => (
   <SubjectBodyFields prefix='settings' />

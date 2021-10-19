@@ -12,7 +12,7 @@ const DisclaimerRelease: React.FC<Props> = ({ firstEventTimestamp, widgetCreated
       <Alert status="success">
         <Stack direction="row" spacing={4} align="center">
           <ChartIcon />
-          <Text color="black">{`Os dados de envio de e-mail abaixo começaram a ser coletados no dia  ${firstEventTimestamp.toLocaleDateString()} para te dar mais visibilidade da performance das suas campanhas.`}</Text>
+          <Text color="black">{`Os dados de envio de e-mail começaram a ser coletados no dia ${firstEventTimestamp.toLocaleDateString()} para te dar mais visibilidade da performance das suas campanhas de pressão.`}</Text>
         </Stack>
       </Alert>
     )

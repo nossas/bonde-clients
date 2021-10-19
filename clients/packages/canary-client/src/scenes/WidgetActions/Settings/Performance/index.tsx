@@ -63,7 +63,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
       {!hasntEventHistory ? (
         <TargetsStatistics aggregateEmails={aggregateEmails} activeTargets={activeTargets} />
       ) : (
-        <TargetsTable aggregateEmails={aggregateEmails} activeTargets={activeTargets} />
+        <TargetsTable activeTargets={activeTargets} />
       )}
 
     </Stack>

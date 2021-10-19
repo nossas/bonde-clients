@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Tab, Header, Heading } from "bonde-components";
+import { Tab, Header, Heading, DarkMode } from "bonde-components";
 import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { useSession } from 'bonde-core-tools';
@@ -42,7 +42,7 @@ const Settings: React.FC<Props> = ({ widgets }) => {
     <Container
       title={widget.block.mobilization.name}
       navigation={({ push, is }: NavigationArgs) => (
-        <>
+        <DarkMode>
           <Tab
             onClick={() => {
               if (process.env.REACT_APP_DOMAIN_ADMIN) {
@@ -64,7 +64,7 @@ const Settings: React.FC<Props> = ({ widgets }) => {
           >
             {t('settings.navigation.settings')}
           </Tab>
-        </>
+        </DarkMode>
       )}
     >
       {/* Corpo */}
