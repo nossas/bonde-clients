@@ -3,7 +3,7 @@ import { Tab } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import TabRoute from '../TabRoute';
 
-const Navigation = () => {
+const Navigation: React.FC = () => {
   const { t } = useTranslation("widgetActions");
 
   return (

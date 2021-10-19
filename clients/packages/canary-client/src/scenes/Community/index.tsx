@@ -1,7 +1,6 @@
 import React from 'react'
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
-import styled from 'styled-components';
-import { Empty, Header, Navigation, Tab, Container } from 'bonde-components';
+import { Flex, Empty, Heading, DarkMode, Tab, Container, Stack } from 'bonde-components';
 import { useSession } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 // Subroutes
@@ -11,28 +10,6 @@ import Integrations from './Integrations';
 import Mobilizers from './Mobilizers';
 import Recipient from './Recipient';
 import Settings from './Settings';
-
-const SubHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-  padding: 0 60px;
-
-  h3 {
-    color: #fff;
-    margin: 10px 0 30px;
-  }
-
-  ${Tab} {
-    outline: none;
-  }
-`;
-
-const PageWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
 
 type Props = {
   match: any
@@ -51,19 +28,21 @@ const CommunityPage: React.FC<Props> = ({ match, location }): React.ReactElement
   const push = (path: string) => () => history.push(`${match.path}${path}`);
 
   return community ? (
-    <PageWrap>
-      <SubHeader>
-        <Header.H3>{t('titles.settings')}</Header.H3>
-        <Navigation>
-          <Tab active={is(/\/community\/analytics\/*/)} onClick={push('/analytics')}>{t('navigation.analytics')}</Tab>
-          <Tab active={is(/\/community\/settings\/*/)} onClick={push('/settings')}>{t('navigation.settings')}</Tab>
-          <Tab active={is(/\/community\/mobilizers\/*/)} onClick={push('/mobilizers')}>{t('navigation.mobilizers')}</Tab>
-          <Tab active={is(/\/community\/recipient\/*/)} onClick={push('/recipient')}>{t('navigation.recipient')}</Tab>
-          <Tab active={is(/\/community\/integrations\/*/)} onClick={push('/integrations/mailchimp')}>{t('navigation.integrations')}</Tab>
-          <Tab active={is(/\/community\/domains\/*/)} onClick={push('/domains')}>Domínios</Tab>
-        </Navigation>
-      </SubHeader>
-      <Container w="100%">
+    <Flex direction="column" flex={1}>
+      <Stack spacing={5} bg="black" px={12} pt={4}>
+        <Heading as="h2" size="2xl" color="white" fontWeight="extrabold">{t('titles.settings')}</Heading>
+        <DarkMode>
+          <Flex direction="row">
+            <Tab active={is(/\/community\/analytics\/*/)} onClick={push('/analytics')}>{t('navigation.analytics')}</Tab>
+            <Tab active={is(/\/community\/settings\/*/)} onClick={push('/settings')}>{t('navigation.settings')}</Tab>
+            <Tab active={is(/\/community\/mobilizers\/*/)} onClick={push('/mobilizers')}>{t('navigation.mobilizers')}</Tab>
+            <Tab active={is(/\/community\/recipient\/*/)} onClick={push('/recipient')}>{t('navigation.recipient')}</Tab>
+            <Tab active={is(/\/community\/integrations\/*/)} onClick={push('/integrations/mailchimp')}>{t('navigation.integrations')}</Tab>
+            <Tab active={is(/\/community\/domains\/*/)} onClick={push('/domains')}>Domínios</Tab>
+          </Flex>
+        </DarkMode>
+      </Stack>
+      <Container>
         <Switch>
           <Route exact path={`${match.path}`}>
             {/* Redirect /community to index tab */}
@@ -89,7 +68,7 @@ const CommunityPage: React.FC<Props> = ({ match, location }): React.ReactElement
           </Route>
         </Switch>
       </Container>
-    </PageWrap>
+    </Flex>
   ) : <Empty message='Nada por aqui...' />;
 };
 
