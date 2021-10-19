@@ -30,12 +30,18 @@ const FetchMailchimpStatus = ({ children }: any) => {
   const { community } = useSession();
   const { data, loading, error, refetch } = useQuery(
     fetchGraphqlQuery,
-    { variables: { is_community: true, id: community?.id } }
+    {
+      variables: { is_community: true, id: community?.id },
+      pollInterval: 5000,
+    },
   );
 
   const { data2, loading2, error2 } = useQuery(
     fetchGraphqlQuery2,
-    { variables: { is_community: true, id: community?.id } }
+    {
+      variables: { is_community: true, id: community?.id },
+      pollInterval: 500,
+    }
   );
 
   if (loading) return 'Carregando Mailchimp Status';
