@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMutation, gql } from 'bonde-core-tools';
+// import { useQuery, gql } from 'bonde-core-tools';
 import {
   InputField,
   Heading,
@@ -17,26 +17,20 @@ import {
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import MailchimpIcon from './MailchimpIcon';
-
-const propagatingDNSGQL = gql`
-query($id:Int, $community_id:Int) {
-  resync(id:9,iscommunity:true) {
-    status
-  }
-}
-`;
+import { MailchimpStatus } from './types';
 
 type Props = {
-  onClose: any;
-  dnsHostedZone: any
+  mailchimpStatus: MailchimpStatus
+  refetch: any
 }
 
-const MailchimpPanel: React.FC<Props> = ({ dnsHostedZone }) => {
+const MailchimpPanel: React.FC<Props> = ({ mailchimpStatus }) => {
   const { t } = useTranslation('community');
-  const [setPropagating] = useMutation(propagatingDNSGQL);
+  console.log(mailchimpStatus);
+  // const [setPropagating] = useQuery(resyncMailchimpStatusGQL);
 
   const done = async () => {
-    await setPropagating({ variables: { dns_hosted_zone_id: dnsHostedZone.id } });
+    // await setPropagating({ variables: { id: 9, is_community: true } });
     toast(<Success message='Atualização da base de contatos do mailchimp iniciada com sucesso!' />, { type: toast.TYPE.SUCCESS });
   }
 

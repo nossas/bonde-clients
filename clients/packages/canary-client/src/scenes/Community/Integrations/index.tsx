@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, Route, Switch, useParams, useRouteMatch } from 'react-router-dom';
 import styled from 'styled-components';
+import FetchMailchimpStatus from './FetchMailchimpStatus';
 import {
   Heading,
   Text,
@@ -46,7 +47,11 @@ const SettingsPage = () => {
 
         <Switch>
           <Route exact path={path.replace(':name', 'mailchimp')}>
-            <Mailchimp />
+          <FetchMailchimpStatus>
+            {({ mailchimpStatus, refetch }: any) => (
+              <Mailchimp mailchimpStatus={mailchimpStatus} refetch={refetch} />
+            )}
+          </FetchMailchimpStatus>
           </Route>
           <Route exact path={path.replace(':name', 'twilio')}>
             <Twilio />
