@@ -3,6 +3,10 @@ export type Community = {
     name: string
 }
 
+export type MailchimpLastSync = {
+    date: Date
+}
+
 export type MailchimpStatus = {
     completed: number
     waiting: number

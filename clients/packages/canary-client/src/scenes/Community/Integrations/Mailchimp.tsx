@@ -17,16 +17,17 @@ import {
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import MailchimpIcon from './MailchimpIcon';
-import { MailchimpStatus } from './types';
+import { MailchimpLastSync,  MailchimpStatus } from './types';
 
 type Props = {
   mailchimpStatus: MailchimpStatus
+  mailchimpLastSync: MailchimpLastSync
   refetch: any
 }
 
-const MailchimpPanel: React.FC<Props> = ({ mailchimpStatus }) => {
+const MailchimpPanel: React.FC<Props> = ({ mailchimpStatus, mailchimpLastSync }) => {
   const { t } = useTranslation('community');
-  console.log(mailchimpStatus);
+  // console.log(mailchimpStatus, mailchimpLastSync);
   // const [setPropagating] = useQuery(resyncMailchimpStatusGQL);
 
   const done = async () => {
@@ -90,6 +91,11 @@ const MailchimpPanel: React.FC<Props> = ({ mailchimpStatus }) => {
               <Stack>
                 <Heading as="h4" size="sm">Forçar sincronização</Heading>
                 <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
+                <Heading as="h4" size="sm">Status</Heading>
+                <Text size="sm">Data da última atualização: {(typeof mailchimpLastSync === 'undefined' ? '-' : mailchimpLastSync.date)}</Text>
+                <Text size="sm">Total de sincronizações com sucesso: {mailchimpStatus.resyncMailchimpStatus.completed}</Text>
+                <Text size="sm">Total de falhas na sincronização: {mailchimpStatus.resyncMailchimpStatus.failed}</Text>
+                <Text size="sm">Total de sincronizações ativas: {mailchimpStatus.resyncMailchimpStatus.active}</Text>
                 <Flex justifyContent="flex-end">
                   <Button onClick={done} type='button' marginTop={4}>Sincronizar</Button>
                 </Flex>

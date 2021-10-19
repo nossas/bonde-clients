@@ -48,8 +48,8 @@ const SettingsPage = () => {
         <Switch>
           <Route exact path={path.replace(':name', 'mailchimp')}>
           <FetchMailchimpStatus>
-            {({ mailchimpStatus, refetch }: any) => (
-              <Mailchimp mailchimpStatus={mailchimpStatus} refetch={refetch} />
+            {({ mailchimpStatus, mailchimpLastSync, refetch }: any) => (
+              <Mailchimp mailchimpLastSync={mailchimpLastSync} mailchimpStatus={mailchimpStatus} refetch={refetch} />
             )}
           </FetchMailchimpStatus>
           </Route>
