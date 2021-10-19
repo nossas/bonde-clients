@@ -17,7 +17,19 @@ import {
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import MailchimpIcon from './MailchimpIcon';
-import { MailchimpLastSync,  MailchimpStatus } from './types';
+import { MailchimpStart, MailchimpLastSync, MailchimpStatus } from './types';
+import { useQuery, gql, useSession } from 'bonde-core-tools';
+
+const fetchGraphqlQuery = gql`
+query($id:Int!, $is_community:Boolean!) {
+  resyncMailchimpStart(
+    is_community: $is_community
+    id: $id
+  ) {
+    status
+  }
+}
+`
 
 type Props = {
   mailchimpStatus: MailchimpStatus
@@ -27,13 +39,20 @@ type Props = {
 
 const MailchimpPanel: React.FC<Props> = ({ mailchimpStatus, mailchimpLastSync }) => {
   const { t } = useTranslation('community');
-  // console.log(mailchimpStatus, mailchimpLastSync);
-  // const [setPropagating] = useQuery(resyncMailchimpStatusGQL);
+  const { community } = useSession();
+  const { refetch } = useQuery(
+    fetchGraphqlQuery,
+    { variables: { is_community: true, id: community?.id }, skip: true }
+  );
 
   const done = async () => {
-    // await setPropagating({ variables: { id: 9, is_community: true } });
-    toast(<Success message='Atualização da base de contatos do mailchimp iniciada com sucesso!' />, { type: toast.TYPE.SUCCESS });
-  }
+    const a: MailchimpStart = await refetch();
+    if (typeof a !== 'undefined' && typeof a.data.resyncMailchimpStart.status !== 'undefined') {
+      toast(<Success message={`Atualização da base de contatos do mailchimp iniciada com sucesso! ${a.data.resyncMailchimpStart.status}`} />, { type: toast.TYPE.SUCCESS });
+    } else {
+      toast(`Falha na atualização da base de contatos do mailchimp!`, { type: toast.TYPE.ERROR });
+    }
+  };
 
   return (
     <CommunityForm
@@ -97,7 +116,7 @@ const MailchimpPanel: React.FC<Props> = ({ mailchimpStatus, mailchimpLastSync })
                 <Text size="sm">Total de falhas na sincronização: {mailchimpStatus.resyncMailchimpStatus.failed}</Text>
                 <Text size="sm">Total de sincronizações ativas: {mailchimpStatus.resyncMailchimpStatus.active}</Text>
                 <Flex justifyContent="flex-end">
-                  <Button onClick={done} type='button' marginTop={4}>Sincronizar</Button>
+                  <Button onClick={done} disabled={(mailchimpStatus.resyncMailchimpStatus.active > 0)} type='button' marginTop={4}>Sincronizar</Button>
                 </Flex>
               </Stack>
             </Stack>

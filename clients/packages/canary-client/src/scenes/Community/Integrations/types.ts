@@ -4,12 +4,24 @@ export type Community = {
 }
 
 export type MailchimpLastSync = {
-    date: Date
+    resyncMailchimpLastSync: {
+        date: Date
+    }
 }
 
 export type MailchimpStatus = {
-    completed: number
-    waiting: number
-    failed: number
-    active: number
+    resyncMailchimpStatus: {
+        completed: number
+        waiting: number
+        failed: number
+        active: number
+    }
+}
+
+export type MailchimpStart = {
+    data: {
+        resyncMailchimpStart: {
+            status: string
+        }
+    }
 }
