@@ -13,7 +13,7 @@ interface Props {
 }
 
 const TargetsTable: React.FC<Props> = ({ activeTargets }) => {
-  const activeEmails = activeTargets.map((target) => (target.match(/^[A-zÀ-ú0-9 ]+<([\w.@]+)>$/) || [])[1]);
+  const activeEmails = activeTargets.map((target) => (target.match(/^[A-zÀ-ú0-9 .]+<([\w.@]+)>$/) || [])[1]);
   const targetsCount = activeTargets.length
 
   return (
