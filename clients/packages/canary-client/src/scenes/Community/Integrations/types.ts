@@ -20,7 +20,7 @@ export type MailchimpStatus = {
 
 export type MailchimpStart = {
     data: {
-        resyncMailchimpStart: {
+        resync_mailchimp_start: {
             status: string
         }
     }

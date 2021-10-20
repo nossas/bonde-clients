@@ -12,47 +12,14 @@ import {
   Stack,
   UnorderedList,
   ListItem,
-  toast,
 } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import MailchimpIcon from './MailchimpIcon';
-import { MailchimpStart, MailchimpLastSync, MailchimpStatus } from './types';
-import { useQuery, gql, useSession } from 'bonde-core-tools';
+import ForceSync from './ForceSync';
 
-const fetchGraphqlQuery = gql`
-query($id:Int!, $is_community:Boolean!) {
-  resyncMailchimpStart(
-    is_community: $is_community
-    id: $id
-  ) {
-    status
-  }
-}
-`
-
-type Props = {
-  mailchimpStatus: MailchimpStatus
-  mailchimpLastSync: MailchimpLastSync
-  refetch: any
-}
-
-const MailchimpPanel: React.FC<Props> = ({ mailchimpStatus, mailchimpLastSync }) => {
+const MailchimpPanel: React.FC = () => {
   const { t } = useTranslation('community');
-  const { community } = useSession();
-  const { refetch } = useQuery(
-    fetchGraphqlQuery,
-    { variables: { is_community: true, id: community?.id }, skip: true }
-  );
-
-  const done = async () => {
-    const a: MailchimpStart = await refetch();
-    if (typeof a !== 'undefined' && typeof a.data.resyncMailchimpStart.status !== 'undefined') {
-      toast(<Success message={`Atualização da base de contatos do mailchimp iniciada com sucesso! ${a.data.resyncMailchimpStart.status}`} />, { type: toast.TYPE.SUCCESS });
-    } else {
-      toast(`Falha na atualização da base de contatos do mailchimp!`, { type: toast.TYPE.ERROR });
-    }
-  };
 
   return (
     <CommunityForm
@@ -107,18 +74,7 @@ const MailchimpPanel: React.FC<Props> = ({ mailchimpStatus, mailchimpLastSync })
                   <Button type='submit' disabled={submitting || !dirty} marginTop={4}>Conectar ao mailchimp</Button>
                 </Flex>
               </Stack>
-              <Stack>
-                <Heading as="h4" size="sm">Forçar sincronização</Heading>
-                <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
-                <Heading as="h4" size="sm">Status</Heading>
-                <Text size="sm">Data da última atualização: {(typeof mailchimpLastSync === 'undefined' ? '-' : mailchimpLastSync.date)}</Text>
-                <Text size="sm">Total de sincronizações com sucesso: {mailchimpStatus.resyncMailchimpStatus.completed}</Text>
-                <Text size="sm">Total de falhas na sincronização: {mailchimpStatus.resyncMailchimpStatus.failed}</Text>
-                <Text size="sm">Total de sincronizações ativas: {mailchimpStatus.resyncMailchimpStatus.active}</Text>
-                <Flex justifyContent="flex-end">
-                  <Button onClick={done} disabled={(mailchimpStatus.resyncMailchimpStatus.active > 0)} type='button' marginTop={4}>Sincronizar</Button>
-                </Flex>
-              </Stack>
+              <ForceSync />
             </Stack>
           </GridItem>
           <GridItem colSpan={[12, null, null, 4]}>
