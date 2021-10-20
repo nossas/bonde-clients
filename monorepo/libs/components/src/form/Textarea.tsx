@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import theme from '../base/theme';
 
 type TextareaProps = {
   invalid?: boolean;
@@ -11,7 +10,7 @@ type TextareaProps = {
 
 const Textarea = styled.textarea<TextareaProps>`
   ${props => props.fullWidth && 'width: 100%;'}
-  font-family: ${theme.fontFamily};
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;
   color: #000000;
   border: none;
@@ -28,23 +27,23 @@ const Textarea = styled.textarea<TextareaProps>`
 
   &:focus {
     outline: none;
-    border-bottom: 1px solid ${theme.brand.main};
+    border-bottom: 1px solid #ee0099;
   }
 
   &::placeholder {
-    color: ${theme.commons.dark};
+    color: #4A4A4A;
   }
   &::-webkit-input-placeholder {
-    color: ${theme.commons.dark};
+    color: #4A4A4A;
   }
   &::-moz-placeholder {
-    color: ${theme.commons.dark};
+    color: #4A4A4A;
   }
   &:-ms-input-placeholder {
-    color: ${theme.commons.dark};
+    color: #4A4A4A;
   }
   &:-moz-placeholder {
-    color: ${theme.commons.dark};
+    color: #4A4A4A;
   }
 
   ${props => props.invalid && `border-color: #ff0931;`}

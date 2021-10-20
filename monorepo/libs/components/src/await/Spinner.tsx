@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import theme from '../base/theme';
 
-const Ring = styled.div<{ theme: any }>`
+const Ring = styled.div`
   display: inline-block;
   position: relative;
   width: 80px;
@@ -14,11 +13,10 @@ const Ring = styled.div<{ theme: any }>`
     width: 64px;
     height: 64px;
     margin: 8px;
-    border: 8px solid ${({ theme }) => theme.commons.light};
+    border: 8px solid #eee;
     border-radius: 50%;
     animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-    border-color: ${({ theme }) => theme.commons.light} transparent transparent
-      transparent;
+    border-color: #eee transparent transparent transparent;
   }
   & div:nth-child(1) {
     animation-delay: -0.45s;
@@ -39,19 +37,15 @@ const Ring = styled.div<{ theme: any }>`
   }
 `;
 
-const Spinner = ({ theme }: any) => {
+const Spinner: React.FC = () => {
   return (
-    <Ring theme={theme}>
+    <Ring>
       <div></div>
       <div></div>
       <div></div>
       <div></div>
     </Ring>
   );
-};
-
-Spinner.defaultProps = {
-  theme,
 };
 
 export default Spinner;

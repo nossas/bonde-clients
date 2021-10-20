@@ -1,12 +1,10 @@
 import styled from '@emotion/styled';
 import { css } from "@emotion/react";
-import theme from '../base/theme';
 
 type Props = {
   type?: string;
   invalid?: boolean;
   disabled?: boolean;
-  theme?: any;
   onBlur?: (e: any) => void;
   placeholder?: string;
   border?: boolean;
@@ -17,10 +15,10 @@ const RoundInput = styled.input<Props>`
   width: 100%;
   height: 40px;
 
-  font-family: ${props => props.theme.fontFamily};
+  font-family: 'Nunito Sans', sans-serif;
   font-size: 14px;
   line-height: 22px;
-  color: ${props => props.theme.commons.dark};
+  color: #4A4A4A;
   border: none;
   box-sizing: border-box;
   background-color: unset;
@@ -35,11 +33,11 @@ const RoundInput = styled.input<Props>`
   &::-moz-placeholder,
   &:-ms-input-placeholder,
   &:-moz-placeholder {
-    color: ${props => props.theme.commons.dark};
-    font-family: ${props => props.theme.fontFamily};
+    color: #4A4A4A;
+    font-family: 'Nunito Sans', sans-serif;
   }
 
-  ${({ border, value, theme, invalid }) =>
+  ${({ border, value, invalid }) =>
     border &&
     css`
       border: 1px solid;
@@ -48,25 +46,24 @@ const RoundInput = styled.input<Props>`
         ? css`
             &:hover,
             &:focus {
-              border-color: ${theme.commons.main};
+              border-color: #4A4A4A;
             }
-            border-color: ${theme.commons.main};
+            border-color: #4A4A4A;
           `
         : css`
             &:hover,
             &:focus {
-              border-color: ${theme.brand.main};
+              border-color: #4A4A4A;
             }
-            border-color: ${theme.brand.main};
+            border-color: #4A4A4A;
           `}
-      ${invalid && `border-color: ${theme.error};`}
+      ${invalid && `border-color: #FF2B4E;`}
     `}
 `;
 
 RoundInput.defaultProps = {
   invalid: false,
-  type: 'text',
-  theme,
+  type: 'text'
 };
 
 export default RoundInput;

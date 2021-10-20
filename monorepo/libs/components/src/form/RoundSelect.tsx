@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/react';
 import ReactSelect, { components } from 'react-select';
-
-import theme from '../base/theme';
 import { ArrowDownIcon } from '../icons';
 
 const SelectIcon = styled.div<{ show: boolean }>`
@@ -26,7 +24,7 @@ const StyledControl = styled.div<{
   & > .Select__control {
     // Sets clear button color dinamically
     & > .Select__indicators > .Select__clear-indicator {
-      color: ${props => props.theme.brand.main};
+      color: #ee0099;
     }
     background-color: unset;
     ${props =>
@@ -34,40 +32,36 @@ const StyledControl = styled.div<{
         ? css`
             &:hover,
             &:focus {
-              border-color: ${props.theme.commons.main};
+              border-color: #aaa;
             }
-            border-color: ${props.theme.commons.main};
+            border-color: #aaa;
           `
         : css`
             &:hover,
             &:focus {
-              border-color: ${props.theme.brand.main};
+              border-color: #ee0099;
             }
-            border-color: ${props.theme.brand.main};
+            border-color: #ee0099;
           `}
     ${props =>
       props.invalid &&
       css`
         &:hover,
         &:focus {
-          border-color: ${props.theme.error};
+          border-color: #FF2B4E;
         }
-        border-color: ${props.theme.error};
+        border-color: #FF2B4E;
       `}
     box-shadow: none;
     width: 100%;
     & > .Select__value-container {
       & > .Select__placeholder {
-        font-family: ${props => props.theme.fontFamily};
-        color: ${props => props.theme.commons.dark};
+        font-family: 'Nunito Sans', sans-serif;
+        color: #4A4A4A;
       }
     }
   }
 `;
-
-StyledControl.defaultProps = {
-  theme,
-};
 
 const StyledSingleValue = styled.div<{
   isDisabled: boolean;
@@ -77,15 +71,11 @@ const StyledSingleValue = styled.div<{
   & > .Select__single-value {
     opacity: ${props => (props.isDisabled ? 0.5 : 1)};
     transition: opacity 300ms;
-    font-family: ${props => props.theme.fontFamily};
+    font-family: 'Nunito Sans', sans-serif;
     color: ${props =>
-      !props.value ? props.theme.commons.main : props.theme.brand.main};
+      !props.value ? "#aaa" : "#ee0099"};
   }
 `;
-
-StyledSingleValue.defaultProps = {
-  theme,
-};
 
 const StyledOption = styled.div<{
   theme: any;
@@ -94,8 +84,8 @@ const StyledOption = styled.div<{
   isDisabled: boolean;
 }>`
   & > .Select__option {
-    font-family: ${props => props.theme.fontFamily};
-    cursor: ${props => (props.isDisabled ? 'not-allowed' : 'default')};
+    font-family: 'Nunito Sans', sans-serif;
+    cursor: ${props => props.isDisabled ? 'not-allowed' : 'default'};
     ${props =>
       props.isSelected &&
       css`
@@ -114,8 +104,7 @@ const StyledOption = styled.div<{
       css`
         color: #ccc;
       `}
-    color: ${props =>
-      props.isSelected ? props.theme.brand.light : props.theme.commons.dark};
+    color: ${props => props.isSelected ? "#fff" : "#4A4A4A"};
   }
 `;
 
@@ -125,10 +114,6 @@ const StyledMenu = styled.div`
   }
 `;
 
-StyledOption.defaultProps = {
-  theme,
-};
-
 const SingleValue = (props: any) => (
   <StyledSingleValue value={props.selectProps.value} {...props}>
     <components.SingleValue {...props} />
@@ -137,8 +122,8 @@ const SingleValue = (props: any) => (
 
 const DropdownIndicator = (props: any) => {
   const color = !props.selectProps.value
-    ? theme.commons.main
-    : theme.brand.main;
+    ? "#4A4A4A"
+    : "#ee0099";
   return (
     <components.DropdownIndicator {...props}>
       <SelectIcon show={props.selectProps.show}>
@@ -185,7 +170,6 @@ type Props = {
   isClearable?: boolean;
   maxMenuHeight?: number;
   menuPlacement?: 'auto' | 'top' | 'bottom';
-  theme?: any
   menuHeight?: any
 };
 
@@ -212,7 +196,6 @@ const RoundSelect: React.FC<Props> = ({ ...props }) => {
 };
 
 RoundSelect.defaultProps = {
-  theme,
   menuHeight: 300
 };
 
