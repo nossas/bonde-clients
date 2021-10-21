@@ -5,13 +5,13 @@ import {
   Route
 } from "react-router-dom";
 import {
-  Box,
-  BondeIcon,
+  // Box,
+  // BondeIcon,
   ChakraProvider,
-  Container,
+  // Container,
   CSSReset,
   FontsLoader,
-  Flex,
+  // Flex,
   customTheme
 } from "@bonde/components";
 import Home from "./scenes/Home";
@@ -23,19 +23,12 @@ const App: React.FC = () => {
     <ChakraProvider theme={customTheme}>
       <CSSReset />
       <FontsLoader />
-      <Flex direction="column" h="100vh">
-        <Box bg="black" px="60px">
-          <BondeIcon boxSize={16} />
-        </Box>
-        <Container bg="gray.50" flex={1}>
-          <Router>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/community" component={Community} />
-            </Switch>
-          </Router>        
-        </Container>
-      </Flex>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/community" component={Community} />
+        </Switch>
+      </Router>
     </ChakraProvider>
   );
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Gadget, GadgetHeader } from "@bonde/components";
-import Home from '.';
+import { HomeContent as Home } from '.';
 
 describe("Home", () => {
   it('renders without crashing', () => {

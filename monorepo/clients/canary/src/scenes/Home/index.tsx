@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Box,
   Gadget,
   GadgetHeader,
   ImageBox,
@@ -8,7 +9,10 @@ import {
   ListBox,
   ListBoxRenderCommunity,
   SearchInput,
-  Stack
+  Stack,
+  Page,
+  PageNavbar,
+  PageContent
 } from "@bonde/components";
 
 const communities = [
@@ -91,21 +95,24 @@ const mobilizations = [
   }
 ]
 
-const Home: React.FC = () => {
+export const HomeContent: React.FC = () => {
   const [data, setData] = useState(communities);
 
   return (
     <Stack direction={["column", null, null, "row"]} spacing={6}>
-      <Gadget>
+      <Gadget h={["460px", null, null, "606px"]}>
         <GadgetHeader
+          h={10}
           title="Suas comunidades"
           actionRightElement={
-            <SearchInput
-              data={communities}
-              field="name"
-              placeholder="Buscar comunidade"
-              onChange={setData}
-            />
+            <Box display={["none", null, "flex"]}>
+              <SearchInput
+                data={communities}
+                field="name"
+                placeholder="Buscar comunidade"
+                onChange={setData}
+              />
+            </Box>
           }
         />
         <ScrollBox bg="white">
@@ -116,9 +123,9 @@ const Home: React.FC = () => {
           />
         </ScrollBox>
       </Gadget>
-      <Gadget>
-        <GadgetHeader title="Últimas atualizações" />
-        <SimpleGrid columns={[1, null, 2]} spacing={4}>
+      <Gadget h="606px">
+        <GadgetHeader h={10} title="Últimas atualizações" />
+        <SimpleGrid h="100%" columns={[1, null, 2]} spacing={4}>
           {mobilizations.map((mobilization) => (
             <ImageBox
               key={mobilization.id}
@@ -135,5 +142,14 @@ const Home: React.FC = () => {
     </Stack>
   );
 }
+
+const Home = () => (
+  <Page>
+    <PageNavbar />
+    <PageContent>
+      <HomeContent />
+    </PageContent>
+  </Page>
+);
 
 export default Home;
