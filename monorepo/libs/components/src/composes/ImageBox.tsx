@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Image, Heading } from '@chakra-ui/react';
+import { Flex, Text, Image, Heading } from '@chakra-ui/react';
 import styled from "@emotion/styled";
 
 const WrapperStyled = styled.div`
@@ -9,7 +9,7 @@ const WrapperStyled = styled.div`
   transition: filter 0.5s cubic-bezier(.43,.41,.22,.91);
   display: flex;
   align-items: center;
-  width: auto;
+  width: 100%;
   height: 188px;
   background-color: #424242;
 
@@ -65,12 +65,13 @@ export const ImageBox: React.FC<ImageBoxProps> = ({
   author,
   onClick
 }) => (
-  <Box
+  <Flex
+    direction="column"
+    as={onClick ? "button" : "div"}
     w="auto"
     boxShadow="sm"
     overflow="hidden"
     bg="white"
-    cursor={!!onClick ? "pointer" : "normal"}
     onClick={onClick}
   >
     <Image
@@ -81,9 +82,9 @@ export const ImageBox: React.FC<ImageBoxProps> = ({
       w="100%"
       h="188px"
     />
-    <Box p={4}>
+    <Flex direction="column" w="100%" p={4} textAlign="left">
       <Heading as="h4" fontWeight="extrabold" size="md">{title}</Heading>
       <Text>{author}</Text>
-    </Box>
-  </Box>
+    </Flex>
+  </Flex>
 );

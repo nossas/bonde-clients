@@ -3,7 +3,7 @@ import { createIcon } from "@chakra-ui/react";
 
 const BondeIcon = createIcon({
   displayName: "BondeIcon",
-  viewBox: "0 25 200 50",
+  viewBox: "0 10 200 80",
   path: (
     <>
       <path

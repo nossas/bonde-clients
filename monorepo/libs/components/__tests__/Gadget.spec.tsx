@@ -36,8 +36,8 @@ describe("GadgetHeader", () => {
     const component = shallow(<GadgetHeader title="My communities" />);
   
     expect(component.find("Heading").prop("as")).toBe("h5");
-    expect(component.find("Heading").prop("size")).toBe("xs");
-    expect(component.find("Heading").prop("color")).toBe("gray.300");
+    expect(component.find("Heading").prop("size")).toBe("sm");
+    expect(component.find("Heading").prop("color")).toBe("gray.400");
     expect(component.find("Heading").prop("textTransform")).toBe("uppercase");
   })
 });

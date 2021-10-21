@@ -15,13 +15,12 @@ describe("ImageBox", () => {
     const component = shallow(
       <ImageBox title="My mobilization" author="By community" />
     );
-    const wrapperBox = component.find("Box").at(0);
+    const wrapperBox = component.find("Flex").at(0);
 
     expect(wrapperBox.prop("w")).toBe("auto");
     expect(wrapperBox.prop("boxShadow")).toBe("sm");
     expect(wrapperBox.prop("overflow")).toBe("hidden");
     expect(wrapperBox.prop("bg")).toBe("white");
-    expect(wrapperBox.prop("cursor")).toBe("normal");
   });
 
   it('renders Box with click', () => {
@@ -33,9 +32,9 @@ describe("ImageBox", () => {
         onClick={onClick}
       />
     );
-    const wrapperBox = component.find("Box").at(0);
+    const wrapperBox = component.find("Flex").at(0);
 
-    expect(wrapperBox.prop("cursor")).toBe("pointer");
+    expect(wrapperBox.prop("as")).toBe("button");
     expect(wrapperBox.prop("onClick")).toBe(onClick);
   });
 
@@ -44,7 +43,7 @@ describe("ImageBox", () => {
     const author = "By community";
     const component = shallow(<ImageBox title={title} author={author} />);
 
-    expect(component.find("Box").at(1).prop("p")).toBe(4);
+    expect(component.find("Flex").at(1).prop("p")).toBe(4);
 
     expect(component.find("Heading").prop("children")).toBe(title);
     expect(component.find("Heading").prop("as")).toBe("h4");

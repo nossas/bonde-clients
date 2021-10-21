@@ -1,5 +1,6 @@
 export { default as ArrowDownIcon } from "./ArrowDownIcon";
 export { default as ArrowUpIcon } from "./ArrowUpIcon";
+export { default as BoltIcon } from "./BoltIcon";
 export { default as BondeIcon } from "./BondeIcon";
 export { default as ChartIcon } from "./ChartIcon";
 export { default as CloseIcon } from "./CloseIcon";
@@ -15,6 +16,8 @@ export { default as RefreshIcon } from "./RefreshIcon";
 export { default as RobotIcon } from "./RobotIcon";
 export { default as SearchIcon } from "./SearchIcon";
 export { default as SettingsIcon } from "./SettingsIcon";
+export { default as TicketIcon } from "./TicketIcon";
+export { default as TicketRecurringIcon } from "./TicketRecurringIcon";
 export { default as TrashIcon } from "./TrashIcon";
 export { default as UploadImageIcon } from "./UploadImageIcon";
 export { default as UserIcon } from "./UserIcon";
