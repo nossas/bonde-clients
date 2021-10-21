@@ -33,7 +33,9 @@ const TargetsTable: React.FC<Props> = ({ activeTargets }) => {
             .map((email: string, index: number) => {
               return (
                 <Tr key={`activity-feed-${index}`}>
-                  <Td>{email}</Td>
+                  {email && (
+                    <Td>{email}</Td>
+                  )}
                 </Tr>
               );
             })
