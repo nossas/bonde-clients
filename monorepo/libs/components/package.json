@@ -13,7 +13,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "clean": "rimraf dist",
-    "build": "npm run clean && rollup -c",
+    "build": "yarn run clean && rollup -c",
     "prepare": "yarn build"
   },
   "keywords": [],
