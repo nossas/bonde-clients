@@ -18,9 +18,20 @@ jobs:
       with:
         path: ~/.pnpm-store
         key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-    - name: Install dependencies
+    - name: Install pnpm
       run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
-    - name: pnpm Install
+    - name: Install dependencies
       run: cd monorepo && pnpm install
     - name: Run tests
       run: cd monorepo && pnpm m run test:coverage
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v2
+      with:
+        # directory: ./coverage/reports/
+        # env_vars: OS,PYTHON
+        # fail_ci_if_error: true
+        files: ./monorepo/clients/canary/coverage/clover.xml,./monorepo/libs/components/coverage/clover.xml
+        # flags: unittests
+        # name: codecov-umbrella
+        # path_to_write_report: ./coverage/codecov_report.txt
+        verbose: true
