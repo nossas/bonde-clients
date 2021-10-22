@@ -9,5 +9,6 @@ module.exports = {
     "ts",
     "tsx",
     "js"
-  ]
+  ],
+  "collectCoverage": true
 };

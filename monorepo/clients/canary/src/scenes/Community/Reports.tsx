@@ -18,19 +18,19 @@ const Reports = () => {
       <Gadget>
         <GadgetHeader title="Baixar relatórios" />
         <Stack direction="row" spacing={4}>
-          <Card as="button">
+          <Card>
             <TicketIcon boxSize={8} />
             <Text color="black" fontWeight="bold">Relatório de doações</Text>
           </Card>
-          <Card as="button">
+          <Card>
             <TicketRecurringIcon boxSize={8} />
             <Text color="black" fontWeight="bold">Doadores recorrentes</Text>
           </Card>
-          <Card as="button">
+          <Card>
             <BoltIcon boxSize={8} />
             <Text color="black" fontWeight="bold">Relatório de ações</Text>
           </Card>
-          <Card as="button">
+          <Card>
             <NetworkIcon boxSize={8} />
             <Text color="black" fontWeight="bold">Relatório de ativistas</Text>
           </Card>
