@@ -7,13 +7,14 @@ import {
   Tr,
   Td,
 } from "bonde-components";
+import targetRegex from "../targetsRegex"
 
 interface Props {
   activeTargets: string[]
 }
 
 const TargetsTable: React.FC<Props> = ({ activeTargets }) => {
-  const activeEmails = activeTargets.map((target) => (target.match(/^[A-zÀ-ú0-9 .]+<([\w.@]+)>$/) || [])[1]);
+  const activeEmails = activeTargets.map((target) => (target.match(targetRegex) || [])[1]);
   const targetsCount = activeTargets.length
 
   return (

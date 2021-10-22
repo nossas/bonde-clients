@@ -12,6 +12,7 @@ import {
   Tooltip
 } from "bonde-components";
 import { ActivityFeedEmail } from "./hooks/usePerformance";
+import targetRegex from "../targetsRegex"
 
 const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
   const openingCount = activityFeed.events.filter((evt) => evt.eventType === "open").length
@@ -88,7 +89,7 @@ interface ActivityFeedEmailWithDisabled extends ActivityFeedEmail {
 }
 
 const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) => {
-  const activeEmails = activeTargets.map((target) => (target.match(/^[A-zÀ-ú0-9 ]+<([\w.@]+)>$/) || [])[1]);
+  const activeEmails = activeTargets.map((target) => (target.match(targetRegex) || [])[1]);
   const targetsCount = aggregateEmails.length
 
   // Transforma todos e-mails ativos em eventos
@@ -153,11 +154,11 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
 
               return (
                 <Tr key={`activity-feed-${index}`} color={activityFeed.disabled ? "gray.300" : "inherit"}>
-                  {activityFeed.disabled ? (
+                  {activityFeed.disabled ?
                     <Td>{activityFeed.email} (Inativo)</Td>
-                  ) : (
+                    :
                     <Td>{activityFeed.email}</Td>
-                  )}
+                  }
                   <Td>{`${processed} envios`}</Td>
                   <Td>
                     {`${deliveredPercentage}% entregue`}
