@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "Bonde apps and libs",
   "scripts": {
-    "test": "pnpm m run test"
+    "test": "pnpm m run test",
+    "build:clients": "pnpm m run build --filter {clients}"
   },
   "author": "Igor Santos",
   "license": "ISC",
@@ -16,5 +17,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "serve": "^12.0.1"
   }
 }
