@@ -35,7 +35,7 @@ const Delete = ({ row: { original: { id, user } }, refetch }: DeleteProps) => {
   return (
     <Button
       leftIcon={<Icon name='Trash' size='small' />}
-      variant="tableLink"
+      variant="link"
       colorScheme="gray"
       onClick={async () => {
         try {
