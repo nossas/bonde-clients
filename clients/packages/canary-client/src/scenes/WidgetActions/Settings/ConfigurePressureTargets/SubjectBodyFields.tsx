@@ -2,7 +2,6 @@ import React from 'react';
 import { InputField, TextareaField } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import TagInputField from "./TagInputField";
-import targetRegex from "../targetsRegex"
 
 type SubjectBodyFieldsProps = {
   prefix?: string
@@ -11,9 +10,11 @@ type SubjectBodyFieldsProps = {
 }
 
 const validate = (targets: string[]) => {
+  // eslint-disable-next-line
+  const re = new RegExp(/[a-zA-Zá-ú 0-9]+<(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})>/);
 
   if (targets !== undefined) {
-    const invalidTargets = targets.filter((target) => !targetRegex.test(target));
+    const invalidTargets = targets.filter((target) => !re.test(target));
 
     if (invalidTargets.length > 0) return invalidTargets;
     else return undefined
