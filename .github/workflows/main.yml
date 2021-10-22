@@ -27,11 +27,10 @@ jobs:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v2
       with:
-        # directory: ./coverage/reports/
-        # env_vars: OS,PYTHON
-        # fail_ci_if_error: true
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: true
         files: ./monorepo/clients/canary/coverage/clover.xml,./monorepo/libs/components/coverage/clover.xml
-        # flags: unittests
+        flags: unittests
         # name: codecov-umbrella
         # path_to_write_report: ./coverage/codecov_report.txt
         verbose: true
