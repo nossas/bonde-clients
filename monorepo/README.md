@@ -5,9 +5,9 @@
 
 Gerar imagem Docker para implantação dos clients:
 
-`docker build -f Dockerfile.clients -t bonde.org/clients`
+`docker build -f Dockerfile.clients -t nossas/bonde-clients`
 
 Executar serviço a partir da image padrão:
 
-`docker run -p 5000:5000 bonde.org/clients pnpm m run start --filter @bonde/canary`
+`docker run -p 5000:5000 nossas/bonde-clients pnpm m run start --filter @bonde/canary`
 
