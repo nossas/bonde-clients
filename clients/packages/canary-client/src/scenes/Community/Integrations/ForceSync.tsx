@@ -72,7 +72,7 @@ export default () => {
     <Text size="sm">Total de falhas na sincronização: {data.resync_mailchimp_status.failed}</Text>
     <Text size="sm">Total de sincronizações ativas: {data.resync_mailchimp_status.active}</Text>
     <Flex justifyContent="flex-end">
-      <Button onClick={done} disabled={(data.resync_mailchimp_status.active > 0)} type='button' marginTop={4}>Sincronizar</Button>
+      <Button onClick={done} disabled={(data.resync_mailchimp_status.active > 0 || data.resync_mailchimp_status.waiting > 0)} type='button' marginTop={4}>Sincronizar</Button>
     </Flex>
   </Stack>
 }
