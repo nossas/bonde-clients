@@ -2,10 +2,14 @@ name: Workflow build and tests
 
 on:
   push:
+    branches:
+      - feature/*
+      - hotfix/*
 
 jobs:
   build:
     runs-on: ubuntu-20.04
+    environment: staging
     strategy:
       matrix:
         node-version: [15]
