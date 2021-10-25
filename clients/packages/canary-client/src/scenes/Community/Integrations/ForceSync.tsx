@@ -22,6 +22,7 @@ query($id:Int!, $is_community:Boolean!) {
     failed
     last_sync
     waiting
+    status
   }
 }
 `
@@ -51,10 +52,12 @@ export default () => {
 
   const done = async () => {
     const a: MailchimpStart = await setPropagating();
-    if (typeof a !== 'undefined' && typeof a.data.resync_mailchimp_start.status !== 'undefined') {
-      toast(<Success message={`Atualização da base de contatos do mailchimp iniciada com sucesso! ${a.data.resync_mailchimp_start.status}`} />, { type: toast.TYPE.SUCCESS });
+    if (typeof a !== 'undefined' && 
+        typeof a.data.resync_mailchimp_start.status !== 'undefined' &&
+        a.data.resync_mailchimp_start.status == 'started to add contacts to the queue') {
+      toast(<Success message={`Ae! Sincronização em andamento.`} />, { type: toast.TYPE.SUCCESS });
     } else {
-      toast(`Falha na atualização da base de contatos do mailchimp!`, { type: toast.TYPE.ERROR });
+      toast(`Falha na atualização da base de contatos do mailchimp! ${a.data.resync_mailchimp_start.status}`, { type: toast.TYPE.ERROR });
     }
   };
   if (loading) return <Text>Carregando Mailchimp Status</Text>;
