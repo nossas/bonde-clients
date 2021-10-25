@@ -59,20 +59,31 @@ export default () => {
     } else {
       toast(`Falha na atualização da base de contatos do mailchimp! ${a.data.resync_mailchimp_start.status}`, { type: toast.TYPE.ERROR });
     }
-  };
+  }; 
+
   if (loading) return <Text>Carregando Mailchimp Status</Text>;
   else if (error) return <Text>Failed ${error}</Text>;
 
+  if (data.resync_mailchimp_status.active > 0 || data.resync_mailchimp_status.waiting > 0){
+    return <Stack>
+      <Heading as="h4" size="sm">Forçar sincronização</Heading>
+      <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
+      <Heading as="h4" size="sm">Status da sincronização</Heading>
+      <Text size="sm">{data.resync_mailchimp_status.status}</Text>
+      <Flex justifyContent="flex-end">
+        <Button onClick={done} disabled='true' type='button' marginTop={4}>Sincronizar</Button>
+      </Flex>
+    </Stack>
+  }
+  
   return <Stack>
     <Heading as="h4" size="sm">Forçar sincronização</Heading>
     <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
     <Heading as="h4" size="sm">Status</Heading>
+    <Text size="sm">{data.resync_mailchimp_status.status}</Text>
     <Text size="sm">Data da última atualização: {(typeof data.resync_mailchimp_status.last_sync === 'undefined' ? '-' : data.resync_mailchimp_status.last_sync)}</Text>
-    <Text size="sm">Total de sincronizações com sucesso: {data.resync_mailchimp_status.completed}</Text>
-    <Text size="sm">Total de falhas na sincronização: {data.resync_mailchimp_status.failed}</Text>
-    <Text size="sm">Total de sincronizações ativas: {data.resync_mailchimp_status.active}</Text>
     <Flex justifyContent="flex-end">
-      <Button onClick={done} disabled={(data.resync_mailchimp_status.active > 0 || data.resync_mailchimp_status.waiting > 0)} type='button' marginTop={4}>Sincronizar</Button>
+      <Button onClick={done} type='button' marginTop={4}>Sincronizar</Button>
     </Flex>
   </Stack>
 }
