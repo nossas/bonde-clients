@@ -55,6 +55,7 @@ const SettingsPage: React.FC = () => {
           ) : (
             <div style={{ display: 'flex', flexDirection: 'row', marginBottom: '20px', alignItems: 'flex-end' }}>
               <Image
+                boxSize="85px"
                 src={values.community.image || `https://via.placeholder.com/100?text=${values.community.name.charAt(0)}`}
                 alt={values.community.name}
               />
