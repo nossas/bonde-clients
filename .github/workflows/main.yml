@@ -61,3 +61,13 @@ jobs:
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
+
+    - name: Rancher Deploy clients/canary-2
+      uses: yantadeu/rancher-deploy-action@v0.0.3
+      env:
+        RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
+        RANCHER_SECRET_KEY: ${{ secrets.RANCHER_SECRET_KEY }}
+        RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
+        SERVICE_NAME: 'clients/canary-2'
+        DOCKER_IMAGE: ${{ format('nossas/bonde-clients:{0}', steps.meta.outputs.tags) }}
+        DOCKER_IMAGE_LATEST: 'nossas/bonde-clients:latest'
