@@ -54,7 +54,7 @@ export default () => {
     const a: MailchimpStart = await setPropagating();
     if (typeof a !== 'undefined' && 
         typeof a.data.resync_mailchimp_start.status !== 'undefined' &&
-        a.data.resync_mailchimp_start.status == 'started to add contacts to the queue') {
+        a.data.resync_mailchimp_start.status === 'started to add contacts to the queue') {
       toast(<Success message={`Ae! Sincronização em andamento.`} />, { type: toast.TYPE.SUCCESS });
     } else {
       toast(`Falha na atualização da base de contatos do mailchimp! ${a.data.resync_mailchimp_start.status}`, { type: toast.TYPE.ERROR });
@@ -68,8 +68,8 @@ export default () => {
     return <Stack>
       <Heading as="h4" size="sm">Forçar sincronização</Heading>
       <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
-      <Heading as="h4" size="sm">Status da sincronização</Heading>
-      <Text size="sm">{data.resync_mailchimp_status.status}</Text>
+      <Heading as="h4" size="sm">Status</Heading>
+      <Text size="sm">{data.resync_mailchimp_status.status} ({data.resync_mailchimp_status.completed})</Text>
       <Flex justifyContent="flex-end">
         <Button onClick={done} disabled='true' type='button' marginTop={4}>Sincronizar</Button>
       </Flex>
@@ -81,7 +81,9 @@ export default () => {
     <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
     <Heading as="h4" size="sm">Status</Heading>
     <Text size="sm">{data.resync_mailchimp_status.status}</Text>
-    <Text size="sm">Data da última atualização: {(typeof data.resync_mailchimp_status.last_sync === 'undefined' ? '-' : data.resync_mailchimp_status.last_sync)}</Text>
+    <Text size="sm">{((typeof data.resync_mailchimp_status.last_sync === 'undefined' || data.resync_mailchimp_status.last_sync === "")? '' 
+                      : `Data da última atualização: ${data.resync_mailchimp_status.last_sync}`)}
+    </Text>
     <Flex justifyContent="flex-end">
       <Button onClick={done} type='button' marginTop={4}>Sincronizar</Button>
     </Flex>
