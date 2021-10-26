@@ -59,9 +59,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
       <Stack direction="row" spacing={4}>
         <Stack direction="column" spacing={6}>
           <BondePressureCards targetsCount={activeTargets.length} pressuresCount={pressuresCount} />
-          {!hasntEventHistory && (
-            <EventsCards aggregateEvents={aggregateEvents} />
-          )}
+          <EventsCards aggregateEvents={aggregateEvents} />
         </Stack>
         <Charts widgetId={widget.id} />
       </Stack>

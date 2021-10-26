@@ -20,11 +20,6 @@ const ACTIVIST_PRESSURES_RANGE_QUERY = gql`
   }
 `;
 
-// const dummyData = Array.from({ length: 30 }, (_, index) => ({
-//   name: index + 1,
-//   total: Math.floor(Math.random() * 1000)
-// }))
-
 export interface ChartsProps {
   widgetId: number
   start: string
@@ -58,7 +53,7 @@ const Charts: React.FC<ChartsProps> = ({ widgetId, start, end }) => {
   })
 
   return (
-    <div style={{ width: "100%", height: "300px" }}>
+    <div style={{ width: "100%", height: "275px" }}>
       <ResponsiveContainer>
         <LineChart data={newItems}>
           <Line type="monotone" dataKey="total" stroke="#9AE3D3" />
