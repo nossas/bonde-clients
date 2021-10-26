@@ -6,6 +6,7 @@
   "devDependencies": {},
   "scripts": {
     "normalize": "ts-node src/normalize_targets.ts",
+    "generate": "ts-node src/generate_pressures.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Igor Santos",
@@ -16,6 +17,7 @@
     "graphql": "^15.6.1",
     "graphql-request": "^3.6.0",
     "ts-node": "^10.3.0",
-    "typescript": "^4.4.4"
+    "typescript": "^4.4.4",
+    "yargs": "^17.2.1"
   }
 }
