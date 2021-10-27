@@ -9,8 +9,11 @@
 `RANCHER_URL_API`
 **Required** API Url of your rancher project workload.
 
+`RANCHER_ENVIRONMENT`
+**Required** Environemnt id of your rancher project workload.
+
 `SERVICE_NAME`
-**Required** NAME OF YOUR SERVICE ON RANCHER CLUSTER WHAT YOU WANT DEPLOY.
+**Required** Name of your service on rancher cluster what you want deploy.
 
 `DOCKER_IMAGE`
-**Required** URL TO YOUR DOCKER IMAGE.
+**Required** Url to docker image.

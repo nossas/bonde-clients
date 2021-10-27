@@ -1,7 +1,7 @@
 name: Workflow build and tests
 on: [push]
 jobs:
-  tests-build-and-deploy:
+  tests:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -37,13 +37,13 @@ jobs:
           flags: unittests
           verbose: true
 
-  # build:
-  #   needs: tests
-  #   runs-on: ubuntu-20.04
-  #   outputs:
-  #     tags: ${{ steps.meta.outputs.tags }}
-  #   steps:
-  #     - uses: actions/checkout@v2
+  build:
+    needs: tests
+    runs-on: ubuntu-20.04
+    outputs:
+      tags: ${{ steps.meta.outputs.tags }}
+    steps:
+      - uses: actions/checkout@v2
       - name: Log in to Docker Hub
         uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
         with:
@@ -65,13 +65,13 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
 
-  # deploy:
-  #   needs: build
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #     - uses: actions/checkout@v2
+  deploy:
+    needs: build
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      
       - name: Rancher Deploy clients/canary-2
-        # uses: yantadeu/rancher-deploy-action@v0.0.2
         uses: ./.github/actions/rancher-deploy
         env:
           RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
@@ -79,4 +79,14 @@ jobs:
           RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
           RANCHER_ENVIRONMENT: ${{ secrets.RANCHER_ENVIRONMENT }}
           SERVICE_NAME: 'clients/canary-2'
-          DOCKER_IMAGE: ${{ steps.meta.outputs.tags }}
+          DOCKER_IMAGE: ${{ needs.build.outputs.tags }}
+
+      # - name: Rancher Deploy clients/canary
+      #   uses: ./.github/actions/rancher-deploy
+      #   env:
+      #     RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
+      #     RANCHER_SECRET_KEY: ${{ secrets.RANCHER_SECRET_KEY }}
+      #     RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
+      #     RANCHER_ENVIRONMENT: ${{ secrets.RANCHER_ENVIRONMENT }}
+      #     SERVICE_NAME: 'clients/canary-2'
+      #     DOCKER_IMAGE: ${{ steps.meta.outputs.tags }}

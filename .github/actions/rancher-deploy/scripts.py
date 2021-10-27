@@ -18,7 +18,6 @@ def up(image, service, url, access, secret, environment):
   """"""
   stack, service_name = service.split("/", 1)
 
-
   command = "rancher --url {url} --access-key {access} --secret-key {secret} --environment {environment}".format(
     url=url,
     access=access,
