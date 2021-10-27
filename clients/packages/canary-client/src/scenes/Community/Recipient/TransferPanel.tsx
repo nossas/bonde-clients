@@ -20,7 +20,7 @@ const TransferPanel: React.FC = () => {
     <Grid templateColumns="repeat(12, 1fr)" gap={[null, 6, 16]} rowGap="0!important">
       <GridItem colSpan={[null, null, 12, 6]}>
         <Stack direction="column" spacing={2} mb={3}>
-          <Heading as="h5" size="sm">{t('recipient.form.titles.transfer_date')}</Heading>
+          <Heading as="h5" size="lg">{t('recipient.form.titles.transfer_date')}</Heading>
           <Text className='about'>Defina o dia em que o valor arrecadado pela sua comunidade será automaticamente transferido para a conta cadastrada aqui.</Text>
         </Stack>
         <FieldPrefix prefix="community.recipient">
@@ -64,7 +64,7 @@ const TransferPanel: React.FC = () => {
       </GridItem>
       <GridItem colSpan={[null, null, 12, 6]}>
         <Stack direction="column" spacing={2} mb={3}>
-          <Heading as="h5" size="sm">Observações</Heading>
+          <Heading as="h5" size="lg">Observações</Heading>
         </Stack>
         <UnorderedList>
           <ListItem>
