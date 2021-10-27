@@ -8,6 +8,7 @@ import DisclaimerRelease from "./DisclaimerRelease";
 import usePerformance from "./hooks/usePerformance";
 import Card from "./Card";
 import TargetsTable from "./TargetsTable";
+import StepByStepCard from "./StepByStepCard";
 
 type Props = {
   widget: Widget
@@ -45,6 +46,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
   } = data;
 
   const hasntEventHistory = firstEventTimestamp > widgetCreatedAt && aggregateEvents.length === 0;
+  const hasntPressure = pressuresCount === 0 && activeTargets.length === 0;
 
   return (
     <Stack spacing={6}>
@@ -54,6 +56,11 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
           widgetCreatedAt={widgetCreatedAt}
         />
       )}
+      {
+        hasntPressure && (
+          <StepByStepCard />
+        )
+      }
       <Stack direction="row" spacing={4}>
         <BondePressureCards targetsCount={activeTargets.length} pressuresCount={pressuresCount} />
         {!hasntEventHistory && (
