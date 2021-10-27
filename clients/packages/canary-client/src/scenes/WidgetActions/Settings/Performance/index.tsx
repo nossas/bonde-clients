@@ -46,7 +46,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
   } = data;
 
   const hasntEventHistory = firstEventTimestamp > widgetCreatedAt && aggregateEvents.length === 0;
-  const hasntPressure = pressuresCount === 0 && activeTargets.length === 0;
+  const hasntPressure = pressuresCount === 0;
 
   return (
     <Stack spacing={6}>
