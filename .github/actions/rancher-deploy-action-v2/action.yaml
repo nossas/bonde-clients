@@ -1,9 +1,0 @@
-name: 'Rancher Deploy Action'
-description: 'Action to deploy docker image in rancher'
-author: 'Yan Tadeu'
-branding:
-  icon: 'check'
-  color: 'gray-dark'
-runs:
-  using: 'docker'
-  image: 'Dockerfile'

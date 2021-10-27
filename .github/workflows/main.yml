@@ -72,10 +72,11 @@ jobs:
   #     - uses: actions/checkout@v2
       - name: Rancher Deploy clients/canary-2
         # uses: yantadeu/rancher-deploy-action@v0.0.2
-        uses: ./.github/actions/rancher-deploy-action-v2
+        uses: ./.github/actions/rancher-deploy
         env:
           RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
           RANCHER_SECRET_KEY: ${{ secrets.RANCHER_SECRET_KEY }}
           RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
+          RANCHER_ENVIRONMENT: ${{ secrets.RANCHER_ENVIRONMENT }}
           SERVICE_NAME: 'clients/canary-2'
           DOCKER_IMAGE: ${{ steps.meta.outputs.tags }}
