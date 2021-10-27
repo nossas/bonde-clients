@@ -29,7 +29,8 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
 
   return (
     <Grid>
-      <Shortcut
+      <button
+        type="button"
         onClick={() => {
           if (process.env.REACT_APP_DOMAIN_ADMIN) {
             storage.setAsyncItem("community", community).then(() => {
@@ -40,10 +41,14 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
             });
           }
         }}
-        text={t('home.shortcuts.buttons.newMobilization')}
-        icon={<Icon name="New" size="large" />}
-      />
-      <Shortcut
+      >
+        <Shortcut
+          text={t('home.shortcuts.buttons.newMobilization')}
+          icon={<Icon name="New" size="large" />}
+        />
+      </button>
+      <button
+        type="button"
         onClick={() => {
           if (process.env.REACT_APP_DOMAIN_ADMIN) {
             storage.setAsyncItem("community", community).then(() => {
@@ -54,9 +59,12 @@ const Shortcuts = ({ community, storage }: Props): React.ReactElement => {
             });
           }
         }}
-        text={t('home.shortcuts.buttons.mobilizations')}
-        icon={<Icon name="Window" size="default" />}
-      />
+      >
+        <Shortcut
+          text={t('home.shortcuts.buttons.mobilizations')}
+          icon={<Icon name="Window" size="default" />}
+        />
+      </button>
       <Link to="/community/analytics">
         <Shortcut
           text={t('home.shortcuts.buttons.reports')}
