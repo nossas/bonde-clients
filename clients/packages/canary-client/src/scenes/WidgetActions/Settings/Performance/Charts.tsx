@@ -56,7 +56,7 @@ const Charts: React.FC<ChartsProps> = ({ widgetId, start, end }) => {
     <div style={{ width: "100%", height: "275px" }}>
       <ResponsiveContainer>
         <LineChart data={newItems}>
-          <Line type="monotone" dataKey="total" stroke="#9AE3D3" />
+          <Line type="monotone" dataKey="total" stroke="#50E3C2" />
           <CartesianGrid stroke="#EEEEEE" />
           <XAxis dataKey="name" />
           <YAxis />
@@ -86,13 +86,13 @@ const ChartsWrap: React.FC<Pick<ChartsProps, 'widgetId'>> = ({ widgetId }) => {
           Progresso da campanha
         </Heading>
       </Stack>
-      <Stack bg="white" boxShadow="sm" p={6}>
+      <Stack bg="white" boxShadow="sm" py={6} px={8} spacing={4}>
         <Flex justify="space-between">
-          <Stack spacing={2} pl={5}>
+          <Stack spacing={1}>
             <Heading size="lg" fontWeight="extrabold">Pressões enviadas</Heading>
             <Text fontSize="sm">{before.toLocaleDateString()} a {now.toLocaleDateString()}</Text>
           </Stack>
-          <Text fontSize="sm">Últimos 30 dias</Text>
+          <Text fontSize="sm" textTransform="uppercase">Últimos 30 dias</Text>
         </Flex>
         <Charts
           widgetId={widgetId}
