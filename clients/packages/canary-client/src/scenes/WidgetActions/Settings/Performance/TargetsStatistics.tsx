@@ -37,9 +37,27 @@ const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
   )
 }
 
-const FailedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
+const StatusLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
+  const isDelivered = activityFeed.events.filter((evt) => evt.eventType === "delivered").length > 0;
   const isFailed = activityFeed.events.filter((evt) => evt.eventType === "bounce").length > 0;
   const isDropped = activityFeed.events.filter((evt) => evt.eventType === "dropped").length > 0;
+
+  if (isDelivered) {
+    return (
+      <Tooltip
+        label="Pelo menos um e-mail foi entregue com sucesso na caixa de entrada do alvo."
+        maxW="220px"
+      >
+        <Button
+          variant="tag"
+          colorScheme="green"
+          textTransform="none"
+          fontWeight="400">
+          Entregue
+        </Button>
+      </Tooltip>
+    )
+  }
 
   if (isFailed) {
     return (
@@ -129,7 +147,7 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
             <Th>Email</Th>
             <Th>Enviados</Th>
             <Th>Entregues</Th>
-            <Th>Falha</Th>
+            <Th>Status</Th>
             <Th>Abertura</Th>
           </Tr>
         </Thead>
@@ -163,7 +181,7 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
                     {`${deliveredPercentage}% entregue`}
                   </Td>
                   <Td>
-                    <FailedLabel activityFeed={activityFeed} />
+                    <StatusLabel activityFeed={activityFeed} />
                   </Td>
                   <Td>
                     <OpenedLabel activityFeed={activityFeed} />
