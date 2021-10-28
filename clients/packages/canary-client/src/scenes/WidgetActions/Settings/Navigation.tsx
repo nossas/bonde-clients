@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab } from 'bonde-components';
+import { Flex, Tab } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import TabRoute from '../TabRoute';
 
@@ -9,7 +9,7 @@ const Navigation: React.FC = () => {
   return (
     <TabRoute>
       {({ push, is }) => (
-        <>
+        <Flex direction="row">
           <Tab
             active={is(/\/widgets\/\d+\/settings\/*$/)}
             onClick={() => push("")}
@@ -46,7 +46,7 @@ const Navigation: React.FC = () => {
           >
             {t("settings.navigation.finish")}
           </Tab>
-        </>
+        </Flex>
       )}
     </TabRoute>
   );

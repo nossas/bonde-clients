@@ -2,7 +2,7 @@ import { gql, useQuery } from "bonde-core-tools";
 import { Widget } from "../../../FetchWidgets";
 
 const PERFORMANCE_GQL = gql`
-  query PerformanceQuery ($widgetId: Int!) {
+  query PerformanceQuery ($widgetId: Int!, $start_date: timestamp, $end_date: timestamp) {
     activity_feed_total(widget_id: $widgetId) {
       events {
         total
@@ -34,6 +34,19 @@ const PERFORMANCE_GQL = gql`
         count
       }
     }
+
+    activist_pressures_range(
+      where: {
+        widget_id: { _eq: $widgetId },
+        _and: [
+          { created_at: { _gte: $start_date } },
+          { created_at: { _lte: $end_date } },
+        ]
+      }
+    ) {
+      created_at
+      total
+    }
   }
 `;
 
@@ -52,6 +65,11 @@ export interface ActivityFeedEmail {
   events: ActivityFeedEvent[]
 }
 
+export interface ChartPressure {
+  name: number
+  total: number
+}
+
 interface PerformanceData {
   aggregateEvents: ActivityFeedEvent[]
   aggregateEmails: ActivityFeedEmail[]
@@ -59,6 +77,11 @@ interface PerformanceData {
   widgetCreatedAt: Date
   pressuresCount: number
   activeTargets: string[]
+  charts: {
+    interval_start: any,
+    interval_end: any,
+    pressures: ChartPressure[]
+  }
 }
 
 interface PerformanceResult {
@@ -68,10 +91,16 @@ interface PerformanceResult {
 }
 
 const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
+  // Prepare interval date to fetch charts info
+  const now = new Date();
+  const before = new Date();
+  before.setDate(before.getDate() - 29);
 
   const { data, loading, error } = useQuery(PERFORMANCE_GQL, {
     variables: {
-      widgetId: widget.id
+      widgetId: widget.id,
+      start_date: before.toDateString(),
+      end_date: now.toDateString()
     }
   });
 
@@ -122,6 +151,21 @@ const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
     activeTargets = widget.settings.targets || [];
   }
 
+  // Parse charts info
+  const diffInMs = (now as any) - (before as any);
+  const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+  const pressures: ChartPressure[] = Array.from({ length: diffInDays + 1 }, (_, index) => {
+    const i = new Date(before);
+    i.setDate(i.getDate() + index);
+    const exist = data.activist_pressures_range.filter((a: any) => new Date(a.created_at).toDateString() === i.toDateString())[0]
+    
+    return {
+      name: i.getDate(),
+      total: exist ? exist.total : 0
+    }
+  })
+
   return {
     data: {
       aggregateEvents,
@@ -129,6 +173,11 @@ const usePerformance = ({ widget }: PerformanceArgs): PerformanceResult => {
       firstEventTimestamp,
       widgetCreatedAt,
       pressuresCount,
+      charts: {
+        interval_start: before,
+        interval_end: now,
+        pressures
+      },
       activeTargets
     },
     loading,
