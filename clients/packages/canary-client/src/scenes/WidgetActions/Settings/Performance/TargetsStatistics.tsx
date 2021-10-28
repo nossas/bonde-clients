@@ -130,6 +130,8 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
     return acc;
   }, [] as ActivityFeedEmail[])
 
+  const withoutEvents = aggregateEmails.length !== 0;
+
   return (
     <Stack spacing={4}>
       <Heading
@@ -142,15 +144,17 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
         Todos os alvos ({targetsCount})
       </Heading>
       <Table variant="simple" bg="white">
-        <Thead>
-          <Tr>
-            <Th>Email</Th>
-            <Th>Enviados</Th>
-            <Th>Entregues</Th>
-            <Th>Status</Th>
-            <Th>Abertura</Th>
-          </Tr>
-        </Thead>
+        {withoutEvents && (
+          <Thead>
+            <Tr>
+              <Th>Email</Th>
+              <Th>Enviados</Th>
+              <Th>Entregues</Th>
+              <Th>Status</Th>
+              <Th>Abertura</Th>
+            </Tr>
+          </Thead>
+        )}
         <Tbody>
           {uniqueItems
             .map((activityFeed: ActivityFeedEmail) => ({
@@ -176,16 +180,20 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
                   ) : (
                     <Td>{activityFeed.email}</Td>
                   )}
-                  <Td>{`${processed} envios`}</Td>
-                  <Td>
-                    {`${deliveredPercentage}% entregue`}
-                  </Td>
-                  <Td>
-                    <StatusLabel activityFeed={activityFeed} />
-                  </Td>
-                  <Td>
-                    <OpenedLabel activityFeed={activityFeed} />
-                  </Td>
+                  {withoutEvents && (
+                    <>
+                      <Td>{`${processed} envios`}</Td>
+                      <Td>
+                        {`${deliveredPercentage}% entregue`}
+                      </Td>
+                      <Td>
+                        <StatusLabel activityFeed={activityFeed} />
+                      </Td>
+                      <Td>
+                        <OpenedLabel activityFeed={activityFeed} />
+                      </Td>
+                    </>
+                  )}
                 </Tr>
               );
             })

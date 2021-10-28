@@ -7,7 +7,6 @@ import BondePressureCards from "./BondePressureCards";
 import DisclaimerRelease from "./DisclaimerRelease";
 import usePerformance from "./hooks/usePerformance";
 import Card from "./Card";
-import TargetsTable from "./TargetsTable";
 import Charts from "./Charts";
 import StepByStepCard from "./StepByStepCard";
 
@@ -64,7 +63,13 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
   } = data;
 
   const hasntEventHistory = firstEventTimestamp > widgetCreatedAt && aggregateEvents.length === 0;
-  const hasntPressure = pressuresCount === 0;
+  
+  // Alvos
+  const step1 = activeTargets.length === 0;
+  // Ajustes
+  const step2 = !widget.settings?.call_to_action || !widget.settings?.button_text;
+  // Pós-ação
+  const step3 = !widget.settings?.sender_name || !widget.settings?.sender_email || !widget.settings?.email_subject || !widget.settings?.email_text;
 
   return (
     <Stack spacing={6}>
@@ -74,9 +79,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
           widgetCreatedAt={widgetCreatedAt}
         />
       )}
-      {hasntPressure && (
-        <StepByStepCard />
-      )}
+      <StepByStepCard stepsValidation={[step1, step2, step3]} />
       <Stack direction="row" spacing={4}>
         <Stack direction="column" spacing={6}>
           <BondePressureCards targetsCount={activeTargets.length} pressuresCount={pressuresCount} />
@@ -88,10 +91,11 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
           end={charts.interval_end}
         />
       </Stack>
-      {!hasntEventHistory ? (
-        <TargetsStatistics aggregateEmails={aggregateEmails} activeTargets={activeTargets} />
-      ) : (
-        <TargetsTable activeTargets={activeTargets} />
+      {!step1 && (
+        <TargetsStatistics
+          aggregateEmails={aggregateEmails}
+          activeTargets={activeTargets}
+        />
       )}
     </Stack>
   );
