@@ -1,4 +1,5 @@
 import React from 'react';
+// import { useQuery, gql } from 'bonde-core-tools';
 import {
   InputField,
   Heading,
@@ -10,13 +11,14 @@ import {
   Flex,
   Stack,
   UnorderedList,
-  ListItem
+  ListItem,
 } from 'bonde-components';
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import MailchimpIcon from './MailchimpIcon';
+import ForceSync from './ForceSync';
 
-const MailchimpPanel = () => {
+const MailchimpPanel: React.FC = () => {
   const { t } = useTranslation('community');
 
   return (
@@ -72,13 +74,7 @@ const MailchimpPanel = () => {
                   <Button type='submit' disabled={submitting || !dirty} marginTop={4}>Conectar ao mailchimp</Button>
                 </Flex>
               </Stack>
-              <Stack>
-                <Heading as="h4" size="lg">Forçar sincronização</Heading>
-                <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
-                <Flex justifyContent="flex-end">
-                  <Button type='button' marginTop={4}>Sincronizar</Button>
-                </Flex>
-              </Stack>
+              <ForceSync />
             </Stack>
           </GridItem>
           <GridItem colSpan={[12, null, null, 4]}>
