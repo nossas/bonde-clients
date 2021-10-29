@@ -140,7 +140,7 @@ const Domain = (props: Omit<Props, 'action'>) => {
           <GridItem>
             <Stack direction="row" spacing={6}>
               <Button
-                variant="link"
+                variant="tableLink"
                 colorScheme="gray"
                 onClick={handleCheckDNS({ ...props, action: updateDomain })}
                 style={{ fontSize: '13px' }}
@@ -149,7 +149,7 @@ const Domain = (props: Omit<Props, 'action'>) => {
                 Verificar DNS
               </Button>
               <Button
-                variant="link"
+                variant="tableLink"
                 colorScheme="gray"
                 onClick={handleDelete({ ...props, action: deleteDomain, push })}
                 style={{ fontSize: '13px' }}

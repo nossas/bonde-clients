@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, toast } from 'bonde-components';
+import { Button, toast } from 'bonde-components';
 import { useMutation, useSession, gql } from 'bonde-core-tools';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -78,7 +78,7 @@ const Resend = ({ data: { id, email, role }, refetch }: Props) => {
 
   return (
     <Styles>
-      <Link href="#" onClick={onClick}>{t('mobilizers.table.actions.resend.label')}</Link>
+      <Button href="#" onClick={onClick} colorScheme="gray" variant="tableLink">{t('mobilizers.table.actions.resend.label')}</Button>
     </Styles>
   );
 };

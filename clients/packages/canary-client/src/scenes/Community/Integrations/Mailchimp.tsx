@@ -34,15 +34,15 @@ const MailchimpPanel: React.FC = () => {
           <GridItem colSpan={[12, null, null, 7]}>
             <Stack spacing={6}>
               <Stack spacing={2}>
-                <Heading as="h3" size="md">Mailchimp</Heading>
+                <Heading as="h3" size="xl">Mailchimp</Heading>
                 <Text>Conecte ao Mailchimp para se comunicar com as pessoas que agirem nas mobilizações da sua comunidade.</Text>
               </Stack>
               <Stack spacing={2}>
-                <Heading as="h5" size="sm">Pra começar</Heading>
+                <Heading as="h4" size="lg" >Pra começar</Heading>
                 <Text>Crie ou acesse sua conta no <a href='https://login.mailchimp.com/signup/' title='Mailchimp' target='_blank' rel="noopener noreferrer">Mailchimp</a>.</Text>
               </Stack>
               <Stack>
-                <Heading as="h4" size="sm">Integrar</Heading>
+                <Heading as="h4" size="lg">Integrar</Heading>
                 <InputField
                   name='community.mailchimp_api_key'
                   label={t('integrations.form.fields.mailchimp_api_key.label')}
@@ -80,7 +80,7 @@ const MailchimpPanel: React.FC = () => {
           <GridItem colSpan={[12, null, null, 4]}>
             <Stack spacing={6}>
               <Stack spacing={2}>
-                <Heading as="h4" size="sm">Funcionalidades</Heading>
+                <Heading as="h4" size="lg">Funcionalidades</Heading>
                 <UnorderedList>
                   <ListItem>
                     <Text>Comunicação por e-mail com todas as pessoas que agirem nas páginas da sua comunidade.</Text>
@@ -94,7 +94,7 @@ const MailchimpPanel: React.FC = () => {
                 </UnorderedList>
               </Stack>
               <Stack spacing={2}>
-                <Heading as="h4" size="sm">Dificuldade: Fácil</Heading>
+                <Heading as="h4" size="lg">Dificuldade: Fácil</Heading>
                 <UnorderedList>
                   <ListItem>
                     <Text>Não precisa saber programar :)</Text>
@@ -108,7 +108,7 @@ const MailchimpPanel: React.FC = () => {
                 </UnorderedList>
               </Stack>
               <Stack spacing={2}>
-                <Heading as="h4" size="sm">Observações</Heading>
+                <Heading as="h4" size="lg">Observações</Heading>
                 <Text>Os segmentos criados pelo BONDE no Mailchimp seguem esse formato: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)</Text>
               </Stack>
             </Stack>
