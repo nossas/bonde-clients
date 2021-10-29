@@ -107,7 +107,6 @@ interface ActivityFeedEmailWithDisabled extends ActivityFeedEmail {
 
 const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) => {
   const activeEmails = activeTargets.map((target) => (target.match(/^[A-zÀ-ú0-9 ]+<([\w.@]+)>$/) || [])[1]);
-  const targetsCount = aggregateEmails.length
 
   // Transforma todos e-mails ativos em eventos
   const items: ActivityFeedEmail[] = [...activeEmails.map((email: string) => {
@@ -141,7 +140,7 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
         color="gray.400"
         textTransform="uppercase"
       >
-        Todos os alvos ({targetsCount})
+        Todos os alvos ({uniqueItems.length})
       </Heading>
       <Table variant="simple" bg="white">
         {withoutEvents && (
