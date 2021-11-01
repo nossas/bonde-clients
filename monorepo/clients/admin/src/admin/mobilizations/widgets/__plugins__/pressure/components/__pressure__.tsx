@@ -20,6 +20,7 @@ interface MyProperties {
   editable?: boolean,
   mobilization: Record<string, number>,
   widget: {
+    id: number,
     settings: {
       finish_message_type: string,
       finish_message: string,
@@ -204,7 +205,7 @@ class Pressure extends React.Component<MyProperties, MyState> {
       disable_edit_field: 'n'
     }
     console.log(this.state)
-    return filledPressureWidgets.includes(widget.id) || this.state.showFinishMessage ? (
+    return (filledPressureWidgets || []).includes(widget.id) || this.state.showFinishMessage ? (
       finishMessageType === 'custom' ? (
         <FinishMessageCustom widget={widget} />
       ) : (
