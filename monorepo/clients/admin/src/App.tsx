@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 const Gallery = lazy(async () => import('pages/Gallery'))
 const Details = lazy(async () => import('pages/Details'))
 
-export default function App(): ReactElement {
+export default function App(): ReactElement<any> {
 	return (
 		<BrowserRouter>
 			<Suspense fallback={<LoadingOrError />}>

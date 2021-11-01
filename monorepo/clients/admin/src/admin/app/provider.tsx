@@ -10,31 +10,19 @@ import crossStorage from "../cross-storage-client"
 import AppRouting from '../pages/app'
 // save on store
 import { createAction } from '../utils/redux'
-import ApplicationContextTypes from './context/types'
+import AppContext from './context'
 
 function Loading(): JSX.Element {
   return <h1>Signing...</h1>
 }
 
-interface MyProperties {
-  app: {
-    signing: boolean,
-    signed: boolean,
-    token: string
-  }
-}
-
 interface MyState {
   signing: boolean
   signed: boolean
-  token: string
+  token?: string
 }
-class Application extends React.Component<MyProperties, MyState> {
+class Application extends React.Component<any, MyState> {
   state: MyState = { signing: false, signed: false, token: undefined }
-
-  getChildContext() {
-    return { app: this.state }
-  }
 
   componentDidMount() {
     const { location: { pathname } } = window
@@ -86,17 +74,17 @@ class Application extends React.Component<MyProperties, MyState> {
     const { locale, messages, store, apolloClient } = this.props
 
     return signing ? <Loading /> : (
-      <IntlProvider locale={locale} messages={messages}>
-        <Provider store={store}>
-          <ApolloProvider store={store} client={apolloClient()}>
-            <AppRouting />
-          </ApolloProvider>
-        </Provider>
-      </IntlProvider>
+      <AppContext.Provider value={{ app: this.state }}>
+        <IntlProvider locale={locale} messages={messages}>
+          <Provider store={store}>
+            <ApolloProvider store={store} client={apolloClient()}>
+              <AppRouting />
+            </ApolloProvider>
+          </Provider>
+        </IntlProvider>
+      </AppContext.Provider>
     )
   }
 }
-
-Application.childContextTypes = ApplicationContextTypes
 
 export default Application
