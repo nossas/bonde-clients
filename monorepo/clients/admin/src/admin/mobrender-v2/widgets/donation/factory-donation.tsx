@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
 import { Progress } from '.'
@@ -7,11 +6,33 @@ import * as formatNumberHelper from "../../../utils/format-number-helper"
 
 import('./donation.scss')
 
+interface DonationProps {
+  mobilization: any,
+  widget: any,
+  editable: boolean,
+  configurable?: boolean,
+  hasNewField?: boolean,
+  handleDonationTransactionCreate?: any,
+  intl?: intlShape
+  donationCustomerData: any
+  donationGoalStats: any
+}
+
+interface DonationState {
+  hasMouseOver: boolean
+  loading: boolean
+  success: boolean
+  selected_value: number
+  selected_payment_type: string
+  errors: any[]
+}
+
 export default ({
   finishMessageCustom: FinishMessageCustom,
   tellAFriend: DonationTellAFriend
 }) => {
-  class Donation extends React.Component {
+  
+  class Donation extends React.Component<DonationProps, DonationState> {
     constructor(properties, context) {
       super(properties, context)
       this.state = {
@@ -35,7 +56,7 @@ export default ({
       this.setState({ selected_value: Number(defaultDonationValue) })
     }
 
-    componentWillReceiveProps(nextProperties) {
+    componentWillReceiveProps(nextProperties: DonationProps) {
       if (this.state.loading) {
         this.setState({ loading: false, success: true })
       }
@@ -80,13 +101,13 @@ export default ({
         : JSON.parse(donationGoalStats.data)
 
       if (settings && settings.goal_date_limit) {
-        const now = new Date()
+        const now: any = new Date()
         const [day, month, year] = settings.goal_date_limit.split('/')
-        const goalDate = new Date(`${year}-${month}-${day}`)
+        const goalDate: any = new Date(`${year}-${month}-${day}`)
         goalDateRemaining = Math.ceil((goalDate - now) / (1000 * 60 * 60 * 24))
       }
 
-      const properties = {
+      const properties: any = {
         value: 0,
         valueTopLeft: '',
         valueTopRight: '',
@@ -459,16 +480,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         </div>
       )
     }
-  }
-
-  Donation.propTypes = {
-    mobilization: PropTypes.object.isRequired,
-    widget: PropTypes.object.isRequired,
-    editable: PropTypes.bool.isRequired,
-    configurable: PropTypes.bool,
-    hasNewField: PropTypes.bool,
-    handleDonationTransactionCreate: PropTypes.func,
-    intl: intlShape
   }
 
   return Donation
