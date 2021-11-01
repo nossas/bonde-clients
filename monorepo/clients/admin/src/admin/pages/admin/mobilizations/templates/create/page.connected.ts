@@ -8,8 +8,7 @@ import * as TemplateActions from "../../../../../mobilizations/templates/action-
 import MobSelectors from "../../../../../mobrender/redux/selectors"
 import Page from './page'
 
-const mapStateToProperties = state => {
-  console.log(state)
+const mapStateToProperties = (state: any) => {
   const mobilization = MobSelectors(state).getMobilization()
   return {
     mobilization,
@@ -28,8 +27,8 @@ export default connect(mapStateToProperties, mapActionCreatorsToProperties)(
   injectIntl(
     reduxForm({
       form: 'templateCreateForm',
-      validate: (values, { intl }) => {
-        const errors = {}
+      validate: (values: any, { intl }: any) => {
+        const errors: any = {}
         const requiredMessage = intl.formatMessage({
           id: 'page--templates-create.form.validation.required',
           defaultMessage: 'Preenchimento obrigatório'
@@ -40,6 +39,6 @@ export default connect(mapStateToProperties, mapActionCreatorsToProperties)(
         return errors
       },
       fields: ['name', 'goal', 'mobilization_id', 'global']
-    })(Page)
+    } as any)(Page as any)
   )
 )

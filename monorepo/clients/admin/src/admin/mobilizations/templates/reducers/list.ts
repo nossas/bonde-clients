@@ -1,7 +1,7 @@
 // Current module dependencies
-import * as t from './../../../mobilizations/templates/action-types'
+import * as t from '../action-types'
 
-export const initialState = {
+export const initialState: any = {
   loading: false,
   loaded: false,
   global: [],
@@ -9,7 +9,7 @@ export const initialState = {
   templateId: undefined
 }
 
-const MobilizationTemplatesReducer = (state = initialState, action = {}) => {
+const MobilizationTemplatesReducer = (state = initialState, action: any = {}) => {
   switch (action.type) {
     case t.REQUEST_TEMPLATE_CREATE:
       return { ...state, loading: true }

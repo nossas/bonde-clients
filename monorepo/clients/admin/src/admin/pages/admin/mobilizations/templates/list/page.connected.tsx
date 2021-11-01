@@ -12,13 +12,15 @@ import * as TemplateSelectors from './../../../../../mobilizations/templates/sel
 
 import Page from './page'
 
-const mapStateToProps = state => ({
-  loaded: TemplateSelectors.isLoaded(state),
-  loading: TemplateSelectors.isLoading(state),
-  community: CommunitySelectors.getCurrent(state),
-  menuActiveIndex: MobSelectors(state).getMobilizationMenuActive(),
-  mobilizationTemplates: TemplateSelectors.getCustomTemplates(state)
-})
+const mapStateToProps = (state) => {
+  return {
+    loaded: TemplateSelectors.isLoaded(state),
+    loading: TemplateSelectors.isLoading(state),
+    community: CommunitySelectors.getCurrent(state),
+    menuActiveIndex: MobSelectors(state).getMobilizationMenuActive(),
+    mobilizationTemplates: TemplateSelectors.getCustomTemplates(state)
+  }
+}
 
 const mapActionCreatorsToProps = {
   asyncDestroyTemplate: TemplateActions.asyncDestroyTemplate,

@@ -17,7 +17,7 @@ import {
 } from "../../../../../mobilizations/components/list/items"
 import * as paths from '../../../../../paths'
 
-class TemplatesListPage extends React.Component {
+class TemplatesListPage extends React.Component<any> {
   componentDidMount() {
     const { loaded, asyncFetch, toggleMenu, community } = this.props
 
