@@ -53,7 +53,7 @@ const EventsCards: React.FC<Props> = ({ aggregateEvents }) => {
         p={6}
         justify="space-between"
       >
-        <Text fontWeight="extrabold" fontSize="4xl">{processed}</Text>
+        <Text color="black" fontWeight="extrabold" fontSize="4xl">{processed}</Text>
         <Stack direction="row" spacing={6}>
           <PercentageLabel
             label="Entregues"
