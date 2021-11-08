@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import reducer from 'mobrender/redux/reducers/uploader'
-import * as t from 'mobrender/redux/action-types'
+import reducer from '../../../mobrender/redux/reducers/uploader'
+import * as t from '../../../mobrender/redux/action-types'
 
 describe('mobrender/redux/reducers/uploader', () => {
   describe('t.LOADING_FILE', () => {
@@ -16,7 +16,8 @@ describe('mobrender/redux/reducers/uploader', () => {
       const initialState = { bg: 10 }
       const action = { type: t.LOADING_FILE, payload: { key: 'bg', progress: 50 } }
       const nextState = reducer(initialState, action)
-      expect(nextState).to.deep.equal({...initialState,
+      expect(nextState).to.deep.equal({
+        ...initialState,
         bg: 50
       })
     })

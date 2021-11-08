@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import * as mock from 'utils/mock'
-import FlatForm from 'ux/components/flat-form'
+import * as mock from '../../../utils/mock'
+import FlatForm from '../../../ux/components/flat-form'
 
 describe('client/ux/components/flat-form', () => {
   let wrapper
@@ -17,7 +17,7 @@ describe('client/ux/components/flat-form', () => {
       valid: false
     },
     buttonText: 'Continuar',
-    handleSubmit: () => {},
+    handleSubmit: () => { },
     submitFailed: false,
     dirty: false,
     valid: false

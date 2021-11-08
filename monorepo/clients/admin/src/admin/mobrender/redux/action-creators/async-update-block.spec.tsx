@@ -4,9 +4,9 @@ import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import configureStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
-import { asyncUpdateBlock } from 'mobrender/redux/action-creators'
-import { createAction } from 'mobrender/redux/action-creators/create-action'
-import * as t from 'mobrender/redux/action-types'
+import { asyncUpdateBlock } from '../../../mobrender/redux/action-creators'
+import { createAction } from '../../../mobrender/redux/action-creators/create-action'
+import * as t from '../../../mobrender/redux/action-types'
 
 import rootReducer from './mock-reducers/root-reducer'
 
@@ -18,7 +18,7 @@ const data = [
   { id: 3, name: 'Dolor', position: 3 }
 ]
 
-const block = {...data[1], name: 'Ipsum updated'}
+const block = { ...data[1], name: 'Ipsum updated' }
 mockAxios.onPut(
   `/mobilizations/1/blocks/2`, { block }
 ).reply(200, block)
@@ -29,7 +29,7 @@ const store = configureStore(
 )(fromJS(rootReducer).mergeDeep({
   mobilizations: {
     list: {
-      data: [ { id: 1, name: 'Mob' } ],
+      data: [{ id: 1, name: 'Mob' }],
       currentId: 1
     },
     blocks: { data }

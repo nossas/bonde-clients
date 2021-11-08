@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { Map } from 'immutable'
 import { mountWithIntl } from 'intl/helpers'
-import { factoryDonation } from 'mobrender-v2/widgets/donation'
+import { factoryDonation } from '../../../mobrender-v2/widgets/donation'
 
 const TellAFriend = () => (<div />)
 const FinishMessageCustom = () => (<div />)
@@ -243,9 +243,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       const [year, month, day] = new Date().toLocaleString('pt-BR', dateOptions).split('-')
 
       donationWidget.setProps({
-        widget: { ...props.widget,
+        widget: {
+          ...props.widget,
           settings: {
-            goal_date_limit: `${day}/${month}/${year}` }
+            goal_date_limit: `${day}/${month}/${year}`
+          }
         }
       })
       expect(donationWidget.find('Progress')).to.have.length(1)

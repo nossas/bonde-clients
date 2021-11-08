@@ -1,8 +1,8 @@
 import { expect } from 'chai'
 import { fromJS } from 'immutable'
 
-import { reducer as rootReducer } from 'mobrender/redux'
-import Selectors from 'mobrender/redux/selectors'
+import { reducer as rootReducer } from '../../mobrender/redux'
+import Selectors from '../../mobrender/redux/selectors'
 
 const state = fromJS({
   mobilizations: rootReducer

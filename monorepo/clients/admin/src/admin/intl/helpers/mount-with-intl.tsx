@@ -3,7 +3,7 @@
 //
 
 import { mount } from 'enzyme'
-import pt from 'intl/locale-data/pt-BR'
+import pt from '../../intl/locale-data/pt-BR'
 import { IntlProvider, intlShape } from 'react-intl'
 
 const intlProvider = new IntlProvider({ locale: 'pt-BR', messages: pt }, {})

@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
 
-import shallowWithIntl from 'intl/helpers/shallow-with-intl'
+import shallowWithIntl from '../../../intl/helpers/shallow-with-intl'
 import * as mock from './../../../utils/mock'
 import Page from './component'
 
@@ -24,10 +24,10 @@ describe('client/mobrender/widgets/donations/component', () => {
       payment_methods: 'payment_methods',
       payment_type: 'payment_type'
     },
-    handleSubmit: () => {},
+    handleSubmit: () => { },
     submitting: false,
     widget: {},
-    asyncWidgetUpdate: () => {}
+    asyncWidgetUpdate: () => { }
   }
 
   beforeAll(() => {

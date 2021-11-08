@@ -1,7 +1,7 @@
 import React from 'react'
 import { expect } from 'chai'
 import sinon from 'sinon'
-import { mountWithIntl } from 'intl/helpers'
+import { mountWithIntl } from '../../intl/helpers'
 import BlockConfigMenu from '../../mobrender/components/block-config-menu'
 
 describe('mobrender/components/block-config-menu', () => {
@@ -56,7 +56,8 @@ describe('mobrender/components/block-config-menu', () => {
         let result
         menuConfig.setProps({ update: block => { result = block } })
         menu(menuIndex).simulate('click')
-        expect(result).to.deep.equal({...props.block,
+        expect(result).to.deep.equal({
+          ...props.block,
           hidden: !props.block.hidden
         })
       })

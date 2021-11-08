@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 
-import * as t from 'mobrender/redux/action-types'
-import reducer, { initialState } from 'mobrender/redux/reducers/mobilizations'
+import * as t from '../../../mobrender/redux/action-types'
+import reducer, { initialState } from '../../../mobrender/redux/reducers/mobilizations'
 
 describe('mobrender/redux/reducers/mobilizations', () => {
   describe('doing add', () => {
@@ -9,7 +9,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const state = { ...initialState, isLoaded: true }
       const action = { type: t.ADD_MOBILIZATION_REQUEST }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         saving: true
       })
     })
@@ -19,7 +20,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const payload = { id: 1, name: 'Lorem', goal: 'Ipsum' }
       const action = { type: t.ADD_MOBILIZATION_SUCCESS, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         saving: false,
         data: [...state.data, payload],
         currentId: payload.id
@@ -31,7 +33,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const payload = '500 Internal Server Error'
       const action = { type: t.ADD_MOBILIZATION_FAILURE, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         saving: false,
         error: payload
       })
@@ -42,7 +45,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
     it('#FETCH_MOBILIZATIONS_REQUEST', () => {
       const action = { type: t.FETCH_MOBILIZATIONS_REQUEST }
       const nextState = reducer(initialState, action)
-      expect(nextState).to.deep.equal({...initialState,
+      expect(nextState).to.deep.equal({
+        ...initialState,
         fetching: true
       })
     })
@@ -55,7 +59,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       ]
       const action = { type: t.FETCH_MOBILIZATIONS_SUCCESS, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         isLoaded: true,
         fetching: false,
         data: payload
@@ -67,7 +72,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const payload = '500 Internal Server Error'
       const action = { type: t.FETCH_MOBILIZATIONS_FAILURE, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         isLoaded: true,
         fetching: false,
         error: payload
@@ -88,7 +94,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const payload = 1
       const action = { type: t.SELECT_MOBILIZATION, payload }
       let nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         currentId: payload,
         reload: true
       })
@@ -105,7 +112,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
     it('#UPDATE_MOBILIZATION_REQUEST', () => {
       const action = { type: t.UPDATE_MOBILIZATION_REQUEST }
       const nextState = reducer(loadedState, action)
-      expect(nextState).to.deep.equal({...loadedState,
+      expect(nextState).to.deep.equal({
+        ...loadedState,
         saving: true
       })
     })
@@ -115,7 +123,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const payload = { ...data[0], name: 'Edited' }
       const action = { type: t.UPDATE_MOBILIZATION_SUCCESS, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         saving: false,
         data: [payload, data[1]]
       })
@@ -126,7 +135,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const payload = '500 Internal Server Error'
       const action = { type: t.UPDATE_MOBILIZATION_FAILURE, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         saving: false,
         error: payload
       })
@@ -138,7 +148,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const payload = 1
       const action = { type: t.TOGGLE_MOBILIZATION_MENU, payload }
       const nextState = reducer(initialState, action)
-      expect(nextState).to.deep.equal({...initialState,
+      expect(nextState).to.deep.equal({
+        ...initialState,
         menuActiveIndex: payload
       })
     })
@@ -147,7 +158,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const state = { ...initialState, menuActiveIndex: 1 }
       const action = { type: t.TOGGLE_MOBILIZATION_MENU, payload: 1 }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         menuActiveIndex: undefined
       })
     })
@@ -157,7 +169,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
     it('#FILTER_MOBILIZATIONS_REQUEST', () => {
       const action = { type: t.FILTER_MOBILIZATIONS_REQUEST }
       const nextState = reducer(initialState, action)
-      expect(nextState).to.deep.equal({...initialState,
+      expect(nextState).to.deep.equal({
+        ...initialState,
         fetching: true
       })
     })
@@ -169,7 +182,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       ]
       const action = { type: t.FILTER_MOBILIZATIONS_SUCCESS, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         fetching: false,
         isLoaded: true,
         data: payload,
@@ -182,7 +196,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
       const payload = '500 Internal Server Error'
       const action = { type: t.FILTER_MOBILIZATIONS_FAILURE, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         fetching: false,
         isLoaded: true,
         error: payload
@@ -196,7 +211,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
     it('#FETCH_BLOCKS_SUCCESS', () => {
       const action = { type: t.FETCH_BLOCKS_SUCCESS }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         reload: false
       })
     })
@@ -204,7 +220,8 @@ describe('mobrender/redux/reducers/mobilizations', () => {
     it('#FETCH_WIDGETS_SUCCESS', () => {
       const action = { type: t.FETCH_WIDGETS_SUCCESS }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         reload: false
       })
     })

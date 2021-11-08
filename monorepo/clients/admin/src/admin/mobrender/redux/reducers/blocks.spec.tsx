@@ -1,6 +1,6 @@
 import { expect } from 'chai'
-import * as t from 'mobrender/redux/action-types'
-import reducer, { initialState } from 'mobrender/redux/reducers/blocks'
+import * as t from '../../../mobrender/redux/action-types'
+import reducer, { initialState } from '../../../mobrender/redux/reducers/blocks'
 
 describe('client/mobrender/redux/reducers/blocks', () => {
   describe('doing fetch', () => {
@@ -14,7 +14,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
     })
 
     it('success', () => {
-      const requestState = {...initialState,
+      const requestState = {
+        ...initialState,
         fetching: true
       }
       const data = [
@@ -23,7 +24,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       ]
       const action = { type: t.FETCH_BLOCKS_SUCCESS, payload: data }
       const nextState = reducer(requestState, action)
-      expect(nextState).to.deep.equal({...requestState,
+      expect(nextState).to.deep.equal({
+        ...requestState,
         isLoaded: true,
         fetching: false,
         data
@@ -31,13 +33,15 @@ describe('client/mobrender/redux/reducers/blocks', () => {
     })
 
     it('failure', () => {
-      const requestState = {...initialState,
+      const requestState = {
+        ...initialState,
         fetching: true
       }
       const error = '500 Internal Server Error'
       const action = { type: t.FETCH_BLOCKS_FAILURE, payload: error }
       const nextState = reducer(requestState, action)
-      expect(nextState).to.deep.equal({...requestState,
+      expect(nextState).to.deep.equal({
+        ...requestState,
         isLoaded: true,
         fetching: false,
         error
@@ -46,7 +50,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
   })
 
   describe('doing update', () => {
-    const fetchState = {...initialState,
+    const fetchState = {
+      ...initialState,
       isLoaded: true,
       data: [
         { id: 1, name: 'Lorem' },
@@ -54,7 +59,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       ]
     }
 
-    const fetchRequestState = {...fetchState,
+    const fetchRequestState = {
+      ...fetchState,
       saving: true
     }
 
@@ -68,7 +74,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       const block = { id: 1, name: 'Dolor' }
       const action = { type: t.UPDATE_BLOCK_SUCCESS, payload: block }
       const nextState = reducer(fetchRequestState, action)
-      expect(nextState).to.deep.equal({...fetchRequestState,
+      expect(nextState).to.deep.equal({
+        ...fetchRequestState,
         saving: false,
         data: fetchRequestState.data.map(b => {
           if (b.id === block.id) return block
@@ -81,7 +88,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       const error = '500 Internal Server Error'
       const action = { type: t.UPDATE_BLOCK_FAILURE, payload: error }
       const nextState = reducer(fetchRequestState, action)
-      expect(nextState).to.deep.equal({...fetchRequestState,
+      expect(nextState).to.deep.equal({
+        ...fetchRequestState,
         saving: false,
         error
       })
@@ -93,16 +101,18 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       { id: 1, name: 'Lorem', bg_image: 'tmp://old.png' },
       { id: 2, name: 'Ipsum', bg_class: 'bg-5' }
     ]
-    const fetchState = {...initialState,
+    const fetchState = {
+      ...initialState,
       isLoaded: true,
       data
     }
 
     it('change background', () => {
-      const payload = {...data[0], bg_image: 'tmp://new.png'}
+      const payload = { ...data[0], bg_image: 'tmp://new.png' }
       const action = { type: t.CHANGE_BLOCK_BACKGROUND, payload }
       const nextState = reducer(fetchState, action)
-      expect(nextState).to.deep.equal({...nextState,
+      expect(nextState).to.deep.equal({
+        ...nextState,
         data: [payload, data[1]]
       })
     })
@@ -111,14 +121,15 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       const payload = {
         blocks: {
           blocks: [
-            {...data[0], bg_image: 'tmp://new.png'}
+            { ...data[0], bg_image: 'tmp://new.png' }
           ]
         }
       }
 
       const action = { type: t.UPDATE_BLOCK_BATCH, payload }
       const nextState = reducer(fetchState, action)
-      expect(nextState).to.deep.equal({...nextState,
+      expect(nextState).to.deep.equal({
+        ...nextState,
         data: [payload.blocks.blocks[0], data[1]]
       })
     })
@@ -129,7 +140,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       { id: 1, name: 'Lorem', bg_image: 'tmp://old.png' },
       { id: 2, name: 'Ipsum', bg_class: 'bg-5' }
     ]
-    const fetchState = {...initialState,
+    const fetchState = {
+      ...initialState,
       isLoaded: true,
       data
     }
@@ -137,7 +149,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
     it('request', () => {
       const action = { type: t.ADD_BLOCK_REQUEST }
       const nextState = reducer(fetchState, action)
-      expect(nextState).to.deep.equal({...fetchState,
+      expect(nextState).to.deep.equal({
+        ...fetchState,
         saving: true
       })
     })
@@ -147,7 +160,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       const state = { ...fetchState, saving: true }
       const action = { type: t.ADD_BLOCK_SUCCESS, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         saving: false,
         data: [...data, payload]
       })
@@ -158,7 +172,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       const state = { ...fetchState, saving: true }
       const action = { type: t.ADD_BLOCK_FAILURE, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         saving: false,
         error: payload
       })
@@ -170,7 +185,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       { id: 1, name: 'Lorem', bg_image: 'tmp://old.png' },
       { id: 2, name: 'Ipsum', bg_class: 'bg-5' }
     ]
-    const fetchState = {...initialState,
+    const fetchState = {
+      ...initialState,
       isLoaded: true,
       data
     }
@@ -178,7 +194,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
     it('request', () => {
       const action = { type: t.DESTROY_BLOCK_REQUEST }
       const nextState = reducer(fetchState, action)
-      expect(nextState).to.deep.equal({...fetchState,
+      expect(nextState).to.deep.equal({
+        ...fetchState,
         saving: true
       })
     })
@@ -188,7 +205,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       const state = { ...fetchState, saving: true }
       const action = { type: t.DESTROY_BLOCK_SUCCESS, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         saving: false,
         data: data.filter(b => b.id !== payload.id)
       })
@@ -199,7 +217,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
       const state = { ...fetchState, saving: true }
       const action = { type: t.DESTROY_BLOCK_FAILURE, payload }
       const nextState = reducer(state, action)
-      expect(nextState).to.deep.equal({...state,
+      expect(nextState).to.deep.equal({
+        ...state,
         saving: false,
         error: payload
       })
@@ -207,7 +226,8 @@ describe('client/mobrender/redux/reducers/blocks', () => {
   })
 
   it('should reset blocks reducer when SELECT_MOBILIZATION', () => {
-    const fetchState = {...initialState,
+    const fetchState = {
+      ...initialState,
       isLoaded: true,
       data: [
         { id: 1, name: 'Lorem', bg_class: 'bg-5' }

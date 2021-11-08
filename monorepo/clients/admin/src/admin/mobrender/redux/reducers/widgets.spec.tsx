@@ -1,7 +1,7 @@
 import { expect } from 'chai'
-import * as t from 'mobrender/redux/action-types'
-import reducer, { initialState } from 'mobrender/redux/reducers/widgets'
-import { createAction } from 'mobrender/redux/action-creators/create-action'
+import * as t from '../../../mobrender/redux/action-types'
+import reducer, { initialState } from '../../../mobrender/redux/reducers/widgets'
+import { createAction } from '../../../mobrender/redux/action-creators/create-action'
 
 describe('mobrender/redux/reducers/widgets', () => {
   describe('doing fetch', () => {
@@ -15,7 +15,8 @@ describe('mobrender/redux/reducers/widgets', () => {
     })
 
     it('success', () => {
-      const requestState = {...initialState,
+      const requestState = {
+        ...initialState,
         fetching: true
       }
       const data = [
@@ -24,7 +25,8 @@ describe('mobrender/redux/reducers/widgets', () => {
       ]
       const action = { type: t.FETCH_WIDGETS_SUCCESS, payload: data }
       const nextState = reducer(requestState, action)
-      expect(nextState).to.deep.equal({...requestState,
+      expect(nextState).to.deep.equal({
+        ...requestState,
         isLoaded: true,
         fetching: false,
         data
@@ -32,13 +34,15 @@ describe('mobrender/redux/reducers/widgets', () => {
     })
 
     it('failure', () => {
-      const requestState = {...initialState,
+      const requestState = {
+        ...initialState,
         fetching: true
       }
       const error = '500 Internal Server Error'
       const action = { type: t.FETCH_WIDGETS_FAILURE, payload: error }
       const nextState = reducer(requestState, action)
-      expect(nextState).to.deep.equal({...requestState,
+      expect(nextState).to.deep.equal({
+        ...requestState,
         isLoaded: true,
         fetching: false,
         error
@@ -47,7 +51,8 @@ describe('mobrender/redux/reducers/widgets', () => {
   })
 
   describe('doing update', () => {
-    const fetchState = {...initialState,
+    const fetchState = {
+      ...initialState,
       isLoaded: true,
       data: [
         { id: 1, kind: 'draft' },
@@ -55,7 +60,8 @@ describe('mobrender/redux/reducers/widgets', () => {
       ]
     }
 
-    const fetchRequestState = {...fetchState,
+    const fetchRequestState = {
+      ...fetchState,
       saving: true
     }
 
@@ -69,7 +75,8 @@ describe('mobrender/redux/reducers/widgets', () => {
       const widget = { id: 1, kind: 'content' }
       const action = { type: t.UPDATE_WIDGET_SUCCESS, payload: widget }
       const nextState = reducer(fetchRequestState, action)
-      expect(nextState).to.deep.equal({...fetchRequestState,
+      expect(nextState).to.deep.equal({
+        ...fetchRequestState,
         saving: false,
         data: fetchRequestState.data.map(w => {
           if (w.id === widget.id) return widget
@@ -82,7 +89,8 @@ describe('mobrender/redux/reducers/widgets', () => {
       const error = '500 Internal Server Error'
       const action = { type: t.UPDATE_WIDGET_FAILURE, payload: error }
       const nextState = reducer(fetchRequestState, action)
-      expect(nextState).to.deep.equal({...fetchRequestState,
+      expect(nextState).to.deep.equal({
+        ...fetchRequestState,
         saving: false,
         error
       })
@@ -91,17 +99,19 @@ describe('mobrender/redux/reducers/widgets', () => {
 
   describe('doing add widgets', () => {
     it('success', () => {
-      const fetchState = {...initialState,
+      const fetchState = {
+        ...initialState,
         isLoaded: true,
         data: [
           { id: 1, kind: 'draft', block_id: 2 },
           { id: 2, kind: 'draft', block_id: 2 }
         ]
       }
-      const payload = [ { id: 3, kind: 'draft', block_id: 3 } ]
+      const payload = [{ id: 3, kind: 'draft', block_id: 3 }]
       const action = { type: t.ADD_WIDGETS_SUCCESS, payload }
       const nextState = reducer(fetchState, action)
-      expect(nextState).to.deep.equal({...fetchState,
+      expect(nextState).to.deep.equal({
+        ...fetchState,
         data: [...fetchState.data, ...payload]
       })
     })
@@ -136,7 +146,8 @@ describe('mobrender/redux/reducers/widgets', () => {
   })
 
   it('should reset widgets reducer when SELECT_MOBILIZATION', () => {
-    const fetchState = {...initialState,
+    const fetchState = {
+      ...initialState,
       isLoaded: true,
       data: [
         { id: 1, kind: 'draft', block_id: 1 }
