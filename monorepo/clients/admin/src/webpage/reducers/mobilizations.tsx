@@ -1,10 +1,16 @@
-import * as t from '../actionTypes'
+import * as t from '../action-types'
+
+export interface Mobilization {
+  id: number;
+  name: string;
+  status: 'active' | 'archived';
+}
 
 export interface StateMobilizations {
   isLoaded: boolean;
   fetching: boolean;
   saving: boolean;
-  data: any[];
+  data: Mobilization[];
   currentId?: number;
   menuActiveIndex?: number;
   error?: any;
@@ -24,7 +30,7 @@ export const initialState = {
   communityId: undefined
 }
 
-export default (state: StateMobilizations = initialState, action: any = {}) => {
+export default (state: StateMobilizations = initialState, action: any = {}): StateMobilizations => {
   switch (action.type) {
     case t.ADD_MOBILIZATION_REQUEST:
     case t.UPDATE_MOBILIZATION_REQUEST:
@@ -64,6 +70,7 @@ export default (state: StateMobilizations = initialState, action: any = {}) => {
         isLoaded: true,
         fetching: false,
         data: action.payload,
+        // eslint-disable-next-line @typescript-eslint/no-magic-numbers
         currentId: action.payload.length === 1 ? action.payload[0].id : undefined
       }
     case t.FETCH_MOBILIZATIONS_FAILURE:

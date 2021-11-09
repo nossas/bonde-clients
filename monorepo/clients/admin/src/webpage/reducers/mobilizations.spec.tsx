@@ -1,4 +1,4 @@
-import * as t from '../actionTypes'
+import * as t from '../action-types'
 import reducer, { initialState } from './mobilizations'
 
 describe('reducers/mobilizations', () => {
@@ -81,7 +81,7 @@ describe('reducers/mobilizations', () => {
 
   describe('doing select', () => {
     it('#SELECT_MOBILIZATION', () => {
-      const state = {
+      const state: any = {
         ...initialState,
         isLoaded: true,
         data: [
@@ -91,7 +91,7 @@ describe('reducers/mobilizations', () => {
       }
       const payload = 1
       const action = { type: t.SELECT_MOBILIZATION, payload }
-      let nextState = reducer(state, action)
+      const nextState = reducer(state, action)
       expect(nextState).toEqual({
         ...state,
         currentId: payload,
@@ -105,7 +105,7 @@ describe('reducers/mobilizations', () => {
       { id: 1, name: 'Lorem' },
       { id: 2, name: 'Ipsum' }
     ]
-    const loadedState = { ...initialState, isLoaded: true, data }
+    const loadedState: any = { ...initialState, isLoaded: true, data }
 
     it('#UPDATE_MOBILIZATION_REQUEST', () => {
       const action = { type: t.UPDATE_MOBILIZATION_REQUEST }

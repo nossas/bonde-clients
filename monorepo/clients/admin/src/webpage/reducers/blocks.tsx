@@ -1,10 +1,16 @@
-import * as t from '../actionTypes'
+import * as t from '../action-types'
+
+export interface Block {
+  id: number;
+  position: number;
+  mobilization_id: number;
+}
 
 export interface StateBlocks {
   isLoaded: boolean;
   fetching: boolean;
   saving: boolean;
-  data: any[];
+  data: Block[];
   error?: any;
 }
 
@@ -16,7 +22,7 @@ export const initialState = {
   error: undefined
 }
 
-export default (state: StateBlocks = initialState, action: any = {}) => {
+export default (state: StateBlocks = initialState, action: any = {}): StateBlocks => {
   switch (action.type) {
     case t.FETCH_BLOCKS_REQUEST:
     case t.FILTER_BLOCK_REQUEST:
@@ -74,13 +80,14 @@ export default (state: StateBlocks = initialState, action: any = {}) => {
         error: action.payload
       }
     case t.UPDATE_BLOCK_BATCH:
+      // eslint-disable-next-line no-case-declarations
       const payload = action.payload.blocks.blocks
       return {...state,
         saving: false,
         data: state.data.map(b => {
           const block = payload.find(u => u.id === b.id)
           if (block) return block
-          else return b
+          return b
         })
       }
     case t.SELECT_MOBILIZATION:

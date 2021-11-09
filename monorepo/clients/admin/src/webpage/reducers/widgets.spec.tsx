@@ -1,4 +1,4 @@
-import * as t from '../actionTypes';
+import * as t from '../action-types';
 import reducer, { initialState } from './widgets';
 
 describe('mobrender/redux/reducers/widgets', () => {
@@ -49,7 +49,7 @@ describe('mobrender/redux/reducers/widgets', () => {
   })
 
   describe('doing update', () => {
-    const fetchState = {
+    const fetchState: any = {
       ...initialState,
       isLoaded: true,
       data: [
@@ -58,7 +58,7 @@ describe('mobrender/redux/reducers/widgets', () => {
       ]
     }
 
-    const fetchRequestState = {
+    const fetchRequestState: any = {
       ...fetchState,
       saving: true
     }
@@ -78,7 +78,7 @@ describe('mobrender/redux/reducers/widgets', () => {
         saving: false,
         data: fetchRequestState.data.map(w => {
           if (w.id === widget.id) return widget
-          else return w
+          return w
         })
       })
     })
@@ -97,7 +97,7 @@ describe('mobrender/redux/reducers/widgets', () => {
 
   describe('doing add widgets', () => {
     it('success', () => {
-      const fetchState = {
+      const fetchState: any = {
         ...initialState,
         isLoaded: true,
         data: [
@@ -141,7 +141,7 @@ describe('mobrender/redux/reducers/widgets', () => {
   })
 
   it('should reset widgets reducer when SELECT_MOBILIZATION', () => {
-    const fetchState = {
+    const fetchState: any = {
       ...initialState,
       isLoaded: true,
       data: [

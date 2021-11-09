@@ -5,6 +5,7 @@ import type { State as StateApp } from "./reducers";
 
 export interface Action {
   type: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   payload?: any;
 }
 
@@ -18,16 +19,19 @@ export const applicationContext = createContext<IApplicationContext>({
   dispatch: (action) => console.log("application -> ", action)
 });
 
+// eslint-disable-next-line react/prop-types
 const Application: React.FC = ({ children }) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const [state, dispatch] = useReducer<Reducer<StateApp, Action>>(appReducer, initialState);
 
   return (
+    // eslint-disable-next-line react/jsx-no-constructed-context-values
     <applicationContext.Provider value={{ state, dispatch }}>
       {children}
     </applicationContext.Provider>
   );
 }
 
-export const useAppState = () => useContext(applicationContext);
+export const useAppState = (): IApplicationContext => useContext(applicationContext);
 
 export default Application;

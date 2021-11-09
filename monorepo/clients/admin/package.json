@@ -71,6 +71,7 @@
 		"react-draggable": "^4.4.4",
 		"react-fontawesome": "^1.7.1",
 		"react-ga": "2.5.6",
+		"react-google-font-loader": "^1.1.0",
 		"react-helmet": "^5.2.0",
 		"react-i18next": "^11.13.0",
 		"react-intl": "2.7.2",

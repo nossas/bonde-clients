@@ -1,6 +1,6 @@
 import { render } from 'react-dom';
 import Application from "./Application";
-import Mobilization from "./components/Mobilization";
+import Mobilization from "./components/Page";
 
 const Main = () => (
   <Application>

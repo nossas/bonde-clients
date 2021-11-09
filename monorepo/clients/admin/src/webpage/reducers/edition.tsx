@@ -1,8 +1,8 @@
-import * as t from '../actionTypes'
+import * as t from '../action-types'
 
 export interface StateEdition {
   isEditing: boolean;
-  mode?: any
+  mode?: string;
 }
 
 export const initialState = {
@@ -10,7 +10,8 @@ export const initialState = {
   mode: undefined
 }
 
-export default (state: StateEdition = initialState, action: any = {}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default (state: StateEdition = initialState, action: any = {}): StateEdition => {
   switch (action.type) {
     case t.TURN_ON_EDITION:
       return {...state,

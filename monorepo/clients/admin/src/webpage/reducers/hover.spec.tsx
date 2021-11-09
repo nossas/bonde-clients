@@ -1,4 +1,4 @@
-import * as t from '../actionTypes'
+import * as t from '../action-types'
 import reducer, { initialState } from './hover'
 
 describe('mobrender/redux/reducers/hover', () => {

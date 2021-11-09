@@ -1,11 +1,20 @@
-import * as t from '../actionTypes'
+import * as t from '../action-types'
+
+export interface Widget {
+  id: number;
+  kind: 'content' | 'donation' | 'draft' | 'form' | 'pressure-phone' | 'pressure';
+  block_id: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  settings?: any;
+}
 
 export interface StateWidgets {
   currentId?: number;
   isLoaded: boolean;
   fetching: boolean;
   saving: boolean;
-  data: any[];
+  data: Widget[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   error?: any;
 }
 
@@ -18,14 +27,15 @@ export const initialState = {
   error: undefined
 }
 
-const getWidget = (widget) => {
-  if(widget.settings && widget.settings.fields) {
-    console.log("getWidget::fields -> ", widget.settings.fields);
+const getWidget = (widget: Widget): Widget => {
+  if(widget.settings?.fields) {
+    console.log("getWidget::fields ->", widget.settings.fields);
     return {
       ...widget,
       settings: {
         ...widget.settings,
         // Entender melhor se os campos fields vem como string
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         fields: JSON.parse(widget.settings.fields)
       }
     }
@@ -33,7 +43,8 @@ const getWidget = (widget) => {
   return widget
 }
 
-export default (state: StateWidgets = initialState, action: any = {}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default (state: StateWidgets = initialState, action: any = {}): StateWidgets => {
   switch (action.type) {
     case t.SELECT_WIDGET:
       return { ...state, currentId: action.payload }
@@ -48,7 +59,7 @@ export default (state: StateWidgets = initialState, action: any = {}) => {
       return {...state,
         isLoaded: true,
         fetching: false,
-        data: action.payload.map(getWidget)
+        data: action.payload.map((element: Widget) => getWidget(element))
       }
     case t.FETCH_WIDGETS_FAILURE:
     case t.FILTER_WIDGETS_FAILURE:
@@ -67,7 +78,7 @@ export default (state: StateWidgets = initialState, action: any = {}) => {
       return {...state,
         saving: false,
         data: state.data.map(
-          w => w.id === action.payload.id ? getWidget(action.payload) : w
+          w => w.id === action.payload.id ? getWidget(action.payload as Widget) : w
         )
       }
     case t.UPDATE_WIDGET_FAILURE:
@@ -78,7 +89,7 @@ export default (state: StateWidgets = initialState, action: any = {}) => {
       }
     case t.ADD_WIDGETS_SUCCESS:
       return {...state,
-        data: [...state.data, ...getWidget(action.payload)]
+        data: [...state.data, ...(action.payload as Widget[]).map((element) => getWidget(element))]
       }
     case t.SET_WIDGET_LIST:
       return { ...state, data: action.payload }
