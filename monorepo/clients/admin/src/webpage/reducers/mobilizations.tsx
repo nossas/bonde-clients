@@ -3,7 +3,27 @@ import * as t from '../action-types'
 export interface Mobilization {
   id: number;
   name: string;
+  slug: string;
   status: 'active' | 'archived';
+  traefik_backend_address?: string;
+  traefik_host_rule?: string;
+  twitter_share_text?: string;
+  updated_at: string;
+  user_id: number;
+  language: string;
+  header_font?: string;
+  google_analytics_code?: string;
+  goal?: string;
+  favicon?: string;
+  facebook_share_title?: string;
+  facebook_share_image?: string;
+  facebook_share_description?: string;
+  deleted_at?: string;
+  custom_domain?: string;
+  created_at: string;
+  community_id: number;
+  color_scheme?: string;
+  body_font?: string;
 }
 
 export interface StateMobilizations {

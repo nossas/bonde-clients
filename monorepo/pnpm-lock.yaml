@@ -94,6 +94,8 @@ importers:
       font-awesome: ^4.7.0
       format-number: ^3.0.0
       framer-motion: '4'
+      graphql: ^16.0.1
+      graphql-request: ^3.6.1
       history: ^5.0.1
       husky: 7.0.4
       i18next: ^21.3.3
@@ -133,7 +135,7 @@ importers:
       react-redux: 5.0.7
       react-router: 4.3.1
       react-router-config: ^1.0.0-beta.4
-      react-router-dom: 4.3.1
+      react-router-dom: '6'
       react-s3-uploader: 4.8.0
       react-select-plus: 1.2.0
       react-test-renderer: 16.7.0
@@ -203,6 +205,8 @@ importers:
       font-awesome: 4.7.0
       format-number: 3.0.0
       framer-motion: 4.1.17_react-dom@17.0.2+react@17.0.2
+      graphql: 16.0.1
+      graphql-request: 3.6.1_graphql@16.0.1
       history: 5.0.1
       i18next: 21.3.3
       i18next-browser-languagedetector: 6.1.2
@@ -219,7 +223,7 @@ importers:
       rangy: 1.3.0
       raven-js: 3.27.2
       react: 17.0.2
-      react-apollo: 1.4.16_a5a5f18f70addf1d5a6cd53e5574c05a
+      react-apollo: 1.4.16_a51a802d56f69614596aaad37a7a86ec
       react-color: 2.14.1
       react-combine-reducers: 1.1.1
       react-cookie: 1.0.5
@@ -237,7 +241,7 @@ importers:
       react-redux: 5.0.7_react@17.0.2+redux@3.7.2
       react-router: 4.3.1_react@17.0.2
       react-router-config: 1.0.0-beta.4_react-router@4.3.1+react@17.0.2
-      react-router-dom: 4.3.1_react@17.0.2
+      react-router-dom: 6.0.1_react-dom@17.0.2+react@17.0.2
       react-s3-uploader: 4.8.0
       react-select-plus: 1.2.0_react-dom@17.0.2+react@17.0.2
       react-test-renderer: 16.7.0_react@17.0.2
@@ -11801,6 +11805,11 @@ packages:
       snapdragon: 0.8.2
       to-regex: 3.0.2
 
+  /extract-files/9.0.0:
+    resolution: {integrity: sha512-CvdFfHkC95B4bBBk36hcEmvdR2awOdhhVUYH6S/zrVj3477zven/fJMYg7121h4T1xHZC+tetUpubpAhxwI7hQ==}
+    engines: {node: ^10.17.0 || ^12.0.0 || >= 13.7.0}
+    dev: false
+
   /extract-zip/2.0.1_supports-color@8.1.1:
     resolution: {integrity: sha512-GDhU9ntwuKyGXdZBUgTIe+vXnWj0fppUEtMDL0+idd5Sta8TGpHssn/eusA9mrPr9qNDym6SxAYZjNvCn/9RBg==}
     engines: {node: '>= 10.17.0'}
@@ -12630,13 +12639,15 @@ packages:
     resolution: {integrity: sha1-PqDY6GRrXO5oA1AWqadVfBXCHpY=}
     dev: false
 
-  /graphql-tag/2.12.5:
-    resolution: {integrity: sha512-5xNhP4063d16Pz3HBtKprutsPrmHZi5IdUGOWRxA2B6VF7BIRGOHZ5WQvDmJXZuPcBg7rYwaFxvQYjqkSdR3TQ==}
-    engines: {node: '>=10'}
+  /graphql-request/3.6.1_graphql@16.0.1:
+    resolution: {integrity: sha512-Nm1EasrAQVZllyNTlHDLnLZjlhC6eRWnWP6KH//ytnAL08pjlLkdI2K+s6OV92p45hn5b/kUlLbDwACmRoLwrQ==}
     peerDependencies:
-      graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+      graphql: 14.x || 15.x
     dependencies:
-      tslib: 2.3.1
+      cross-fetch: 3.1.4
+      extract-files: 9.0.0
+      form-data: 3.0.1
+      graphql: 16.0.1
     dev: false
 
   /graphql-tag/2.12.5_graphql@0.10.5:
@@ -12659,6 +12670,16 @@ packages:
       tslib: 2.3.1
     dev: false
 
+  /graphql-tag/2.12.5_graphql@16.0.1:
+    resolution: {integrity: sha512-5xNhP4063d16Pz3HBtKprutsPrmHZi5IdUGOWRxA2B6VF7BIRGOHZ5WQvDmJXZuPcBg7rYwaFxvQYjqkSdR3TQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      graphql: ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+    dependencies:
+      graphql: 16.0.1
+      tslib: 2.3.1
+    dev: false
+
   /graphql/0.10.5:
     resolution: {integrity: sha512-Q7cx22DiLhwHsEfUnUip1Ww/Vfx7FS0w6+iHItNuN61+XpegHSa3k5U0+6M5BcpavQImBwFiy0z3uYwY7cXMLQ==}
     dependencies:
@@ -12668,6 +12689,11 @@ packages:
   /graphql/15.7.2:
     resolution: {integrity: sha512-AnnKk7hFQFmU/2I9YSQf3xw44ctnSFCfp3zE0N6W174gqe9fWG/2rKaKxROK7CcI3XtERpjEKFqts8o319Kf7A==}
     engines: {node: '>= 10.x'}
+    dev: false
+
+  /graphql/16.0.1:
+    resolution: {integrity: sha512-oPvCuu6dlLdiz8gZupJ47o1clgb72r1u8NDBcQYjcV6G/iEdmE11B1bBlkhXRvV0LisP/SXRFP7tT6AgaTjpzg==}
+    engines: {node: ^12.22.0 || ^14.16.0 || >=16.0.0}
     dev: false
 
   /growly/1.3.0:
@@ -12818,6 +12844,12 @@ packages:
 
   /history/5.0.1:
     resolution: {integrity: sha512-5qC/tFUKfVci5kzgRxZxN5Mf1CV8NmJx9ByaPX0YTLx5Vz3Svh7NYp6eA4CpDq4iA9D0C1t8BNIfvQIrUI3mVw==}
+    dependencies:
+      '@babel/runtime': 7.15.4
+    dev: false
+
+  /history/5.1.0:
+    resolution: {integrity: sha512-zPuQgPacm2vH2xdORvGGz1wQMuHSIB56yNAy5FnLuwOwgSYyPKptJtcMm6Ev+hRGeS+GzhbmRacHzvlESbFwDg==}
     dependencies:
       '@babel/runtime': 7.15.4
     dev: false
@@ -17716,7 +17748,7 @@ packages:
       strip-json-comments: 2.0.1
     dev: false
 
-  /react-apollo/1.4.16_a5a5f18f70addf1d5a6cd53e5574c05a:
+  /react-apollo/1.4.16_a51a802d56f69614596aaad37a7a86ec:
     resolution: {integrity: sha512-/Htq9zI/u/PpIdoH/qBU9Zty09U23biH585H52GvEF0m/kK9te9QFCnYfjKpB30DS6YleIk1uKNcqeK3HEfU6w==}
     peerDependencies:
       react: 0.14.x || 15.* || ^15.0.0 || ^16.0.0
@@ -17724,7 +17756,7 @@ packages:
     dependencies:
       apollo-client: 1.9.3
       enzyme-adapter-react-16: 1.15.6_fae758709a8810ba97b4c03852dde4d0
-      graphql-tag: 2.12.5
+      graphql-tag: 2.12.5_graphql@16.0.1
       hoist-non-react-statics: 2.5.5
       invariant: 2.2.4
       lodash.pick: 4.4.0
@@ -18268,20 +18300,6 @@ packages:
       react-router: 4.3.1_react@17.0.2
     dev: false
 
-  /react-router-dom/4.3.1_react@17.0.2:
-    resolution: {integrity: sha512-c/MlywfxDdCp7EnB7YfPMOfMD3tOtIjrQlj/CKfNMBxdmpJP8xcz5P/UAFn3JbnQCNUxsHyVVqllF9LhgVyFCA==}
-    peerDependencies:
-      react: '>=15'
-    dependencies:
-      history: 4.10.1
-      invariant: 2.2.4
-      loose-envify: 1.4.0
-      prop-types: 15.7.2
-      react: 17.0.2
-      react-router: 4.3.1_react@17.0.2
-      warning: 4.0.3
-    dev: false
-
   /react-router-dom/5.3.0_react@17.0.2:
     resolution: {integrity: sha512-ObVBLjUZsphUUMVycibxgMdh5jJ1e3o+KpAZBVeHcNQZ4W+uUGGWsokurzlF4YOldQYRQL4y6yFRWM4m3svmuQ==}
     peerDependencies:
@@ -18295,6 +18313,18 @@ packages:
       react-router: 5.2.1_react@17.0.2
       tiny-invariant: 1.1.0
       tiny-warning: 1.0.3
+    dev: false
+
+  /react-router-dom/6.0.1_react-dom@17.0.2+react@17.0.2:
+    resolution: {integrity: sha512-fiE+PzFTrof5q8Z/+RHzuiin9/U/q5KY2adlHClwYexbY0DqJnHcC/0U9yv3Amz9em2/bcK7X8mk7+zxB+qhvg==}
+    peerDependencies:
+      react: '>=16.8'
+      react-dom: '>=16.8'
+    dependencies:
+      history: 5.1.0
+      react: 17.0.2
+      react-dom: 17.0.2_react@17.0.2
+      react-router: 6.0.1_react@17.0.2
     dev: false
 
   /react-router/4.3.1_react@17.0.2:
@@ -18328,6 +18358,15 @@ packages:
       react-is: 16.13.1
       tiny-invariant: 1.1.0
       tiny-warning: 1.0.3
+    dev: false
+
+  /react-router/6.0.1_react@17.0.2:
+    resolution: {integrity: sha512-O3iab52icFnQaHWONZr50CcjRlf3gx8CCjPQ0YxN8xEuEklRJNgoZSeoYFYz0fLvA4cpnhc306Nd8BYgL4QZrQ==}
+    peerDependencies:
+      react: '>=16.8'
+    dependencies:
+      history: 5.1.0
+      react: 17.0.2
     dev: false
 
   /react-s3-uploader/4.8.0:

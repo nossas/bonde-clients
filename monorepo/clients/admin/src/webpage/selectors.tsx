@@ -19,7 +19,7 @@ export interface ISelectors {
   canMoveUp: () => boolean;
   canMoveDown: () => boolean;
   getUploadProgress: (key: string) => number;
-  getEditing: () => string[] | undefined;
+  getEditing: () => string | undefined;
   getBlockSaving: () => boolean;
   getWidgets: () => Widget[];
   getWidget: (id: number) => Widget | undefined;
@@ -95,7 +95,7 @@ export default (state: State, properties?: any): ISelectors => ({
 
   getUploadProgress: (key: string): number => state.uploader[key],
 
-  getEditing: (): string[] | undefined => {
+  getEditing: (): string | undefined => {
     const { edition } = state
     return edition.isEditing ? edition.mode : undefined
   },

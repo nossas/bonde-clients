@@ -4,6 +4,14 @@ export interface Block {
   id: number;
   position: number;
   mobilization_id: number;
+  bg_class?: string;
+  bg_image?: string;
+  created_at: string;
+  deleted_at: string;
+  hidden?: boolean | string;
+  menu_hidden?: boolean | string;
+  name?: string;
+  updated_at: string;
 }
 
 export interface StateBlocks {

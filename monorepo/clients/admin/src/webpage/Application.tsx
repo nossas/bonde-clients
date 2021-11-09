@@ -16,7 +16,7 @@ export interface IApplicationContext {
 
 export const applicationContext = createContext<IApplicationContext>({
   state: initialState,
-  dispatch: (action) => console.log("application -> ", action)
+  dispatch: (action) => console.log("application ->", action)
 });
 
 // eslint-disable-next-line react/prop-types
@@ -24,6 +24,7 @@ const Application: React.FC = ({ children }) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const [state, dispatch] = useReducer<Reducer<StateApp, Action>>(appReducer, initialState);
 
+  console.log("state", { state });
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <applicationContext.Provider value={{ state, dispatch }}>

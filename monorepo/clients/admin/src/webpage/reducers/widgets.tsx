@@ -3,6 +3,22 @@ import * as t from '../action-types'
 export interface Widget {
   id: number;
   kind: 'content' | 'donation' | 'draft' | 'form' | 'pressure-phone' | 'pressure';
+  created_at: string;
+  deleted_at?: string;
+  exported_at?: string;
+  goal?: string;
+  lg_size?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mailchimp_recurring_active_segment_id?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mailchimp_recurring_inactive_segment_id?: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mailchimp_segment_id?: any;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+  mailchimp_unique_segment_id: any;
+  md_size?: string;
+  sm_size?: string;
+  updated_at: string;
   block_id: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   settings?: any;

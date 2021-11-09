@@ -1,4 +1,8 @@
+import { useEffect } from 'react';
 import GoogleFontLoader from 'react-google-font-loader';
+import { useAppState } from '../Application';
+import fetchMobilizations from '../async-actions/fetch-mobilizations';
+import Mobilization from "./mobilization";
 
 const fonts = [
   { font: 'Armata', weights: ['regular'] },
@@ -38,11 +42,20 @@ const fonts = [
   }
 ]
 
-const Page: React.FC = () => (
-  <>
-    <GoogleFontLoader fonts={fonts} />
-    <div />
-  </>
-);
+const Page: React.FC = () => {
+  const { state, dispatch } = useAppState();
+  
+  useEffect(() => {
+    fetchMobilizations(state, dispatch)();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  return (
+    <>
+      <GoogleFontLoader fonts={fonts} />
+      <Mobilization />
+    </>
+  );
+}
 
 export default Page;
