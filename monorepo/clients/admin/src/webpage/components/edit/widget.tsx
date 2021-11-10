@@ -37,8 +37,6 @@ const WidgetFC = ({
     `sm-col-${smSize} md-col-${mdSize} lg-col-${lgSize}`
   )
 
-  // const widgetFilter = /
-  // const widgetConfig = widgets(mobilization, widget, { intl }).find(w: => w.kind === kind)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const widgetConfig: any = widgetsPlugins(mobilization, widget, {
     intl: {
@@ -65,18 +63,18 @@ const WidgetFC = ({
             // }
           }}
           onDelete={(): void => {
-            console.log("onDelete widget");
-            // const message = intl.formatMessage({
+            const message = 'Deseja remover o widget?';
+            // intl.formatMessage({
             //   id: 'c--content-widget.delete-widget.confirm.message',
             //   defaultMessage: 'Deseja remover o widget?'
             // })
-            // if (window.confirm(message)) {
-            //   update({
-            //     ...widget,
-            //     settings: undefined,
-            //     kind: 'draft'
-            //   })
-            // }
+            if (window.confirm(message)) {
+              update({
+                ...widget,
+                settings: {},
+                kind: 'draft'
+              })
+            }
           }}
         >
           <WrapperComponent

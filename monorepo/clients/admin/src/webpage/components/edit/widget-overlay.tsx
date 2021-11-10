@@ -1,5 +1,15 @@
-import PropTypes from 'prop-types'
+import type { Widget } from "../../reducers";
 
+interface WidgetOverlayProperties {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  children: any;
+  widget: Widget;
+  onDelete: () => void;
+  onEdit: () => void;
+  hasMouseOver: boolean;
+  onMouseOver: (key: string, id: number) => void
+  onMouseOut: (key: string) => void
+}
 
 const overlayStyle = {
   position: 'absolute',
@@ -22,12 +32,12 @@ const WidgetOverlay = ({
   onMouseOver,
   onMouseOut,
   hasMouseOver
-}) => (
+}: WidgetOverlayProperties): React.ReactElement => (
   <div
     className='relative overlay'
     style={{ cursor: 'pointer' }}
-    onMouseEnter={() => onMouseOver('widget', widget.id)}
-    onMouseLeave={() => onMouseOut('widget')}
+    onMouseEnter={(): void => onMouseOver('widget', widget.id)}
+    onMouseLeave={(): void => onMouseOut('widget')}
   >
     {children}
     {hasMouseOver ? (
@@ -35,6 +45,7 @@ const WidgetOverlay = ({
         <div className='table full-height col-12 center'>
           <div className='white table-cell align-middle'>
             <button
+              type="button"
               className='btn m1 btn-edit'
               onClick={onEdit}
               title='Editar'
@@ -42,6 +53,7 @@ const WidgetOverlay = ({
               <i className='fa fa-edit' />
             </button>
             <button
+              type="button"
               className='btn m1 btn-remove'
               onClick={onDelete}
               title='Remover'
@@ -51,17 +63,8 @@ const WidgetOverlay = ({
           </div>
         </div>
       </div>
-    ) : null}
+    ) : undefined}
   </div>
-)
-
-WidgetOverlay.propTypes = {
-  widget: PropTypes.object,
-  onClick: PropTypes.func,
-  // Injected by react-redux
-  hasMouseOver: PropTypes.bool,
-  onMouseOver: PropTypes.func,
-  onMouseOut: PropTypes.func
-}
+);
 
 export default WidgetOverlay

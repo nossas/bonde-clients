@@ -1,11 +1,11 @@
-// import { asyncUpdateBlock } from '../redux/action-creators'
 import { EDIT_KEY } from './block-config-menu'
 import { useAppState } from '../../Application';
 import Selectors from '../../selectors';
+import { asyncUpdateBlock } from '../../async-actions';
 import Mobilization from './mobilization'
 
 export default (properties: any): React.ReactElement => {
-  const { state } = useAppState();
+  const { state, dispatch } = useAppState();
   const selectors = Selectors(state);
   const editing = selectors.getEditing();
   
@@ -15,8 +15,7 @@ export default (properties: any): React.ReactElement => {
     blocksIsLoaded: selectors.blocksIsLoaded(),
     widgets: selectors.getWidgets(),
     blockEditionMode: editing ? editing.includes(EDIT_KEY) : false,
-    blockUpdate: () => console.log("blockUpdate")
-    // blockUpdate: asyncUpdateBlock
+    blockUpdate: asyncUpdateBlock(dispatch)
   }
 
   // eslint-disable-next-line react/jsx-props-no-spreading
