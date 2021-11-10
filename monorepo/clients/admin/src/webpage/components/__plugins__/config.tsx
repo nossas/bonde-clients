@@ -1,5 +1,5 @@
 import { Draft } from './draft/components';
-// import Pressure from './pressure/components'
+import Pressure from './pressure/components'
 import Form from './form/components'
 import Content from './content/components'
 // import Donation from './donation/components'
@@ -55,7 +55,7 @@ export default (mobilization: any, widget: any, { intl }: any): any[] => [
     // redirect: Paths.formMobilizationWidget(mobilization.id, widget.id)
   },
   {
-    component: DummyComponent,
+    component: Pressure,
     kind: 'pressure',
     // TODO: propriedades relacionadas ao draft
     svgIcon: PressureEmailIcon,
