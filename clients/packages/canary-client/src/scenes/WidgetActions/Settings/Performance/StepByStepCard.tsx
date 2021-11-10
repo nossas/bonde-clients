@@ -1,6 +1,7 @@
 import React from "react";
-import { Stack, Box, Button, Heading, Text, Flex } from "bonde-components";
+import { Stack, Box, Button, Heading, Text } from "bonde-components";
 import { useLocation, Link } from "react-router-dom";
+import CheckIcon from "../../../../Icons/CheckIcon";
 
 interface Props {
   stepsValidation: boolean[]
@@ -31,12 +32,12 @@ const StepByStepCard: React.FC<Props> = ({ stepsValidation }) => {
           Para começar, lembre-se de:
         </Text>
       </Stack>
-      <Stack direction="row" spacing={45}>
+      <Stack direction="row" spacing={4}>
         <Box maxW={60}>
           <Text fontSize="18px">
             1 - Definir os <b>alvos</b> da sua campanha (quem você quer pressionar) e o conteúdo do e-mail que será enviado para eles;
           </Text>
-          <Flex>
+          <Stack direction="row" spacing={1}>
             <Button
               as={Link}
               variant="ghost"
@@ -47,16 +48,16 @@ const StepByStepCard: React.FC<Props> = ({ stepsValidation }) => {
               Definir alvos
             </Button>
             {!stepsValidation[0] && (
-              <Text>Checked</Text>
+              <CheckIcon />
             )}
-          </Flex>
+          </Stack>
         </Box>
 
         <Box maxW={60}>
           <Text fontSize="18px">
             2 - Ajustar o <b>formulário</b> para deixá-lo do jeitinho da sua campanha;
           </Text>
-          <Flex>
+          <Stack direction="row" spacing={1}>
             <Button
               as={Link}
               variant="ghost"
@@ -66,16 +67,16 @@ const StepByStepCard: React.FC<Props> = ({ stepsValidation }) => {
               Ajustar formulário
             </Button>
             {!stepsValidation[1] && (
-              <Text>Checked</Text>
+              <CheckIcon />
             )}
-          </Flex>
+          </Stack>
         </Box>
 
         <Box maxW={60}>
           <Text fontSize="18px">
             3 - Escrever o <b>e-mail de agradecimento</b> que vai ser enviado para quem agir na sua campanha.
           </Text>
-          <Flex>
+          <Stack direction="row" spacing={1}>
             <Button
               as={Link}
               variant="ghost"
@@ -85,9 +86,9 @@ const StepByStepCard: React.FC<Props> = ({ stepsValidation }) => {
               Escrever e-mail
             </Button>
             {!stepsValidation[2] && (
-              <Text>Checked</Text>
+              <CheckIcon />
             )}
-          </Flex>
+          </Stack>
         </Box>
       </Stack>
     </Stack >
