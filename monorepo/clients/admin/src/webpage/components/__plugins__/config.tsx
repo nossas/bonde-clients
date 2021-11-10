@@ -1,6 +1,6 @@
 import { Draft } from './draft/components';
 // import Pressure from './pressure/components'
-// import Form from './form/components'
+import Form from './form/components'
 import Content from './content/components'
 // import Donation from './donation/components'
 import { PressureEmailIcon, PressurePhoneIcon } from './icons';
@@ -37,7 +37,7 @@ export default (mobilization: any, widget: any, { intl }: any): any[] => [
     }
   },
   {
-    component: DummyComponent,
+    component: Form,
     kind: 'form',
     // TODO: propriedades relacionadas ao draft
     icon: 'list',

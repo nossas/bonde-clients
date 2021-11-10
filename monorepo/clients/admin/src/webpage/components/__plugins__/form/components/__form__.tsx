@@ -1,77 +1,38 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
 import CountUp from 'react-countup'
-import { intlShape } from 'react-intl'
-import { Button, FormTellAFriend, Input } from '.'
-import { Error } from '../../../../../components/form-util'
-import { isValidEmail } from '../../../../../utils/validation-helper'
-import { FinishMessageCustom } from "../../../components"
-import AnalyticsEvents from "../../../utils/analytics-events"
+import type { Mobilization, Widget } from "../../../../reducers";
+import Button from './button';
+import Input from "./input";
 
+interface FormProperties {
+  mobilization: Mobilization;
+  widget: Widget;
+  block: any;
+  editable: boolean;
+  configurable: boolean;
+  hasNewField: boolean;
+  intl: any
+}
 
-class Form extends React.Component {
+class Form extends React.Component<FormProperties, any> {
   constructor(properties, context) {
     super(properties, context)
     this.state = {
       hasMouseOver: false,
-      loading: false,
-      success: false,
-      errors: []
     }
   }
 
-  componentWillReceiveProps() {
-    if (this.state.loading) {
-      this.setState({ loading: false, success: true })
-    }
+  fields(): any[] {
+    const { settings } = this.props.widget;
+    // eslint-disable-next-line react/prop-types
+    return (settings?.fields ? settings.fields : [])
   }
 
-  fields() {
-    const { settings } = this.props.widget
-    return (settings && settings.fields ? settings.fields : [])
-  }
-
-  submit() {
-    if (!this.props.editable) {
-      const { asyncFormEntryCreate, mobilization, widget } = this.props
-
-      const fieldsWithValue = widget.settings.fields.map(field => ({
-        ...field,
-        value: document.querySelector(`#input-${field.uid}`).value
-      }))
-      const errors = this.validate(fieldsWithValue)
-      this.setState({ errors })
-
-      if (errors.length === 0) {
-        this.setState({ loading: true })
-        const formEntry = {
-          widget_id: widget.id,
-          fields: JSON.stringify(fieldsWithValue)
-        }
-        asyncFormEntryCreate({ mobilization, formEntry }).then(() => {
-          this.setState({ loading: false, success: true })
-        })
-      }
-    }
-  }
-
-  validate(fieldsWithValue) {
-    const errors = []
-    for (const field of fieldsWithValue) {
-      if (field.required === 'true' && field.value === '') {
-        errors.push(`${field.label} não pode ficar em branco`)
-      } else if (field.value !== '' && field.kind === 'email' && !isValidEmail(field.value)) {
-        errors.push(`${field.label} inválido`)
-      }
-    }
-    return errors
-  }
-
-  renderCallToAction() {
+  renderCallToAction(): React.ReactElement | undefined {
     const { configurable, widget, mobilization: { header_font: headerFont }, intl } = this.props
     const callToAction = (
-      widget.settings && widget.settings.call_to_action
+      widget.settings?.call_to_action
         ? widget.settings.call_to_action
         : intl.formatMessage({
           id: 'form-widget.components--form.default.title-text',
@@ -79,7 +40,7 @@ class Form extends React.Component {
         })
     ).replace('\n', '<br/><br/>')
 
-    return configurable ? null : (
+    return configurable ? undefined : (
       <h2
         className='mt0 mb3 center white'
         dangerouslySetInnerHTML={{ __html: callToAction }}
@@ -88,48 +49,39 @@ class Form extends React.Component {
     )
   }
 
-  renderFields() {
+  renderFields(): React.ReactElement[] {
     const fields = this.fields()
     return fields.map((field, index) => (
       <Input
         {...this.props}
         key={field.uid}
         uid={field.uid}
-        onBlur={(Number(index) === 0 ? AnalyticsEvents.formIsFilled.bind(AnalyticsEvents) : () => { })}
         canMoveUp={index !== 0}
         canMoveDown={index !== fields.length - 1}
-        initializeEditing={this.props.hasNewField && index === fields.length - 1}
         field={field}
       />
     ))
   }
 
-  renderButton() {
-    const { configurable, widget, intl } = this.props
-    const { loading, success } = this.state
-
-    if (!configurable) {
-      return (
-        <Button
-          {...this.props}
-          buttonText={
-            (widget.settings && widget.settings.button_text) ||
-            intl.formatMessage({
-              id: 'form-widget.components--form.default.button-text',
-              defaultMessage: 'Enviar'
-            })
-          }
-          handleClick={this.submit.bind(this)}
-          loading={loading}
-          success={success}
-        />
-      )
-    }
+  renderButton(): React.ReactElement {
+    const { widget, intl, mobilization } = this.props;
+    return (
+      <Button
+        mobilization={mobilization}
+        buttonText={
+          (widget.settings?.button_text) ||
+          intl.formatMessage({
+            id: 'form-widget.components--form.default.button-text',
+            defaultMessage: 'Enviar'
+          })
+        }
+      />
+    )
   }
 
-  renderCount() {
-    const { widget: { settings } } = this.props
-    if (!this.props.configurable && settings && settings.count_text) {
+  renderCount(): React.ReactElement | undefined {
+    const { widget: { settings }, configurable } = this.props
+    if (!configurable && settings && settings.count_text) {
       const {
         block: { scrollTopReached: startCounting },
         widget: { form_entries_count: count },
@@ -150,43 +102,13 @@ class Form extends React.Component {
     }
   }
 
-  renderErrors() {
-    const { errors } = this.state
-
-    return errors.length > 0 && (
-      <div>{errors.map(error => <Error message={error} />)}</div>
-    )
-  }
-
-  renderShareButtons() {
-    const fields = this.fields()
-    let message = ''
-    fields.map((field) => {
-      if (field.kind === 'greetings') {
-        message = field.placeholder
-      }
-      return message
-    })
-    if (message === '') {
-      const { mobilization, widget } = this.props
-      const { settings: { finish_message_type: finishMessageType } } = widget
-      return finishMessageType === 'custom' ? (
-        <FinishMessageCustom widget={widget} />
-      ) : (
-        <FormTellAFriend mobilization={mobilization} widget={widget} />
-      )
-    }
-    return <p className='center p2 bg-darken-3'>{message}</p>
-
-  }
-
-  renderForm() {
+  renderForm(): React.ReactElement {
     const {
       editable,
       configurable,
       widget: { settings }
     } = this.props
-    const backgroundColor = settings && settings.main_color
+    const backgroundColor = settings?.main_color
       ? settings.main_color
       : 'rgba(0,0,0,0.25)'
 
@@ -201,37 +123,24 @@ class Form extends React.Component {
         >
           {this.renderCallToAction()}
           {this.renderFields()}
-          {this.renderErrors()}
+          {/* {this.renderErrors()} */}
           {this.renderButton()}
         </div>
       </div>
     )
   }
 
-  render() {
+  render(): React.ReactElement {
     const { mobilization: { header_font: headerFont } } = this.props
-    const { success } = this.state
 
     return (
+      // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
       <div className={`widget ${headerFont}-header`}>
-        {success ? this.renderShareButtons() : this.renderForm()}
+        {this.renderForm()}
         {this.renderCount()}
       </div>
     )
   }
-}
-
-Form.propTypes = {
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.shape({
-    settings: PropTypes.shape({
-      finish_message_type: PropTypes.string
-    }).isRequired
-  }).isRequired,
-  editable: PropTypes.bool,
-  configurable: PropTypes.bool,
-  hasNewField: PropTypes.bool,
-  intl: intlShape
 }
 
 export default Form

@@ -1,32 +1,25 @@
-import PropTypes from 'prop-types'
+import type { Mobilization } from "../../../../reducers";
 
+interface ButtonProperties {
+  mobilization: Mobilization
+  // eslint-disable-next-line react/require-default-props
+  handleClick?: () => void
+  buttonText: React.ReactElement | string
+}
 
 const Button = ({
-  success,
   buttonText,
-  loading,
   handleClick,
   mobilization: { body_font: bodyFont }
-}) => (
+}: ButtonProperties): React.ReactElement => (
   <div style={{ fontFamily: bodyFont }}>
     <button
-      disabled={loading}
+      type="button"
       className='caps btn bg-darken-4 p2 col-12 mt1 mb2 rounded white'
       onClick={handleClick}>
-      {loading ? 'Enviando...' : buttonText}
+      {buttonText}
     </button>
-    {success && (
-      <div className='center'>Sua ação foi registrada com sucesso!</div>
-    )}
   </div>
 )
-
-Button.propTypes = {
-  success: PropTypes.bool.isRequired,
-  buttonText: PropTypes.string,
-  loading: PropTypes.bool.isRequired,
-  handleClick: PropTypes.func.isRequired,
-  mobilization: PropTypes.object.isRequired
-}
 
 export default Button
