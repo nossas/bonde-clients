@@ -1,13 +1,15 @@
-import { Draft } from './draft/components'
-import {
-  Pressure,
-  Form,
-  Content,
-  Donation
-} from '../../mobilizations/widgets/__plugins__'
-import { PressureEmailIcon, PressurePhoneIcon } from './icons'
-import { createEditorContent } from '../../mobilizations/widgets/__plugins__/content/components/editor-slate'
-import * as Paths from '../../paths'
+import { Draft } from './draft/components';
+// import Pressure from './pressure/components'
+// import Form from './form/components'
+import Content from './content/components'
+// import Donation from './donation/components'
+import { PressureEmailIcon, PressurePhoneIcon } from './icons';
+import { createEditorContent } from './content/components/editor-slate'
+// import * as Paths from '../../paths'
+
+const DummyComponent = ({ widget }: any) => (
+  <p>{widget.kind}</p>
+)
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (mobilization: any, widget: any, { intl }: any): any[] => [
@@ -35,7 +37,7 @@ export default (mobilization: any, widget: any, { intl }: any): any[] => [
     }
   },
   {
-    component: Form,
+    component: DummyComponent,
     kind: 'form',
     // TODO: propriedades relacionadas ao draft
     icon: 'list',
@@ -49,10 +51,11 @@ export default (mobilization: any, widget: any, { intl }: any): any[] => [
         defaultMessage: 'Obrigado por apostar na força da ação coletiva! Sua participação é muito importante e, agora, precisamos da sua ajuda para potencializar nosso impacto. Compartilhe nas suas redes clicando em um dos links abaixo.\n\nUm abraço'
       })
     },
-    redirect: Paths.formMobilizationWidget(mobilization.id, widget.id)
+    redirect: "/form"
+    // redirect: Paths.formMobilizationWidget(mobilization.id, widget.id)
   },
   {
-    component: Pressure,
+    component: DummyComponent,
     kind: 'pressure',
     // TODO: propriedades relacionadas ao draft
     svgIcon: PressureEmailIcon,
@@ -72,10 +75,11 @@ export default (mobilization: any, widget: any, { intl }: any): any[] => [
       })
       /* reply_email: user.email */
     },
-    redirect: Paths.pressure(mobilization.id, widget.id)
+    redirect: "/pressure"
+    // redirect: Paths.pressure(mobilization.id, widget.id)
   },
   {
-    component: Pressure,
+    component: DummyComponent,
     kind: 'pressure-phone',
     // TODO: propriedades relacionadas ao draft
     svgIcon: PressurePhoneIcon,
@@ -94,10 +98,11 @@ export default (mobilization: any, widget: any, { intl }: any): any[] => [
         defaultMessage: 'Ligar'
       })
     },
-    redirect: Paths.pressure(mobilization.id, widget.id)
+    redirect: "/pressure"
+    // redirect: Paths.pressure(mobilization.id, widget.id)
   },
   {
-    component: Donation,
+    component: DummyComponent,
     kind: 'donation',
     // TODO: propriedades relacionadas ao draft
     icon: 'money',
@@ -116,6 +121,7 @@ export default (mobilization: any, widget: any, { intl }: any): any[] => [
         defaultMessage: 'Doar agora'
       })
     },
-    redirect: Paths.donation(mobilization.id, widget.id)
+    redirect: "/donation"
+    // redirect: Paths.donation(mobilization.id, widget.id)
   }
 ]

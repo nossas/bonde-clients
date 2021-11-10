@@ -3,41 +3,9 @@ import classnames from 'classnames'
 // import { intlShape } from 'react-intl'
 // import urljoin from 'url-join'
 import type { Block, Mobilization, Widget } from '../../reducers'
-// import widgets from '../widgets/config'
 // import { Loading } from './../../components/await'
 import WidgetOverlay from './widget-overlay.connected'
-
-const PluginComponent = ({ widget }: any): React.ReactElement => (
-  <p>Tipo: {widget.kind}</p>
-)
-
-const widgets = [
-  {
-    kind: "pressure",
-    redirect: "/pressure",
-    component: PluginComponent
-  },
-  {
-    kind: "donation",
-    redirect: "/donation",
-    component: PluginComponent
-  },
-  {
-    kind: "content",
-    redirect: "/content",
-    component: PluginComponent
-  },
-  {
-    kind: "form",
-    redirect: "/form",
-    component: PluginComponent
-  },
-  {
-    kind: "pressure-phone",
-    redirect: "/pressure-phone",
-    component: PluginComponent
-  }
-]
+import widgetsPlugins from "../__plugins__/config";
 
 export interface WidgetProperties {
   mobilization: Mobilization;
@@ -72,7 +40,12 @@ const WidgetFC = ({
   // const widgetFilter = /
   // const widgetConfig = widgets(mobilization, widget, { intl }).find(w: => w.kind === kind)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const widgetConfig: any = widgets.filter(w => w.kind === kind)[0];
+  const widgetConfig: any = widgetsPlugins(mobilization, widget, {
+    intl: {
+      formatMessage: ({ defaultMessage }) => defaultMessage
+    }
+  }).find(w => w.kind === kind);
+
   const { component: WrapperComponent, redirect } = widgetConfig
 
   return (
