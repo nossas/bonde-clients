@@ -88,12 +88,10 @@ export default (state: StateBlocks = initialState, action: any = {}): StateBlock
         error: action.payload
       }
     case t.UPDATE_BLOCK_BATCH:
-      // eslint-disable-next-line no-case-declarations
-      const payload = action.payload.blocks.blocks
       return {...state,
         saving: false,
         data: state.data.map(b => {
-          const block = payload.find(u => u.id === b.id)
+          const block = action.payload.find(u => u.id === b.id)
           if (block) return block
           return b
         })

@@ -25,10 +25,9 @@ const MobilizationFC: React.FC = () => {
     return <p>Loading....</p>;
   }
   return mobilization ? (
-    <>
-      <Link to="/">Voltar</Link>
-      <Mobilization />
-    </>
+    <div className="top-0 right-0 bottom-0 left-0 flex flex-column absolute">
+      <Mobilization editable />
+    </div>
   ) : (
     <ul>
       {mobilizations.map((m) =>

@@ -1,6 +1,7 @@
 // import { connect } from 'react-redux'
 import { useAppState } from '../../Application';
 import Selectors from '../../selectors';
+import { asyncMoveUp, asyncMoveDown } from '../../async-actions';
 // import { asyncMoveUp, asyncMoveDown, asyncUpdateBlock, handleEdit, asyncDestroyBlock } from '../redux/action-creators'
 import BlockConfigMenu from './block-config-menu'
 
@@ -22,15 +23,15 @@ import BlockConfigMenu from './block-config-menu'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default (properties: any): React.ReactElement => {
-  const { state } = useAppState();
+  const { state, dispatch } = useAppState();
   const selectors = Selectors(state, properties);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const configMenuProperites: any = {
     canMoveUp: selectors.canMoveUp(),
     canMoveDown: selectors.canMoveDown(),
-    moveUp: (): void => console.log("moveUp"),
-    moveDown: (): void => console.log("moveDown"),
+    moveUp: asyncMoveUp(dispatch, state),
+    moveDown: asyncMoveDown(dispatch, state),
     update: (): void => console.log("update"),
     onEdit: (): void => console.log("onEdit"),
     destroy: (): void => console.log("destroy")

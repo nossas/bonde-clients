@@ -4,7 +4,7 @@ import { useAppState } from '../../Application';
 import Selectors from '../../selectors';
 import Mobilization from './mobilization'
 
-export default (): React.ReactElement => {
+export default (properties: any): React.ReactElement => {
   const { state } = useAppState();
   const selectors = Selectors(state);
   const editing = selectors.getEditing();
@@ -20,5 +20,5 @@ export default (): React.ReactElement => {
   }
 
   // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Mobilization {...mobilizationProperties} />
+  return <Mobilization {...properties} {...mobilizationProperties} />
 }

@@ -97,7 +97,7 @@ export class NavbarEditionWrapper extends React.Component<INavbarEditionWrapper,
 
   // eslint-disable-next-line class-methods-use-this
   blockName(block): string {
-    return block.name || `Bloco {block.position}`;
+    return block.name || `Bloco ${block.position}`;
     
     // this.props.intl.formatMessage({
     //   id: 'components.navigation--navbar-edition-wrapper.block',
