@@ -62,7 +62,7 @@ const EventsCards: React.FC<Props> = ({ aggregateEvents }) => {
           />
           <PercentageLabel
             label="Bloqueados"
-            helpText="O e-mail do alvo está correto, mas foi bloqueado porque ele se desinscreveu ou porque muitos emails foram marcados como spam."
+            helpText="Pode ocorrer porque o alvo se desinscreveu, porque muitos e-mails foram marcados como spam ou porque o servidor do alvo bloqueou."
             value={droppedPercetage}
           />
           <PercentageLabel
