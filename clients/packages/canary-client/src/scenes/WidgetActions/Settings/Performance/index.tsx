@@ -63,7 +63,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
   } = data;
 
   const hasntEventHistory = firstEventTimestamp > widgetCreatedAt && aggregateEvents.length === 0;
-  
+
   // Alvos
   const step1 = activeTargets.length === 0;
   // Ajustes
@@ -79,7 +79,9 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
           widgetCreatedAt={widgetCreatedAt}
         />
       )}
-      <StepByStepCard stepsValidation={[step1, step2, step3]} />
+      {pressuresCount === 0 && (
+        <StepByStepCard stepsValidation={[step1, step2, step3]} />
+      )}
       <Stack direction="row" spacing={4}>
         <Stack direction="column" spacing={6}>
           <BondePressureCards targetsCount={activeTargets.length} pressuresCount={pressuresCount} />
