@@ -1,13 +1,13 @@
 import classnames from 'classnames'
-// import PropTypes from 'prop-types'
 import React from 'react'
 // import { injectIntl, intlShape } from 'react-intl'
-import { NavbarButton, NavbarForm } from '.'
+import NavbarButton from "./navbar-button";
+import NavbarForm from './navbar-form';
 
-interface INavbarEditionWrapper {
+export interface INavbarEditionWrapper {
   block: any;
-  dispatch: (action: any) => void;
-  auth: any;
+  editable?: boolean;
+  blockUpdate: (block: any) => void;
   // eslint-disable-next-line unicorn/no-keyword-prefix
   className?: string;
   // intl: intlShape.isRequired
@@ -31,7 +31,7 @@ export class NavbarEditionWrapper extends React.Component<INavbarEditionWrapper,
   }
 
   handleHideButtonClick(): void {
-    this.refs.hideButton.blur()
+    (this.refs.hideButton as any).blur()
     const { blockUpdate, block } = this.props
     blockUpdate({ ...block, menu_hidden: !block.menu_hidden })
   }

@@ -1,8 +1,15 @@
 import { EditorState } from 'draft-js'
-import PropTypes from 'prop-types'
 import React from 'react'
 
-export default class HistoryControls extends React.Component {
+interface HistoryControlsProperties {
+  editorState: any;
+  setEditorState: (editorState: any) => void
+  focusEditor: () => void;
+  buttonClassName?: string;
+  popoverClassName?: string;
+}
+
+export default class HistoryControls extends React.Component<HistoryControlsProperties> {
   handleUndoClick() {
     const { editorState, setEditorState } = this.props
 
@@ -34,11 +41,4 @@ export default class HistoryControls extends React.Component {
       </div>
     )
   }
-}
-
-HistoryControls.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  setEditorState: PropTypes.func.isRequired,
-  focusEditor: PropTypes.func.isRequired,
-  buttonClassName: PropTypes.string
 }

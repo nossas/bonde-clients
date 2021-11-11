@@ -1,6 +1,3 @@
-import PropTypes from 'prop-types'
-
-
 const fonts = [
   'Abel', 'Anton', 'Archivo Narrow', 'Asap', 'Bree Serif',
   'Crimson Text', 'Cuprum', 'Exo', 'Exo 2', 'Fira Sans',
@@ -18,7 +15,12 @@ const fonts = [
   'Slabo 27px', 'Source Sans Pro', 'Ubuntu'
 ]
 
-const SelectFontFamily = props => (
+interface SelectFontFamilyProperties {
+  value: string;
+  onChange: (value: any) => void
+}
+
+const SelectFontFamily = (props: SelectFontFamilyProperties) => (
   <select {...props} className='font-controls-family select col col-8 h5'>
     <option value=''>Selecione uma fonte</option>
     {fonts.map(
@@ -26,10 +28,5 @@ const SelectFontFamily = props => (
     )}
   </select>
 )
-
-SelectFontFamily.propTypes = {
-  value: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired
-}
 
 export default SelectFontFamily

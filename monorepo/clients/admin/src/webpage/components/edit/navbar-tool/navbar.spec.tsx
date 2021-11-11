@@ -1,15 +1,26 @@
-import React from 'react'
 import { expect } from 'chai'
-
-import { mountWithIntl } from '../../../intl/helpers'
-import Navbar from '../../../mobrender/components/navbar'
-import MenuItems from '../../../mobrender/components/navbar/menu-items'
+import { mount } from "enzyme";
+// import { mountWithIntl } from '../../../intl/helpers'
+import Navbar from './navbar'
+import MenuItems from './menu-items'
 
 describe('client/mobrender/components/navbar', () => {
   let wrapper
-  const props = {
+  const status: 'active' | 'archived' = "active"
+  const properties = {
     editable: false,
-    mobilization: {},
+    mobilization: {
+      id: 1,
+      name: "mobs",
+      slug: "mobs",
+      status,
+      community_id: 1,
+      user_id: 1,
+      language: "pt-br",
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    },
+    blockUpdate: jest.fn(),
     blocks: [
       {
         id: 1,
@@ -29,7 +40,7 @@ describe('client/mobrender/components/navbar', () => {
   }
 
   beforeEach(() => {
-    wrapper = mountWithIntl(<Navbar {...props} />)
+    wrapper = mount(<Navbar {...properties} />)
   })
 
   it('renders absolute layout by default', () => {
@@ -47,7 +58,7 @@ describe('client/mobrender/components/navbar', () => {
     })
 
     it('should passed to <Menu /> visible blocks', () => {
-      const blocks = props.blocks.filter(b => !b.hidden)
+      const blocks = properties.blocks.filter(b => !b.hidden)
       wrapper.find(MenuItems).map(menu => {
         expect(menu.props().blocks).to.deep.equal(blocks)
       })
@@ -60,7 +71,7 @@ describe('client/mobrender/components/navbar', () => {
     })
 
     it('should passed to <Menu /> only visible blocks menu', () => {
-      const blocks = props.blocks.filter(b => !b.hidden && !b.menu_hidden)
+      const blocks = properties.blocks.filter(b => !b.hidden && !b.menu_hidden)
       wrapper.find(MenuItems).map(menu => {
         expect(menu.props().blocks).to.deep.equal(blocks)
       })

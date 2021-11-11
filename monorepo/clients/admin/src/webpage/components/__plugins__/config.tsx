@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Draft } from './draft/components';
 import Pressure from './pressure/components'
 import Form from './form/components'
 import Content from './content/components'
+import type { Kind } from "../../reducers";
 // import Donation from './donation/components'
 import { PressureEmailIcon, PressurePhoneIcon } from './icons';
 import { createEditorContent } from './content/components/editor-slate'
@@ -11,8 +13,18 @@ const DummyComponent = ({ widget }: any) => (
   <p>{widget.kind}</p>
 )
 
+interface IWidgetConfig {
+  component: any;
+  kind: Kind;
+  settings: any
+  svgIcon?: any;
+  icon?: string;
+  label?: string;
+  redirect?: string;
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default (mobilization: any, widget: any, { intl }: any): any[] => [
+export default (mobilization: any, widget: any, { intl }: any): IWidgetConfig[] => [
   {
     component: Draft,
     kind: 'draft',

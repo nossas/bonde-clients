@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import { CompositeDecorator, RichUtils } from 'draft-js'
-import PropTypes from 'prop-types'
 import React from 'react'
 import AlignmentControls from './AlignmentControls'
 import ColorControls, { customStyleFn as colorCustomStyleFunction } from './ColorControls'
@@ -10,10 +9,17 @@ import LinkControls, { decorator as linkDecorator } from './LinkControls'
 import MediaControls, { blockRendererFn as mediaBlockRendererFunction } from './MediaControls'
 import './styles.scss'
 
+interface ToolbarProperties {
+  editorState: any;
+  setEditorState: (editorState: any) => void
+  focusEditor: () => void
+  buttonClassName?: string;
+  popoverClassName?: string;
+  theme?: string;
+  style?: any;
+}
 
-
-
-class Toolbar extends React.Component {
+class Toolbar extends React.Component<ToolbarProperties> {
   toggleInlineStyle(style) {
     const { editorState, setEditorState } = this.props
     setEditorState(RichUtils.toggleInlineStyle(editorState, style))
@@ -125,15 +131,6 @@ class Toolbar extends React.Component {
       </div>
     )
   }
-}
-
-Toolbar.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  setEditorState: PropTypes.func.isRequired,
-  focusEditor: PropTypes.func.isRequired,
-  buttonClassName: PropTypes.string,
-  popoverClassName: PropTypes.string,
-  theme: PropTypes.string
 }
 
 export const toolbarEditorProps = {

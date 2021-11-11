@@ -1,10 +1,22 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import { SketchPicker } from 'react-color'
 import themes from '../themes'
 
+interface ColorPickerButtonProperties {
+  color?: string;
+  onRemoveColor: () => void;
+  onChangeColor: (color: any) => void;
+  focusEditor: () => void;
+  className?: string;
+  theme?: string;
+}
 
-class ColorPickerButton extends React.Component {
+interface ColorPickerButtonState {
+  showColorPicker: boolean;
+  color?: any;
+}
+
+class ColorPickerButton extends React.Component<ColorPickerButtonProperties, ColorPickerButtonState> {
   constructor(props) {
     super(props)
     this.state = { showColorPicker: false }
@@ -38,7 +50,7 @@ class ColorPickerButton extends React.Component {
 
     const presetColors = theme ? themes[theme] : []
 
-    const colorPickerProps = {
+    const colorPickerProps: any = {
       color,
       presetColors,
       onChangeComplete: this.handleChange.bind(this)
@@ -53,6 +65,7 @@ class ColorPickerButton extends React.Component {
           <div className='absolute left-0'>
             <SketchPicker {...colorPickerProps} />
             <button
+              type="button"
               className='btn bg-darken-4 white col-12 rounded-bottom'
               onClick={this.handleChangeColor.bind(this)}
             >
@@ -63,15 +76,6 @@ class ColorPickerButton extends React.Component {
       </div>
     )
   }
-}
-
-ColorPickerButton.propTypes = {
-  color: PropTypes.string,
-  onRemoveColor: PropTypes.func.isRequired,
-  onChangeColor: PropTypes.func.isRequired,
-  focusEditor: PropTypes.func.isRequired,
-  className: PropTypes.string,
-  theme: PropTypes.string
 }
 
 export default ColorPickerButton

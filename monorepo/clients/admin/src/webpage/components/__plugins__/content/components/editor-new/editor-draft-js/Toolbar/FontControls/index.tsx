@@ -1,13 +1,26 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import EditorUtils from '../EditorUtils'
 import SelectFontFamily from './SelectFontFamily'
 import './styles.scss'
 
+interface FontControlsProperties {
+  editorState: any;
+  setEditorState: (editorState: any) => void
+  focusEditor: () => void;
+  buttonClassName?: string;
+  popoverClassName?: string;
+  initialValue: {
+    fontSize: number;
+    fontFamily: string;
+  }
+}
 
+interface FontControlsState {
+  fontSize: number;
+  fontFamily: string;
+}
 
-
-export default class FontControls extends React.Component {
+export default class FontControls extends React.Component<FontControlsProperties, FontControlsState> {
   constructor(props) {
     super(props)
     this.state = { ...this.props.initialValue }
@@ -79,7 +92,7 @@ export default class FontControls extends React.Component {
     this.props.focusEditor()
   }
 
-  render() {
+  render(): React.ReactElement {
     return (
       <div className='font-controls'>
         <input
@@ -92,6 +105,7 @@ export default class FontControls extends React.Component {
         <SelectFontFamily
           onChange={this.handleChangeFont.bind(this)}
           value={this.state.fontFamily}
+          // eslint-disable-next-line react/jsx-no-bind
           onMouseOut={this.handleMouseOut.bind(this)}
         />
       </div>
@@ -99,19 +113,8 @@ export default class FontControls extends React.Component {
   }
 }
 
-FontControls.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  setEditorState: PropTypes.func.isRequired,
-  focusEditor: PropTypes.func.isRequired,
-  initialValue: PropTypes.shape({
-    fontSize: PropTypes.number,
-    fontFamily: PropTypes.string
-  })
-
-}
-
 export const customStyleFn = (style) => {
-  const output = {}
+  const output: any = {}
   const fontSize = style.filter(value => value.startsWith('font-size')).last()
   if (fontSize) {
     output.fontSize = fontSize

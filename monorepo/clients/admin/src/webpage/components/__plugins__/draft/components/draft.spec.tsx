@@ -1,46 +1,70 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
-import { mountWithIntl } from '../../../../intl/helpers'
-import { Draft } from '../../../../mobrender/widgets/draft/components'
-import widgetsConfig from '../../../../mobrender/widgets/config'
+import { mount } from "enzyme"
+import Draft from './draft';
+import type { Kind, Status } from "../../../../reducers";
+import widgetsConfig from '../../config';
 
 describe('client/mobrender/widgets/draft/components/draft', () => {
+  const kind: Kind = "draft";
+  const status: Status = "active";
   const props = {
-    mobilization: { id: 1 },
+    mobilization: {
+      id: 2,
+      color_scheme: 'meu-rio',
+      header_font: 'headerFont',
+      body_font: 'bodyFont',
+      name: 'Lorem',
+      status,
+      slug:  'lorem',
+      goal: 'Lorem ipsum dolor',
+      facebook_share_title: 'Facebook share title',
+      facebook_share_description: 'Facebook share description',
+      facebook_share_image: 'http://facebook.com/share-image.png',
+      updated_at: new Date().toISOString(),
+      user_id: 1,
+      language: "pt-br",
+      created_at: new Date().toISOString(),
+      community_id: 2
+    },
     widget: {
       id: 1,
-      kind: 'draft',
-      settings: {}
+      kind,
+      settings: {},
+      sm_size: 3,
+      md_size: 3,
+      lg_size: 3,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      block_id: 1
     },
-    update: widget => widget
+    update: jest.fn(),
+    intl: { formatMessage: ({ defaultMessage }) => defaultMessage }
   }
   const widgets = widgetsConfig(props.mobilization, props.widget, {
-    intl: { formatMessage: ({ defaultMessage }) => defaultMessage }
+    intl: props.intl
   })
 
   it('should render without crashed', () => {
-    const draft = mountWithIntl(<Draft {...props} />)
+    const draft = mount(<Draft {...props} />)
     expect(draft).to.be.ok
   })
 
   it('should render buttons to update kind', () => {
     const plugins = widgets.filter(w => w.kind !== 'draft')
-    const draft = mountWithIntl(<Draft {...props} />)
+    const draft = mount(<Draft {...props} />)
     expect(draft.find('DraftButton').length).to.equal(plugins.length)
   })
 
   it('should pass to update method widget props when clicked button', () => {
-    let widgetProps
-    const draft = mountWithIntl(
-      <Draft {...props} update={props => { widgetProps = props }} />
+    const update = jest.fn();
+    const draft = mount(
+      <Draft {...props} update={update} />
     )
     const button = draft.find('DraftButton').at(1)
     button.find('button').simulate('click')
-    const { kind, settings } = widgets.filter(w => w.kind === button.props().kind)[0]
+
     // Assert item to item
-    expect(kind).to.equal(widgetProps.kind)
-    expect(settings).to.deep.equal(widgetProps.settings)
-    expect(props.widget.id).to.equal(widgetProps.id)
+    expect(update.mock.calls.length).to.equal(1)
   })
 })

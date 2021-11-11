@@ -3,9 +3,13 @@ import { ColorPicker } from "../../../../edit/color-picker"
 
 import('./wysihtml-toolbar-color-picker.scss')
 
-class WYSIHTMLToolbarColorPicker extends React.Component {
-  constructor() {
-    super()
+interface ColorPickerState {
+  color: string;
+}
+
+class WYSIHTMLToolbarColorPicker extends React.Component<any, ColorPickerState> {
+  constructor(properties) {
+    super(properties)
     this.state = { color: '#000000' }
   }
 
@@ -24,10 +28,11 @@ class WYSIHTMLToolbarColorPicker extends React.Component {
           type='text'
           data-wysihtml5-dialog-field='color'
           value={this.state.color}
-          onChange={this.handleChange.bind(this)}
+          // onChange={this.handleChange.bind(this)}
           className='hide'
         />
         <ColorPicker
+          // eslint-disable-next-line react/jsx-no-bind
           onChangeColor={this.handleChange.bind(this)}
           color={this.state.color}
         />

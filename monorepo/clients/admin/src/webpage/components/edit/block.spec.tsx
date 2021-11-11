@@ -1,24 +1,29 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import Block from '../../mobrender/components/block'
-import Widget from '../../mobrender/components/widget.connected'
-import BlockChangeBackground from '../../mobrender/components/block-change-background.connected'
-import BlockConfigMenu from '../../mobrender/components/block-config-menu.connected'
-import { EDIT_KEY } from '../../mobrender/components/block-config-menu'
+import Block from './block'
+import Widget from './widget.connected'
+import BlockChangeBackground from './block-change-background.connected'
+import BlockConfigMenu from './block-config-menu.connected'
+import { EDIT_KEY } from './block-config-menu'
 
 describe('mobrender/components/block', () => {
   let block
   const props = {
     block: { id: 1, bg_class: 'bg-1', hidden: false },
-    widgets: []
+    widgets: [],
+    editable: false,
+    hasMouseOver: false,
+    onMouseOver: jest.fn(),
+    onMouseOut: jest.fn(),
+    onCancelEdit: jest.fn(),
+    saving: false
   }
   const blockSelector = `#block-${props.block.id}`
 
   beforeEach(() => {
-    block = shallow(<Block {...props} />)
+    block = shallow(<Block  {...props} />)
   })
 
   it('should render without crashed', () => {

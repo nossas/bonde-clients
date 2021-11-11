@@ -2,12 +2,21 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import classnames from 'classnames'
 import React from 'react'
+import type { Mobilization } from "../../../../reducers";
 // import { FormattedMessage } from 'react-intl'
 
-class Input extends React.Component<any, any> {
+interface InputProperties {
+  field: any;
+  uid: string;
+  editable?: boolean;
+  configurable?: boolean;
+  mobilization: Mobilization
+}
+
+class Input extends React.Component<InputProperties, any> {
 
   renderFieldKind(): React.ReactElement {
-    const { field, uid, editable, configurable, onBlur } = this.props
+    const { field, uid, editable, configurable } = this.props
 
     if (field.kind === 'dropdown') {
       return (
@@ -44,7 +53,6 @@ class Input extends React.Component<any, any> {
           borderRadius: '2px',
           padding: '1rem'
         }}
-        onBlur={onBlur}
         placeholder={field.placeholder}
         type={field.kind === 'email' ? 'email' : 'text'}
       />

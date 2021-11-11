@@ -1,12 +1,12 @@
-import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import { NavbarButton } from 'components/navigation/navbar'
+import NavbarButton from './navbar-button'
 
 let wrapper
 
 const children = 'Hello world'
+// eslint-disable-next-line unicorn/no-keyword-prefix
 const className = 'class'
 const targetId = 'targetId'
 const scrollableId = 'scrollableId'

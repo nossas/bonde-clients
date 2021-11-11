@@ -5,7 +5,6 @@ import {
   EditorState, genKey
 } from 'draft-js'
 import { OrderedMap } from 'immutable'
-import PropTypes from 'prop-types'
 import React from 'react'
 import './styles.scss'
 // Current module dependencies
@@ -14,8 +13,25 @@ import Toolbar, {
   getBlockAlignment, toolbarEditorProps as toolbarEditorProperties
 } from './Toolbar'
 
+interface RebooEditorProperties {
+  handleSave: (content: any) => void
+  handleDelete: () => void;
+  readOnly: boolean;
+  value?: any;
+  theme?: string;
+  editorStyle?: any;
+  focusStyle?: any;
+  toolbarContainerStyle?: any;
+  toolbarStyle?: any;
+  containerStyle?: any;
+}
 
-class RebooEditor extends React.Component {
+interface RebooEditorState {
+  editorState: any;
+  hasFocus: boolean;
+}
+
+class RebooEditor extends React.Component<RebooEditorProperties, RebooEditorState> {
   constructor(properties) {
     super(properties)
 
@@ -40,7 +56,7 @@ class RebooEditor extends React.Component {
   focus() {
     this.setState({
       hasFocus: true
-    }, () => setTimeout(() => this.refs.editor.focus()))
+    }, () => setTimeout(() => (this.refs.editor as any).focus()))
   }
 
   onChangeEditorState(editorState) {
@@ -59,7 +75,7 @@ class RebooEditor extends React.Component {
         key: genKey(),
         type: 'unstyled'
       })
-      const contentBlockMap = new OrderedMap([
+      const contentBlockMap = OrderedMap([
         [contentBlock.getKey(), contentBlock]
       ])
 
@@ -74,12 +90,13 @@ class RebooEditor extends React.Component {
         .skipUntil(skipCurrent)
         .rest()
 
-      let blockMap
+      const current = OrderedMap([[currentBlock.getKey(), currentBlock]]).toSeq()
+      let blockMap: any;
       blockMap = editorState.getSelection().getAnchorOffset() < editorState.getSelection().getFocusOffset() ? beforeBlocks.concat(
         contentBlockMap.toSeq(),
         afterBlocks
       ).toOrderedMap() : beforeBlocks.concat(
-        new OrderedMap([[currentBlock.getKey(), currentBlock]]).toSeq(),
+        current,
         contentBlockMap.toSeq(),
         afterBlocks
       ).toOrderedMap();
@@ -189,12 +206,14 @@ class RebooEditor extends React.Component {
               }}
             >
               <button
+                type="button"
                 className='btn caps bg-darken-4 white rounded'
                 onClick={this.save.bind(this)}
               >
                 Salvar
               </button>
               <button
+                type="button"
                 className='btn bg-darken-4 white rounded'
                 style={{
                   position: 'absolute',
@@ -205,23 +224,12 @@ class RebooEditor extends React.Component {
                 <i className='fa fa-trash' />
               </button>
             </div>
-          ) : null}
+          ) : undefined}
         </div>
 
       </div>
     )
   }
-}
-
-RebooEditor.propTypes = {
-  handleSave: PropTypes.func,
-  readOnly: PropTypes.bool.isRequired,
-  value: PropTypes.any,
-  theme: PropTypes.string
-}
-
-RebooEditor.defaultProps = {
-  readOnly: false
 }
 
 export default RebooEditor

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import classnames from 'classnames'
 // import PropTypes from 'prop-types'
 import React from 'react'
@@ -17,26 +19,29 @@ class ColorPickerButton extends React.Component<any, any> {
     }
   }
 
-  onChangeColor(color) {
+  onChangeColor(color): void {
     this.props.onChange(JSON.stringify(color.rgb))
   }
 
   render(): React.ReactElement {
+    const { show, theme, color } = this.state;
+
     return (
       <div>
         <button
           type="button"
-          className={classnames('btn white', { 'bg-darken-4': this.state.show })}
+          className={classnames('btn white', { 'bg-darken-4': show })}
           style={{ height: '55px', borderRight: '1px solid rgba(119, 119, 119, 0.33)' }}
-          onClick={() => this.setState({ show: !this.state.show })}
+          onClick={(): void => this.setState({ show: !show })}
         >
           <i className='fa fa-eyedropper' />
         </button>
         <div className='fixed z5'>
           <ColorPicker
-            theme={this.props.theme}
-            showColorPicker={this.state.show}
-            color={this.props.color}
+            theme={theme}
+            showColorPicker={show}
+            color={color}
+            // eslint-disable-next-line react/jsx-no-bind
             onChangeColor={this.onChangeColor.bind(this)}
           />
         </div>
@@ -53,9 +58,9 @@ const rgba = (block: Block): any | undefined => {
       return JSON.parse(block.bg_class)
     } catch {
       // Silent error because use className
-      return undefined;
     }
   }
+  return undefined;
 }
 
 interface BlockChangeBackgroundProperties {
@@ -100,7 +105,7 @@ const BlockChangeBackground = ({
         <button
           type="button"
           className='btn caps bg-darken-4 white rounded mr1 save-btn'
-          style={{ heigth: '40px' }}
+          style={{ heigth: '40px' } as any}
           disabled={progress !== undefined}
           onClick={(): void => {
             update(block)
@@ -116,7 +121,7 @@ const BlockChangeBackground = ({
         <button
           type="button"
           className='btn caps bg-darken-4 white rounded cancel-btn'
-          style={{ heigth: '40px' }}
+          style={{ heigth: '40px' } as any}
           onClick={(): void => onCancelEdit(block)}
         >
           Cancelar

@@ -8,8 +8,6 @@ import WYSIHTMLToolbarInsertHTML from './wysihtml-toolbar-insert-html'
 import WYSIHTMLToolbarInsertImage from './wysihtml-toolbar-insert-image'
 
 
-
-
 const renderFontsizeDropdownMenuItem = (size, className) => (
   <DropdownMenuItem>
     <span
@@ -22,7 +20,14 @@ const renderFontsizeDropdownMenuItem = (size, className) => (
   </DropdownMenuItem>
 )
 
-class WYSIHTMLToolbar extends React.Component {
+interface WYSIHTMLToolbarProperties {
+  elementId?: string;
+  className?: string;
+  style?: any
+  buttonClassName?: string;
+}
+
+class WYSIHTMLToolbar extends React.Component<WYSIHTMLToolbarProperties> {
   render() {
     const { elementId, className, style, buttonClassName } = this.props
 
@@ -90,13 +95,6 @@ class WYSIHTMLToolbar extends React.Component {
       </div>
     )
   }
-}
-
-WYSIHTMLToolbar.propTypes = {
-  elementId: PropTypes.string,
-  className: PropTypes.string,
-  style: PropTypes.object,
-  buttonClassName: PropTypes.string
 }
 
 export default WYSIHTMLToolbar

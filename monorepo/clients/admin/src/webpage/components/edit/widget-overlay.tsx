@@ -11,7 +11,7 @@ interface WidgetOverlayProperties {
   onMouseOut: (key: string) => void
 }
 
-const overlayStyle = {
+const overlayStyle: any = {
   position: 'absolute',
   top: '0',
   right: '0',

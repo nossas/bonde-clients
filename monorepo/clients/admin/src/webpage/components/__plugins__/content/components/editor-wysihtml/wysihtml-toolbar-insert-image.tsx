@@ -1,12 +1,16 @@
 import React from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
 
+interface InsertImageState {
+  image?: string;
+  isLoading: boolean;
+}
 
-class WYSIHTMLToolbarInsertImage extends React.Component {
+class WYSIHTMLToolbarInsertImage extends React.Component<any, InsertImageState> {
   constructor(properties, context) {
     super(properties, context)
     this.state = {
-      image: null,
+      image: undefined,
       isLoading: false
     }
   }

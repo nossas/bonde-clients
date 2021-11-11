@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
@@ -8,10 +7,11 @@ import EditorDraftJS from './index'
 describe('client/components/editor-draft-js/index', () => {
   let wrapper
   const props = {
-    handleSave: () => {},
+    handleSave: jest.fn(),
     readOnly: false,
     value: 'Foo bar',
-    theme: 'theme'
+    theme: 'theme',
+    handleDelete: jest.fn()
   }
 
   beforeAll(() => {

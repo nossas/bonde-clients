@@ -1,52 +1,41 @@
-import React from 'react'
 import sinon from 'sinon'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
-
-import { Input } from 'mobilizations/widgets/__plugins__/form/components'
+import type { Status } from "../../../../reducers";
+import Input from './input';
 
 describe('client/mobilizations/widgets/__plugins__/form/components/input', () => {
-  describe('when render form edit input settings', () => {
-    let props = {
-      uid: '',
-      initializeEditing: true,
-      editable: true,
-      configurable: true,
-      mobilization: {
-        body_font: ''
-      }
-    }
-
-    it('should call renderForm when initialize editable', () => {
-      sinon.spy(Input.prototype, 'renderForm')
-
-      shallow(<Input {...props} />)
-      expect(Input.prototype.renderForm.calledOnce).to.equal(true)
-    })
-  })
-
   describe('when render input form', () => {
-    let props = {
+    const status: Status = "active";
+    const props: any = {
       uid: '',
-      initializeEditing: false,
       editable: true,
       configurable: true,
+      field: {},
       mobilization: {
-        body_font: ''
+        id: 2,
+        color_scheme: 'meu-rio',
+        header_font: 'headerFont',
+        body_font: 'bodyFont',
+        name: 'Lorem',
+        status,
+        slug:  'lorem',
+        goal: 'Lorem ipsum dolor',
+        facebook_share_title: 'Facebook share title',
+        facebook_share_description: 'Facebook share description',
+        facebook_share_image: 'http://facebook.com/share-image.png',
+        updated_at: new Date().toISOString(),
+        user_id: 1,
+        language: "pt-br",
+        created_at: new Date().toISOString(),
+        community_id: 2
       }
     }
 
-    it('should call renderInput, renderInstructions, renderFieldKind when not initialize editable', () => {
-      props.field = { }
-
-      sinon.spy(Input.prototype, 'renderInput')
-      sinon.spy(Input.prototype, 'renderInstructions')
+    it('should call renderFieldKind when not initialize editable', () => {
       sinon.spy(Input.prototype, 'renderFieldKind')
-
       shallow(<Input {...props} />)
-      expect(Input.prototype.renderInput.calledOnce).to.equal(true)
-      expect(Input.prototype.renderInstructions.calledOnce).to.equal(true)
-      expect(Input.prototype.renderFieldKind.calledOnce).to.equal(true)
+      expect((Input.prototype.renderFieldKind as any).calledOnce).to.equal(true)
     })
 
     it('should render a select input when field kind equals dropdown', () => {
@@ -71,32 +60,6 @@ describe('client/mobilizations/widgets/__plugins__/form/components/input', () =>
 
       let node = wrapper.find('p').at(0)
       expect(node.text()).to.have.string(props.field.placeholder)
-    })
-
-    it('should change hasMouseOver state for render link edit when mouseOver', () => {
-      let wrapper = shallow(<Input {...props} />)
-
-      wrapper.simulate('mouseEnter')
-      expect(wrapper.state('hasMouseOver')).to.equals(true)
-
-      wrapper.simulate('mouseLeave')
-      expect(wrapper.state('hasMouseOver')).to.equals(false)
-    })
-
-    it('should editMode when click on block', () => {
-      let wrapper = shallow(<Input {...props} />)
-      wrapper.simulate('click')
-
-      expect(wrapper.state('editing')).to.equals(true)
-    })
-
-    it('should not click to go edit mode when configurable is False', () => {
-      props.configurable = false
-
-      let wrapper = shallow(<Input {...props} />)
-      wrapper.simulate('click')
-
-      expect(wrapper.state('editing')).to.equals(false)
     })
   })
 })

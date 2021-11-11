@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { ColorPicker } from './index'
+import { ColorPicker } from '.'
 
 describe('client/components/color-picker/index', () => {
   let wrapper
-  const props = {
-    dispatch: () => {}
+  const props: any = {
+    dispatch: (): void => {},
+    color: "#333"
   }
 
   beforeAll(() => {

@@ -1,11 +1,17 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import { SketchPicker } from 'react-color'
-import { connect } from 'react-redux'
-import * as ColorPickerActions from './actions'
+import { useAppState } from '../../../Application';
+import * as t from "../../../action-types";
 import themes from './themes'
 
-
+interface ColorPickerProperties {
+  onChangeColor?: any;
+  className?: string[] | string;
+  showColorPicker?: boolean;
+  theme?: string;
+  color: any;
+  selectedColor?: any;
+}
 
 export const ColorPicker = ({
   className,
@@ -14,11 +20,12 @@ export const ColorPicker = ({
   onChangeColor,
   selectedColor,
   color
-}) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+}: ColorPickerProperties): any => {
   const hasTheme = theme && themes[theme]
   const colorStrategy = selectedColor || (hasTheme ? themes[theme][0] : '#333')
 
-  return !showColorPicker ? null : (
+  return showColorPicker && (
     <div className={classnames('color-picker-container', className)}>
       <SketchPicker
         color={color || colorStrategy}
@@ -26,23 +33,16 @@ export const ColorPicker = ({
         presetColors={hasTheme ? themes[theme] : []}
       />
     </div>
-  )
+  );
 }
 
-ColorPicker.propTypes = {
-  showColorPicker: PropTypes.bool.isRequired,
-  onChangeColor: PropTypes.func,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
-  theme: PropTypes.string,
-  color: PropTypes.oneOfType([PropTypes.string, PropTypes.object])
+export default (properties: any): React.ReactElement => {
+  const { state, dispatch } = useAppState();
+  const colorPickerProperties = {
+    selectedColor: state.colorPicker.color || "#333",
+    setSelectedColor: (color: any): void => dispatch({ type: t.SET_SELECTED_COLOR, payload: color })
+  };
+
+  // eslint-disable-next-line react/jsx-props-no-spreading
+  return <ColorPicker {...properties} {...colorPickerProperties} />;
 }
-
-ColorPicker.defaultProps = {
-  showColorPicker: true
-}
-
-const mapStateToProps = state => ({
-  selectedColor: state.colorPicker.color || '#333'
-})
-
-export default connect(mapStateToProps, ColorPickerActions)(ColorPicker)

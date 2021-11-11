@@ -1,22 +1,22 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
-import WidgetOverlay from '../../mobrender/components/widget-overlay'
+import WidgetOverlay from './widget-overlay'
 
 describe('client/mobrender/components/widget-overlay', () => {
-  const props = {
+  const properties: any = {
     widget: { id: 1, kind: 'content' },
     hasMouseOver: false,
-    onEdit: () => { },
-    onDelete: () => { },
-    onMouseEnter: () => { },
-    onMouseLeave: () => { }
+    onEdit: jest.fn(),
+    onDelete: jest.fn(),
+    onMouseEnter: jest.fn(),
+    onMouseLeave: jest.fn()
   }
   let over
 
   beforeEach(() => {
-    over = mount(<WidgetOverlay {...props} />)
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    over = mount(<WidgetOverlay {...properties} />)
   })
 
   it('should render without crashed', () => {
@@ -25,7 +25,8 @@ describe('client/mobrender/components/widget-overlay', () => {
 
   it('should render children', () => {
     const over2 = mount(
-      <WidgetOverlay {...props}>
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      <WidgetOverlay {...properties}>
         <h1>Children</h1>
       </WidgetOverlay>
     )
@@ -36,7 +37,7 @@ describe('client/mobrender/components/widget-overlay', () => {
     let result
     over.setProps({ onMouseOver: (key, id) => { result = [key, id] } })
     over.find('div.relative').simulate('mouseenter')
-    expect(result).to.deep.equal(['widget', props.widget.id])
+    expect(result).to.deep.equal(['widget', properties.widget.id])
   })
 
   it('should call onMouseOut passing ("widget") when mouse leave', () => {

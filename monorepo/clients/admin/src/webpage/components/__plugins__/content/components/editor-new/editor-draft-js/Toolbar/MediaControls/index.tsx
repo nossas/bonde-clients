@@ -1,15 +1,19 @@
 import { AtomicBlockUtils, Entity } from 'draft-js'
-import PropTypes from 'prop-types'
 import React from 'react'
 import InsertImageButton from './InsertImageButton'
 import InsertScriptButton from './InsertScriptButton'
 import Media from './Media'
 import './styles.scss'
 
+interface MediaControlsProperties {
+  editorState: any;
+  setEditorState: (editorState: any) => void
+  focusEditor: () => void;
+  buttonClassName?: string;
+  popoverClassName?: string;
+}
 
-
-
-export default class MediaControls extends React.Component {
+export default class MediaControls extends React.Component<MediaControlsProperties> {
   handleInsertMedia(mediaType, source) {
     const { editorState, setEditorState } = this.props
 
@@ -38,14 +42,6 @@ export default class MediaControls extends React.Component {
       </div>
     )
   }
-}
-
-MediaControls.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  setEditorState: PropTypes.func.isRequired,
-  focusEditor: PropTypes.func.isRequired,
-  buttonClassName: PropTypes.string,
-  popoverClassName: PropTypes.string
 }
 
 export const blockRendererFn = (block) => {

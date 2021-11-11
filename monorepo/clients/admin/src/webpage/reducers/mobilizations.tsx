@@ -1,10 +1,12 @@
 import * as t from '../action-types'
 
+export type Status = 'active' | 'archived';
+
 export interface Mobilization {
   id: number;
   name: string;
   slug: string;
-  status: 'active' | 'archived';
+  status: Status;
   traefik_backend_address?: string;
   traefik_host_rule?: string;
   twitter_share_text?: string;

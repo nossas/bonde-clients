@@ -1,17 +1,24 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
+import type React from 'react'
 
+interface NavbarButtonProperties {
+  targetId: string;
+  scrollableId: string;
+  className?: string;
+  children: string;
+  hidden?: boolean;
+}
 
-const NavbarButton = props => {
-  const handleClick = e => {
+const NavbarButton = (properties: NavbarButtonProperties): React.ReactElement => {
+  const handleClick = (e): void => {
     e.preventDefault()
-    const { targetId } = props
-    const target = document.getElementById(targetId)
+    const { targetId } = properties
+    const target: any = document.querySelector(targetId)
 
     target.scrollIntoView({ behavior: "smooth" })
   }
 
-  const { className, children, hidden } = props
+  const { className, children, hidden } = properties
   return (
     <a
       href='/'
@@ -27,14 +34,6 @@ const NavbarButton = props => {
       )}
     </a>
   )
-}
-
-NavbarButton.propTypes = {
-  targetId: PropTypes.string.isRequired,
-  scrollableId: PropTypes.string.isRequired,
-  className: PropTypes.string,
-  children: PropTypes.string,
-  hidden: PropTypes.bool
 }
 
 export default NavbarButton

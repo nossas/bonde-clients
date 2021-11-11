@@ -1,11 +1,17 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
 import styleWholeSelectedBlocksModifier from './styleWholeSelectedBlocksModifier'
 
-const alignments = ['left', 'center', 'right']
+const alignments: any = ['left', 'center', 'right']
 
-export default class AlignmentControls extends React.Component {
+interface AlignmentControlsProperties {
+  editorState: any;
+  setEditorState: (editorState: any) => void
+  focusEditor: () => void;
+  buttonClassName?: string;
+}
+
+export default class AlignmentControls extends React.Component<AlignmentControlsProperties> {
   handleToggleAlign(alignment) {
     const { editorState, setEditorState } = this.props
     const editorStateWithAlignment = styleWholeSelectedBlocksModifier(
@@ -39,18 +45,21 @@ export default class AlignmentControls extends React.Component {
     return (
       <div className='alignmentControls'>
         <button
+          type="button"
           className={classnames(buttonClassName, this.hasAlignmentStyle('left'))}
           onClick={() => this.handleToggleAlign('left')}
         >
           <i className='fa fa-align-left' />
         </button>
         <button
+          type="button"
           className={classnames(buttonClassName, this.hasAlignmentStyle('center'))}
           onClick={() => this.handleToggleAlign('center')}
         >
           <i className='fa fa-align-center' />
         </button>
         <button
+          type="button"
           className={classnames(buttonClassName, this.hasAlignmentStyle('right'))}
           onClick={() => this.handleToggleAlign('right')}
         >
@@ -59,11 +68,4 @@ export default class AlignmentControls extends React.Component {
       </div>
     )
   }
-}
-
-AlignmentControls.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  setEditorState: PropTypes.func.isRequired,
-  focusEditor: PropTypes.func.isRequired,
-  buttonClassName: PropTypes.string
 }

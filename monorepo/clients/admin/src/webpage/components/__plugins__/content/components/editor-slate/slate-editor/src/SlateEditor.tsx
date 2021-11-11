@@ -1,11 +1,19 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
 import { Value } from 'slate'
 import { react, typeCheck } from '../../slate-editor-utils/src'
 import initialEditorState from './initialEditorState'
 
-class SlateEditor extends React.Component {
+interface SlateEditorProperties {
+  initialState: any;
+  style?: any;
+  // eslint-disable-next-line unicorn/no-keyword-prefix
+  className?: string;
+  plugins: any[];
+  onChange: any;
+}
+
+class SlateEditor extends React.Component<SlateEditorProperties> {
   constructor(properties) {
     super(properties)
     this.state = {
@@ -19,7 +27,7 @@ class SlateEditor extends React.Component {
   // Migrate Slate's Value object
   // From v0.25.3
   // To   v0.31.3
-  migrateStateVersion(value) {
+  migrateStateVersion(value: any): any {
     let updatedValue = value
     if (value.kind !== 'value') {
       updatedValue = JSON.parse(
@@ -41,7 +49,7 @@ class SlateEditor extends React.Component {
   //
   // This function change only the Editor value object
   //
-  onChange(change) {
+  onChange(change): void {
     const { value } = change
 
     this.setState({ value })
@@ -54,11 +62,11 @@ class SlateEditor extends React.Component {
   // This function change the SlateEditor state object.
   // It can be change the Editor value object too...
   //
-  changeState(state) {
+  changeState(state): void {
     this.setState(state)
   }
 
-  render() {
+  render(): React.ReactElement {
     const { children, style, className, plugins } = this.props
 
     const childProperties = {
@@ -75,10 +83,6 @@ class SlateEditor extends React.Component {
       </div>
     )
   }
-}
-
-SlateEditor.propTypes = {
-  initialState: PropTypes.object
 }
 
 export default SlateEditor

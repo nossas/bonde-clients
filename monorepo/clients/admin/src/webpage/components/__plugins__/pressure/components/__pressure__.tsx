@@ -1,16 +1,6 @@
 import React from 'react'
-// import { connect } from 'react-redux'
-// import { withRouter } from 'react-router'
+import type { Mobilization, Widget } from "../../../../reducers";
 import { PressureCount, PressureForm, TargetList } from '.'
-// import { client as graphqlClient } from "../../../../../createReducer"
-// import * as graphqlMutations from "../../../../../graphql/mutations"
-// import * as graphqlQueries from "../../../../../graphql/queries"
-// import MobSelectors from "../../../../../mobrender/redux/selectors"
-// import * as paths from "../../../../../paths"
-// import * as array from "../../../../../utils/array"
-// import { FinishMessageCustom } from "../../../components"
-// import * as pressureHelper from "../../../utils/pressure-helper"
-// import * as PressureActions from '../action-creators'
 
 /* TODO: Change static content by props
  * - title
@@ -18,9 +8,9 @@ import { PressureCount, PressureForm, TargetList } from '.'
  */
 interface MyProperties {
   editable?: boolean,
-  mobilization: Record<string, number>,
+  mobilization: Mobilization,
   block: any;
-  widget: {
+  widget: Widget | {
     id: number,
     settings: {
       finish_message_type: string,
@@ -40,19 +30,6 @@ class Pressure extends React.Component<MyProperties, any> {
 
     return targets && targets.split(';').filter(target => !!target.trim())
   }
-
-  // getEmailTarget(target) {
-  //   const targetSplit = target.split('<')
-  //   return targetSplit[1].replace('>', '')
-  // }
-
-  // changeSelectedTargets(selectedTargets) {
-  //   this.setState({ selectedTargets })
-  // }
-
-  // changeState(state) {
-  //   this.setState(state)
-  // }
 
   render(): React.ReactElement {
     const {
@@ -90,9 +67,6 @@ class Pressure extends React.Component<MyProperties, any> {
         </h2>
         <TargetList
           targets={this.getTargetList() || []}
-          // onSelect={this.changeSelectedTargets.bind(this)}
-          // errorMessage={this.state.selectedTargetsError}
-          // selectable={this.selectableTargetList}
         />
         <PressureForm
           disabled={disableEditField === 's'}
@@ -102,16 +76,11 @@ class Pressure extends React.Component<MyProperties, any> {
           buttonColor={mainColor}
           subject={pressureSubject}
           body={pressureBody}
-          // onSubmit={this.handleSubmit.bind(this)}
           targetList={this.getTargetList()}
-          // selectedTargets={this.selectedTargets}
-          // callTransition={this.state.callTransition}
-          // addTwilioCallMutation={this.state.addTwilioCallMutation}
-          // changeParentState={this.changeState.bind(this)}
         >
           {countText && (
             <PressureCount
-              value={widget.count || 0}
+              value={(widget as any).count || 0}
               color={mainColor}
               text={countText}
               startCounting={block.scrollTopReached}

@@ -1,30 +1,43 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
 
+interface DropdownMenuProperties {
+  className?: string;
+  menuClassName?: string;
+  menuStyle?: any;
+  wrapperClassName?: string;
+  buttonClassName?: string;
+  text?: string;
+  children?: any
+  icon?: string
+}
 
-class DropdownMenu extends React.Component {
+interface DropdownMenuState {
+  open: boolean;
+}
+
+class DropdownMenu extends React.Component<DropdownMenuProperties, DropdownMenuState> {
   constructor(properties, context) {
     super(properties, context)
     this.state = { open: false }
   }
 
-  handleClick() {
+  handleClick(): void {
     this.setState({ open: !this.state.open })
   }
 
-  handleOverlayClick() {
+  handleOverlayClick(): void {
     this.setState({ open: false })
   }
 
-  renderIcon() {
-    return !this.props.icon ? null : (
+  renderIcon(): any {
+    return !this.props.icon ? undefined : (
       <i ref='icon' className={classnames('icon fa', `fa-${this.props.icon}`)} />
     )
   }
 
-  renderOverlay() {
-    return !this.state.open ? null : (
+  renderOverlay(): any {
+    return !this.state.open ? undefined : (
       <div
         className='overlay fixed top-0 right-0 bottom-0 left-0 z1'
         onClick={this.handleOverlayClick.bind(this)}
@@ -32,7 +45,7 @@ class DropdownMenu extends React.Component {
     )
   }
 
-  renderChildren() {
+  renderChildren(): any {
     return this.props.children.map((child, index) => {
       const properties = child.type !== 'div' ? { onItemClick: this.handleOverlayClick.bind(this) } : {}
       return React.cloneElement(child, {
@@ -42,7 +55,7 @@ class DropdownMenu extends React.Component {
     })
   }
 
-  render() {
+  render(): React.ReactElement {
     const {
       wrapperClassName,
       buttonClassName,
@@ -54,7 +67,7 @@ class DropdownMenu extends React.Component {
 
     return (
       <div style={{ marginTop: '5px' }} className={classnames('relative', wrapperClassName)}>
-        <button ref='button' className={buttonClassName} onClick={this.handleClick.bind(this)}>
+        <button ref='button' type="button" className={buttonClassName} onClick={this.handleClick.bind(this)}>
           {this.renderIcon()} {text}
         </button>
         <div
@@ -71,17 +84,6 @@ class DropdownMenu extends React.Component {
       </div>
     )
   }
-}
-
-DropdownMenu.propTypes = {
-  className: PropTypes.string,
-  menuClassName: PropTypes.string,
-  menuStyle: PropTypes.object,
-  wrapperClassName: PropTypes.string,
-  buttonClassName: PropTypes.string,
-  text: PropTypes.string,
-  children: PropTypes.array,
-  icon: PropTypes.string
 }
 
 export default DropdownMenu

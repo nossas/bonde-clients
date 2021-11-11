@@ -7,7 +7,7 @@ export interface Block {
   bg_class?: string;
   bg_image?: string;
   created_at: string;
-  deleted_at: string;
+  deleted_at?: string;
   hidden?: boolean | string;
   menu_hidden?: boolean | string;
   name?: string;

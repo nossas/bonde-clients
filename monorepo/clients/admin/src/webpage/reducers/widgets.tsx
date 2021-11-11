@@ -1,13 +1,16 @@
 import * as t from '../action-types'
 
+// eslint-disable-next-line @typescript-eslint/no-type-alias
+export type Kind = 'content' | 'donation' | 'draft' | 'form' | 'pressure-phone' | 'pressure';
+
 export interface Widget {
   id: number;
-  kind: 'content' | 'donation' | 'draft' | 'form' | 'pressure-phone' | 'pressure';
+  kind: Kind;
   created_at: string;
   deleted_at?: string;
   exported_at?: string;
   goal?: string;
-  lg_size?: string;
+  lg_size?: number | string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mailchimp_recurring_active_segment_id?: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -15,13 +18,14 @@ export interface Widget {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   mailchimp_segment_id?: any;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  mailchimp_unique_segment_id: any;
-  md_size?: string;
-  sm_size?: string;
+  mailchimp_unique_segment_id?: any;
+  md_size?: number | string;
+  sm_size?: number | string;
   updated_at: string;
   block_id: number;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   settings?: any;
+  form_entries_count?: number;
 }
 
 export interface StateWidgets {

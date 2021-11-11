@@ -1,40 +1,41 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 import sinon from 'sinon'
 
-import { NavbarForm } from 'components/navigation/navbar'
+import NavbarForm from './navbar-form';
 
-const handleCloseForm = () => {}
-const mobilization = {}
+const handleCloseForm = jest.fn()
+const mobilization: any = {}
 const block = {name: 'My block'}
-const blockUpdate = () => {}
-const auth = {}
-
-function generateComponent (options = {}) {
-  return (
-    <NavbarForm
-      handleCloseForm={options.handleCloseForm || handleCloseForm}
-      mobilization={options.mobilization || mobilization}
-      block={options.block || block}
-      blockUpdate={options.blockUpdate || blockUpdate}
-      auth={options.auth || auth}
-      defaultValue={block.name}
-    />
-  )
-}
+const blockUpdate = jest.fn()
 
 describe('client/components/navigation/navbar/navbar-form', () => {
   it('should initialize state with a name', () => {
-    const wrapper = mount(generateComponent())
+    const wrapper: any = mount(
+      <NavbarForm
+        handleCloseForm={handleCloseForm}
+        mobilization={mobilization}
+        block={block}
+        blockUpdate={blockUpdate}
+        defaultValue={block.name}
+      />
+    )
     expect(wrapper.state().name).to.be.eq(block.name)
   })
 
   describe('#componentDidMount', () => {
     it.skip('should add an event listenter for the window', () => {
       sinon.spy(window, 'addEventListener')
-      mount(generateComponent())
+      mount(
+        <NavbarForm
+          handleCloseForm={handleCloseForm}
+          mobilization={mobilization}
+          block={block}
+          blockUpdate={blockUpdate}
+          defaultValue={block.name}
+        />
+      )
       expect(window.addEventListener).to.have.been.calledOnce
     })
   })
@@ -48,7 +49,15 @@ describe('client/components/navigation/navbar/navbar-form', () => {
 
   describe('#handleKeyUp', () => {
     it.skip('should call submit when ESC is pressed', () => {
-      const wrapper = mount(generateComponent())
+      const wrapper: any = mount(
+        <NavbarForm
+          handleCloseForm={handleCloseForm}
+          mobilization={mobilization}
+          block={block}
+          blockUpdate={blockUpdate}
+          defaultValue={block.name}
+        />
+      )
       sinon.spy(wrapper.instance(), 'submit')
       wrapper.simulate('keyUp', { preventDefault: () => {}, keyCode: 27 })
       expect(wrapper.instance().submit).to.have.been.calledOnce
@@ -56,16 +65,18 @@ describe('client/components/navigation/navbar/navbar-form', () => {
   })
 
   describe('#submit', () => {
-    it.skip('should dispatch the edit block action', () => {
-      const mockedDispatch = sinon.spy()
-      const wrapper = mount(generateComponent({ blockUpdate: mockedDispatch }))
-      wrapper.instance().submit({ preventDefault: () => {} })
-      expect(mockedDispatch).to.have.been.calledOnce
-    })
 
     it.skip('should call close form callback', () => {
       const mockedHandleCloseForm = sinon.spy()
-      const wrapper = mount(generateComponent({ handleCloseForm: mockedHandleCloseForm }))
+      const wrapper: any = mount(
+        <NavbarForm
+          handleCloseForm={mockedHandleCloseForm}
+          mobilization={mobilization}
+          block={block}
+          blockUpdate={blockUpdate}
+          defaultValue={block.name}
+        />
+      )
       wrapper.instance().submit({ preventDefault: () => {} })
       expect(mockedHandleCloseForm).to.have.been.calledOnce
     })

@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import MenuItems from '../../mobrender/components/navbar/menu-items'
+import MenuItems from './menu-items'
 
 describe('client/mobrender/components/navbar/menu-items', () => {
   let wrapper
   const props = {
     blocks: [{ id: 1 }, { id: 2 }],
-    mobilization: { id: 1 }
+    mobilization: { id: 1 },
+    mobile: false
   }
 
   beforeAll(() => {
@@ -21,7 +21,7 @@ describe('client/mobrender/components/navbar/menu-items', () => {
   })
 
   it('should render two NavbarEditionWrapper component properly', () => {
-    expect(wrapper.find('InjectIntl(NavbarEditionWrapper)')).to.have.length(2)
+    expect(wrapper.find('NavbarEditionWrapper')).to.have.length(2)
   })
 
   describe('default', () => {

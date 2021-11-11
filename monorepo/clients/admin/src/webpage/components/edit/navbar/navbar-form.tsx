@@ -1,70 +1,67 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { useState, useRef, useEffect } from 'react'
 
-class NavbarForm extends React.Component {
-  constructor(properties, context) {
-    super(properties, context)
-    this.state = {
-      name: properties.defaultValue
-    }
-  }
+export interface NavbarFormProperties {
+  handleCloseForm: () => void;
+  block: any;
+  blockUpdate: (block: any) => void;
+  defaultValue?: string;
+}
 
-  componentDidMount() {
-    this.refs.nameInput.focus()
-    this.refs.nameInput.select()
-    window.addEventListener('keyup', this.handleKeyUp)
-  }
+export interface NavbarFormState {
+  name?: string
+}
 
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleKeyUp)
-  }
+const NavbarForm = (properties: NavbarFormProperties): React.ReactElement => {
+  const [name, setName] = useState(properties.defaultValue || "");
+  const inputReference: any = useRef();
 
-  handleKeyUp(e) {
-    if (e.keyCode === 27) {
-      this.submit(e)
-    }
-  }
-
-  handleChangeName(e) {
-    this.setState({ name: e.target.value })
-  }
-
-  submit(e) {
+  const submit = (e): void => {
     e.preventDefault()
     const {
       block,
       blockUpdate,
       handleCloseForm
-    } = this.props
+    } = properties
 
-    blockUpdate({ ...block, name: this.state.name })
+    blockUpdate({ ...block, name })
     handleCloseForm()
   }
 
-  render() {
-    return (
-      <form className='inline-block' onSubmit={this.submit.bind(this)}>
-        <input
-          type='text'
-          ref='nameInput'
-          className='input z2 relative'
-          value={this.state.name}
-          onChange={this.handleChangeName.bind(this)}
-        />
-        <div
-          className='fixed top-0 right-0 bottom-0 left-0 z1'
-          onClick={this.submit.bind(this)} />
-      </form>
-    )
+  const handleKeyUp = (e): void => {
+    if (e.keyCode === 27) {
+      submit(e)
+    }
   }
-}
 
-NavbarForm.propTypes = {
-  handleCloseForm: PropTypes.func.isRequired,
-  mobilization: PropTypes.object.isRequired,
-  block: PropTypes.object.isRequired,
-  blockUpdate: PropTypes.func.isRequired,
-  defaultValue: PropTypes.string
+  useEffect(() => {
+    if (inputReference) {
+      inputReference.current.focus()
+      inputReference.current.select();
+    }
+    window.addEventListener('keyup', handleKeyUp)
+
+    return (): void => {
+      window.removeEventListener('keyup', handleKeyUp)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputReference])
+
+  return (
+    <form className='inline-block' onSubmit={submit}>
+      <input
+        type='text'
+        ref={inputReference}
+        className='input z2 relative'
+        value={name}
+        onChange={(e): void => setName(e.target.value)}
+      />
+      <div
+        className='fixed top-0 right-0 bottom-0 left-0 z1'
+        onClick={submit} />
+    </form>
+  )
 }
 
 export default NavbarForm

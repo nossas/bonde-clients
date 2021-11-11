@@ -1,10 +1,19 @@
-import PropTypes from 'prop-types'
 import React from 'react'
+import type { Mobilization, Widget } from "../../../../reducers"
 // import { injectIntl, intlShape } from 'react-intl'
 import { EditorNew, EditorOld, EditorSlate } from '.'
 
+interface ContentProperties {
+  mobilization: Mobilization;
+  widget: Widget;
+  editable: boolean;
+  onEdit: () => void,
+  onCancelEdit: () => void
+  update: (widget: any) => void
+  intl?: any;
+}
 
-export class Content extends React.Component {
+export class Content extends React.Component<ContentProperties, any> {
   constructor(properties) {
     super(properties)
     this.state = { forceRenderNewEditor: false }
@@ -77,16 +86,6 @@ export class Content extends React.Component {
 
     }
   }
-}
-
-Content.propTypes = {
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
-  editable: PropTypes.bool.isRequired,
-  onEdit: PropTypes.func,
-  onCancelEdit: PropTypes.func,
-  update: PropTypes.func,
-  // intl: intlShape.isRequired
 }
 
 export default (properties) => <Content {...properties} intl={{

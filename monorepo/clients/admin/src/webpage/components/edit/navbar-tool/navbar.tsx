@@ -1,34 +1,30 @@
-import PropTypes from 'prop-types'
 import Menu from './menu-items'
+import type { Mobilization } from "../../../reducers";
 
+interface NavbarProperties {
+  editable: boolean;
+  mobilization: Mobilization;
+  blocks: any[],
+  blockUpdate: (block: any) => void
+}
 
-
-const Navbar = props => {
-  const { blocks, editable } = props
+const Navbar = (properties: NavbarProperties): React.ReactElement => {
+  const {
+    blocks = [],
+    editable = false
+  } = properties
 
   const onlyVisibleBlocks = blocks.filter(
     block => editable ? !block.hidden : !block.hidden && !block.menu_hidden
   )
-  const menuProps = { ...props, blocks: onlyVisibleBlocks }
+  const menuProperties = { ...properties, blocks: onlyVisibleBlocks }
 
   return (
     <div className='absolute col-12 z3'>
-      <Menu {...menuProps} />
-      <Menu {...menuProps} mobile />
+      <Menu {...menuProperties} />
+      <Menu {...menuProperties} mobile />
     </div>
   )
-}
-
-Navbar.propTypes = {
-  editable: PropTypes.bool.isRequired,
-  mobilization: PropTypes.object.isRequired,
-  blocks: PropTypes.array,
-  blockUpdate: PropTypes.func
-}
-
-Navbar.defaultProps = {
-  editable: false,
-  blocks: []
 }
 
 export default Navbar

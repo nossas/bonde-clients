@@ -1,20 +1,23 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
-import { mountWithIntl } from '../../intl/helpers'
-import BlockChangeBackground from '../../mobrender/components/block-change-background'
+import { mount } from "enzyme";
+// import { mountWithIntl } from '../../intl/helpers'
+import BlockChangeBackground from './block-change-background'
 
 describe('mobrender/components/block-change-background', () => {
   let changeBackground
-  const props = {
+  const props: any = {
     mobilization: { id: 1, color_scheme: 'meurio' },
     block: { id: 1, bg_class: 'bg-1', bg_image: 'tmp://bg.png' },
-    onCancelEdit: () => {},
-    update: () => {}
+    onCancelEdit: jest.fn(),
+    update: jest.fn(),
+    onChangeBackground: jest.fn(),
+    onUploadFile: jest.fn()
   }
 
   beforeEach(() => {
-    changeBackground = mountWithIntl(<BlockChangeBackground {...props} />)
+    // eslint-disable-next-line react/jsx-props-no-spreading
+    changeBackground = mount(<BlockChangeBackground {...props} />)
   })
 
   it('should render without crashed', () => {

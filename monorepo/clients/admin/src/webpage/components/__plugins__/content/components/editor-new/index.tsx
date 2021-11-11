@@ -1,10 +1,26 @@
-import PropTypes from 'prop-types'
 import React from 'react'
+import type { Mobilization, Widget } from '../../../../../reducers'
 // import { Loading } from '../../../../../../components/await'
 import Editor from './editor-draft-js'
 import './index.scss'
 
-class EditorNew extends React.Component {
+interface EditorNewProperties {
+  mobilization: Mobilization;
+  widget: Widget;
+  editable: boolean;
+  onEdit: () => void;
+  onCancelEdit: () => void;
+  update: (widget: Widget) => void
+  handleDelete: () => void;
+}
+
+interface EditorNewState {
+  editing: boolean;
+  content: any;
+  loading: boolean;  
+}
+
+class EditorNew extends React.Component<EditorNewProperties, EditorNewState> {
   constructor(properties, context) {
     super(properties, context)
     this.state = {
@@ -49,7 +65,7 @@ class EditorNew extends React.Component {
     const theme = (
       mobilization && mobilization.color_scheme
         ? mobilization.color_scheme.replace('-scheme', '')
-        : null
+        : undefined
     )
 
     let value
@@ -65,22 +81,13 @@ class EditorNew extends React.Component {
           value={value}
           theme={theme}
           readOnly={!editable}
+          // eslint-disable-next-line react/jsx-no-bind
           handleSave={this.handleSave.bind(this)}
           handleDelete={this.props.handleDelete}
         />
       </div>
     )
   }
-}
-
-EditorNew.propTypes = {
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
-  editable: PropTypes.bool.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onCancelEdit: PropTypes.func.isRequired,
-  update: PropTypes.func,
-  handleDelete: PropTypes.func
 }
 
 export default EditorNew

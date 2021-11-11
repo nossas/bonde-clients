@@ -10,7 +10,7 @@ const getSelectionEntities = (editorState, entityType) => {
 
   const block = currentContent.getBlockForKey(targetSelection.getStartKey())
 
-  let selectionEntitySet = new OrderedSet()
+  let selectionEntitySet = OrderedSet()
 
   block.findEntityRanges(character => {
     const entityKey = character.getEntity()

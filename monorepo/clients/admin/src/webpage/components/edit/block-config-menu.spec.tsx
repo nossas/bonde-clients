@@ -1,16 +1,25 @@
-import React from 'react'
+// import React from 'react'
 import { expect } from 'chai'
 import sinon from 'sinon'
-import { mountWithIntl } from '../../intl/helpers'
-import BlockConfigMenu from '../../mobrender/components/block-config-menu'
+import { mount } from "enzyme";
+// import { mountWithIntl } from '../../intl/helpers'
+import BlockConfigMenu from './block-config-menu'
 
 describe('mobrender/components/block-config-menu', () => {
   const props = {
-    block: { id: 1, hidden: false }
+    block: { id: 1, hidden: false },
+    update: jest.fn(),
+    destroy: jest.fn(),
+    canMoveUp: true,
+    canMoveDown: true,
+    moveUp: jest.fn(),
+    moveDown: jest.fn(),
+    onEdit: jest.fn(),
+    onCancelEdit: jest.fn()
   }
   let menuConfig
   beforeEach(() => {
-    menuConfig = mountWithIntl(<BlockConfigMenu {...props} />)
+    menuConfig = mount(<BlockConfigMenu {...props} />)
   })
 
   it('should render dropdown menu with options to action', () => {

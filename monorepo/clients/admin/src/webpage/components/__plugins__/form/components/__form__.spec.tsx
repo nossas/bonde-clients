@@ -1,14 +1,41 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
-import shallowWithIntl from 'intl/helpers/shallow-with-intl'
-import { Form } from 'mobilizations/widgets/__plugins__/form/components/__form__.connected'
+import { shallow } from "enzyme";
+import type { Status } from "../../../../reducers";
+import Form from './__form__'
 
 describe('client/mobilizations/widgets/__plugins__/form/components/__form__', () => {
   let wrapper
+  const status: Status = 'active';
+  const kind: any = "draft";
   const props = {
-    mobilization: {},
+    mobilization: {
+      id: 2,
+      color_scheme: 'meu-rio',
+      header_font: 'headerFont',
+      body_font: 'bodyFont',
+      name: 'Lorem',
+      status,
+      slug:  'lorem',
+      goal: 'Lorem ipsum dolor',
+      facebook_share_title: 'Facebook share title',
+      facebook_share_description: 'Facebook share description',
+      facebook_share_image: 'http://facebook.com/share-image.png',
+      updated_at: new Date().toISOString(),
+      user_id: 1,
+      language: "pt-br",
+      created_at: new Date().toISOString(),
+      community_id: 2
+    },
     widget: {
+      id: 1,
+      kind,
+      sm_size: 3,
+      md_size: 3,
+      lg_size: 3,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      block_id: 1,
       settings: {
         finish_message_type: 'share'
       }
@@ -20,7 +47,7 @@ describe('client/mobilizations/widgets/__plugins__/form/components/__form__', ()
   }
 
   beforeAll(() => {
-    wrapper = shallowWithIntl(<Form {...props} />)
+    wrapper = shallow(<Form {...props} />)
   })
 
   describe('#render', () => {

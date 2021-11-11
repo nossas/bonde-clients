@@ -1,14 +1,24 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
 import EditorUtils from '../EditorUtils'
 import ColorPickerButton from './ColorPickerButton'
 
+interface ColorControlsProperties {
+  editorState: any;
+  setEditorState: (editorState: any) => void
+  focusEditor: () => void;
+  buttonClassName?: string;
+  theme?: string;
+}
 
-export default class ColorControls extends React.Component {
+interface ColorControlsState {
+  color?: string;
+}
+
+export default class ColorControls extends React.Component<ColorControlsProperties, ColorControlsState> {
   constructor(props) {
     super(props)
-    this.state = { color: null }
+    this.state = { color: undefined }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -64,16 +74,8 @@ export default class ColorControls extends React.Component {
   }
 }
 
-ColorControls.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  setEditorState: PropTypes.func.isRequired,
-  focusEditor: PropTypes.func.isRequired,
-  buttonClassName: PropTypes.string,
-  theme: PropTypes.string
-}
-
 export const customStyleFn = (style) => {
-  const output = {}
+  const output: any = {}
   const color = style.filter(value => value.startsWith('color')).last()
   if (color) {
     output.color = color

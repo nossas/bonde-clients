@@ -1,36 +1,36 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 
+interface DropdownMenuItemProperties {
+  href?: string;
+  children?: any
+  onClick?: () => void
+  onItemClick?: () => void
+  disabled?: boolean;
+  className?: string
+}
 
-const DropdownMenuItem = props => {
-  const handleClick = event => {
-    (props.onClick || props.disabled) && event && event.preventDefault()
-    if (!props.disabled) {
-      props.onItemClick && props.onItemClick()
-      props.onClick && props.onClick()
+const DropdownMenuItem = (properties: DropdownMenuItemProperties): React.ReactElement => {
+  const handleClick = (event): void => {
+    (properties.onClick || properties.disabled) && event && event.preventDefault()
+    if (!properties.disabled) {
+      properties.onItemClick && properties.onItemClick()
+      properties.onClick && properties.onClick()
     }
   }
 
-  const { className, disabled, href, children } = props
+  const { className, disabled, href, children } = properties
 
   return (
     <a
       className={classnames(className, (disabled ? 'muted' : ''))}
-      disabled={disabled}
+      style={{
+        pointerEvents: disabled ? "none" : "initial"
+      }}
       onClick={handleClick}
       href={href}>
       {children}
     </a>
   )
-}
-
-DropdownMenuItem.propTypes = {
-  href: PropTypes.string,
-  children: PropTypes.object,
-  onClick: PropTypes.func,
-  onItemClick: PropTypes.func,
-  disabled: PropTypes.bool,
-  className: PropTypes.string
 }
 
 export default DropdownMenuItem

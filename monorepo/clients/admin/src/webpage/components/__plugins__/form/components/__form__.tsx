@@ -12,7 +12,7 @@ interface FormProperties {
   editable: boolean;
   configurable: boolean;
   hasNewField: boolean;
-  intl: any
+  intl?: any
 }
 
 class Form extends React.Component<FormProperties, any> {
@@ -51,14 +51,11 @@ class Form extends React.Component<FormProperties, any> {
 
   renderFields(): React.ReactElement[] {
     const fields = this.fields()
-    return fields.map((field, index) => (
+    return fields.map((field) => (
       <Input
-        {...this.props}
-        key={field.uid}
         uid={field.uid}
-        canMoveUp={index !== 0}
-        canMoveDown={index !== fields.length - 1}
         field={field}
+        mobilization={this.props.mobilization}
       />
     ))
   }
@@ -92,7 +89,7 @@ class Form extends React.Component<FormProperties, any> {
         <div className='mt2 h3 center white' style={{ fontFamily: bodyFont }}>
           <CountUp
             start={0}
-            end={!isNaN(count) && startCounting ? Number(count) : 0}
+            end={count && startCounting ? count : 0}
             duration={5}
           />
           &nbsp;

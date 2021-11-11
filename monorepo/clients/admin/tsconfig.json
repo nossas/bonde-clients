@@ -15,7 +15,8 @@
 		"types": ["vite/client", "node", "jest"],
 		"target": "ESNext",
 		"noImplicitAny": false,
-		"useUnknownInCatchVariables": true
+		"useUnknownInCatchVariables": true,
+		"esModuleInterop": true,
 	},
 	"include": ["src", "vite.config.ts", "global.d.ts"]
 }

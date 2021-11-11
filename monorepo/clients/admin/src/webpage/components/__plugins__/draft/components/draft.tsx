@@ -1,12 +1,19 @@
-
-// import { injectIntl, intlShape } from 'react-intl'
 import widgetsPlugins from '../../config';
+import type { Mobilization, Widget } from "../../../../reducers";
 import DraftButton from './draft-button'
-
 import('./draft.scss')
 
-const Draft = ({ mobilization, widget, update, intl, ...extraProps }) => {
-  const updateKind = props => update({ ...widget, ...props })
+interface WidgetComponentProperties {
+  mobilization: Mobilization;
+  widget: Widget;
+  update: (widget: Widget) => void;
+}
+
+const Draft = ({
+  mobilization,
+  widget,
+  update
+}: WidgetComponentProperties): React.ReactElement => {
   const widgetsConfig = widgetsPlugins(
     mobilization,
     widget,
@@ -15,24 +22,22 @@ const Draft = ({ mobilization, widget, update, intl, ...extraProps }) => {
 
   return (
     <div className='draft-widget widget center rounded lightgray clearfix'>
-      {widgetsConfig.map((wc, index) => {
-        const props = Object.assign({}, wc)
-        delete props.component
-        return (
+      {widgetsConfig.map((widgetConfig) => (
           <DraftButton
-            key={`wc-${index}`}
+            label={widgetConfig.label || ""}
             widget={widget}
-            updateKind={updateKind}
-            {...props}
+            updateKind={(): any => {
+              update({
+                ...widget,
+                kind: widgetConfig.kind,
+                settings: widgetConfig.settings
+              })
+            }}
           />
         )
-      })}
+      )}
     </div>
   )
 }
-
-// Draft.propTypes = {
-//   intl: intlShape.isRequired
-// }
 
 export default Draft;

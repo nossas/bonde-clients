@@ -1,27 +1,15 @@
-import React from 'react'
 import { expect } from 'chai'
+import { shallow } from 'enzyme';
+import { NavbarEditionWrapper } from './navbar-edition-wrapper'
 
-import shallowWithIntl from 'intl/helpers/shallow-with-intl'
-import { NavbarEditionWrapper } from 'components/navigation/navbar/navbar-edition-wrapper'
-import { IntlProvider } from 'react-intl';
-
-const intlProvider = new IntlProvider({ locale: 'en' }, {});
-const { intl } = intlProvider.getChildContext();
-
-const block = {}
-const mobilization = {}
-const auth = {}
-const dispatch = () => {}
+const block = {};
+const blockUpdate = jest.fn();
 
 describe('client/components/navigation/navbar/navbar-edition-wrapper', () => {
-  const wrapper = shallowWithIntl(
+  const wrapper = shallow(
     <NavbarEditionWrapper
       block={block}
-      mobilization={mobilization}
-      auth={auth}
-      dispatch={dispatch}
-      intl={intl}
-      blockUpdate={Function}
+      blockUpdate={blockUpdate}
     />
   )
   it('should render form when its in the edit mode', () => {

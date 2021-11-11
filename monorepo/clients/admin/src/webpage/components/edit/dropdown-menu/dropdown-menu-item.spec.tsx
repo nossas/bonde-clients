@@ -1,5 +1,4 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 import sinon from 'sinon'
@@ -43,13 +42,13 @@ describe('client/components/dropdown-menu/dropdown-menu-item', () => {
       component = shallow(<DropdownMenuItem {...props} onClick={handleClick} />)
       component.simulate('click')
 
-      expect(component.find('a').at(0).props().disabled).to.be.false
+      expect(component.find('a').at(0).props().style.pointerEvents).to.equal("none")
       expect(handleClick).to.have.been.calledOnce
     })
 
     it('should render disabled', () => {
       component = shallow(<DropdownMenuItem {...props} disabled />)
-      expect(component.find('a').at(0).props().disabled).to.be.true
+      expect(component.find('a').at(0).props().style.pointerEvents).to.equal("none")
     })
   })
 })

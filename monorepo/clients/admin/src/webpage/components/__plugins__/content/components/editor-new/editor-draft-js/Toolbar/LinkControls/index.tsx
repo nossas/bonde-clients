@@ -1,20 +1,25 @@
 import classnames from 'classnames'
 import { Entity } from 'draft-js'
-import PropTypes from 'prop-types'
 import React from 'react'
 import EditorUtils from '../EditorUtils'
 import getSelectionEntities from '../getSelectionEntities'
 import Link from './Link'
 import linkStrategy from './linkStrategy'
 
-
+interface LinkControlsProperties {
+  editorState: any;
+  setEditorState: (editorState: any) => void
+  focusEditor: () => void;
+  buttonClassName?: string;
+  popoverClassName?: string;
+}
 
 const getSelectionLink = (editorState) => {
   // Return entity when one and only one selected
   return getSelectionEntities(editorState, 'LINK').last()
 }
 
-export default class LinkControls extends React.Component {
+export default class LinkControls extends React.Component<LinkControlsProperties> {
   constructor(props) {
     super(props)
     this.state = {
@@ -110,14 +115,6 @@ export default class LinkControls extends React.Component {
       </div>
     )
   }
-}
-
-LinkControls.propTypes = {
-  editorState: PropTypes.object.isRequired,
-  setEditorState: PropTypes.func.isRequired,
-  focusEditor: PropTypes.func.isRequired,
-  buttonClassName: PropTypes.string,
-  popoverClassName: PropTypes.string
 }
 
 export const decorator = {

@@ -1,16 +1,17 @@
-import React from 'react'
 import { expect } from 'chai'
 import { mount } from 'enzyme'
 import sinon from 'sinon'
 import ReactS3Uploader from 'react-s3-uploader'
-import FileUploader from '../../mobrender/components/file-uploader'
+import FileUploader from './file-uploader';
 
 describe('mobrender/components/file-uploader', () => {
   let confirmStub
   let uploader
   const props = {
     file: 'tmp://myimage.png',
-    onRemove: () => {}
+    onRemove: jest.fn(),
+    onProgress: jest.fn(),
+    onFinish: jest.fn()
   }
 
   beforeEach(() => {

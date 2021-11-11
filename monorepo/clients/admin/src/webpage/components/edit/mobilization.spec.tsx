@@ -1,15 +1,13 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import * as mock from '../../utils/mock'
-import Mobilization from '../../mobrender/components/mobilization'
-import Block from '../../mobrender/components/block.connected'
+import Mobilization from './mobilization'
+import Block from './block.connected'
 
 describe('client/mobrender/components/mobilization', () => {
   let wrapper
-  const props = {
+  const properties: any = {
     mobilization: {
       id: 1,
       color_scheme: 'meu-rio',
@@ -28,12 +26,11 @@ describe('client/mobrender/components/mobilization', () => {
     widgets: [
       { id: 1, block_id: 1, kind: 'draft' },
       { id: 2, block_id: 2, kind: 'draft' }
-    ],
-    store: mock.store({ auth: { user: { email: 'foo@bar.com' } } })
+    ]
   }
 
   beforeEach(() => {
-    wrapper = shallow(<Mobilization {...props} />, { disableLifecycleMethods: true })
+    wrapper = shallow(<Mobilization {...properties} />, { disableLifecycleMethods: true })
   })
 
   it('render without crashed', () => {
@@ -41,29 +38,29 @@ describe('client/mobrender/components/mobilization', () => {
   })
 
   it('renders with color_scheme, header_font, body_font custom by default', () => {
-    const { mobilization: m } = props
+    const { mobilization: m } = properties
     const themeClassName = `.${m.color_scheme}.${m.header_font}-header.${m.body_font}-body`
     expect(wrapper.find(`div${themeClassName}`).length).to.equal(1)
   })
 
   it('renders Navbar with blocks and editable props passed', () => {
-    expect(wrapper.find('Navbar').props().blocks).to.equal(props.blocks)
-    expect(wrapper.find('Navbar').props().editable).to.equal(props.editable || false)
+    expect(wrapper.find('Navbar').props().blocks).to.equal(properties.blocks)
+    expect(wrapper.find('Navbar').props().editable).to.equal(properties.editable || false)
   })
 
   it('should pass widgets filter by block to block component', () => {
     // jump the scroll offset handling
-    wrapper.setState({ blocks: props.blocks })
+    wrapper.setState({ blocks: properties.blocks })
 
-    let expected = props.widgets.filter(w => w.block_id === props.blocks[0].id)
+    let expected = properties.widgets.filter(w => w.block_id === properties.blocks[0].id)
     expect(wrapper.find(Block).at(0).props().widgets).to.deep.equal(expected)
 
-    expected = props.widgets.filter(w => w.block_id === props.blocks[1].id)
+    expected = properties.widgets.filter(w => w.block_id === properties.blocks[1].id)
     expect(wrapper.find(Block).at(1).props().widgets).to.deep.equal(expected)
   })
 
   describe('when is editable', () => {
-    const editableWrapper = shallow(<Mobilization {...props} editable />, {
+    const editableWrapper = shallow(<Mobilization {...properties} editable />, {
       disableLifecycleMethods: true
     })
 
@@ -80,7 +77,7 @@ describe('client/mobrender/components/mobilization', () => {
 
     it('should render all blocks', () => {
       editableWrapper.setProps({ editable: true })
-      expect(editableWrapper.find(Block).length).to.equal(props.blocks.length)
+      expect(editableWrapper.find(Block).length).to.equal(properties.blocks.length)
     })
   })
 
@@ -104,7 +101,7 @@ describe('client/mobrender/components/mobilization', () => {
         facebook_share_title,
         facebook_share_description,
         facebook_share_image
-      } = props.mobilization
+      } = properties.mobilization
 
       const expected = {
         title: name,
@@ -122,7 +119,7 @@ describe('client/mobrender/components/mobilization', () => {
     })
 
     it('should render only visible blocks', () => {
-      const visibleBlocks = props.blocks.filter(b => !b.hidden)
+      const visibleBlocks = properties.blocks.filter(b => !b.hidden)
       expect(wrapper.find(Block).length).to.equal(visibleBlocks.length)
     })
   })

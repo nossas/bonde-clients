@@ -1,19 +1,25 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
-// Dependency modules
 import { DropdownMenu } from '../dropdown-menu';
+// import type { INavbarEditionWrapper } from "../navbar";
 import { NavbarEditionWrapper } from '../navbar';
 
+// interface MenuItemsProperties extends Pick<INavbarEditionWrapper, 'block'> {
+//   mobile: boolean;
+//   blocks: any[]
+// }
 
-
-const MenuItems = ({ blocks, mobile, ...menuProps }) => {
+const MenuItems = ({
+  blocks,
+  mobile,
+  ...props
+}: any): React.ReactElement => {
   const items = blocks.map(block => (
     <div key={block.id} className={classnames({ 'menu-item inline-block': !mobile })}>
       <NavbarEditionWrapper
+        {...props}
         key={`navbar-edition-wrapper-${block.id}`}
-        block={block}
         className='btn btn-transparent block white p2'
-        {...menuProps}
+        block={block}
       />
     </div>
   ))
@@ -37,17 +43,6 @@ const MenuItems = ({ blocks, mobile, ...menuProps }) => {
       </DropdownMenu>
     </div>
   )
-}
-
-MenuItems.defaultProps = {
-  mobile: false
-}
-
-MenuItems.propTypes = {
-  blocks: PropTypes.arrayOf(
-    PropTypes.shape({ id: PropTypes.number })
-  ).isRequired,
-  mobile: PropTypes.bool
 }
 
 export default MenuItems

@@ -1,16 +1,26 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
+import type { Mobilization, Widget } from "../../../../reducers";
 // import { Loading } from '../../../../../components/await'
 // Global module dependencies
 import { WYSIHTMLToolbar } from './editor-wysihtml'
 
-class EditorOld extends React.Component {
+interface EditorOldProperties {
+  mobilization: Mobilization;
+  widget: Widget;
+  editable: boolean;
+  onEdit: () => void
+  onCancelEdit: () => void
+  update: (widget: Widget) => void
+  handleForceRender?: () => void
+}
+
+class EditorOld extends React.Component<EditorOldProperties, any> {
   constructor(properties, context) {
     super(properties, context)
     this.state = {
       editing: false,
-      editor: null,
+      editor: undefined,
       content: properties.widget.settings.content,
       toolbarId: `wysihtml5-toolbar-${this.props.widget.id}`,
       loading: false
@@ -20,7 +30,7 @@ class EditorOld extends React.Component {
   componentDidMount() {
     if (this.props.editable) {
       import('./wysihtml-toolbar.min')
-        .then(({ wysihtml5, wysihtml5ParserRules }) => {
+        .then(({ wysihtml5, wysihtml5ParserRules }: any): void => {
           const editor = new wysihtml5.Editor(
             this.refs.content, {
             toolbar: this.state.toolbarId,
@@ -47,14 +57,16 @@ class EditorOld extends React.Component {
   enableEditor() {
     this.setState({ editing: true })
     this.props.onEdit && this.props.onEdit()
-    window.addEventListener('keyup', this.handleEscapePress.bind(this))
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+    window.addEventListener('keyup', this.handleEscapePress.bind(this));
   }
 
   disableEditor() {
     this.setState({ editing: false })
     this.props.onCancelEdit && this.props.onCancelEdit()
-    window.removeEventListener('keyup', this.handleEscapePress.bind(this))
-    this.refs.content.blur()
+    // eslint-disable-next-line unicorn/no-invalid-remove-event-listener
+    window.removeEventListener('keyup', this.handleEscapePress.bind(this));
+    (this.refs.content as any).blur()
   }
 
   handleEditorFocus() {
@@ -76,15 +88,14 @@ class EditorOld extends React.Component {
       element.addEventListener(event, (e) => { if (e.target.matches(selector)) handler(e); });
     }
 
-    window.addEventListener('click touchstart', function (e) {
+    window.addEventListener('click touchstart', (e) => {
       on('.content-widget a:not([target="_blank"])', 'click touchstart', this.handleClick.bind(this))
     })
   }
 
   handleClick(e) {
-    console.log(e)
     e.preventDefault()
-    const target = document.getElementById(e.target)
+    const target: any = document.getElementById(e.target)
 
     target.scrollIntoView({ behavior: "smooth" })
   }
@@ -116,10 +127,10 @@ class EditorOld extends React.Component {
 
   handleRenderNewEditor() {
     const { handleForceRender } = this.props
-    if (window.confirm(`Ao converter seu conteúdo para o novo editor
-      algumas informações podem ser perdidas,
-      tem certeza que você quer alterar para o novo editor?`)) {
-      handleForceRender()
+    if (handleForceRender && window.confirm(`Ao converter seu conteúdo para o novo editor
+        algumas informações podem ser perdidas,
+        tem certeza que você quer alterar para o novo editor?`)) {
+          handleForceRender()
     }
   }
 
@@ -155,7 +166,7 @@ class EditorOld extends React.Component {
               >
                 Alterar editor
               </button>
-            ) : null}
+            ) : undefined}
             <button
               onClick={this.save.bind(this)}
               className='btn caps bg-darken-4 white rounded'
@@ -168,15 +179,6 @@ class EditorOld extends React.Component {
       </div>
     )
   }
-}
-
-EditorOld.propTypes = {
-  mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
-  editable: PropTypes.bool.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  onCancelEdit: PropTypes.func.isRequired,
-  update: PropTypes.func
 }
 
 export default EditorOld
