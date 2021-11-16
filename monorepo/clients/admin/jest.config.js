@@ -1,6 +1,6 @@
 module.exports = {
   // The root of the source code, `<rootDir>` is a token Jest substitutes
-  roots: ["<rootDir>/src/"],
+  roots: ["<rootDir>/src/webpage"],
 
   // The test environment that will be used for testing, jsdom for browser environment
   testEnvironment: "jsdom",
@@ -19,9 +19,9 @@ module.exports = {
   testPathIgnorePatterns: ["<rootDir>/cypress/"],
 
   // Code coverage config
-  collectCoverageFrom: ["<rootDir>/src/**/*.{ts,tsx}"],
+  collectCoverageFrom: ["<rootDir>/src/webpage/**/*.{ts,tsx}"],
   coverageDirectory: "<rootDir>/coverage/",
-  coveragePathIgnorePatterns: ["<rootDir>/node_modules/", "(.*).d.ts$"],
+  coveragePathIgnorePatterns: ["<rootDir>/node_modules/", "(.*).d.ts$", "(.*).min.tsx$"],
 
   // Important: order matters, specific rules should be defined first
   // See : https://jestjs.io/fr/docs/configuration#modulenamemapper-objectstring-string--arraystring

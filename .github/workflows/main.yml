@@ -1,5 +1,8 @@
-name: Workflow build and tests
-on: [push]
+name: Workflow build and tests canary
+on:
+  push:
+    paths:
+      - 'monorepo/clients/canary'
 jobs:
   tests:
     runs-on: ubuntu-20.04
@@ -23,10 +26,10 @@ jobs:
         run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
       
       - name: Install dependencies
-        run: cd monorepo && pnpm install
+        run: cd monorepo && pnpm m i --filter @bonde/canary
       
       - name: Run tests
-        run: cd monorepo && pnpm m run test:coverage
+        run: cd monorepo && pnpm m run test:coverage  --filter @bonde/canary
       
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v2
