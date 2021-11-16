@@ -74,7 +74,7 @@ describe('mobrender/components/block', () => {
 
     const expected = 'Escondido'
     block.setProps({ block: { ...props.block, hidden: true } })
-    expect(block.find('div.hidden-tag FormattedMessage').props().defaultMessage).to.equal(expected)
+    expect(block.find('div.hidden-tag').text().trim()).to.equal(expected)
   })
 
   describe('render change background', () => {
@@ -97,7 +97,7 @@ describe('mobrender/components/block', () => {
     })
 
     it('should show when hasMouseOver and editable', () => {
-      expect(block.find(BlockConfigMenu).props().display).to.be.undefined
+      expect(block.find(BlockConfigMenu).props().display).to.equal(false)
 
       block.setProps({ hasMouseOver: true, editable: true })
       expect(block.find(BlockConfigMenu).props().display).to.equal(true)

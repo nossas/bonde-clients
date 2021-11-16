@@ -2,7 +2,7 @@ import { gql } from "graphql-request";
 import apiGraphql from "./api-graphql";
 import * as t from '../action-types'
 
-const UPDATE_BLOCK = gql`
+export const UPDATE_BLOCK = gql`
   mutation ($block: blocks_set_input, $id: Int!) {
     update_blocks_by_pk(_set: $block, pk_columns: { id: $id }) {
       bg_class

@@ -45,7 +45,7 @@ const FileUploader = ({ file, onRemove, progress, onProgress, onFinish }: FileUp
           }}
         />
       ) : (
-        <p>Progresso do upload: {progress}</p>
+        <p className='bg-pagenta full-height rounded' style={{ height: '34px' }}>{progress}</p>
         // <Progress
         //   className='bg-pagenta full-height rounded'
         //   percent={progress}

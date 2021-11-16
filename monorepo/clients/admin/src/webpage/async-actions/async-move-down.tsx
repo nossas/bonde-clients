@@ -5,7 +5,7 @@ import apiGraphql from './api-graphql'
 // import AuthSelectors from '../../../account/redux/selectors'
 import Selectors from '../selectors'
 
-const UPDATE_BLOCKS_POSITION = gql`
+export const UPDATE_BLOCKS_POSITION = gql`
   mutation ($objects: [blocks_insert_input!]!) {
     insert_blocks(
       objects: $objects,
@@ -34,7 +34,7 @@ const UPDATE_BLOCKS_POSITION = gql`
 export default (dispatch, state) => (block): void => {
   dispatch({ type: t.UPDATE_BLOCK_REQUEST })
 
-  const blocks = Selectors(state).getBlocks()
+  const blocks: any[] = Selectors(state).getBlocks()
   const nextBlock = blocks[blocks.indexOf(blocks.find(b => b.id === block.id)) + 1]
 
   const updatedBlocks = [

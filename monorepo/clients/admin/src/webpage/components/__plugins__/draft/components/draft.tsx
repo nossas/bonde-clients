@@ -24,6 +24,7 @@ const Draft = ({
     <div className='draft-widget widget center rounded lightgray clearfix'>
       {widgetsConfig.map((widgetConfig) => (
           <DraftButton
+            key={widgetConfig.kind}
             label={widgetConfig.label || ""}
             widget={widget}
             updateKind={(): any => {

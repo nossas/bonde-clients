@@ -45,7 +45,7 @@ describe('client/mobrender/components/mobilization', () => {
 
   it('renders Navbar with blocks and editable props passed', () => {
     expect(wrapper.find('Navbar').props().blocks).to.equal(properties.blocks)
-    expect(wrapper.find('Navbar').props().editable).to.equal(properties.editable || false)
+    expect(wrapper.find('Navbar').props().editable).to.equal(properties.editable)
   })
 
   it('should pass widgets filter by block to block component', () => {

@@ -2,22 +2,22 @@ import { shallow } from 'enzyme'
 import WYSIHTMLToolbar from './wysihtml-toolbar'
 
 describe('client/components/editor-wysihtml/wysihtml-toolbar', () => {
-  let wrapper
   const props = {
     elementId: 'some-id',
     className: 'some-class'
   }
 
   beforeAll(() => {
-    wrapper = shallow(<WYSIHTMLToolbar {...props} />)
   })
-
+  
   describe('#render', () => {
     it('should set the element id', () => {
-      expect(wrapper.props().id).toEqual('some-id')
+      const wrapper = shallow(<WYSIHTMLToolbar {...props} />)
+      expect(wrapper.find("div#some-id").length).toEqual(1);
     })
     it('should set the element classes', () => {
-      expect(wrapper.props().className).toHaveTextContent('some-class')
+      const wrapper = shallow(<WYSIHTMLToolbar {...props} />)
+      expect(wrapper.find("div.some-class").length).toEqual(1);
     })
   })
 })
