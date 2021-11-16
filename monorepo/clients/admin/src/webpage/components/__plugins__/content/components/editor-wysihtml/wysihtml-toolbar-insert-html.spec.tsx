@@ -1,23 +1,12 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { WYSIHTMLToolbarInsertHTML } from 'components/editor-wysihtml'
+import WYSIHTMLToolbarInsertHTML from './wysihtml-toolbar-insert-html';
 
 describe('client/components/editor-wysihtml/wysihtml-toolbar-insert-html', () => {
-  let wrapper
-  const props = {
-    dispatch: () => {}
-  }
-
-  beforeAll(() => {
-    wrapper = shallow(<WYSIHTMLToolbarInsertHTML {...props} />)
-  })
-
-  describe('#render', () => {
-    it('should render without crash', () => {
-      expect(wrapper).to.be.ok
-    })
+  it('should render without crash', () => {
+    const wrapper = shallow(<WYSIHTMLToolbarInsertHTML />)
+    expect(wrapper).to.be.ok
   })
 })

@@ -21,6 +21,7 @@ import { StrikethroughButton, StrikethroughPlugin } from './slate-editor-striket
 import { UnderlineButton, UnderlinePlugin } from './slate-editor-underline-plugin/src'
 import { SlateContent, SlateEditor, SlateToolbar } from './slate-editor/src'
 import styles from './styles'
+import config from "../../../../../../config"
 
 const fontSizePluginOptions = { initialFontSize: 16 }
 const colorPluginOptions = new ColorStateModel().rgba({ r: 100, g: 100, b: 100, a: 1 }).gen()
@@ -48,7 +49,24 @@ const classNames = {
   lastButton: 'btn btn-primary not-rounded border border-gray linebreak'
 }
 
-class EditorSlate extends React.Component {
+interface EditorSlateProperties {
+  content: any;
+  notifySuccess: () => void;
+  handleSave: (value: any) => void;
+  intl?: any;
+  handleDelete: () => void;
+  readOnly: boolean;
+  toolbarStyles?: any;
+  contentStyles?: any;
+}
+
+interface EditorSlateState {
+  editing: boolean;
+  loading: boolean;
+  initialState: any;
+}
+
+class EditorSlate extends React.Component<EditorSlateProperties, EditorSlateState> {
   constructor(properties) {
     super(properties)
     this.state = {
@@ -58,7 +76,7 @@ class EditorSlate extends React.Component {
     }
   }
 
-  handleCancelEditionMode(state, setState) {
+  handleCancelEditionMode(state: any, setState: any): void {
     const initialRaw = Plain.serialize(this.state.initialState)
     const raw = Plain.serialize(state)
     if (initialRaw !== raw) {
@@ -75,9 +93,14 @@ class EditorSlate extends React.Component {
   }
 
   handleSave(state) {
+    const {
+      notifySuccess,
+      handleSave = () => { },
+    } = this.props;
+
     this.setState({ initialState: state })
-    this.props.handleSave(state)
-    this.props.notifySuccess()
+    handleSave(state)
+    notifySuccess()
   }
 
   render() {
@@ -103,7 +126,7 @@ class EditorSlate extends React.Component {
             <ListButtonBar className={classNames.button} />
             <FontFamilyDropdown className={classNames.dropdown} style={styles.dropdown} />
             <FontSizeInput className={classNames.input} {...fontSizePluginOptions} style={styles.input} />
-            <ImageButton className={classNames.button} signingUrl={`${import.meta.env.VITE_DOMAIN_API_REST}/uploads`} />
+            <ImageButton className={classNames.button} signingUrl={`${config.domainApiRest}/uploads`} />
             <ColorButton className={classNames.button} initialState={colorPluginOptions} pickerDefaultPosition={{ x: 0, y: 17 }} />
             <GridButtonBar className={classNames.button} />
             <EmbedButton className={classNames.button} />
@@ -178,10 +201,6 @@ class EditorSlate extends React.Component {
 // EditorSlate.propTypes = {
 //   intl: intlShape.isRequired
 // }
-
-EditorSlate.defaultProps = {
-  handleSave: () => { }
-}
 
 export const createEditorContent = content => JSON.stringify(
   Plain.deserialize(content).toJSON()

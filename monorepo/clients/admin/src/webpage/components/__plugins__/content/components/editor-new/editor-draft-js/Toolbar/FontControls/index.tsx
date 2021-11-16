@@ -103,6 +103,7 @@ export default class FontControls extends React.Component<FontControlsProperties
           className='font-controls-size input col col-3 h5 mx1'
         />
         <SelectFontFamily
+          // eslint-disable-next-line react/jsx-no-bind
           onChange={this.handleChangeFont.bind(this)}
           value={this.state.fontFamily}
           // eslint-disable-next-line react/jsx-no-bind

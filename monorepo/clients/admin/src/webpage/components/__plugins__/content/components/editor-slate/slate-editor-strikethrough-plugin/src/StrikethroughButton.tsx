@@ -3,10 +3,23 @@ import FontAwesome from 'react-fontawesome'
 import { Button } from '../../slate-editor-components/src'
 import { hasMark, strikethroughMarkStrategy } from './StrikethroughUtils'
 
+interface StrikethroughButtonProperties {
+  value?: any;
+  onChange?: any;
+  changeState?: any;
+  className?: string;
+  style?: any;
+  type?: any;
+}
 
-
-function StrikethroughButton({ value, onChange, changeState, className, style, type }) {
-  return <Button
+const StrikethroughButton: React.FC<StrikethroughButtonProperties> = ({
+  value = {},
+  onChange,
+  className,
+  style,
+  type
+}) =>
+  <Button
     style={style}
     type={type}
     onClick={e => onChange(strikethroughMarkStrategy(value.change()))}
@@ -18,6 +31,6 @@ function StrikethroughButton({ value, onChange, changeState, className, style, t
   >
     <FontAwesome name="strikethrough" />
   </Button>
-}
+;
 
 export default StrikethroughButton

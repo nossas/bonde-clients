@@ -1,4 +1,5 @@
 class ColorStateModel {
+  color: any;
 
   constructor() {
     this.color = {

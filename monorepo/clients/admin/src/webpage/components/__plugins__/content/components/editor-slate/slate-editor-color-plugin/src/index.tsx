@@ -15,10 +15,8 @@ import * as ColorUtils from './ColorUtils'
 import ColorButton from './ColorButton'
 import ColorStateModel from './ColorStateModel'
 
-const ColorPlugin = options => ({
-  onKeyDown(...args) {
-    return ColorKeyboardShortcut(...args)
-  }
+const ColorPlugin = (): any => ({
+  onKeyDown: ColorKeyboardShortcut
 })
 
 export {

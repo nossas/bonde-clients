@@ -12,10 +12,8 @@ import StrikethroughMark from './StrikethroughMark'
 //
 import * as StrikethroughUtils from './StrikethroughUtils'
 
-const StrikethroughPlugin = options => ({
-  onKeyDown(...arguments_) {
-    return StrikethroughKeyboardShortcut(...arguments_)
-  },
+const StrikethroughPlugin = (): any => ({
+  onKeyDown: StrikethroughKeyboardShortcut,
 })
 
 export {

@@ -1,12 +1,26 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import ReactS3Uploader from 'react-s3-uploader'
+import config from "../../../../../../../../../config";
 
-class InsertImageButton extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { showInsertDialog: false, isLoading: false, image: null }
+interface InsertImageButtonProperties {
+  buttonClassName: string;
+  popoverClassName: string;
+  handleUploadFinish: (value: any) => void
+}
+
+interface InsertImageButtonState {
+  showInsertDialog: boolean;
+  isLoading: boolean;
+  image?: string;
+}
+
+class InsertImageButton extends React.Component<InsertImageButtonProperties, InsertImageButtonState> {
+  inputFile: any
+
+  constructor(properties) {
+    super(properties)
+    this.state = { showInsertDialog: false, isLoading: false, image: undefined }
   }
 
   handleToggleDialog(e) {
@@ -23,14 +37,15 @@ class InsertImageButton extends React.Component {
 
   handleUploadFinish(e) {
     const { handleUploadFinish } = this.props
-    const imgUrl = e.signedUrl.substring(0, e.signedUrl.indexOf('?'))
+    const imgUrl = e.signedUrl.slice(0, Math.max(0, e.signedUrl.indexOf('?')))
     this.setState({ isLoading: false, image: imgUrl })
 
     handleUploadFinish(imgUrl)
   }
 
   handleOpenDialog() {
-    ReactDOM.findDOMNode(this.inputFile).click()
+    const node: any = ReactDOM.findDOMNode(this.inputFile)
+    node.click()
   }
 
   render() {
@@ -42,12 +57,12 @@ class InsertImageButton extends React.Component {
           <i className='fa fa-image' />
         </button>
         <ReactS3Uploader
-          signingUrl={`${import.meta.env.VITE_DOMAIN_API_REST}/uploads`}
+          signingUrl={`${config.domainApiRest}/uploads`}
           accept='image/*'
           onProgress={this.handleUploadProgress.bind(this)}
           onError={this.handleUploadError.bind(this)}
           onFinish={this.handleUploadFinish.bind(this)}
-          ref={input => { this.inputFile = input }}
+          ref={this.inputFile}
           style={{
             position: 'absolute',
             visibility: 'hidden'
@@ -56,12 +71,6 @@ class InsertImageButton extends React.Component {
       </div>
     )
   }
-}
-
-InsertImageButton.propTypes = {
-  buttonClassName: PropTypes.string,
-  popoverClassName: PropTypes.string,
-  handleUploadFinish: PropTypes.func.isRequired
 }
 
 export default InsertImageButton

@@ -14,12 +14,19 @@ interface LinkControlsProperties {
   popoverClassName?: string;
 }
 
-const getSelectionLink = (editorState) => {
+interface LinkControlsState {
+  showInput: boolean;
+  href: string;
+  target: string;
+  hasLink?: boolean;
+}
+
+const getSelectionLink = (editorState: any): any => {
   // Return entity when one and only one selected
   return getSelectionEntities(editorState, 'LINK').last()
 }
 
-export default class LinkControls extends React.Component<LinkControlsProperties> {
+export default class LinkControls extends React.Component<LinkControlsProperties, LinkControlsState> {
   constructor(props) {
     super(props)
     this.state = {

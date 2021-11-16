@@ -30,13 +30,14 @@ export default class MediaControls extends React.Component<MediaControlsProperti
     return (
       <div className='mediaControls'>
         <InsertImageButton
-          buttonClassName={buttonClassName}
-          popoverClassName={popoverClassName}
+          buttonClassName={buttonClassName || ''}
+          popoverClassName={popoverClassName || ''}
           handleUploadFinish={source => this.handleInsertMedia('image', source)}
         />
         <InsertScriptButton
-          buttonClassName={buttonClassName}
-          popoverClassName={popoverClassName}
+          buttonClassName={buttonClassName || ''}
+          popoverClassName={popoverClassName || ''}
+          // eslint-disable-next-line react/jsx-no-bind
           handleInsertScript={this.handleInsertMedia.bind(this)}
         />
       </div>

@@ -3,8 +3,7 @@ import React from 'react'
 import ImageDataModal from './ImageDataModal'
 import ImageEditLayer from './ImageEditLayer'
 
-
-class ImageLinkNode extends React.Component {
+class ImageLinkNode extends React.Component<any, any> {
   constructor(properties) {
     super(properties)
     this.state = { isModalActive: false }

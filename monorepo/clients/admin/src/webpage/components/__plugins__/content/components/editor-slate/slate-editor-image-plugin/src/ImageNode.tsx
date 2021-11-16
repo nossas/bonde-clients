@@ -7,7 +7,7 @@ import ImageEditLayer from './ImageEditLayer'
 // FIXME: Needs to handle assets files to work with SSR
 import('./ImageNode.css')
 
-class ImageNode extends React.Component {
+class ImageNode extends React.Component<any, any> {
   constructor(properties) {
     super(properties)
     this.state = { isModalActive: false }

@@ -12,10 +12,8 @@ import BoldMark from './BoldMark'
 //
 import * as BoldUtils from './BoldUtils'
 
-const BoldPlugin = options => ({
-  onKeyDown(...arguments_) {
-    return BoldKeyboardShortcut(...arguments_)
-  },
+const BoldPlugin = (): any => ({
+  onKeyDown: BoldKeyboardShortcut,
 })
 
 export {

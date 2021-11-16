@@ -19,10 +19,8 @@ import UnorderedListButton from './UnorderedListButton'
 import OrderedListButton from './OrderedListButton'
 
 
-const ListPlugin = options => ({
-  onKeyDown(...args) {
-    return ListKeyboardShortcut(...args)
-  },
+const ListPlugin = (): any => ({
+  onKeyDown: ListKeyboardShortcut,
 })
 
 export {

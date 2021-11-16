@@ -15,10 +15,8 @@ import * as EmbedUtils from './EmbedUtils'
 import EmbedButton from './EmbedButton'
 
 
-const EmbedPlugin = options => ({
-  onKeyDown(...args) {
-    return EmbedKeyboardShortcut(...args)
-  },
+const EmbedPlugin = (): any => ({
+  onKeyDown: EmbedKeyboardShortcut,
 })
 
 export {

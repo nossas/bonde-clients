@@ -51,17 +51,30 @@ export const renderMark = properties => {
 }
 /* eslint-disable default-case */
 
-export default function ({
+interface SlateContentProperties {
+  className?: string;
+  wrapperStyle?: any;
+  style?: any;
+  value?: any;
+  outerState?: any;
+  plugins?: any[];
+  onChange?: () => void;
+  onFocus: () => void;
+  readOnly: boolean;
+  onKeyDown: (event: any, data: any, state: any) => void
+}
+
+const SlateContent: React.FC<SlateContentProperties | any> = ({
   className,
-  wrapperStyle,
-  style,
+  wrapperStyle = {},
+  style = {},
   value,
-  outerState,
-  plugins,
+  outerState = {},
+  plugins = [],
   onChange,
   children,
   ...rest
-}) {
+}) => {
   const { readOnly } = outerState
 
   return (
@@ -78,7 +91,9 @@ export default function ({
         {...rest}
       />
 
-      {Children.map(children, (child) => cloneElement(child, rest))}
+      {Children.map(children, (child: any) => cloneElement(child, rest))}
     </div>
   )
 }
+
+export default SlateContent;

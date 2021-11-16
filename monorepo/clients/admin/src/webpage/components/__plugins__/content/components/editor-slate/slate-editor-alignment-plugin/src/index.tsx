@@ -15,10 +15,8 @@ import AlignmentRightButton from './AlignmentRightButton'
 //
 import * as AlignmentUtils from './AlignmentUtils'
 
-const AlignmentPlugin = options => ({
-  onKeyDown(...arguments_) {
-    return AlignmentKeyboardShortcut(...arguments_)
-  },
+const AlignmentPlugin = (): any => ({
+  onKeyDown: AlignmentKeyboardShortcut,
 })
 
 export {

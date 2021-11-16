@@ -2,7 +2,9 @@ import React from 'react'
 import { Modal, ModalButton, ModalContent, ModalForm } from '../../slate-editor-components/src'
 import { unlink, updateLinkStrategy } from './LinkUtils'
 
-class LinkDataModal extends React.Component {
+class LinkDataModal extends React.Component<any, any> {
+  inputHref: any;
+
   constructor(properties) {
     super(properties)
 
@@ -47,7 +49,7 @@ class LinkDataModal extends React.Component {
   }
 
   componentDidMount() {
-    this.inputHref.focus()
+    this.inputHref?.focus()
   }
 
   setLinkAttribute(event, value) {

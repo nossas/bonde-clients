@@ -1,6 +1,11 @@
+interface LayerProperties {
+  editing: boolean;
+  onClick: (value: any, changeState: any) => void;
+  value?: any;
+  changeState?: any;
+}
 
-
-function Layer({ editing, onClick, value, changeState }) {
+const Layer = ({ editing, onClick, value, changeState }: LayerProperties) => {
   return (
     <div
       style={{

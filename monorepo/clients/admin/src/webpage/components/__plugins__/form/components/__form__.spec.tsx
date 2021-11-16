@@ -5,7 +5,6 @@ import type { Status } from "../../../../reducers";
 import Form from './__form__'
 
 describe('client/mobilizations/widgets/__plugins__/form/components/__form__', () => {
-  let wrapper
   const status: Status = 'active';
   const kind: any = "draft";
   const props = {
@@ -43,16 +42,14 @@ describe('client/mobilizations/widgets/__plugins__/form/components/__form__', ()
     block: {},
     editable: true,
     configurable: true,
-    hasNewField: false
+    hasNewField: false,
+    intl: {
+      formatMessage: ({ defaultMessage }: any): string => defaultMessage
+    }
   }
 
-  beforeAll(() => {
-    wrapper = shallow(<Form {...props} />)
-  })
-
-  describe('#render', () => {
-    it('should render without crash', () => {
-      expect(wrapper).to.be.ok
-    })
+  it('should render without crash', () => {
+    const wrapper = shallow(<Form {...props} />)
+    expect(wrapper).to.be.ok
   })
 })

@@ -10,10 +10,16 @@ interface SlateEditorProperties {
   // eslint-disable-next-line unicorn/no-keyword-prefix
   className?: string;
   plugins: any[];
-  onChange: any;
+  onChange?: any;
 }
 
-class SlateEditor extends React.Component<SlateEditorProperties> {
+interface SlateEditorState {
+  value: any;
+  readOnly: boolean;
+  uid: any;
+}
+
+class SlateEditor extends React.Component<SlateEditorProperties, SlateEditorState> {
   constructor(properties) {
     super(properties)
     this.state = {

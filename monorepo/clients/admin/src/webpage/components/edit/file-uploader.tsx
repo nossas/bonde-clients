@@ -1,5 +1,6 @@
 import ReactS3Uploader from 'react-s3-uploader'
 // import { Progress } from '../../components/await'
+import config from "../../../config";
 
 interface FileUploaderProperties {
   file?: string;
@@ -35,7 +36,7 @@ const FileUploader = ({ file, onRemove, progress, onProgress, onFinish }: FileUp
         <ReactS3Uploader
           className='input border-none white m0 bg-darken-4'
           accept='image/*'
-          signingUrl={`${import.meta.env.VITE_DOMAIN_API_REST}/uploads`}
+          signingUrl={`${config.domainApiRest}/uploads`}
           onProgress={(percent: number): void => onProgress(percent)}
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           onFinish={(image: any): void => {

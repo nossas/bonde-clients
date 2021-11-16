@@ -19,10 +19,8 @@ import GridButton from './GridButton'
 import GridSplitRowButton from './GridSplitRowButton'
 
 
-const GridPlugin = options => ({
-  onKeyDown(...args) {
-    return GridKeyboardShortcut(...args)
-  },
+const GridPlugin = (): any => ({
+  onKeyDown: GridKeyboardShortcut,
 })
 
 export {

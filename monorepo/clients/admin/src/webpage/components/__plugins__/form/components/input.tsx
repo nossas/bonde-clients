@@ -17,7 +17,8 @@ class Input extends React.Component<InputProperties, any> {
 
   renderFieldKind(): React.ReactElement {
     const { field, uid, editable, configurable } = this.props
-
+      // const { field, uid, editable, configurable, onBlur } = this.props
+  
     if (field.kind === 'dropdown') {
       return (
         <select
@@ -33,14 +34,29 @@ class Input extends React.Component<InputProperties, any> {
           <option value=''>
             Selecione...
             {/* <FormattedMessage
-              id='form-widget.components--input.field-dropdown.options.default'
-              defaultMessage='Selecione...'
+            id='form-widget.components--input.field-dropdown.options.default'
+            defaultMessage='Selecione...'
             /> */}
           </option>
           {
-            field.placeholder.split(',').map((v) => <option>{v}</option>)
+            field.placeholder.split(',').map((v) => <option key={v}>{v}</option>)
           }
         </select>
+      );
+    }
+    if (field.kind === 'greetings') {
+      return (
+        <p className='block full-width'>
+          <strong>
+            Mensagem de sucesso alterada para:
+            {/* <FormattedMessage
+              id='form-widget.components--input.field-greetings.title'
+              defaultMessage='Mensagem de sucesso alterada para:'
+            /> */}
+          </strong>
+          <br />
+          {field.placeholder}
+        </p>
       );
     }
 
@@ -63,8 +79,6 @@ class Input extends React.Component<InputProperties, any> {
   render(): React.ReactElement {
     const {
       field,
-      editable,
-      configurable,
       mobilization: {
         body_font: bodyFont
       }
@@ -80,10 +94,9 @@ class Input extends React.Component<InputProperties, any> {
         <label
           className={classnames(
             'caps bold mb1 inline-block',
-            configurable ? 'darkengray' : 'white'
+            'white'
           )}
           style={{
-            cursor: editable || configurable ? 'pointer' : undefined,
             fontSize: '.75rem',
             fontWeight: 600,
             marginBottom: '1rem'

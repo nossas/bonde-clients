@@ -15,10 +15,8 @@ import * as LinkUtils from './LinkUtils'
 
 
 
-const LinkPlugin = options => ({
-  onKeyDown(...arguments_) {
-    return LinkKeyboardShortcut(...arguments_)
-  },
+const LinkPlugin = (): any => ({
+  onKeyDown: LinkKeyboardShortcut,
 })
 
 export {

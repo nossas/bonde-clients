@@ -2,7 +2,8 @@ import { EditorState, Entity, Modifier, RichUtils, SelectionState } from 'draft-
 
 import getSelectionEntities from './getSelectionEntities'
 
-export const getEntitySelectionState = (editorState, selectionState, entityType) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getEntitySelectionState = (editorState: any, selectionState: any, entityType: any): any => {
   // Selection cursor
   const currentContent = editorState.getCurrentContent()
   const endOffset = selectionState.getEndOffset()
@@ -31,7 +32,8 @@ export const getEntitySelectionState = (editorState, selectionState, entityType)
 /*
  * getSelectedBlocks
  */
-export const getSelectedBlocks = (contentState, selectionState) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSelectedBlocks = (contentState: any, selectionState: any): any => {
   const anchorKey = selectionState.getStartKey()
   const focusKey = selectionState.getEndKey()
 
@@ -61,7 +63,8 @@ export const getSelectedBlocks = (contentState, selectionState) => {
   return selectedBlocks
 }
 
-const getBlockSelectionState = (contentBlock, selectionState) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getBlockSelectionState = (contentBlock: any, selectionState: any): any => {
   const anchorKey = selectionState.getStartKey()
   const focusKey = selectionState.getEndKey()
 
@@ -83,7 +86,8 @@ const getBlockSelectionState = (contentBlock, selectionState) => {
  */
 export default {
 
-  toggleInlineStyle: (editorState, inlineStyle) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  toggleInlineStyle: (editorState: any, inlineStyle: any): any => {
     if (inlineStyle.indexOf(':') > 0) {  // remove and add new custom inline style
       let contentWithoutStyle = editorState.getCurrentContent()
 
@@ -108,7 +112,8 @@ export default {
     return RichUtils.toggleInlineStyle(editorState, inlineStyle)
   },
 
-  toggleLink: (editorState, data) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  toggleLink: (editorState: any, data: any): any => {
     /* This code need refactor */
     // Save editorState then apply link in loop
     let editorStateMutable = editorState
@@ -128,7 +133,7 @@ export default {
         if (entity) {  // When has entity selected
           if (block.getType() === 'atomic') {
             if (!data) {  // Remove
-              Entity.mergeData(entity, { href: null })
+              Entity.mergeData(entity, { href: undefined })
             } else {  // Update
               Entity.mergeData(entity, data)
             }
@@ -136,24 +141,21 @@ export default {
             const blockSelectionState = getBlockSelectionState(block, selection)
             const entitySelectionState = getEntitySelectionState(editorState, blockSelectionState, 'LINK')
 
-            if (entitySelectionState && data) {
-              editorStateMutable = RichUtils.toggleLink(
+            editorStateMutable = entitySelectionState && data
+              ? RichUtils.toggleLink(
                 editorStateMutable,
                 blockSelectionState,
                 Entity.create('LINK', 'MUTABLE', data)
               )
-            } else {
-              editorStateMutable = RichUtils.toggleLink(
+              : RichUtils.toggleLink(
                 editorStateMutable,
-                blockSelectionState,
-                null
+                blockSelectionState
               )
-            }
           }
         } else if (block.getText().length > 0) {
           if (!entityKey) {
             // Ensure only a entity been created
-            entityKey = data ? Entity.create('LINK', 'MUTABLE', data) : null
+            entityKey = data ? Entity.create('LINK', 'MUTABLE', data) : undefined
           }
 
           // Toggle link
@@ -169,16 +171,16 @@ export default {
       })
 
       return editorStateMutable
-    } else {
-      const selectionEntity = getSelectionEntities(editorState, 'LINK').last()
-      if (selectionEntity) {
-        Entity.mergeData(selectionEntity.entityKey, data)
-      }
-      return editorState
     }
+    const selectionEntity: any = getSelectionEntities(editorState, 'LINK').last()
+    if (selectionEntity) {
+      Entity.mergeData(selectionEntity.entityKey, data)
+    }
+    return editorState
   },
 
-  getEntityInstance: (editorState, selectionState, entityType) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getEntityInstance: (editorState: any, selectionState: any, entityType: any): any => {
     const entitySelectionState = getEntitySelectionState(
       editorState,
       selectionState,

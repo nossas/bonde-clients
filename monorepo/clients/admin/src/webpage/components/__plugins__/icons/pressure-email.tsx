@@ -1,7 +1,7 @@
 /* eslint-disable */
 
 
-export default ({ size }) => (
+export default ({ size }): any => (
     <svg width={size || '39'} height={size || '37'} viewBox='0 0 39 37' xmlns='http://www.w3.org/2000/svg'
         xmlnsXlink='http://www.w3.org/1999/xlink'>
         <defs>
@@ -9,27 +9,27 @@ export default ({ size }) => (
                 id='path-1' />
             <filter x='-20.8%' y='-20.8%' width='158.3%' height='158.3%' filterUnits='objectBoundingBox'
                 id='filter-2'>
-                <femorphology radius='1' operator='dilate' in='SourceAlpha' result='shadowSpreadOuter1'>
-                    <feoffset dx='2' dy='2' in='shadowSpreadOuter1' result='shadowOffsetOuter1'>
-                        <fegaussianblur stdDeviation='1' in='shadowOffsetOuter1' result='shadowBlurOuter1'>
-                            <fecolormatrix values='0 0 0 0 0.183434311 0 0 0 0 0.183434311 0 0 0 0 0.183434311 0 0 0 0.17 0'
+                <feMorphology radius='1' operator='dilate' in='SourceAlpha' result='shadowSpreadOuter1'>
+                    <feOffset dx='2' dy='2' in='shadowSpreadOuter1' result='shadowOffsetOuter1'>
+                        <feGaussianBlur stdDeviation='1' in='shadowOffsetOuter1' result='shadowBlurOuter1'>
+                            <feColorMatrix values='0 0 0 0 0.183434311 0 0 0 0 0.183434311 0 0 0 0 0.183434311 0 0 0 0.17 0'
                                 in='shadowBlurOuter1' />
-                        </fegaussianblur>
-                    </feoffset>
-                </femorphology>
+                        </feGaussianBlur>
+                    </feOffset>
+                </feMorphology>
             </filter>
             <path d='M12,16 C13.65,16 15,17.35 15,19 C15,20.65 13.65,22 12,22 C10.35,22 9,20.65 9,19 C9,17.35 10.35,16 12,16 L12,16 Z M12,13 C8.7,13 6,15.7 6,19 C6,22.3 8.7,25 12,25 C15.3,25 18,22.3 18,19 C18,15.7 15.3,13 12,13 L12,13 L12,13 Z'
                 id='path-3' />
             <filter x='-41.7%' y='-41.7%' width='216.7%' height='216.7%' filterUnits='objectBoundingBox'
                 id='filter-4'>
-                <femorphology radius='1' operator='dilate' in='SourceAlpha' result='shadowSpreadOuter1'>
-                    <feoffset dx='2' dy='2' in='shadowSpreadOuter1' result='shadowOffsetOuter1'>
-                        <fegaussianblur stdDeviation='1' in='shadowOffsetOuter1' result='shadowBlurOuter1'>
-                            <fecolormatrix values='0 0 0 0 0.183434311 0 0 0 0 0.183434311 0 0 0 0 0.183434311 0 0 0 0.17 0'
+                <feMorphology radius='1' operator='dilate' in='SourceAlpha' result='shadowSpreadOuter1'>
+                    <feOffset dx='2' dy='2' in='shadowSpreadOuter1' result='shadowOffsetOuter1'>
+                        <feGaussianBlur stdDeviation='1' in='shadowOffsetOuter1' result='shadowBlurOuter1'>
+                            <feColorMatrix values='0 0 0 0 0.183434311 0 0 0 0 0.183434311 0 0 0 0 0.183434311 0 0 0 0.17 0'
                                 in='shadowBlurOuter1' />
-                        </fegaussianblur>
-                    </feoffset>
-                </femorphology>
+                        </feGaussianBlur>
+                    </feOffset>
+                </feMorphology>
             </filter>
         </defs>
         <g id='Symbols' fill='none' fillRule='evenodd'>

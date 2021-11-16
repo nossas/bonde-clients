@@ -11,13 +11,12 @@ import ValidatePluginOptions from './ValidatePluginOptions'
 
 
 
-const FontSizePlugin = options => {
-
+const FontSizePlugin = (options): any => {
   ValidatePluginOptions(options)
 
   return {
-    onKeyDown(...arguments_) {
-      return FontSizeKeyboardShortcut(...arguments_, options)
+    onKeyDown(event, change, editor): any {
+      return FontSizeKeyboardShortcut(event, change, editor, options)
     }
   }
 }

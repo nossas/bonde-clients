@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 import { SketchPicker } from 'react-color';
 import Draggable from 'react-draggable';
 import { colorMarkStrategy, getMark, hasMark } from './ColorUtils';
@@ -6,8 +5,26 @@ import { colorMarkStrategy, getMark, hasMark } from './ColorUtils';
 // FIXME: Needs to handle assets files to work with SSR
 import('./DraggableColorPicker.css')
 
+interface OuterState {
+  color: {
+    showPicker: boolean;
+    rgba: {
+      r: number;
+      g: number;
+      b: number;
+      a: number;
+    }
+  }
+}
 
-const DraggableColorPicker = ({
+interface DraggableColorPickerProperties {
+  value: any;
+  changeState: any;
+  outerState: OuterState;
+}
+
+
+const DraggableColorPicker: React.FC<DraggableColorPickerProperties | any> = ({
   value,
   changeState,
   outerState: {
@@ -19,13 +36,14 @@ const DraggableColorPicker = ({
   if (hasMark(value)) {
     rgba = getMark(value).data.get('rgba')
   }
+  const draggableProperties: any = {
+    handle: ".slate-color-plugin--draggable-handle",
+    defaultPosition: pickerDefaultPosition,
+    zIndex: 100
+  }
 
   return (
-    <Draggable
-      handle=".slate-color-plugin--draggable-handle"
-      defaultPosition={pickerDefaultPosition}
-      zIndex={100}
-    >
+    <Draggable {...draggableProperties}>
       <div className="slate-color-plugin--draggable-handle-container">
         <div className="slate-color-plugin--draggable-handle" />
         <SketchPicker
@@ -41,22 +59,6 @@ const DraggableColorPicker = ({
       </div>
     </Draggable>
   )
-}
-
-DraggableColorPicker.propTypes = {
-  value: PropTypes.object.isRequired,
-  changeState: PropTypes.func.isRequired,
-  outerState: PropTypes.shape({
-    color: PropTypes.shape({
-      showPicker: PropTypes.bool.isRequired,
-      rgba: PropTypes.shape({
-        r: PropTypes.number.isRequired,
-        g: PropTypes.number.isRequired,
-        b: PropTypes.number.isRequired,
-        a: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired
-  }).isRequired,
 }
 
 export default DraggableColorPicker

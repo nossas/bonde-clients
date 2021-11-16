@@ -1,8 +1,11 @@
 import { Entity } from 'draft-js'
-import PropTypes from 'prop-types'
 import React from 'react'
 
-class Media extends React.Component {
+interface MediaProperties {
+  block: any
+}
+
+class Media extends React.Component<MediaProperties> {
   render() {
     const { block } = this.props
 
@@ -41,11 +44,6 @@ class Media extends React.Component {
       throw new Error('Sorry, media type not found.')
     }
   }
-}
-
-Media.propTypes = {
-  // Injected by draft-js in blockRendererFn
-  block: PropTypes.object.isRequired
 }
 
 export default Media

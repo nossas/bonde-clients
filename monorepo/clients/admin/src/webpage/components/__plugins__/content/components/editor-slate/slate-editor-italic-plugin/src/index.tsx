@@ -15,10 +15,8 @@ import * as ItalicUtils from './ItalicUtils'
 import ItalicButton from './ItalicButton'
 
 
-const ItalicPlugin = options => ({
-  onKeyDown(...args) {
-    return ItalicKeyboardShortcut(...args)
-  },
+const ItalicPlugin = (): any => ({
+  onKeyDown: ItalicKeyboardShortcut,
 })
 
 export {

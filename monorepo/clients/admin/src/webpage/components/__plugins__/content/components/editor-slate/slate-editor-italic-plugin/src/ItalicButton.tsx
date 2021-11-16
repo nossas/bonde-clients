@@ -3,10 +3,17 @@ import FontAwesome from 'react-fontawesome'
 import { Button } from '../../slate-editor-components/src'
 import { hasMark, italicMarkStrategy } from './ItalicUtils'
 
+interface ItalicButtonProperties {
+  value?: any;
+  onChange?: any;
+  changeState?: any;
+  className?: string;
+  style?: any;
+  type?: any;
+}
 
-
-function ItalicButton({ value, onChange, className, style, type }) {
-  return <Button
+const ItalicButton: React.FC<ItalicButtonProperties> = ({ value = {}, onChange, className, style = {}, type }) =>
+  <Button
     style={style}
     type={type}
     onClick={e => onChange(italicMarkStrategy(value.change()))}
@@ -18,6 +25,6 @@ function ItalicButton({ value, onChange, className, style, type }) {
   >
     <FontAwesome name="italic" />
   </Button>
-}
+;
 
 export default ItalicButton

@@ -40,7 +40,7 @@ export default (properties: any): React.ReactElement => {
   const { state, dispatch } = useAppState();
   const colorPickerProperties = {
     selectedColor: state.colorPicker.color || "#333",
-    setSelectedColor: (color: any): void => dispatch({ type: t.SET_SELECTED_COLOR, payload: color })
+    onChangeColor: (color: any): void => dispatch({ type: t.SET_SELECTED_COLOR, payload: color })
   };
 
   // eslint-disable-next-line react/jsx-props-no-spreading

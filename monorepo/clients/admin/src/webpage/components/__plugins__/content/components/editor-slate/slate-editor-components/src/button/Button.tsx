@@ -1,8 +1,7 @@
-
 import { typeCheck } from '../../../slate-editor-utils/src'
 
-function Button({ children, id, onClick, className, style, type, ...properties }) {
-  return <button
+const Button: React.FC<any> = ({ children, id, onClick, className, style, type = 'button', ...properties }) =>
+  <button
     id={id}
     style={style}
     type={type}
@@ -12,10 +11,6 @@ function Button({ children, id, onClick, className, style, type, ...properties }
   >
     {children}
   </button>
-}
-
-Button.defaultProps = {
-  type: 'button'
-}
+;
 
 export default Button

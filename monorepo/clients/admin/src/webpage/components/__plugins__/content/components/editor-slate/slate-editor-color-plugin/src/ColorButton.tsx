@@ -8,7 +8,18 @@ import DraggableColorPicker from './DraggableColorPicker'
 // FIXME: Needs to handle assets files to work with SSR
 import('./ColorButton.css')
 
-class ColorButton extends React.Component {
+interface ColorButtonProperties {
+  className?: string;
+  style?: any;
+  value?: any;
+  changeState?: any;
+  outerState?: any;
+  type?: any;
+  initialState?: any;
+  pickerDefaultPosition?: any
+}
+
+class ColorButton extends React.Component<ColorButtonProperties> {
   UNSAFE_componentWillMount() {
     const { changeState, outerState: { color }, initialState } = this.props
 

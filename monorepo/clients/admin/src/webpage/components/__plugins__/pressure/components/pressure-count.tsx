@@ -1,9 +1,18 @@
-import PropTypes from 'prop-types'
 import CountUp from 'react-countup'
-import { FormattedMessage } from 'react-intl'
 
+interface PressureCountProperties {
+  value?: number;
+  color: string;
+  text?: string;
+  startCounting?: boolean;
+}
 
-const PressureCount = ({ value, color, text, startCounting }) => {
+const PressureCount = ({
+  value = 0,
+  color,
+  text = 'pressões feitas',
+  startCounting = false
+}: PressureCountProperties): React.ReactElement => {
   /* TODO: support all browser
    * -webkit-box-shadow: inset 0px 15px 18px -10px rgba(227,224,227,1);
    * -moz-box-shadow: inset 0px 15px 18px -10px rgba(227,224,227,1);
@@ -12,39 +21,23 @@ const PressureCount = ({ value, color, text, startCounting }) => {
   const pressureCount = {
     boxShadow: 'inset 0px 15px 18px -10px rgba(227,224,227,1)'
   }
+
   return (
     <div className='pressure-count p3 bg-white rounded-bottom' style={pressureCount}>
       <div className='center m0'>
         <div className='h1' style={{ color }}>
           <CountUp
             start={0}
-            end={!isNaN(value) && startCounting ? Number(value) : 0}
+            end={value !== undefined && startCounting ? Number(value) : 0}
             duration={5}
           />
         </div>
         <span className='black bold h3 ml1'>
-          {text || (
-            <FormattedMessage
-              id='c--pressure-count.text.default'
-              defaultMessage='pressões feitas'
-            />
-          )}
+          {text}
         </span>
       </div>
     </div>
   )
-}
-
-PressureCount.propTypes = {
-  value: PropTypes.number,
-  color: PropTypes.string,
-  text: PropTypes.string,
-  startCounting: PropTypes.bool
-}
-
-PressureCount.defaultProps = {
-  value: 0,
-  startCounting: false
 }
 
 export default PressureCount

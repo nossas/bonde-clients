@@ -1,46 +1,54 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 import WidgetOverlay from './widget-overlay'
 
 describe('client/mobrender/components/widget-overlay', () => {
-  const properties: any = {
-    widget: { id: 1, kind: 'content' },
+  const kind: any = 'content'
+  const properties = {
+    children: <p>Widget Dummy</p>,
+    widget: {
+      id: 1,
+      kind,
+      sm_size: 3,
+      md_size: 3,
+      lg_size: 3,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      block_id: 1
+    },
     hasMouseOver: false,
     onEdit: jest.fn(),
     onDelete: jest.fn(),
-    onMouseEnter: jest.fn(),
-    onMouseLeave: jest.fn()
+    onMouseOver: jest.fn(),
+    onMouseOut: jest.fn()
   }
-  let over
-
-  beforeEach(() => {
-    // eslint-disable-next-line react/jsx-props-no-spreading
-    over = mount(<WidgetOverlay {...properties} />)
-  })
 
   it('should render without crashed', () => {
+    const over = shallow(<WidgetOverlay {...properties} />)
     expect(over).to.be.ok
   })
 
   it('should render children', () => {
-    const over2 = mount(
+    const over = shallow(
       // eslint-disable-next-line react/jsx-props-no-spreading
       <WidgetOverlay {...properties}>
         <h1>Children</h1>
       </WidgetOverlay>
     )
-    expect(over2.find('h1').length).to.equal(1)
+    expect(over.find('h1').length).to.equal(1)
   })
 
   it('should call onMouseOver passing ("widget", widget.id) when mouse enter', () => {
     let result
+    const over = shallow(<WidgetOverlay {...properties} />)
     over.setProps({ onMouseOver: (key, id) => { result = [key, id] } })
     over.find('div.relative').simulate('mouseenter')
     expect(result).to.deep.equal(['widget', properties.widget.id])
   })
 
   it('should call onMouseOut passing ("widget") when mouse leave', () => {
+    const over = shallow(<WidgetOverlay {...properties} />)
     let result
     over.setProps({ onMouseOut: key => { result = [key] } })
     over.find('div.relative').simulate('mouseleave')
@@ -48,6 +56,7 @@ describe('client/mobrender/components/widget-overlay', () => {
   })
 
   it('should render cursor pointer', () => {
+    const over = shallow(<WidgetOverlay {...properties} />)
     expect(over.find('div.relative').props().style).to.deep.equal({
       cursor: 'pointer'
     })
@@ -55,6 +64,7 @@ describe('client/mobrender/components/widget-overlay', () => {
 
   it('should call onEdit when click edit button', () => {
     let result
+    const over = shallow(<WidgetOverlay {...properties} />)
     over.setProps({
       hasMouseOver: true,
       onEdit: () => { result = true }
@@ -65,6 +75,7 @@ describe('client/mobrender/components/widget-overlay', () => {
 
   it('should call onDelete when click remove button', () => {
     let result
+    const over = shallow(<WidgetOverlay {...properties} />)
     over.setProps({
       hasMouseOver: true,
       onDelete: () => { result = true }
@@ -74,6 +85,7 @@ describe('client/mobrender/components/widget-overlay', () => {
   })
 
   it('should render over div when has mouse over', () => {
+    const over = shallow(<WidgetOverlay {...properties} />)
     over.setProps({ hasMouseOver: true })
     expect(over.find('div.overlay').length).to.equal(1)
   })

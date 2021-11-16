@@ -1,14 +1,13 @@
 import { expect } from 'chai'
-import { mount } from "enzyme";
-// import { mountWithIntl } from '../../../intl/helpers'
+import { shallow } from "enzyme";
+// import { shallowWithIntl } from '../../../intl/helpers'
 import Navbar from './navbar'
 import MenuItems from './menu-items'
 
 describe('client/mobrender/components/navbar', () => {
-  let wrapper
   const status: 'active' | 'archived' = "active"
   const properties = {
-    editable: false,
+    editable: true,
     mobilization: {
       id: 1,
       name: "mobs",
@@ -34,30 +33,28 @@ describe('client/mobrender/components/navbar', () => {
       },
       {
         id: 3,
+        hidden: false,
         menu_hidden: true
       }
     ]
   }
 
-  beforeEach(() => {
-    wrapper = mount(<Navbar {...properties} />)
-  })
-
   it('renders absolute layout by default', () => {
+    const wrapper = shallow(<Navbar {...properties} />)
     expect(wrapper.find('.absolute.col-12.z3').length).to.equal(1)
   })
 
   it('should render desktop and mobile version', () => {
-    expect(wrapper.find(MenuItems).at(0).props().mobile).to.equal(false)
+    const wrapper = shallow(<Navbar {...properties} />)
+
+    expect(wrapper.find(MenuItems).at(0).props().mobile).to.equal(undefined)
     expect(wrapper.find(MenuItems).at(1).props().mobile).to.equal(true)
   })
 
   describe('when is editable', () => {
-    beforeEach(() => {
-      wrapper.setProps({ editable: true })
-    })
-
     it('should passed to <Menu /> visible blocks', () => {
+      const wrapper = shallow(<Navbar {...properties} />)
+
       const blocks = properties.blocks.filter(b => !b.hidden)
       wrapper.find(MenuItems).map(menu => {
         expect(menu.props().blocks).to.deep.equal(blocks)
@@ -66,11 +63,10 @@ describe('client/mobrender/components/navbar', () => {
   })
 
   describe('when isnt editable', () => {
-    beforeEach(() => {
-      wrapper.setProps({ editable: false })
-    })
-
     it('should passed to <Menu /> only visible blocks menu', () => {
+      const wrapper = shallow(<Navbar {...properties} />)
+      wrapper.setProps({ editable: false })
+
       const blocks = properties.blocks.filter(b => !b.hidden && !b.menu_hidden)
       wrapper.find(MenuItems).map(menu => {
         expect(menu.props().blocks).to.deep.equal(blocks)

@@ -1,11 +1,16 @@
-
 import classnames from 'classnames'
 import FontFamilyList from './FontFamilyList'
 import { fontFamilyMarkStrategy, getMark, hasMark } from './FontFamilyUtils'
 
+interface FontFamilyDropdownProperties {
+  value?: any;
+  onChange?: any;
+  changeState?: any;
+  className?: string;
+  style?: any;
+}
 
-
-const FontFamilyDropdown = ({ value, onChange, changeState, className, style }) => {
+const FontFamilyDropdown: React.FC<FontFamilyDropdownProperties> = ({ value, onChange, changeState, className, style }) => {
   let fontFamilyDefault = 0
   if (hasMark(value)) {
     fontFamilyDefault = getMark(value).data.get('fontFamilyIndex')

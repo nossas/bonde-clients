@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Draft } from './draft/components';
-import Pressure from './pressure/components'
-import Form from './form/components'
+import Donation from "./donation/components";
 import Content from './content/components'
+import Form from './form/components'
+import Pressure from './pressure/components'
 import type { Kind } from "../../reducers";
 // import Donation from './donation/components'
 import { PressureEmailIcon, PressurePhoneIcon } from './icons';
@@ -114,7 +115,7 @@ export default (mobilization: any, widget: any, { intl }: any): IWidgetConfig[] 
     // redirect: Paths.pressure(mobilization.id, widget.id)
   },
   {
-    component: DummyComponent,
+    component: Donation,
     kind: 'donation',
     // TODO: propriedades relacionadas ao draft
     icon: 'money',

@@ -43,6 +43,7 @@ class Form extends React.Component<FormProperties, any> {
     return configurable ? undefined : (
       <h2
         className='mt0 mb3 center white'
+        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: callToAction }}
         style={{ fontFamily: headerFont }}
       />
@@ -77,8 +78,8 @@ class Form extends React.Component<FormProperties, any> {
   }
 
   renderCount(): React.ReactElement | undefined {
-    const { widget: { settings }, configurable } = this.props
-    if (!configurable && settings && settings.count_text) {
+    const { widget: { settings } } = this.props
+    if (settings?.count_text) {
       const {
         block: { scrollTopReached: startCounting },
         widget: { form_entries_count: count },

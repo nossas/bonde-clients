@@ -1,8 +1,9 @@
 import { GraphQLClient } from 'graphql-request';
+import config from "../../config";
 
-const API_URL: any = import.meta.env.VITE_DOMAIN_API_GRAPHQL || "";
+const API_URL: any = config.domainApiGraphql || "";
 
-const API_TOKEN: any = import.meta.env.VITE_API_GRAPHQL_TOKEN || "";
+const API_TOKEN: any = config.apiGraphqlToken || "";
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
 export default new GraphQLClient(API_URL, {

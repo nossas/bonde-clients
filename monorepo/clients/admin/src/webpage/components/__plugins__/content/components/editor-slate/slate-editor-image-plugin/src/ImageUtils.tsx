@@ -25,8 +25,10 @@ export const updateInlineImage = ({
 export const deleteInlineImage = ({ change }) => change
   .deleteBackward(1)
 
-export const forceClickUploadButton = editor => {
-  window.document.getElementById(
+export const forceClickUploadButton = (editor: any): void => {
+  const element: any = window.document.getElementById(
     `slate-image-plugin-button-${editor.props.outerState.uid}`
-  ).click()
+  )
+  
+  element.click();
 }

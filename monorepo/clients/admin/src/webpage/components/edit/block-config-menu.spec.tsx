@@ -1,7 +1,7 @@
 // import React from 'react'
 import { expect } from 'chai'
 import sinon from 'sinon'
-import { mount } from "enzyme";
+import { shallow } from "enzyme";
 // import { mountWithIntl } from '../../intl/helpers'
 import BlockConfigMenu from './block-config-menu'
 
@@ -17,30 +17,29 @@ describe('mobrender/components/block-config-menu', () => {
     onEdit: jest.fn(),
     onCancelEdit: jest.fn()
   }
-  let menuConfig
-  beforeEach(() => {
-    menuConfig = mount(<BlockConfigMenu {...props} />)
-  })
 
   it('should render dropdown menu with options to action', () => {
+    const menuConfig = shallow(<BlockConfigMenu {...props} />)
     expect(menuConfig.find('DropdownMenu').length).to.equal(1)
     expect(menuConfig.find('DropdownMenu').find('DropdownMenuItem').length).to.equal(5)
   })
 
   it('should hide dropdown menu when display is false', () => {
+    const menuConfig = shallow(<BlockConfigMenu {...props} />)
     menuConfig.setProps({ display: false })
-    expect(menuConfig.find('DropdownMenu').props().wrapperClassName).to.contains('display-none')
+    expect((menuConfig.find('DropdownMenu').props() as any).wrapperClassName).to.contains('display-none')
   })
 
   it('should show dropdown menu when display is true', () => {
+    const menuConfig = shallow(<BlockConfigMenu {...props} />)
     menuConfig.setProps({ display: true })
-    expect(menuConfig.find('DropdownMenu').props().wrapperClassName).to.not.contains('display-none')
+    expect((menuConfig.find('DropdownMenu').props() as any).wrapperClassName).to.not.contains('display-none')
   })
 
   describe('should make menu item', () => {
-    const menu = index => menuConfig.find('DropdownMenuItem').at(index)
-
     describe('1: change background', () => {
+      const menuConfig = shallow(<BlockConfigMenu {...props} />)
+      const menu = (index: number): any => menuConfig.find('DropdownMenuItem').at(index)
       const menuIndex = 0
 
       it('should call onEdit("background-{block_id}") when clicked', () => {
@@ -54,11 +53,13 @@ describe('mobrender/components/block-config-menu', () => {
         const text = 'Alterar fundo'
         expect(menu(menuIndex).props().className).to.equal('btn')
         expect(menu(menuIndex).find('i').props().className).to.equal('fa fa-picture-o')
-        expect(menu(menuIndex).find('span FormattedMessage').props().defaultMessage).to.equal(text)
+        expect(menu(menuIndex).find('span').text().trim()).to.equal(text)
       })
     })
 
     describe('2: show/hide block', () => {
+      const menuConfig = shallow(<BlockConfigMenu {...props} />)
+      const menu = (index: number): any => menuConfig.find('DropdownMenuItem').at(index)
       const menuIndex = 1
 
       it('should call update with block.hidden updated', () => {
@@ -77,18 +78,21 @@ describe('mobrender/components/block-config-menu', () => {
 
       it('should custom style to item when block is hidden', () => {
         menuConfig.setProps({ block: { ...props.block, hidden: true } })
-        expect(menu(menuIndex).find('span FormattedMessage').props().defaultMessage).to.equal('Mostrar')
+        expect(menu(menuIndex).find('span').text().trim()).to.equal('Mostrar')
         expect(menu(menuIndex).find('i').props().className).to.equal('fa fa-eye')
       })
 
       it('should custom style to item when block isnt hidden', () => {
-        expect(menu(menuIndex).find('span FormattedMessage').props().defaultMessage).to.equal('Esconder')
+        menuConfig.setProps({ block: { ...props.block, hidden: false } })
+        expect(menu(menuIndex).find('span').text().trim()).to.equal('Esconder')
         expect(menu(menuIndex).find('i').props().className).to.equal('fa fa-eye-slash')
       })
     })
 
     describe('3: remove block', () => {
       let confirmStub
+      const menuConfig = shallow(<BlockConfigMenu {...props} />)
+      const menu = (index: number): any => menuConfig.find('DropdownMenuItem').at(index)
       const menuIndex = 2
 
       beforeEach(() => {
@@ -114,12 +118,14 @@ describe('mobrender/components/block-config-menu', () => {
 
       it('should custom style item', () => {
         expect(menu(menuIndex).props().className).to.equal('btn')
-        expect(menu(menuIndex).find('span FormattedMessage').props().defaultMessage).to.equal('Remover')
+        expect(menu(menuIndex).find('span').text().trim()).to.equal('Remover')
         expect(menu(menuIndex).find('i').props().className).to.equal('fa fa-trash')
       })
     })
 
     describe('4: move up', () => {
+      const menuConfig = shallow(<BlockConfigMenu {...props} />)
+      const menu = (index: number): any => menuConfig.find('DropdownMenuItem').at(index)
       const menuIndex = 3
 
       it('should call moveUp(block) when click and canMoveUp', () => {
@@ -141,12 +147,14 @@ describe('mobrender/components/block-config-menu', () => {
       it('should custom style to item', () => {
         const text = 'Mover para cima'
         expect(menu(menuIndex).props().className).to.equal('btn')
-        expect(menu(menuIndex).find('span FormattedMessage').props().defaultMessage).to.equal(text)
+        expect(menu(menuIndex).find('span').text().trim()).to.equal(text)
         expect(menu(menuIndex).find('i').props().className).to.equal('fa fa-chevron-up')
       })
     })
 
     describe('5: move down', () => {
+      const menuConfig = shallow(<BlockConfigMenu {...props} />)
+      const menu = (index: number): any => menuConfig.find('DropdownMenuItem').at(index)
       const menuIndex = 4
 
       it('should call moveDown(block) when click and canMoveDown', () => {
@@ -167,7 +175,7 @@ describe('mobrender/components/block-config-menu', () => {
       it('should custom style to item', () => {
         const text = 'Mover para baixo'
         expect(menu(menuIndex).props().className).to.equal('btn')
-        expect(menu(menuIndex).find('span FormattedMessage').props().defaultMessage).to.equal(text)
+        expect(menu(menuIndex).find('span').text().trim()).to.equal(text)
         expect(menu(menuIndex).find('i').props().className).to.equal('fa fa-chevron-down')
       })
     })

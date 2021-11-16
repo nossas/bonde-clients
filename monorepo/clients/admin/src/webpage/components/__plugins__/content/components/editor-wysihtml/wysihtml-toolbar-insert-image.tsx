@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
+import config from "../../../../../../config";
 
 interface InsertImageState {
   image?: string;
@@ -40,7 +41,7 @@ class WYSIHTMLToolbarInsertImage extends React.Component<any, InsertImageState> 
         <div>
           <ReactS3Uploader
             className='input col-11 inline-block'
-            signingUrl={`${import.meta.env.VITE_DOMAIN_API_REST}/uploads`}
+            signingUrl={`${config.domainApiRest}/uploads`}
             accept='image/*'
             onProgress={this.handleUploadProgress.bind(this)}
             onError={this.handleUploadError.bind(this)}

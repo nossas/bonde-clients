@@ -18,6 +18,7 @@ const fonts = [
 interface SelectFontFamilyProperties {
   value: string;
   onChange: (value: any) => void
+  onMouseOut: (value: any) => void
 }
 
 const SelectFontFamily = (props: SelectFontFamilyProperties) => (

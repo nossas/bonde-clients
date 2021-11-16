@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { shallow } from 'enzyme'
 import { expect } from 'chai'
 
-import { WYSIHTMLToolbarColorPicker } from 'components/editor-wysihtml'
+import WYSIHTMLToolbarColorPicker from './wysihtml-toolbar-color-picker';
 
 describe('client/components/editor-wysihtml/wysihtml-toolbar-color-picker', () => {
   let wrapper

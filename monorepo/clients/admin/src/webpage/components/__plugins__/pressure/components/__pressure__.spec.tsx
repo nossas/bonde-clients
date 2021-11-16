@@ -55,7 +55,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/__pressur
       }
     })
     expect(wrapper.find('h2').props().style.backgroundColor).to.equal('#fff')
-    expect(wrapper.find('InjectIntl(PressureForm)').props().buttonColor).to.equal('#fff')
+    expect(wrapper.find('PressureForm').props().buttonColor).to.equal('#fff')
     expect(wrapper.find('PressureCount').props().color).to.equal('#fff')
   })
 
@@ -132,10 +132,5 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/__pressur
         'Igor Santos <igor@nossascidades.org>',
         'Lucas Pirola <pirola@nossascidades.org>'
       ])
-  })
-
-  it('should render PressureTellAFriend when filledPressureWidgets includes the id 1', () => {
-    wrapper.setProps({ widget: { ...props.widget }, filledPressureWidgets: [1] })
-    expect(wrapper.find('PressureTellAFriend').length).to.equal(1)
   })
 })

@@ -16,10 +16,8 @@ import * as ImageUtils from './ImageUtils'
 import ImageButton from './ImageButton'
 
 
-const ImagePlugin = options => ({
-  onKeyDown(...args) {
-    return ImageKeyboardShortcut(...args)
-  },
+const ImagePlugin = (): any => ({
+  onKeyDown: ImageKeyboardShortcut,
 })
 
 export {

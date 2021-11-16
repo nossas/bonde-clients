@@ -1,8 +1,5 @@
-import React from 'react'
 import { shallow } from 'enzyme'
-import { expect } from 'chai'
-
-import { WYSIHTMLToolbar } from 'components/editor-wysihtml'
+import WYSIHTMLToolbar from './wysihtml-toolbar'
 
 describe('client/components/editor-wysihtml/wysihtml-toolbar', () => {
   let wrapper
@@ -17,10 +14,10 @@ describe('client/components/editor-wysihtml/wysihtml-toolbar', () => {
 
   describe('#render', () => {
     it('should set the element id', () => {
-      expect(wrapper.props().id).to.be.eql('some-id')
+      expect(wrapper.props().id).toEqual('some-id')
     })
     it('should set the element classes', () => {
-      expect(wrapper.props().className).to.have.string('some-class')
+      expect(wrapper.props().className).toHaveTextContent('some-class')
     })
   })
 })

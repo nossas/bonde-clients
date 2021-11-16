@@ -14,7 +14,16 @@ import('./FontSizeInput.css')
 // input element for the lifetime of the component.
 // More info: https://fb.me/react-controlled-components
 //
-const FontSizeInput = ({
+interface FontSizeInputProperties {
+  value?: any;
+  onChange?: any;
+  changeState?: any;
+  className?: string;
+  style?: any;
+  initialFontSize?: any;
+}
+
+const FontSizeInput: React.FC<FontSizeInputProperties> = ({
   value,
   className,
   style,

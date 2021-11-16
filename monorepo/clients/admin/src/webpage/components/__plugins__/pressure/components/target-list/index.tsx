@@ -16,7 +16,7 @@ class TargetList extends React.Component<any, any> {
   constructor(properties) {
     super(properties)
     this.state = {
-      targets: properties.targets,
+      targets: properties.targets || [],
       selectedTargets: []
     }
   }
@@ -40,6 +40,7 @@ class TargetList extends React.Component<any, any> {
               return !target ? undefined : (
                 // eslint-disable-next-line jsx-a11y/label-has-associated-control
                 <label
+                  key={target.name}
                   className='target-item left py1 px2 mr1 bg-white rounded'
                 >
                   <p className='black h6 m0'>

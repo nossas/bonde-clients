@@ -5,8 +5,21 @@ import ReactS3Uploader from 'react-s3-uploader'
 import { Button } from '../../slate-editor-components/src'
 import { insertInlineImage } from './ImageUtils'
 
+interface ImageButtonProperties {
+  className?: string;
+  style?: any;
+  value?: any;
+  onChange?: any;
+  changeState?: any;
+  outerState?: any;
+  type?: any;
+  initialState?: any;
+  signingUrl?: string;
+}
 
-class ImageButton extends React.Component {
+class ImageButton extends React.Component<ImageButtonProperties, any> {
+  upload: any
+
   constructor(properties) {
     super(properties)
     this.state = {
@@ -24,7 +37,7 @@ class ImageButton extends React.Component {
           style={{ position: 'relative', ...style }}
           className={className}
           onClick={e => {
-            const upload = ReactDOM.findDOMNode(this.upload)
+            const upload: any = ReactDOM.findDOMNode(this.upload)
             upload.value = ''
             upload.click()
           }}

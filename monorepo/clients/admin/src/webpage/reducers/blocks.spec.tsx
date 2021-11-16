@@ -117,19 +117,15 @@ describe('client/mobrender/redux/reducers/blocks', () => {
     })
 
     it('batch', () => {
-      const payload = {
-        blocks: {
-          blocks: [
-            { ...data[0], bg_image: 'tmp://new.png' }
-          ]
-        }
-      }
+      const payload = [
+        { ...data[0], bg_image: 'tmp://new.png' }
+      ]
 
       const action = { type: t.UPDATE_BLOCK_BATCH, payload }
       const nextState = reducer(fetchState, action)
       expect(nextState).toEqual({
         ...nextState,
-        data: [payload.blocks.blocks[0], data[1]]
+        data: [payload[0], data[1]]
       })
     })
   })

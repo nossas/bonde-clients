@@ -75,10 +75,10 @@ describe('client/mobrender/components/widget', () => {
     expect(widget.find(Draft).length).to.equal(1)
   })
 
-  it('should render component loading while saving widget', () => {
-    const widget = shallow(<Widget {...props} saving />)
-    expect(widget.find('Loading').length).to.equal(1)
-  })
+  // it('should render component loading while saving widget', () => {
+  //   const widget = shallow(<Widget {...props} saving />)
+  //   expect(widget.find('Loading').length).to.equal(1)
+  // })
 
   it('should passed widget and update to children', () => {
     const widget = shallow(<Widget {...props} editable />)

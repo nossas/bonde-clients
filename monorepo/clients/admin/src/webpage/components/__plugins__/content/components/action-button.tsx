@@ -1,7 +1,18 @@
 import classnames from 'classnames'
 
-function ActionButton({ children, editing, changeState, onClick, title, style, className, value }) {
-  return <button
+interface ActionButtonProperties {
+  editing: boolean;
+  onClick: (value: any, changeState: any) => void;
+  changeState?: () => void;
+  title?: string;
+  style?: any;
+  className?: string;
+  value?: any;
+}
+
+const ActionButton: React.FC<ActionButtonProperties> = ({ children, editing, changeState, onClick, title, style = {}, className, value }) =>
+  <button
+    type="button"
     className={classnames('btn bg-blacker rounded', className)}
     onClick={() => onClick(value, changeState)}
     style={{
@@ -13,6 +24,6 @@ function ActionButton({ children, editing, changeState, onClick, title, style, c
   >
     {children}
   </button>
-}
+;
 
 export default ActionButton

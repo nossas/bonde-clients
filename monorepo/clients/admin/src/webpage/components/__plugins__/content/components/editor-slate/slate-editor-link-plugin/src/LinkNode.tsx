@@ -6,7 +6,9 @@ import { getLink, hasLinks, unlink } from './LinkUtils'
 // FIXME: Needs to handle assets files to work with SSR
 import('./LinkNode.css')
 
-class LinkNode extends React.Component {
+class LinkNode extends React.Component<any, any> {
+  text: any;
+
   constructor(properties) {
     super(properties)
     this.state = {

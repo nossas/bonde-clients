@@ -15,6 +15,7 @@ import { ToggleReadOnlyButton } from '../../../../slate-editor-toggle-readonly/s
 import { UnderlineButton, UnderlinePlugin } from '../../../../slate-editor-underline-plugin/src'
 import { SlateContent, SlateEditor, SlateToolbar } from '../../../../slate-editor/src'
 import './Home.css'
+import config from "../../../../../../../../../../config";
 
 const fontSizePluginOptions = { initialFontSize: 16 }
 const colorPluginOptions = new ColorStateModel().rgba({ r: 100, g: 100, b: 100, a: 1 }).gen()
@@ -103,7 +104,7 @@ function Home({ title, version }) {
           />
           <ImageButton
             className={classNames.button}
-            signingUrl={`${import.meta.env.VITE_DOMAIN_API_REST}/uploads`}
+            signingUrl={`${config.domainApiRest}/uploads`}
           />
           <ColorButton
             className={classNames.button}

@@ -1,16 +1,26 @@
-import PropTypes from 'prop-types'
 import React from 'react'
 
-class InsertScriptButton extends React.Component {
-  constructor(props) {
-    super(props)
+interface InsertScriptButtonProperties {
+  buttonClassName: string;
+  popoverClassName: string;
+  handleInsertScript: (value1: any, value2: any) => void
+}
+
+interface InsertScriptButtonState {
+  showInputDialog: boolean;
+  script: string;
+}
+
+class InsertScriptButton extends React.Component<InsertScriptButtonProperties, InsertScriptButtonState> {
+  constructor(properties) {
+    super(properties)
     this.state = { showInputDialog: false, script: '' }
   }
 
   getTagName(script) {
     if (script.startsWith('<iframe')) {
       return 'iframe'
-    } else if (script.startsWith('<script')) {
+    } if (script.startsWith('<script')) {
       return 'script'
     }
     throw new Error('Sorry, script name not permitted')
@@ -53,12 +63,6 @@ class InsertScriptButton extends React.Component {
       </div>
     )
   }
-}
-
-InsertScriptButton.propTypes = {
-  buttonClassName: PropTypes.string,
-  popoverClassName: PropTypes.string,
-  handleInsertScript: PropTypes.func.isRequired
 }
 
 export default InsertScriptButton

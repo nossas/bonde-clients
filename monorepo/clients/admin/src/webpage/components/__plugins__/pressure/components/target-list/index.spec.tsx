@@ -1,32 +1,28 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import { TargetList } from 'mobilizations/widgets/__plugins__/pressure/components'
+import TargetList from '.'
 
 describe('client/mobilizations/widgets/__plugins__/pressure/components/target-list', () => {
-  let wrapper
-
-  beforeEach(() => {
-    wrapper = shallow(<TargetList
-      onSelect={() => {}}
-    />)
-  })
+  const onSelect = jest.fn();
 
   it('should render ok by default', () => {
+    const wrapper = shallow(<TargetList onSelect={onSelect} />)
     expect(wrapper).to.be.ok
     expect(wrapper.find('.target-item').length).to.equal(0)
   })
 
   describe('email pressure', () => {
     it('should render .target-item according targets passed', () => {
+      const wrapper = shallow(<TargetList onSelect={onSelect} />)
       // jump the targets shuffle process
       wrapper.setState({ targets: ['Igor Santos <igor@nossascidades.org>'] })
       expect(wrapper.find('.target-item').length).to.equal(1)
     })
 
     it('should render target parsed to Name <user@host.com>', () => {
+      const wrapper = shallow(<TargetList onSelect={onSelect} />)
       const targets = ['Igor Santos <igor@nossascidades.org>']
       // jump the targets shuffle process
       wrapper.setState({ targets })
@@ -38,22 +34,20 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/target-li
 
   describe('selectable', () => {
     it('should render the phone pressure label text properly', () => {
+      const wrapper = shallow(<TargetList onSelect={onSelect} selectable />)
       const targets = ['Foo Bar <+551199999-9999>']
       // jump the targets shuffle process
       wrapper.setState({ targets })
-      wrapper.setProps({ ...wrapper.props(), selectable: true })
 
-      expect(wrapper.find('.target-list-label FormattedMessage').at(0).props().defaultMessage)
-        .to.include('Selecione quem você quer pressionar')
+      expect(wrapper.find('.target-list-label').text())
+        .to.include('Quem você vai pressionar')
     })
 
     it('should render a checkbox on each target item', () => {
       const targets = ['Foo Bar <+551199999-9999>', 'Foo Bar <+551199999-9999>']
-      // jump the targets shuffle process
-      wrapper.setState({ targets })
-      wrapper.setProps({ ...wrapper.props(), selectable: true })
+      const wrapper = shallow(<TargetList onSelect={onSelect} targets={targets} selectable />)
 
-      expect(wrapper.find('.target-item input[type="checkbox"]').length).to.equal(2)
+      expect(wrapper.find('.target-item').length).to.equal(2)
     })
   })
 })

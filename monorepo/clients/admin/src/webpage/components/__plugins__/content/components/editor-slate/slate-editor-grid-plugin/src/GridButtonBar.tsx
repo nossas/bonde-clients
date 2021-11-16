@@ -1,5 +1,5 @@
-
-import { GridButton, GridSplitRowButton } from '.'
+import GridButton from './GridButton';
+import GridSplitRowButton from "./GridSplitRowButton";
 
 // FIXME: Needs to handle assets files to work with SSR
 import('./GridButtonBar.css')

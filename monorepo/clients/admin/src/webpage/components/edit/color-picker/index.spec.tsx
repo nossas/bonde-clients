@@ -6,9 +6,10 @@ import { ColorPicker } from '.'
 
 describe('client/components/color-picker/index', () => {
   let wrapper
-  const props: any = {
-    dispatch: (): void => {},
-    color: "#333"
+  const props = {
+    color: "#333",
+    showColorPicker: true,
+    onChangeColor: jest.fn()
   }
 
   beforeAll(() => {
@@ -29,7 +30,7 @@ describe('client/components/color-picker/index', () => {
       expect(wrapper.children().props().presetColors).to.be.deep.equal([])
     })
     it.skip('should render with "onChangeComplete" prop as a function by default', () => {
-      expect(wrapper.children().props().onChangeComplete).to.be.a('function')
+      expect(wrapper.children().props().onChangeComplete).to.be.equal(props.onChangeColor)
     })
     it('should render with "className" prop as custom', () => {
       const customClassName = 'Foo Bar'

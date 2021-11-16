@@ -5,11 +5,11 @@ import { isOrderedList, orderedListStrategy } from './ListUtils'
 
 
 
-function OrderedListButton({ value, onChange, className, style, type }) {
-  return <Button
+const OrderedListButton: React.FC<any> = ({ value, onChange, className, style, type }) =>
+  <Button
     style={style}
     type={type}
-    onClick={e => onChange(orderedListStrategy(value.change(), 'ordered-list'))}
+    onClick={e => onChange(orderedListStrategy(value.change()))}
     className={classnames(
       'slate-list-plugin--button',
       { active: isOrderedList(value) },
@@ -18,6 +18,6 @@ function OrderedListButton({ value, onChange, className, style, type }) {
   >
     <FontAwesome name="list-ol" />
   </Button>
-}
+;
 
 export default OrderedListButton
