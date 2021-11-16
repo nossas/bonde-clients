@@ -101,9 +101,9 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
             await upsert({ variables });
             updateCache({ ...widget, settings, groups });
             toast(<Success message={t('settings.pressure.targets.success')} />, { type: toast.TYPE.SUCCESS });
-          } catch (err: any) {
+          } catch (err) {
             console.error('err', { err });
-            toast(err.message, { type: toast.TYPE.ERROR });
+            toast((err as any).message, { type: toast.TYPE.ERROR });
           }
         } else {
           updateCache({ ...widget, settings });
