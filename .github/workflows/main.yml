@@ -2,7 +2,7 @@ name: Workflow build and tests canary
 on:
   push:
     paths:
-      - 'monorepo/clients/canary'
+      - 'monorepo/clients/canary/**'
 jobs:
   tests:
     runs-on: ubuntu-20.04
