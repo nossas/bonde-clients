@@ -67,7 +67,7 @@ const PerformanceScene: React.FC<Props> = ({ widget }) => {
   // Alvos
   const step1 = activeTargets.length === 0;
   // Ajustes
-  const step2 = !widget.settings?.call_to_action || !widget.settings?.button_text;
+  const step2 = !widget.settings?.button_text;
   // Pós-ação
   const step3 = !widget.settings?.sender_name || !widget.settings?.sender_email || !widget.settings?.email_subject || !widget.settings?.email_text;
 
