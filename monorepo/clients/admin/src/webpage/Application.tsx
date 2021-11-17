@@ -24,7 +24,6 @@ const Application: React.FC = ({ children }) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const [state, dispatch] = useReducer<Reducer<StateApp, Action>>(appReducer, initialState);
 
-  console.log("state", { state });
   return (
     // eslint-disable-next-line react/jsx-no-constructed-context-values
     <applicationContext.Provider value={{ state, dispatch }}>
