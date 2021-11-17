@@ -1,4 +1,3 @@
-// import { connect } from 'react-redux'
 import { useAppState } from '../../../../Application';
 import EditorOld from './editor-old'
 import Selectors from '../../../../selectors';

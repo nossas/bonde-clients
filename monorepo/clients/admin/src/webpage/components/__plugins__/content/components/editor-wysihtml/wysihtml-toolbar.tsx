@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import React from 'react'
 import { DropdownMenu, DropdownMenuItem } from "../../../../edit/dropdown-menu";
 import WYSIHTMLToolbarColorPicker from './wysihtml-toolbar-color-picker'

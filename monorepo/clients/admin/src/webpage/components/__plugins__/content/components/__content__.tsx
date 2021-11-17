@@ -1,6 +1,5 @@
 import React from 'react'
 import type { Mobilization, Widget } from "../../../../reducers"
-// import { injectIntl, intlShape } from 'react-intl'
 import { EditorNew, EditorOld, EditorSlate } from '.'
 
 interface ContentProperties {

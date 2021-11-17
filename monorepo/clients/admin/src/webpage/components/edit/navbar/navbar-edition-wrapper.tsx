@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import React from 'react'
-// import { injectIntl, intlShape } from 'react-intl'
 import NavbarButton from "./navbar-button";
 import NavbarForm from './navbar-form';
 

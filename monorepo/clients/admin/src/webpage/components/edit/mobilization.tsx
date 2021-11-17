@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import React from 'react'
-// import { FormattedMessage } from 'react-intl'
 // import * as paths from '../../paths'
 import LogoIconNoBorder from './logo-icon-no-border'
 import Block from './block.connected'

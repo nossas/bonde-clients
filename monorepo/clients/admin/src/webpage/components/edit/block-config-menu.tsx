@@ -1,5 +1,4 @@
 import classnames from 'classnames'
-// import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { DropdownMenu, DropdownMenuItem } from './dropdown-menu';
 
 

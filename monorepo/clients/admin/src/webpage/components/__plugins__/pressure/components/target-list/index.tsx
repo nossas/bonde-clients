@@ -1,6 +1,4 @@
-// import PropTypes from 'prop-types'
 import React from 'react'
-// import { FormattedMessage } from 'react-intl'
 // import * as array from "../../../../../../utils/array"
 import { getType, PRESSURE_TYPE_PHONE } from "../utils";
 import './index.scss'

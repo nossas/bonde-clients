@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types'
-// import { connect } from 'react-redux'
 import { useAppState } from '../../../../../Application'
 //
 // The content widget module it is not the perfect module to provide these actions.
@@ -8,6 +6,10 @@ import { useAppState } from '../../../../../Application'
 // import * as ContentActions from './../../mobilizations/widgets/__plugins__/content/action-creators'
 
 
+interface WYSIHTMLToolbarCreateLinkProperties {
+  editorLinkTargetType: string
+  setEditorLinkTargetType: any
+}
 
 // You may will see the warning below:
 // Warning: Stateless function components cannot be given refs (See ref "wrappedInstance" in
@@ -17,7 +19,7 @@ import { useAppState } from '../../../../../Application'
 // Upgrade React Redux to version 4 will should go away this warning.
 // See: https://github.com/reactjs/react-redux/issues/141#issuecomment-148358733
 
-export const WYSIHTMLToolbarCreateLink = ({ editorLinkTargetType, setEditorLinkTargetType }) => (
+export const WYSIHTMLToolbarCreateLink: React.FC<WYSIHTMLToolbarCreateLinkProperties> = ({ editorLinkTargetType, setEditorLinkTargetType }) => (
   <div
     data-wysihtml5-dialog='createLink'
     className='white p2 bg-darken-3'
@@ -47,9 +49,6 @@ export const WYSIHTMLToolbarCreateLink = ({ editorLinkTargetType, setEditorLinkT
   </div>
 )
 
-WYSIHTMLToolbarCreateLink.propTypes = {
-  editorLinkTargetType: PropTypes.string.isRequired
-}
 // TODO: Replace by selectors
 // const mapStateToProps = state => ()
 

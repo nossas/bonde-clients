@@ -1,9 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import classnames from 'classnames'
-// import PropTypes from 'prop-types'
 import React from 'react'
-// import { FormattedMessage } from 'react-intl'
 import type { Block, Mobilization } from "../../reducers";
 import { ColorPicker } from './color-picker';
 import FileUploader from './file-uploader'

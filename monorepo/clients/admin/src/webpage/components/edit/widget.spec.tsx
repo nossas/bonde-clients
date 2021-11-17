@@ -1,6 +1,5 @@
 /* eslint-disable no-unused-expressions */
 import { expect } from 'chai'
-// import { IntlProvider } from 'react-intl';
 import { shallow } from 'enzyme';
 import type { Status } from "../../reducers";
 // import shallow from '../../intl/helpers/shallow-with-intl'

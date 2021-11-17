@@ -1,4 +1,3 @@
-// import { FormattedMessage } from 'react-intl'
 import BlockChangeBackground from './block-change-background.connected'
 import { EDIT_KEY } from './block-config-menu'
 import BlockConfigMenu from './block-config-menu.connected'

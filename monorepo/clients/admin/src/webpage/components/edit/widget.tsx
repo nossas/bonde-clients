@@ -1,6 +1,4 @@
 import classnames from 'classnames'
-// import PropTypes from 'prop-types'
-// import { intlShape } from 'react-intl'
 // import urljoin from 'url-join'
 import type { Block, Mobilization, Widget } from '../../reducers'
 // import { Loading } from './../../components/await'

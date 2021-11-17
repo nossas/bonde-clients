@@ -1,6 +1,4 @@
 import React from 'react'
-// import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
-// import { connect } from 'react-redux'
 import Plain from 'slate-plain-serializer'
 import { ActionButton, FooterEditor, Layer } from ".."
 // import { Loading } from '../../../../../../components/await'

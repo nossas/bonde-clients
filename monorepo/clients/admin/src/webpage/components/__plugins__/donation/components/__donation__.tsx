@@ -1,6 +1,5 @@
 import React from "react";
 import classnames from "classnames";
-// import { FormattedMessage, intlShape } from 'react-intl';
 import Progress from './progress';
 import * as formatNumberHelper from "./format-number-helper";
 

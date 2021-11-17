@@ -3,7 +3,6 @@
 import classnames from 'classnames'
 import React from 'react'
 import type { Mobilization } from "../../../../reducers";
-// import { FormattedMessage } from 'react-intl'
 
 interface InputProperties {
   field: any;

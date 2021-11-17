@@ -1,4 +1,3 @@
-// import { connect } from 'react-redux'
 // import { useAppState } from '../../../../Application';
 import EditorNew from './editor-new'
 // import { handleEdit, handleCancelEdit } from './../../../../../mobrender/redux/action-creators'
