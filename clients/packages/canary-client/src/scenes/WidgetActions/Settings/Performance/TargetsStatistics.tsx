@@ -37,9 +37,27 @@ const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFe
   )
 }
 
-const FailedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
+const StatusLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {
+  const isDelivered = activityFeed.events.filter((evt) => evt.eventType === "delivered").length > 0;
   const isFailed = activityFeed.events.filter((evt) => evt.eventType === "bounce").length > 0;
   const isDropped = activityFeed.events.filter((evt) => evt.eventType === "dropped").length > 0;
+
+  if (isDelivered) {
+    return (
+      <Tooltip
+        label="Pelo menos um e-mail foi entregue com sucesso na caixa de entrada do alvo."
+        maxW="220px"
+      >
+        <Button
+          variant="tag"
+          colorScheme="green"
+          textTransform="none"
+          fontWeight="400">
+          Entregue
+        </Button>
+      </Tooltip>
+    )
+  }
 
   if (isFailed) {
     return (
@@ -88,8 +106,7 @@ interface ActivityFeedEmailWithDisabled extends ActivityFeedEmail {
 }
 
 const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) => {
-  const activeEmails = activeTargets.map((target) => (target.match(/^[A-zÀ-ú0-9 ]+<([\w.@]+)>$/) || [])[1]);
-  const targetsCount = aggregateEmails.length
+  const activeEmails = activeTargets.map((target) => (target.match(/^[A-zÀ-ú0-9 ()-.]+<([\w.@]+)>$/) || [])[1]);
 
   // Transforma todos e-mails ativos em eventos
   const items: ActivityFeedEmail[] = [...activeEmails.map((email: string) => {
@@ -112,6 +129,8 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
     return acc;
   }, [] as ActivityFeedEmail[])
 
+  const withoutEvents = aggregateEmails.length !== 0;
+
   return (
     <Stack spacing={4}>
       <Heading
@@ -121,18 +140,20 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
         color="gray.400"
         textTransform="uppercase"
       >
-        Todos os alvos ({targetsCount})
+        Todos os alvos ({uniqueItems.length})
       </Heading>
       <Table variant="simple" bg="white">
-        <Thead>
-          <Tr>
-            <Th>Email</Th>
-            <Th>Enviados</Th>
-            <Th>Entregues</Th>
-            <Th>Falha</Th>
-            <Th>Abertura</Th>
-          </Tr>
-        </Thead>
+        {withoutEvents && (
+          <Thead>
+            <Tr>
+              <Th>Email</Th>
+              <Th>Enviados</Th>
+              <Th>Entregues</Th>
+              <Th>Status</Th>
+              <Th>Abertura</Th>
+            </Tr>
+          </Thead>
+        )}
         <Tbody>
           {uniqueItems
             .map((activityFeed: ActivityFeedEmail) => ({
@@ -158,16 +179,20 @@ const TargetsStatistics: React.FC<Props> = ({ aggregateEmails, activeTargets }) 
                   ) : (
                     <Td>{activityFeed.email}</Td>
                   )}
-                  <Td>{`${processed} envios`}</Td>
-                  <Td>
-                    {`${deliveredPercentage}% entregue`}
-                  </Td>
-                  <Td>
-                    <FailedLabel activityFeed={activityFeed} />
-                  </Td>
-                  <Td>
-                    <OpenedLabel activityFeed={activityFeed} />
-                  </Td>
+                  {withoutEvents && (
+                    <>
+                      <Td>{`${processed} envios`}</Td>
+                      <Td>
+                        {`${deliveredPercentage}% entregue`}
+                      </Td>
+                      <Td>
+                        <StatusLabel activityFeed={activityFeed} />
+                      </Td>
+                      <Td>
+                        <OpenedLabel activityFeed={activityFeed} />
+                      </Td>
+                    </>
+                  )}
                 </Tr>
               );
             })

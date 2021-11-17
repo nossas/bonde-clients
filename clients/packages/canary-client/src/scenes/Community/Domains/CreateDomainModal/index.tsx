@@ -43,8 +43,8 @@ const CreateDomainModal: React.FC<Props> = ({ btnText, refetch }) => {
         }
       });
       setDnsHostedZone(data.create_domain);
-    } catch (err: any) {
-      if (err?.message === 'domain_name_exists') {
+    } catch (err) {
+      if ((err as any).message === 'domain_name_exists') {
         return { "FINAL_FORM/form-error": 'Esse domínio já existe no BONDE!' };
       }
     }
@@ -63,12 +63,12 @@ const CreateDomainModal: React.FC<Props> = ({ btnText, refetch }) => {
         {!dnsHostedZone
           ? <DomainForm onClose={onClose} onSubmit={onSubmit} />
           : <ConnectDNS
-              onClose={() => {
-                onClose()
-                refetch()
-              }}
-              dnsHostedZone={dnsHostedZone}
-            />
+            onClose={() => {
+              onClose()
+              refetch()
+            }}
+            dnsHostedZone={dnsHostedZone}
+          />
         }
       </Modal>
     </>

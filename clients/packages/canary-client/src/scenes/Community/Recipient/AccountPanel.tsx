@@ -21,7 +21,7 @@ const AccountPanel: React.FC = () => {
   return (
     <FieldPrefix prefix='community.recipient.bank_account'>
       <Box>
-        <Heading as="h5" size="sm" mb={3}>{t('recipient.form.titles.account')}</Heading>
+        <Heading as="h4" size="lg" mb={3}>{t('recipient.form.titles.account')}</Heading>
         {/* reset rowGap to use only FormField margin */}
         <Grid templateColumns="repeat(12, 1fr)" gap={[null, 6, 8, 16]} rowGap="0!important">
           <GridItem colSpan={[null, 12, null, 6]}>

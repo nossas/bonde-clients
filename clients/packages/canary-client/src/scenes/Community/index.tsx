@@ -29,7 +29,7 @@ const CommunityPage: React.FC<Props> = ({ match, location }): React.ReactElement
 
   return community ? (
     <Flex direction="column" flex={1}>
-      <Stack spacing={5} bg="black" px={12} pt={4}>
+      <Stack spacing={5} bg="black" px={12} pt={2}>
         <Heading as="h2" size="2xl" color="white" fontWeight="extrabold">{t('titles.settings')}</Heading>
         <DarkMode>
           <Flex direction="row">
