@@ -5,7 +5,7 @@ import { react, typeCheck } from '../../slate-editor-utils/src'
 import initialEditorState from './initialEditorState'
 
 interface SlateEditorProperties {
-  initialState: any;
+  initialState?: any;
   style?: any;
   // eslint-disable-next-line unicorn/no-keyword-prefix
   className?: string;

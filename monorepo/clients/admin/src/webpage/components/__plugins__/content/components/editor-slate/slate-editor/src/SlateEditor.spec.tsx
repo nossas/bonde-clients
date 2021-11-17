@@ -3,7 +3,6 @@ import SlateEditor from './SlateEditor'
 
 describe('package/slate-editor/SlateEditor.spec.js', () => {
   const props = {
-    initialState: {},
     // style?: any;?
     // eslint-disable-next-line unicorn/no-keyword-prefix
     // className?: string;

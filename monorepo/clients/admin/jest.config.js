@@ -16,12 +16,12 @@ module.exports = {
   setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"],
 
   // Ignore cypress e2e test files
-  testPathIgnorePatterns: ["<rootDir>/cypress/"],
+  testPathIgnorePatterns: ["<rootDir>/cypress/", "<rootDir>/src/webpage/components/__plugins__/content/components/editor-slate/slate-editor-example/"],
 
   // Code coverage config
   collectCoverageFrom: ["<rootDir>/src/webpage/**/*.{ts,tsx}"],
   coverageDirectory: "<rootDir>/coverage/",
-  coveragePathIgnorePatterns: ["<rootDir>/node_modules/", "(.*).d.ts$", "(.*).min.tsx$"],
+  coveragePathIgnorePatterns: ["<rootDir>/node_modules/", "(.*).d.ts$", "(.*).min.tsx$", "<rootDir>/src/webpage/components/__plugins__/content/components/editor-slate/slate-editor-example/"],
 
   // Important: order matters, specific rules should be defined first
   // See : https://jestjs.io/fr/docs/configuration#modulenamemapper-objectstring-string--arraystring

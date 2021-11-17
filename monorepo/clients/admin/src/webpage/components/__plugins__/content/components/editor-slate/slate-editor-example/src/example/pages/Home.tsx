@@ -21,19 +21,19 @@ const fontSizePluginOptions = { initialFontSize: 16 }
 const colorPluginOptions = new ColorStateModel().rgba({ r: 100, g: 100, b: 100, a: 1 }).gen()
 
 const plugins = [
-  AlignmentPlugin({}),
-  BoldPlugin({}),
+  AlignmentPlugin(),
+  BoldPlugin(),
   ColorPlugin(colorPluginOptions),
-  EmbedPlugin({}),
+  EmbedPlugin(),
   FontFamilyPlugin({}),
   FontSizePlugin(fontSizePluginOptions),
-  GridPlugin({}),
-  ImagePlugin({}),
-  ItalicPlugin({}),
-  LinkPlugin({}),
-  ListPlugin({}),
-  StrikethroughPlugin({}),
-  UnderlinePlugin({})
+  GridPlugin(),
+  ImagePlugin(),
+  ItalicPlugin(),
+  LinkPlugin(),
+  ListPlugin(),
+  StrikethroughPlugin(),
+  UnderlinePlugin()
 ]
 
 const classNames = {
