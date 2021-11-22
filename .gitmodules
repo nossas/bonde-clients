@@ -13,9 +13,6 @@
 [submodule "clients/packages/storage"]
 	path = clients/packages/storage
 	url = https://github.com/nossas/bonde-cross-storage
-[submodule "clients/webpage"]
-	path = clients/webpage
-	url = https://github.com/nossas/bonde-webpage
 [submodule "apis/api-graphql"]
 	path = apis/api-graphql
 	url = https://github.com/nossas/bonde-apis
