@@ -43,6 +43,7 @@ jobs:
   build:
     needs: tests
     runs-on: ubuntu-20.04
+    environment: staging
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
@@ -61,6 +62,20 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        env:
+          REACT_APP_DOMAIN_PUBLIC: ${{ secrets.REACT_APP_DOMAIN_PUBLIC }}
+          REACT_APP_API_GRAPHQL_SECRET: ${{ secrets.REACT_APP_API_GRAPHQL_SECRET }}
+          REACT_APP_DOMAIN_API_ACTIVISTS: ${{ secrets.REACT_APP_DOMAIN_API_ACTIVISTS }}
+          REACT_APP_DOMAIN_API_GRAPHQL: ${{ secrets.REACT_APP_DOMAIN_API_GRAPHQL }}
+          REACT_APP_DOMAIN_API_REST: ${{ secrets.REACT_APP_DOMAIN_API_REST }}
+          REACT_APP_PAGARME_KEY: ${{ secrets.REACT_APP_PAGARME_KEY }}
+          ACTION_SECRET_KEY: ${{ secrets.ACTION_SECRET_KEY }}
+          # RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
+          # RANCHER_SECRET_KEY: ${{ secrets.RANCHER_SECRET_KEY }}
+          # RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
+          # RANCHER_ENVIRONMENT: ${{ secrets.RANCHER_ENVIRONMENT }}
+          # SERVICE_NAME: 'webservers/public-ts'
+          # DOCKER_IMAGE: ${{ needs.build.outputs.tags }}
         with:
           context: ./clients/webpage
           file: ./clients/webpage/Dockerfile

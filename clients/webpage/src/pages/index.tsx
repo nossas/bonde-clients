@@ -6,6 +6,9 @@ import asyncFilterWidgetsGraphql from '../graphql-app/filterWidgets';
 import MeuRioStyles from '../components/MeuRioStyles';
 import Styles from '../bonde-webpage/Styles';
 import MobilizationConnected from '../components/MobilizationConnected';
+import getConfig from 'next/config'
+
+const { publicRuntimeConfig } = getConfig()
 
 interface PageProperties {
   mobilization: any;
@@ -14,7 +17,6 @@ interface PageProperties {
 }
 
 function Page({ mobilization, blocks, widgets }: PageProperties) {
-  console.log("PageProperties >>>", { mobilization, blocks, widgets })
   if (!mobilization) return <Error404 />;
 
   const {
@@ -115,21 +117,18 @@ function Page({ mobilization, blocks, widgets }: PageProperties) {
   )
 }
 
-// This gets called on every request
-export async function getServerSideProps() {
-  // Fetch data from external API
-  // const res = await fetch(`https://.../data`)
-  // const { host } = getState().sourceRequest;
-  // const { protocol } = getState().sourceRequest;
-  // const appDomain = publicRuntimeConfig.domainPublic || 'staging.bonde.org';
-  // const appDomain = "localhost:3000"
-  // const userAgent = req ? req.headers['user-agent'] || '' : navigator.userAgent || '';
+export async function getServerSideProps({
+  req,
+  // res
+}: any) {
+  console.log("getServerSideProps");
+  // This gets called on every request
+  const host = req.headers.host || '';
+  // const protocol = req.headers['x-forwarded-proto'] || 'http';
+  const appDomain = publicRuntimeConfig.domainPublic || 'staging.bonde.org';
 
-  // Resolve ataque de bots
-  // if (userAgent.toLowerCase().indexOf('less') > 0) {
-  //   res?.end();
-  // }
-
+  // Redireciona acesso para www
+  // Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
   // if (host) {
   //   if (res) {
   //     if (!host.startsWith('www', 0)) {
@@ -141,34 +140,17 @@ export async function getServerSideProps() {
   //   }
   // }
 
-  // const fetchData = async (filter?: any) => {
-  //   // const regex = host.match(`(.+).${appDomain}`);
-  //   // const where = regex
-  //   //   ? { slug: regex[1].replace(/^www\./, '') }
-  //   //   : { custom_domain: host };
+  const regex = host.match(`(.+).${appDomain}`);
+  const where = regex
+    ? { slug: regex[1].replace(/^www\./, '') }
+    : { custom_domain: host };
 
-  //   await asyncFilterMobilizationGraphql(filter || where));
-  //   // await dispatch(asyncFilterBlockGraphql(filter || where));
-  //   // await dispatch(asyncFilterWidgetGraphql(filter || where));
-  // };
-  const filter: any = {
-    slug: 'teste-de-widgets'
-  }
+  const { mobilizations } = await asyncFilterMobilizationsGraphql(where)
+  const { blocks } = await asyncFilterBlocksGraphql(where)
+  const { widgets } = await asyncFilterWidgetsGraphql(where)
 
-  const { mobilizations } = await asyncFilterMobilizationsGraphql(filter)
-  const { blocks } = await asyncFilterBlocksGraphql(filter)
-  const { widgets } = await asyncFilterWidgetsGraphql(filter)
-
-  // console.log("mobilizations, blocks, widgets >>>", { mobilizations, blocks, widgets });
-
-  // await fetchData();
-  // Mobiization with all widgets configured.
-  // await fetchData({ slug: 'teste-de-widgets' });
-
-  // const data = await res.json()
-
+  // console.log("regex, where", { regex, where, mobilizations });
   // Pass data to the page via props
-  // return { props: { data } }
   return { props: { mobilization: mobilizations[0], blocks, widgets } };
 }
 

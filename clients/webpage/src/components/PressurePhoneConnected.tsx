@@ -1,6 +1,11 @@
 import { useEffect, useState } from 'react';
 import { gql } from '@apollo/client';
-// import { connect } from 'react-redux';
+import {
+  PressureAnalytics,
+  FinishMessageCustom,
+  PressureTellAFriend,
+} from '../bonde-webpage';
+import Utils from '../Utils';
 
 import {
   PhonePressurePlugin,
@@ -82,7 +87,7 @@ const TwilioCall = ({ children, totalCount }) => {
     }
   }, [totalCount]);
 
-  const call = (variables: any, watchQuery: boolean = false) => {
+  const call = (variables: any, watchQuery = false) => {
     setPhonePressureCount(phonePressureCount + 1);
     return client.mutate({ mutation: addTwilioCall, variables }).then(() => {
       if (watchQuery && !observableQuery) {
@@ -132,7 +137,24 @@ const PressurePhoneConnected = (props: any) => {
 
   return (
     <TwilioCall totalCount={totalCount}>
-      {(twilio: any) => <PhonePressurePlugin {...props} twilio={twilio} />}
+      {(twilio: any) =>
+        <PhonePressurePlugin
+          {...props}
+          asyncFillWidget={(values: any) => console.log("should be implement asyncFillWidget >>> ", { values })}
+          twilio={twilio}
+          analyticsEvents={PressureAnalytics}
+          overrides={{
+            FinishCustomMessage: { component: FinishMessageCustom },
+            FinishDefaultMessage: {
+              component: PressureTellAFriend,
+              props: {
+                imageUrl: Utils.imageUrl,
+                href: Utils.getSharedPath(props.mobilization),
+              },
+            },
+          }}
+        />
+      }
     </TwilioCall>
   );
 };

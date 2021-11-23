@@ -162,7 +162,7 @@ const PhonePressure = ({
   const [callManagement, setCalls] = useState<any[]>([]);
 
   const { call, phonePressureCount, callTransition } = twilio;
-  console.log('phonePressureCount', { phonePressureCount });
+  // console.log('phonePressureCount', { phonePressureCount });
   const {
     main_color: mainColor,
     call_to_action: callToAction,

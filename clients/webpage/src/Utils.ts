@@ -2,7 +2,7 @@ import getConfig from 'next/config';
 
 const { publicRuntimeConfig } = getConfig();
 
-export default {
+const Utils = {
   getSharedPath: (mobilization?: any) => {
     const domain = publicRuntimeConfig.domainPublic || 'staging.bonde.org';
 
@@ -12,3 +12,5 @@ export default {
   },
   imageUrl: '/static/images/check-mark-image.png'
 }
+
+export default Utils;
