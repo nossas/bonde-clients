@@ -73,19 +73,13 @@ function Page({ mobilization, blocks, widgets }: PageProperties) {
           rel="icon"
           type="image/png"
           sizes="32x32"
-          href={
-            favicon ||
-            'https://static.bonde.org/static/images/icon/favicon-32.png'
-          }
+          href={favicon || '/static/icon/favicon-32.png'}
         />
         <link
           rel="icon"
           type="image/png"
           sizes="16x16"
-          href={
-            favicon ||
-            'https://static.bonde.org/static/images/icon/favicon-16.png'
-          }
+          href={favicon || '/static/icon/favicon-16.png'}
         />
         <link
           type="text/css"
@@ -141,7 +135,6 @@ export async function getServerSideProps({
   req,
   // res
 }: any) {
-  console.log("getServerSideProps");
   // This gets called on every request
   const host = req.headers.host || '';
   // const protocol = req.headers['x-forwarded-proto'] || 'http';
@@ -169,7 +162,6 @@ export async function getServerSideProps({
   const { blocks } = await asyncFilterBlocksGraphql(where)
   const { widgets } = await asyncFilterWidgetsGraphql(where)
 
-  // console.log("regex, where", { regex, where, mobilizations });
   // Pass data to the page via props
   return { props: { mobilization: mobilizations[0], blocks, widgets } };
 }
