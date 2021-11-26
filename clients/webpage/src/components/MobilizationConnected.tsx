@@ -20,6 +20,7 @@ import Footer from './Footer';
 import FormPlugin from './FormConnected';
 import PressureEmailPlugin from './PressureEmailConnected';
 import PressurePhonePlugin from './PressurePhoneConnected';
+import PlipForm from '../bonde-webpage/plugins/Plip/form/PlipForm';
 // import PressurePhonePlugin from './PressurePhoneConnected';
 
 // const mapStateToProps = (state: any, props: any) => {
@@ -99,6 +100,10 @@ const plugins = [
     kind: 'content',
     // component: DummyWidget,
     component: ContentPlugin,
+  },
+  {
+    kind: 'plip',
+    component: PlipForm
   },
 ];
 
