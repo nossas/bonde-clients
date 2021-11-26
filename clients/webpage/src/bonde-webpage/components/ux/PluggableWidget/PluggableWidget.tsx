@@ -5,9 +5,9 @@ import Overlay from './Overlay';
 const PluggableWidget = (props: any) => {
   const getOptions = (plugin: any) => {
     let options = { noOverlay: !props.editable };
-    if (typeof plugin.options === 'function') {
+    if (typeof plugin?.options === 'function') {
       options = Object.assign({}, options, plugin.options(props));
-    } else if (typeof plugin.options === 'object') {
+    } else if (typeof plugin?.options === 'object') {
       options = Object.assign({}, options, plugin.options);
     }
     return options;
