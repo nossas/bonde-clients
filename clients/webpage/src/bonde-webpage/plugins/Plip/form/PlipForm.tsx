@@ -1,13 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form } from 'react-final-form'
 import  SelectField from '../components/SelectField';
 import TextInput from '../components/TextInput';
+import PlipDetails from '../components/PlipDetails';
 
 function PlipForm() {
-
+  const [pdf, setPdf] = useState(false);
   return (
-    <Form
-    onSubmit={(values) => {console.log(values)}}
+    pdf ? <PlipDetails /> : <Form
+    onSubmit={(values) => {setPdf(true); console.log(values)}}
     render={renderProps => {
 
       const {
