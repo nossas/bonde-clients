@@ -18,6 +18,8 @@ export { default as selectors } from './redux-mob/Selectors';
 export { default as ContentPlugin } from './plugins/Content';
 export { default as DraftPlugin } from './plugins/Draft';
 
+export { default as PlipPlugin } from './plugins/Plip';
+
 /* FormPlugin */
 export { default as FormPlugin } from './plugins/Form';
 export { default as FormAnalytics } from './plugins/Form/Analytics';
