@@ -9,9 +9,9 @@ export type Activist = {
 };
 
 export type Payload = {
-  email: String;
+  email: string;
   pdf_data: any;
-  state: String
+  state: string
 };
 
 export type Widget = {

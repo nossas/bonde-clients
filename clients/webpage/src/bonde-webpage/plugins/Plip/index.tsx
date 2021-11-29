@@ -30,7 +30,7 @@ interface State {
   fetching: boolean;
 }
 
-const PlipPlugin = ({ asyncFillWidget, widgetId, children }: Props) => {
+const PlipPlugin = ({ asyncFillWidget, children }: Props): JSX.Element => {
   const [state, setState] = useState<State>({ data: [], fetching: true });
 
   useEffect(() => {

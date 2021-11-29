@@ -119,7 +119,7 @@ const MobilizationConnected = ({
   blocks,
   widgets,
   blocksIsLoaded,
-}: MobilizationProperties) => {
+}: MobilizationProperties): JSX.Element => {
   const { t, i18n } = useTranslation();
 
   if (mobilization && blocksIsLoaded) {
