@@ -4,11 +4,40 @@ import  SelectField from '../components/SelectField';
 import TextInput from '../components/TextInput';
 import PlipDetails from '../components/PlipDetails';
 
-function PlipForm() {
-  const [pdf, setPdf] = useState(false);
+type Props = {
+  // Function created with createApolloFetch
+  // https://www.apollographql.com/blog/4-simple-ways-to-call-a-graphql-api-a6807bcdb355
+  asyncFillWidget: any;
+  widgetId: number;
+  children: any;
+};
+
+// interface PlipFormState {
+//   data: any[];
+//   fetching: boolean;
+// }
+
+const PlipForm = ({ asyncFillWidget }: Props): JSX.Element => {
+  // const [setState] = useState<PlipFormState>({ data: [], fetching: true });
+
+  const [pdf, setPdf] = useState(false);  // TODO: Render Loading...
+
   return (
     pdf ? <PlipDetails /> : <Form
-    onSubmit={(values) => {setPdf(true); console.log(values)}}
+    onSubmit={(values) => {
+      setPdf(true);
+      console.log(values)
+      // useEffect(() => {
+        asyncFillWidget({ email: "çicas", state: "sp", widget_id: 111 })
+          .then(({ data }: any) => {
+            // setState({ data, fetching: false });
+          })
+          .catch((err: any) => {
+            console.error('PlipPlugin: ', err);
+          });
+      // }, []);
+    
+    }}
     render={renderProps => {
 
       const {
