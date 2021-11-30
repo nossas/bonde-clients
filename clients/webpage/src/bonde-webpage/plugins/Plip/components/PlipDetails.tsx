@@ -1,6 +1,13 @@
+// import { BrowserRouter } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { Wrap } from './styles';
+import PdfButton from './PdfButton';
+
 const PlipDetails = () => {
   return (
-    <h3>mostrar pdf</h3>
+    <Wrap>
+     <PdfButton />
+    </Wrap>
   )
 }
 
