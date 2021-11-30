@@ -29,14 +29,14 @@ const PlipForm = ({ asyncFillWidget }: Props): JSX.Element => {
       console.log(values)
       // useEffect(() => {
         asyncFillWidget({ email: "çicas", state: "sp", widget_id: 111 })
-          .then(({ data }: any) => {
+          // .then(({ data }: any) => {
             // setState({ data, fetching: false });
-          })
+          // })
           .catch((err: any) => {
             console.error('PlipPlugin: ', err);
           });
       // }, []);
-    
+
     }}
     render={renderProps => {
 
