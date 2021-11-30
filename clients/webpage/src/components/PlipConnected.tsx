@@ -7,6 +7,7 @@ import {
 const PlipConnected = (props: any): JSX.Element =>
   <PlipPlugin
     {...props}
+    widgetId={props.widget.id}
     asyncFillWidget={async (args: any) =>
       (
         await fetch('/api/actions/plip', {

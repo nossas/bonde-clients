@@ -13,27 +13,25 @@ type Props = {
   children: any;
 };
 
-// interface PlipFormState {
-//   data: any[];
-//   fetching: boolean;
-// }
+export interface PlipFormState {
+  data: any[];
+  submited: boolean;
+}
 
-const PlipForm = ({ asyncFillWidget }: Props): JSX.Element => {
-  // const [setState] = useState<PlipFormState>({ data: [], fetching: true });
-
-  const [pdf, setPdf] = useState(false);  // TODO: Render Loading...
+const PlipForm = ({ asyncFillWidget, widgetId }: Props): JSX.Element => {
+  const [pdf, setPdf] = useState<PlipFormState>({ data: [], submited: false });
 
   return (
   <div className={styles.PlipForm}>
-    {pdf ? <PlipDetails /> : <Form 
+    {pdf.submited ? <PlipDetails pdf={pdf} /> : <Form 
   onSubmit={(values) => {
-      setPdf(true);
-      console.log(values)
+      // console.log(values, widgetId)
       // useEffect(() => {
-        asyncFillWidget({ email: "çicas", state: "sp", widget_id: 111 })
-          // .then(({ data }: any) => {
-            // setState({ data, fetching: false });
-          // })
+        asyncFillWidget({...values, widget_id: widgetId})
+          .then(({ create_plip }: any) => {
+            // setPdf(true);
+            setPdf({ data: create_plip, submited: true });
+          })
           .catch((err: any) => {
             console.error('PlipPlugin: ', err);
           });
@@ -83,6 +81,14 @@ const PlipForm = ({ asyncFillWidget }: Props): JSX.Element => {
 
         <TextInput id="whatsapp" name="whatsapp" label="Whatsapp " placeholder="Seu whatsapp" />
 
+        <SelectField id="signature_quantity" name="signature_quantity" label="Quantidade de Assinaturas* ">
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="40">40</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+        </SelectField>
         <button type="submit">Send</button>
       </form>
       )
