@@ -23,8 +23,9 @@ const PlipForm = ({ asyncFillWidget }: Props): JSX.Element => {
   const [pdf, setPdf] = useState(false);  // TODO: Render Loading...
 
   return (
-    pdf ? <PlipDetails /> : <Form
-    onSubmit={(values) => {
+  <div className="PlipForm">
+    {pdf ? <PlipDetails /> : <Form 
+  onSubmit={(values) => {
       setPdf(true);
       console.log(values)
       // useEffect(() => {
@@ -86,8 +87,10 @@ const PlipForm = ({ asyncFillWidget }: Props): JSX.Element => {
       )
     }}
     >
-    </Form>
-  )
+    </Form>}
+    </div>
+    )
+  
 };
 
 export default PlipForm;

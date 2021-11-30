@@ -3,7 +3,9 @@ import styled from '@emotion/styled';
 export const Wrap = styled.div`
   background-color: #ffffff;
   padding: 2rem;
+  margin: 0 2em;
   border-radius: 3px;
+  text-align: center;
 `;
 
 export const Header = styled.h3`
@@ -21,5 +23,6 @@ padding-inline: 0.5rem;
 `;
 
 export const WrapButton = styled.div`
-  display: grid;
+  display: display-block;
+  padding: 1em 4em;
 `;
