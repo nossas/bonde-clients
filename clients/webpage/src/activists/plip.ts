@@ -1,30 +1,36 @@
 import graphql, { Response } from './request-graphql';
 
 export type Args = {
-  state: String
-  email: String
-  pdf_data?: any
-  widget_id: Number
+  name: string
+  state: string
+  email: string
+  whatsapp: number
+  widget_id: number
 };
 
-
 export const plipQuery = `
-  mutation plipm($email: String!, $state: String!, $widget_id: Int!) {
-    plip_generate_sheet(widget_id: $widget_id, email: $email, state: $state) {
-      pdf_data,
-      unique_identifier,
-      id
+mutation Plip($activist: ActivistInput!, $widget_id: Int!, $input: PlipInput!) {
+  create_plip(widget_id: $widget_id, activist: $activist, input: $input) {
+      data
     }
   }
 `;
 
-const plip = async ({ email, state, widget_id }: Args): Promise<any> => {
+const plip = async ({ name, email, state, widget_id, whatsapp }: Args): Promise<any> => {
 
   try {
     const variables = {
-      email: email,
-      widget_id: widget_id,
-      state: state,
+      activist: {
+        name,
+        email,
+      },
+      input: {
+        name,
+        state,
+        whatsapp,
+        email,
+      },
+      widget_id,
     };
 
     const query = JSON.stringify({ query: plipQuery, variables });
@@ -35,7 +41,7 @@ const plip = async ({ email, state, widget_id }: Args): Promise<any> => {
       console.log('data, errors', { data, errors });
       throw new Error('request_graphql_error');
     }
-
+    // console.log('data plip activists', data);
     return data;
   } catch (err) {
     // TODO: Show popup window error
