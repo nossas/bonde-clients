@@ -3,6 +3,7 @@ import { Form } from 'react-final-form'
 import  SelectField from '../components/SelectField';
 import TextInput from '../components/TextInput';
 import PlipDetails from '../components/PlipDetails';
+import styles from './PlipForm.module.css'
 
 type Props = {
   // Function created with createApolloFetch
@@ -23,7 +24,7 @@ const PlipForm = ({ asyncFillWidget }: Props): JSX.Element => {
   const [pdf, setPdf] = useState(false);  // TODO: Render Loading...
 
   return (
-  <div className="PlipForm">
+  <div className={styles.PlipForm}>
     {pdf ? <PlipDetails /> : <Form 
   onSubmit={(values) => {
       setPdf(true);

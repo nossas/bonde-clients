@@ -23,62 +23,6 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     box-sizing: border-box;
   }
-
-  .PlipForm {
-    background-color: limegreen;
-    padding: 2em;
-  }
-  .PlipForm label {
-    text-transform: uppercase;
-    color: #fff;
-    display:block;
-    font-weigth: strong;
-    margin: 1.5em 0 1em;
-  }
-
-  .PlipForm input {
-    cursor: pointer;
-    border-radius: 2px;
-    padding: 1rem;
-    box-sizing: border-box;
-    height: auto;
-    border: 1px solid #eee;
-    font-size: inherit;
-    font-family: inherit;
-    width: 100%;
-  }
-
-  .PlipForm select {
-    border-radius: 2px;
-    padding: 1rem;
-    display: inline-block;
-    height: inherit;
-    background-color: #ffffff;
-    box-sizing: border-box;
-    border: 1px solid #eee;
-    font-family: inherit;
-    font-size: inherit;
-    width: 100%;
-  }
-
-  .PlipForm button {
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-    padding: 1rem;
-    width: 100%;
-    border-radius: 3px;
-    border: 1px solid transparent;
-    text-transform: uppercase;
-    letter-spacing: 0;
-    font-family: inherit;
-    font-size: inherit;
-    font-weight: bold;
-    line-height: 1.125rem;
-    -webkit-text-decoration: none;
-    text-decoration: none;
-    cursor: pointer;
-    margin: 2em 0 0 0;
-  }
 `
 
 const theme = {
