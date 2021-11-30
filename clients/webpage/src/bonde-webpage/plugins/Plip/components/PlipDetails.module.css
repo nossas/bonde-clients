@@ -1,0 +1,31 @@
+.PlipDetails {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 3px;
+  text-align: center;
+}
+
+.PlipDetails h3 {
+   color: #FFFFFF;
+   font-family: Nunito Sans;
+   font-weight: extrabold;
+   text-align: center;
+   font-size: 13px;
+}
+
+.PlipDetails button.viewSheet {
+  background-color: #EE0090;
+  border-radius:0.2rem;
+  border: 1px solid #000000; 
+  /* height:'4.375rem', 
+  maxWidth:'22.75rem',  */
+  color:#FFFFFF;
+  /* fontFamily: 'nunito sans',  */
+  text-transform: uppercase;
+}
+
+.PlipDetails button svg {
+  display: inline-block;
+  padding-inline: 0.5rem;
+
+}

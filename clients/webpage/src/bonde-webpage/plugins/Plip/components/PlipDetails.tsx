@@ -1,11 +1,11 @@
 // import { BrowserRouter } from "react-router-dom";
 // import { Link } from "react-router-dom";
-import { Wrap } from './styles';
+import styles from './PlipDetails.module.css';
 import PdfButton from './PdfButton';
 
 const PlipDetails = () => {
   return (
-    <Wrap>
+    <div className={styles.PlipDetails}>
       <h3>Eba! Geramos uma ficha para você assinar:</h3>
       <PdfButton />
       <ol>
@@ -14,8 +14,8 @@ const PlipDetails = () => {
       </ol>
       <p>Contamos com você! 🌳✊</p>
       <p>Não pode imprimir agora? Tudo bem! Já enviamos uma cópia no seu e-mail também.</p>
-    </Wrap>
+    </div>
   )
-} 
+}
 
 export default PlipDetails;

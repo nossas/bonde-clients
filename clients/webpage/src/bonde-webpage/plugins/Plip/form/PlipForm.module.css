@@ -1,12 +1,16 @@
 .PlipForm {
   background-color: limegreen;
+}
+
+.PlipForm form {
   padding: 2em;
 }
+
 .PlipForm label {
   text-transform: uppercase;
   color: #fff;
   display:block;
-  font-weigth: strong;
+  font-weight: 900;
   margin: 1.5em 0 1em;
 }
 
