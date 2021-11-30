@@ -11,7 +11,6 @@ const PdfButton = () => {
   return (
     <>
         <button
-        className="viewSheet"
         onClick={handleClick}>
             <EyeIcon />
           Ver ficha de assinatura

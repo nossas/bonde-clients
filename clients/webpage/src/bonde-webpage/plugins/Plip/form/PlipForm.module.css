@@ -39,7 +39,7 @@
   width: 100%;
 }
 
-.PlipForm button {
+.PlipForm button[type=submit] {
   background-color: rgba(0, 0, 0, 0.5);
   color: #ffffff;
   padding: 1rem;

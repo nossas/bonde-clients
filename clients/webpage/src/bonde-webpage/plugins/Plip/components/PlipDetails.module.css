@@ -6,14 +6,12 @@
 }
 
 .PlipDetails h3 {
-   color: #FFFFFF;
    font-family: Nunito Sans;
-   font-weight: extrabold;
+   font-weight: 900;
    text-align: center;
-   font-size: 13px;
 }
 
-.PlipDetails button.viewSheet {
+.PlipDetails button {
   background-color: #EE0090;
   border-radius:0.2rem;
   border: 1px solid #000000; 
@@ -22,10 +20,16 @@
   color:#FFFFFF;
   /* fontFamily: 'nunito sans',  */
   text-transform: uppercase;
+  padding: 1em 5em;
+  line-height: 1.5em;
+  font-size: 1em;
+  display: inline-flex;
+  align-self: center;
 }
 
 .PlipDetails button svg {
-  display: inline-block;
-  padding-inline: 0.5rem;
-
+  display: inline;
+  padding: 0 .5em;
+  height: 1.4em;
+  width: 1.4em;
 }
