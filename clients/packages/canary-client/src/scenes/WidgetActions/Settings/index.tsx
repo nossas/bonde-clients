@@ -13,6 +13,7 @@ import ConfigurePressureTargets from "./ConfigurePressureTargets";
 import ConfigurePostAction from "./ConfigurePostAction";
 import Sending from "./Sending";
 import Performance from "./Performance";
+import Plips from "./Plips";
 
 type Props = {
   widgets: Widget[];
@@ -77,23 +78,28 @@ const Settings: React.FC<Props> = ({ widgets }) => {
         {t('settings.header', { label: label.title.toLowerCase() })}
       </Heading>
 
-      <Navigation />
-
+      <Navigation widget={widget} />
       <Switch>
-        <Route exact path={`${match.path}`}>
-          <Performance widget={widget} />
-        </Route>
-        <Route exact path={`${match.path}/targets`}>
-          {widget.kind === "pressure" && (
-            <ConfigurePressureTargets
-              widget={widget}
-              updateCache={updateCache}
-            />
-          )}
-        </Route>
-        <Route exact path={`${match.path}/sending`}>
-          <Sending widget={widget} updateCache={updateCache} />
-        </Route>
+        {widget.kind === "pressure" ? (
+          <>
+            <Route exact path={`${match.path}`}>
+              <Performance widget={widget} />
+            </Route>
+            <Route exact path={`${match.path}/targets`}>
+              <ConfigurePressureTargets
+                widget={widget}
+                updateCache={updateCache}
+              />
+            </Route>
+            <Route exact path={`${match.path}/sending`}>
+              <Sending widget={widget} updateCache={updateCache} />
+            </Route>
+          </>
+        ) : (
+          <Route exact path={`${match.path}`}>
+            <Plips widget={widget} />
+          </Route>
+        )}
         <Route exact path={`${match.path}/adjusts`}>
           <Adjusts widget={widget} updateCache={updateCache} />
         </Route>

@@ -42,7 +42,7 @@ const WidgetButton = ({ widget }: Props) => {
     }
   };
 
-  if (kind === 'pressure') {
+  if (kind === 'pressure' || kind === 'plip') {
     linkProps = { to: `/widgets/${id}/settings` };
   }
 
