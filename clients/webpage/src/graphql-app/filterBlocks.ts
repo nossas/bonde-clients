@@ -6,7 +6,7 @@ import { client as GraphQLAPI } from '.';
 const asyncFilterBlocksGraphql = async ({ slug, custom_domain }: any) => {
   // dispatch({ type: 'FILTER_BLOCKS_REQUEST' });
 
-  let filter: Filter = {};
+  const filter: Filter = {};
   if (slug) filter.slug = { _eq: slug };
   if (custom_domain) filter.custom_domain = { _eq: custom_domain };
 
@@ -21,6 +21,7 @@ const asyncFilterBlocksGraphql = async ({ slug, custom_domain }: any) => {
           bg_image
           name
           position
+          mobilization_id
         }
       }
     `,
