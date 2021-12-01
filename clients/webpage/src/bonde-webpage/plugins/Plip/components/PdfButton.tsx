@@ -8,7 +8,7 @@ interface PdfButtonProps {
 const PdfButton = (props: PdfButtonProps) => {
   const handleClick = (event:any) => {
     event?.preventDefault()
-    window.open(encodeURI(props.dataPdf)); 
+    window.open(encodeURI(`data:application/pdf;filename=generated.pdf;base64,${props.dataPdf}`)); 
   };
 
   return (
