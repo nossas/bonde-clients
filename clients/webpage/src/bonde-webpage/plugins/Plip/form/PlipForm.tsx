@@ -3,7 +3,6 @@ import { Form, Field } from 'react-final-form'
 import PlipDetails from '../components/PlipDetails';
 import styles from './PlipForm.module.css';
 import LGPD from '../../../components/ux/LGPD';
-import  SelectField from '../components/SelectField';
 
 type Props = {
   // Function created with createApolloFetch
@@ -17,7 +16,6 @@ export interface PlipFormState {
   data: any[];
   submited: boolean;
 }
-
 
 const required = (value) => {
   console.log(value)
@@ -46,8 +44,6 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
   <div className={styles.PlipForm} style={{backgroundColor:bgcolor}}>
     {pdf.submited ? <PlipDetails pdf={pdf} /> : <Form
   onSubmit={(values) => {
-      // console.log(values, widgetId)
-      // useEffect(() => {
         asyncFillWidget({...values, widget_id: widget.id})
           .then(({ create_plip }: any) => {
             // setPdf(true);
@@ -56,9 +52,8 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
           .catch((err: any) => {
             console.error('PlipPlugin: ', err);
           });
-      // }, []);
-
     }}
+
     render={(renderProps) => {
       const {
         handleSubmit,
@@ -88,40 +83,49 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
             )}
           </Field>
 
-          <label>Estado* </label>
-          <Field name="state" component='select'>
-            <option value="AC">Acre</option>
-            <option value="AL">Alagoas</option>
-            <option value="AM">Amazonas</option>
-            <option value="BA">Bahia</option>
-            <option value="CE">Ceará</option>
-            <option value="DF">Distrito Federal</option>
-            <option value="ES">Espírito Santo</option>
-            <option value="GO">Goiás</option>
-            <option value="AP">Amapá</option>
-            <option value="MA">Maranhão</option>
-            <option value="MT">Mato Grosso</option>
-            <option value="MS">Mato Grosso do Sul</option>
-            <option value="MG">Minas Gerais</option>
-            <option value="PA">Pará</option>
-            <option value="PB">Paraíba</option>
-            <option value="PR">Paraná</option>
-            <option value="PE">Pernambuco</option>
-            <option value="PI">Piauí</option>
-            <option value="RJ">Rio de Janeiro</option>
-            <option value="RN">Rio Grande do Norte</option>
-            <option value="RS">Rio Grande do Sul</option>
-            <option value="RO">Rondônia</option>
-            <option value="RR">Roraima</option>
-            <option value="SC">Santa Catarina</option>
-            <option value="SP">São Paulo</option>
-            <option value="SE">Sergipe</option>
-            <option value="TO">Tocantins</option>
-            <option value="EX">Estrangeiro</option>
+          <Field name="state" validate={required}>
+            {({ input, meta }) => (
+                <div>
+                  <label>Estado* </label>
+                  <select {...input}>
+                    <option></option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="AP">Amapá</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                    <option value="EX">Estrangeiro</option>
+                  </select>
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+            )}
           </Field>
 
-          <Field name="whatsapp"
-           validate={composeValidators(mustBeNumber, minValue(11))}
+          <Field
+          name="whatsapp"
+          validate={composeValidators(mustBeNumber, minValue(11))}
           >
             {({ input, meta }) => (
                 <div>
@@ -132,9 +136,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
             )}
           </Field>
 
-          <Field name="signature_quantity"
-           validate={required}
-          >
+          <Field name="signature_quantity" validate={required}>
             {({ input, meta }) => (
                 <div>
                   <label>Quantidade de Assinaturas* </label>
@@ -152,6 +154,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
             )}
           </Field>
         <button type="submit">{(widget.settings && widget.settings.button_text) || 'Enviar'}</button>
+
         <LGPD />
       </form>
       </>
@@ -162,7 +165,6 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
   }
     </div>
     )
-
 };
 
 export default PlipForm;
