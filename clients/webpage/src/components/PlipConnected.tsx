@@ -4,10 +4,9 @@ import {
   PlipPlugin,
 } from '../bonde-webpage';
 
-const PlipConnected = (props: any): JSX.Element =>
+const PlipConnected = (props): JSX.Element =>
   <PlipPlugin
     {...props}
-    widgetId={props.widget.id}
     asyncFillWidget={async (args: any) =>
       (
         await fetch('/api/actions/plip', {

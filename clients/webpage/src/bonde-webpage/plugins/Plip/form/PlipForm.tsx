@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
-import { Form } from 'react-final-form'
-import  SelectField from '../components/SelectField';
-import TextInput from '../components/TextInput';
+import { Form, Field } from 'react-final-form'
 import PlipDetails from '../components/PlipDetails';
-import styles from './PlipForm.module.css'
+import styles from './PlipForm.module.css';
+import LGPD from '../../../components/ux/LGPD';
+import  SelectField from '../components/SelectField';
 
 type Props = {
   // Function created with createApolloFetch
   // https://www.apollographql.com/blog/4-simple-ways-to-call-a-graphql-api-a6807bcdb355
   asyncFillWidget: any;
-  widgetId: number;
+  widget: any;
   children: any;
 };
 
@@ -18,16 +18,37 @@ export interface PlipFormState {
   submited: boolean;
 }
 
-const PlipForm = ({ asyncFillWidget, widgetId }: Props): JSX.Element => {
+
+const required = (value) => {
+  console.log(value)
+  return !!value ? undefined : "Campo obrigatório"
+};
+const mustBeNumber = (value) => (isNaN(value) ? "Insira apenas números" : undefined);
+const minValue = (min) => (value) =>
+  isNaN(value) || value.length >= min ? undefined : `Digite o número com o DDD`;
+const composeValidators = (...validators) => (value) =>
+  validators.reduce((error, validator) => error || validator(value), undefined);
+
+const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
   const [pdf, setPdf] = useState<PlipFormState>({ data: [], submited: false });
+  const bgcolor =
+  widget.settings && widget.settings.main_color
+    ? widget.settings.main_color
+    : 'rgba(0,0,0,0.25)';
+
+  const callToAction =
+    widget.settings &&
+    widget.settings.call_to_action
+    ? widget.settings.call_to_action
+    : 'Clique para configurar seu formulário...';
 
   return (
-  <div className={styles.PlipForm}>
-    {pdf.submited ? <PlipDetails pdf={pdf} /> : <Form 
+  <div className={styles.PlipForm} style={{backgroundColor:bgcolor}}>
+    {pdf.submited ? <PlipDetails pdf={pdf} /> : <Form
   onSubmit={(values) => {
       // console.log(values, widgetId)
       // useEffect(() => {
-        asyncFillWidget({...values, widget_id: widgetId})
+        asyncFillWidget({...values, widget_id: widget.id})
           .then(({ create_plip }: any) => {
             // setPdf(true);
             setPdf({ data: create_plip, submited: true });
@@ -38,66 +59,110 @@ const PlipForm = ({ asyncFillWidget, widgetId }: Props): JSX.Element => {
       // }, []);
 
     }}
-    render={renderProps => {
-
+    render={(renderProps) => {
       const {
         handleSubmit,
       } = renderProps;
 
       return (
-      <form onSubmit={handleSubmit}>
-        <TextInput id="name" name="name" label="Nome completo* " placeholder="Insira seu nome" />
-        <TextInput id="email" name="email" label="Email* " placeholder="Insira seu e-mail" />
-        <SelectField id="state" name="state" label="Estado* ">
-          <option value="AC">Acre</option>
-          <option value="AL">Alagoas</option>
-          <option value="BA">Bahia</option>
-          <option value="CE">Ceará</option>
-          <option value="AM">Amazonas</option>
-          <option value="DF">Distrito Federal</option>
-          <option value="ES">Espírito Santo</option>
-          <option value="GO">Goiás</option>
-          <option value="AP">Amapá</option>
-          <option value="MA">Maranhão</option>
-          <option value="MT">Mato Grosso</option>
-          <option value="MS">Mato Grosso do Sul</option>
-          <option value="MG">Minas Gerais</option>
-          <option value="PA">Pará</option>
-          <option value="PB">Paraíba</option>
-          <option value="PR">Paraná</option>
-          <option value="PE">Pernambuco</option>
-          <option value="PI">Piauí</option>
-          <option value="RJ">Rio de Janeiro</option>
-          <option value="RN">Rio Grande do Norte</option>
-          <option value="RS">Rio Grande do Sul</option>
-          <option value="RO">Rondônia</option>
-          <option value="RR">Roraima</option>
-          <option value="SC">Santa Catarina</option>
-          <option value="SP">São Paulo</option>
-          <option value="SE">Sergipe</option>
-          <option value="TO">Tocantins</option>
-          <option value="EX">Estrangeiro</option>
-        </SelectField>
+        <>
+        <form onSubmit={handleSubmit}>
+          <h2>{callToAction}</h2>
+          <Field name="name" validate={required}>
+            {({ input, meta }) => (
+                <div>
+                  <label>Nome completo*</label>
+                  <input {...input} type="text" placeholder="Insira seu nome" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+            )}
+          </Field>
 
-        <TextInput id="whatsapp" name="whatsapp" label="Whatsapp " placeholder="Seu whatsapp" />
+          <Field name="email" validate={required}>
+            {({ input, meta }) => (
+                <div>
+                  <label>Email* </label>
+                  <input {...input} type="text" placeholder="Insira seu e-mail" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+            )}
+          </Field>
 
-        <SelectField id="signature_quantity" name="signature_quantity" label="Quantidade de Assinaturas* ">
-          <option value="10">10</option>
-          <option value="20">20</option>
-          <option value="30">30</option>
-          <option value="40">40</option>
-          <option value="50">50</option>
-          <option value="100">100</option>
-        </SelectField>
-        <button type="submit">Send</button>
+          <label>Estado* </label>
+          <Field name="state" component='select'>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="AP">Amapá</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+            <option value="EX">Estrangeiro</option>
+          </Field>
+
+          <Field name="whatsapp"
+           validate={composeValidators(mustBeNumber, minValue(11))}
+          >
+            {({ input, meta }) => (
+                <div>
+                  <label>Whatsapp </label>
+                  <input {...input} type="text" placeholder="Seu Whatsapp" />
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+            )}
+          </Field>
+
+          <Field name="signature_quantity"
+           validate={required}
+          >
+            {({ input, meta }) => (
+                <div>
+                  <label>Quantidade de Assinaturas* </label>
+                  <select {...input}>
+                    <option></option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                </div>
+            )}
+          </Field>
+        <button type="submit">{(widget.settings && widget.settings.button_text) || 'Enviar'}</button>
+        <LGPD />
       </form>
+      </>
       )
     }}
     >
-    </Form>}
+    </Form>
+  }
     </div>
     )
-  
+
 };
 
 export default PlipForm;
