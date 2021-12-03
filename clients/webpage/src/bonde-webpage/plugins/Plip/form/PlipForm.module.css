@@ -6,6 +6,12 @@
   padding: 2em;
 }
 
+.PlipForm h2 {
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+}
+
 .PlipForm label {
   text-transform: uppercase;
   color: #fff;
