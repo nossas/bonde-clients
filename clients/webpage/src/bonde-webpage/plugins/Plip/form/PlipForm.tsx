@@ -19,7 +19,7 @@ export interface PlipFormState {
 
 const required = (value) => {
   console.log(value)
-  return !!value ? undefined : "Campo obrigatório"
+  return !!value ? undefined : "não pode ficar em branco"
 };
 const mustBeNumber = (value) => (isNaN(value) ? "Insira apenas números" : undefined);
 const minValue = (min) => (value) =>
@@ -68,7 +68,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                 <div>
                   <label>Nome completo*</label>
                   <input {...input} type="text" placeholder="Insira seu nome" />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span>Nome completo {meta.error}</span>}
                 </div>
             )}
           </Field>
@@ -78,7 +78,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                 <div>
                   <label>Email* </label>
                   <input {...input} type="text" placeholder="Insira seu e-mail" />
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span>Email {meta.error}</span>}
                 </div>
             )}
           </Field>
@@ -118,7 +118,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                     <option value="TO">Tocantins</option>
                     <option value="EX">Estrangeiro</option>
                   </select>
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span>Estado {meta.error}</span>}
                 </div>
             )}
           </Field>
@@ -149,7 +149,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                     <option value="50">50</option>
                     <option value="100">100</option>
                   </select>
-                  {meta.error && meta.touched && <span>{meta.error}</span>}
+                  {meta.error && meta.touched && <span>Quantidade de assinaturas {meta.error}</span>}
                 </div>
             )}
           </Field>
