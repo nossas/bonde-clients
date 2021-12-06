@@ -3,6 +3,8 @@ import { Tab, Header, Heading, DarkMode } from "bonde-components";
 import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { useSession } from 'bonde-core-tools';
+import { isMobile } from "react-device-detect";
+
 import Container, { NavigationArgs } from "../Container";
 import { Widget } from "../FetchWidgets";
 import Labels from "../Labels";
@@ -33,7 +35,6 @@ const Settings: React.FC<Props> = ({ widgets }) => {
   const label = Labels.get(widget.kind);
 
   const updateCache = (updated: Widget) => {
-
     setWidgetsCached(widgets.map((w: Widget) => w.id === updated.id ? { ...w, ...updated } : w));
   }
 
@@ -44,20 +45,22 @@ const Settings: React.FC<Props> = ({ widgets }) => {
       title={widget.block.mobilization.name}
       navigation={({ push, is }: NavigationArgs) => (
         <DarkMode>
-          <Tab
-            onClick={() => {
-              if (process.env.REACT_APP_DOMAIN_ADMIN) {
-                storage.setAsyncItem("community", community).then(() => {
-                  window.location.href = new URL(
-                    `/mobilizations/${widget.block.mobilization.id}/edit`,
-                    process.env.REACT_APP_DOMAIN_ADMIN
-                  ).href;
-                });
-              }
-            }}
-          >
-            {t('settings.navigation.edit')}
-          </Tab>
+          {!isMobile ? (
+            <Tab
+              onClick={() => {
+                if (process.env.REACT_APP_DOMAIN_ADMIN) {
+                  storage.setAsyncItem("community", community).then(() => {
+                    window.location.href = new URL(
+                      `/mobilizations/${widget.block.mobilization.id}/edit`,
+                      process.env.REACT_APP_DOMAIN_ADMIN
+                    ).href;
+                  });
+                }
+              }}
+            >
+              {t('settings.navigation.edit')}
+            </Tab>
+          ) : null}
 
           <Tab
             active={is(/\/widgets\/\d+\/settings\/*/)}
@@ -69,16 +72,20 @@ const Settings: React.FC<Props> = ({ widgets }) => {
       )}
     >
       {/* Corpo */}
-      <Heading
-        as="h3"
-        size="xl"
-        mt={2.4}
-        mb={2}
-      >
-        {t('settings.header', { label: label.title.toLowerCase() })}
-      </Heading>
+      {!isMobile ? (
+        <>
+          <Heading
+            as="h3"
+            size="xl"
+            mt={2.4}
+            mb={2}
+          >
+            {t('settings.header', { label: label.title.toLowerCase() })}
+          </Heading>
 
-      <Navigation widget={widget} />
+          <Navigation widget={widget} />
+        </>
+      ) : null}
       <Switch>
         {widget.kind === "pressure" ? (
           <>

@@ -41,8 +41,7 @@ const Navigation: React.FC<NavigationProps> = ({ widget }) => {
                 active={is(/\/widgets\/\d+\/settings\/*$/)}
                 onClick={() => push("")}
               >
-                PLIP Home
-                {/* {t("settings.navigation.performance")} */}
+                {t("settings.navigation.performance")}
               </Tab>
           )}
           <Tab
