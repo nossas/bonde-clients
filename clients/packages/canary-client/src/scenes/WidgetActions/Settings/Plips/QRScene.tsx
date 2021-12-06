@@ -14,7 +14,8 @@ const Styles = styled.div`
 `
 
 const QRCode = () => {
-  const [_result, setResult] = useState();
+  const [result, setResult] = useState();
+  console.log("result", result);
 
   const handleScan = (data: any) => {
     if (data) setResult(data);
