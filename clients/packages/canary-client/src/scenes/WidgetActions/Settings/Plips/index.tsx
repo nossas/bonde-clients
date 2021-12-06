@@ -33,12 +33,13 @@ interface Properties {
 
 const PlipsHomeScene: React.FC<Properties> = ({ widget }) => {
   const match = useRouteMatch();
-  console.log("widget", { widget });
 
   return (
     <Switch>
       <Route exact path={`${match.path}`} component={PerformanceScene} />
-      <Route exact path={`${match.path}/workflow`} component={QRScene} />
+      <Route path={`/widgets/${widget.id}/settings/workflow`}>
+        <QRScene widget={widget} />
+      </Route>
     </Switch>
   )
 }

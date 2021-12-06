@@ -26,7 +26,7 @@ const Container: React.FC<Props> = ({ children, title, navigation }): React.Reac
               </Flex>
             </DarkMode>
           </Stack>
-          <Content display="flex" flex={1} flexDirection="column">
+          <Content display="flex" flex={1} flexDirection="column" height={["100%", null, null, "auto"]}>
             {children}
           </Content>
         </Flex>
