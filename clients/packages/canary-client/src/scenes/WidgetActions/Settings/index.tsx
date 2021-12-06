@@ -103,7 +103,7 @@ const Settings: React.FC<Props> = ({ widgets }) => {
             </Route>
           </>
         ) : (
-          <Route exact path={`${match.path}`}>
+          <Route path={`${match.path}`}>
             <Plips widget={widget} />
           </Route>
         )}

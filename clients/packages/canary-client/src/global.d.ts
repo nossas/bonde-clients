@@ -17,4 +17,4 @@ declare module "@slate-editor/state-logger";
 declare module "@slate-editor/toggle-readonly";
 declare module "bonde-components";
 declare module "bonde-core-tools";
-
+declare module "react-qr-reader";

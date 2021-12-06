@@ -369,9 +369,11 @@ importers:
       lodash: ^4.17.21
       moment: ^2.27.0
       react-color: ^2.19.3
+      react-device-detect: ^2.1.2
       react-final-form-arrays: ^3.1.3
       react-hotjar: ^4.0.0
       react-number-format: ^4.4.1
+      react-qr-reader: ^2.2.1
       react-s3-uploader: ^4.9.3
       react-table: ^7.5.0
       react-toastify: 6.0.8
@@ -416,9 +418,11 @@ importers:
       lodash: 4.17.21
       moment: 2.29.1
       react-color: 2.19.3_react@16.14.0
+      react-device-detect: 2.1.2_react-dom@16.14.0+react@16.14.0
       react-final-form-arrays: 3.1.3_b5ff98baa05cbe0eec74ff33faede482
       react-hotjar: 4.0.0
       react-number-format: 4.8.0_react-dom@16.14.0+react@16.14.0
+      react-qr-reader: 2.2.1_react-dom@16.14.0+react@16.14.0
       react-s3-uploader: 4.9.3
       react-table: 7.7.0_react@16.14.0
       react-toastify: 6.0.8_react-dom@16.14.0+react@16.14.0
@@ -3125,7 +3129,7 @@ packages:
       '@emotion/react': '>=10.0.35'
       react: '>=16.8.6'
     dependencies:
-      '@emotion/react': 11.6.0_54bb682bbb5ee2bebf6da345a3d2a956
+      '@emotion/react': 11.6.0_414da64a83d07b5b28f5e74e56d85156
       react: 16.14.0
     dev: false
 
@@ -11479,6 +11483,18 @@ packages:
         optional: true
     dev: false
 
+  /follow-redirects/1.14.5_debug@4.3.2:
+    resolution: {integrity: sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==}
+    engines: {node: '>=4.0'}
+    peerDependencies:
+      debug: '*'
+    peerDependenciesMeta:
+      debug:
+        optional: true
+    dependencies:
+      debug: 4.3.2_supports-color@6.1.0
+    dev: false
+
   /for-each/0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
     dependencies:
@@ -12290,7 +12306,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.14.5
+      follow-redirects: 1.14.5_debug@4.3.2
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -13742,6 +13758,10 @@ packages:
       extsprintf: 1.3.0
       json-schema: 0.2.3
       verror: 1.10.0
+
+  /jsqr/1.4.0:
+    resolution: {integrity: sha512-dxLob7q65Xg2DvstYkRpkYtmKm2sPJ9oFhrhmudT1dZvNFFTlroai3AWSpLey/w5vMcLBXRgOJsbXpdN9HzU/A==}
+    dev: false
 
   /jsx-ast-utils/2.4.1:
     resolution: {integrity: sha512-z1xSldJ6imESSzOjd3NNkieVJKRlKYSOtMG8SFyCj2FIrvSaSuli/WjpBkEzCBoR9bYYYFgqJw61Xhu7Lcgk+w==}
@@ -16763,6 +16783,19 @@ packages:
       warning: 4.0.3
     dev: true
 
+  /react-qr-reader/2.2.1_react-dom@16.14.0+react@16.14.0:
+    resolution: {integrity: sha512-EL5JEj53u2yAOgtpAKAVBzD/SiKWn0Bl7AZy6ZrSf1lub7xHwtaXe6XSx36Wbhl1VMGmvmrwYMRwO1aSCT2fwA==}
+    peerDependencies:
+      react: ~16
+      react-dom: ~16
+    dependencies:
+      jsqr: 1.4.0
+      prop-types: 15.7.2
+      react: 16.14.0
+      react-dom: 16.14.0_react@16.14.0
+      webrtc-adapter: 7.7.1
+    dev: false
+
   /react-remove-scroll-bar/2.2.0_414da64a83d07b5b28f5e74e56d85156:
     resolution: {integrity: sha512-UU9ZBP1wdMR8qoUs7owiVcpaPwsQxUDC2lypP6mmixaGlARZa7ZIBx1jcuObLdhMOvCsnZcvetOho0wzPa9PYg==}
     engines: {node: '>=8.5.0'}
@@ -17677,6 +17710,13 @@ packages:
     resolution: {integrity: sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==}
     engines: {node: 6.* || >= 7.*}
 
+  /rtcpeerconnection-shim/1.2.15:
+    resolution: {integrity: sha512-C6DxhXt7bssQ1nHb154lqeL0SXz5Dx4RczXZu2Aa/L1NJFnEVDxFwCBo3fqtuljhHIGceg5JKBV4XJ0gW5JKyw==}
+    engines: {node: '>=6.0.0', npm: '>=3.10.0'}
+    dependencies:
+      sdp: 2.12.0
+    dev: false
+
   /run-async/2.4.1:
     resolution: {integrity: sha512-tvVnVv01b8c1RrA6Ep7JkStj85Guv/YrMcwqYQnwjsAS2cTmmPGBBjAjpCW7RrSodNSoE2/qg9O4bceNvUuDgQ==}
     engines: {node: '>=0.12.0'}
@@ -17808,6 +17848,10 @@ packages:
       '@types/json-schema': 7.0.9
       ajv: 6.12.6
       ajv-keywords: 3.5.2_ajv@6.12.6
+
+  /sdp/2.12.0:
+    resolution: {integrity: sha512-jhXqQAQVM+8Xj5EjJGVweuEzgtGWb3tmEEpl3CLP3cStInSbVHSg0QWOGQzNq8pSID4JkpeV2mPqlMDLrm0/Vw==}
+    dev: false
 
   /select-hose/2.0.0:
     resolution: {integrity: sha1-Yl2GWPhlr0Psliv8N2o3NZpJlMo=}
@@ -19965,6 +20009,14 @@ packages:
       watchpack: 1.7.5
       webpack-sources: 1.4.3
     dev: true
+
+  /webrtc-adapter/7.7.1:
+    resolution: {integrity: sha512-TbrbBmiQBL9n0/5bvDdORc6ZfRY/Z7JnEj+EYOD1ghseZdpJ+nF2yx14k3LgQKc7JZnG7HAcL+zHnY25So9d7A==}
+    engines: {node: '>=6.0.0', npm: '>=3.10.0'}
+    dependencies:
+      rtcpeerconnection-shim: 1.2.15
+      sdp: 2.12.0
+    dev: false
 
   /websocket-driver/0.7.4:
     resolution: {integrity: sha512-b17KeDIQVjvb0ssuSDF2cYXSg2iztliJ4B9WdsuB6J952qCPKmnVq4DyW5motImXHDC1cBT/1UezrJVsKw5zjg==}
