@@ -7,12 +7,12 @@
 }
 
 .PlipForm h2 {
-  text-transform: uppercase;
   color: #fff;
   text-align: center;
 }
 
 .PlipForm label {
+  font-size: 13px;
   text-transform: uppercase;
   color: #fff;
   display:block;
