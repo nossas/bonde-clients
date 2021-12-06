@@ -32,6 +32,17 @@
   width: 100%;
 }
 
+.PlipForm div > span {
+  color: #ff4136;
+  font-weight: bold;
+  background-color: #f9cace;
+  padding: 0.5rem;
+  border-radius: 0.188rem;
+  border: 0.063rem solid red;
+  display: block;
+  margin-top: 0.9rem;
+}
+
 .PlipForm select {
   border-radius: 2px;
   padding: 1rem;
