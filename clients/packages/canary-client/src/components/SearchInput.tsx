@@ -36,7 +36,7 @@ const SearchInput: React.FC<Props> = ({ data, field, placeholder, onChange }) =>
 
   return (
     <form
-      className='hide-xs'
+      style={{ width: '100%' }}
       onSubmit={e => {
         e.preventDefault()
         onChange(data.filter(searching));

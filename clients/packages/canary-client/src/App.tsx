@@ -115,7 +115,11 @@ const PageRouting = () => {
         languageTool={ChangeLanguage}
       >
         <Switch>
-          <Route exact path='/' component={HomePage} />
+          <Route
+            exact
+            path='/'
+            component={HomePage}
+          />
           <Route path='/community' component={CommunityPage} />
           <RouteIsAdmin path='/superuser' component={SuperuserPage} />
           <Route path='/widgets' component={WidgetsActionsPage} />
