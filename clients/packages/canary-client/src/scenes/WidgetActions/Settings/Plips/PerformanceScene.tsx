@@ -42,7 +42,7 @@ const ValueWithLabel: React.FC<Props> = ({ value, label, variant = "md" }) => va
   </Box>
 )
 
-const percentage = (value = 0, total = 0) => (value * 100) / total;
+const percentage = (value = 0, total = 0) => Math.round(((value * 100) / total) * 100) / 100;
 
 const PerformanceScene: React.FC<Properties> = ({ widget }) => {
   const { pathname } = useLocation();
@@ -80,7 +80,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
         <Box bg="white">
           <Table>
             <Tbody>
-            {data?.states_signatures.filter((ss) => !!ss.state).sort((a, b) => a.confirmed_signatures - b.confirmed_signatures).splice(0, 5).map((ss) => (
+            {data?.states_signatures.filter((ss) => !!ss.state).sort((a, b) => b.confirmed_signatures - a.confirmed_signatures).splice(0, 5).map((ss) => (
               <Tr>
                 <Td>{ss.state}</Td>
                 <Td>{ss.confirmed_signatures || "0"}</Td>

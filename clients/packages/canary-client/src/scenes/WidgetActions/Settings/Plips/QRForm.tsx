@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Button,
@@ -8,20 +8,29 @@ import {
   Text,
   Stack
 } from "bonde-components";
-import { useLazyQuery, gql } from "bonde-core-tools";
+import { useMutation, useQuery, gql } from "bonde-core-tools";
 
 import type { Widget } from "../../FetchWidgets";
 import Wizard from "./components/Wizard";
 
 const GET_PLIP_FORM = gql`
   query ($code: uuid!) {
-    plips(where: { unique_identifier: { _eq: $code } }) {
+    plips(where: { unique_identifier: { _eq: $code }, confirmed_signatures: { _is_null: true } }) {
       id
       unique_identifier
       created_at
       form_data
       state
       expected_signatures
+    }
+  }
+`;
+
+const UPDATE_PLIP_FORM = gql`
+  mutation ($id: Int!, $confirmed_signatures: Int!) {
+    update_plips_by_pk(pk_columns: {id: $id}, _set: { confirmed_signatures: $confirmed_signatures }) {
+      id
+      unique_identifier
     }
   }
 `;
@@ -39,22 +48,24 @@ interface Properties {
 const QRForm: React.FC<Properties> = ({ widget }) => {
   const [formValues, setFormValues] = useState();
   const { code }: any = useParams();
-  const [getPlipForm, { loading, error, data }] = useLazyQuery(GET_PLIP_FORM);
-
-  useEffect(() => {
-    getPlipForm({ variables: { code } });
-  }, [code, getPlipForm])
+  const [updatePlipForm] = useMutation(UPDATE_PLIP_FORM);
+  const { loading, error, data } = useQuery(GET_PLIP_FORM, { variables: { code } });
 
   if (loading) return <p>Carregando formulário...</p>;
   if (error) return <p>Failed!</p>
 
-  const handleSubmit = (values: any) => {
-    console.log("TODO: submitting values >>>", values);
-    setFormValues(values);
+  const handleSubmit = ({ id, confirmed_signatures }: any) => {
+    updatePlipForm({ variables: { id, confirmed_signatures } })
+      .then((resp: any) => {
+        setFormValues(resp.data.update_plips_by_pk)
+      })
+      .catch((err: any) => {
+        console.log("error", err);
+      })
   }
 
-  const plipForm = data?.plips[0]
-  const formData: FormData = JSON.parse(plipForm.form_data || "{}");
+  const plipForm = data?.plips[0];
+  const formData: FormData = plipForm.form_data;
 
   return formValues ? (
     <Flex direction="column" flex={1}>
@@ -70,6 +81,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
     <Wizard
       onSubmit={handleSubmit}
       initialValues={{
+        id: plipForm.id,
         unique_identify: code,
         confirmed_signatures: plipForm.expected_signatures
       }}
