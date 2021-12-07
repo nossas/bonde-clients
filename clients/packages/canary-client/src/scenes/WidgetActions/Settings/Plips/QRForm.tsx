@@ -17,10 +17,11 @@ const GET_PLIP_FORM = gql`
   query ($code: uuid!) {
     plips(where: { unique_identifier: { _eq: $code } }) {
       id
-      pdf_data
       unique_identifier
       created_at
       form_data
+      state
+      expected_signatures
     }
   }
 `;
@@ -52,7 +53,8 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
     setFormValues(values);
   }
 
-  const formData: FormData = JSON.parse(data?.plips[0].form_data || "{}");
+  const plipForm = data?.plips[0]
+  const formData: FormData = JSON.parse(plipForm.form_data || "{}");
 
   return formValues ? (
     <Flex direction="column" flex={1}>
@@ -69,7 +71,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
       onSubmit={handleSubmit}
       initialValues={{
         unique_identify: code,
-        confirmed_signatures: formData.signature_quantity
+        confirmed_signatures: plipForm.expected_signatures
       }}
     >
       <Wizard.Page>
@@ -79,7 +81,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
             name="unique_identify"
             label="Código da ficha"
           />
-          <Text>Ficha de <strong>{formData.state}</strong> gerada por <strong>{formData.name}</strong>.</Text>
+          <Text>Ficha de <strong>{plipForm.state}</strong> gerada por <strong>{formData.name}</strong>.</Text>
         </Stack>
       </Wizard.Page>
       <Wizard.Page>

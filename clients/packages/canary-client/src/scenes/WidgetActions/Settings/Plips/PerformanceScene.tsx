@@ -1,36 +1,18 @@
 import React from "react";
-import { Box, Button, Stack, Text, Flex, SimpleGrid } from "bonde-components";
-// import { useQuery, gql } from "bonde-core-tools";
+import { Box, Button, Stack, Table, Tbody, Tr, Td, Text, Flex, SimpleGrid } from "bonde-components";
 import { Link, useLocation } from "react-router-dom";
+
 import { Header } from "../../../../components/CardWithHeader";
 import type { Widget } from "../../FetchWidgets";
-
-// const PLIP_QUERY = gql`
-//   query ($widget_id: Int!) {
-//     plips(where: { widget_id: { _eq: $widget_id } }) {
-//       id
-//       widget_id
-//       form_data
-//       pdf_data
-//       unique_identifier
-//     }
-//   }
-// `;
+import { usePerformanceQuery } from "./performance/fetchData";
+import eleitorado from "./performance/eleitorado";
 
 interface Properties {
   widget: Widget
 }
 
-// interface Plip {
-//   id: number;
-//   widget_id: number;
-//   form_data: any;
-//   pdf_data: string;
-//   unique_identifier: string;
-// }
-
 interface Props {
-  value: string;
+  value: string | number;
   label: string;
   variant?: "lg" | "md"
 }
@@ -60,27 +42,14 @@ const ValueWithLabel: React.FC<Props> = ({ value, label, variant = "md" }) => va
   </Box>
 )
 
+const percentage = (value = 0, total = 0) => (value * 100) / total;
+
 const PerformanceScene: React.FC<Properties> = ({ widget }) => {
   const { pathname } = useLocation();
-  console.log("widget", widget);
-  // const { data, loading, error } = useQuery(PLIP_QUERY, { variables: { widget_id: widget.id } });
+  const { data, loading, error } = usePerformanceQuery(widget.id)
 
-  // return loading ? (
-  //   <Text>Carregando formulários PLIP</Text>
-  // ) : error ? (
-  //   <Text color="red">{JSON.stringify(error)}</Text>
-  // ) : (
-  //   <Stack spacing={4}>
-  //     <Heading as="h2">Formulários gerados:</Heading>
-  //     <Stack spacing={2}>
-  //       {data.plips.map((p: Plip) =>
-  //         <a key={p.unique_identifier} href={p.pdf_data} download={`plip-formulario-${p.unique_identifier}.pdf`}>
-  //           <Text>{p.unique_identifier}</Text>
-  //         </a>
-  //       )}
-  //     </Stack>
-  //   </Stack>
-  // );
+  if (loading) return <Text>Carregando dados de performance</Text>;
+  if (error) return <Text color="red">{JSON.stringify(error)}</Text>;
 
   return (
     <Stack spacing={4}>
@@ -90,8 +59,8 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
           <Flex bg="white" p={4} minH="105px" align="end">
             <ValueWithLabel
               variant="lg"
-              value="12.348"
-              label="5% da meta"
+              value={data?.confirmed_signatures || "0"}
+              label={`${percentage(data?.confirmed_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
             />
           </Flex>
         </Stack>
@@ -100,28 +69,40 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
           <Flex bg="white" p={4} minH="105px" align="end">
             <ValueWithLabel
               variant="lg"
-              value="5.244"
-              label="12% da meta"
+              value={data?.pending_signatures || "0"}
+              label={`${percentage(data?.pending_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
             />
           </Flex>
         </Stack>
       </SimpleGrid>
       <Stack>
         <Header label="Total por estado" />
-        <Box bg="white" minH="200px" />
+        <Box bg="white">
+          <Table>
+            <Tbody>
+            {data?.states_signatures.filter((ss) => !!ss.state).sort((a, b) => a.confirmed_signatures - b.confirmed_signatures).splice(0, 5).map((ss) => (
+              <Tr>
+                <Td>{ss.state}</Td>
+                <Td>{ss.confirmed_signatures || "0"}</Td>
+                <Td>{`${percentage(ss.confirmed_signatures, eleitorado.states[ss.state] * eleitorado.goal.state)}%`}</Td>
+              </Tr>
+            ))}
+            </Tbody>
+          </Table>
+        </Box>
       </Stack>
       <Stack>
         <Header label="Ativistas" />
         <Stack bg="white" px={4} py={6} spacing={4}>
           <ValueWithLabel
             variant="lg"
-            value="51.452"
+            value={data?.total_subscribers || "0"}
             label="Total de inscritos"
           />
           <Flex direction="row" justify="space-between">
-            <ValueWithLabel value="32%" label="Inscritos" />
-            <ValueWithLabel value="54%" label="Concluídos" />
-            <ValueWithLabel value="14%" label="Pendentes" />
+            <ValueWithLabel value={`XX%`} label="Inscritos" />
+            <ValueWithLabel value={`${percentage(data?.confirmed_subscribers, data?.total_subscribers)}%`} label="Concluídos" />
+            <ValueWithLabel value={`${percentage(data?.pending_subscribers, data?.total_subscribers)}%`} label="Pendentes" />
           </Flex>
         </Stack>
       </Stack>
