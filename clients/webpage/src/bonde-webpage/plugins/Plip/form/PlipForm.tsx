@@ -18,25 +18,27 @@ export interface PlipFormState {
 }
 
 const required = (value) => {
-  console.log(value)
   return !!value ? undefined : "não pode ficar em branco"
 };
-const mustBeNumber = (value) => (isNaN(value) ? "Insira apenas números" : undefined);
+
+const mustBeNumber = (value) => (isNaN(value) && value != null ? "Digite apenas números" : undefined);
+
 const minValue = (min) => (value) =>
   isNaN(value) || value.length >= min ? undefined : `Digite o número com o DDD`;
+
 const composeValidators = (...validators) => (value) =>
   validators.reduce((error, validator) => error || validator(value), undefined);
 
 const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
   const [pdf, setPdf] = useState<PlipFormState>({ data: [], submited: false });
+
   const bgcolor =
   widget.settings && widget.settings.main_color
     ? widget.settings.main_color
     : 'rgba(0,0,0,0.25)';
 
-  const callToAction =
-    widget.settings &&
-    widget.settings.call_to_action
+  const title =
+    widget.settings && widget.settings.call_to_action
     ? widget.settings.call_to_action
     : 'Clique para configurar seu formulário...';
 
@@ -62,7 +64,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
       return (
         <>
         <form onSubmit={handleSubmit}>
-          <h2>{callToAction}</h2>
+          <h2>{title}</h2>
           <Field name="name" validate={required}>
             {({ input, meta }) => (
                 <div>
