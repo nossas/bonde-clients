@@ -13,7 +13,7 @@ const asyncFilterBlocksGraphql = async ({ slug, custom_domain }: any) => {
   return GraphQLAPI.query({
     query: gql`
       query ($filter: mobilizations_bool_exp!) {
-        blocks(where: { mobilization: $filter }) {
+        blocks(where: { mobilization: $filter }, order_by: { position: asc }) {
           id
           menu_hidden
           hidden
