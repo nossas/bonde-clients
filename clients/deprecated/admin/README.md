@@ -56,7 +56,7 @@
 
 ## Recommended Reading
 
-* [Concepts & good patterns
+- [Concepts & good patterns
   (pt-br)](https://github.com/nossas/bonde-client/wiki/Conceitos-e-boas-pr%C3%A1ticas)
 
 ## Configuration
@@ -65,7 +65,7 @@ Bonde Client app depends on the host name to decide how to behave, considering t
 
 Or you could simple add to your `/etc/hosts` the following names:
 
-``` bash
+```bash
 127.0.0.1 bonde.devel app.bonde.devel admin-canary.bonde.devel cross-storage.bonde.devel chatbot.bonde.devel
 ```
 
@@ -75,20 +75,22 @@ This repository focus mainly on the setup for the client side of BONDE's apps. T
 
 ### Requirements
 
-* Git
-* [Yarn](https://yarnpkg.com/) (optional)
-* [Lerna](https://lernajs.io/) (required)
+- Git (required)
+- NodeJS 14 (required) `nvm install 14 && nvm use 14`
+- [Pnpm](https://pnpm.io/) (required) `curl -fsSL https://get.pnpm.io/install.sh | sh -`
 
-``` bash
+```bash
 $ git --version
 git version 2.7.4
-$ yarn --version
-1.19.1
+$ node --version
+v14.18.3
+$ pnpm --version
+6.26.1
 ```
 
 ### Manual
 
-``` bash
+```bash
 mkdir bonde/ && cd bonde/
 git clone git@github.com:nossas/bonde-client.git
 cd bonde-client
@@ -96,54 +98,36 @@ cd bonde-client
 
 To configure packages, we use .env files, examples could be founded at each package.
 
-With help from Yarn and Lerna, install dependencies:
+With help from Pnpm, install dependencies:
 
 ### Local Development
 
-``` bash
-yarn install
-yarn lerna bootstrap
-yarn lerna run dev --parallel
+```bash
+cd clients/deprecated/admin
+pnpm i
+pnpm m run dev
 ```
 
-If you'd like to run selected packages, use the `--scope` command:
+If you'd like to run selected packages, use the `--filter` command:
 
-`yarn lerna run dev --scope="bonde-admin" --scope="bonde-admin-canary`
+`pnpm m run dev --filter="bonde-admin"`
 
 And you are done!
 
-### Preview New Mobilization
+### Admin Dependencies
 
-To preview a new mobilization you created locally, check your mobilization unique identifier (slug) in settings and add it to your `/etc/hosts` file:
+You will need to update .env file in bonde-admin to proper use of graphql api.
 
-`127.0.0.1 www.(slug).bonde.devel`
+We use an api rest to upload images.
 
-To access it, go to `www.(slug).bonde.devel:(port)` using the port number setup on the `.env` file in the `bonde-public` package.
+And as a logged in section you will need to be authenticated.
 
 ### Tests
 
 As simples as:
 
-`yarn lerna run test --parallel`
-
-Now sit and relax.
-
-If you want to test a single file you can temporarily change the first line of `webpack.test.config.js` to:
-
-``` bash
-var context = require.context('./app/scripts/tests', true, /MyComponentTest\.jsx/);
-```
-
-### Useful commands
-
-``` bash
-yarn lerna run build --parallel
-```
-
-And you are done!
+`pnpm m run test`
 
 ## Links
 
-* [How to contribute](CONTRIBUTING.md)
-* [Zeplin](https://app.zeplin.io/)
-* [Zenhub](https://app.zenhub.com/)
+- [How to contribute](CONTRIBUTING.md)
