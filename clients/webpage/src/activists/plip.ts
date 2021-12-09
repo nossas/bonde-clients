@@ -6,7 +6,7 @@ export type Args = {
   email: string
   whatsapp: number
   widget_id: number
-  signature_quantity: number
+  signature_quantity: string
 };
 
 export const plipQuery = `
@@ -30,7 +30,7 @@ const plip = async ({ name, email, state, widget_id, whatsapp, signature_quantit
         state,
         whatsapp,
         email,
-        expected_signatures: signature_quantity,
+        expected_signatures: parseInt(signature_quantity),
       },
       widget_id,
     };
