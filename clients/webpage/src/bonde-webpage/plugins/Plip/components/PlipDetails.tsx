@@ -11,7 +11,7 @@ const PlipDetails = (props: PropsPlipDetails) => {
   return (
     <div className={styles.PlipDetails}>
       <h3>Eba! Geramos uma ficha para você assinar:</h3>
-      <PdfButton dataPdf={props.pdf.data.data?.pdf_data} />
+      <PdfButton dataPdf={props.pdf.data.data?.pdf_data} fileName={props.pdf.data.data?.filename} />
       <ol>
         <li><strong>Assine:</strong> Imprima a sua ficha, assine e chame mais 7 pessoas para assinar também.</li>
         <li><strong>Envie a ficha:</strong> Junto com a ficha tem uma etiqueta de envio dos correios. É só levar até a agência mais próxima de você e enviar, é por nossa conta.</li>
