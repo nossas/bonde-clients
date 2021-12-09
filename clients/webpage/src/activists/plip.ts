@@ -6,6 +6,7 @@ export type Args = {
   email: string
   whatsapp: number
   widget_id: number
+  signature_quantity: number
 };
 
 export const plipQuery = `
@@ -16,7 +17,7 @@ mutation Plip($activist: ActivistInput!, $widget_id: Int!, $input: PlipInput!) {
   }
 `;
 
-const plip = async ({ name, email, state, widget_id, whatsapp }: Args): Promise<any> => {
+const plip = async ({ name, email, state, widget_id, whatsapp, signature_quantity }: Args): Promise<any> => {
 
   try {
     const variables = {
@@ -29,6 +30,7 @@ const plip = async ({ name, email, state, widget_id, whatsapp }: Args): Promise<
         state,
         whatsapp,
         email,
+        expected_signatures: signature_quantity,
       },
       widget_id,
     };
