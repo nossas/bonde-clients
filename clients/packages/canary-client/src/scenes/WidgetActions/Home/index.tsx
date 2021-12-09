@@ -46,7 +46,7 @@ const Home = ({ community, storage, widgets, loading }: Props): React.ReactEleme
         >
           {({ result }: any) => (
             <Box
-              maxHeight="500px"
+              maxHeight={["500px", "none"]}
               overflowY="auto"
             >
               <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", null, "repeat(4, 1fr)", null, "repeat(6, 1fr)"]} gap={4} rowGap={4}>

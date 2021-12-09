@@ -1,6 +1,7 @@
 import React from "react";
-import { Box, Button, Stack, Table, Tbody, Tr, Td, Text, Flex, SimpleGrid } from "bonde-components";
+import { Box, Button, Stack, Grid, GridItem, Table, Tbody, Tr, Td, Text, Flex } from "bonde-components";
 import { Link, useLocation } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 
 import { Header } from "../../../../components/CardWithHeader";
 import type { Widget } from "../../FetchWidgets";
@@ -53,59 +54,77 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
 
   return (
     <Stack spacing={4}>
-      <SimpleGrid columns={[2]} gap={[4]}>
-        <Stack>
-          <Header label="Total assinaturas" />
-          <Flex bg="white" p={4} minH="105px" align="end">
-            <ValueWithLabel
-              variant="lg"
-              value={data?.confirmed_signatures || "0"}
-              label={`${percentage(data?.confirmed_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
-            />
-          </Flex>
-        </Stack>
-        <Stack>
-          <Header label="Pendentes" />
-          <Flex bg="white" p={4} minH="105px" align="end">
-            <ValueWithLabel
-              variant="lg"
-              value={data?.pending_signatures || "0"}
-              label={`${percentage(data?.pending_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
-            />
-          </Flex>
-        </Stack>
-      </SimpleGrid>
-      <Stack>
-        <Header label="Total por estado" />
-        <Box bg="white">
-          <Table>
-            <Tbody>
-            {data?.states_signatures.filter((ss) => !!ss.state).sort((a, b) => b.confirmed_signatures - a.confirmed_signatures).splice(0, 5).map((ss) => (
-              <Tr>
-                <Td>{ss.state}</Td>
-                <Td>{ss.confirmed_signatures || "0"}</Td>
-                <Td>{`${percentage(ss.confirmed_signatures, eleitorado.states[ss.state] * eleitorado.goal.state)}%`}</Td>
-              </Tr>
-            ))}
-            </Tbody>
-          </Table>
-        </Box>
-      </Stack>
-      <Stack>
-        <Header label="Ativistas" />
-        <Stack bg="white" px={4} py={6} spacing={4}>
-          <ValueWithLabel
-            variant="lg"
-            value={data?.total_subscribers || "0"}
-            label="Total de inscritos"
-          />
-          <Flex direction="row" justify="space-between">
-            <ValueWithLabel value={`XX%`} label="Inscritos" />
-            <ValueWithLabel value={`${percentage(data?.confirmed_subscribers, data?.total_subscribers)}%`} label="Concluídos" />
-            <ValueWithLabel value={`${percentage(data?.pending_subscribers, data?.total_subscribers)}%`} label="Pendentes" />
-          </Flex>
-        </Stack>
-      </Stack>
+      <Grid templateColumns={['repeat(2, 1fr)', null, 'repeat(7, 1fr)']} gap={4}>
+        <GridItem colSpan={1}>
+          <Stack>
+            <Header label="Total assinaturas" />
+            <Flex bg="white" p={4} minH="105px" align="end">
+              <ValueWithLabel
+                variant="lg"
+                value={data?.confirmed_signatures || "0"}
+                label={`${percentage(data?.confirmed_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
+              />
+            </Flex>
+          </Stack>
+        </GridItem>
+        <GridItem colSpan={1}>
+          <Stack>
+            <Header label="Pendentes" />
+            <Flex bg="white" p={4} minH="105px" align="end">
+              <ValueWithLabel
+                variant="lg"
+                value={data?.pending_signatures || "0"}
+                label={`${percentage(data?.pending_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
+              />
+            </Flex>
+          </Stack>
+        </GridItem>
+        <GridItem colSpan={2} rowSpan={2}>
+          <Stack>
+            <Header label="Total por estado" />
+            <Box bg="white">
+              <Table>
+                <Tbody>
+                {data?.states_signatures
+                  .filter((ss) => !!ss.state)
+                  .sort((a, b) => b.confirmed_signatures - a.confirmed_signatures)
+                  .splice(0, isMobile ? 5 : 8)
+                  .map((ss) => (
+                  <Tr>
+                    <Td>{ss.state}</Td>
+                    <Td>{ss.confirmed_signatures || "0"}</Td>
+                    <Td>{`${percentage(ss.confirmed_signatures, eleitorado.states[ss.state] * eleitorado.goal.state)}%`}</Td>
+                  </Tr>
+                ))}
+                </Tbody>
+              </Table>
+            </Box>
+          </Stack>
+        </GridItem>
+        {!isMobile && (
+          <GridItem colSpan={3} rowSpan={2}>
+            <Header label='Progresso da campanha' />
+            <Box bg="white" />
+          </GridItem>
+        )}
+        <GridItem colSpan={2}>
+          <Stack>
+            <Header label="Ativistas" />
+            <Stack bg="white" px={4} py={6} spacing={4}>
+              <ValueWithLabel
+                variant="lg"
+                value={data?.total_subscribers || "0"}
+                label="Total de inscritos"
+              />
+              <Flex direction="row" justify="space-between">
+                <ValueWithLabel value={`XX%`} label="Inscritos" />
+                <ValueWithLabel value={`${percentage(data?.confirmed_subscribers, data?.total_subscribers)}%`} label="Concluídos" />
+                <ValueWithLabel value={`${percentage(data?.pending_subscribers, data?.total_subscribers)}%`} label="Pendentes" />
+              </Flex>
+            </Stack>
+          </Stack>
+        </GridItem>
+      </Grid>
       <Button minH="42px" as={Link} to={pathname + "/workflow"}>Atualizar ficha</Button>
     </Stack>
   )

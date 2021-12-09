@@ -4,7 +4,8 @@ import {
   InputRightElement,
   Input,
   IconButton,
-  SearchIcon
+  SearchIcon,
+  Box
 } from 'bonde-components';
 
 type Props = {
@@ -35,32 +36,34 @@ const SearchInput: React.FC<Props> = ({ data, field, placeholder, onChange }) =>
   }
 
   return (
-    <form
-      style={{ width: '100%' }}
-      onSubmit={e => {
-        e.preventDefault()
-        onChange(data.filter(searching));
-      }}
-    >
-      <InputGroup>
-        <Input
-          colorScheme="pink"
-          ref={inputRef}
-          placeholder={placeholder}
-        />
-        <InputRightElement
-          // eslint-disable-next-line react/no-children-prop
-          children={(
-            <IconButton
-              variant="link"
-              colorScheme="gray"
-              type='submit'
-              icon={<SearchIcon boxSize={4} />}
-            />
-          )}
-        />
-      </InputGroup>
-    </form>
+    <Box w={['100%', null, '30%']}>
+      <form
+        style={{ width: '100%' }}
+        onSubmit={e => {
+          e.preventDefault()
+          onChange(data.filter(searching));
+        }}
+      >
+        <InputGroup>
+          <Input
+            colorScheme="pink"
+            ref={inputRef}
+            placeholder={placeholder}
+          />
+          <InputRightElement
+            // eslint-disable-next-line react/no-children-prop
+            children={(
+              <IconButton
+                variant="link"
+                colorScheme="gray"
+                type='submit'
+                icon={<SearchIcon boxSize={4} />}
+              />
+            )}
+          />
+        </InputGroup>
+      </form>
+    </Box>
   );
 };
 
