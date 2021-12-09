@@ -12,8 +12,11 @@ import {
   Stack,
   Image
 } from "bonde-components";
-import { CommunityMenu, useSession } from "bonde-core-tools";
-import { isMobile as isMobileDetect } from "react-device-detect";
+import {
+  // CommunityMenu,
+  useSession
+} from "bonde-core-tools";
+// import { isMobile as isMobileDetect } from "react-device-detect";
 
 type Props = {
   communities: any[];
@@ -85,7 +88,7 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
                 >
                   <Heading as="h5" fontWeight="extrabold" size="sm">{c.name}</Heading>
                 </Button>
-                {!isMobileDetect ? <CommunityMenu community={c} /> : null}
+                {/* {!isMobileDetect ? <CommunityMenu community={c} /> : null} */}
               </Stack>
             </ListItem>
           ))}
