@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useSession } from "bonde-core-tools";
 import { useTranslation } from "react-i18next";
-import { isMobile } from "react-device-detect";
 
 import SearchInput from "../../../components/SearchInput";
 import CommunitiesScrollBox from "./CommunitiesScrollBox";
@@ -15,7 +14,7 @@ const CommunitiesGadget = (): React.ReactElement => {
   return (
     <>
       <GadgetHeader
-        title={!isMobile ? t("gadgets.communities.title") : undefined}
+        title={t("gadgets.communities.title")}
         actionRightElement={(
           <SearchInput
             placeholder={t("gadgets.communities.search")}
