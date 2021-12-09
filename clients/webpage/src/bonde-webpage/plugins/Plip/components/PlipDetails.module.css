@@ -19,22 +19,25 @@
    text-align: center;
 }
 
-.PlipDetails button {
-  background-color: #EE0090;
-  border-radius: 0.3rem;
-  border: 0; 
-  color:#FFFFFF;
+.PlipDetails a {
+  display: inline-flex;
   text-transform: uppercase;
-  padding: 1.5em;
+  font-size: small;
+  justify-content: center;
+  align-items: center;
+  white-space: nowrap;
   text-align: center;
   line-height: 1.5em;
-  display: inline-flex;
-  align-self: center;
+  background-color: #EE0090;
+  color: #FFF;
+  border-radius: 0.3rem;
+  text-decoration: none;
+  padding: 1.3em;
+  width: 13.5rem;
+  margin: 20px;
+  font-family: Arial;
 }
 
-.PlipDetails button svg {
-  display: inline;
-  padding: 0 .5em;
-  height: 1.4em;
-  width: 1.4em;
+.PlipDetails a > svg {
+  margin-right: 0.5rem;
 }
