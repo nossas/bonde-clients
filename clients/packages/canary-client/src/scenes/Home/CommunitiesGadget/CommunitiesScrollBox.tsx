@@ -13,10 +13,10 @@ import {
   Image
 } from "bonde-components";
 import {
-  // CommunityMenu,
+  CommunityMenu,
   useSession
 } from "bonde-core-tools";
-// import { isMobile as isMobileDetect } from "react-device-detect";
+import { isMobile } from "react-device-detect";
 
 type Props = {
   communities: any[];
@@ -25,9 +25,9 @@ type Props = {
 const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
   const { push } = useHistory();
   const { onChangeAsync } = useSession();
-  const isMobile = window.innerWidth <= 768;
+  const isMobileWidth = window.innerWidth <= 768;
   const itemProps: any = {};
-  if (isMobile) {
+  if (isMobileWidth) {
     itemProps.className = "mobile";
   }
 
@@ -88,7 +88,7 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
                 >
                   <Heading as="h5" fontWeight="extrabold" size="sm">{c.name}</Heading>
                 </Button>
-                {/* {!isMobileDetect ? <CommunityMenu community={c} /> : null} */}
+                {!isMobile ? <CommunityMenu community={c} /> : null}
               </Stack>
             </ListItem>
           ))}

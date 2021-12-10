@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, SimpleGrid, Box } from "bonde-components";
+import { isMobile } from "react-device-detect";
 import CommunitiesGadget from './CommunitiesGadget';
 import MobilizationsGadget from './MobilizationsGadget';
 
@@ -9,9 +10,11 @@ const HomePage = (): React.ReactElement => (
       <Box>
         <CommunitiesGadget />
       </Box>
-      <Box>
-        <MobilizationsGadget />
-      </Box>
+      {!isMobile ?
+        <Box>
+          <MobilizationsGadget />
+        </Box>
+        : null}
     </SimpleGrid>
   </Container>
 );
