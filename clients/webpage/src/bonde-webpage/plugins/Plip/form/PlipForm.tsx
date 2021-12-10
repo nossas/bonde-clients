@@ -37,10 +37,10 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
     bgcolor = widget.settings.main_color
   };
 
-  const title = 'Clique para configurar seu formulário...'
-  if (widget.settings && widget.settings.call_to_action) {
-    bgcolor = widget.settings.call_to_action
-  }
+  let title = 'Clique para configurar seu formulário...'
+  if (widget.settings && widget.settings.call_to_action){
+    title = widget.settings.call_to_action
+  };
 
   return (
     <div className={styles.PlipForm} style={{ backgroundColor: bgcolor }}>
@@ -81,7 +81,7 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                     <input {...input} type="text" placeholder="Insira seu e-mail" />
                     {meta.error && meta.touched && <span>Email {meta.error}</span>}
                   </div>
-                )}
+            )}
               </Field>
 
               <Field name="state" validate={required}>
@@ -123,7 +123,6 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                   </div>
                 )}
               </Field>
-
               <Field
                 name="whatsapp"
                 validate={composeValidators(mustBeNumber, minValue(11))}
@@ -136,7 +135,6 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                   </div>
                 )}
               </Field>
-
               <Field name="signature_quantity" validate={required}>
                 {({ input, meta }) => (
                   <div>
