@@ -9,13 +9,13 @@ interface PdfButtonProps {
 const PdfButton = (props: PdfButtonProps) => {
 
   return (
-      <a
+    <a
       href={`data:application/pdf;base64,${props.dataPdf}`}
-      download={`Ficha de Assinatura ${props.fileName}`}
-      >
-        <EyeIcon />
-        Ver ficha de assinatura
-      </a>
+      download={`Ficha de Assinatura de ${props.fileName}`}
+    >
+      <EyeIcon />
+      Ver ficha de assinatura
+    </a>
   );
 };
 
