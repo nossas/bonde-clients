@@ -39,8 +39,10 @@ const widget = {
   },
 };
 const overrides = {
+  // eslint-disable-next-line react/display-name
   FinishCustomMessage: { component: () => <div>nice!</div>, props: {} },
   FinishDefaultMessage: {
+    // eslint-disable-next-line react/display-name
     component: () => <div>compartilhe!</div>,
     props: { imageUrl: 'bla', href: 'https://www.mapalgbt.bonde.org' },
   },
@@ -61,13 +63,16 @@ const block = {
 };
 
 const analyticsEvents = {
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   pressureIsFilled: () => {},
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   pressureSavedData: () => {},
 };
 
 const targetsList = getTargetList(widget.settings.targets);
 
 const renderEmailPlugin = (props: any) => render(
+  // eslint-disable-next-line react/display-name
   <TranslateContext.Provider value={{ t: (key: string) => key, Trans: () => <div />, i18n: { language: 'pt-BR' } }}>
     <EmailPlugin {...props} />
   </TranslateContext.Provider>
@@ -233,7 +238,7 @@ describe('Plugin successful behavior paths', () => {
         city: mockedValues.city || null,
         state: mockedValues.state || null,
       },
-      targets_id: null,
+      targets_id: undefined,
       mail: {
         // cc: targetsList.map((target: string) => getEmailTarget(target)),
         disableEditField: widget.settings.disable_edit_field,

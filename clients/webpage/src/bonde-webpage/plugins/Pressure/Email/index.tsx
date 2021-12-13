@@ -57,7 +57,7 @@ type Props = {
     pressureIsFilled: () => void;
     pressureSavedData: () => void;
   };
-  asyncFillWidget: (params: {
+  asyncFillWidget: (_params: {
     payload: Record<string, any>;
     widget: Record<string, any>;
   }) => Promise<any>;
@@ -137,7 +137,7 @@ export const EmailPressure = ({
             city: data.city || null,
             state: data.state || null,
           },
-          targets_id: targetsInput ? targetsInput.value : null,
+          targets_id: targetsInput,
           mail: {
             disableEditField,
             subject: data.subject,

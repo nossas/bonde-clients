@@ -15,15 +15,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
-
-      # - name: Cache .pnpm-store
-      #   uses: actions/cache@v1
-      #   with:
-      #     path: ~/.pnpm-store
-      #     key: ${{ runner.os }}-node${{ matrix.node-version }}-${{ hashFiles('**/pnpm-lock.yaml') }}
-      
-      # - name: Install pnpm
-      #   run: curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm@6
       
       - name: Install dependencies
         run: cd clients/webpage && npm install
@@ -70,12 +61,6 @@ jobs:
           REACT_APP_DOMAIN_API_REST: ${{ secrets.REACT_APP_DOMAIN_API_REST }}
           REACT_APP_PAGARME_KEY: ${{ secrets.REACT_APP_PAGARME_KEY }}
           ACTION_SECRET_KEY: ${{ secrets.ACTION_SECRET_KEY }}
-          # RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
-          # RANCHER_SECRET_KEY: ${{ secrets.RANCHER_SECRET_KEY }}
-          # RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
-          # RANCHER_ENVIRONMENT: ${{ secrets.RANCHER_ENVIRONMENT }}
-          # SERVICE_NAME: 'webservers/public-ts'
-          # DOCKER_IMAGE: ${{ needs.build.outputs.tags }}
         with:
           context: ./clients/webpage
           file: ./clients/webpage/Dockerfile
@@ -98,13 +83,3 @@ jobs:
           RANCHER_ENVIRONMENT: ${{ secrets.RANCHER_ENVIRONMENT }}
           SERVICE_NAME: 'webservers/public-ts'
           DOCKER_IMAGE: ${{ needs.build.outputs.tags }}
-
-      # - name: Rancher Deploy clients/canary
-      #   uses: ./.github/actions/rancher-deploy
-      #   env:
-      #     RANCHER_ACCESS_KEY: ${{ secrets.RANCHER_ACCESS_KEY }}
-      #     RANCHER_SECRET_KEY: ${{ secrets.RANCHER_SECRET_KEY }}
-      #     RANCHER_URL_API: ${{ secrets.RANCHER_URL_API }}
-      #     RANCHER_ENVIRONMENT: ${{ secrets.RANCHER_ENVIRONMENT }}
-      #     SERVICE_NAME: 'clients/canary-2'
-      #     DOCKER_IMAGE: ${{ steps.meta.outputs.tags }}
