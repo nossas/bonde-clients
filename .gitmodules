@@ -46,3 +46,6 @@
 [submodule "manual"]
 	path = manual
 	url = https://github.com/nossas/manual-tech
+[submodule "workers"]
+	path = workers
+	url = https://github.com/nossas/bonde-workers
