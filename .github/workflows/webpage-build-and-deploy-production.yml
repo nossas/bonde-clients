@@ -1,10 +1,8 @@
 name: Build, tests and deploy to bonde-webpage
 on:
   push:
-    branches:
-      - "release/*"
-      - "feature/*"
-      - "hotfix/*"
+    tags-ignore:
+      - 'v4.**'
     paths:
       - 'clients/webpage/**'
 jobs:
@@ -38,7 +36,7 @@ jobs:
   build:
     needs: tests
     runs-on: ubuntu-20.04
-    environment: webpage-in-staging
+    environment: webpage-in-production
     outputs:
       tags: ${{ steps.meta.outputs.tags }}
     steps:
@@ -75,7 +73,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-20.04
-    environment: webpage-in-staging
+    environment: webpage-in-production
     steps:
       - uses: actions/checkout@v2
       

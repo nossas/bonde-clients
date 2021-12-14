@@ -24,6 +24,8 @@ const plip = async ({ name, email, state, widget_id, whatsapp, signature_quantit
       activist: {
         name,
         email,
+        state,
+        phone: whatsapp
       },
       input: {
         name,

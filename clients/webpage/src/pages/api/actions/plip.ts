@@ -29,12 +29,11 @@ interface Request {
 }
 
 interface Response {
-  status: (code: number) => any | { json: (vars: any) => any };
+  status: (_code: number) => any | { json: (_vars: any) => any };
 }
 
 const ActionPlip = async (req: Request, res: Response) => {
   if (req.method === 'POST') {
-    console.log(req.body)
     const result = await plip(req.body);
     return res.status(200).json(result);
   }
