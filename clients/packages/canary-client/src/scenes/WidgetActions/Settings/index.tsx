@@ -87,6 +87,15 @@ const Settings: React.FC<Props> = ({ widgets }) => {
         </>
       ) : null}
       <Switch>
+        <Route exact path={`${match.path}/adjusts`}>
+          <Adjusts widget={widget} updateCache={updateCache} />
+        </Route>
+        <Route exact path={`${match.path}/autofire`}>
+          <Autofire widget={widget} updateCache={updateCache} />
+        </Route>
+        <Route exact path={`${match.path}/finish`}>
+          <ConfigurePostAction widget={widget} updateCache={updateCache} />
+        </Route>
         {widget.kind === "pressure" ? (
           <>
             <Route exact path={`${match.path}`}>
@@ -107,15 +116,6 @@ const Settings: React.FC<Props> = ({ widgets }) => {
             <Plips widget={widget} />
           </Route>
         )}
-        <Route exact path={`${match.path}/adjusts`}>
-          <Adjusts widget={widget} updateCache={updateCache} />
-        </Route>
-        <Route exact path={`${match.path}/autofire`}>
-          <Autofire widget={widget} updateCache={updateCache} />
-        </Route>
-        <Route exact path={`${match.path}/finish`}>
-          <ConfigurePostAction widget={widget} updateCache={updateCache} />
-        </Route>
       </Switch>
     </Container>
   );
