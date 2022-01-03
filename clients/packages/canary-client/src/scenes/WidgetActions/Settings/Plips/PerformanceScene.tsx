@@ -5,6 +5,7 @@ import { isMobile } from "react-device-detect";
 
 import { Header } from "../../../../components/CardWithHeader";
 import type { Widget } from "../../FetchWidgets";
+import Chart from "./Chart";
 import { usePerformanceQuery } from "./performance/fetchData";
 import eleitorado from "./performance/eleitorado";
 
@@ -104,7 +105,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
         {!isMobile && (
           <GridItem colSpan={3} rowSpan={2}>
             <Header label='Progresso da campanha' />
-            <Box bg="white" />
+            <Chart subscribers={data?.subscribers_range} />
           </GridItem>
         )}
         <GridItem colSpan={2}>
@@ -125,7 +126,9 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
           </Stack>
         </GridItem>
       </Grid>
-      <Button minH="42px" as={Link} to={pathname + "/workflow"}>Atualizar ficha</Button>
+      {isMobile && (
+        <Button minH="42px" as={Link} to={pathname + "/workflow"}>Atualizar ficha</Button>
+      )}
     </Stack>
   )
 }
