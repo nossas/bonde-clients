@@ -1,10 +1,11 @@
 import React from 'react';
-import { Flex, Heading, Stack, Text } from 'bonde-components';
+import { Flex, Stack, Heading, Text } from 'bonde-components';
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
-import { Header } from "../../../../components/CardWithHeader";
+import { Header } from '../../../../components/CardWithHeader';
+
 
 const SubscribersChart: React.FC<any> = ({ subscribers }) => (
-  <div style={{ width: "100%", height: "100%" }}>
+  <div style={{ width: "100%", height: "275px" }}>
     <ResponsiveContainer>
       <LineChart data={subscribers}>
         <Line type="monotone" dataKey="total" stroke="#50E3C2" />
