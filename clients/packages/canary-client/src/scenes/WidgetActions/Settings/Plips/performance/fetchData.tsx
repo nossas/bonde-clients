@@ -75,6 +75,20 @@ const PLIP_PERFORMANCE_QUERY = gql`
       widget_id
       created_at
     }
+
+    plips(
+      where: {
+        widget_id: { _eq: $widget_id }
+      },
+      limit: 10
+    ) {
+      name: form_data(path: "name")
+      email: form_data(path: "email")
+      state
+      expected_signatures
+      confirmed_signatures
+      created_at
+    }
   }
 `;
 
@@ -87,6 +101,15 @@ export interface StateSignature {
 
 export interface SubscribersRange {
   total: number;
+  created_at: string;
+}
+
+export interface PlipsForm {
+  name: string;
+  email: string;
+  state: string;
+  expected_signatures?: number;
+  confirmed_signatures?: number;
   created_at: string;
 }
 
@@ -118,6 +141,7 @@ interface ResultData {
   };
   states_signatures: StateSignature[];
   subscribers_range: SubscribersRange[];
+  plips: PlipsForm[]
 }
 
 interface ResultQuery<T> {
@@ -134,6 +158,9 @@ export interface PerformanceData {
   confirmed_signatures: number;
   states_signatures: StateSignature[]
   subscribers_range: SubscribersRange[];
+  subscribers_range_start: Date;
+  subscribers_range_end: Date;
+  plips: PlipsForm[];
 }
 
 export const usePerformanceQuery = (widget_id: number): ResultQuery<PerformanceData> => {
@@ -177,7 +204,10 @@ export const usePerformanceQuery = (widget_id: number): ResultQuery<PerformanceD
         pending_signatures: data.pending_signatures.aggregate.sum.expected_signatures,
         confirmed_signatures: data.confirmed_signatures.aggregate.sum.confirmed_signatures,
         states_signatures: data.states_signatures,
-        subscribers_range: subscribers_range
+        subscribers_range: subscribers_range,
+        subscribers_range_start: before,
+        subscribers_range_end: now,
+        plips: data.plips
       }
     }
   }

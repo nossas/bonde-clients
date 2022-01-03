@@ -6,6 +6,7 @@ import { isMobile } from "react-device-detect";
 import { Header } from "../../../../components/CardWithHeader";
 import type { Widget } from "../../FetchWidgets";
 import Chart from "./Chart";
+import PlipsFormTable from './PlipsFormTable';
 import { usePerformanceQuery } from "./performance/fetchData";
 import eleitorado from "./performance/eleitorado";
 
@@ -59,7 +60,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
         <GridItem colSpan={1}>
           <Stack>
             <Header label="Total assinaturas" />
-            <Flex bg="white" p={4} minH="105px" align="end">
+            <Flex bg="white" p={4} minH="131px" align="end">
               <ValueWithLabel
                 variant="lg"
                 value={data?.confirmed_signatures || "0"}
@@ -71,7 +72,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
         <GridItem colSpan={1}>
           <Stack>
             <Header label="Pendentes" />
-            <Flex bg="white" p={4} minH="105px" align="end">
+            <Flex bg="white" p={4} minH="131px" align="end">
               <ValueWithLabel
                 variant="lg"
                 value={data?.pending_signatures || "0"}
@@ -104,28 +105,34 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
         </GridItem>
         {!isMobile && (
           <GridItem colSpan={3} rowSpan={2}>
-            <Header label='Progresso da campanha' />
-            <Chart subscribers={data?.subscribers_range} />
+            <Chart
+              subscribers={data?.subscribers_range}
+              start={data?.subscribers_range_start}
+              end={data?.subscribers_range_end}
+            />
           </GridItem>
         )}
         <GridItem colSpan={2}>
-          <Stack>
+          <Stack flex={1} height="100%">
             <Header label="Ativistas" />
-            <Stack bg="white" px={4} py={6} spacing={4}>
+            <Stack bg="white" px={4} py={6} spacing={4} flex={1} height="100%" justifyContent="space-around">
               <ValueWithLabel
                 variant="lg"
                 value={data?.total_subscribers || "0"}
                 label="Total de inscritos"
               />
               <Flex direction="row" justify="space-between">
-                <ValueWithLabel value={`XX%`} label="Inscritos" />
                 <ValueWithLabel value={`${percentage(data?.confirmed_subscribers, data?.total_subscribers)}%`} label="Concluídos" />
+                <ValueWithLabel value={`${percentage((data?.total_subscribers || 0) - (data?.pending_subscribers || 0) - (data?.confirmed_subscribers || 0), data?.total_subscribers)}%`} label="Inscritos" />
                 <ValueWithLabel value={`${percentage(data?.pending_subscribers, data?.total_subscribers)}%`} label="Pendentes" />
               </Flex>
             </Stack>
           </Stack>
         </GridItem>
       </Grid>
+      {!isMobile && (
+        <PlipsFormTable plips={data?.plips || []} total={data?.total_subscribers || 0} />
+      )}
       {isMobile && (
         <Button minH="42px" as={Link} to={pathname + "/workflow"}>Atualizar ficha</Button>
       )}
