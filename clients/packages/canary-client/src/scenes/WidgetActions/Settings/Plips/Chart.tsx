@@ -3,9 +3,8 @@ import { Flex, Stack, Heading, Text } from 'bonde-components';
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import { Header } from '../../../../components/CardWithHeader';
 
-
 const SubscribersChart: React.FC<any> = ({ subscribers }) => (
-  <div style={{ width: "100%", height: "275px" }}>
+  <div style={{ width: "100%", height: "100%" }}>
     <ResponsiveContainer>
       <LineChart data={subscribers}>
         <Line type="monotone" dataKey="total" stroke="#50E3C2" />
