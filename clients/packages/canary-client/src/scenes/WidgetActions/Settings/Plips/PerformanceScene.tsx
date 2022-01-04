@@ -6,7 +6,7 @@ import { isMobile } from "react-device-detect";
 import { Header } from "../../../../components/CardWithHeader";
 import type { Widget } from "../../FetchWidgets";
 import Chart from "./Chart";
-import PlipsFormTable from './PlipsFormTable';
+import PlipsFormTable from './datatable/TableView';
 import { usePerformanceQuery } from "./performance/fetchData";
 import eleitorado from "./performance/eleitorado";
 
@@ -131,7 +131,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
         </GridItem>
       </Grid>
       {!isMobile && (
-        <PlipsFormTable plips={data?.plips || []} total={data?.total_subscribers || 0} />
+        <PlipsFormTable widgetId={widget.id} />
       )}
       {isMobile && (
         <Button minH="42px" as={Link} to={pathname + "/workflow"}>Atualizar ficha</Button>

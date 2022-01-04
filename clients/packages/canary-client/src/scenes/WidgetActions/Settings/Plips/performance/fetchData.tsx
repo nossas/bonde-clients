@@ -75,20 +75,6 @@ const PLIP_PERFORMANCE_QUERY = gql`
       widget_id
       created_at
     }
-
-    plips(
-      where: {
-        widget_id: { _eq: $widget_id }
-      },
-      limit: 10
-    ) {
-      name: form_data(path: "name")
-      email: form_data(path: "email")
-      state
-      expected_signatures
-      confirmed_signatures
-      created_at
-    }
   }
 `;
 
@@ -141,7 +127,7 @@ interface ResultData {
   };
   states_signatures: StateSignature[];
   subscribers_range: SubscribersRange[];
-  plips: PlipsForm[]
+  // plips: PlipsForm[]
 }
 
 interface ResultQuery<T> {
@@ -160,7 +146,7 @@ export interface PerformanceData {
   subscribers_range: SubscribersRange[];
   subscribers_range_start: Date;
   subscribers_range_end: Date;
-  plips: PlipsForm[];
+  // plips: PlipsForm[];
 }
 
 export const usePerformanceQuery = (widget_id: number): ResultQuery<PerformanceData> => {
@@ -207,7 +193,7 @@ export const usePerformanceQuery = (widget_id: number): ResultQuery<PerformanceD
         subscribers_range: subscribers_range,
         subscribers_range_start: before,
         subscribers_range_end: now,
-        plips: data.plips
+        // plips: data.plips
       }
     }
   }
