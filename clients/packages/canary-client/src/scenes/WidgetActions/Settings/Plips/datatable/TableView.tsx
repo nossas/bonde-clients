@@ -14,8 +14,9 @@ import {
   Skeleton,
   Stack,
   Heading,
-  Select
+  // Select
 } from 'bonde-components';
+import Select from "../components/ChakraReactSelect";
 import { checkStatus } from './utils';
 import { useQueryFilters } from './useQueryFilters';
 
@@ -29,10 +30,10 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
     onNextPage,
     onPreviousPage,
     onChangeStatus,
+    onChangeStates,
     onChangeLimit
   } = useQueryFilters(widgetId);
 
-  console.log("pageIndex, pages", { pageIndex, pages });
   return (
     <Stack spacing={4}>
       <Flex direction='row' justify="space-between" align='end'>
@@ -45,24 +46,36 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
         >
           Todas as fichas ({total})
         </Heading>
-        <Stack direction='row' spacing={2}>
-          {/* <FormControl as={Stack} spacing={2} direction='row' align='end'>
+        <Stack direction='row' spacing={4} minW='600px'>
+          <FormControl>
             <FormLabel>Estado</FormLabel>
-            <Select w='auto' minW='150px' onChange={(e: any) => onChangeStatus(e.target.value)}>
-              <option value="todos">Todos</option>
-              <option value="ES">ES</option>
-              <option value="AC">AC</option>
-              <option value="PE">PE</option>
-            </Select>
-          </FormControl> */}
-          <FormControl as={Stack} spacing={2} direction='row' align='end'>
+            <Select
+              isMulti
+              size='sm'
+              options={[
+                { value: 'ES', label: 'Espirito Santo' },
+                { value: 'SP', label: 'São Paulo' },
+                { value: 'PE', label: 'Pernambuco' },
+              ]}
+              onChange={(items: any) => {
+                onChangeStates(items?.map((i: any) => i.value) || []);
+              }}
+            />
+          </FormControl>
+          <FormControl>
             <FormLabel>Status</FormLabel>
-            <Select w='auto' minW='150px' onChange={(e: any) => onChangeStatus(e.target.value)}>
-              <option value="todos">Todos</option>
-              <option value="pendentes">Pendentes</option>
-              <option value="concluidos">Concluídos</option>
-              <option value="inscritos">Inscritos</option>
-            </Select>
+            <Select
+              size='sm'
+              onChange={(item: any) => {
+                onChangeStatus(item.value)
+              }}
+              options={[
+                { value: 'todos', label: 'Todos' },
+                { value: 'pendentes', label: 'Pendentes' },
+                { value: 'concluidos', label: 'Concluídos' },
+                { value: 'inscritos', label: 'Inscritos' },
+              ]}
+            />
           </FormControl>
         </Stack>
       </Flex>
@@ -70,15 +83,19 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
         <TableCaption>
           <Stack direction="row" align='center' justify="center">
             <Button variant='ghost' onClick={onPreviousPage} disabled={pageIndex === 0}>Anterior</Button>
-            <FormControl as={Stack} spacing={2} direction='row' align='end'>
-            <FormLabel>Status</FormLabel>
-              <Select w='auto' minW='150px' onChange={(e: any) => onChangeLimit(Number(e.target.value))}>
-                <option value="2">2</option>
-                <option value="10">10</option>
-                <option value="20">20</option>
-                <option value="30">30</option>
-              </Select>
-            </FormControl>
+            <Flex w='150px'>
+              <FormControl>
+                <Select
+                  size='sm'
+                  options={[
+                    { value: 10, label: '10'},
+                    { value: 20, label: '20'},
+                    { value: 30, label: '30'},
+                  ]}
+                  onChange={(item: any) => onChangeLimit(item.value)}
+                />
+              </FormControl>
+            </Flex>
             <Button variant='ghost' onClick={onNextPage} disabled={pageIndex === pages}>Próxima</Button>
           </Stack>
         </TableCaption>
@@ -90,6 +107,7 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
               <Tr>
                 <Th>Nome</Th>
                 <Th>E-mail</Th>
+                <Th>Whatsapp</Th>
                 <Th>Estado</Th>
                 <Th>Assinaturas</Th>
                 <Th>Data da inscrição</Th>
@@ -101,6 +119,7 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
                 <Tr key={`plips-form-${index}`}>
                   <Td>{pf.name}</Td>
                   <Td>{pf.email}</Td>
+                  <Td>{pf.whatsapp}</Td>
                   <Td>{pf.state}</Td>
                   <Td>{pf.expected_signatures || 0}</Td>
                   <Td>{new Date(pf.created_at).toLocaleDateString()}</Td>

@@ -11,6 +11,7 @@ const QUERY = gql`
     ) {
       name: form_data(path: "name")
       email: form_data(path: "email")
+      whatsapp: form_data(path: "whatsapp")
       state
       expected_signatures
       confirmed_signatures
@@ -28,6 +29,7 @@ const QUERY = gql`
 export interface PlipForm {
   name: string;
   email: string;
+  whatsapp?: string;
   state: string;
   expected_signatures: number;
   confirmed_signatures?: number;
@@ -35,7 +37,7 @@ export interface PlipForm {
 }
 
 export type FilterStatus = 'pendentes' | 'inscritos' | 'concluidos' | 'todos';
-export type FilterState = 'ES' | 'AC' | 'PE' | 'todos';
+// export type FilterState = 'ES' | 'AC' | 'PE';
 
 export interface DataQueryFilters {
   // Fetch query
@@ -50,22 +52,14 @@ export interface DataQueryFilters {
   status: FilterStatus;
   onChangeStatus: (status: FilterStatus) => void;
   // State filters
-  // state: FilterState;
-  // onChangeState: (state: FilterState) => void;
+  states: string[];
+  onChangeStates: (states: string[]) => void;
   // Page filters
   pages: number;
   pageIndex: number;
   onNextPage: () => void;
   onPreviousPage: () => void;
 }
-
-interface Variables {
-  where: any;
-  offset: number;
-  limit: number;
-}
-
-type Refetch = (args: any) => void
 
 interface Opts {
   defaultLimit?: number;
@@ -76,9 +70,16 @@ interface VariablesOpts {
   limit: number;
   pageIndex: number;
   status?: FilterStatus;
+  states: string[]
 }
 
-const createVariables = ({ widgetId, limit, pageIndex, status }: VariablesOpts) => {
+const createVariables = ({
+  widgetId,
+  limit,
+  pageIndex,
+  status,
+  states
+}: VariablesOpts) => {
   // Pagination default
   const variables: any = {
     offset: limit * pageIndex,
@@ -100,8 +101,6 @@ const createVariables = ({ widgetId, limit, pageIndex, status }: VariablesOpts) 
         ]
       }
     })
-    // Change offset when change status
-    variables['offset'] = 0;
   } else if (status === 'inscritos') {
     where['confirmed_signatures'] = { _is_null: true };
     where['_or'] = [10, 20, 30, 40, 50, 100].map((value, index) => {
@@ -114,15 +113,17 @@ const createVariables = ({ widgetId, limit, pageIndex, status }: VariablesOpts) 
         ]
       }
     })
-    // Change offset when change status
-    variables['offset'] = 0;
-  } else if (status === 'todos') {
-    // Change offset when change status
-    variables['offset'] = 0;
   } else if (status === 'concluidos') {
     where['confirmed_signatures'] = { _is_null: false };
-    // Change offset when change status
-    variables['offset'] = 0;
+  }
+
+  // States filter
+  if (states.length > 0) {
+    where['_and'] = {
+      '_or': states.map((state) => ({
+        'state': { '_eq': state } 
+      }))
+    }
   }
 
   return { ...variables, where };
@@ -135,9 +136,10 @@ export const useQueryFilters = (widgetId: number, opts?: Opts): DataQueryFilters
   const [pageIndex, setPageIndex] = useState(0);
   // Status
   const [status, setStatus] = useState<FilterStatus>('todos');
+  const [states, setStates] = useState<string[]>([]);
   // Fetch query
   const { data, loading, error, refetch } = useQuery(QUERY, {
-    variables: createVariables({ widgetId, limit, pageIndex, status })
+    variables: createVariables({ widgetId, limit, pageIndex, status, states })
   });
   
   const total = data?.plips_aggregate.aggregate.count || 0;
@@ -153,28 +155,34 @@ export const useQueryFilters = (widgetId: number, opts?: Opts): DataQueryFilters
     onNextPage: () => {
       const newPageIndex = pageIndex + 1;
       if (newPageIndex <= total) {
-        refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, status }));
+        refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, status, states }));
         setPageIndex(newPageIndex)
       }
     },
     onPreviousPage: () => {
       const newPageIndex = pageIndex - 1;
       if (newPageIndex >= 0) {
-        refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, status }));
+        refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, status, states }));
         setPageIndex(newPageIndex);
       }
     },
     limit,
     onChangeLimit: (i: number) => {
-      refetch(createVariables({ widgetId, limit: i, pageIndex: 0, status }));
+      refetch(createVariables({ widgetId, limit: i, pageIndex: 0, status, states }));
       setLimit(i);
       setPageIndex(0);
     },
     status,
     onChangeStatus: (i: FilterStatus) => {
-      refetch(createVariables({ widgetId, limit, pageIndex: 0, status: i }));
+      refetch(createVariables({ widgetId, limit, pageIndex: 0, status: i, states }));
       setPageIndex(0);
       setStatus(i);
+    },
+    states,
+    onChangeStates: (i: string[]) => {
+      refetch(createVariables({ widgetId, limit, pageIndex: 0, status, states: i }));
+      setPageIndex(0);
+      setStates(i);
     }
   }
 }
