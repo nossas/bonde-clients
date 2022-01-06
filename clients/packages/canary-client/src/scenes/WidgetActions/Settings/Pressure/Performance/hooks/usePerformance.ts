@@ -1,5 +1,5 @@
 import { gql, useQuery } from "bonde-core-tools";
-import { Widget } from "../../../FetchWidgets";
+import { Widget } from "../../../../FetchWidgets";
 
 const PERFORMANCE_GQL = gql`
   query PerformanceQuery ($widgetId: Int!, $start_date: timestamp, $end_date: timestamp) {

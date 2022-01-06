@@ -19,10 +19,10 @@ import {
 } from "bonde-components";
 import { useTranslation } from "react-i18next";
 
-import SpyField from "../../../../components/SpyField";
-import { OptimizedPressure } from "../../../Community/Domains/Icons";
-import { Widget } from "../../FetchWidgets";
-import SettingsForm from '../SettingsForm';
+import SpyField from "../../../../../components/SpyField";
+import { OptimizedPressure } from "../../../../Community/Domains/Icons";
+import { Widget } from "../../../FetchWidgets";
+import SettingsForm from '../../SettingsForm';
 
 type Props = {
   widget: Widget;
