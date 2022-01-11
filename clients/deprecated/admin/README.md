@@ -1,77 +1,9 @@
-<h1 align="center">BONDE</h1>
+# Admin Monorepo
 
-<p align="center">
-  <img
-    src="https://s3.amazonaws.com/hub-central/uploads/logo-nossas-20170517185909.svg"
-    width="320"
-    height="320"
-    alt="BONDE Logo"
-  />
-  <br />
-  <p style="margin-top: 50px" align="center">
-    <a href="http://ci.bonde.org/nossas/bonde-client">
-      <img
-        alt="Build Status"
-        src="http://ci.bonde.org/api/badges/nossas/bonde-client/status.svg"
-      />
-    </a>
-    <a href="https://github.com/nossas/bonde-client/issues">
-      <img
-        alt="Opened Issues Count"
-        src="https://img.shields.io/github/issues-raw/nossas/bonde-client.svg"
-      />
-    </a>
-    <br />
-    <a href="https://hub.docker.com/r/nossas/bonde-client">
-      <img
-        alt="Docker Automated Deploy"
-        src="https://img.shields.io/docker/automated/nossas/bonde-client.svg"
-      />
-    </a>
-    <a href="https://hub.docker.com/r/nossas/bonde-client/builds">
-      <img
-        alt="Docker Build Status"
-        src="https://img.shields.io/docker/build/nossas/bonde-client.svg"
-      />
-    </a>
-    <br />
-    <a href="https://github.com/nossas/bonde-client/blob/master/LICENSE">
-      <img
-        alt="Licence"
-        src="https://img.shields.io/github/license/nossas/bonde-client.svg"
-      />
-    </a>
-    <a href="https://conventionalcommits.org">
-      <img
-        alt="Conventional Commits"
-        src="https://img.shields.io/badge/Conventional%20Commits-1.0.0--beta.1-brightgreen.svg"
-      />
-    </a>
-  </p>
-</p>
+# Para rodar o bonde-admin corretamente, siga os passos:
 
----
-
-[![Greenkeeper badge](https://badges.greenkeeper.io/nossas/bonde-client.svg)](https://greenkeeper.io/)
-
-## Recommended Reading
-
-- [Concepts & good patterns
-  (pt-br)](https://github.com/nossas/bonde-client/wiki/Conceitos-e-boas-pr%C3%A1ticas)
-
-## Configuration
-
-Bonde Client app depends on the host name to decide how to behave, considering this you should [setup a wildcard DNS domain](http://asciithoughts.com/posts/2014/02/23/setting-up-a-wildcard-dns-domain-on-mac-os-x/) on the development environment.
-
-Or you could simple add to your `/etc/hosts` the following names:
-
-```bash
-127.0.0.1 bonde.devel app.bonde.devel admin-canary.bonde.devel cross-storage.bonde.devel chatbot.bonde.devel
-```
-
-This repository focus mainly on the setup for the client side of BONDE's apps. To a more detailed description on how to setup BONDE's arquitecture check out [bonde-install](https://github.com/nossas/bonde-install).
-
-## Install
+- Na raiz desse projeto, crie um arquivo .env para inserir as variáveis de ambiente. Elas podem ser encontradas no arquivo .drone.yml, também na raiz.
+- Certifique-se que a versão do node utilizada é a 14 com o comando
 
 ### Requirements
 
@@ -102,17 +34,25 @@ With help from Pnpm, install dependencies:
 
 ### Local Development
 
-```bash
-cd clients/deprecated/admin
-pnpm i
-pnpm m run dev
+```jsx
+	nvm use 14
 ```
 
-If you'd like to run selected packages, use the `--filter` command:
+- Ainda na raiz desse projeto, instale os pacotes necessários por meio do comando
 
-`pnpm m run dev --filter="bonde-admin"`
+```jsx
+	pnpm i
+```
 
-And you are done!
+- Agora é possível subir o package bonde-admin, ainda na mesma pasta, com o comando
+
+```jsx
+pnpm m run dev --filter bonde-admin
+```
+
+Seguindo os passos corretamente, o projeto estará rodando localmente na porta 5001
+
+ <!-- TODO: Adicionar passo a passo para o package bonde-webpage -->
 
 ### Admin Dependencies
 
@@ -130,4 +70,4 @@ As simples as:
 
 ## Links
 
-- [How to contribute](CONTRIBUTING.md)
+- [How to contribute](../../CONTRIBUTING.md)
