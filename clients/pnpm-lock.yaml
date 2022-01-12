@@ -142,9 +142,9 @@ importers:
       '@storybook/addons': ^5.3.17
       '@storybook/react': ^5.3.17
       '@types/jest': ^25.1.4
-      '@types/react': ^16.9.23
+      '@types/react': ^16.9 || ^17
       '@types/react-color': ^3.0.4
-      '@types/react-dom': ^16.9.5
+      '@types/react-dom': ^16.8 || ^17
       '@types/react-select': ^3.0.16
       '@types/react-table': 7.0.22
       '@types/styled-components': ^5.0.1
@@ -153,16 +153,15 @@ importers:
       framer-motion: ^4
       husky: ^4.2.3
       lint-staged: ^10.2.11
-      react: ^16.13.0
+      react: ^16.9 || ^17
       react-color: ^2.19.3
-      react-dom: ^16.13.0
+      react-dom: ^16.8 || ^17
       react-final-form: ^6.3.5
       react-google-font-loader: ^1.1.0
       react-s3-uploader: ^4.9.3
       react-select: ^3.1.0
       react-table: ^7.5.0
       react-toastify: ^6.0.9
-      styled-components: ^5.0.1
       ts-loader: ^6.2.1
       tsdx: ^0.12.3
       tslib: ^1.11.1
@@ -189,7 +188,7 @@ importers:
       '@chakra-ui/layout': 1.5.1_093bb91aee9797395d5856c241371e71
       '@chakra-ui/media-query': 1.2.1_ee7f160d50fb3b8d01c12c6a811113a5
       '@chakra-ui/menu': 1.8.1_ac8f55256ccf0fbfe9bdd7937ce35f10
-      '@chakra-ui/modal': 1.10.1_fe33aa4691280894c3ea42aaeac10a7b
+      '@chakra-ui/modal': 1.10.1_55dc7335651e966de241c7afe7f6486e
       '@chakra-ui/number-input': 1.3.1_093bb91aee9797395d5856c241371e71
       '@chakra-ui/pin-input': 1.7.1_093bb91aee9797395d5856c241371e71
       '@chakra-ui/popover': 1.10.1_ac8f55256ccf0fbfe9bdd7937ce35f10
@@ -197,7 +196,7 @@ importers:
       '@chakra-ui/portal': 1.3.1_react-dom@16.14.0+react@16.14.0
       '@chakra-ui/progress': 1.2.1_093bb91aee9797395d5856c241371e71
       '@chakra-ui/radio': 1.4.1_093bb91aee9797395d5856c241371e71
-      '@chakra-ui/react': 1.7.1_7c7fb1c835287a51c37e5fd87bb9cc91
+      '@chakra-ui/react': 1.7.1_81261f0a9940642748b45e3e747df7f6
       '@chakra-ui/select': 1.2.1_093bb91aee9797395d5856c241371e71
       '@chakra-ui/skeleton': 1.2.1_8208faedaee4dbcad1bf54569106e470
       '@chakra-ui/slider': 1.5.1_093bb91aee9797395d5856c241371e71
@@ -215,8 +214,8 @@ importers:
       '@chakra-ui/tooltip': 1.4.1_fe50e0d306736e11647f5e243f4f8dd6
       '@chakra-ui/transition': 1.4.1_2d100d4b6007d6f7ded6514ed309de9d
       '@chakra-ui/visually-hidden': 1.1.1_093bb91aee9797395d5856c241371e71
-      '@emotion/react': 11.6.0_54bb682bbb5ee2bebf6da345a3d2a956
-      '@emotion/styled': 11.6.0_4c9d08020f6b5416114e64171641b139
+      '@emotion/react': 11.6.0_bb76f45a9a467c3ed7c70fd9a53caea5
+      '@emotion/styled': 11.6.0_191fba494ac2f49bba0684dd3ffae396
       final-form: 4.20.4
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
       react-color: 2.19.3_react@16.14.0
@@ -226,25 +225,24 @@ importers:
       react-select: 3.2.0_react-dom@16.14.0+react@16.14.0
       react-table: 7.7.0_react@16.14.0
       react-toastify: 6.2.0_react-dom@16.14.0+react@16.14.0
-      styled-components: 5.3.3_react-dom@16.14.0+react@16.14.0
     devDependencies:
       '@babel/core': 7.16.0
-      '@storybook/addon-actions': 5.3.21_6f1c4920fc2e6a204f40ffeaea355da1
+      '@storybook/addon-actions': 5.3.21_951ed48dd92dc5b7939a5a797d84208f
       '@storybook/addon-links': 5.3.21_react-dom@16.14.0+react@16.14.0
       '@storybook/addons': 5.3.21_react-dom@16.14.0
-      '@storybook/react': 5.3.21_2482f8c2bdc53a412eb222ee23c6d9fc
+      '@storybook/react': 5.3.21_9f3c493963a7f1128acb015be6a907a0
       '@types/jest': 25.2.3
-      '@types/react': 16.14.21
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
       '@types/react-color': 3.0.6
-      '@types/react-dom': 16.9.14
+      '@types/react-dom': registry.npmjs.org/@types/react-dom/16.9.14
       '@types/react-select': 3.1.2
       '@types/react-table': 7.0.22
       '@types/styled-components': 5.1.15
       babel-loader: 8.2.3_@babel+core@7.16.0
       husky: 4.3.8
       lint-staged: 10.5.4
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       ts-loader: 6.2.2_typescript@3.9.10
       tsdx: 0.12.3
       tslib: 1.14.1
@@ -253,52 +251,46 @@ importers:
   libs/core-tools:
     specifiers:
       '@apollo/client': ^3.1.2
-      '@types/cross-storage': ^0.8.29
       '@types/faker': ^4.1.12
       '@types/jest': ^25.2.3
+      '@types/js-cookie': ^3.0.1
       '@types/pino': ^6.3.0
-      '@types/react': ^16.9.43
-      '@types/react-dom': ^16
+      '@types/react': ^16.9 || ^17
+      '@types/react-dom': ^16.8 || ^17
       '@types/react-router-dom': ^5.1.3
-      '@types/styled-components': ^5.1.11
       axios: ^0.21.1
-      bonde-components: workspace:*
-      cross-storage: ^1.0.0
       faker: ^4.1.0
       framer-motion: ^4
       graphql: ^15.3.0
       husky: ^4.2.3
+      js-cookie: ^3.0.1
       lint-staged: ^10.5.4
       pino: ^6.4.0
-      react: ^16
-      react-device-detect: ^2.1.2
-      react-dom: ^16
+      react: ^16.9 || ^17
+      react-dom: ^16.8 || ^17
       ts-jest: ^26.1.2
       tsdx: ^0.12.3
       tslib: ^1.11.1
     dependencies:
       '@apollo/client': 3.4.17_graphql@15.7.2+react@16.14.0
       axios: 0.21.4
-      bonde-components: link:../components
-      cross-storage: 1.0.0
       faker: 4.1.0
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
       graphql: 15.7.2
+      js-cookie: 3.0.1
       lint-staged: 10.5.4
       pino: 6.13.3
-      react: 16.14.0
-      react-device-detect: 2.1.2_react-dom@16.14.0+react@16.14.0
-      react-dom: 16.14.0_react@16.14.0
     devDependencies:
-      '@types/cross-storage': 0.8.30
       '@types/faker': 4.1.12
       '@types/jest': 25.2.3
+      '@types/js-cookie': 3.0.1
       '@types/pino': 6.3.12
-      '@types/react': 16.14.21
-      '@types/react-dom': 16.9.14
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
+      '@types/react-dom': registry.npmjs.org/@types/react-dom/16.9.14
       '@types/react-router-dom': 5.3.2
-      '@types/styled-components': 5.1.15
       husky: 4.3.8
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       ts-jest: 26.5.6_jest@24.9.0+typescript@3.9.10
       tsdx: 0.12.3
       tslib: 1.14.1
@@ -476,9 +468,6 @@ importers:
       '@types/prettier': 2.4.2
       '@types/scheduler': 0.16.2
 
-  packages/storage:
-    specifiers: {}
-
 packages:
 
   /@apollo/client/3.4.17_graphql@15.7.2+react@16.14.0:
@@ -502,7 +491,7 @@ packages:
       hoist-non-react-statics: 3.3.2
       optimism: 0.16.1
       prop-types: 15.7.2
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
       symbol-observable: 4.0.0
       ts-invariant: 0.9.3
       tslib: 2.3.1
@@ -2990,7 +2979,7 @@ packages:
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/transition': 1.4.1_2d100d4b6007d6f7ded6514ed309de9d
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     transitivePeerDependencies:
       - framer-motion
     dev: false
@@ -3005,7 +2994,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/anatomy/1.2.1_@chakra-ui+system@1.8.1:
@@ -3026,7 +3015,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/breadcrumb/1.3.1_093bb91aee9797395d5856c241371e71:
@@ -3038,7 +3027,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/button/1.5.1_093bb91aee9797395d5856c241371e71:
@@ -3052,7 +3041,7 @@ packages:
       '@chakra-ui/spinner': 1.2.1_093bb91aee9797395d5856c241371e71
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/checkbox/1.6.1_ac8f55256ccf0fbfe9bdd7937ce35f10:
@@ -3068,7 +3057,7 @@ packages:
       '@chakra-ui/utils': 1.9.1
       '@chakra-ui/visually-hidden': 1.1.1_093bb91aee9797395d5856c241371e71
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/clickable/1.2.1_react@16.14.0:
@@ -3078,7 +3067,7 @@ packages:
     dependencies:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/close-button/1.2.1_093bb91aee9797395d5856c241371e71:
@@ -3090,7 +3079,7 @@ packages:
       '@chakra-ui/icon': 1.2.1_093bb91aee9797395d5856c241371e71
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/color-mode/1.3.1_react@16.14.0:
@@ -3101,7 +3090,7 @@ packages:
       '@chakra-ui/hooks': 1.7.1_react@16.14.0
       '@chakra-ui/react-env': 1.1.1_react@16.14.0
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/control-box/1.1.1_093bb91aee9797395d5856c241371e71:
@@ -3112,7 +3101,7 @@ packages:
     dependencies:
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/counter/1.2.1_react@16.14.0:
@@ -3122,7 +3111,7 @@ packages:
     dependencies:
       '@chakra-ui/hooks': 1.7.1_react@16.14.0
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/css-reset/1.1.1_85ebbe04203a95159aff318dc0019db8:
@@ -3131,8 +3120,8 @@ packages:
       '@emotion/react': '>=10.0.35'
       react: '>=16.8.6'
     dependencies:
-      '@emotion/react': 11.6.0_414da64a83d07b5b28f5e74e56d85156
-      react: 16.14.0
+      '@emotion/react': 11.6.0_bb76f45a9a467c3ed7c70fd9a53caea5
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/descendant/2.1.1_react@16.14.0:
@@ -3141,7 +3130,7 @@ packages:
       react: '>=16.8.6'
     dependencies:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/editable/1.3.1_093bb91aee9797395d5856c241371e71:
@@ -3154,7 +3143,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/focus-lock/1.2.1_414da64a83d07b5b28f5e74e56d85156:
@@ -3165,6 +3154,18 @@ packages:
       '@chakra-ui/utils': 1.9.1
       react: 16.14.0
       react-focus-lock: 2.5.2_414da64a83d07b5b28f5e74e56d85156
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
+  /@chakra-ui/focus-lock/1.2.1_d97ae545d00f93f3da9d693c23ee71cf:
+    resolution: {integrity: sha512-HYu39nvfaXUrBx+dIDJkFgebNCGEi9oZTfLUKzIJC+zPkmReTDSXV0dzSb/8vCAOq5fph1gFKsdbGy2U98P8GQ==}
+    peerDependencies:
+      react: '>=16.8.6'
+    dependencies:
+      '@chakra-ui/utils': 1.9.1
+      react: registry.npmjs.org/react/16.14.0
+      react-focus-lock: 2.5.2_d97ae545d00f93f3da9d693c23ee71cf
     transitivePeerDependencies:
       - '@types/react'
     dev: false
@@ -3180,7 +3181,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/hooks/1.7.1_react@16.14.0:
@@ -3228,7 +3229,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/layout/1.5.1_093bb91aee9797395d5856c241371e71:
@@ -3241,7 +3242,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/live-region/1.1.1_react@16.14.0:
@@ -3264,7 +3265,7 @@ packages:
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/theme': 1.12.1_@chakra-ui+system@1.8.1
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/menu/1.8.1_ac8f55256ccf0fbfe9bdd7937ce35f10:
@@ -3283,7 +3284,32 @@ packages:
       '@chakra-ui/transition': 1.4.1_2d100d4b6007d6f7ded6514ed309de9d
       '@chakra-ui/utils': 1.9.1
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
+    dev: false
+
+  /@chakra-ui/modal/1.10.1_55dc7335651e966de241c7afe7f6486e:
+    resolution: {integrity: sha512-cboC2ITm+5FjhrBc6yJ5cW4VXnfwlLhFa1EkPqF1k4kvYGyUHArvPN1q8AiPYOIrupHYu2Iu6YmQPg7TJwNImg==}
+    peerDependencies:
+      '@chakra-ui/system': '>=1.0.0'
+      framer-motion: 3.x || 4.x || 5.x
+      react: '>=16.8.6'
+      react-dom: '>=16.8.6'
+    dependencies:
+      '@chakra-ui/close-button': 1.2.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/focus-lock': 1.2.1_d97ae545d00f93f3da9d693c23ee71cf
+      '@chakra-ui/hooks': 1.7.1_react@16.14.0
+      '@chakra-ui/portal': 1.3.1_react-dom@16.14.0+react@16.14.0
+      '@chakra-ui/react-utils': 1.2.1_react@16.14.0
+      '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
+      '@chakra-ui/transition': 1.4.1_2d100d4b6007d6f7ded6514ed309de9d
+      '@chakra-ui/utils': 1.9.1
+      aria-hidden: 1.1.3
+      framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
+      react-remove-scroll: 2.4.1_d97ae545d00f93f3da9d693c23ee71cf
+    transitivePeerDependencies:
+      - '@types/react'
     dev: false
 
   /@chakra-ui/modal/1.10.1_fe33aa4691280894c3ea42aaeac10a7b:
@@ -3324,7 +3350,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/pin-input/1.7.1_093bb91aee9797395d5856c241371e71:
@@ -3338,7 +3364,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/popover/1.10.1_ac8f55256ccf0fbfe9bdd7937ce35f10:
@@ -3355,7 +3381,7 @@ packages:
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
       framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/popper/2.4.1_react@16.14.0:
@@ -3390,7 +3416,7 @@ packages:
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/theme-tools': 1.3.1_@chakra-ui+system@1.8.1
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/provider/1.7.1_80c78684eb64d2b330aad39322289587:
@@ -3425,7 +3451,7 @@ packages:
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
       '@chakra-ui/visually-hidden': 1.1.1_093bb91aee9797395d5856c241371e71
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/react-env/1.1.1_react@16.14.0:
@@ -3511,6 +3537,71 @@ packages:
       - '@types/react'
     dev: false
 
+  /@chakra-ui/react/1.7.1_81261f0a9940642748b45e3e747df7f6:
+    resolution: {integrity: sha512-mbU6M/lxD9BCuXXSEcscPpWqR4mWxXyTk0vkWcgLG59lMFAZ4/Ll+rG1xRHaCuRsAndWNws8h4+NcxY0eECfLQ==}
+    peerDependencies:
+      '@emotion/react': ^11.0.0
+      '@emotion/styled': ^11.0.0
+      framer-motion: 3.x || 4.x || 5.x
+      react: '>=16.8.6'
+      react-dom: '>=16.8.6'
+    dependencies:
+      '@chakra-ui/accordion': 1.4.1_ac8f55256ccf0fbfe9bdd7937ce35f10
+      '@chakra-ui/alert': 1.3.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/avatar': 1.3.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/breadcrumb': 1.3.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/button': 1.5.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/checkbox': 1.6.1_ac8f55256ccf0fbfe9bdd7937ce35f10
+      '@chakra-ui/close-button': 1.2.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/control-box': 1.1.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/counter': 1.2.1_react@16.14.0
+      '@chakra-ui/css-reset': 1.1.1_85ebbe04203a95159aff318dc0019db8
+      '@chakra-ui/editable': 1.3.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/form-control': 1.5.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/hooks': 1.7.1_react@16.14.0
+      '@chakra-ui/icon': 1.2.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/image': 1.1.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/input': 1.3.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/layout': 1.5.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/live-region': 1.1.1_react@16.14.0
+      '@chakra-ui/media-query': 1.2.1_ee7f160d50fb3b8d01c12c6a811113a5
+      '@chakra-ui/menu': 1.8.1_ac8f55256ccf0fbfe9bdd7937ce35f10
+      '@chakra-ui/modal': 1.10.1_55dc7335651e966de241c7afe7f6486e
+      '@chakra-ui/number-input': 1.3.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/pin-input': 1.7.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/popover': 1.10.1_ac8f55256ccf0fbfe9bdd7937ce35f10
+      '@chakra-ui/popper': 2.4.1_react@16.14.0
+      '@chakra-ui/portal': 1.3.1_react-dom@16.14.0+react@16.14.0
+      '@chakra-ui/progress': 1.2.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/provider': 1.7.1_80c78684eb64d2b330aad39322289587
+      '@chakra-ui/radio': 1.4.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/react-env': 1.1.1_react@16.14.0
+      '@chakra-ui/select': 1.2.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/skeleton': 1.2.1_8208faedaee4dbcad1bf54569106e470
+      '@chakra-ui/slider': 1.5.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/spinner': 1.2.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/stat': 1.2.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/switch': 1.3.1_ac8f55256ccf0fbfe9bdd7937ce35f10
+      '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
+      '@chakra-ui/table': 1.3.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/tabs': 1.6.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/tag': 1.2.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/textarea': 1.2.1_093bb91aee9797395d5856c241371e71
+      '@chakra-ui/theme': 1.12.1_@chakra-ui+system@1.8.1
+      '@chakra-ui/toast': 1.4.1_fe50e0d306736e11647f5e243f4f8dd6
+      '@chakra-ui/tooltip': 1.4.1_fe50e0d306736e11647f5e243f4f8dd6
+      '@chakra-ui/transition': 1.4.1_2d100d4b6007d6f7ded6514ed309de9d
+      '@chakra-ui/utils': 1.9.1
+      '@chakra-ui/visually-hidden': 1.1.1_093bb91aee9797395d5856c241371e71
+      '@emotion/react': 11.6.0_bb76f45a9a467c3ed7c70fd9a53caea5
+      '@emotion/styled': 11.6.0_191fba494ac2f49bba0684dd3ffae396
+      framer-motion: 4.1.17_react-dom@16.14.0+react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
   /@chakra-ui/select/1.2.1_093bb91aee9797395d5856c241371e71:
     resolution: {integrity: sha512-GqRmYGjVnw/Z/2RQiW7Ywuu9O5E0spmMUBjeE/v0rqjixBqrmdApjg5pmJ4YmUMvUI/WkGtR3FR5W9Y5PpvfKw==}
     peerDependencies:
@@ -3520,7 +3611,7 @@ packages:
       '@chakra-ui/form-control': 1.5.1_093bb91aee9797395d5856c241371e71
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/skeleton/1.2.1_8208faedaee4dbcad1bf54569106e470:
@@ -3532,7 +3623,7 @@ packages:
       '@chakra-ui/media-query': 1.2.1_ee7f160d50fb3b8d01c12c6a811113a5
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     transitivePeerDependencies:
       - '@chakra-ui/theme'
       - '@emotion/react'
@@ -3549,7 +3640,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.1_react@16.14.0
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/spinner/1.2.1_093bb91aee9797395d5856c241371e71:
@@ -3574,14 +3665,14 @@ packages:
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
       '@chakra-ui/visually-hidden': 1.1.1_093bb91aee9797395d5856c241371e71
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@chakra-ui/styled-system/1.14.1:
     resolution: {integrity: sha512-dgXFYZdJicsddUnPV1X7lQksgMD0z5EvwGaIh2JHJERqNRIvth/CBAnVLQQvy/xSJK5YaSEmeuVVU0veUOQcXg==}
     dependencies:
       '@chakra-ui/utils': 1.9.1
-      csstype: 3.0.10
+      csstype: registry.npmjs.org/csstype/3.0.10
     dev: false
 
   /@chakra-ui/switch/1.3.1_ac8f55256ccf0fbfe9bdd7937ce35f10:
@@ -3593,7 +3684,7 @@ packages:
       '@chakra-ui/checkbox': 1.6.1_ac8f55256ccf0fbfe9bdd7937ce35f10
       '@chakra-ui/system': 1.8.1_d47daa7669d2e49c51a66ec656a7b84a
       '@chakra-ui/utils': 1.9.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     transitivePeerDependencies:
       - framer-motion
     dev: false
@@ -3848,7 +3939,7 @@ packages:
       '@emotion/serialize': 0.11.16
       '@emotion/sheet': 0.9.4
       '@emotion/utils': 0.11.3
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
 
   /@emotion/css/10.0.27:
     resolution: {integrity: sha512-6wZjsvYeBhyZQYNrGoR5yPMYbMBNEnanDrqmsqS1mzDm1cOTu12shvl2j4QHNS36UaTE0USIJawCH9C8oW34Zw==}
@@ -3901,7 +3992,7 @@ packages:
       react: 16.14.0
     dev: false
 
-  /@emotion/react/11.6.0_54bb682bbb5ee2bebf6da345a3d2a956:
+  /@emotion/react/11.6.0_bb76f45a9a467c3ed7c70fd9a53caea5:
     resolution: {integrity: sha512-23MnRZFBN9+D1lHXC5pD6z4X9yhPxxtHr6f+iTGz6Fv6Rda0GdefPrsHL7otsEf+//7uqCdT5QtHeRxHCERzuw==}
     peerDependencies:
       '@babel/core': ^7.0.0
@@ -3920,9 +4011,9 @@ packages:
       '@emotion/sheet': 1.1.0
       '@emotion/utils': 1.0.0
       '@emotion/weak-memoize': 0.2.5
-      '@types/react': 16.14.21
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
       hoist-non-react-statics: 3.3.2
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@emotion/serialize/0.11.16:
@@ -3932,7 +4023,7 @@ packages:
       '@emotion/memoize': 0.7.4
       '@emotion/unitless': 0.7.5
       '@emotion/utils': 0.11.3
-      csstype: 2.6.18
+      csstype: registry.npmjs.org/csstype/2.6.18
 
   /@emotion/serialize/1.0.2:
     resolution: {integrity: sha512-95MgNJ9+/ajxU7QIAruiOAdYNjxZX7G2mhgrtDWswA21VviYIRP1R5QilZ/bDY42xiKsaktP4egJb3QdYQZi1A==}
@@ -3962,7 +4053,7 @@ packages:
       '@emotion/is-prop-valid': 0.8.8
       '@emotion/serialize': 0.11.16
       '@emotion/utils': 0.11.3
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: true
 
   /@emotion/styled/10.0.27_5f216699bc8c1f24088b3bf77b7cbbdf:
@@ -3974,10 +4065,10 @@ packages:
       '@emotion/core': 10.1.1_react@16.14.0
       '@emotion/styled-base': 10.0.31_5f216699bc8c1f24088b3bf77b7cbbdf
       babel-plugin-emotion: 10.2.2
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: true
 
-  /@emotion/styled/11.6.0_4c9d08020f6b5416114e64171641b139:
+  /@emotion/styled/11.6.0_191fba494ac2f49bba0684dd3ffae396:
     resolution: {integrity: sha512-mxVtVyIOTmCAkFbwIp+nCjTXJNgcz4VWkOYQro87jE2QBTydnkiYusMrRGFtzuruiGK4dDaNORk4gH049iiQuw==}
     peerDependencies:
       '@babel/core': ^7.0.0
@@ -3994,11 +4085,11 @@ packages:
       '@babel/runtime': 7.16.3
       '@emotion/babel-plugin': 11.3.0_@babel+core@7.16.0
       '@emotion/is-prop-valid': 1.1.1
-      '@emotion/react': 11.6.0_54bb682bbb5ee2bebf6da345a3d2a956
+      '@emotion/react': 11.6.0_bb76f45a9a467c3ed7c70fd9a53caea5
       '@emotion/serialize': 1.0.2
       '@emotion/utils': 1.0.0
-      '@types/react': 16.14.21
-      react: 16.14.0
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@emotion/styled/11.6.0_f53a51783301564d5b983963cb7be2a8:
@@ -4095,8 +4186,8 @@ packages:
       react: '>=0.14.0'
     dependencies:
       gud: 1.0.0
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
       warning: 4.0.3
     dev: true
 
@@ -4105,7 +4196,7 @@ packages:
     peerDependencies:
       react: '*'
     dependencies:
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /@istanbuljs/schema/0.1.3:
@@ -4219,7 +4310,7 @@ packages:
     engines: {node: '>= 6'}
     dependencies:
       callsites: 3.1.0
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       source-map: 0.6.1
 
   /@jest/test-result/24.9.0:
@@ -4314,7 +4405,7 @@ packages:
     dependencies:
       '@reach/utils': 0.13.2_react-dom@16.14.0+react@16.14.0
       '@reach/visually-hidden': 0.13.2_react-dom@16.14.0+react@16.14.0
-      prop-types: 15.7.2
+      prop-types: registry.npmjs.org/prop-types/15.7.2
       react: 16.14.0
       react-dom: 16.14.0_react@16.14.0
       tslib: 2.3.1
@@ -4328,9 +4419,9 @@ packages:
     dependencies:
       create-react-context: 0.3.0_prop-types@15.7.2+react@16.14.0
       invariant: 2.2.4
-      prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       react-lifecycles-compat: 3.0.4
     dev: true
 
@@ -4353,7 +4444,7 @@ packages:
       react: ^16.8.0 || 17.x
       react-dom: ^16.8.0 || 17.x
     dependencies:
-      prop-types: 15.7.2
+      prop-types: registry.npmjs.org/prop-types/15.7.2
       react: 16.14.0
       react-dom: 16.14.0_react@16.14.0
       tslib: 2.3.1
@@ -4591,13 +4682,13 @@ packages:
       react: 16.14.0
     dev: false
 
-  /@storybook/addon-actions/5.3.21_6f1c4920fc2e6a204f40ffeaea355da1:
+  /@storybook/addon-actions/5.3.21_951ed48dd92dc5b7939a5a797d84208f:
     resolution: {integrity: sha512-6SAF/j8UBZaAbRz/rYUlcCXda+c4LQvvNlbVJc9GHjNNNMJQQVc3/EU+M7PyFz6uDUxudAW1+AFchGk04ACJ2g==}
     dependencies:
       '@storybook/addons': 5.3.21_react-dom@16.14.0
       '@storybook/api': 5.3.21_react-dom@16.14.0
       '@storybook/client-api': 5.3.21_react-dom@16.14.0
-      '@storybook/components': 5.3.21_@types+react@16.14.21
+      '@storybook/components': 5.3.21_@types+react@17.0.35
       '@storybook/core-events': 5.3.21
       '@storybook/theming': 5.3.21_react-dom@16.14.0+react@16.14.0
       core-js: 3.19.1
@@ -4605,7 +4696,7 @@ packages:
       global: 4.4.0
       polished: 3.7.2
       prop-types: 15.7.2
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
       react-inspector: 4.0.1_react@16.14.0
       uuid: 3.4.0
     transitivePeerDependencies:
@@ -4628,7 +4719,7 @@ packages:
       global: 4.4.0
       prop-types: 15.7.2
       qs: 6.10.1
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
       ts-dedent: 1.2.0
     transitivePeerDependencies:
       - react-dom
@@ -4683,8 +4774,8 @@ packages:
       global: 4.4.0
       lodash: 4.17.21
       memoizerific: 1.11.3
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
       regenerator-runtime: 0.13.9
       semver: 6.3.0
       shallow-equal: 1.2.1
@@ -4713,8 +4804,8 @@ packages:
       global: 4.4.0
       lodash: 4.17.21
       memoizerific: 1.11.3
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
       semver: 6.3.0
       shallow-equal: 1.2.1
       store2: 2.12.0
@@ -4796,7 +4887,7 @@ packages:
       core-js: 3.19.1
     dev: true
 
-  /@storybook/components/5.3.21_@types+react@16.14.21:
+  /@storybook/components/5.3.21_@types+react@17.0.35:
     resolution: {integrity: sha512-42QQk6qZl6wrtajP8yNCfmNS2t8Iod5QY+4V/l6iNnnT9O+j6cWOlnO+ZyvjNv0Xm0zIOt+VyVjdkKh8FUjQmA==}
     dependencies:
       '@storybook/client-logger': 5.3.21
@@ -4810,10 +4901,10 @@ packages:
       memoizerific: 1.11.3
       polished: 3.7.2
       popper.js: 1.16.1
-      prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
-      react-focus-lock: 2.6.0_414da64a83d07b5b28f5e74e56d85156
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
+      react-focus-lock: 2.6.0_d97ae545d00f93f3da9d693c23ee71cf
       react-helmet-async: 1.1.2_react-dom@16.14.0+react@16.14.0
       react-popper-tooltip: 2.11.1_react-dom@16.14.0+react@16.14.0
       react-syntax-highlighter: 11.0.3_react@16.14.0
@@ -4830,7 +4921,7 @@ packages:
       core-js: 3.19.1
     dev: true
 
-  /@storybook/core/5.3.21_2482f8c2bdc53a412eb222ee23c6d9fc:
+  /@storybook/core/5.3.21_9f3c493963a7f1128acb015be6a907a0:
     resolution: {integrity: sha512-plD47WIsn/JoyRJDOpmH7N7mEMo/jiA8ZlOitLW55zYvzUn8UrVpRFpMYo91OJxiCT6JFoaEh3XtNdhbgUwnPA==}
     peerDependencies:
       '@babel/core': '*'
@@ -4853,7 +4944,7 @@ packages:
       '@storybook/node-logger': 5.3.21
       '@storybook/router': 5.3.21_react-dom@16.14.0+react@16.14.0
       '@storybook/theming': 5.3.21_react-dom@16.14.0+react@16.14.0
-      '@storybook/ui': 5.3.21_@types+react@16.14.21
+      '@storybook/ui': 5.3.21_@types+react@17.0.35
       airbnb-js-shims: 2.2.1
       ansi-to-html: 0.6.15
       autoprefixer: 9.8.8
@@ -4896,9 +4987,9 @@ packages:
       pretty-hrtime: 1.0.3
       qs: 6.10.1
       raw-loader: 3.1.0_webpack@4.46.0
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
       react-dev-utils: 9.1.0
-      react-dom: 16.14.0_react@16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       regenerator-runtime: 0.13.9
       resolve: 1.20.0
       resolve-from: 5.0.0
@@ -4940,7 +5031,7 @@ packages:
       regenerator-runtime: 0.13.9
     dev: true
 
-  /@storybook/react/5.3.21_2482f8c2bdc53a412eb222ee23c6d9fc:
+  /@storybook/react/5.3.21_9f3c493963a7f1128acb015be6a907a0:
     resolution: {integrity: sha512-A50F8dDZxyLGa/dE3q0Zxt7T5r9UbomoSclqw7oJTO9GI76QOu7GfsoWrEL2gTEDAmqXreLVQqGuTLQhBz0rlA==}
     engines: {node: '>=8.0.0'}
     hasBin: true
@@ -4955,7 +5046,7 @@ packages:
       '@babel/preset-flow': 7.16.0_@babel+core@7.16.0
       '@babel/preset-react': 7.16.0_@babel+core@7.16.0
       '@storybook/addons': 5.3.21_a6719548f2de806ac36be576bff5ec40
-      '@storybook/core': 5.3.21_2482f8c2bdc53a412eb222ee23c6d9fc
+      '@storybook/core': 5.3.21_9f3c493963a7f1128acb015be6a907a0
       '@storybook/node-logger': 5.3.21
       '@svgr/webpack': 4.3.3
       '@types/webpack-env': 1.16.3
@@ -4968,9 +5059,9 @@ packages:
       lodash: 4.17.21
       mini-css-extract-plugin: 0.7.0_webpack@4.46.0
       prop-types: 15.7.2
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
       react-dev-utils: 9.1.0
-      react-dom: 16.14.0_react@16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       regenerator-runtime: 0.13.9
       semver: 6.3.0
       ts-dedent: 1.2.0
@@ -4997,8 +5088,8 @@ packages:
       lodash: 4.17.21
       memoizerific: 1.11.3
       qs: 6.10.1
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       util-deprecate: 1.0.2
     dev: true
 
@@ -5017,14 +5108,14 @@ packages:
       global: 4.4.0
       memoizerific: 1.11.3
       polished: 3.7.2
-      prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       resolve-from: 5.0.0
       ts-dedent: 1.2.0
     dev: true
 
-  /@storybook/ui/5.3.21_@types+react@16.14.21:
+  /@storybook/ui/5.3.21_@types+react@17.0.35:
     resolution: {integrity: sha512-OUf8JYY9LN+XfzLSZE6KtboITGDL6C8Z0W9QOXM5LJwFLv4PkANK/f9qsB5vVHFm7vhoO96butFzs6SjTKhxkw==}
     dependencies:
       '@emotion/core': 10.1.1_react@16.14.0
@@ -5032,7 +5123,7 @@ packages:
       '@storybook/api': 5.3.21_a6719548f2de806ac36be576bff5ec40
       '@storybook/channels': 5.3.21
       '@storybook/client-logger': 5.3.21
-      '@storybook/components': 5.3.21_@types+react@16.14.21
+      '@storybook/components': 5.3.21_@types+react@17.0.35
       '@storybook/core-events': 5.3.21
       '@storybook/router': 5.3.21_react-dom@16.14.0+react@16.14.0
       '@storybook/theming': 5.3.21_react-dom@16.14.0+react@16.14.0
@@ -5047,10 +5138,10 @@ packages:
       markdown-to-jsx: 6.11.4_react@16.14.0
       memoizerific: 1.11.3
       polished: 3.7.2
-      prop-types: 15.7.2
+      prop-types: registry.npmjs.org/prop-types/15.7.2
       qs: 6.10.1
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       react-draggable: 4.4.4_react-dom@16.14.0+react@16.14.0
       react-helmet-async: 1.1.2_react-dom@16.14.0+react@16.14.0
       react-hotkeys: 2.0.0_react@16.14.0
@@ -6288,10 +6379,6 @@ packages:
     dependencies:
       '@babel/types': 7.16.0
 
-  /@types/cross-storage/0.8.30:
-    resolution: {integrity: sha512-bnW3xTNYIkblokN9iPlf26PhlHhrDxusp96NiM3O/WswjO7yrV1orjbK9Ips90Zl4gx1cU4HtJdpLkpbYBkCtA==}
-    dev: true
-
   /@types/d3-color/2.0.3:
     resolution: {integrity: sha512-+0EtEjBfKEDtH9Rk3u3kLOUXM5F+iZK+WvASPb0MhIZl8J8NUvGeZRwKCXl+P3HkYx5TdU4YtcibpqHkSR9n7w==}
     dev: false
@@ -6414,6 +6501,10 @@ packages:
       pretty-format: 25.5.0
     dev: true
 
+  /@types/js-cookie/3.0.1:
+    resolution: {integrity: sha512-7wg/8gfHltklehP+oyJnZrz9XBuX5ZPP4zB6UsI84utdlkRYLnOm2HfpLXazTwZA+fpGn0ir8tGNgVnMEleBGQ==}
+    dev: true
+
   /@types/json-schema/7.0.9:
     resolution: {integrity: sha512-qcUXuemtEu+E5wZSJHNxUXeCZhAfXKQ41D+duX+VYPde7xyEVZci+/oXKJL13tnRs9lR2pr4fod59GT6/X1/yQ==}
 
@@ -6486,19 +6577,20 @@ packages:
   /@types/reach__router/1.3.9:
     resolution: {integrity: sha512-N6rqQqTTAV/zKLfK3iq9Ww3wqCEhTZvsilhl0zI09zETdVq1QGmJH6+/xnj8AFUWIrle2Cqo+PGM/Ltr1vBb9w==}
     dependencies:
-      '@types/react': 16.14.21
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
     dev: true
 
   /@types/react-color/3.0.6:
     resolution: {integrity: sha512-OzPIO5AyRmLA7PlOyISlgabpYUa3En74LP8mTMa0veCA719SvYQov4WLMsHvCgXP+L+KI9yGhYnqZafVGG0P4w==}
     dependencies:
-      '@types/react': 16.14.21
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
       '@types/reactcss': 1.2.6
 
   /@types/react-dom/16.9.14:
     resolution: {integrity: sha512-FIX2AVmPTGP30OUJ+0vadeIFJJ07Mh1m+U0rxfgyW34p3rTlXI+nlenvAxNn4BP36YyI9IJ/+UJ7Wu22N1pI7A==}
     dependencies:
       '@types/react': 16.14.21
+    dev: false
 
   /@types/react-router-dom/5.3.2:
     resolution: {integrity: sha512-ELEYRUie2czuJzaZ5+ziIp9Hhw+juEw8b7C11YNA4QdLCVbQ3qLi2l4aq8XnlqM7V31LZX8dxUuFUCrzHm6sqQ==}
@@ -6516,21 +6608,21 @@ packages:
   /@types/react-select/3.1.2:
     resolution: {integrity: sha512-ygvR/2FL87R2OLObEWFootYzkvm67LRA+URYEAcBuvKk7IXmdsnIwSGm60cVXGaqkJQHozb2Cy1t94tCYb6rJA==}
     dependencies:
-      '@types/react': 16.14.21
-      '@types/react-dom': 16.9.14
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
+      '@types/react-dom': registry.npmjs.org/@types/react-dom/16.9.14
       '@types/react-transition-group': 4.4.4
     dev: true
 
   /@types/react-syntax-highlighter/11.0.4:
     resolution: {integrity: sha512-9GfTo3a0PHwQeTVoqs0g5bS28KkSY48pp5659wA+Dp4MqceDEa8EHBqrllJvvtyusszyJhViUEap0FDvlk/9Zg==}
     dependencies:
-      '@types/react': 16.14.21
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
     dev: true
 
   /@types/react-table/7.0.22:
     resolution: {integrity: sha512-RAzjB7Udv23QPuIuNNRn8VBldmcFobqpNqLWXh0FXVVyIye76muzfn01WZdcTIEfmQjHts7bjJSQQVabLQgTcA==}
     dependencies:
-      '@types/react': 16.14.21
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
     dev: true
 
   /@types/react-table/7.7.8:
@@ -6542,13 +6634,13 @@ packages:
   /@types/react-textarea-autosize/4.3.6:
     resolution: {integrity: sha512-cTf8tCem0c8A7CERYbTuF+bRFaqYu7N7HLCa6ZhUhDx8XnUsTpGx5udMWljt87JpciUKuUkImKPEsy6kcKhrcQ==}
     dependencies:
-      '@types/react': 16.14.21
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
     dev: true
 
   /@types/react-transition-group/4.4.4:
     resolution: {integrity: sha512-7gAPz7anVK5xzbeQW9wFBDg7G++aPLAFY0QaSMOou9rJZpbuI58WAuJrgu+qR92l61grlnCUe7AFX8KGahAgug==}
     dependencies:
-      '@types/react': 16.14.21
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
     dev: true
 
   /@types/react/16.14.21:
@@ -6568,7 +6660,7 @@ packages:
   /@types/reactcss/1.2.6:
     resolution: {integrity: sha512-qaIzpCuXNWomGR1Xq8SCFTtF4v8V27Y6f+b9+bzHiv087MylI/nTCqqdChNeWS7tslgROmYB7yeiruWX7WnqNg==}
     dependencies:
-      '@types/react': 16.14.21
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
 
   /@types/recharts/1.8.23:
     resolution: {integrity: sha512-O/mIPm9f6dwRWfenOI3GQwsGta3x1YWjwqXOCZqC0MATQ6C+A+Jc8VxFnSUr4N3uYv64zkq90RwXFaMNbhJKvg==}
@@ -7644,7 +7736,7 @@ packages:
     dependencies:
       chalk: 1.1.3
       esutils: 2.0.3
-      js-tokens: 3.0.2
+      js-tokens: registry.npmjs.org/js-tokens/3.0.2
 
   /babel-eslint/10.1.0_eslint@6.8.0:
     resolution: {integrity: sha512-ifWaTHQ0ce+448CYop8AdrQiBsGrnC+bMgfyKFdi6EsPLTAWG+QfyDeM6OH+FmWnKvEq5NnBMLvlBUPKQZoDSg==}
@@ -8049,18 +8141,6 @@ packages:
       styled-components: 5.0.1_react-dom@16.14.0+react@16.14.0
     dev: false
 
-  /babel-plugin-styled-components/1.13.3_styled-components@5.3.3:
-    resolution: {integrity: sha512-meGStRGv+VuKA/q0/jXxrPNWEm4LPfYIqxooDTdmh8kFsP/Ph7jJG5rUPwUPX3QHUvggwdbgdGpo88P/rRYsVw==}
-    peerDependencies:
-      styled-components: '>= 2'
-    dependencies:
-      '@babel/helper-annotate-as-pure': 7.16.0
-      '@babel/helper-module-imports': 7.16.0
-      babel-plugin-syntax-jsx: 6.18.0
-      lodash: 4.17.21
-      styled-components: 5.3.3_react-dom@16.14.0+react@16.14.0
-    dev: false
-
   /babel-plugin-syntax-jsx/6.18.0:
     resolution: {integrity: sha1-CvMqmm4Tyno/1QaeYtew9Y0NiUY=}
 
@@ -8283,13 +8363,6 @@ packages:
   /binary-extensions/2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
-
-  /bindings/1.5.0:
-    resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==}
-    requiresBuild: true
-    dependencies:
-      file-uri-to-path: 1.0.0
-    optional: true
 
   /bluebird/3.5.5:
     resolution: {integrity: sha512-5am6HnnfN+urzt4yfg7IgTbotDjIT/u8AJpEt0sIU9FtXfVeezXAPKswrG+xKUCOYAINpSdgZVDU6QFh+cuH3w==}
@@ -8566,7 +8639,7 @@ packages:
       chownr: 1.1.4
       figgy-pudding: 3.5.2
       glob: 7.2.0
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       infer-owner: 1.0.4
       lru-cache: 5.1.1
       mississippi: 3.0.0
@@ -8791,7 +8864,7 @@ packages:
       readdirp: 2.2.1
       upath: 1.2.0
     optionalDependencies:
-      fsevents: 1.2.13
+      fsevents: registry.npmjs.org/fsevents/1.2.13
     dev: true
 
   /chokidar/2.1.8:
@@ -8810,7 +8883,7 @@ packages:
       readdirp: 2.2.1
       upath: 1.2.0
     optionalDependencies:
-      fsevents: 1.2.13
+      fsevents: registry.npmjs.org/fsevents/1.2.13
 
   /chokidar/3.5.2:
     resolution: {integrity: sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==}
@@ -8824,7 +8897,8 @@ packages:
       normalize-path: 3.0.0
       readdirp: 3.6.0
     optionalDependencies:
-      fsevents: 2.3.2
+      fsevents: registry.npmjs.org/fsevents/2.3.2
+    dev: false
 
   /chownr/1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
@@ -8902,10 +8976,10 @@ packages:
     resolution: {integrity: sha512-7Qg2Jrep1S/+Q3EceiZtQcDPWxhAvBw+ERf1162v4sikJrvojMHFqXt8QIVha8UlH9rgU0BeWPytZ9/TzYqlUw==}
     engines: {node: '>=6'}
     dependencies:
-      object-assign: 4.1.1
+      object-assign: registry.npmjs.org/object-assign/4.1.1
       string-width: 2.1.1
     optionalDependencies:
-      colors: 1.4.0
+      colors: registry.npmjs.org/colors/1.4.0
     dev: true
 
   /cli-truncate/2.1.0:
@@ -8925,16 +8999,6 @@ packages:
   /clipboard-copy/3.2.0:
     resolution: {integrity: sha512-vooFaGFL6ulEP1liiaWFBmmfuPm3cY3y7T9eB83ZTnYc/oFeAKsq3NcDrOkBC8XaauEE8zHQwI7k0+JSYiVQSQ==}
     dev: false
-
-  /clipboard/2.0.8:
-    resolution: {integrity: sha512-Y6WO0unAIQp5bLmk1zdThRhgJt/x3ks6f30s3oE3H1mgIEU33XyQjEf8gsf6DxC7NPX8Y1SsNWjUjL/ywLnnbQ==}
-    requiresBuild: true
-    dependencies:
-      good-listener: 1.2.2
-      select: 1.1.2
-      tiny-emitter: 2.1.0
-    dev: true
-    optional: true
 
   /clipboardy/1.2.3:
     resolution: {integrity: sha512-2WNImOvCRe6r63Gk9pShfkwXsVtKCroMAevIbiae021mS850UkWPbevxsBz3tnvjZIEGvlwaqCPsw+4ulzNgJA==}
@@ -9055,13 +9119,6 @@ packages:
 
   /colorette/2.0.16:
     resolution: {integrity: sha512-hUewv7oMjCp+wkBv5Rm0v87eJhq4woh5rSR+42YSQJKecCqgIqNkZ6lAlQms/BwHPJA5NKMRlpxPRv0n8HQW6g==}
-
-  /colors/1.4.0:
-    resolution: {integrity: sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==}
-    engines: {node: '>=0.1.90'}
-    requiresBuild: true
-    dev: true
-    optional: true
 
   /combined-stream/1.0.8:
     resolution: {integrity: sha512-FQN4MRfuJeHf7cBbBMJFXhKSDq+2kAArBlmRBvcvFE5BB1HZKXtSFASDhdlz9zOYwxh8lDdnvmMOe/+5cdoEdg==}
@@ -9334,8 +9391,8 @@ packages:
   /create-react-class/15.7.0:
     resolution: {integrity: sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==}
     dependencies:
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
+      loose-envify: registry.npmjs.org/loose-envify/1.4.0
+      object-assign: registry.npmjs.org/object-assign/4.1.1
     dev: false
 
   /create-react-context/0.3.0_prop-types@15.7.2+react@16.14.0:
@@ -9345,8 +9402,8 @@ packages:
       react: ^0.14.0 || ^15.0.0 || ^16.0.0
     dependencies:
       gud: 1.0.0
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
       warning: 4.0.3
     dev: true
 
@@ -9398,10 +9455,6 @@ packages:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
-
-  /cross-storage/1.0.0:
-    resolution: {integrity: sha1-cJUDdyQUhPF86VWbBdLghEjhdmA=}
-    dev: false
 
   /crypto-browserify/3.12.0:
     resolution: {integrity: sha512-fz4spIh+znjO2VjL+IdhEpRJ3YN6sMzITSBijk6FK2UvTqruSQW+/cCZTSNsMiZNvUeq0CqurF+dAbyiGOY6Wg==}
@@ -9550,14 +9603,14 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       mdn-data: 2.0.4
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
 
   /css-tree/1.1.3:
     resolution: {integrity: sha512-tRpdppF7TRazZrjJ6v3stzv93qxRcSsFmW6cX0Zm2NVKpxE1WV1HblnghVv9TreireHkqI/VDEsfolRF1p6y7Q==}
     engines: {node: '>=8.0.0'}
     dependencies:
       mdn-data: 2.0.14
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
 
   /css-unit-converter/1.1.2:
     resolution: {integrity: sha512-IiJwMC8rdZE0+xiEZHeru6YoONC4rfPMqGm2W85jMIbkFvv5nFTwJVFHam2eFrN6txmoUYFAFXiv8ICVeTO0MA==}
@@ -9579,7 +9632,7 @@ packages:
     resolution: {integrity: sha512-oUnjmWpy0niI3x/mPL8dVEI1l7MnG3+HHyRPHf+YFSbK+svOhXpmSOcDURUh2aOCgl2grzrOPt1nHLuCVFULLw==}
     dependencies:
       inherits: 2.0.4
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
       source-map-resolve: 0.5.3
       urix: 0.1.0
     dev: false
@@ -9699,9 +9752,6 @@ packages:
     dependencies:
       cssom: 0.3.8
     dev: false
-
-  /csstype/2.6.18:
-    resolution: {integrity: sha512-RSU6Hyeg14am3Ah4VZEmeX8H7kLwEEirXe6aU2IPfKNvhXwTflK5HQRDNI0ypQXoqmm+QPyG2IaPuQE5zMwSIQ==}
 
   /csstype/3.0.10:
     resolution: {integrity: sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==}
@@ -10326,7 +10376,7 @@ packages:
       '@emotion/core': 10.1.1_react@16.14.0
       '@emotion/weak-memoize': 0.2.5
       hoist-non-react-statics: 3.3.2
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: true
 
   /encodeurl/1.0.2:
@@ -10478,7 +10528,7 @@ packages:
       esutils: 2.0.3
       optionator: 0.8.3
     optionalDependencies:
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
 
   /escodegen/2.0.0:
     resolution: {integrity: sha512-mmHKys/C8BFUGI+MAWNcSYoORYLMdPzjrknd2Vc+bUsjN5bXcr8EhrNB+UTqfL1y3I9c4fw2ihgtMPQLBRiQxw==}
@@ -10490,7 +10540,7 @@ packages:
       esutils: 2.0.3
       optionator: 0.8.3
     optionalDependencies:
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
     dev: false
 
   /eslint-config-prettier/6.15.0_eslint@6.8.0:
@@ -10759,7 +10809,7 @@ packages:
       object.fromentries: 2.0.5
       object.hasown: 1.1.0
       object.values: 1.1.5
-      prop-types: 15.7.2
+      prop-types: registry.npmjs.org/prop-types/15.7.2
       resolve: 2.0.0-next.3
       semver: 6.3.0
       string.prototype.matchall: 4.0.6
@@ -11247,11 +11297,6 @@ packages:
       ramda: 0.21.0
     dev: true
 
-  /file-uri-to-path/1.0.0:
-    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==}
-    requiresBuild: true
-    optional: true
-
   /filesize/3.6.1:
     resolution: {integrity: sha512-7KjR1vv6qnicaPMi1iiTcI85CyYwRO/PSFCu6SvqL8jN2Wjt/NIYQTFtFs7fSDCYOstUkEWIQGFUg5YZQfjlcg==}
     engines: {node: '>= 0.4.0'}
@@ -11413,18 +11458,6 @@ packages:
         optional: true
     dev: false
 
-  /follow-redirects/1.14.5_debug@4.3.2:
-    resolution: {integrity: sha512-wtphSXy7d4/OR+MvIFbCVBDzZ5520qV8XfPklSN5QtxuMUJZ+b0Wnst1e1lCDocfzuCkHqj8k0FpZqO+UIaKNA==}
-    engines: {node: '>=4.0'}
-    peerDependencies:
-      debug: '*'
-    peerDependenciesMeta:
-      debug:
-        optional: true
-    dependencies:
-      debug: 4.3.2_supports-color@6.1.0
-    dev: false
-
   /for-each/0.3.3:
     resolution: {integrity: sha512-jqYfLp7mo9vIyQf8ykW2v7A+2N4QjeCeI5+Dz9XraiO1ign81wjiH7Fb9vSOWvQfNtmSa4H2RoQTrrXivdUZmw==}
     dependencies:
@@ -11529,7 +11562,7 @@ packages:
       style-value-types: 4.1.4
       tslib: 2.3.1
     optionalDependencies:
-      '@emotion/is-prop-valid': 0.8.8
+      '@emotion/is-prop-valid': registry.npmjs.org/@emotion/is-prop-valid/0.8.8
     dev: false
 
   /framesync/5.3.0:
@@ -11561,7 +11594,7 @@ packages:
   /fs-extra/4.0.3:
     resolution: {integrity: sha512-q6rbdDd1o2mAnQreO7YADIxf/Whx4AHBiRf6d+/cVT8h44ss+lHgxf1FemcqDnQt9X3ct4McHr+JMGlYSsK7Cg==}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       jsonfile: 4.0.0
       universalify: 0.1.2
     dev: false
@@ -11592,40 +11625,13 @@ packages:
   /fs-write-stream-atomic/1.0.10:
     resolution: {integrity: sha1-tH31NJPvkR33VzHnCp3tAYnbQMk=}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       iferr: 0.1.5
       imurmurhash: 0.1.4
       readable-stream: 2.3.7
 
   /fs.realpath/1.0.0:
     resolution: {integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8=}
-
-  /fsevents/1.2.13:
-    resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==}
-    engines: {node: '>= 4.0'}
-    os: [darwin]
-    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
-    requiresBuild: true
-    dependencies:
-      bindings: 1.5.0
-      nan: 2.15.0
-    optional: true
-
-  /fsevents/2.1.2:
-    resolution: {integrity: sha512-R4wDiBwZ0KzpgOWetKDug1FZcYhqYnUYKtfZYt4mD5SBz76q0KR4Q9o7GIPamsVPGmW3EYPPJ0dOOjvx32ldZA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    deprecated: '"Please update to latest v2.3 or v2.2"'
-    requiresBuild: true
-    dev: false
-    optional: true
-
-  /fsevents/2.3.2:
-    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==}
-    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
-    os: [darwin]
-    requiresBuild: true
-    optional: true
 
   /function-bind/1.1.1:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
@@ -11658,7 +11664,7 @@ packages:
       aproba: 1.2.0
       console-control-strings: 1.1.0
       has-unicode: 2.0.1
-      object-assign: 4.1.1
+      object-assign: registry.npmjs.org/object-assign/4.1.1
       signal-exit: 3.0.5
       string-width: 1.0.2
       strip-ansi: 3.0.1
@@ -12236,7 +12242,7 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       eventemitter3: 4.0.7
-      follow-redirects: 1.14.5_debug@4.3.2
+      follow-redirects: 1.14.5
       requires-port: 1.0.0
     transitivePeerDependencies:
       - debug
@@ -12503,7 +12509,7 @@ packages:
   /invariant/2.2.4:
     resolution: {integrity: sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==}
     dependencies:
-      loose-envify: 1.4.0
+      loose-envify: registry.npmjs.org/loose-envify/1.4.0
 
   /invert-kv/2.0.0:
     resolution: {integrity: sha512-wPVv/y/QQ/Uiirj/vh3oP+1Ww+AWehmi1g5fFWGPF6IpCBCDVrhgHRMvrLfdYcwDh3QJbGXDW4JAuzxElLSqKA==}
@@ -12996,7 +13002,7 @@ packages:
       istanbul-lib-coverage: 2.0.5
       make-dir: 2.1.0
       rimraf: 2.7.1
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
     transitivePeerDependencies:
       - supports-color
 
@@ -13182,7 +13188,7 @@ packages:
       '@jest/types': 24.9.0
       anymatch: 2.0.0
       fb-watchman: 2.0.1
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       invariant: 2.2.4
       jest-serializer: 24.9.0
       jest-util: 24.9.0
@@ -13191,7 +13197,7 @@ packages:
       sane: 4.1.0
       walker: 1.0.8
     optionalDependencies:
-      fsevents: 1.2.13
+      fsevents: registry.npmjs.org/fsevents/1.2.13
 
   /jest-jasmine2/24.9.0:
     resolution: {integrity: sha512-Cq7vkAgaYKp+PsX+2/JbTarrk0DmNhsEtqBXNwUHkdlbrTBLtMJINADf2mf5FkowNsq8evbPc07/qFO0AdKTzw==}
@@ -13315,7 +13321,7 @@ packages:
       '@jest/types': 24.9.0
       chalk: 2.4.2
       exit: 0.1.2
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       jest-config: 24.9.0
       jest-docblock: 24.9.0
       jest-haste-map: 24.9.0
@@ -13345,7 +13351,7 @@ packages:
       chalk: 2.4.2
       exit: 0.1.2
       glob: 7.2.0
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       jest-config: 24.9.0
       jest-haste-map: 24.9.0
       jest-message-util: 24.9.0
@@ -13491,8 +13497,10 @@ packages:
     resolution: {integrity: sha512-GxJWybWU4NV0RNKi6EIqk6IRPOTqd/h+U7sbtyuD7yUISUzV78LdHnq2xkevJsTlz/EImux4sWj+wfMiwKLkiw==}
     dev: true
 
-  /js-tokens/3.0.2:
-    resolution: {integrity: sha1-mGbfOVECEw449/mWvOtlRDIJwls=}
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
+    dev: false
 
   /js-tokens/4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
@@ -13668,13 +13676,13 @@ packages:
   /jsonfile/2.4.0:
     resolution: {integrity: sha1-NzaitCi4e72gzIO1P6PWM6NcKug=}
     optionalDependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
     dev: true
 
   /jsonfile/4.0.0:
     resolution: {integrity: sha1-h3Gq4HmbZAdrdmQPygWPnBDjPss=}
     optionalDependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
 
   /jsonify/0.0.0:
     resolution: {integrity: sha1-LHS27kHZPKUbe1qu6PUDYx0lKnM=}
@@ -13742,7 +13750,7 @@ packages:
   /klaw/1.3.1:
     resolution: {integrity: sha1-QIhDO0azsbolnXh4XY6W9zugJDk=}
     optionalDependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
     dev: true
 
   /kleur/3.0.3:
@@ -13866,7 +13874,7 @@ packages:
     resolution: {integrity: sha1-eUfkIUmvgNaWy/eXvKq8/h/inKg=}
     engines: {node: '>=4'}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       parse-json: 2.2.0
       pify: 2.3.0
       strip-bom: 3.0.0
@@ -13876,7 +13884,7 @@ packages:
     resolution: {integrity: sha1-L19Fq5HjMhYjT9U62rZo607AmTs=}
     engines: {node: '>=4'}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       parse-json: 4.0.0
       pify: 3.0.0
       strip-bom: 3.0.0
@@ -14143,8 +14151,8 @@ packages:
     peerDependencies:
       react: '>= 0.14.0'
     dependencies:
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
       unquote: 1.1.1
     dev: true
 
@@ -14489,11 +14497,6 @@ packages:
 
   /mute-stream/0.0.8:
     resolution: {integrity: sha512-nnbWWOkoWyUsTjKrhgD0dcz22mdkSnpYqbEjIm2nhwhuxlSkpywJmBo8h0ZqJdkp73mb90SssHkN4rsRaBAfAA==}
-
-  /nan/2.15.0:
-    resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==}
-    requiresBuild: true
-    optional: true
 
   /nanomatch/1.2.13:
     resolution: {integrity: sha512-fpoe2T0RbHwBTBUOftAfBPaDEi06ufaUai0mE6Yn1kacc3SnTErfb/h+X94VXzI64rKFHYImXSvdwGGCmwOqCA==}
@@ -16066,7 +16069,7 @@ packages:
       '@jest/types': 25.5.0
       ansi-regex: 5.0.1
       ansi-styles: 4.3.0
-      react-is: 16.13.1
+      react-is: registry.npmjs.org/react-is/16.13.1
     dev: true
 
   /pretty-format/26.6.2:
@@ -16087,7 +16090,7 @@ packages:
   /prismjs/1.17.1:
     resolution: {integrity: sha512-PrEDJAFdUGbOP6xK/UsfkC5ghJsPJviKgnQOoxaDbBjwc8op68Quupwt1DeAFoG8GImPhiKXAvvsH7wDSLsu1Q==}
     optionalDependencies:
-      clipboard: 2.0.8
+      clipboard: registry.npmjs.org/clipboard/2.0.8
     dev: true
 
   /prismjs/1.25.0:
@@ -16366,7 +16369,7 @@ packages:
       react: ^15.3.0 || ^16.0.0 || ^17.0.0
     dependencies:
       '@babel/runtime': 7.16.3
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
 
   /react-color/2.19.3_react@16.14.0:
     resolution: {integrity: sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==}
@@ -16378,7 +16381,7 @@ packages:
       lodash-es: 4.17.21
       material-colors: 1.2.6
       prop-types: 15.7.2
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
       reactcss: 1.2.3
       tinycolor2: 1.4.2
     dev: false
@@ -16484,6 +16487,7 @@ packages:
       prop-types: 15.7.2
       react: 16.14.0
       scheduler: 0.19.1
+    dev: false
 
   /react-draggable/3.3.2:
     resolution: {integrity: sha512-oaz8a6enjbPtx5qb0oDWxtDNuybOylvto1QLydsXgKmwT7e3GXC2eMVDwEMIUYJIFqVG72XpOv673UuuAq6LhA==}
@@ -16499,9 +16503,9 @@ packages:
       react-dom: '>= 16.3.0'
     dependencies:
       clsx: 1.1.1
-      prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
     dev: true
 
   /react-error-overlay/6.0.9:
@@ -16531,7 +16535,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.16.3
       final-form: 4.20.4
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /react-focus-lock/2.5.2_414da64a83d07b5b28f5e74e56d85156:
@@ -16541,7 +16545,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.16.3
       focus-lock: 0.9.2
-      prop-types: 15.7.2
+      prop-types: registry.npmjs.org/prop-types/15.7.2
       react: 16.14.0
       react-clientside-effect: 1.2.5_react@16.14.0
       use-callback-ref: 1.2.5_414da64a83d07b5b28f5e74e56d85156
@@ -16550,17 +16554,33 @@ packages:
       - '@types/react'
     dev: false
 
-  /react-focus-lock/2.6.0_414da64a83d07b5b28f5e74e56d85156:
+  /react-focus-lock/2.5.2_d97ae545d00f93f3da9d693c23ee71cf:
+    resolution: {integrity: sha512-WzpdOnEqjf+/A3EH9opMZWauag7gV0BxFl+EY4ElA4qFqYsUsBLnmo2sELbN5OC30S16GAWMy16B9DLPpdJKAQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0
+    dependencies:
+      '@babel/runtime': 7.16.3
+      focus-lock: 0.9.2
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
+      react-clientside-effect: 1.2.5_react@16.14.0
+      use-callback-ref: 1.2.5_d97ae545d00f93f3da9d693c23ee71cf
+      use-sidecar: 1.0.5_react@16.14.0
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
+  /react-focus-lock/2.6.0_d97ae545d00f93f3da9d693c23ee71cf:
     resolution: {integrity: sha512-2yB5KWyaefbvFDgqvsg/KpIjbqVlhIY2c/dyDcokDLhB3Ib7I4bjsrta5OkI5euUoIu5xBTyBwIQZPykUJAr1g==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.16.3
       focus-lock: 0.9.2
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
       react-clientside-effect: 1.2.5_react@16.14.0
-      use-callback-ref: 1.2.5_414da64a83d07b5b28f5e74e56d85156
+      use-callback-ref: 1.2.5_d97ae545d00f93f3da9d693c23ee71cf
       use-sidecar: 1.0.5_react@16.14.0
     transitivePeerDependencies:
       - '@types/react'
@@ -16583,8 +16603,8 @@ packages:
       react-dom: ^16.6.3
     dependencies:
       prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
     dev: false
 
   /react-grid-system/7.0.3_react@16.14.0:
@@ -16604,9 +16624,9 @@ packages:
     dependencies:
       '@babel/runtime': 7.16.3
       invariant: 2.2.4
-      prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       react-fast-compare: 3.2.0
       shallowequal: 1.1.0
     dev: true
@@ -16620,8 +16640,8 @@ packages:
     peerDependencies:
       react: '>= 0.14.0'
     dependencies:
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
     dev: true
 
   /react-i18next/11.14.2_i18next@19.9.2+react@16.14.0:
@@ -16650,8 +16670,8 @@ packages:
     peerDependencies:
       react: ^16.3.0 || ^17.0.0
     dependencies:
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /react-inspector/4.0.1_react@16.14.0:
@@ -16661,8 +16681,8 @@ packages:
     dependencies:
       '@babel/runtime': 7.16.3
       is-dom: 1.1.0
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
     dev: true
 
   /react-is/16.13.1:
@@ -16693,8 +16713,8 @@ packages:
       react-dom: ^16.6.0
     dependencies:
       '@babel/runtime': 7.16.3
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       react-popper: 1.3.11_react@16.14.0
     dev: true
 
@@ -16707,8 +16727,8 @@ packages:
       '@hypnosphi/create-react-context': 0.3.1_prop-types@15.7.2+react@16.14.0
       deep-equal: 1.1.1
       popper.js: 1.16.1
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
       typed-styles: 0.0.7
       warning: 4.0.3
     dev: true
@@ -16742,6 +16762,22 @@ packages:
       tslib: 1.14.1
     dev: false
 
+  /react-remove-scroll-bar/2.2.0_d97ae545d00f93f3da9d693c23ee71cf:
+    resolution: {integrity: sha512-UU9ZBP1wdMR8qoUs7owiVcpaPwsQxUDC2lypP6mmixaGlARZa7ZIBx1jcuObLdhMOvCsnZcvetOho0wzPa9PYg==}
+    engines: {node: '>=8.5.0'}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
+      react: registry.npmjs.org/react/16.14.0
+      react-style-singleton: 2.1.1_d97ae545d00f93f3da9d693c23ee71cf
+      tslib: 1.14.1
+    dev: false
+
   /react-remove-scroll/2.4.1_414da64a83d07b5b28f5e74e56d85156:
     resolution: {integrity: sha512-K7XZySEzOHMTq7dDwcHsZA6Y7/1uX5RsWhRXVYv8rdh+y9Qz2nMwl9RX/Mwnj/j7JstCGmxyfyC0zbVGXYh3mA==}
     engines: {node: '>=8.5.0'}
@@ -16758,6 +16794,25 @@ packages:
       react-style-singleton: 2.1.1_414da64a83d07b5b28f5e74e56d85156
       tslib: 1.14.1
       use-callback-ref: 1.2.5_414da64a83d07b5b28f5e74e56d85156
+      use-sidecar: 1.0.5_react@16.14.0
+    dev: false
+
+  /react-remove-scroll/2.4.1_d97ae545d00f93f3da9d693c23ee71cf:
+    resolution: {integrity: sha512-K7XZySEzOHMTq7dDwcHsZA6Y7/1uX5RsWhRXVYv8rdh+y9Qz2nMwl9RX/Mwnj/j7JstCGmxyfyC0zbVGXYh3mA==}
+    engines: {node: '>=8.5.0'}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
+      react: registry.npmjs.org/react/16.14.0
+      react-remove-scroll-bar: 2.2.0_d97ae545d00f93f3da9d693c23ee71cf
+      react-style-singleton: 2.1.1_d97ae545d00f93f3da9d693c23ee71cf
+      tslib: 1.14.1
+      use-callback-ref: 1.2.5_d97ae545d00f93f3da9d693c23ee71cf
       use-sidecar: 1.0.5_react@16.14.0
     dev: false
 
@@ -16894,7 +16949,7 @@ packages:
       webpack-manifest-plugin: 2.2.0_webpack@4.42.0
       workbox-webpack-plugin: 4.3.1_webpack@4.42.0
     optionalDependencies:
-      fsevents: 2.1.2
+      fsevents: registry.npmjs.org/fsevents/2.1.2
     transitivePeerDependencies:
       - fibers
       - node-sass
@@ -16915,8 +16970,8 @@ packages:
       '@emotion/css': 10.0.27
       memoize-one: 5.2.1
       prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       react-input-autosize: 3.0.0_react@16.14.0
       react-transition-group: 4.4.2_react-dom@16.14.0+react@16.14.0
     dev: false
@@ -16929,8 +16984,8 @@ packages:
     dependencies:
       element-resize-detector: 1.2.3
       invariant: 2.2.4
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       shallowequal: 1.1.0
       throttle-debounce: 2.3.0
     dev: true
@@ -16980,6 +17035,23 @@ packages:
       tslib: 1.14.1
     dev: false
 
+  /react-style-singleton/2.1.1_d97ae545d00f93f3da9d693c23ee71cf:
+    resolution: {integrity: sha512-jNRp07Jza6CBqdRKNgGhT3u9umWvils1xsuMOjZlghBDH2MU0PL2WZor4PGYjXpnRCa9DQSlHMs/xnABWOwYbA==}
+    engines: {node: '>=8.5.0'}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
+      get-nonce: 1.0.1
+      invariant: 2.2.4
+      react: registry.npmjs.org/react/16.14.0
+      tslib: 1.14.1
+    dev: false
+
   /react-syntax-highlighter/11.0.3_react@16.14.0:
     resolution: {integrity: sha512-0v0ET2qn9oAam4K/Te9Q/2jtS4R2d6wUFqgk5VcxrCBm+4MB5BE+oQf2CA0RanUHbYaYFuagt/AugICU87ufxQ==}
     peerDependencies:
@@ -16989,7 +17061,7 @@ packages:
       highlight.js: 9.18.5
       lowlight: 1.11.0
       prismjs: 1.25.0
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
       refractor: 2.10.1
     dev: true
 
@@ -16998,7 +17070,7 @@ packages:
     peerDependencies:
       react: ^16.8.3 || ^17.0.0-0
     dependencies:
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
     dev: false
 
   /react-textarea-autosize/7.1.2_react@16.14.0:
@@ -17007,8 +17079,8 @@ packages:
       react: '>=0.14.0 <17.0.0'
     dependencies:
       '@babel/runtime': 7.16.3
-      prop-types: 15.7.2
-      react: 16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
     dev: true
 
   /react-toastify/6.0.8_react-dom@16.14.0+react@16.14.0:
@@ -17031,7 +17103,7 @@ packages:
     dependencies:
       clsx: 1.1.1
       prop-types: 15.7.2
-      react: 16.14.0
+      react: registry.npmjs.org/react/16.14.0
       react-transition-group: 4.4.2_react-dom@16.14.0+react@16.14.0
     transitivePeerDependencies:
       - react-dom
@@ -17061,8 +17133,8 @@ packages:
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
     dev: false
 
   /react/16.14.0:
@@ -17072,6 +17144,7 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       prop-types: 15.7.2
+    dev: false
 
   /reactcss/1.2.3:
     resolution: {integrity: sha512-KiwVUcFu1RErkI97ywr8nvx8dNOpT03rbnma0SSalTYjkrPYaEajR4a/MRt6DZ46K6arDRbWMNHF+xH7G7n/8A==}
@@ -17134,7 +17207,7 @@ packages:
     resolution: {integrity: sha512-1JU/8q+VgFZyxwrJ+SVIOsh+KywWGpds3NTqikiKpDMZWScmAYyKIgqkO+ARvNWJfXeXR1zxz7aHF4u4CyH6vQ==}
     engines: {node: '>=0.10'}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       micromatch: 3.1.10
       readable-stream: 2.3.7
 
@@ -17762,6 +17835,7 @@ packages:
     dependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
+    dev: false
 
   /schema-utils/1.0.0:
     resolution: {integrity: sha512-i27Mic4KovM/lnGsy8whRCHhc7VicJajAjTrYg11K9zfZXnYIt4k5F+kZkwjnrhKzLic/HLU4j11mjsz2G/75g==}
@@ -18027,9 +18101,9 @@ packages:
       react: ^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0
       react-dom: ^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0
     dependencies:
-      prop-types: 15.7.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
+      react-dom: registry.npmjs.org/react-dom/16.14.0_react@16.14.0
       simplebar: 4.2.3
     dev: true
 
@@ -18243,7 +18317,7 @@ packages:
       define-property: 0.2.5
       extend-shallow: 2.0.1
       map-cache: 0.2.2
-      source-map: 0.5.7
+      source-map: registry.npmjs.org/source-map/0.5.7
       source-map-resolve: 0.5.3
       use: 3.1.1
 
@@ -18306,7 +18380,7 @@ packages:
     resolution: {integrity: sha512-n1lZZ8Ve4ksRqizaBQgxXDgKwttHDhyfQjA6YZZn8+AroHbsIz+JjwxQDxbp+7y5OYCI8t1Yk7etjD9CRd2hIw==}
     dependencies:
       buffer-from: 1.1.2
-      source-map: 0.6.1
+      source-map: registry.npmjs.org/source-map/0.6.1
 
   /source-map-url/0.4.1:
     resolution: {integrity: sha512-cPiFOTLUKvJFIg4SKVScy4ilPPW6rFgMgfuZJPNoDuMs3nC1HbMUycBoJw77xFIp6z1UJQJOfx6C9GMH80DiTw==}
@@ -18706,28 +18780,6 @@ packages:
       '@emotion/stylis': 0.8.5
       '@emotion/unitless': 0.7.5
       babel-plugin-styled-components: 1.13.3_styled-components@5.0.1
-      css-to-react-native: 3.0.0
-      hoist-non-react-statics: 3.3.2
-      react: 16.14.0
-      react-dom: 16.14.0_react@16.14.0
-      shallowequal: 1.1.0
-      supports-color: 5.5.0
-    dev: false
-
-  /styled-components/5.3.3_react-dom@16.14.0+react@16.14.0:
-    resolution: {integrity: sha512-++4iHwBM7ZN+x6DtPPWkCI4vdtwumQ+inA/DdAsqYd4SVgUKJie5vXyzotA00ttcFdQkCng7zc6grwlfIfw+lw==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      react: '>= 16.8.0'
-      react-dom: '>= 16.8.0'
-      react-is: '>= 16.8.0'
-    dependencies:
-      '@babel/helper-module-imports': 7.16.0
-      '@babel/traverse': 7.16.3_supports-color@5.5.0
-      '@emotion/is-prop-valid': 0.8.8
-      '@emotion/stylis': 0.8.5
-      '@emotion/unitless': 0.7.5
-      babel-plugin-styled-components: 1.13.3_styled-components@5.3.3
       css-to-react-native: 3.0.0
       hoist-non-react-statics: 3.3.2
       react: 16.14.0
@@ -19562,6 +19614,20 @@ packages:
     dependencies:
       '@types/react': 16.14.21
       react: 16.14.0
+    dev: false
+
+  /use-callback-ref/1.2.5_d97ae545d00f93f3da9d693c23ee71cf:
+    resolution: {integrity: sha512-gN3vgMISAgacF7sqsLPByqoePooY3n2emTH59Ur5d/M8eg4WTWu1xp8i8DHjohftIyEx0S08RiYxbffr4j8Peg==}
+    engines: {node: '>=8.5.0'}
+    peerDependencies:
+      '@types/react': ^16.8.0 || ^17.0.0
+      react: ^16.8.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': registry.npmjs.org/@types/react/17.0.35
+      react: registry.npmjs.org/react/16.14.0
 
   /use-sidecar/1.0.5_react@16.14.0:
     resolution: {integrity: sha512-k9jnrjYNwN6xYLj1iaGhonDghfvmeTmYjAiGvOr7clwKfPjMXJf4/HOr7oT5tJwYafgp2tG2l3eZEOfoELiMcA==}
@@ -19705,14 +19771,7 @@ packages:
   /warning/4.0.3:
     resolution: {integrity: sha512-rpJyN222KWIvHJ/F53XSZv0Zl/accqHR8et1kpaMTD/fLCRxtV8iX8czMzY7sVZupTI3zcUTg8eycS2kNF9l6w==}
     dependencies:
-      loose-envify: 1.4.0
-
-  /watchpack-chokidar2/2.0.1:
-    resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==}
-    requiresBuild: true
-    dependencies:
-      chokidar: 2.1.8
-    optional: true
+      loose-envify: registry.npmjs.org/loose-envify/1.4.0
 
   /watchpack/1.7.5:
     resolution: {integrity: sha512-9P3MWk6SrKjHsGkLT2KHXdQ/9SNkyoJbabxnKOoJepsvJjJG8uYTR3yTPxPQvNDI3w4Nz1xnE0TLHK4RIVe/MQ==}
@@ -19720,8 +19779,8 @@ packages:
       graceful-fs: 4.2.8
       neo-async: 2.6.2
     optionalDependencies:
-      chokidar: 3.5.2
-      watchpack-chokidar2: 2.0.1
+      chokidar: registry.npmjs.org/chokidar/3.5.2
+      watchpack-chokidar2: registry.npmjs.org/watchpack-chokidar2/2.0.1
 
   /wbuf/1.7.3:
     resolution: {integrity: sha512-O84QOnr0icsbFGLS0O3bI5FswxzRr8/gHwWkDlQFskhSPryQXvrTMxjxGP4+iWYoauLoBvfDpkrOauZ+0iZpDA==}
@@ -20235,7 +20294,7 @@ packages:
   /write-file-atomic/2.4.1:
     resolution: {integrity: sha512-TGHFeZEZMnv+gBFRfjAcxL5bPHrsGKtnb4qsFAws7/vlh+QfwAaySIw4AXP9ZskTTh5GWu3FLuJhsWVdiJPGvg==}
     dependencies:
-      graceful-fs: 4.2.8
+      graceful-fs: registry.npmjs.org/graceful-fs/4.2.8
       imurmurhash: 0.1.4
       signal-exit: 3.0.5
 
@@ -20418,3 +20477,275 @@ packages:
   /zen-observable/0.8.15:
     resolution: {integrity: sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==}
     dev: false
+
+  registry.npmjs.org/@emotion/is-prop-valid/0.8.8:
+    resolution: {integrity: sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz}
+    name: '@emotion/is-prop-valid'
+    version: 0.8.8
+    requiresBuild: true
+    dependencies:
+      '@emotion/memoize': 0.7.4
+    dev: false
+    optional: true
+
+  registry.npmjs.org/@types/prop-types/15.7.4:
+    resolution: {integrity: sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.4.tgz}
+    name: '@types/prop-types'
+    version: 15.7.4
+
+  registry.npmjs.org/@types/react-dom/16.9.14:
+    resolution: {integrity: sha512-FIX2AVmPTGP30OUJ+0vadeIFJJ07Mh1m+U0rxfgyW34p3rTlXI+nlenvAxNn4BP36YyI9IJ/+UJ7Wu22N1pI7A==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/react-dom/-/react-dom-16.9.14.tgz}
+    name: '@types/react-dom'
+    version: 16.9.14
+    dependencies:
+      '@types/react': registry.npmjs.org/@types/react/16.14.21
+    dev: true
+
+  registry.npmjs.org/@types/react/16.14.21:
+    resolution: {integrity: sha512-rY4DzPKK/4aohyWiDRHS2fotN5rhBSK6/rz1X37KzNna9HJyqtaGAbq9fVttrEPWF5ywpfIP1ITL8Xi2QZn6Eg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/react/-/react-16.14.21.tgz}
+    name: '@types/react'
+    version: 16.14.21
+    dependencies:
+      '@types/prop-types': registry.npmjs.org/@types/prop-types/15.7.4
+      '@types/scheduler': registry.npmjs.org/@types/scheduler/0.16.2
+      csstype: registry.npmjs.org/csstype/3.0.10
+    dev: true
+
+  registry.npmjs.org/@types/react/17.0.35:
+    resolution: {integrity: sha512-r3C8/TJuri/SLZiiwwxQoLAoavaczARfT9up9b4Jr65+ErAUX3MIkU0oMOQnrpfgHme8zIqZLX7O5nnjm5Wayw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/react/-/react-17.0.35.tgz}
+    name: '@types/react'
+    version: 17.0.35
+    dependencies:
+      '@types/prop-types': registry.npmjs.org/@types/prop-types/15.7.4
+      '@types/scheduler': registry.npmjs.org/@types/scheduler/0.16.2
+      csstype: registry.npmjs.org/csstype/3.0.10
+
+  registry.npmjs.org/@types/scheduler/0.16.2:
+    resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.2.tgz}
+    name: '@types/scheduler'
+    version: 0.16.2
+
+  registry.npmjs.org/bindings/1.5.0:
+    resolution: {integrity: sha512-p2q/t/mhvuOj/UeLlV6566GD/guowlr0hHxClI0W9m7MWYkL1F0hLo+0Aexs9HSPCtR1SXQ0TD3MMKrXZajbiQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/bindings/-/bindings-1.5.0.tgz}
+    name: bindings
+    version: 1.5.0
+    requiresBuild: true
+    dependencies:
+      file-uri-to-path: registry.npmjs.org/file-uri-to-path/1.0.0
+    optional: true
+
+  registry.npmjs.org/chokidar/2.1.8:
+    resolution: {integrity: sha512-ZmZUazfOzf0Nve7duiCKD23PFSCs4JPoYyccjUFF3aQkQadqBhfzhjkwBH2mNOG9cTBwhamM37EIsIkZw3nRgg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/chokidar/-/chokidar-2.1.8.tgz}
+    name: chokidar
+    version: 2.1.8
+    deprecated: Chokidar 2 will break on node v14+. Upgrade to chokidar 3 with 15x less dependencies.
+    dependencies:
+      anymatch: 2.0.0
+      async-each: 1.0.3
+      braces: 2.3.2
+      glob-parent: 3.1.0
+      inherits: 2.0.4
+      is-binary-path: 1.0.1
+      is-glob: 4.0.3
+      normalize-path: 3.0.0
+      path-is-absolute: 1.0.1
+      readdirp: 2.2.1
+      upath: 1.2.0
+    optionalDependencies:
+      fsevents: registry.npmjs.org/fsevents/1.2.13
+    optional: true
+
+  registry.npmjs.org/chokidar/3.5.2:
+    resolution: {integrity: sha512-ekGhOnNVPgT77r4K/U3GDhu+FQ2S8TnK/s2KbIGXi0SZWuwkZ2QNyfWdZW+TVfn84DpEP7rLeCt2UI6bJ8GwbQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/chokidar/-/chokidar-3.5.2.tgz}
+    name: chokidar
+    version: 3.5.2
+    engines: {node: '>= 8.10.0'}
+    requiresBuild: true
+    dependencies:
+      anymatch: 3.1.2
+      braces: 3.0.2
+      glob-parent: 5.1.2
+      is-binary-path: 2.1.0
+      is-glob: 4.0.3
+      normalize-path: 3.0.0
+      readdirp: 3.6.0
+    optionalDependencies:
+      fsevents: registry.npmjs.org/fsevents/2.3.2
+    optional: true
+
+  registry.npmjs.org/clipboard/2.0.8:
+    resolution: {integrity: sha512-Y6WO0unAIQp5bLmk1zdThRhgJt/x3ks6f30s3oE3H1mgIEU33XyQjEf8gsf6DxC7NPX8Y1SsNWjUjL/ywLnnbQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/clipboard/-/clipboard-2.0.8.tgz}
+    name: clipboard
+    version: 2.0.8
+    requiresBuild: true
+    dependencies:
+      good-listener: 1.2.2
+      select: 1.1.2
+      tiny-emitter: 2.1.0
+    dev: true
+    optional: true
+
+  registry.npmjs.org/colors/1.4.0:
+    resolution: {integrity: sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/colors/-/colors-1.4.0.tgz}
+    name: colors
+    version: 1.4.0
+    engines: {node: '>=0.1.90'}
+    requiresBuild: true
+    dev: true
+    optional: true
+
+  registry.npmjs.org/csstype/2.6.18:
+    resolution: {integrity: sha512-RSU6Hyeg14am3Ah4VZEmeX8H7kLwEEirXe6aU2IPfKNvhXwTflK5HQRDNI0ypQXoqmm+QPyG2IaPuQE5zMwSIQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/csstype/-/csstype-2.6.18.tgz}
+    name: csstype
+    version: 2.6.18
+
+  registry.npmjs.org/csstype/3.0.10:
+    resolution: {integrity: sha512-2u44ZG2OcNUO9HDp/Jl8C07x6pU/eTR3ncV91SiK3dhG9TWvRVsCoJw14Ckx5DgWkzGA3waZWO3d7pgqpUI/XA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/csstype/-/csstype-3.0.10.tgz}
+    name: csstype
+    version: 3.0.10
+
+  registry.npmjs.org/file-uri-to-path/1.0.0:
+    resolution: {integrity: sha512-0Zt+s3L7Vf1biwWZ29aARiVYLx7iMGnEUl9x33fbB/j3jR81u/O2LbqK+Bm1CDSNDKVtJ/YjwY7TUd5SkeLQLw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/file-uri-to-path/-/file-uri-to-path-1.0.0.tgz}
+    name: file-uri-to-path
+    version: 1.0.0
+    requiresBuild: true
+    optional: true
+
+  registry.npmjs.org/fsevents/1.2.13:
+    resolution: {integrity: sha512-oWb1Z6mkHIskLzEJ/XWX0srkpkTQ7vaopMQkyaEIoq0fmtFVxOthb8cCxeT+p3ynTdkk/RZwbgG4brR5BeWECw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fsevents/-/fsevents-1.2.13.tgz}
+    name: fsevents
+    version: 1.2.13
+    engines: {node: '>= 4.0'}
+    os: [darwin]
+    deprecated: fsevents 1 will break on node v14+ and could be using insecure binaries. Upgrade to fsevents 2.
+    requiresBuild: true
+    dependencies:
+      bindings: registry.npmjs.org/bindings/1.5.0
+      nan: registry.npmjs.org/nan/2.15.0
+    optional: true
+
+  registry.npmjs.org/fsevents/2.1.2:
+    resolution: {integrity: sha512-R4wDiBwZ0KzpgOWetKDug1FZcYhqYnUYKtfZYt4mD5SBz76q0KR4Q9o7GIPamsVPGmW3EYPPJ0dOOjvx32ldZA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fsevents/-/fsevents-2.1.2.tgz}
+    name: fsevents
+    version: 2.1.2
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    deprecated: '"Please update to latest v2.3 or v2.2"'
+    requiresBuild: true
+    dev: false
+    optional: true
+
+  registry.npmjs.org/fsevents/2.3.2:
+    resolution: {integrity: sha512-xiqMQR4xAeHTuB9uWm+fFRcIOgKBMiOBP+eXiyT7jsgVCq1bkVygt00oASowB7EdtpOHaaPgKt812P9ab+DDKA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/fsevents/-/fsevents-2.3.2.tgz}
+    name: fsevents
+    version: 2.3.2
+    engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
+    os: [darwin]
+    requiresBuild: true
+    optional: true
+
+  registry.npmjs.org/graceful-fs/4.2.8:
+    resolution: {integrity: sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.2.8.tgz}
+    name: graceful-fs
+    version: 4.2.8
+
+  registry.npmjs.org/js-tokens/3.0.2:
+    resolution: {integrity: sha1-mGbfOVECEw449/mWvOtlRDIJwls=, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/js-tokens/-/js-tokens-3.0.2.tgz}
+    name: js-tokens
+    version: 3.0.2
+
+  registry.npmjs.org/js-tokens/4.0.0:
+    resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/js-tokens/-/js-tokens-4.0.0.tgz}
+    name: js-tokens
+    version: 4.0.0
+
+  registry.npmjs.org/loose-envify/1.4.0:
+    resolution: {integrity: sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz}
+    name: loose-envify
+    version: 1.4.0
+    hasBin: true
+    dependencies:
+      js-tokens: registry.npmjs.org/js-tokens/4.0.0
+
+  registry.npmjs.org/nan/2.15.0:
+    resolution: {integrity: sha512-8ZtvEnA2c5aYCZYd1cvgdnU6cqwixRoYg70xPLWUws5ORTa/lnw+u4amixRS/Ac5U5mQVgp9pnlSUnbNWFaWZQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/nan/-/nan-2.15.0.tgz}
+    name: nan
+    version: 2.15.0
+    requiresBuild: true
+    optional: true
+
+  registry.npmjs.org/object-assign/4.1.1:
+    resolution: {integrity: sha1-IQmtx5ZYh8/AXLvUQsrIv7s2CGM=, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/object-assign/-/object-assign-4.1.1.tgz}
+    name: object-assign
+    version: 4.1.1
+    engines: {node: '>=0.10.0'}
+
+  registry.npmjs.org/prop-types/15.7.2:
+    resolution: {integrity: sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/prop-types/-/prop-types-15.7.2.tgz}
+    name: prop-types
+    version: 15.7.2
+    dependencies:
+      loose-envify: registry.npmjs.org/loose-envify/1.4.0
+      object-assign: registry.npmjs.org/object-assign/4.1.1
+      react-is: registry.npmjs.org/react-is/16.13.1
+
+  registry.npmjs.org/react-dom/16.14.0_react@16.14.0:
+    resolution: {integrity: sha512-1gCeQXDLoIqMgqD3IO2Ah9bnf0w9kzhwN5q4FGnHZ67hBm9yePzB5JJAIQCc8x3pFnNlwFq4RidZggNAAkzWWw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/react-dom/-/react-dom-16.14.0.tgz}
+    id: registry.npmjs.org/react-dom/16.14.0
+    name: react-dom
+    version: 16.14.0
+    peerDependencies:
+      react: ^16.14.0
+    dependencies:
+      loose-envify: registry.npmjs.org/loose-envify/1.4.0
+      object-assign: registry.npmjs.org/object-assign/4.1.1
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+      react: registry.npmjs.org/react/16.14.0
+      scheduler: registry.npmjs.org/scheduler/0.19.1
+    dev: true
+
+  registry.npmjs.org/react-is/16.13.1:
+    resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz}
+    name: react-is
+    version: 16.13.1
+
+  registry.npmjs.org/react/16.14.0:
+    resolution: {integrity: sha512-0X2CImDkJGApiAlcf0ODKIneSwBPhqJawOa5wCtKbu7ZECrmS26NvtSILynQ66cgkT/RJ4LidJOc3bUESwmU8g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/react/-/react-16.14.0.tgz}
+    name: react
+    version: 16.14.0
+    engines: {node: '>=0.10.0'}
+    dependencies:
+      loose-envify: registry.npmjs.org/loose-envify/1.4.0
+      object-assign: registry.npmjs.org/object-assign/4.1.1
+      prop-types: registry.npmjs.org/prop-types/15.7.2
+    dev: true
+
+  registry.npmjs.org/scheduler/0.19.1:
+    resolution: {integrity: sha512-n/zwRWRYSUj0/3g/otKDRPMh6qv2SYMWNq85IEa8iZyAv8od9zDYpGSnpBEjNgcMNq6Scbu5KfIPxNF72R/2EA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/scheduler/-/scheduler-0.19.1.tgz}
+    name: scheduler
+    version: 0.19.1
+    dependencies:
+      loose-envify: registry.npmjs.org/loose-envify/1.4.0
+      object-assign: registry.npmjs.org/object-assign/4.1.1
+    dev: true
+
+  registry.npmjs.org/source-map/0.5.7:
+    resolution: {integrity: sha1-igOdLRAh0i0eoUyA2OpGi6LvP8w=, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/source-map/-/source-map-0.5.7.tgz}
+    name: source-map
+    version: 0.5.7
+    engines: {node: '>=0.10.0'}
+
+  registry.npmjs.org/source-map/0.6.1:
+    resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/source-map/-/source-map-0.6.1.tgz}
+    name: source-map
+    version: 0.6.1
+    engines: {node: '>=0.10.0'}
+
+  registry.npmjs.org/watchpack-chokidar2/2.0.1:
+    resolution: {integrity: sha512-nCFfBIPKr5Sh61s4LPpy1Wtfi0HE8isJ3d2Yb5/Ppw2P2B/3eVSEBjKfN0fmHJSK14+31KwMKmcrzs2GM4P0Ww==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/watchpack-chokidar2/-/watchpack-chokidar2-2.0.1.tgz}
+    name: watchpack-chokidar2
+    version: 2.0.1
+    requiresBuild: true
+    dependencies:
+      chokidar: registry.npmjs.org/chokidar/2.1.8
+    optional: true
