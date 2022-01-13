@@ -115,8 +115,8 @@
     "jsdom": "^16.5.3",
     "mocha": "^8.3.2",
     "nyc": "^15.1.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "^16",
+    "react-dom": "^16",
     "react-scripts": "^4.0.3",
     "redux-mock-store": "^1.5.4"
   },
