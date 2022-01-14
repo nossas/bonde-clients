@@ -32,16 +32,6 @@ pipeline:
       status: success
       event: [push]
 
-  admin-codecov:
-    image: plugins/codecov
-    secrets: [ codecov_token ]
-    group: publish
-    paths:
-      - clients/deprecated/admin/packages/bonde-admin/coverage
-    when:
-      status: success
-      event: [push]
-
   admin-staging-publish:
     image: plugins/docker
     repo: nossas/bonde-admin
@@ -128,9 +118,6 @@ pipeline:
       status: success
       event: tag
 
-branches: feature/admin-*
-
-pipeline:
   staging-build:
     image: node:14-alpine
     environment:
@@ -321,3 +308,13 @@ pipeline:
     when:
       status: success
       event: [tag]
+
+  admin-codecov:
+    image: plugins/codecov
+    secrets: [ codecov_token ]
+    group: publish
+    paths:
+      - clients/deprecated/admin/packages/bonde-admin/coverage
+    when:
+      status: success
+      event: [push]
