@@ -104,7 +104,11 @@ const PageRouting = () => {
   const { pathname } = useLocation();
 
   React.useEffect(() => {
-    hotjar.stateChange(pathname);
+    try {
+      hotjar.stateChange(pathname);
+    } catch(err) {
+      console.log("hotjar", err);
+    }
   }, [pathname])
 
   return (
