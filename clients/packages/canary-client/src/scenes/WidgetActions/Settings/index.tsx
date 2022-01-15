@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Tab, Header, Heading, DarkMode } from "bonde-components";
 import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
-import { useSession } from 'bonde-core-tools';
+import { Context as SessionContext } from 'bonde-core-tools';
 import { isMobile } from "react-device-detect";
 
 import Container, { NavigationArgs } from "../Container";
@@ -25,7 +25,7 @@ const Settings: React.FC<Props> = ({ widgets }) => {
   const [widgetsCached, setWidgetsCached] = useState(widgets);
   const match = useRouteMatch();
   const { t } = useTranslation('widgetActions');
-  const { community, storage } = useSession();
+  const { community, updateSession } = useContext(SessionContext);
 
   const { widgetId }: any = useParams();
   const widget = widgetsCached.filter((w: Widget) => w.id === Number(widgetId))[0];
@@ -49,7 +49,7 @@ const Settings: React.FC<Props> = ({ widgets }) => {
             <Tab
               onClick={() => {
                 if (process.env.REACT_APP_DOMAIN_ADMIN) {
-                  storage.setAsyncItem("community", community).then(() => {
+                  updateSession("community", community).then(() => {
                     window.location.href = new URL(
                       `/mobilizations/${widget.block.mobilization.id}/edit`,
                       process.env.REACT_APP_DOMAIN_ADMIN

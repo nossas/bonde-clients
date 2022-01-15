@@ -1,5 +1,5 @@
-import React from 'react';
-import { useQuery, useMutation, gql, useSession } from 'bonde-core-tools';
+import React, { useContext } from 'react';
+import { useQuery, useMutation, gql, Context as SessionContext } from 'bonde-core-tools';
 import { MailchimpStart } from './types';
 import {
   Heading,
@@ -36,8 +36,8 @@ mutation($id:Int!, $is_community:Boolean!) {
   }
 }
 `
-export default () => {
-  const { community } = useSession();
+const ForceSync: React.FC = () => {
+  const { community } = useContext(SessionContext);
   const { data, loading, error } = useQuery(
     fetchGraphqlQuery,
     {
@@ -89,3 +89,5 @@ export default () => {
     </Flex>
   </Stack>
 }
+
+export default ForceSync;

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useSession } from 'bonde-core-tools';
+import React, { useState, useContext } from 'react';
+import { Context as SessionContext } from 'bonde-core-tools';
 import { Header, Icon, Loading, toast, Success } from 'bonde-components';
 import downloadjs from 'downloadjs'
 import styled from 'styled-components';
@@ -69,7 +69,7 @@ type DownloadCSVProps = {
 
 const DownloadCSV = ({ path, label, icon }: DownloadCSVProps): JSX.Element => {
   const [loading, setLoading] = useState(false);
-  const { community, token } = useSession();
+  const { community, token } = useContext(SessionContext);
   const apiUrl = process.env.REACT_APP_DOMAIN_API_REST;
   const headers = { 'access-token': token || 'no-token' };
   const reportNames = {
