@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import {
   Empty,
   // Chakra UI
@@ -23,8 +23,8 @@ type Props = {
 };
 
 const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
-  // const { push } = useHistory();
-  const session = useContext(SessionContext);
+  const { push } = useHistory();
+  const session: any = useContext(SessionContext);
   const isMobileWidth = window.innerWidth <= 768;
   const itemProps: any = {};
   if (isMobileWidth) {
@@ -80,11 +80,11 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
                   colorScheme="black"
                   textTransform="normal"
                   onClick={() => {
-                    console.log("onClick", { community: c });
-                    // onChangeAsync({ community: c })
-                    //   .then(() => {
-                    //     push('/widgets');
-                    //   });
+                    session
+                      .updateSession('community', c)
+                      .then(() => {
+                        push('/widgets');
+                      });
                   }}
                 >
                   <Heading as="h5" fontWeight="extrabold" size="sm">{c.name}</Heading>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
   InputField,
   Success,
@@ -10,7 +10,7 @@ import {
   S3UploadField,
   Image
 } from 'bonde-components';
-import { useSession } from 'bonde-core-tools';
+import { Context as SessionContext } from 'bonde-core-tools';
 import { useTranslation } from "react-i18next";
 import CommunityForm from '../BaseForm';
 import ButtonStyled from '../../../components/ButtonStyled';
@@ -28,7 +28,7 @@ export const isValidFromEmail = (value: string): string | undefined => {
 
 const SettingsPage: React.FC = () => {
   const { t } = useTranslation(['community', 'app']);
-  const { user } = useSession();
+  const { currentUser: user } = useContext(SessionContext);
 
   return (
     <CommunityForm

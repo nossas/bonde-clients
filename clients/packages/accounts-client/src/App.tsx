@@ -19,7 +19,7 @@ import ResetPasswordPage from './scenes/ResetPasswordPage';
 
 type Environment = "development" | "staging" | "production";
 
-function App() {
+const App: React.FC = () => {
   // Environment to use for configure bonde-core-tools
   const envConfig: Environment =
     (process.env.REACT_APP_ENVIRONMENT || "development") as Environment;
