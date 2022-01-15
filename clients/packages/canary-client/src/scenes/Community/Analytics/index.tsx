@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSession } from 'bonde-core-tools';
+import React, { useContext } from 'react';
+import { Context as SessionContext } from 'bonde-core-tools';
 import {
   Header,
   Icon,
@@ -81,7 +81,7 @@ type NumberProps = {
 }
 
 const Number = ({ query: Query, children, format }: NumberProps) => {
-  const { community } = useSession();
+  const { community } = useContext(SessionContext);
   const numberProps: any = {
     displayType: 'text',
     thousandSeparator: '.',
