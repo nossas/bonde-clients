@@ -1,4 +1,4 @@
-import { gql } from 'react-apollo'
+import { gql } from 'bonde-core-tools';
 
 //
 // @param Object({ extraFields: Array })

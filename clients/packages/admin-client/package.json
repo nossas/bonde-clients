@@ -45,6 +45,7 @@
     "font-awesome": "^4.7.0",
     "format-number": "^3.0.0",
     "immutable": "^4.0.0-rc.12",
+    "js-cookie": "^3.0.1",
     "keycode": "^2.2.0",
     "node-sass": "^4.11.0",
     "prop-types": "^15.6.2",
