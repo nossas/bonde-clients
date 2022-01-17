@@ -3,6 +3,7 @@ packages:
   - '.'
   - './libs/components'
   - './libs/core-tools'
+  - './libs/webpage'
   - '!./packages/example-client'
   - './packages/*'
   # - '!packages/example-client'
