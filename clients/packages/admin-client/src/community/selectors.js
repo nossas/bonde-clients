@@ -1,13 +1,7 @@
-import Cookie from 'js-cookie';
-
 export const getList = state => state.community.list.data
-
-export const getCurrentId = () => JSON.parse(Cookie.get('community')).id
-
+export const getCurrentId = state => state.community.list.currentId
 export const isLoaded = state => state.community.list.isLoaded
-
 export const isLoading = state => state.community.list.loading
-
 export const isForcedSubmit = state => state.community.list.forcedSubmit
 
-export const getCurrent = () => JSON.parse(Cookie.get('community'))
+export const getCurrent = state => getList(state).filter(c => c.id === getCurrentId(state))[0]

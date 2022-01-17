@@ -1,6 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 import 'react-app-polyfill/ie9';
 =======
+=======
+>>>>>>> feat(admin): add bonde-core-tools to render a simple admin app
 // import 'react-app-polyfill/ie9';
 // import React from 'react'
 // import { render } from 'react-dom'
@@ -48,12 +51,16 @@ import 'react-app-polyfill/ie9';
 // render((
 //   <Application />
 // ), document.getElementById('root'))
+<<<<<<< HEAD
+>>>>>>> feat(admin): add bonde-core-tools to render a simple admin app
+=======
 >>>>>>> feat(admin): add bonde-core-tools to render a simple admin app
 import * as React from "react";
 import ReactDOM from "react-dom";
 // import "./i18n";
 import App from "./app";
 import * as serviceWorker from "./serviceWorker";
+<<<<<<< HEAD
 <<<<<<< HEAD
 // import React from 'react'
 // import { render } from 'react-dom'
@@ -102,10 +109,15 @@ ReactDOM.render(
   <React.StrictMode>
     <App store={store} messages={messages} locale={locale} />
 =======
+=======
+>>>>>>> feat(admin): add bonde-core-tools to render a simple admin app
 
 ReactDOM.render(
   <React.StrictMode>
     <App />
+<<<<<<< HEAD
+>>>>>>> feat(admin): add bonde-core-tools to render a simple admin app
+=======
 >>>>>>> feat(admin): add bonde-core-tools to render a simple admin app
   </React.StrictMode>,
   document.getElementById("root")

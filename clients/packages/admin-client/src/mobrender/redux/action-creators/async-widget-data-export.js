@@ -1,16 +1,15 @@
 /* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
 import downloadjs from 'downloadjs'
-import AuthSelectors from 'account/redux/selectors';
 import { createAction } from './create-action'
 
 const asyncWidgetDataExport = params => (dispatch, getState, { api, intl }) => {
-  const headers = AuthSelectors(getState()).getCredentials();
+  const { auth: { credentials } } = getState()
   const { mobilization, widget, filename } = params
 
   const endpoint = `/mobilizations/${mobilization.id}/form_entries.csv`
   const config = {
-    headers,
+    headers: credentials,
     params: {
       widget_id: widget.id,
       INFO: 'disjoint_fields'

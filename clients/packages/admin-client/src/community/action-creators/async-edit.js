@@ -1,9 +1,9 @@
 /* eslint-disable prefer-promise-reject-errors */
-// import * as t from 'community/action-types'
-import AuthSelectors from 'account/redux/selectors';
+import * as t from 'community/action-types'
+import crossStorage from 'cross-storage-client'
 
 const asyncEdit = ({ id, ...community }) => (dispatch, getState, { api }) => {
-  const headers = AuthSelectors(getState())
+  const { auth: { credentials } } = getState()
 
   // ensure that the document number value have only numbers
   if (community.recipient) {
@@ -16,22 +16,21 @@ const asyncEdit = ({ id, ...community }) => (dispatch, getState, { api }) => {
   }
 
   return api
-    .put(`/communities/${id}`, { community }, { headers })
+    .put(`/communities/${id}`, { community }, { headers: credentials })
     .then(({ status, data }) => {
       if (status === 400 && data.errors) {
         return Promise.reject({ ...data.errors })
       } else if (status === 200) {
-        console.log("remover esse metodo");
-        // return crossStorage
-        //   .onConnect()
-        //   .then(() => {
-        //     return crossStorage
-        //       .set('community', JSON.stringify(data))
-        //       .then(() => {
-        //         dispatch({ type: t.EDIT, community: data })
-        //         return Promise.resolve()
-        //       })
-        //   })
+        return crossStorage
+          .onConnect()
+          .then(() => {
+            return crossStorage
+              .set('community', JSON.stringify(data))
+              .then(() => {
+                dispatch({ type: t.EDIT, community: data })
+                return Promise.resolve()
+              })
+          })
       }
     })
     .catch(obj => {

@@ -1,13 +1,12 @@
 /* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
-import AuthSelectors from 'account/redux/selectors';
 
 const AsyncCreateTemplate = template => (dispatch, getState, { api }) => {
   dispatch({ type: t.REQUEST_TEMPLATE_CREATE })
 
-  const headers = AuthSelectors(getState()).getCredentials();
+  const { auth: { credentials } } = getState()
   return api
-    .post('/templates', template, { headers })
+    .post('/templates', template, { headers: credentials })
     .then(({ status, data }) => {
       if (status === 200) {
         dispatch({ type: t.SUCCESS_TEMPLATE_CREATE, template: data })

@@ -1,4 +1,4 @@
-import { gql } from 'bonde-core-tools';
+import { gql } from 'react-apollo'
 
 export default gql`
   mutation updateTwilioConfiguration(

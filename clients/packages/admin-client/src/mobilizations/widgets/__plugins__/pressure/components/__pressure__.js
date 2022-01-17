@@ -2,7 +2,9 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-// import * as graphqlQueries from 'graphql/queries'
+import { client as graphqlClient } from 'store'
+import * as graphqlMutations from 'graphql/mutations'
+import * as graphqlQueries from 'graphql/queries'
 import * as pressureHelper from 'mobilizations/widgets/utils/pressure-helper'
 import * as paths from 'paths'
 import * as array from 'utils/array'
@@ -36,15 +38,14 @@ export class Pressure extends Component {
     const isPressurePhone = pressureHelper.getType(this.getTargetList()) === pressureHelper.PRESSURE_TYPE_PHONE
     const hasCounter = !!this.props.widget.settings.count_text
     if (hasCounter && isPressurePhone) {
-      this.setState({ phonePressureCount: 0 })
-      // graphqlClient().query({
-      //   query: graphqlQueries.CountTwilioCallsByWidget,
-      //   variables: { widgetId: this.props.widget.id }
-      // })
-      //   .then(({ data: { allTwilioCalls: { totalCount: phonePressureCount } } }) => {
-      //     this.setState({ phonePressureCount })
-      //   })
-      //   .catch(err => console.error(err))
+      graphqlClient().query({
+        query: graphqlQueries.CountTwilioCallsByWidget,
+        variables: { widgetId: this.props.widget.id }
+      })
+        .then(({ data: { allTwilioCalls: { totalCount: phonePressureCount } } }) => {
+          this.setState({ phonePressureCount })
+        })
+        .catch(err => console.error(err))
     }
   }
 
@@ -103,14 +104,13 @@ export class Pressure extends Component {
         this.setState({ selectedTargetsError: undefined })
 
         // it needs to find or create the activist data
-        const addTwilioCallMutation = () => {
+        const addTwilioCallMutation = variables => {
           const { phonePressureCount } = this.state
           this.setstate({ phonePressureCount: phonePressureCount + 1 })
-          return Promise.resolve();
-          // return graphqlClient().mutate({
-          //   mutation: graphqlMutations.addTwilioCall,
-          //   variables
-          // })
+          return graphqlClient().mutate({
+            mutation: graphqlMutations.addTwilioCall,
+            variables
+          })
         }
 
         addTwilioCallMutation({
@@ -120,17 +120,17 @@ export class Pressure extends Component {
           to: this.getEmailTarget(array.shuffle(this.getTargetList())[0])
         }).then(() => {
           if (!this.state.observableQuery) {
-            // const observableQuery = graphqlClient({ ssrMode: false }).watchQuery({
-            //   pollInterval: 2000,
-            //   query: graphqlQueries.watchTwilioCallTransitions,
-            //   variables: { widgetId: this.props.widget.id, from: data.phone }
-            // })
-            // observableQuery.subscribe({
-            //   next: ({ data: { watchTwilioCallTransitions: callTransition } }) => {
-            //     this.setState({ callTransition })
-            //   }
-            // })
-            this.setState({ observableQuery: undefined })
+            const observableQuery = graphqlClient({ ssrMode: false }).watchQuery({
+              pollInterval: 2000,
+              query: graphqlQueries.watchTwilioCallTransitions,
+              variables: { widgetId: this.props.widget.id, from: data.phone }
+            })
+            observableQuery.subscribe({
+              next: ({ data: { watchTwilioCallTransitions: callTransition } }) => {
+                this.setState({ callTransition })
+              }
+            })
+            this.setState({ observableQuery })
           }
         })
 

@@ -1,13 +1,12 @@
 /* eslint-disable prefer-promise-reject-errors */
 import * as t from 'community/action-types'
-import AuthSelectors from 'account/redux/selectors';
 
 const asyncCreate = community => (dispatch, getState, { api }) => {
-  const headers = AuthSelectors(getState()).getCredentials()
+  const { auth: { credentials } } = getState()
 
   const endpoint = '/communities'
   const body = { community }
-  const config = { headers }
+  const config = { headers: credentials }
 
   return api
     .post(endpoint, body, config)
