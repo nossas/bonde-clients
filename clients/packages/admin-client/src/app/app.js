@@ -1,19 +1,23 @@
 import React, { useContext } from 'react';
-// import { IntlProvider } from 'react-intl'
-// import { Provider } from 'react-redux'
-import { Provider as Session, Context as SessionContext } from 'bonde-core-tools';
+import { IntlProvider } from 'react-intl'
+import { Provider } from 'react-redux'
+import {
+  Provider as Session,
+  Context as SessionContext,
+} from 'bonde-core-tools';
 
-// import AppRouting from 'pages/app';
+import AppRouting from 'pages/app';
 
-const Routing = () => {
+const Portal = () => {
   const { currentUser: user } = useContext(SessionContext);
+  console.log(`Hello ${user.firstName}`);
 
   return (
-    <h3>Hello {user.firstName}</h3>
+    <AppRouting />
   );
 }
 
-const App = () => {
+const App = ({ messages, locale, store }) => {
   // Environment to use for configure bonde-core-tools
   const envConfig =
     (process.env.REACT_APP_ENVIRONMENT || "development");
@@ -21,14 +25,17 @@ const App = () => {
   console.info('Build environment:', envConfig);
 
   return (
-    <Session
-      uri={process.env.REACT_APP_DOMAIN_API_GRAPHQL}
-      environment={envConfig}
-      fetchData
-    >
-      <h2>Welcome to {envConfig}!</h2>
-      <Routing />
-    </Session>
+    <IntlProvider messages={messages} locale={locale}>
+      <Provider store={store}>
+        <Session
+          uri={process.env.REACT_APP_DOMAIN_API_GRAPHQL}
+          environment={envConfig}
+          fetchData
+        >
+          <Portal />
+        </Session>
+      </Provider>
+    </IntlProvider>
   )
 
   // return (
