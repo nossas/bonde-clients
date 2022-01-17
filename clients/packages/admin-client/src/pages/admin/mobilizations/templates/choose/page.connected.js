@@ -1,9 +1,8 @@
-import React from 'react';
-import { gql, useQuery } from 'bonde-core-tools'
 //
 // @route /mobilizations/:mobilization_id/templates/choose
 //
 import { connect } from 'react-redux'
+import { graphql, gql } from 'react-apollo'
 import * as CommunitySelectors from 'community/selectors'
 import MobSelectors from 'mobrender/redux/selectors'
 import { asyncUpdateMobilization } from 'mobrender/redux/action-creators'
@@ -33,7 +32,7 @@ const mapActionsToProps = (dispatch, props) => ({
   }
 })
 
-const FETCH_TEMPLATES = gql`
+const GraphPage = graphql(gql`
   query allTemplates($communityId: Int!) {
     customTemplates (ctxCommunityId: $communityId) {
       totalCount
@@ -46,27 +45,18 @@ const FETCH_TEMPLATES = gql`
       }
     }
   }
-`;
-
-const PageGraphQL = (props) => {
-  const { data, loading, error } = useQuery(FETCH_TEMPLATES, {
-    variables: { communityId: props.communityId },
+`, {
+  options: ({ communityId }) => ({
+    variables: { communityId },
     fetchPolicy: 'network-only'
-  });
-
-  if (error) {
-    console.log("PageGraphQL error", error);
-    return 'Failed!';
+  }),
+  props: ({ ownProps, data: { loading, customTemplates, globalTemplates } }) => {
+    return {
+      loading,
+      customTemplatesLength: customTemplates ? customTemplates.totalCount : 0,
+      globalTemplates: globalTemplates ? globalTemplates.nodes : []
+    }
   }
+})(Page)
 
-  return (
-    <Page
-      {...props}
-      loading={loading}
-      customTemplatesLength={(data || {}).customTemplates ? data.customTemplates.totalCount : 0}
-      globalTemplates={(data || {}).globalTemplates ? data.globalTemplates.nodes : []}
-    />
-  );
-}
-
-export default connect(mapStateToProps, mapActionsToProps)(PageGraphQL);
+export default connect(mapStateToProps, mapActionsToProps)(GraphPage)

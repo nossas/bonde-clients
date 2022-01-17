@@ -1,22 +1,14 @@
 import PropTypes from 'prop-types'
-import React, { useContext } from 'react'
+import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { Context as SessionContext } from 'bonde-core-tools';
 
 import * as paths from 'paths'
 import * as mobilizationUtils from 'mobilizations/utils'
 import { Loading } from 'components/await'
 import { Sidenav, SidenavList, SidenavListItem } from 'components/navigation/sidenav'
+import crossStorage from 'cross-storage-client'
 
-const WrappedSidebar = (props) => {
-  const { logout } = useContext(SessionContext);
-
-  return (
-    <Sidebar {...props} logout={logout} />
-  )
-}
-
-const Sidebar = ({ children, loading, mobilization, user, community, logout }) => loading ? <Loading /> : (
+const Sidebar = ({ children, loading, mobilization, user, community }) => loading ? <Loading /> : (
   <div className='top-0 right-0 bottom-0 left-0 flex flex-column absolute'>
     <Sidenav community={community}>
       {!mobilization ? (
@@ -158,8 +150,17 @@ const Sidebar = ({ children, loading, mobilization, user, community, logout }) =
           linkType='anchor'
           href='#'
           onClick={(e) => {
-            e.preventDefault();
-            logout();
+            e.preventDefault()
+            crossStorage
+              .onConnect()
+              .then(() => {
+                crossStorage
+                  .del('auth', 'community')
+                  .then(() => {
+                    const loginUrl = process.env.REACT_APP_LOGIN_URL || 'http://bonde.devel:5000/login'
+                    window.location.href = loginUrl
+                  })
+              })
           }}
         />
       </SidenavList>
@@ -170,10 +171,10 @@ const Sidebar = ({ children, loading, mobilization, user, community, logout }) =
   </div>
 )
 
-WrappedSidebar.propTypes = {
+Sidebar.propTypes = {
   loading: PropTypes.bool.isRequired,
   user: PropTypes.object.isRequired,
   mobilization: PropTypes.object
 }
 
-export default WrappedSidebar
+export default Sidebar

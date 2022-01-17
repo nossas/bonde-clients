@@ -2,11 +2,13 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import promise from 'redux-promise';
 import axios from 'axios';
+import { ApolloClient, createNetworkInterface } from 'react-apollo';
+import crossStorage from 'cross-storage-client';
 import createReducer from './createReducer';
 
 const logoutOnCanary = () => {
   const domain = process.env.REACT_APP_LOGIN_URL || 'http://bonde.devel:5000';
-  window.location.href = `${domain}?next=${window.location.href}`;
+  window.location.href = `${domain}/login?next=${window.location.href}`;
 };
 
 const api = axios.create({
@@ -16,6 +18,64 @@ const api = axios.create({
 
 const middlewares = [promise];
 
+const networkInterface = createNetworkInterface({
+  uri:
+    process.env.REACT_APP_DOMAIN_API_GRAPHQL ||
+    'http://api-graphql-deprecated.bonde.devel/graphql',
+  connectToDevTools: true,
+});
+
+networkInterface.use([
+  {
+    applyMiddleware(req, next) {
+      if (!req.options.headers) {
+        req.options.headers = {};
+      }
+      // Non-use auth for authenticate mutation to make a new JWT Token
+      // Donation has a public method { fetchDonationGoalStats }
+      const requiredAuth = !!!['authenticate', 'fetchDonationGoalStats'].find(
+        (x) => x === req.request.operationName
+      );
+      if (require('exenv').canUseDOM && requiredAuth) {
+        crossStorage
+          .onConnect()
+          .then(() => {
+            return crossStorage.get('auth');
+          })
+          .then((authJson) => {
+            const auth = JSON.parse(authJson);
+            if (auth) {
+              req.options.headers.authorization = `Bearer ${
+                auth.jwtToken || auth.token
+              }`;
+            }
+            next();
+          });
+      } else {
+        next();
+      }
+    },
+  },
+]);
+
+networkInterface.useAfter([
+  {
+    applyAfterware({ response }, next) {
+      if (response.status === 401) {
+        logoutOnCanary();
+      }
+      next();
+    },
+  },
+]);
+
+export const client = (options = {}) =>
+  new ApolloClient({
+    ssrMode: true,
+    networkInterface,
+    ...options,
+  });
+
 export function configureStore(initialState, thunkExtraArgument) {
   middlewares.push(
     thunk.withExtraArgument({
@@ -24,6 +84,8 @@ export function configureStore(initialState, thunkExtraArgument) {
       ...thunkExtraArgument,
     })
   );
+
+  middlewares.push(client().middleware());
 
   const composeEnhancers =
     window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

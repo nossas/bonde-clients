@@ -1,11 +1,10 @@
 /* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
-import AuthSelectors from 'account/redux/selectors';
 
 const AsyncFetch = community => (dispatch, getState, { api }) => {
-  const headers = AuthSelectors(getState()).getCredentials();
+  const { auth: { credentials } } = getState()
   const config = {
-    headers,
+    headers: credentials,
     params: { community_id: community.id }
   }
 

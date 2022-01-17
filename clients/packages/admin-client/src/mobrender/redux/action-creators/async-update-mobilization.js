@@ -1,16 +1,15 @@
 /* eslint-disable prefer-promise-reject-errors */
 import { createAction } from './create-action'
 import * as t from '../action-types'
-import AuthSelectors from 'account/redux/selectors';
 
 import asyncFetchBlocks from './async-fetch-blocks'
 import asyncFetchWidgets from './async-fetch-widgets'
 
 export default ({ fieldName, ...mobilization }) =>
   (dispatch, getState, { api }) => {
-      const headers = AuthSelectors(getState()).getCredentials();
+    const { auth: { credentials } } = getState()
     const endpoint = `/mobilizations/${mobilization.id}`
-    const config = { headers }
+    const config = { headers: credentials }
 
     dispatch({ type: t.UPDATE_MOBILIZATION_REQUEST })
     return api

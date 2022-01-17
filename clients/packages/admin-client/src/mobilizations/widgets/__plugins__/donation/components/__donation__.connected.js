@@ -1,7 +1,6 @@
-import React from 'react';
 import { connect } from 'react-redux'
+import { graphql } from 'react-apollo'
 import { injectIntl } from 'react-intl'
-import { useQuery } from 'bonde-core-tools';
 import AnalyticsEvents from 'mobilizations/widgets/utils/analytics-events'
 import { asyncDonationTransactionCreate } from '../action-creators'
 
@@ -91,23 +90,11 @@ const mapDispatchToProps = dispatch => ({
   })
 })
 
-const DonationConnected = connect(mapStateToProps, mapDispatchToProps)(injectIntl(Donation));
-
-const FetchDonationGoalStats = (props) => {
-  const { data, loading, error } = useQuery(graphqlQueries.fetchDonationGoalStats, {
-    variables: { widgetId: props.widget.id },
-    fetchPolicy: 'network-only'
-  });
-
-  if (loading) return 'Carregando...';
-  if (error) return 'Failed!';
-
-  return (
-    <DonationConnected
-      donationGoalStats={data}
-      {...props}
-    />
-  );
-}
-
-export default FetchDonationGoalStats;
+export default graphql(
+  graphqlQueries.fetchDonationGoalStats, {
+    name: 'donationGoalStats',
+    options: props => ({
+      variables: { widgetId: props.widget.id },
+      fetchPolicy: 'network-only'
+    })
+  })(connect(mapStateToProps, mapDispatchToProps)(injectIntl(Donation)))

@@ -2,10 +2,9 @@
 import downloadjs from 'downloadjs'
 import { toast } from 'react-toastify'
 import * as notifications from 'utils/notifications'
-import AuthSelectors from 'account/redux/selectors';
 
 const asyncDownloadActivistActions = ({ id, name, ...community }) => (dispatch, getState, { api, intl }) => {
-  const headers = AuthSelectors(getState()).getCredentials()
+  const { auth: { credentials } } = getState()
 
   const filename = `[Relatório][Ações dos Ativistas] ${name}.csv`
   // const notificationId = Math.random()
@@ -27,7 +26,7 @@ const asyncDownloadActivistActions = ({ id, name, ...community }) => (dispatch, 
   // dispatch(notify(notifications.reportDownloadInProgressWarning(intl, warningOptions)))
 
   return api
-    .get(`/communities/${id}/activist_actions.csv`, { headers })
+    .get(`/communities/${id}/activist_actions.csv`, { headers: credentials })
     .then(({ status, data }) => {
       if (status === 400 && data.errors) {
         notifyError()
