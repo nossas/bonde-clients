@@ -1,11 +1,12 @@
 import React from 'react'
-import { MetricsMobilization } from 'components/metrics'
+// import { MetricsMobilization } from 'components/metrics'
 import { Title } from 'components/title'
 
-const MobilizationsSettingsMetricsPage = props => (
+const MobilizationsSettingsMetricsPage = () => (
   <React.Fragment>
     <Title>Métricas</Title>
-    <MetricsMobilization mobilizationId={props.mobilization.id} />
+    <h3>Override MetricsMobilization</h3>
+    {/* <MetricsMobilization mobilizationId={props.mobilization.id} /> */}
   </React.Fragment>
 )
 

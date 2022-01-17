@@ -1,10 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Route, Redirect as RedirectComponent } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { Context as SessionContext } from 'bonde-core-tools';
 import * as paths from 'paths'
 import { Loading } from 'components/await'
-import AccountSelectors from 'account/redux/selectors'
-import * as CommunitySelectors from 'community/selectors'
 
 const Redirect = ({ pathname, location }) => (
   <RedirectComponent to={{ pathname, state: { from: location } }} />
@@ -14,49 +12,53 @@ const PrivateRoute = ({
   component: Component,
   exact = false,
   path,
-  authenticated,
-  hasCommunity,
   ...rest
-}) => (
-  <Route
-    {...rest}
-    exact={exact}
-    path={path}
-    render={props => {
-      const { location: { pathname } } = rest
+}) => {
+  const { currentUser: user, community } = useContext(SessionContext);
+  const authenticated = !!user;
+  const hasCommunity = !!community;
 
-      const isRoot = pathname === '/'
-      const isCommunity = pathname.match(/\/communities\/?/)
-      const isMobilizations = pathname.match(/\/mobilizations\/?/)
+  return (
+    <Route
+      {...rest}
+      exact={exact}
+      path={path}
+      render={props => {
+        const { location: { pathname } } = rest
 
-      const mobilizationsPath = paths.mobilizations()
-      const communitiesPath = paths.communityList()
-      const loginPath = paths.login()
+        const isRoot = pathname === '/'
+        const isCommunity = pathname.match(/\/communities\/?/)
+        const isMobilizations = pathname.match(/\/mobilizations\/?/)
 
-      const redir = destination => ({
-        [mobilizationsPath]: authenticated && hasCommunity && isRoot && !isMobilizations,
-        [communitiesPath]: authenticated && !hasCommunity && !isCommunity,
-        [loginPath]: !authenticated
-      }[destination])
+        const mobilizationsPath = paths.mobilizations()
+        const communitiesPath = paths.communityList()
+        const loginPath = paths.login()
 
-      if (redir(mobilizationsPath)) {
-        return <Redirect {...props} pathname={mobilizationsPath} />
-      } else if (redir(communitiesPath)) {
-        window.location.href = process.env.REACT_APP_DOMAIN_ADMIN_CANARY
-          || 'http://admin-canary.bonde.devel:5001';
-        return <Loading />
-      } else if (redir(loginPath)) {
-        return <Redirect {...props} pathname={loginPath} />
-      } else {
-        return <Component {...props} />
-      }
-    }}
-  />
-)
+        const redir = destination => ({
+          [mobilizationsPath]: authenticated && hasCommunity && isRoot && !isMobilizations,
+          [communitiesPath]: authenticated && !hasCommunity && !isCommunity,
+          [loginPath]: !authenticated
+        }[destination])
 
-const mapStateToProps = state => ({
-  authenticated: AccountSelectors(state).getCredentials(),
-  hasCommunity: !!CommunitySelectors.getCurrent(state)
-})
+        if (redir(mobilizationsPath)) {
+          return <Redirect {...props} pathname={mobilizationsPath} />
+        } else if (redir(communitiesPath)) {
+          window.location.href = process.env.REACT_APP_DOMAIN_ADMIN_CANARY
+            || 'https://admin-canary.staging.bonde.org';
+          return <Loading />
+        } else if (redir(loginPath)) {
+          return <Redirect {...props} pathname={loginPath} />
+        } else {
+          return <Component {...props} />
+        }
+      }}
+    />
+  );
+}
 
-export default connect(mapStateToProps)(PrivateRoute)
+// const mapStateToProps = state => ({
+//   authenticated: AccountSelectors(state).getCredentials(),
+//   hasCommunity: !!CommunitySelectors.getCurrent(state)
+// })
+
+export default PrivateRoute;

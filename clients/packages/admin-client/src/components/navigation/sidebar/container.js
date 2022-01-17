@@ -1,6 +1,21 @@
-import { connect } from 'react-redux'
+import React, { useContext } from 'react'
+import { Context as SessionContext } from 'bonde-core-tools';
 
 import Sidebar from './sidebar'
-import mapStateToProps from './map-state-to-props'
 
-export default connect(mapStateToProps)(Sidebar)
+const UserContainer = () => {
+  const { currentUser: user, community } = useContext(SessionContext);
+
+  console.log("UserContainer: ", { user, community });
+
+  return (
+    <Sidebar
+      loading={false}
+      user={user}
+      mobilization={undefined}
+      community={community}
+    />
+  );
+}
+
+export default UserContainer;
