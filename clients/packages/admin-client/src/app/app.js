@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { IntlProvider } from 'react-intl'
-import { Provider } from 'react-redux'
+import { Provider, connect } from 'react-redux'
 import {
   Provider as Session,
   Context as SessionContext,
@@ -8,14 +8,25 @@ import {
 
 import AppRouting from 'pages/app';
 
-const Portal = () => {
-  const { currentUser: user } = useContext(SessionContext);
-  console.log(`Hello ${user.firstName}`);
+import * as t from 'community/action-types';
+
+const Portal = ({ dispatch }) => {
+  const { communities } = useContext(SessionContext);
+  
+  useEffect(() => {
+    if (communities?.length > 0) {
+      dispatch({ type: t.FETCH_SUCCESS, payload: communities });
+    }
+  }, [communities, dispatch])
 
   return (
     <AppRouting />
   );
 }
+
+const ConnectedPortal = connect(undefined, (dispatch) => ({
+  dispatch
+}))(Portal)
 
 const App = ({ messages, locale, store }) => {
   // Environment to use for configure bonde-core-tools
@@ -32,7 +43,7 @@ const App = ({ messages, locale, store }) => {
           environment={envConfig}
           fetchData
         >
-          <Portal />
+          <ConnectedPortal />
         </Session>
       </Provider>
     </IntlProvider>
