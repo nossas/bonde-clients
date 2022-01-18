@@ -1,12 +1,13 @@
 /* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
+import AuthSelectors from 'account/redux/selectors';
 
 const AsyncDestroyTemplate = template => (dispatch, getState, { api }) => {
-  const { auth: { credentials } } = getState()
+  const headers = AuthSelectors(getState()).getCredentials();
 
   dispatch({ type: t.REQUEST_TEMPLATE_DESTROY })
   return api
-      .delete(`/templates/${template.id}`, { headers: credentials })
+      .delete(`/templates/${template.id}`, { headers })
       .then(() => {
         dispatch({ type: t.SUCCESS_TEMPLATE_DESTROY, template })
         return Promise.resolve()
