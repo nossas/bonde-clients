@@ -1,5 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
 import { toast } from 'react-toastify'
+import AuthSelectors from 'account/redux/selectors';
 import { createAction } from 'utils/redux'
 import * as t from 'community/action-types'
 import * as AwaitActions from 'components/await/redux/action-creators'
@@ -12,11 +13,11 @@ const COMMUNITY_USER_ROLES = {
 }
 
 export default ({ communityId, email }) => (dispatch, getState, { api, intl }) => {
-  const { auth: { credentials } } = getState()
+  const headers = AuthSelectors(getState()).getCredentials();
 
   const endpoint = `/communities/${communityId}/invitation`
   const body = { invitation: { email, role: COMMUNITY_USER_ROLES.admin } }
-  const options = { headers: credentials }
+  const options = { headers }
 
   dispatch(AwaitActions.setLoading(true))
   dispatch(createAction(t.ASYNC_INVITE_REQUEST))

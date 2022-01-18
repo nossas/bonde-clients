@@ -43,14 +43,12 @@ class SubRoute extends React.Component {
     const promises = []
     const {
       community,
-      loaded,
-      loading,
       asyncFetchMobilizations,
       dnsControlSelectors: { dnsHostedZones },
       asyncFetchHostedZones
     } = this.props
 
-    community && !loaded && !loading && promises.push(asyncFetchMobilizations(community.id))
+    !!community && promises.push(asyncFetchMobilizations(community.id))
     !dnsHostedZones().isLoaded() && promises.push(asyncFetchHostedZones())
     return Promise.all(promises)
   }
