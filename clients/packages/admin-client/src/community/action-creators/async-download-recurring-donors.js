@@ -1,14 +1,15 @@
 /* eslint-disable prefer-promise-reject-errors */
 import downloadjs from 'downloadjs'
 import { toast } from 'react-toastify'
+import AuthSelectors from 'account/redux/selectors';
 import * as notifications from 'utils/notifications'
 
 const asyncDownloadRecurringDonors = ({ id, name }) => (dispatch, getState, { api, intl }) => {
-  const { auth: { credentials } } = getState()
+  const headers = AuthSelectors(getState()).getCredentials();
 
   const endpoint = `/communities/${id}/download_subscriptions.csv`
   const body = {}
-  const options = { headers: credentials }
+  const options = { headers: headers }
 
   const filename = `[Relatório][DoadoresRecorrentes] ${name}.csv`
   // const notificationId = Math.random()
