@@ -205,13 +205,3 @@ pipeline:
     when:
       status: success
       event: [tag]
-
-  admin-codecov:
-    image: plugins/codecov
-    secrets: [ codecov_token ]
-    group: publish
-    paths:
-      - clients/deprecated/admin/packages/bonde-admin/coverage
-    when:
-      status: success
-      event: [push]
