@@ -24,7 +24,7 @@ const Wrapper = (props) => {
     loading: false,
     user,
     community,
-    mobilization: undefined 
+    mobilization: props.mobilization
   };
 
   return (
@@ -70,6 +70,7 @@ class SubRoute extends React.Component {
 const mapStateToProps = (state, props) => ({
   sidebarProps: SidebarAPI.getSidebarProps(state, props),
   community: CommunitySelectors.getCurrent(state),
+  mobilization: MobSelectors(state, props).getMobilization(),
   loading: MobSelectors(state, props).mobilizationsIsLoading(),
   loaded: MobSelectors(state, props).mobilizationsIsLoaded(),
   dnsControlSelectors: DNSControlSelectors(state)
