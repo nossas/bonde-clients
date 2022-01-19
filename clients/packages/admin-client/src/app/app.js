@@ -11,13 +11,21 @@ import AppRouting from 'pages/app';
 import * as t from 'community/action-types';
 
 const Portal = ({ dispatch }) => {
-  const { communities } = useContext(SessionContext);
+  const { communities, community } = useContext(SessionContext);
   
   useEffect(() => {
     if (communities?.length > 0) {
       dispatch({ type: t.FETCH_SUCCESS, payload: communities });
     }
   }, [communities, dispatch])
+
+  useEffect(() => {
+    if (!community) {
+      const appDomain = process.env.REACT_APP_ENVIRONMENT === 'production' ? 'bonde.org' : 'staging.bonde.org';
+ 
+      window.location.href =  `https://admin-canary.${appDomain}`;
+    }
+  }, [community])
 
   return (
     <AppRouting />
