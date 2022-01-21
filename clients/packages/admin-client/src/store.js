@@ -6,7 +6,7 @@ import createReducer from './createReducer';
 
 const logoutOnCanary = () => {
   const domain = process.env.REACT_APP_LOGIN_URL || 'http://bonde.devel:5000';
-  window.location.href = `${domain}/login?next=${window.location.href}`;
+  window.location.href = `${domain}?next=${window.location.href}`;
 };
 
 const api = axios.create({
