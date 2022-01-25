@@ -29,7 +29,7 @@
     "i18next-browser-languagedetector": "^5.0.1",
     "i18next-http-backend": "^1.0.17",
     "jest": "24.9.0",
-    "pnpm": "^6.26.1",
+    "pnpm": "^6.28.0",
     "react": "^17",
     "react-dom": "^17",
     "react-grid-system": "7.0.3",

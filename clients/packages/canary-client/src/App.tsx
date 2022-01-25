@@ -140,7 +140,14 @@ const App: React.FC = () => {
             className='BondeToastify'
             hideProgressBar={true}
           />
-          <Session fetchData uri={apiGraphqlUrl} environment={envConfig}>
+          <Session
+            fetchData
+            uri={apiGraphqlUrl}
+            environment={envConfig}
+            loadingComponent={
+              <Loading fullsize message="Carregando sessão..." />
+            }
+          >
             <Router>
               <PageRouting />
             </Router>
