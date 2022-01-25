@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
-import { IntlProvider } from 'react-intl'
-import { Provider, connect } from 'react-redux'
+import { IntlProvider } from 'react-intl';
+import { Provider, connect } from 'react-redux';
 import {
   Provider as Session,
   Context as SessionContext,
@@ -12,34 +12,36 @@ import * as t from 'community/action-types';
 
 const Portal = ({ dispatch }) => {
   const { communities, community } = useContext(SessionContext);
-  
+
   useEffect(() => {
     if (communities?.length > 0) {
       dispatch({ type: t.FETCH_SUCCESS, payload: communities });
     }
-  }, [communities, dispatch])
+  }, [communities, dispatch]);
 
   useEffect(() => {
     if (!community) {
-      const appDomain = process.env.REACT_APP_ENVIRONMENT === 'production' ? 'bonde.org' : 'staging.bonde.org';
- 
-      window.location.href =  `https://admin-canary.${appDomain}`;
-    }
-  }, [community])
+      const appDomain =
+        process.env.REACT_APP_ENVIRONMENT === 'production'
+          ? 'bonde.org'
+          : 'bonde.devel';
+      const protocol =
+        process.env.REACT_APP_ENVIRONMENT === 'production' ? 'https' : 'http';
 
-  return (
-    <AppRouting />
-  );
-}
+      window.location.href = `${protocol}://admin-canary.${appDomain}`;
+    }
+  }, [community]);
+
+  return <AppRouting />;
+};
 
 const ConnectedPortal = connect(undefined, (dispatch) => ({
-  dispatch
-}))(Portal)
+  dispatch,
+}))(Portal);
 
 const App = ({ messages, locale, store }) => {
   // Environment to use for configure bonde-core-tools
-  const envConfig =
-    (process.env.REACT_APP_ENVIRONMENT || "development");
+  const envConfig = process.env.REACT_APP_ENVIRONMENT || 'development';
 
   console.info('Build environment:', envConfig);
 
@@ -55,11 +57,11 @@ const App = ({ messages, locale, store }) => {
         </Session>
       </Provider>
     </IntlProvider>
-  )
+  );
 
   // return (
   //   <h2>Welcome to {envConfig}!</h2>
   // );
-}
+};
 
 export default App;
