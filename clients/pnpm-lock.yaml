@@ -33,7 +33,7 @@ importers:
       i18next-http-backend: ^1.0.17
       jest: 24.9.0
       lint-staged: ^10.2.11
-      pnpm: ^6.26.1
+      pnpm: ^6.28.0
       react: ^17
       react-dom: ^17
       react-grid-system: 7.0.3
@@ -65,7 +65,7 @@ importers:
       i18next-browser-languagedetector: 5.0.1
       i18next-http-backend: 1.3.1
       jest: 24.9.0
-      pnpm: registry.npmjs.org/pnpm/6.26.1
+      pnpm: registry.npmjs.org/pnpm/6.28.0
       react: registry.npmjs.org/react/17.0.2
       react-dom: registry.npmjs.org/react-dom/17.0.2_react@17.0.2
       react-grid-system: 7.0.3_react@17.0.2
@@ -39796,10 +39796,10 @@ packages:
     transitivePeerDependencies:
       - typescript
 
-  registry.npmjs.org/pnpm/6.26.1:
-    resolution: {integrity: sha512-LsBJ+mJLenS4bmbA2xLWUTpWEXIThxPQy0uePEsplBdUUFvgrTDccyIcKDepE8EY8e5QSks67IOMI7bDRySgbQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/pnpm/-/pnpm-6.26.1.tgz}
+  registry.npmjs.org/pnpm/6.28.0:
+    resolution: {integrity: sha512-6k0bXft4zengPSmQFx2rTkRrvp2CpXRytNAY/vjvi/7YzVm5GCDY4Uiz8A80lEEf6D1UZ32P9bG9yEiS4crmvQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/pnpm/-/pnpm-6.28.0.tgz}
     name: pnpm
-    version: 6.26.1
+    version: 6.28.0
     engines: {node: '>=12.17'}
     hasBin: true
     dev: false

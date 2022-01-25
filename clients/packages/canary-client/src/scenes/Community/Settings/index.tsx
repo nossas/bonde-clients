@@ -29,21 +29,22 @@ export const isValidFromEmail = (value: string): string | undefined => {
 const SettingsPage: React.FC = () => {
   const { t } = useTranslation(['community', 'app']);
   const { currentUser: user } = useContext(SessionContext);
+  const hasPerm: boolean = user.hasAdminPermission();
 
   return (
     <CommunityForm
-      formName={user.isAdmin ? 'SettingsIsAdmin' : 'Settings'}
+      formName={hasPerm ? 'SettingsIsAdmin' : 'Settings'}
       success={<Success message='UHU! Informações da comunidade atualizadas.' />}
     >
       {({ submitting, dirty, values }: any) => (
         <Box bg="white" p={6} w="50%">
-          {user.isAdmin ? (
+          {hasPerm ? (
             <>
               <S3UploadField
                 label={t('info.form.fields.image.label')}
                 helpText={t('app:upload.information')}
                 name='community.image'
-                disabled={!user.isAdmin}
+                disabled={!hasPerm}
                 signingUrl={process.env.REACT_APP_UPLOADS_URL}
               />
               <InputField
@@ -87,13 +88,13 @@ const SettingsPage: React.FC = () => {
             validate={isValidFromEmail}
           />
           <InputField
-            disabled={!user.isAdmin}
+            disabled={!hasPerm}
             name='community.signature.name'
             label='Assinatura da comunidade'
             placeholder='Nome da comunidade'
           />
           <InputField
-            disabled={!user.isAdmin}
+            disabled={!hasPerm}
             name='community.signature.url'
             label='Site da comunidade'
             placeholder='Insira o link do site ou página oficial da sua comunidade'
