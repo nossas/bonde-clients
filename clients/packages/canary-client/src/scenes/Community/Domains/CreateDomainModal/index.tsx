@@ -57,7 +57,7 @@ const CreateDomainModal: React.FC<Props> = ({ btnText, refetch }) => {
 
   return (
     <>
-      <Button onClick={() => setOpen(true)}>{btnText}</Button>
+      <Button disabled={!user.hasAdminPermission()} onClick={() => setOpen(true)}>{btnText}</Button>
       <Modal size={!dnsHostedZone ? 'lg' : '4xl'} isOpen={open} onClose={onClose}>
         <ModalOverlay />
         {!dnsHostedZone
