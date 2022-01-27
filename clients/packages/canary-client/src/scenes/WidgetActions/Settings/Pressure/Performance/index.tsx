@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Skeleton } from "bonde-components";
 import TargetsStatistics from "./TargetsStatistics";
-import { Widget } from "../../FetchWidgets";
+import { Widget } from "../../../FetchWidgets";
 import EventsCards from "./EventsCards";
 import BondePressureCards from "./BondePressureCards";
 import DisclaimerRelease from "./DisclaimerRelease";

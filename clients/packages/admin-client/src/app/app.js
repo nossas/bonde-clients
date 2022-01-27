@@ -12,9 +12,8 @@ import * as t from 'community/action-types';
 
 const Portal = ({ dispatch }) => {
   const { communities, community } = useContext(SessionContext);
-
   useEffect(() => {
-    if (communities?.length > 0) {
+    if ((communities || []).length > 0) {
       dispatch({ type: t.FETCH_SUCCESS, payload: communities });
     }
   }, [communities, dispatch]);

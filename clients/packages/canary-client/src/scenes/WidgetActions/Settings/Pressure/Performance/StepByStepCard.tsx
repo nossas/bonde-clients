@@ -1,7 +1,7 @@
 import React from "react";
 import { Stack, Box, Button, Heading, Text } from "bonde-components";
 import { useLocation, Link } from "react-router-dom";
-import CheckIcon from "../../../../Icons/CheckIcon";
+import CheckIcon from "../../../../../Icons/CheckIcon";
 
 interface Props {
   stepsValidation: boolean[]

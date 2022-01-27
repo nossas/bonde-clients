@@ -19,12 +19,12 @@ import slugify from 'slugify';
 import { useTranslation } from 'react-i18next';
 
 // import RadioField, { Radio } from '../../../../components/Radio';
-import SpyField from '../../../../components/SpyField';
-import { Widget } from '../../FetchWidgets';
-import SettingsForm from '../SettingsForm';
+import SpyField from '../../../../../components/SpyField';
+import { Widget } from '../../../FetchWidgets';
+import SettingsForm from '../../SettingsForm';
 import UniqueFormFields, { UniqueFormExplainCard } from "./UniqueForm";
 import GroupFormFields from './GroupForm';
-import { Targets } from "../../../Community/Domains/Icons";
+import { Targets } from "../../../../Community/Domains/Icons";
 
 const upsertPressureTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {
