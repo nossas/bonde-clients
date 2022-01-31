@@ -28,9 +28,6 @@
 [submodule "webhooks/mapa-do-acolhimento"]
 	path = webhooks/mapa-do-acolhimento
 	url = https://github.com/nossas/mapa-do-acolhimento
-[submodule "webhooks/accounts"]
-	path = webhooks/accounts
-	url = https://github.com/nossas/bonde-auth.git
 [submodule "infra"]
 	path = infra
 	url = https://github.com/nossas/bonde-install
