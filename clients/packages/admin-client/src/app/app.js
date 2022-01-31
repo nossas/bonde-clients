@@ -23,9 +23,11 @@ const Portal = ({ dispatch }) => {
       const appDomain =
         process.env.REACT_APP_ENVIRONMENT === 'production'
           ? 'bonde.org'
+          : process.env.REACT_APP_ENVIRONMENT === 'staging'
+          ? 'staging.bonde.org'
           : 'bonde.devel';
       const protocol =
-        process.env.REACT_APP_ENVIRONMENT === 'production' ? 'https' : 'http';
+        process.env.REACT_APP_ENVIRONMENT !== 'development' ? 'https' : 'http';
 
       window.location.href = `${protocol}://admin-canary.${appDomain}`;
     }
