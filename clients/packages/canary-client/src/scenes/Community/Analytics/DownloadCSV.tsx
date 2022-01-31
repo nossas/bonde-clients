@@ -76,7 +76,7 @@ const DownloadCSV = ({ path, label, icon }: DownloadCSVProps): JSX.Element => {
     donation_reports: 'Doação',
     download_subscriptions: 'Doação recorrente',
     activist_actions: 'Ações',
-    activists: 'Ativistas' 
+    activists: 'Ativistas'
   }
 
   const handleClick = async () => {
