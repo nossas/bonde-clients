@@ -18,7 +18,6 @@ export const UniqueFormExplainCard = () => {
         <Text>{t("settings.pressure.explain.controllers.format")}</Text>
         <Text>{t("settings.pressure.explain.controllers.add")}</Text>
         <Text>{t("settings.pressure.explain.controllers.delete")}</Text>
-        <Text>{t("settings.pressure.explain.controllers.comma")}</Text>
         <Text>{t("settings.pressure.explain.save_form")}</Text>
         <Text>{t("settings.pressure.explain.ordering")}</Text>
       </Stack>

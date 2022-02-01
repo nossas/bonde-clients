@@ -120,8 +120,7 @@
         "controllers": {
           "format": "Nome do alvo <email@provedor.com>",
           "add": "Pressione [ENTER] para inserir outro alvo.",
-          "delete": "Usando [Backspace] ou pressionando o 'X' você pode remover um alvo da lista.",
-          "comma": "Você pode inserir vários alvos, basta colocar os alvos separados por ponto e virgula (;)"
+          "delete": "Usando [Backspace] ou pressionando o 'X' você pode remover um alvo da lista."
         },
         "save_form": "Quando acabar, não se esqueça de salvar as alterções.",
         "ordering": "Os alvos serão exibidos em ordem aleatório na widget de pressão. Ou seja, cada vez que a mobilização for acessada, a ordem de exibição será diferente."
