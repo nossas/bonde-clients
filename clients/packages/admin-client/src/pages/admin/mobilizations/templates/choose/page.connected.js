@@ -35,15 +35,41 @@ const mapActionsToProps = (dispatch, props) => ({
 
 const FETCH_TEMPLATES = gql`
   query allTemplates($communityId: Int!) {
-    customTemplates (ctxCommunityId: $communityId) {
-      totalCount
-    }
-    globalTemplates {
-      nodes {
-        id,
-        name,
-        goal
+    customTemplates: template_mobilizations_aggregate(
+      where: {
+        community_id: { _eq: $communityId },
+        global: { _eq: false }
       }
+    ) {
+      aggregate {
+        count
+      }
+    }
+
+    globalTemplates: template_mobilizations(
+      where: {
+        global: { _eq: true }
+      }
+    ) {
+      id
+      name
+      userId: user_id
+      colorScheme: color_scheme
+      facebookShareTitle: facebook_share_title
+      facebookShareDescription: facebook_share_description
+      headerFont: header_font
+      bodyFont: body_font
+      facebookShareImage: facebook_share_image
+      slug
+      customDomain: custom_domain
+      twitterShareText: twitter_share_text
+      communityId: community_id
+      usesNumber: uses_number
+      global
+      createdAt: created_at
+      updateAt: updated_at
+      goal
+      favicon
     }
   }
 `;
@@ -59,12 +85,13 @@ const PageGraphQL = (props) => {
     return 'Failed!';
   }
 
+
   return (
     <Page
       {...props}
       loading={loading}
-      customTemplatesLength={(data || {}).customTemplates ? data.customTemplates.totalCount : 0}
-      globalTemplates={(data || {}).globalTemplates ? data.globalTemplates.nodes : []}
+      customTemplatesLength={(data || {}).customTemplates ? data.customTemplates.aggregate.count : 0}
+      globalTemplates={(data || {}).globalTemplates ? data.globalTemplates : []}
     />
   );
 }

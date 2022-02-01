@@ -31,14 +31,31 @@ const mapActionsToProps = {
 
 const FETCH_TEMPLATES = gql`
   query customTemplates($communityId: Int!) {
-    customTemplates (ctxCommunityId: $communityId) {
-      nodes {
-        id
-        name
-        goal
-        image: facebookShareImage
-        createdAt
+    customTemplates: template_mobilizations(
+      where: {
+        community_id: { _eq: $communityId },
+        global: { _eq: false }
       }
+    ) {
+      id
+      name
+      userId: user_id
+      colorScheme: color_scheme
+      facebookShareTitle: facebook_share_title
+      facebookShareDescription: facebook_share_description
+      headerFont: header_font
+      bodyFont: body_font
+      facebookShareImage: facebook_share_image
+      slug
+      customDomain: custom_domain
+      twitterShareText: twitter_share_text
+      communityId: community_id
+      usesNumber: uses_number
+      global
+      createdAt: created_at
+      updateAt: updated_at
+      goal
+      favicon
     }
   }
 `;
@@ -58,7 +75,7 @@ const PageGraphQL = (props) => {
     <Page
       {...props}
       loading={loading}
-      templates={(data || {}).customTemplates ? data.customTemplates.nodes : []}
+      templates={(data || {}).customTemplates ? data.customTemplates : []}
     />
   );
 }
