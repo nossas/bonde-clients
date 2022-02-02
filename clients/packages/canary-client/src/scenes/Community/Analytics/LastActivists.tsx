@@ -10,9 +10,11 @@ const totalUniqueActivistsByCommunityQuery = gql`
   ) {
     totalUniqueActivistsByCommunity: participations_aggregate(
       where: {
-        community_id: { _eq: $community_id },
-        { participate_at: { _gte: $start_interval } },
-        { participate_at: { _lte: $end_interval } },
+        _and: [
+          { community_id: { _eq: $community_id } },
+          { participate_at: { _gte: $start_interval } },
+          { participate_at: { _lte: $end_interval } }
+        ]
       },
       distinct_on: activist_id
     ) {
