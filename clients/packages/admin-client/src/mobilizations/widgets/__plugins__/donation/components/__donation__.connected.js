@@ -99,12 +99,15 @@ const FetchDonationGoalStats = (props) => {
     fetchPolicy: 'network-only'
   });
 
-  if (loading) return 'Carregando...';
+  // if (loading) return 'Carregando...';
   if (error) return 'Failed!';
 
   return (
     <DonationConnected
-      donationGoalStats={data}
+      donationGoalStats={{
+        data: (data || {}).widgetDonationStats,
+        loading: loading
+      }}
       {...props}
     />
   );

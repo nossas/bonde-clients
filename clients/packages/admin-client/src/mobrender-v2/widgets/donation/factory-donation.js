@@ -77,7 +77,7 @@ export default ({
         donationGoalStats.loading
       )
         ? undefined
-        : JSON.parse(donationGoalStats.data)
+        : donationGoalStats.stats
 
       if (settings && settings.goal_date_limit) {
         const now = new Date()

@@ -1,7 +1,10 @@
 import { gql } from 'bonde-core-tools';
 
 export default gql`
-  query fetchDonationGoalStats($widgetId: Int!) {
-    data: getWidgetDonationStats(widgetId: $widgetId)
+  query ($widgetId: Int!) {
+    widgetDonationStats: get_widget_donation_stats(args: { widget_id: $widgetId }) {
+      widget_id
+      stats
+    }
   }
-`
+`;
