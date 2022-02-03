@@ -38,8 +38,8 @@ const LastActivists: React.FC<Props> = ({ communityId, children }) => {
   const { data, loading, error } = useQuery(totalUniqueActivistsByCommunityQuery, {
     variables: {
       community_id: communityId,
-      start_interval: start_interval.toISOString(),
-      end_interval: end_interval.toISOString()
+      start_interval: start_interval.toDateString(),
+      end_interval: end_interval.toDateString()
     }
   });
 

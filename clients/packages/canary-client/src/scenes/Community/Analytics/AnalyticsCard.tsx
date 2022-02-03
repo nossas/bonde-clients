@@ -1,15 +1,19 @@
 import React from 'react';
 import {
+  Button,
+  Box,
+  Flex,
   Header,
   Icon,
   Text,
   Tooltip,
   InfoIcon,
+  Loading,
   Stack
 } from 'bonde-components';
 import NumberFormat from 'react-number-format';
-
-import Panel from '../../../components/Panel';
+import useDownloadCSV from './hooks/useDownloadCSV';
+import type { PathDownload } from './hooks/useDownloadCSV';
 
 interface NumberProps {
   total?: number;
@@ -45,18 +49,92 @@ export const Number: React.FC<NumberProps> = ({ children, total, waiting, format
   );
 }
 
+export const ContentBox: React.FC<any> = ({ children, w, p }) => (
+  <Box
+    display="flex"
+    flexDirection="column"
+    justifyContent="center"
+    shadow="sm"
+    bg="white"
+    borderRadius="sm"
+    p={p || 6}
+    w={w}
+    h="100%"
+  >
+    {children}
+  </Box>
+);
+
+interface DownloadProps {
+  path: PathDownload
+  label: string
+  icon: any
+}
+
+export const Download: React.FC<DownloadProps> = ({ path, icon, label }) => {
+  const { loading, onClick } = useDownloadCSV(path);
+
+  return (
+    <Button
+      onClick={onClick}
+      bg="white"
+      p={4}
+      w="205px"
+      h="95px"
+      borderRadius="sm"
+      css={`
+        white-space: normal;
+        border: none;
+        outline: none;
+      
+        &:active, &:focus, &:hover {
+          border: none;
+          outline: none;
+        }
+
+        h5 {
+          text-align: left;
+        }
+      
+        &:hover {
+          background-color: white;
+          h5 {
+            color: #a4a4a4 !important;
+          }
+      
+          .fill {
+            path {
+              fill: #a4a4a4 !important;
+            }
+          }
+        }
+      `}
+    >
+      {loading
+        ? (
+          <Loading size='small' />
+        ) : (
+          <Stack display="flex" direction="row" spacing={4}>
+            <Icon name={icon as any} />
+            <Header.H5 uppercase>{label}</Header.H5>
+          </Stack>
+        )
+      }
+    </Button>
+  );
+}
+
 interface Props {
   label: string;
   tooltip?: string;
-  full?: boolean;
 }
 
 const AnalyticsCard: React.FC<Props> = ({ label, tooltip, children }) => {
   const Label = <Header.H5 style={{ fontWeight: 600, marginBottom: '12px', whiteSpace: 'nowrap' }} uppercase>{label}</Header.H5>;
 
   return (
-    <>
-      <Stack direction="row" spacing={2} mt={4} align="center">
+    <Flex direction="column" flex={1} h="100%">
+      <Stack direction="row" spacing={2} mt={4} align="baseline">
         {Label}
         {tooltip && (
           <Tooltip label={tooltip}>
@@ -64,10 +142,10 @@ const AnalyticsCard: React.FC<Props> = ({ label, tooltip, children }) => {
           </Tooltip>
         )}
       </Stack>
-      <Panel>
+      <ContentBox>
         {children}
-      </Panel>
-    </>
+      </ContentBox>
+    </Flex>
   );
 }
 

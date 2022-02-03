@@ -39,8 +39,8 @@ const LastPressures: React.FC<Props> = ({ communityId, children }) => {
   const { data, loading, error } = useQuery(totalActivistsPressureQuery, {
     variables: {
       community_id: communityId,
-      start_interval: startInterval.toISOString(),
-      end_interval: endInterval.toISOString()
+      start_interval: startInterval.toDateString(),
+      end_interval: endInterval.toDateString()
     }
   });
 
