@@ -19,7 +19,7 @@
    text-align: center;
 }
 
-.PlipDetails a {
+.PlipDetails button {
   display: inline-flex;
   text-transform: uppercase;
   font-size: small;
@@ -35,6 +35,7 @@
   max-width: 13.5rem;
   margin: 20px;
   font-family: Arial;
+  border: none;
 }
 
 .PlipDetails a > svg {
