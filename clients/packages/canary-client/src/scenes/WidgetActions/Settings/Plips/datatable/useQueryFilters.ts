@@ -54,6 +54,9 @@ export interface DataQueryFilters {
   // State filters
   states: string[];
   onChangeStates: (states: string[]) => void;
+  // Signature filters
+  signatures?: number;
+  onChangeSignatures: (signatures?: number) => void;
   // Page filters
   pages: number;
   pageIndex: number;
@@ -70,7 +73,8 @@ interface VariablesOpts {
   limit: number;
   pageIndex: number;
   status?: FilterStatus;
-  states: string[]
+  states: string[];
+  signatures?: number;
 }
 
 const createVariables = ({
@@ -78,7 +82,8 @@ const createVariables = ({
   limit,
   pageIndex,
   status,
-  states
+  states,
+  signatures
 }: VariablesOpts) => {
   // Pagination default
   const variables: any = {
@@ -126,6 +131,11 @@ const createVariables = ({
     }
   }
 
+  // Signatures filter
+  if (signatures) {
+    where['expected_signatures'] = { _eq: signatures };
+  }
+
   return { ...variables, where };
 }
 
@@ -137,9 +147,10 @@ export const useQueryFilters = (widgetId: number, opts?: Opts): DataQueryFilters
   // Status
   const [status, setStatus] = useState<FilterStatus>('todos');
   const [states, setStates] = useState<string[]>([]);
+  const [signatures, setSignatures] = useState<number>();
   // Fetch query
   const { data, loading, error, refetch } = useQuery(QUERY, {
-    variables: createVariables({ widgetId, limit, pageIndex, status, states })
+    variables: createVariables({ widgetId, limit, pageIndex, status, states, signatures })
   });
   
   const total = data?.plips_aggregate.aggregate.count || 0;
@@ -183,6 +194,14 @@ export const useQueryFilters = (widgetId: number, opts?: Opts): DataQueryFilters
       refetch(createVariables({ widgetId, limit, pageIndex: 0, status, states: i }));
       setPageIndex(0);
       setStates(i);
+    },
+    signatures,
+    onChangeSignatures: (i?: number) => {
+      if (i !== signatures) {
+        refetch(createVariables({ widgetId, limit, pageIndex: 0, status, states }))
+        setPageIndex(0);
+        setSignatures(i);
+      }
     }
   }
 }

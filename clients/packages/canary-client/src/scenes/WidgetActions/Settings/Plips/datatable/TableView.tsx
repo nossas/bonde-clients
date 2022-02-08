@@ -45,6 +45,7 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
     onPreviousPage,
     onChangeStatus,
     onChangeStates,
+    onChangeSignatures,
     onChangeLimit
   } = useQueryFilters(widgetId);
 
@@ -61,6 +62,24 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
           Todas as fichas ({total})
         </Heading>
         <Stack direction='row' spacing={4} minW='600px'>
+          <FormControl>
+            <FormLabel>Total de assinaturas</FormLabel>
+            <Select
+              size='sm'
+              options={[
+                { value: undefined, label: 'Todos' },
+                { value: 10, label: '10' },
+                { value: 20, label: '20' },
+                { value: 30, label: '30' },
+                { value: 40, label: '40' },
+                { value: 50, label: '50' },
+                { value: 100, label: '100' },
+              ]}
+              onChange={(item: any) => {
+                onChangeSignatures(item.value);
+              }}
+            />
+          </FormControl>
           <FormControl>
             <FormLabel>Estado</FormLabel>
             <Select
