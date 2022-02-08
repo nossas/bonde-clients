@@ -99,9 +99,9 @@ const chakraComponents = {
     innerProps,
     isDisabled,
     isFocused,
-    selectProps: { size, isInvalid }
+    selectProps: { size, variant, isInvalid }
   }: any) => {
-    const inputStyles = useMultiStyleConfig("Input", { size });
+    const inputStyles = useMultiStyleConfig("Input", { size, variant });
 
     const heights: any = {
       sm: 8,
@@ -171,7 +171,7 @@ const chakraComponents = {
   ClearIndicator: ({ innerProps, selectProps: { size } }: any) => (
     <CloseButton {...innerProps} size={size} mx={2} tabIndex={-1} />
   ),
-  DropdownIndicator: ({ innerProps, selectProps: { size } }: any) => {
+  DropdownIndicator: ({ innerProps, selectProps: { size, variant } }: any) => {
     const { addon } = useStyles();
 
     const iconSizes: any = {
@@ -187,6 +187,7 @@ const chakraComponents = {
         sx={{
           ...addon,
           h: "100%",
+          bg: variant === 'outline' ? 'none' : 'inherit',
           borderRadius: 0,
           borderWidth: 0,
           cursor: "pointer"
@@ -354,12 +355,6 @@ const Select = forwardRef((props: any, ref: any) => (
   </ChakraReactSelect>
 ));
 
-// const AsyncSelect = forwardRef((props: any, ref: any) => (
-//   <ChakraReactSelect {...props}>
-//     <AsyncReactSelect ref={ref} />
-//   </ChakraReactSelect>
-// ));
-
 const CreatableSelect = forwardRef((props: any, ref: any) => (
   <ChakraReactSelect {...props}>
     <CreatableReactSelect ref={ref} />
@@ -368,6 +363,5 @@ const CreatableSelect = forwardRef((props: any, ref: any) => (
 
 export {
   Select as default,
-  // AsyncSelect,
   CreatableSelect
 };

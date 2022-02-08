@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   FormControl,
-  FormLabel,
   Button,
   Flex,
   Table,
@@ -13,11 +12,13 @@ import {
   TableCaption,
   Skeleton,
   Stack,
-  Heading,
-  // Select
+  Heading
 } from 'bonde-components';
 import Select from "../components/ChakraReactSelect";
-import { checkStatus } from './utils';
+import StatusLabel from './StatusLabel';
+import ExpectedSignaturesFilter from './ExpectedSignaturesFilter';
+import StateFilter from './StatesFilter';
+import StatusFilter from './StatusFilter';
 import { useQueryFilters } from './useQueryFilters';
 
 const Row: React.FC<any> = ({ data }) => (
@@ -29,10 +30,10 @@ const Row: React.FC<any> = ({ data }) => (
     <Td>{data.expected_signatures || 0}</Td>
     <Td>{new Date(data.created_at).toLocaleDateString()}</Td>
     <Td>
-      {checkStatus(data)}
+      <StatusLabel plipForm={data} />
     </Td>
   </Tr>
-)
+);
 
 const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
   const {
@@ -51,66 +52,22 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
 
   return (
     <Stack spacing={4}>
+      <Heading
+        as="h5"
+        size="xs"
+        fontWeight="normal"
+        color="gray.400"
+        textTransform="uppercase"
+      >
+        Todas as fichas ({total})
+      </Heading>
       <Flex direction='row' justify="space-between" align='end'>
-        <Heading
-          as="h5"
-          size="xs"
-          fontWeight="normal"
-          color="gray.400"
-          textTransform="uppercase"
-        >
-          Todas as fichas ({total})
-        </Heading>
         <Stack direction='row' spacing={4} minW='600px'>
-          <FormControl>
-            <FormLabel>Total de assinaturas</FormLabel>
-            <Select
-              size='sm'
-              options={[
-                { value: undefined, label: 'Todos' },
-                { value: 10, label: '10' },
-                { value: 20, label: '20' },
-                { value: 30, label: '30' },
-                { value: 40, label: '40' },
-                { value: 50, label: '50' },
-                { value: 100, label: '100' },
-              ]}
-              onChange={(item: any) => {
-                onChangeSignatures(item.value);
-              }}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Estado</FormLabel>
-            <Select
-              isMulti
-              size='sm'
-              options={[
-                { value: 'ES', label: 'Espirito Santo' },
-                { value: 'SP', label: 'São Paulo' },
-                { value: 'PE', label: 'Pernambuco' },
-              ]}
-              onChange={(items: any) => {
-                onChangeStates(items?.map((i: any) => i.value) || []);
-              }}
-            />
-          </FormControl>
-          <FormControl>
-            <FormLabel>Status</FormLabel>
-            <Select
-              size='sm'
-              onChange={(item: any) => {
-                onChangeStatus(item.value)
-              }}
-              options={[
-                { value: 'todos', label: 'Todos' },
-                { value: 'pendentes', label: 'Pendentes' },
-                { value: 'concluidos', label: 'Concluídos' },
-                { value: 'inscritos', label: 'Inscritos' },
-              ]}
-            />
-          </FormControl>
+          <ExpectedSignaturesFilter onChange={onChangeSignatures} />
+          <StateFilter onChange={onChangeStates} />
+          <StatusFilter onChange={onChangeStatus} />
         </Stack>
+        <Button type="button" variant="outline" colorScheme="gray">Exportar</Button>
       </Flex>
       <Table variant="simple" bg="white">
         <TableCaption>
