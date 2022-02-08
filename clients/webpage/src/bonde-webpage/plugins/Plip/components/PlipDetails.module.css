@@ -19,7 +19,8 @@
    text-align: center;
 }
 
-.PlipDetails button {
+.PlipDetails button,
+.PlipDetails a {
   display: inline-flex;
   text-transform: uppercase;
   font-size: small;

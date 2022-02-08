@@ -28,8 +28,35 @@ interface PdfButtonProps {
   fileName: string;
 }
 
+const useIosWithChrome = () => {
+  if (typeof navigator !== 'undefined') {
+    console.log("userAgent", navigator.userAgent);
+    const isIos = Boolean(navigator.userAgent.match(/iPhone|iPad|iPod/i));
+    const isChrome = Boolean(navigator.userAgent.match(/Chrome/i));
+
+    return isIos && isChrome;
+  }
+
+  return false;
+}
+
 const PdfButton = (props: PdfButtonProps) => {
+  const renderAsLink = useIosWithChrome();
   const blob = b64toBlob(props.dataPdf.replace('data:application/pdf;filename=generated.pdf;base64,',''));
+
+  console.log("renderAsLink", renderAsLink);
+  if (renderAsLink) {
+    return (
+      <a
+        href={URL.createObjectURL(blob)}
+        rel="nooperer"
+        download={props.fileName}
+      >
+        <EyeIcon />
+        Ver ficha de assinatura
+      </a>   
+    );
+  }
 
   return (
     <button
