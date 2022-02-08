@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  FormControl,
   Button,
   Flex,
   Table,
@@ -14,11 +13,11 @@ import {
   Stack,
   Heading
 } from 'bonde-components';
-import Select from "../components/ChakraReactSelect";
 import StatusLabel from './StatusLabel';
 import ExpectedSignaturesFilter from './ExpectedSignaturesFilter';
 import StateFilter from './StatesFilter';
 import StatusFilter from './StatusFilter';
+import Pagination from './Pagination';
 import { useQueryFilters } from './useQueryFilters';
 
 const Row: React.FC<any> = ({ data }) => (
@@ -42,6 +41,7 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
     loading,
     pageIndex,
     pages,
+    onChangePage,
     onNextPage,
     onPreviousPage,
     onChangeStatus,
@@ -71,23 +71,14 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
       </Flex>
       <Table variant="simple" bg="white">
         <TableCaption>
-          <Stack direction="row" align='center' justify="center">
-            <Button variant='ghost' onClick={onPreviousPage} disabled={pageIndex === 0}>Anterior</Button>
-            <Flex w='150px'>
-              <FormControl>
-                <Select
-                  size='sm'
-                  options={[
-                    { value: 10, label: '10'},
-                    { value: 20, label: '20'},
-                    { value: 30, label: '30'},
-                  ]}
-                  onChange={(item: any) => onChangeLimit(item.value)}
-                />
-              </FormControl>
-            </Flex>
-            <Button variant='ghost' onClick={onNextPage} disabled={pageIndex === pages}>Próxima</Button>
-          </Stack>
+          <Pagination
+            onChangePage={onChangePage}
+            onChangeLimit={onChangeLimit}
+            onPreviousPage={onPreviousPage}
+            onNextPage={onNextPage}
+            pageIndex={pageIndex}
+            pages={pages}
+          />
         </TableCaption>
         {loading
           ? <Skeleton width="100%" h="530px" />

@@ -60,6 +60,7 @@ export interface DataQueryFilters {
   // Page filters
   pages: number;
   pageIndex: number;
+  onChangePage: (i: number) => void;
   onNextPage: () => void;
   onPreviousPage: () => void;
 }
@@ -163,6 +164,12 @@ export const useQueryFilters = (widgetId: number, opts?: Opts): DataQueryFilters
     total,
     pageIndex,
     pages: pages === -1 ? 0 : pages,
+    onChangePage: (i: number) => {
+      if (i !== pageIndex) {
+        refetch(createVariables({ widgetId, limit, pageIndex: i, status, states }));
+        setPageIndex(i)
+      }
+    },
     onNextPage: () => {
       const newPageIndex = pageIndex + 1;
       if (newPageIndex <= total) {

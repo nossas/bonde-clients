@@ -115,6 +115,7 @@ const chakraComponents = {
           ref={innerRef}
           sx={{
             ...inputStyles.field,
+            bg: 'none',
             p: 0,
             overflow: "hidden",
             h: "auto",
