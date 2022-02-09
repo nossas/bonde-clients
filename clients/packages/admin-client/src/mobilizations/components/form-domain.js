@@ -117,7 +117,7 @@ class FormDomain extends Component {
   }
 
   renderCNAMETable() {
-    const { mobilization, fields: { externalDomain } } = this.props
+    const { fields: { externalDomain } } = this.props
     let host = externalDomain ? externalDomain.value : ''
     if (host.startsWith('www.')) {
       host = host.replace('www.', '')
