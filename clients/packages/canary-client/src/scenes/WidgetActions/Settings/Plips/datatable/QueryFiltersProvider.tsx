@@ -68,13 +68,20 @@ export interface SignatureFilters {
   onChangeSignatures: (signatures?: number) => void;
 }
 
+// Email filters resolves only plips query
+export interface EmailFilters {
+  email?: string;
+  onChangeEmail: (email?: string) => void
+}
+
 export interface QueryFilters extends
   DataQuery,
   LimitFilters,
   PageFilters,
   StatusFilters,
   StatesFilters,
-  SignatureFilters {
+  SignatureFilters,
+  EmailFilters {
 
   }
 
@@ -107,7 +114,8 @@ const context = createContext<QueryFilters>({
   onChangeStatus: dummyf,
   states: [],
   onChangeStates: dummyf,
-  onChangeSignatures: dummyf
+  onChangeSignatures: dummyf,
+  onChangeEmail: dummyf
 });
 
 interface VariablesOpts {
@@ -117,6 +125,7 @@ interface VariablesOpts {
   status?: FilterStatus;
   states: string[];
   signatures?: number;
+  email?: string;
 }
 
 export const createVariables = ({
@@ -125,7 +134,8 @@ export const createVariables = ({
   pageIndex,
   status,
   states,
-  signatures
+  signatures,
+  email
 }: VariablesOpts): any => {
   // Pagination default
   const variables: any = limit !== undefined  && pageIndex !== undefined ? {
@@ -134,32 +144,41 @@ export const createVariables = ({
   } : {}
 
   // Filters default
-  const where: any = { widget_id: { _eq: widgetId } };
+  const where: any = { widget_id: { _eq: widgetId }, _and: [] };
+
+  // Email filter
+  if (email !== undefined) {
+    where['form_data'] = { _contains: { email: email } };
+  }
 
   // Status filter
   if (status === 'pendentes') {
     where['confirmed_signatures'] = { _is_null: true };
-    where['_or'] = [10, 20, 30, 40, 50, 100].map((value, index) => {
-      const date = new Date();
-      date.setDate(date.getDate() - (30 * (index + 1)));
-      return {
-        _and: [
-          { created_at: { _lte: date.toDateString() } },
-          { expected_signatures: { _eq: value } }
-        ]
-      }
+    where['_and'].push({
+      '_or': [10, 20, 30, 40, 50, 100].map((value, index) => {
+        const date = new Date();
+        date.setDate(date.getDate() - (30 * (index + 1)));
+        return {
+          _and: [
+            { created_at: { _lte: date.toDateString() } },
+            { expected_signatures: { _eq: value } }
+          ]
+        }
+      })
     })
   } else if (status === 'inscritos') {
     where['confirmed_signatures'] = { _is_null: true };
-    where['_or'] = [10, 20, 30, 40, 50, 100].map((value, index) => {
-      const date = new Date();
-      date.setDate(date.getDate() - (30 * (index + 1)));
-      return {
-        _and: [
-          { created_at: { _gte: date.toDateString() } },
-          { expected_signatures: { _eq: value } }
-        ]
-      }
+    where['_and'].push({
+      '_or': [10, 20, 30, 40, 50, 100].map((value, index) => {
+        const date = new Date();
+        date.setDate(date.getDate() - (30 * (index + 1)));
+        return {
+          _and: [
+            { created_at: { _gte: date.toDateString() } },
+            { expected_signatures: { _eq: value } }
+          ]
+        }
+      })
     })
   } else if (status === 'concluidos') {
     where['confirmed_signatures'] = { _is_null: false };
@@ -167,11 +186,11 @@ export const createVariables = ({
 
   // States filter
   if (states.length > 0) {
-    where['_and'] = {
+    where['_and'].push({
       '_or': states.map((state) => ({
         'state': { '_eq': state } 
       }))
-    }
+    })
   }
 
   // Signatures filter
@@ -195,9 +214,11 @@ const QueryFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
   const [status, setStatus] = useState<FilterStatus>('todos');
   const [states, setStates] = useState<string[]>([]);
   const [signatures, setSignatures] = useState<number>();
+  // Email
+  const [email, setEmail] = useState<string>();
   // Fetch query
   const { data, loading, error, refetch } = useQuery(QUERY, {
-    variables: createVariables({ widgetId, limit, pageIndex, status, states, signatures })
+    variables: createVariables({ widgetId, limit, pageIndex, status, states, signatures, email })
   });
 
   const total = data?.plips_aggregate.aggregate.count || 0;
@@ -214,48 +235,60 @@ const QueryFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
         pages: pages === -1 ? 0 : pages,
         onChangePage: (i: number) => {
           if (i !== pageIndex) {
-            refetch(createVariables({ widgetId, limit, pageIndex: i, status, states }));
+            refetch(createVariables({ widgetId, limit, pageIndex: i, status, states, signatures, email }));
             setPageIndex(i)
           }
         },
         onNextPage: () => {
           const newPageIndex = pageIndex + 1;
           if (newPageIndex <= total) {
-            refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, status, states }));
+            refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, status, states, signatures, email }));
             setPageIndex(newPageIndex)
           }
         },
         onPreviousPage: () => {
           const newPageIndex = pageIndex - 1;
           if (newPageIndex >= 0) {
-            refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, status, states }));
+            refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, status, states, signatures, email }));
             setPageIndex(newPageIndex);
           }
         },
         limit,
         onChangeLimit: (i: number) => {
-          refetch(createVariables({ widgetId, limit: i, pageIndex: 0, status, states }));
+          refetch(createVariables({ widgetId, limit: i, pageIndex: 0, status, states, signatures, email }));
           setLimit(i);
           setPageIndex(0);
         },
         status,
         onChangeStatus: (i: FilterStatus) => {
-          refetch(createVariables({ widgetId, limit, pageIndex: 0, status: i, states }));
-          setPageIndex(0);
-          setStatus(i);
+          if (i !== status) {
+            refetch(createVariables({ widgetId, limit, pageIndex: 0, status: i, states, signatures, email }));
+            setPageIndex(0);
+            setStatus(i);
+          }
         },
         states,
         onChangeStates: (i: string[]) => {
-          refetch(createVariables({ widgetId, limit, pageIndex: 0, status, states: i }));
-          setPageIndex(0);
-          setStates(i);
+          if (i !== states) {
+            refetch(createVariables({ widgetId, limit, pageIndex: 0, status, states: i, signatures, email }));
+            setPageIndex(0);
+            setStates(i);
+          }
         },
         signatures,
         onChangeSignatures: (i?: number) => {
           if (i !== signatures) {
-            refetch(createVariables({ widgetId, limit, pageIndex: 0, status, states }))
+            refetch(createVariables({ widgetId, limit, pageIndex: 0, status, states, signatures: i, email }))
             setPageIndex(0);
             setSignatures(i);
+          }
+        },
+        email,
+        onChangeEmail: (i?: string) => {
+          if (i !== email) {
+            refetch(createVariables({ widgetId, limit, pageIndex: 0, status, states, signatures, email: i }))
+            setPageIndex(0);
+            setEmail(i);
           }
         }
       }}
@@ -288,7 +321,8 @@ export const useQueryFiltersLimit = (): LimitFilters => {
 export interface FieldFilters extends
   StatusFilters,
   StatesFilters,
-  SignatureFilters {
+  SignatureFilters,
+  EmailFilters {
 
   }
 
@@ -299,7 +333,9 @@ export const useQueryFiltersFields = (): FieldFilters => {
     states,
     onChangeStates,
     signatures,
-    onChangeSignatures
+    onChangeSignatures,
+    email,
+    onChangeEmail
   } = useContext(context);
 
   return {
@@ -308,6 +344,8 @@ export const useQueryFiltersFields = (): FieldFilters => {
     states,
     onChangeStates,
     signatures,
-    onChangeSignatures
+    onChangeSignatures,
+    email,
+    onChangeEmail
   };
 }

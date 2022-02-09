@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tag, TagLabel } from 'bonde-components';
-import type { PlipForm } from './useQueryFilters';
+import type { PlipForm } from './QueryFiltersProvider';
 
 const StatusLabel: React.FC<{ plipForm: PlipForm }> = ({ plipForm }) => {
   if (!!plipForm.confirmed_signatures) {

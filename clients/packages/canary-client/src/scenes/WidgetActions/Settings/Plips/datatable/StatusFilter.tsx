@@ -1,10 +1,10 @@
 import React from 'react';
 import { FormControl } from 'bonde-components';
 import Select from "../components/ChakraReactSelect";
-import type { FilterStatus } from './useQueryFilters';
+import type { FilterStatus } from './QueryFiltersProvider';
 
 const STATUS = [
-  { value: 'todos', label: 'Todos' },
+  { value: 'todos', label: 'Status' },
   { value: 'pendentes', label: 'Pendentes' },
   { value: 'concluidos', label: 'Concluídos' },
   { value: 'inscritos', label: 'Inscritos' },
@@ -16,7 +16,7 @@ interface Props {
 
 const StatusFilter: React.FC<Props> = ({ onChange }) => {
   return (
-    <FormControl>
+    <FormControl minW="130px">
       <Select
         size='sm'
         variant="outline"

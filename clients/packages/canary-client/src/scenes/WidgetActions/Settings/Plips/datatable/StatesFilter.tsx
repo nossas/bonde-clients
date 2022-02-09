@@ -9,6 +9,7 @@ const STATES = [
   { value: "AP", label: "AP" },
   { value: "BA", label: "BA" },
   { value: "CE", label: "CE" },
+  { value: "DF", label: "DF" },
   { value: "ES", label: "ES" },
   { value: "GO", label: "GO" },
   { value: "MA", label: "MA" },
@@ -37,7 +38,7 @@ interface Props {
 
 const StatesFilter: React.FC<Props> = ({ onChange }) => {
   return (
-    <FormControl>
+    <FormControl minW="130px">
       <Select
         isMulti
         size='sm'

@@ -12,6 +12,7 @@ import {
   Stack,
   Heading
 } from 'bonde-components';
+import EmailFilter from './EmailFilter';
 import ExpectedSignaturesFilter from './ExpectedSignaturesFilter';
 import ExportCSV from './ExportCSV';
 import Pagination from './Pagination';
@@ -57,7 +58,8 @@ const PlipsFormTable: React.FC<any> = ({ widgetId }) => {
         Todas as fichas ({total})
       </Heading>
       <Flex direction='row' justify="space-between" align='end'>
-        <Stack direction='row' spacing={4} minW='600px'>
+        <Stack direction='row' spacing={4}>
+          <EmailFilter />
           <ExpectedSignaturesFilter onChange={onChangeSignatures} />
           <StateFilter onChange={onChangeStates} />
           <StatusFilter onChange={onChangeStatus} />

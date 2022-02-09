@@ -1,5 +1,5 @@
 import { checkStatus } from './utils';
-import type { PlipForm } from './useQueryFilters';
+import type { PlipForm } from './QueryFiltersProvider';
 
 describe('Status', () => {
   const plipForm: PlipForm = {

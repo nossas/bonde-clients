@@ -8,13 +8,13 @@ interface Props {
 
 const ExpectedSignaturesFilter: React.FC<Props> = ({ onChange }) => {
   return (
-    <FormControl>
+    <FormControl minW='190px'>
       <Select
         size='sm'
         variant="outline"
         placeholder="Total de assinaturas"
         options={[
-          { value: undefined, label: 'Todos' },
+          { value: undefined, label: 'Total de assinaturas' },
           { value: 10, label: '10' },
           { value: 20, label: '20' },
           { value: 30, label: '30' },

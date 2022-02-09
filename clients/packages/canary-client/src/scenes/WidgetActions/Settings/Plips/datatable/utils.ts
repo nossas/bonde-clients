@@ -1,4 +1,4 @@
-import type { PlipForm } from './useQueryFilters';
+import type { PlipForm } from './QueryFiltersProvider';
 
 export const checkStatus = (plipForm: PlipForm): string => {
   if (!!plipForm.confirmed_signatures) return 'Concluído';
