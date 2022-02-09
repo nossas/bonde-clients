@@ -40,7 +40,7 @@ const CreateDomainText = ({ onClickLink }) => (
     <FormattedMessage
       id='mobilizations.components--form-domain.create-domain-text.second-line'
       defaultMessage='Senão você pode, abaixo, usar um domínio externo para configurar o endereço da sua mobilização.'
-      />
+    />
   </p>
 )
 
@@ -49,7 +49,7 @@ const InputError = (field) => field.error && field.touched ? (
 ) : undefined
 
 class FormDomain extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
 
     this.state = {
@@ -59,7 +59,7 @@ class FormDomain extends Component {
     }
   }
 
-  componentDidMount () {
+  componentDidMount() {
     const { hostedZones, mobilization: { custom_domain: customDomain } } = this.props
 
     /* eslint-disable no-useless-escape */
@@ -80,12 +80,12 @@ class FormDomain extends Component {
     }
   }
 
-  clickHere (e) {
+  clickHere(e) {
     e.preventDefault()
     this.props.redirectToCreateDNS()
   }
 
-  toggle (key, value) {
+  toggle(key, value) {
     if (key === 'showExternalDomain') {
       this.props.fields.advancedConfig.onChange(value)
       const state = { [key]: value }
@@ -116,7 +116,7 @@ class FormDomain extends Component {
     }
   }
 
-  renderCNAMETable () {
+  renderCNAMETable() {
     const { mobilization, fields: { externalDomain } } = this.props
     let host = externalDomain ? externalDomain.value : ''
     if (host.startsWith('www.')) {
@@ -128,7 +128,7 @@ class FormDomain extends Component {
           <FormattedMessage
             id='mobilizations.components--form-domain.cname-table.helper-text'
             defaultMessage={
-            '{strong}: você vai precisar configurar este domínio no seu servidor de registro para que o endereço seja redirecionado à página da sua mobilização. Pra isso, você vai precisar dessas informações aqui embaixo, anote aí:'
+              '{strong}: você vai precisar configurar este domínio no seu servidor de registro para que o endereço seja redirecionado à página da sua mobilização. Pra isso, você vai precisar dessas informações aqui embaixo, anote aí:'
             }
             values={{
               strong: (
@@ -142,49 +142,21 @@ class FormDomain extends Component {
             }}
           />
         </p>
-        <table className='col-12 left-align'>
-          <tbody>
-            <tr>
-              <th>
-                <FormattedMessage
-                  id='mobilizations.components--form-domain.cname-table.header.name'
-                  defaultMessage='Nome'
-                />
-              </th>
-              <th>
-                <FormattedMessage
-                  id='mobilizations.components--form-domain.cname-table.header.record-type'
-                  defaultMessage='Tipo'
-                />
-              </th>
-              <th>
-                <FormattedMessage
-                  id='mobilizations.components--form-domain.cname-table.header.data'
-                  defaultMessage='Dados'
-                />
-              </th>
-            </tr>
-            <tr>
-              <td><code>{host}</code></td>
-              <td><code>CNAME</code></td>
-              <td><code>{mobilization.slug}.{process.env.REACT_APP_DOMAIN_ADMIN}</code></td>
-            </tr>
-            <tr>
-              <td><code>{`www.${host}`}</code></td>
-              <td><code>CNAME</code></td>
-              <td><code>{mobilization.slug}.{process.env.REACT_APP_DOMAIN_ADMIN}</code></td>
-            </tr>
-          </tbody>
-        </table>
+
+        <FormattedMessage
+          id='mobilizations.components--form-domain.cname-table.ip'
+          defaultMessage='IP: 54.156.173.29'
+        />
+
         <p>
           <FormattedMessage
             id='mobilizations.components--form-domain.cname-table.footer.helper-text'
             defaultMessage={
-              'Se tiver alguma dúvida, dá uma olhada no tópico "Configurando seu domínio no BONDE", no nosso tutorial, o {link}.'
+              'Se tiver alguma dúvida sobre como fazer isso, dá uma olhada no nosso FAQ, {link} no item 5..'
             }
             values={{
               link: (
-                <a href='https://trilho.bonde.org' target='_blank' rel='noopener noreferrer'>
+                <a href='http://www.faq.bonde.org/#block-7283' target='_blank' rel='noopener noreferrer'>
                   <FormattedMessage
                     id='mobilizations.components--form-domain.cname-table.footer.helper-text.link'
                     defaultMessage='Trilho {icon}'
@@ -203,7 +175,7 @@ class FormDomain extends Component {
     )
   }
 
-  render () {
+  render() {
     const {
       formComponent: FormComponent,
       error,
@@ -225,24 +197,24 @@ class FormDomain extends Component {
             <FormattedMessage
               id='mobilizations.components--form-domain.helper-text-second-line'
               defaultMessage='Já cadastrou um domínio na comunidade? Selecione abaixo qual das opções melhor se encaixa.'
-              />
+            />
             <br />
             <FormattedMessage
               id='mobilizations.components--form-domain.helper-text-third-line'
               defaultMessage={
-                  'Quer cadastrar um novo domínio? {link}.'
-                }
+                'Quer cadastrar um novo domínio? {link}.'
+              }
               values={{
                 link: (
                   <a href='/' onClick={this.clickHere.bind(this)} target='_self'>
                     <FormattedMessage
                       id='mobilizations.components--form-domain.helper-text-third-line.link'
                       defaultMessage='Clique aqui'
-                      />
+                    />
                   </a>
-                  )
+                )
               }}
-              />
+            />
           </p>
 
           {error && <p>{error}</p>}

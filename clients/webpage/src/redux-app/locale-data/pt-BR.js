@@ -194,7 +194,7 @@ export default {
   'community.components--subdomain.record-type.label': 'Tipo',
   'community.components--subdomain.value.label': 'Valor',
   'community.components--subdomain.value.placeholder':
-`redirecionamento.dominio.com
+    `redirecionamento.dominio.com
 ou
 servidor-01.dominio.com
 servidor-02.dominio.com
@@ -437,9 +437,9 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'c--metrics.total.donations.refunded-amount': 'Valor total de reembolso das doações coletadas até agora:',
   'c--metrics.total.donations.refused-amount': 'Valor total de reembolso das doações coletadas até agora:',
 
-    // page community report
-    // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
-    // routepath: /community/report
+  // page community report
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
+  // routepath: /community/report
   'page--community-report.title.metrics': 'Métricas',
   'page--community-report.title.reports': 'Relatórios',
 
@@ -784,10 +784,8 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
 
   'mobilizations.components--form-domain.cname-table.helper-text': '{strong}: já que escolheu um domínio externo, você ainda precisa configurar este domínio no servidor em que cadastrou ele para que o endereço seja redirecionado à sua página. Pra isso, você vai precisar dessas informações aqui embaixo, anota aí:',
   'mobilizations.components--form-domain.cname-table.helper-text.strong': 'Próximo passo:',
-  'mobilizations.components--form-domain.cname-table.header.name': 'Nome',
-  'mobilizations.components--form-domain.cname-table.header.record-type': 'Tipo',
-  'mobilizations.components--form-domain.cname-table.header.data': 'Dados',
-  'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida sobre como fazer isso, dá uma olhada no nosso FAQ, {link}.',
+  'mobilizations.components--form-domain..cname-table.ip': 'IP: 54.156.173.29',
+  'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida sobre como fazer isso, dá uma olhada no nosso FAQ, {link} no item 5.',
   'mobilizations.components--form-domain.cname-table.footer.helper-text.link': 'aqui',
 
   // component mobilizations form domain (connected)
