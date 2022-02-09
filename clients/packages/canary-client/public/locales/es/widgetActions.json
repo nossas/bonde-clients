@@ -115,15 +115,13 @@
       },
       "explain": {
         "title": "Como adicionar alvos",
-        "description": "Escreva nome e e-mail de contato dos alvos segundo o formato abaixo.",
+        "description": "Escreva nome e e-mail de contato dos alvos segundo o formato abaixo e pressione ENTER.",
         "target_format": "Formato do alvo",
         "controllers": {
-          "format": "Nome do alvo <email@provedor.com>",
-          "add": "Pressione [ENTER] para inserir outro alvo.",
-          "delete": "Usando [Backspace] ou pressionando o 'X' você pode remover um alvo da lista."
+          "format": "Nome do alvo <email@provedor.com>"
         },
-        "save_form": "Quando acabar, não se esqueça de salvar as alterções.",
-        "ordering": "Os alvos serão exibidos em ordem aleatório na widget de pressão. Ou seja, cada vez que a mobilização for acessada, a ordem de exibição será diferente."
+        "ordering": "Os alvos serão exibidos em ordem aleatória para o público. Ou seja, cada vez que a campanha for acessada, a ordem de exibição será diferente.",
+        "save_form": "Quando acabar, não se esqueça de salvar as alterações."
       }
     },
     "finish": {

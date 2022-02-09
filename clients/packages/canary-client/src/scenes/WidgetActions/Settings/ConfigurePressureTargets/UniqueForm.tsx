@@ -16,10 +16,8 @@ export const UniqueFormExplainCard = () => {
       <Stack spacing={2}>
         <Heading as="h4" size="lg">{t("settings.pressure.explain.target_format")}</Heading>
         <Text>{t("settings.pressure.explain.controllers.format")}</Text>
-        <Text>{t("settings.pressure.explain.controllers.add")}</Text>
-        <Text>{t("settings.pressure.explain.controllers.delete")}</Text>
-        <Text>{t("settings.pressure.explain.save_form")}</Text>
         <Text>{t("settings.pressure.explain.ordering")}</Text>
+        <Text>{t("settings.pressure.explain.save_form")}</Text>
       </Stack>
     </Stack>
   );
