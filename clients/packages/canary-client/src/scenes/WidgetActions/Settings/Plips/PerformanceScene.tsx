@@ -43,17 +43,40 @@ const ValueWithLabel: React.FC<Props> = ({ value, label, variant = "md" }) => va
     </Text>
     <Text textTransform="uppercase" fontSize="sm">{label}</Text>
   </Box>
-)
+);
 
-const percentage = (value = 0, total = 0) => Math.round(((value * 100) / total) * 100) / 100;
+const calcPercentage = (value = 0, total = 0): number => {
+  const result = Math.round(((value * 100) / total) * 100) / 100;
+  if (isNaN(result)) return 0;
+  return result;
+};
+
+const Percent = ({ value = 0, total = 0 }) => {
+  const percent = calcPercentage(value, total);
+  
+  let color = 'inherit';
+  if (percent > 0.2) color = 'pink.300';
+  if (percent > 0.3) color = 'green.300';
+
+  return (
+    <Text fontWeight="bold" textColor={color}>
+      {`${percent}%`}
+    </Text>
+  );
+}
 
 const Row: React.FC<any> = ({ data }) => (
   <Tr>
     <Td>{data.state}</Td>
     <Td>{data.confirmed_signatures || "0"}</Td>
-    <Td>{`${percentage(data.confirmed_signatures, eleitorado.states[data.state] * eleitorado.goal.state)}%`}</Td>
+    <Td>
+      <Percent
+        value={data.confirmed_signatures}
+        total={eleitorado.states[data.state] * eleitorado.goal.state}
+      />
+    </Td>
   </Tr>
-)
+);
 
 const PerformanceScene: React.FC<Properties> = ({ widget }) => {
   const { pathname } = useLocation();
@@ -67,24 +90,24 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
       <Grid templateColumns={['repeat(2, 1fr)', null, 'repeat(7, 1fr)']} gap={4}>
         <GridItem colSpan={1}>
           <Stack>
-            <Header label="Total assinaturas" />
+            <Header label="Total assinaturas" helpText="Total de assinaturas entregues e registradas pela equipe." />
             <Flex bg="white" p={4} minH="131px" align="end">
               <ValueWithLabel
                 variant="lg"
                 value={data?.confirmed_signatures || "0"}
-                label={`${percentage(data?.confirmed_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
+                label={`${calcPercentage(data?.confirmed_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
               />
             </Flex>
           </Stack>
         </GridItem>
         <GridItem colSpan={1}>
           <Stack>
-            <Header label="Pendentes" />
+            <Header label="Pendentes" helpText="Total de assinaturas geradas que ainda não foram entregues e registradas pela equipe." />
             <Flex bg="white" p={4} minH="131px" align="end">
               <ValueWithLabel
                 variant="lg"
                 value={data?.pending_signatures || "0"}
-                label={`${percentage(data?.pending_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
+                label={`${calcPercentage(data?.pending_signatures, eleitorado.total * eleitorado.goal.total)}% da meta`}
               />
             </Flex>
           </Stack>
@@ -97,8 +120,12 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
                 <Tbody>
                 {data?.states_signatures
                   .filter((ss) => !!ss.state)
-                  .sort((a, b) => b.confirmed_signatures - a.confirmed_signatures)
-                  .splice(0, isMobile ? 5 : 8)
+                  .sort((a, b) => {
+                    const bpercent = calcPercentage(b.confirmed_signatures, eleitorado.states[b.state] * eleitorado.goal.state);
+                    const apercent = calcPercentage(a.confirmed_signatures, eleitorado.states[a.state] * eleitorado.goal.state);
+                    return bpercent - apercent
+                  })
+                  .splice(0, isMobile ? 5 : 7)
                   // eslint-disable-next-line react/display-name
                   .map((ss) => <Row data={ss} />)}
                 </Tbody>
@@ -125,9 +152,9 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
                 label="Total de inscritos"
               />
               <Flex direction="row" justify="space-between">
-                <ValueWithLabel value={`${percentage(data?.confirmed_subscribers, data?.total_subscribers)}%`} label="Concluídos" />
-                <ValueWithLabel value={`${percentage((data?.total_subscribers || 0) - (data?.pending_subscribers || 0) - (data?.confirmed_subscribers || 0), data?.total_subscribers)}%`} label="Inscritos" />
-                <ValueWithLabel value={`${percentage(data?.pending_subscribers, data?.total_subscribers)}%`} label="Pendentes" />
+                <ValueWithLabel value={`${calcPercentage(data?.confirmed_subscribers, data?.total_subscribers)}%`} label="Concluídos" />
+                <ValueWithLabel value={`${calcPercentage((data?.total_subscribers || 0) - (data?.pending_subscribers || 0) - (data?.confirmed_subscribers || 0), data?.total_subscribers)}%`} label="Inscritos" />
+                <ValueWithLabel value={`${calcPercentage(data?.pending_subscribers, data?.total_subscribers)}%`} label="Pendentes" />
               </Flex>
             </Stack>
           </Stack>
