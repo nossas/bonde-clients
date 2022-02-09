@@ -156,7 +156,7 @@ class FormDomain extends Component {
             }
             values={{
               link: (
-                <a href='http://www.faq.bonde.org/#block-7283' target='_blank' rel='noopener noreferrer'>
+                <a href='https://www.faq.bonde.org/#block-7283' target='_blank' rel='noopener noreferrer'>
                   <FormattedMessage
                     id='mobilizations.components--form-domain.cname-table.footer.helper-text.link'
                     defaultMessage='Trilho {icon}'
