@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   Flex,
   Table,
   Thead,
@@ -13,12 +12,18 @@ import {
   Stack,
   Heading
 } from 'bonde-components';
-import StatusLabel from './StatusLabel';
 import ExpectedSignaturesFilter from './ExpectedSignaturesFilter';
+import ExportCSV from './ExportCSV';
+import Pagination from './Pagination';
 import StateFilter from './StatesFilter';
 import StatusFilter from './StatusFilter';
-import Pagination from './Pagination';
-import { useQueryFilters } from './useQueryFilters';
+import StatusLabel from './StatusLabel';
+import QueryFiltersProvider, {
+  useQueryFiltersData,
+  useQueryFiltersLimit,
+  useQueryFiltersPage,
+  useQueryFiltersFields
+} from './QueryFiltersProvider';
 
 const Row: React.FC<any> = ({ data }) => (
   <Tr>
@@ -34,21 +39,11 @@ const Row: React.FC<any> = ({ data }) => (
   </Tr>
 );
 
-const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
-  const {
-    data,
-    total,
-    loading,
-    pageIndex,
-    pages,
-    onChangePage,
-    onNextPage,
-    onPreviousPage,
-    onChangeStatus,
-    onChangeStates,
-    onChangeSignatures,
-    onChangeLimit
-  } = useQueryFilters(widgetId);
+const PlipsFormTable: React.FC<any> = ({ widgetId }) => {
+  const { data, total, loading } = useQueryFiltersData();
+  const { pages, pageIndex, onChangePage, onNextPage, onPreviousPage } = useQueryFiltersPage();
+  const { onChangeLimit } = useQueryFiltersLimit();
+  const { onChangeStatus, onChangeSignatures, onChangeStates } = useQueryFiltersFields();
 
   return (
     <Stack spacing={4}>
@@ -67,7 +62,7 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
           <StateFilter onChange={onChangeStates} />
           <StatusFilter onChange={onChangeStatus} />
         </Stack>
-        <Button type="button" variant="outline" colorScheme="gray">Exportar</Button>
+        <ExportCSV widgetId={widgetId} fileName="relatorio-plips" />
       </Flex>
       <Table variant="simple" bg="white">
         <TableCaption>
@@ -107,4 +102,12 @@ const PlipsFormTable: React.FC<{ widgetId: number }> = ({ widgetId }) => {
   );
 }
 
-export default PlipsFormTable;
+const TableView: React.FC<{ widgetId: number }> = ({ widgetId }) => {
+  return (
+    <QueryFiltersProvider widgetId={widgetId}>
+      <PlipsFormTable widgetId={widgetId} />
+    </QueryFiltersProvider>
+  )
+};
+
+export default TableView;
