@@ -161,9 +161,9 @@ export default {
   // routepath: /community/twilio
   'page--community-twilio.info.title': 'Integração com o Twilio',
   'page--community-twilio.info.content': 'Para pressionar por telefone, você precisa de uma conta no Twilio. ' +
-  'Se você ainda não tem uma conta lá, relaxe que é bem rápido para criar: ' +
-  '{link}, faça seu cadastro e crie um número de telefone no final.{linebreak}' +
-  'Com a conta criada, é só acessá-la e copiar os dados abaixo:',
+    'Se você ainda não tem uma conta lá, relaxe que é bem rápido para criar: ' +
+    '{link}, faça seu cadastro e crie um número de telefone no final.{linebreak}' +
+    'Com a conta criada, é só acessá-la e copiar os dados abaixo:',
   'page--community-twilio.info.link': 'clique aqui',
 
   // component community settings menu
@@ -213,7 +213,7 @@ export default {
   'community.components--subdomain.record-type.label': 'Tipo',
   'community.components--subdomain.value.label': 'Valor',
   'community.components--subdomain.value.placeholder':
-`redirecionamento.dominio.com
+    `redirecionamento.dominio.com
 ou
 servidor-01.dominio.com
 servidor-02.dominio.com
@@ -456,9 +456,9 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'c--metrics.total.donations.refunded-amount': 'Valor total de reembolso das doações coletadas até agora:',
   'c--metrics.total.donations.refused-amount': 'Valor total de reembolso das doações coletadas até agora:',
 
-    // page community report
-    // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
-    // routepath: /community/report
+  // page community report
+  // filepath: /routes/admin/authenticated/sidebar/community-settings/report/page.js
+  // routepath: /community/report
   'page--community-report.title.metrics': 'Métricas',
   'page--community-report.title.reports': 'Relatórios',
 
@@ -805,12 +805,10 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   'mobilizations.components--form-domain.advanced.form.external-domain.label': 'Domínio externo',
   'mobilizations.components--form-domain.advanced.form.external-domain.placeholder': 'meudominio.com.br',
 
-  'mobilizations.components--form-domain.cname-table.helper-text': '{strong}: já que escolheu um domínio externo, você ainda precisa configurar este domínio no servidor em que cadastrou ele para que o endereço seja redirecionado à sua página. Pra isso, você vai precisar dessas informações aqui embaixo, anota aí:',
+  'mobilizations.components--form-domain.cname-table.helper-text': '{strong}: já que escolheu um domínio externo, você ainda precisa configurar este domínio no servidor em que cadastrou ele para que o endereço seja redirecionado à sua página. Pra isso, você vai precisar dessa informação aqui embaixo, anota aí:',
   'mobilizations.components--form-domain.cname-table.helper-text.strong': 'Próximo passo:',
-  'mobilizations.components--form-domain.cname-table.header.name': 'Nome',
-  'mobilizations.components--form-domain.cname-table.header.record-type': 'Tipo',
-  'mobilizations.components--form-domain.cname-table.header.data': 'Dados',
-  'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida sobre como fazer isso, dá uma olhada no nosso FAQ, {link}.',
+  'mobilizations.components--form-domain.cname-table.ip': 'IP: 54.156.173.29',
+  'mobilizations.components--form-domain.cname-table.footer.helper-text': 'Se tiver alguma dúvida sobre como fazer isso, dá uma olhada no nosso FAQ, {link} no item 5.',
   'mobilizations.components--form-domain.cname-table.footer.helper-text.link': 'aqui',
 
   // component mobilizations form domain (connected)
@@ -1036,9 +1034,9 @@ Caso sua base de ações não esteja sincronizada com o Mailchimp, você pode fo
   // filepath: /routes/admin/authenticated/sidebar/widgets-pressure-settings/adjustments/page.connected.js
   'page--widgets-pressure--adjustmens.warning.title': 'Falta pouco!',
   'page--widgets-pressure--adjustmens.warning.content': 'Para liberar a Pressão por Telefone, o Bonde se juntou com o Twilio, uma plataforma ' +
-  'online de comunicação. Pensa numa integração boa! Por isso, pra começar a causar por ' +
-  'telefone é preciso configurar uma conta Twilio na sua comunidade.{linebreak}' +
-  'Bora lá?',
+    'online de comunicação. Pensa numa integração boa! Por isso, pra começar a causar por ' +
+    'telefone é preciso configurar uma conta Twilio na sua comunidade.{linebreak}' +
+    'Bora lá?',
   'page--widges-pressure--adjustments-warning.button': 'Bora lá',
 
   // component share tell-a-friend

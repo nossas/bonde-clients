@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 declare global {
   interface Window {
@@ -24,6 +24,18 @@ type Options = {
 };
 
 const PagarMeCheckout = (props: Props | any) => {
+  useEffect(() => {
+    const script = document.createElement('script');
+
+    script.src = "https://assets.pagar.me/checkout/checkout.js";
+    script.async = true;
+
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    }
+  }, []);
   const [customerData, setCustomerData] = useState();
   const { donationComponent: Donation } = props;
 
@@ -108,11 +120,13 @@ const PagarMeCheckout = (props: Props | any) => {
   };
 
   return (
-    <Donation
-      {...props}
-      donationCustomerData={customerData}
-      asyncDonationCreate={handleTransactionCreate}
-    />
+    <>
+      <Donation
+        {...props}
+        donationCustomerData={customerData}
+        asyncDonationCreate={handleTransactionCreate}
+      />
+    </>
   );
 };
 
