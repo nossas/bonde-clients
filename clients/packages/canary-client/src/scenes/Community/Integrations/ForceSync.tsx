@@ -63,7 +63,7 @@ const ForceSync: React.FC = () => {
   }; 
 
   if (loading) return <Text>Carregando Mailchimp Status</Text>;
-  else if (error) return <Text>Failed ${error}</Text>;
+  else if (error) return <Text>Failed: {error.message}</Text>;
 
   if (data.resync_mailchimp_status.waiting > 0){
     return <Stack>
