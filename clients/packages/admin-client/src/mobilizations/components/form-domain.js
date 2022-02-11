@@ -143,10 +143,12 @@ class FormDomain extends Component {
           />
         </p>
 
-        <FormattedMessage
-          id='mobilizations.components--form-domain.cname-table.ip'
-          defaultMessage='IP: 54.156.173.29'
-        />
+        <strong>
+          <FormattedMessage
+            id='mobilizations.components--form-domain.cname-table.ip'
+            defaultMessage='IP: 54.156.173.29'
+          />
+        </strong>
 
         <p>
           <FormattedMessage
