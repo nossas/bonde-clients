@@ -80,9 +80,9 @@ export default class Wizard extends React.Component<Properties, State> {
           <Form onSubmit={handleSubmit}>
             {activePage}
             <Box py={4} borderTop="1px solid" borderColor="gray.100">
-              {!isLastPage && <Button type="submit" w="100%">Confirma</Button>}
+              {!isLastPage && <Button minH="42px" type="submit" w="100%">Confirma</Button>}
               {isLastPage && (
-                <Button type="submit" disabled={submitting} w="100%">
+                <Button minH="42px" type="submit" disabled={submitting} w="100%">
                   Concluir
                 </Button>
               )}

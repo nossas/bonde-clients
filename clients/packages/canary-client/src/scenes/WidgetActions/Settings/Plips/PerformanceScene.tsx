@@ -42,7 +42,7 @@ const ValueWithLabel: React.FC<Props> = ({ value, label, variant = "md" }) => va
     >
       {value}
     </Text>
-    <Text textTransform="uppercase" fontSize="sm">{label}</Text>
+    <Text fontSize="sm">{label}</Text>
   </Box>
 );
 
@@ -93,7 +93,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
           <GridItem colSpan={1}>
             <Stack>
               <Header label="Total assinaturas" helpText="Total de assinaturas entregues e registradas pela equipe." />
-              <Flex bg="white" p={4} minH="131px" align="end">
+              <Flex bg="white" p={4} minH="131px" align="flex-end">
                 <ValueWithLabel
                   variant="lg"
                   value={data?.confirmed_signatures || "0"}
@@ -105,7 +105,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
           <GridItem colSpan={1}>
             <Stack>
               <Header label="Pendentes" helpText="Total de assinaturas geradas que ainda não foram entregues e registradas pela equipe." />
-              <Flex bg="white" p={4} minH="131px" align="end">
+              <Flex bg="white" p={4} minH="131px" align="flex-end">
                 <ValueWithLabel
                   variant="lg"
                   value={data?.pending_signatures || "0"}
@@ -154,9 +154,9 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
                   label="Total de inscritos"
                 />
                 <Flex direction="row" justify="space-between">
-                  <ValueWithLabel value={`${calcPercentage(data?.confirmed_subscribers, data?.total_subscribers)}%`} label="Concluídos" />
-                  <ValueWithLabel value={`${calcPercentage((data?.total_subscribers || 0) - (data?.pending_subscribers || 0) - (data?.confirmed_subscribers || 0), data?.total_subscribers)}%`} label="Inscritos" />
-                  <ValueWithLabel value={`${calcPercentage(data?.pending_subscribers, data?.total_subscribers)}%`} label="Pendentes" />
+                  <ValueWithLabel value={`${Math.round(calcPercentage(data?.confirmed_subscribers, data?.total_subscribers))}%`} label="Concluídos" />
+                  <ValueWithLabel value={`${Math.round(calcPercentage((data?.total_subscribers || 0) - (data?.pending_subscribers || 0) - (data?.confirmed_subscribers || 0), data?.total_subscribers))}%`} label="Inscritos" />
+                  <ValueWithLabel value={`${Math.round(calcPercentage(data?.pending_subscribers, data?.total_subscribers))}%`} label="Pendentes" />
                 </Flex>
               </Stack>
             </Stack>
