@@ -12,6 +12,7 @@ import { useMutation, useQuery, gql } from "bonde-core-tools";
 
 import type { Widget } from "../../FetchWidgets";
 import Wizard from "./components/Wizard";
+import useQueryParams from "./useQueryParams";
 
 const GET_PLIP_FORM = gql`
   query ($code: uuid!) {
@@ -31,6 +32,7 @@ const UPDATE_PLIP_FORM = gql`
     update_plips_by_pk(pk_columns: {id: $id}, _set: { confirmed_signatures: $confirmed_signatures }) {
       id
       unique_identifier
+      confirmed_signatures
     }
   }
 `;
@@ -48,6 +50,7 @@ interface Properties {
 const QRForm: React.FC<Properties> = ({ widget }) => {
   const [formValues, setFormValues] = useState();
   const { code }: any = useParams();
+  const urlParams = useQueryParams();
   const [updatePlipForm] = useMutation(UPDATE_PLIP_FORM);
   const { loading, error, data } = useQuery(GET_PLIP_FORM, { variables: { code } });
 
@@ -65,16 +68,30 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
   }
 
   const plipForm = data?.plips[0];
+  if (!plipForm) {
+    return (
+      <Flex direction="column" flex={1}>
+        <Flex flex={1} py={8}>
+          <Heading fontSize="2xl">Ops! Essa ficha já foi registrada.</Heading>
+        </Flex>
+        <Stack py={4} borderTop="1px solid" borderColor="gray.100" spacing={2}>
+          <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings/workflow`}>Atualizar outra ficha</Button>
+          <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings`} variant="outline" colorScheme="black">Voltar ao início</Button>
+        </Stack>
+      </Flex>  
+    );
+  }
+
   const formData: FormData = plipForm.form_data;
 
   return formValues ? (
     <Flex direction="column" flex={1}>
       <Flex flex={1} py={8}>
-        <Heading fontSize="2xl">Tudo certo! Dados atualizados, agora temos 12.455 assinaturas pela Amazônia <span role="img" aria-label="Emoji">🎉</span></Heading>
+        <Heading fontSize="2xl">Tudo certo! Dados atualizados, agora temos {Number(urlParams.get('count') || 0) + (formValues as any).confirmed_signatures} assinaturas pela Amazônia <span role="img" aria-label="Emoji">🎉</span></Heading>
       </Flex>
       <Stack py={4} borderTop="1px solid" borderColor="gray.100" spacing={2}>
-        <Button as={Link} to={`/widgets/${widget.id}/settings/workflow`}>Atualizar outra ficha</Button>
-        <Button as={Link} to={`/widgets/${widget.id}/settings`} variant="outline" colorScheme="black">Por agora é só</Button>
+        <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings/workflow`}>Atualizar outra ficha</Button>
+        <Button minH="42px" as={Link} to={`/widgets/${widget.id}/settings`} variant="outline" colorScheme="black">Por agora é só</Button>
       </Stack>
     </Flex>
   ) : (

@@ -168,7 +168,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
       </Stack>
       {isMobile && (
         <MenuActions>
-          <Button minH="42px" as={Link} to={pathname + "/workflow"}>Atualizar ficha</Button>
+          <Button minH="42px" as={Link} to={`${pathname}/workflow?count=${data?.confirmed_signatures || 0}`}>Atualizar ficha</Button>
         </MenuActions>
       )}
     </>

@@ -7,6 +7,7 @@ import QRCodeIcon from "./QRCodeIcon";
 import QRForm from "./QRForm";
 import { Route, useHistory, useLocation, useRouteMatch } from "react-router-dom";
 import type { Widget } from "../../FetchWidgets";
+import useQueryParams from "./useQueryParams";
 
 const Styles = styled.div`
   display: flex;
@@ -26,9 +27,10 @@ const QRScene: React.FC<Properties> = ({ widget }) => {
   const location = useLocation()
   const history = useHistory();
   const match = useRouteMatch();
+  const urlParams = useQueryParams();
 
   const handleScan = (data: any) => {
-    if (data) history.push(location.pathname + `/${data}`);
+    if (data) history.push(location.pathname + `/${data}?count=${urlParams.get('count')}`);
   }
 
   const handleError = (err: any) => {
