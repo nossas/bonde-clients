@@ -22,6 +22,7 @@ query($id:Int!, $is_community:Boolean!) {
     failed
     last_sync
     waiting
+    active
     status
   }
 }
@@ -36,6 +37,21 @@ mutation($id:Int!, $is_community:Boolean!) {
   }
 }
 `
+const lastSync = (last_sync: any) =>{
+
+  if (typeof last_sync === 'undefined' || last_sync === "" ) {
+    return "";
+  }
+  return `Data da última atualização: ${last_sync}`;
+}
+
+const total = (data: any) => {
+  return (data.resync_mailchimp_status.waiting + 
+          data.resync_mailchimp_status.completed + 
+          data.resync_mailchimp_status.failed + 
+          data.resync_mailchimp_status.active); 
+}
+
 const ForceSync: React.FC = () => {
   const { community } = useContext(SessionContext);
   const [setPropagating] = useMutation(
@@ -58,19 +74,23 @@ const ForceSync: React.FC = () => {
         a.data.resync_mailchimp_start.status === 'started to add contacts to the queue') {
       toast(<Success message={`Ae! Sincronização em andamento.`} />, { type: toast.TYPE.SUCCESS }); 
     } else {
-      toast(`Falha na atualização da base de contatos do mailchimp! ${a.data.resync_mailchimp_start.status}`, { type: toast.TYPE.ERROR });
+      toast(`Ish! Ocorreu um erro, tente sincronizar novamente. Se o problema persistir, contacte o suporte. ${a.data.resync_mailchimp_start.status}`, { type: toast.TYPE.ERROR });
     }
   }; 
 
   if (loading) return <Text>Carregando Mailchimp Status</Text>;
-  else if (error) return <Text>Failed: {error.message}</Text>;
+  else if (error) return (
+      <Stack>
+        <Text>Ish! Ocorreu um erro e no momento não conseguimos retornar o status da sincronização.</Text>
+        <Text>Se o problema persistir, contacte o suporte.</Text>
+      </Stack>);
 
   if (data.resync_mailchimp_status.waiting > 0){
     return <Stack>
       <Heading as="h4" size="sm">Forçar sincronização</Heading>
       <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
       <Heading as="h4" size="sm">Status</Heading>
-      <Text size="sm">{data.resync_mailchimp_status.status} ({data.resync_mailchimp_status.completed})</Text>
+      <Text size="sm">{data.resync_mailchimp_status.status} ({data.resync_mailchimp_status.completed} de {total(data)})</Text>
       <Flex justifyContent="flex-end">
         <Button onClick={done} disabled='true' type='button' marginTop={4}>Sincronizar</Button>
       </Flex>
@@ -83,9 +103,7 @@ const ForceSync: React.FC = () => {
       <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
       <Heading as="h4" size="sm">Status</Heading>
       <Text size="sm">{data.resync_mailchimp_status.status}</Text>
-      <Text size="sm">{((typeof data.resync_mailchimp_status.last_sync === 'undefined' || data.resync_mailchimp_status.last_sync === "")? '' 
-                      : `Data da última atualização: ${data.resync_mailchimp_status.last_sync}`)}
-      </Text>
+      <Text size="sm">{lastSync(data.resync_mailchimp_status.last_sync)}</Text>
       <Flex justifyContent="flex-end">
         <Button onClick={done} type='button' marginTop={4}>Sincronizar</Button>
       </Flex>
