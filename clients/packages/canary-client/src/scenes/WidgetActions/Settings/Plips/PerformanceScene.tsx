@@ -73,7 +73,7 @@ const Row: React.FC<any> = ({ data }) => (
     <Td>
       <Percent
         value={data.confirmed_signatures}
-        total={eleitorado.states[data.state] * eleitorado.goal.state}
+        total={eleitorado.states[data.state]}
       />
     </Td>
   </Tr>
