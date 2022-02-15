@@ -10,7 +10,6 @@ import MeuRioStyles from '../components/MeuRioStyles';
 import Styles from '../bonde-webpage/Styles';
 import MobilizationConnected from '../components/MobilizationConnected';
 import resources from "../initialI18nStore";
-import "./index.module.css";
 
 const { publicRuntimeConfig } = getConfig()
 
@@ -52,7 +51,7 @@ function Page({ mobilization, blocks, widgets }: PageProperties) {
   } = mobilization;
 
   const domain = customDomain || `${slug}.bonde.org`;
-  const url = `https://${domain}`;
+  const url = `http://${domain}`;
 
   return (
     <div className="container">
