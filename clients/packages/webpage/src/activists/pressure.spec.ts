@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import { mocked } from 'ts-jest/utils';
 import jwt from "jsonwebtoken";
 import graphql from './request-graphql';
@@ -65,7 +62,7 @@ describe('activists module pressure tests', () => {
             },
             widget_id: args.widget.id,
             input: { targets_id: args.payload.targets_id, token },
-          }
+          } 
         });
 
         expect(mockedGraphql).toBeCalledWith(expected);
@@ -76,10 +73,10 @@ describe('activists module pressure tests', () => {
     mockedGraphql.mockResolvedValue({ data: { activist_pressure_id: 8576 } });
     jwtSpy.mockReturnValue(token);
     const city = 'Belo Horizonte';
-
+    
     return pressure({
       widget: args.widget,
-      payload: { ...args.payload, activist: { ...args.payload.activist, city } }
+      payload: { ...args.payload, activist: { ...args.payload.activist, city }}
     }).then(() => {
       const { email, firstname, lastname } = args.payload.activist;
       const expected: string = JSON.stringify({
