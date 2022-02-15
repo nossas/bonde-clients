@@ -16,6 +16,7 @@ import '../bonde-webpage/plugins/Content/components/SlateEditor/packages/slate-e
 import '../bonde-webpage/plugins/Content/components/SlateEditor/packages/slate-editor-components/src/modal/ModalContent.css'
 import '../bonde-webpage/plugins/Content/components/SlateEditor/packages/slate-editor-components/src/modal/ModalForm.css'
 import '../bonde-webpage/plugins/Content/components/SlateEditor/packages/slate-editor-components/src/tooltip/Tooltip.css'
+import './_app.css';
 
 const GlobalStyle = createGlobalStyle`
   body {
