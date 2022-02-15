@@ -10,7 +10,6 @@ import MeuRioStyles from '../components/MeuRioStyles';
 import Styles from '../bonde-webpage/Styles';
 import MobilizationConnected from '../components/MobilizationConnected';
 import resources from "../initialI18nStore";
-import "./index.module.css";
 
 const { publicRuntimeConfig } = getConfig()
 
