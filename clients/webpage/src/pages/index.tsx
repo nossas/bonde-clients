@@ -51,7 +51,7 @@ function Page({ mobilization, blocks, widgets }: PageProperties) {
   } = mobilization;
 
   const domain = customDomain || `${slug}.bonde.org`;
-  const url = `http://${domain}`;
+  const url = `https://${domain}`;
 
   return (
     <div className="container">
