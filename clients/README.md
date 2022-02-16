@@ -39,7 +39,7 @@ Install Python2
 sudo apt install python2
 ```
 
-Install NodeJS with a litle help of my friend: [nvm](https://github.com/nvm-sh/nvm), node version manager.
+Install NodeJS **v14** with a litle help of my friend: [nvm](https://github.com/nvm-sh/nvm), node version manager.
 
 ```
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash
