@@ -33,6 +33,12 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export PATH=$PATH:$HOME/.arkade/bin/
 ```
 
+Install Python2
+
+```
+sudo apt install python2
+```
+
 Install NodeJS with a litle help of my friend: [nvm](https://github.com/nvm-sh/nvm), node version manager.
 
 ```
