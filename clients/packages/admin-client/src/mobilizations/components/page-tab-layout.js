@@ -6,7 +6,7 @@ import {
   SettingsPageMenuLayout,
   SettingsPageContentLayout
 } from 'components/layout'
-import * as paths from 'paths'
+import * as paths from '../../paths'
 import { Tabs, Tab } from 'components/navigation/tabs'
 
 const PageTabLayout = ({ children, location }) => {

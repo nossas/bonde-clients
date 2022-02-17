@@ -1,6 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react'
 import { expect } from 'chai'
-import { mountWithIntl } from 'intl/helpers'
+import { mountWithIntl } from '../../../../../intl/helpers'
 import { PressureCount } from 'mobilizations/widgets/__plugins__/pressure/components'
 
 describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-count', () => {

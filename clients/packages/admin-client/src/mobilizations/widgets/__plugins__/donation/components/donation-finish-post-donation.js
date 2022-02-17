@@ -1,7 +1,7 @@
 import React from 'react'
 import { bool, object } from 'prop-types'
 
-import * as paths from 'paths'
+import * as paths from '../../../../../paths'
 import { FinishPostDonationComponent } from 'components/post-donation'
 
 const DonationFinishPostDonation = ({ preview, mobilization, widget }) => {

@@ -5,8 +5,8 @@ import { useQuery } from 'bonde-core-tools';
 import AnalyticsEvents from 'mobilizations/widgets/utils/analytics-events'
 import { asyncDonationTransactionCreate } from '../action-creators'
 
-import * as graphqlQueries from 'graphql/queries'
-import { factoryDonation } from 'mobrender-v2/widgets/donation'
+import * as graphqlQueries from '../../../../../graphql/queries'
+import { factoryDonation } from '../../../../../mobrender-v2/widgets/donation'
 import { FinishMessageCustom } from 'mobilizations/widgets/components'
 import DonationTellAFriend from './donation-tell-a-friend'
 import DonationFinishPostDonation from './donation-finish-post-donation'

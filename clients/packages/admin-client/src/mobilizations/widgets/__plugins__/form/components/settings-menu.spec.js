@@ -2,7 +2,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import * as paths from 'paths'
+import * as paths from '../../../../../paths'
 import { SettingsMenu } from 'mobilizations/widgets/__plugins__/form/components'
 
 describe('client/mobilizations/widgets/__plugins__/form/components/settings-menu', () => {

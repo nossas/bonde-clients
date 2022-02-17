@@ -1,7 +1,10 @@
+/**
+ * @jest-environment jsdom
+ */
 /* eslint-disable no-unused-expressions */
 import React from 'react'
 import { expect } from 'chai'
-import { mountWithIntl } from 'intl/helpers'
+import { mountWithIntl } from '../../../../../../intl/helpers'
 import * as pressureHelper from 'mobilizations/widgets/utils/pressure-helper'
 import { PressureForm } from 'mobilizations/widgets/__plugins__/pressure/components'
 

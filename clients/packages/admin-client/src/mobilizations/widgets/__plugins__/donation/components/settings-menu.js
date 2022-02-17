@@ -2,7 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 
-import * as paths from 'paths'
+import * as paths from '../../../../../paths'
 import { Tabs, Tab } from 'components/navigation/tabs'
 import { SettingsPageMenuLayout } from 'components/layout'
 

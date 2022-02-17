@@ -1,33 +1,33 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import PropTypes from 'prop-types';
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import * as paths from 'paths'
-import { Tabs, Tab } from 'components/navigation/tabs'
-import { DivFloat, Button } from 'ux/components'
+import * as paths from '../../paths';
+import { Tabs, Tab } from 'components/navigation/tabs';
+import { DivFloat, Button } from '../../ux/components';
 
 const PageHeader = ({ location }) => {
-  const activePath = `${paths.mobilizations()}`
-  const activePathWithBar = `${activePath}/`
-  const archivedPath = `${activePath}?status=archived`
-  const templatesPath = paths.mobilizationTemplatesList()
+  const activePath = `${paths.mobilizations()}`;
+  const activePathWithBar = `${activePath}/`;
+  const archivedPath = `${activePath}?status=archived`;
+  const templatesPath = paths.mobilizationTemplatesList();
 
   const getPathnameWithQuery = () => {
-    const { pathname, query } = location
-    if (query && query.status) return `${pathname}?status=${query.status}`
-    else return pathname
-  }
+    const { pathname, query } = location;
+    if (query && query.status) return `${pathname}?status=${query.status}`;
+    else return pathname;
+  };
 
-  const pathnameWithQuery = getPathnameWithQuery()
+  const pathnameWithQuery = getPathnameWithQuery();
 
   return (
     <div>
       <DivFloat>
         <Button to={paths.newMobilization()}>
-          <i className='fa fa-plus mr2' style={{ fontSize: '.75rem' }} />
+          <i className="fa fa-plus mr2" style={{ fontSize: '.75rem' }} />
           <FormattedMessage
-            id='mobilizations.components--page-header.button.text'
-            defaultMessage='Nova mobilização'
+            id="mobilizations.components--page-header.button.text"
+            defaultMessage="Nova mobilização"
           />
         </Button>
       </DivFloat>
@@ -35,21 +35,21 @@ const PageHeader = ({ location }) => {
         <Tab
           text={
             <FormattedMessage
-              id='mobilizations.components--page-header.tabs.actives'
-              defaultMessage='Ativas'
+              id="mobilizations.components--page-header.tabs.actives"
+              defaultMessage="Ativas"
             />
           }
           path={activePath}
-          isActive={(
+          isActive={
             activePath === pathnameWithQuery ||
             activePathWithBar === pathnameWithQuery
-          )}
+          }
         />
         <Tab
           text={
             <FormattedMessage
-              id='mobilizations.components--page-header.tabs.archived'
-              defaultMessage='Arquivadas'
+              id="mobilizations.components--page-header.tabs.archived"
+              defaultMessage="Arquivadas"
             />
           }
           path={{ to: activePath, search: '?status=archived' }}
@@ -58,8 +58,8 @@ const PageHeader = ({ location }) => {
         <Tab
           text={
             <FormattedMessage
-              id='mobilizations.components--page-header.tabs.templates'
-              defaultMessage='Templates'
+              id="mobilizations.components--page-header.tabs.templates"
+              defaultMessage="Templates"
             />
           }
           path={templatesPath}
@@ -67,11 +67,12 @@ const PageHeader = ({ location }) => {
         />
       </Tabs>
     </div>
-  )
-}
+  );
+};
 
 PageHeader.propTypes = {
-  location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired
-}
+  location: PropTypes.shape({ pathname: PropTypes.string.isRequired })
+    .isRequired,
+};
 
-export default PageHeader
+export default PageHeader;
