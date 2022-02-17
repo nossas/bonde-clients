@@ -1,7 +1,10 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react'
 import { expect } from 'chai'
 
-import { mountWithIntl } from 'intl/helpers'
+import { mountWithIntl } from '../../../intl/helpers'
 import Navbar from 'mobrender/components/navbar'
 import MenuItems from 'mobrender/components/navbar/menu-items'
 

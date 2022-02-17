@@ -1,7 +1,7 @@
-import authReducer from 'account/redux/reducers'
+// import authReducer from '../../../account/redux/reducers'
 import reducer from 'mobrender/redux'
 
 export default {
-  auth: authReducer,
+  // auth: authReducer,
   mobilizations: reducer
 }

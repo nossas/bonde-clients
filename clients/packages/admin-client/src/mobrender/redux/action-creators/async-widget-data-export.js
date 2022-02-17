@@ -1,7 +1,7 @@
 /* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
 import downloadjs from 'downloadjs'
-import AuthSelectors from 'account/redux/selectors';
+import AuthSelectors from '../../../account/redux/selectors';
 import { createAction } from './create-action'
 
 const asyncWidgetDataExport = params => (dispatch, getState, { api, intl }) => {

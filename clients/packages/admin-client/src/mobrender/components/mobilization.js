@@ -5,7 +5,7 @@ import classnames from 'classnames'
 
 import Block from './block.connected'
 import Navbar from './navbar'
-import * as paths from 'paths'
+import * as paths from '../../paths'
 import LogoIconNoBorder from 'components/navigation/sidenav/logo-icon-no-border'
 
 if (require('exenv').canUseDOM) require('./add-new-block.scss')
