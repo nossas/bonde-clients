@@ -1,6 +1,7 @@
 import React from 'react';
 // import { injectIntl, intlShape } from 'react-intl'
-import { SlateEditor, SlateContent } from './packages/slate-editor/src';
+import SlateEditor from './packages/slate-editor/src/SlateEditor';
+import SlateContent from './packages/slate-editor/src/SlateContent';
 import { BoldPlugin } from './packages/slate-editor-bold-plugin/src';
 import { ItalicPlugin } from './packages/slate-editor-italic-plugin/src';
 import { UnderlinePlugin } from './packages/slate-editor-underline-plugin/src';
@@ -9,7 +10,7 @@ import { AlignmentPlugin } from './packages/slate-editor-alignment-plugin/src';
 import { LinkPlugin } from './packages/slate-editor-link-plugin/src';
 import { ListPlugin } from './packages/slate-editor-list-plugin/src';
 import { FontFamilyPlugin } from './packages/slate-editor-font-family-plugin/src';
-import { FontSizePlugin } from './packages/slate-editor-font-size-plugin/src';
+import FontSizePlugin from './packages/slate-editor-font-size-plugin/src/FontSizeInput';
 import { ImagePlugin } from './packages/slate-editor-image-plugin/src';
 import { ColorPlugin } from './packages/slate-editor-color-plugin/src';
 import { GridPlugin } from './packages/slate-editor-grid-plugin/src';
