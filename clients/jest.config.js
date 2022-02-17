@@ -1,4 +1,5 @@
 module.exports = {
+  coverageReporters: ["lcov", "text-summary"],
   roots: [
     "<rootDir>/packages/accounts-client/src",
     "<rootDir>/packages/admin-client/src",

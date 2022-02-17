@@ -3,7 +3,7 @@
   "version": "4.1.9",
   "license": "AGPL-3.0",
   "scripts": {
-    "test": "pnpm m run test",
+    "test": "jest --coverage",
     "build": "pnpm m run build",
     "start": "pnpm m run start"
   },
