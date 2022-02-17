@@ -1,10 +1,10 @@
-import React from 'react'
+import React from 'react';
 // import { connect } from 'react-redux'
 // import { reduxForm } from 'redux-form'
 // import Select from 'react-select-plus'
 
 // import * as graphqlQueries from 'graphql/queries'
-// import * as validationHelper from 'utils/validation-helper'
+// import * as validationHelper from '../../utils/validation-helper'
 // import * as CommunitySelectors from 'community/selectors'
 // import { client as graphqlClient } from 'store'
 // import { FlatForm } from 'ux/components'
@@ -322,9 +322,7 @@ import React from 'react'
 // )(reduxForm({ form, fields, validate })(ActivistSegmentationForm)))
 
 const ActivistSegmentationForm = () => {
-  return (
-    <h3>Override ActivistSegmentationForm</h3>
-  );
-}
+  return <h3>Override ActivistSegmentationForm</h3>;
+};
 
 export default ActivistSegmentationForm;

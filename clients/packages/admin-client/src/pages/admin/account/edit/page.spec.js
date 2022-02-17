@@ -1,6 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react'
 import { expect } from 'chai'
-import { mountWithIntl } from 'intl/helpers'
+import { mountWithIntl } from '../../../../intl/helpers'
 import { MemoryRouter } from 'react-router-dom'
 
 import Page from './page'

@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Route, Redirect as RedirectComponent } from 'react-router-dom'
 import { Context as SessionContext } from 'bonde-core-tools';
-import * as paths from 'paths'
+import * as paths from '../../paths'
 import { Loading } from 'components/await'
 
 const Redirect = ({ pathname, location }) => (

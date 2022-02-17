@@ -10,7 +10,7 @@ import {
   Button,
   FormError
 } from 'components/forms'
-import * as paths from 'paths'
+import * as paths from '../../../../paths'
 
 class CommunityNewPage extends Component {
   componentWillReceiveProps (nextProps) {

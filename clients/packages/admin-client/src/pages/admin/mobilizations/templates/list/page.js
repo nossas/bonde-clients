@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { Link } from 'react-router-dom'
 import classnames from 'classnames'
 
-import * as paths from 'paths'
+import * as paths from '../../../../../paths'
 import EmptyList from 'components/empty-list'
 import {
   SettingsPageLayout,

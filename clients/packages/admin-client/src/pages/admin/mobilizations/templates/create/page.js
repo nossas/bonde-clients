@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormattedMessage, intlShape } from 'react-intl'
 
-import * as paths from 'paths'
+import * as paths from '../../../../../paths'
 import {
   SettingsPageLayout,
   SettingsPageMenuLayout,

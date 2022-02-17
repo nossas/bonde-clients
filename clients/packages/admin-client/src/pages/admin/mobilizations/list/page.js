@@ -8,7 +8,7 @@ import {
   SettingsPageMenuLayout,
   SettingsPageContentLayout
 } from 'components/layout'
-import * as paths from 'paths'
+import * as paths from '../../../../paths'
 import List from 'mobilizations/components/list'
 import {
   Item,
