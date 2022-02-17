@@ -18,8 +18,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.11.1",
     "babel-preset-stage-0": "^6.5.0",
-    "enzyme": "^3.2.0",
-    "enzyme-adapter-react-16": "^1.1.0"
+    "enzyme": "^3.2.0"
   },
   "dependencies": {
     "@slate-editor/alignment-plugin": "^5.1.0",

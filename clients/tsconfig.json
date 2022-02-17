@@ -19,4 +19,5 @@
     "noEmit": true,
     "jsx": "react"
   },
+  "exclude": ["./out/**/*", "./node_modules/**/*", "**/*stories*", "**/*spec*", "**/*__tests__*", "**/setupTests.ts"],
 }
