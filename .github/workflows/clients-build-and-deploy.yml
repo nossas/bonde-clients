@@ -30,33 +30,33 @@ jobs:
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
-        env:
-          SKIP_PREFLIGHT_CHECK: true
-          REACT_APP_ENVIRONMENT: staging
-          REACT_APP_DOMAIN_ACCOUNTS: https://accounts.staging.bonde.org
-          REACT_APP_DOMAIN_ADMIN: https://app.staging.bonde.org
-          REACT_APP_DOMAIN_ADMIN_CANARY: https://admin-canary.staging.bonde.org
-          REACT_APP_HASURA_API_URL: ${{ secrets.REACT_APP_DOMAIN_API_GRAPHQL }}
-          REACT_APP_DOMAIN_BOT: https://chatbot.staging.bonde.org
-          REACT_APP_DOMAIN_BETA: https://beta.staging.bonde.org
-          REACT_APP_AWS_BUCKET: bonde-assets-staging
-          REACT_APP_LOGIN_URL: https://accounts.staging.bonde.org/login
-          REACT_APP_DOMAIN_REDES: https://redes.staging.bonde.org
-          REACT_APP_UPLOADS_URL: https://api-rest.staging.bonde.org/uploads
-          REACT_APP_ZENDESK_ORGANIZATIONS: '{"lawyer":360269610652,"individual":360273031591,"therapist":360282119532}'
-          REACT_APP_DOMAIN_PUBLIC: ${{ secrets.REACT_APP_DOMAIN_PUBLIC }}
-          REACT_APP_API_GRAPHQL_SECRET: ${{ secrets.REACT_APP_API_GRAPHQL_SECRET }}
-          REACT_APP_DOMAIN_API_ACTIVISTS: ${{ secrets.REACT_APP_DOMAIN_API_ACTIVISTS }}
-          REACT_APP_DOMAIN_API_GRAPHQL: ${{ secrets.REACT_APP_DOMAIN_API_GRAPHQL }}
-          REACT_APP_DOMAIN_API_REST: ${{ secrets.REACT_APP_DOMAIN_API_REST }}
-          REACT_APP_PAGARME_KEY: ${{ secrets.REACT_APP_PAGARME_KEY }}
-          ACTION_SECRET_KEY: ${{ secrets.ACTION_SECRET_KEY }}
-          REACT_APP_AWS_ROUTE_IP: ${{ secrets.AWS_ROUTE_IP }}
-          REACT_APP_HOTJAR_ID: ${{ secrets.HOTJAR_ID }}
-          REACT_APP_HOTJAR_SV: ${{ secrets.HOTJAR_SV }}
         with:
           context: ./clients
           file: ./clients/Dockerfile
+          build-args: |
+            SKIP_PREFLIGHT_CHECK=true
+            REACT_APP_ENVIRONMENT=staging
+            REACT_APP_DOMAIN_ACCOUNTS=https://accounts.staging.bonde.org
+            REACT_APP_DOMAIN_ADMIN=https://app.staging.bonde.org
+            REACT_APP_DOMAIN_ADMIN_CANARY=https://admin-canary.staging.bonde.org
+            REACT_APP_HASURA_API_URL=${{ secrets.REACT_APP_DOMAIN_API_GRAPHQL }}
+            REACT_APP_DOMAIN_BOT=https://chatbot.staging.bonde.org
+            REACT_APP_DOMAIN_BETA=https://beta.staging.bonde.org
+            REACT_APP_AWS_BUCKET=bonde-assets-staging
+            REACT_APP_LOGIN_URL=https://accounts.staging.bonde.org/login
+            REACT_APP_DOMAIN_REDES=https://redes.staging.bonde.org
+            REACT_APP_UPLOADS_URL=https://api-rest.staging.bonde.org/uploads
+            "REACT_APP_ZENDESK_ORGANIZATIONS={""lawyer"":360269610652,""individual"":360273031591,""therapist"":360282119532}"
+            "REACT_APP_DOMAIN_PUBLIC=${{ secrets.REACT_APP_DOMAIN_PUBLIC }}"
+            "REACT_APP_API_GRAPHQL_SECRET=${{ secrets.REACT_APP_API_GRAPHQL_SECRET }}"
+            "REACT_APP_DOMAIN_API_ACTIVISTS=${{ secrets.REACT_APP_DOMAIN_API_ACTIVISTS }}"
+            "REACT_APP_DOMAIN_API_GRAPHQL=${{ secrets.REACT_APP_DOMAIN_API_GRAPHQL }}"
+            "REACT_APP_DOMAIN_API_REST=${{ secrets.REACT_APP_DOMAIN_API_REST }}"
+            "REACT_APP_PAGARME_KEY=${{ secrets.REACT_APP_PAGARME_KEY }}"
+            "ACTION_SECRET_KEY=${{ secrets.ACTION_SECRET_KEY }}"
+            "REACT_APP_AWS_ROUTE_IP=${{ secrets.AWS_ROUTE_IP }}"
+            "REACT_APP_HOTJAR_ID=${{ secrets.HOTJAR_ID }}"
+            "REACT_APP_HOTJAR_SV=${{ secrets.HOTJAR_SV }}"
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
