@@ -14,12 +14,12 @@ describe('client/mobilizations/widgets/components/widget-overlay', () => {
     children: [],
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     component = mount(<WidgetOverlay {...props} />);
   });
 
   describe('when editable is true', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       component.setProps({ editable: true });
     });
 

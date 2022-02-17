@@ -7,7 +7,7 @@ import List from '../../../mobilizations/components/list';
 describe('client/mobilizations/components/list/index', () => {
   let wrapper;
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(
       <List>
         <h1>Foo Bar</h1>

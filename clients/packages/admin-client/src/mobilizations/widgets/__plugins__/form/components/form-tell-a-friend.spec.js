@@ -12,7 +12,7 @@ describe('client/mobilizations/widgets/__plugins__/form/components/form-tell-a-f
     widget: {},
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<FormTellAFriend {...props} />);
   });
 

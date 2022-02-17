@@ -10,7 +10,7 @@ describe('client/mobilizations/widgets/__plugins__/donation/components/donation-
     mobilization: {},
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<DonationFinishPostDonation {...props} />);
   });
 

@@ -15,7 +15,7 @@ describe('routes/admin/authenticated/sidebar/templates-choose-custom/page', () =
     setSelectedIndex: () => {},
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<Page {...props} />);
   });
 

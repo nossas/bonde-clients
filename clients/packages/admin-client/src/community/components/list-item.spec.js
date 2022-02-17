@@ -13,7 +13,7 @@ describe('client/community/components/list-item', () => {
     community: { id: 1, name: 'foo', image: 'bar.png' },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<ListItem {...props} />);
   });
 

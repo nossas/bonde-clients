@@ -20,7 +20,7 @@ describe('routes/admin/authenticated/sidebar/widgets-pressure-settings/email/pag
     submitting: false,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<Page {...props} intl={intl} />);
   });
 

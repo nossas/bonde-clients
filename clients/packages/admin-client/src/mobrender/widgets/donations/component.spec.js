@@ -30,7 +30,7 @@ describe('client/mobrender/widgets/donations/component', () => {
     asyncWidgetUpdate: () => {},
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<Page {...props} />);
   });
 

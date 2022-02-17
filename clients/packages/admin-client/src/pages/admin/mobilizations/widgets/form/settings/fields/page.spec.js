@@ -13,7 +13,7 @@ describe('routes/admin/authenticated/sidebar/widgets-form-settings/fields/page',
     asyncWidgetUpdate: mock.noop,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<Page {...props} />);
   });
 

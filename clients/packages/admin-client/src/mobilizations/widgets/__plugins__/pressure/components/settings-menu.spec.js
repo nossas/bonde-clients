@@ -13,7 +13,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/settings-
     widget: { id: 1 },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<SettingsMenu {...props} />);
   });
 

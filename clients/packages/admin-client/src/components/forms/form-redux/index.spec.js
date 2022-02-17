@@ -48,7 +48,7 @@ describe('client/components/forms/form-redux', () => {
     const className = 'foo bar';
     const cloneProps = props;
     const customProps = { className };
-    // beforeAll(() => {
+    // beforeEach(() => {
     wrapper = shallow(
       <FormRedux {...Object.assign(cloneProps, customProps)} />
     );

@@ -13,7 +13,7 @@ describe('client/mobilizations/components/list/items/more/menu-action', () => {
     path: '',
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<MoreMenuAction {...props} />);
   });
 

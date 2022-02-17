@@ -19,7 +19,7 @@ describe('routes/admin/authenticated/sidebar/widgets-form-settings/export/page',
     dataExportMount: mock.noop,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<Page {...props} />);
   });
 

@@ -24,7 +24,7 @@ describe('client/mobilizations/components/mobilization-basics-form', () => {
     location: { pathname: 'foobar' },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(
       <MobilizationBasicsForm {...props} intl={intl} />
     );

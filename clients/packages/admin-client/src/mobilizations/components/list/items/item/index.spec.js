@@ -9,7 +9,7 @@ describe('client/mobilizations/components/list/items/item', () => {
   let props;
 
   describe('Item', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       props = {
         onClick: () => {},
       };

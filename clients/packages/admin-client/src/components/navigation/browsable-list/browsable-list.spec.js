@@ -11,7 +11,7 @@ describe('client/components/navigation/browsable-list/browsable-list', () => {
     dispatch: () => {},
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<BrowsableList {...props} />);
   });
 

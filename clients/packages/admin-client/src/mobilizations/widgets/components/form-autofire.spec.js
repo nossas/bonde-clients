@@ -25,7 +25,7 @@ describe('client/mobilizations/widgets/components/form-autofire', () => {
     asyncWidgetUpdate: mock.noop,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<FormAutofire {...props} intl={intl} />);
   });
 

@@ -12,7 +12,7 @@ describe('client/mobilizations/components/list/items/more/more', () => {
     onClick: () => {},
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<More {...props} />);
   });
 

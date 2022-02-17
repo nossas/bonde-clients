@@ -19,7 +19,7 @@ describe('client/mobilizations/widgets/__plugins__/form/components/__form__', ()
     hasNewField: false,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<Form {...props} />);
   });
 

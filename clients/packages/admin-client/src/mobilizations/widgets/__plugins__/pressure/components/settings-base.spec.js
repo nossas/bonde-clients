@@ -19,7 +19,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/settings-
     },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<SettingsBase {...props} />);
   });
 

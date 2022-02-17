@@ -12,7 +12,7 @@ describe('client/mobilizations/components/page-tab-layout', () => {
     location: { pathname: 'foo/bar' },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<PageTabLayout {...props} children={<div />} />);
   });
 

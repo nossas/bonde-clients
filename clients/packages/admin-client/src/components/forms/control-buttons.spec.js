@@ -23,7 +23,7 @@ describe('client/components/forms/control-buttons', () => {
   };
 
   describe('default', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallowWithIntl(<ControlButtons {...props} intl={intl} />, {
         context,
       });
@@ -47,7 +47,7 @@ describe('client/components/forms/control-buttons', () => {
   });
 
   describe('with cancel button', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallowWithIntl(
         <ControlButtons {...{ ...props }} intl={intl} />,
         { context }
@@ -68,7 +68,7 @@ describe('client/components/forms/control-buttons', () => {
   });
 
   describe('with form inline style', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallowWithIntl(
         <ControlButtons {...{ ...props, formInline: true }} intl={intl} />,
         { context }
@@ -82,7 +82,7 @@ describe('client/components/forms/control-buttons', () => {
   });
 
   describe('with submitting status', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallowWithIntl(
         <ControlButtons {...{ ...props, submitting: true }} intl={intl} />,
         { context }
@@ -99,7 +99,7 @@ describe('client/components/forms/control-buttons', () => {
   });
 
   describe('with submitted status', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallowWithIntl(
         <ControlButtons {...{ ...props, submitted: true }} intl={intl} />,
         { context }
@@ -119,7 +119,7 @@ describe('client/components/forms/control-buttons', () => {
   });
 
   describe('with dirty status', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallowWithIntl(
         <ControlButtons
           {...{ ...props, dirty: true, valid: true }}
