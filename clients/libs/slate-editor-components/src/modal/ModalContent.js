@@ -3,7 +3,7 @@ import React from 'react'
 
 // FIXME: Needs to handle assets files to work with SSR
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-if (require('exenv').canUseDOM) require('./ModalContent.css')
+if (require('exenv').canUseDOM) require('./ModalContent.module.css')
 
 const ModalContent = ({ children }) => (
   <div className="modal--content">
