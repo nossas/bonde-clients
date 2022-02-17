@@ -1,11 +1,11 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import PropTypes from 'prop-types';
+import React from 'react';
 
 // Global module dependencies
-import { SettingsPageLayout } from 'components/layout'
+import { SettingsPageLayout } from '../../../../../components/layout';
 
 // Current module dependencies
-import { SettingsMenu } from 'mobilizations/widgets/__plugins__/pressure/components'
+import { SettingsMenu } from '../../../../../mobilizations/widgets/__plugins__/pressure/components';
 
 const SettingsBase = ({ children, location, mobilization, widget }) => (
   <SettingsPageLayout>
@@ -16,14 +16,14 @@ const SettingsBase = ({ children, location, mobilization, widget }) => (
     />
     {children}
   </SettingsPageLayout>
-)
+);
 
 SettingsBase.propTypes = {
   location: PropTypes.shape({
-    pathname: PropTypes.string
+    pathname: PropTypes.string,
   }).isRequired,
   mobilization: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired
-}
+  widget: PropTypes.object.isRequired,
+};
 
-export default SettingsBase
+export default SettingsBase;

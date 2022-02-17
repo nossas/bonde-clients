@@ -4,7 +4,7 @@ import * as paths from '../../../../paths';
 import {
   PageCentralizedLayout,
   PageCentralizedLayoutTitle,
-} from 'components/layout';
+} from '../../../../components/layout';
 import { Button } from '../../../../ux/components';
 
 if (require('exenv').canUseDOM) require('./page.scss');

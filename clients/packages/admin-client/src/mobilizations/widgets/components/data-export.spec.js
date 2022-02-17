@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import * as mock from '../../../utils/mock';
-import { DataExport } from 'mobilizations/widgets/components';
+import { DataExport } from '../../../mobilizations/widgets/components';
 
 describe('client/mobilizations/widgets/components/data-export', () => {
   let wrapper;

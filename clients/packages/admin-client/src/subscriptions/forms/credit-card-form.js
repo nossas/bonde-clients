@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { reduxForm } from 'redux-form';
-import { FormGroup, ControlLabel, FormControl } from 'components/forms';
-import { Pagarme } from 'components/external-services';
+import { FormGroup, ControlLabel, FormControl } from '../../components/forms';
+import { Pagarme } from '../../components/external-services';
 import * as validators from '../../utils/redux-form/validators';
 import * as normalizers from '../../utils/redux-form/normalizers';
 

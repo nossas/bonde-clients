@@ -1,18 +1,18 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
-import { Tabs, Tab } from 'components/navigation';
+import { Tabs, Tab } from '../../../../components/navigation';
 import {
   SettingsPageLayout,
   SettingsPageMenuLayout,
   SettingsPageContentLayout,
-} from 'components/layout';
+} from '../../../../components/layout';
 import {
   FormGroup,
   FormControl,
   ControlLabel,
   UploadImageField,
-} from 'components/forms';
+} from '../../../../components/forms';
 import { SettingsForm } from '../../../../ux/components';
 import * as Paths from '../../../../paths';
 

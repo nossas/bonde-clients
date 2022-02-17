@@ -3,8 +3,8 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import urljoin from 'url-join';
-import { Tabs, Tab } from 'components/navigation';
-import { SettingsPageMenuLayout } from 'components/layout';
+import { Tabs, Tab } from '../../components/navigation';
+import { SettingsPageMenuLayout } from '../../components/layout';
 import * as CommunitySelectors from '../../community/selectors';
 
 import * as paths from '../../paths';

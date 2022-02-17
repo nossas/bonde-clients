@@ -2,7 +2,7 @@
 import { toast } from 'react-toastify';
 import * as notifications from '../../../../../utils/notifications';
 import { createAction } from './create-action';
-import AnalyticsEvents from 'mobilizations/widgets/utils/analytics-events';
+import AnalyticsEvents from '../../../../../mobilizations/widgets/utils/analytics-events';
 import * as t from '../action-types';
 import { setDonationCustomerData } from '.';
 

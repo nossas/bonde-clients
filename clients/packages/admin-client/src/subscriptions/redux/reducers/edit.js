@@ -1,4 +1,4 @@
-import * as t from 'subscriptions/redux/action-types'
+import * as t from '../../../subscriptions/redux/action-types';
 
 export const initialState = {
   //
@@ -27,48 +27,48 @@ export const initialState = {
   // Store the subscription data.
   // @type Object
   //
-  data: undefined
-}
+  data: undefined,
+};
 
 export default (state = initialState, action = {}) => {
   switch (action.type) {
     case t.SET_MODIFICATION_TYPE:
-      return { ...state, modificationType: action.payload }
+      return { ...state, modificationType: action.payload };
 
     case t.APPEND_ANIMATION_STACK:
       return {
         ...state,
-        animationStack: [...state.animationStack, action.payload]
-      }
+        animationStack: [...state.animationStack, action.payload],
+      };
     case t.REMOVE_ANIMATION_STACK:
-      const index = action.payload
+      const index = action.payload;
       return {
         ...state,
         animationStack: [
           ...state.animationStack.slice(0, index),
-          ...state.animationStack.slice(index + 1)
-        ]
-      }
+          ...state.animationStack.slice(index + 1),
+        ],
+      };
 
     case t.ASYNC_RECHARGE_REQUEST:
-      return { ...state, isLoading: true }
+      return { ...state, isLoading: true };
     case t.ASYNC_RECHARGE_SUCCESS:
       return {
         ...state,
         isLoading: false,
         modificationType: undefined,
         animationStack: [],
-        error: undefined
-      }
+        error: undefined,
+      };
     case t.ASYNC_RECHARGE_FAILURE:
-      return { ...state, isLoading: false, error: action.payload }
+      return { ...state, isLoading: false, error: action.payload };
 
     case t.ASYNC_FETCH_SUCCESS:
-      return { ...state, data: action.payload }
+      return { ...state, data: action.payload };
     case t.ASYNC_FETCH_FAILURE:
-      return { ...state, error: action.payload }
+      return { ...state, error: action.payload };
 
     default:
-      return state
+      return state;
   }
-}
+};

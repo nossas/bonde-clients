@@ -8,7 +8,7 @@ import React from 'react';
 // import * as CommunitySelectors from 'community/selectors'
 // import { client as graphqlClient } from 'store'
 // import { FlatForm } from 'ux/components'
-// import { FormGroup, ControlLabel, FormControl } from 'components/forms'
+// import { FormGroup, ControlLabel, FormControl } from '../../../../../components/forms'
 // import Summary from './summary'
 
 // var styles = require('exenv').canUseDOM ? require('./activist-segmentation-form.scss') : {}

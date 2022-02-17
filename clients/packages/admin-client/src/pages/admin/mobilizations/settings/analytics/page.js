@@ -1,7 +1,11 @@
 import React from 'react';
 
 import { FormattedMessage } from 'react-intl';
-import { FormGroup, FormControl, ControlLabel } from 'components/forms';
+import {
+  FormGroup,
+  FormControl,
+  ControlLabel,
+} from '../../../../../components/forms';
 import { SettingsForm } from '../../../../../ux/components';
 
 const MobilizationsSettingsAnalyticsPage = (props) => {

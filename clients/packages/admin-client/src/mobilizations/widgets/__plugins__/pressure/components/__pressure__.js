@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 // import * as graphqlQueries from 'graphql/queries'
-import * as pressureHelper from 'mobilizations/widgets/utils/pressure-helper';
+import * as pressureHelper from '../../../../../mobilizations/widgets/utils/pressure-helper';
 import * as paths from '../../../../../paths';
 import * as array from '../../../../../utils/array';
-import MobSelectors from 'mobrender/redux/selectors';
+import MobSelectors from '../../../../../mobrender/redux/selectors';
 import * as PressureActions from '../action-creators';
-import { FinishMessageCustom } from 'mobilizations/widgets/components';
+import { FinishMessageCustom } from '../../../../../mobilizations/widgets/components';
 import {
   PressureCount,
   PressureForm,

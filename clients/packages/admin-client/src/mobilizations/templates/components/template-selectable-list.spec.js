@@ -3,7 +3,7 @@ import React from 'react';
 import { expect } from 'chai';
 
 import shallowWithIntl from '../../../intl/helpers/shallow-with-intl';
-import { TemplateSelectableList } from 'mobilizations/templates/components';
+import { TemplateSelectableList } from '../../../mobilizations/templates/components';
 import { IntlProvider } from 'react-intl';
 
 const intlProvider = new IntlProvider({ locale: 'en' }, {});

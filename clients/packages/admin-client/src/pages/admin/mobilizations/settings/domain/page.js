@@ -2,7 +2,7 @@ import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { SettingsForm } from '../../../../../ux/components';
-import { FormDomain } from 'mobilizations/components';
+import { FormDomain } from '../../../../../mobilizations/components';
 import * as paths from '../../../../../paths';
 
 const MobilizationsSettingsDomainPage = ({

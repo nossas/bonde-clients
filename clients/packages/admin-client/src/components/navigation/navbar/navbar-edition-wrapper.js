@@ -1,78 +1,81 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { injectIntl, intlShape } from 'react-intl'
-import classnames from 'classnames'
+import PropTypes from 'prop-types';
+import React from 'react';
+import { injectIntl, intlShape } from 'react-intl';
+import classnames from 'classnames';
 
-import { NavbarButton, NavbarForm } from 'components/navigation/navbar'
+import {
+  NavbarButton,
+  NavbarForm,
+} from '../../../components/navigation/navbar';
 
 export class NavbarEditionWrapper extends React.Component {
-  constructor (props, context) {
-    super(props, context)
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       isEditing: false,
-      isMouseOver: false
-    }
+      isMouseOver: false,
+    };
   }
 
-  handleEditButtonClick () {
+  handleEditButtonClick() {
     this.setState({
       isEditing: true,
-      isMouseOver: false
-    })
+      isMouseOver: false,
+    });
   }
 
-  handleHideButtonClick () {
-    this.refs.hideButton.blur()
-    const { blockUpdate, block } = this.props
-    blockUpdate({ ...block, menu_hidden: !block.menu_hidden })
+  handleHideButtonClick() {
+    this.refs.hideButton.blur();
+    const { blockUpdate, block } = this.props;
+    blockUpdate({ ...block, menu_hidden: !block.menu_hidden });
   }
 
-  handleCloseForm () {
-    this.setState({isEditing: false})
+  handleCloseForm() {
+    this.setState({ isEditing: false });
   }
 
-  handleMouseOver () {
-    this.setState({isMouseOver: true})
+  handleMouseOver() {
+    this.setState({ isMouseOver: true });
   }
 
-  handleMouseOut () {
-    this.setState({isMouseOver: false})
+  handleMouseOut() {
+    this.setState({ isMouseOver: false });
   }
 
-  renderEditingButtons () {
+  renderEditingButtons() {
     const buttonsWrapperClassName = classnames(
       'absolute z1 right-align full-width top-0',
       { hide: this.state && !this.state.isMouseOver }
-    )
+    );
 
     const editingButtonsStyle = {
       width: '27px',
       height: '27px',
       padding: 0,
       marginLeft: '4px',
-      marginTop: '4px'
-    }
+      marginTop: '4px',
+    };
 
-    const editingButtonsClassName = 'btn white bg-darken-4 circle'
+    const editingButtonsClassName = 'btn white bg-darken-4 circle';
 
     const hideButtonClassName = classnames(
       'fa',
-      {'fa-eye-slash': !this.props.block.menu_hidden},
-      {'fa-eye': this.props.block.menu_hidden}
-    )
+      { 'fa-eye-slash': !this.props.block.menu_hidden },
+      { 'fa-eye': this.props.block.menu_hidden }
+    );
 
     return (
-      <div className='relative'>
+      <div className="relative">
         <div className={buttonsWrapperClassName}>
           <button
             className={editingButtonsClassName}
             style={editingButtonsStyle}
             onClick={this.handleEditButtonClick.bind(this)}
           >
-            <i className='fa fa-pencil' />
+            <i className="fa fa-pencil" />
           </button>
           <button
-            ref='hideButton'
+            ref="hideButton"
             className={editingButtonsClassName}
             style={editingButtonsStyle}
             onClick={this.handleHideButtonClick.bind(this)}
@@ -81,37 +84,45 @@ export class NavbarEditionWrapper extends React.Component {
           </button>
         </div>
       </div>
-    )
+    );
   }
 
-  blockName (block) {
-    return block.name || this.props.intl.formatMessage({
-      id: 'components.navigation--navbar-edition-wrapper.block',
-      defaultMessage: 'Bloco {position}'
-    }, { position: block.position })
+  blockName(block) {
+    return (
+      block.name ||
+      this.props.intl.formatMessage(
+        {
+          id: 'components.navigation--navbar-edition-wrapper.block',
+          defaultMessage: 'Bloco {position}',
+        },
+        { position: block.position }
+      )
+    );
   }
 
-  renderNavbarButton () {
-    const { block, className } = this.props
+  renderNavbarButton() {
+    const { block, className } = this.props;
 
     return (
       <div
         onMouseOver={this.handleMouseOver.bind(this)}
-        onMouseOut={this.handleMouseOut.bind(this)}>
+        onMouseOut={this.handleMouseOut.bind(this)}
+      >
         <NavbarButton
           targetId={'block-' + block.id}
-          scrollableId='blocks-list'
+          scrollableId="blocks-list"
           hidden={block.menu_hidden}
-          className={className}>
+          className={className}
+        >
           {this.blockName(block)}
         </NavbarButton>
         {this.props.editable && this.renderEditingButtons()}
       </div>
-    )
+    );
   }
 
-  renderNavbarForm () {
-    const { block } = this.props
+  renderNavbarForm() {
+    const { block } = this.props;
 
     return (
       <NavbarForm
@@ -119,13 +130,13 @@ export class NavbarEditionWrapper extends React.Component {
         defaultValue={this.blockName(block)}
         handleCloseForm={this.handleCloseForm.bind(this)}
       />
-    )
+    );
   }
 
-  render () {
-    return (
-      this.state.isEditing ? this.renderNavbarForm() : this.renderNavbarButton()
-    )
+  render() {
+    return this.state.isEditing
+      ? this.renderNavbarForm()
+      : this.renderNavbarButton();
   }
 }
 
@@ -134,7 +145,7 @@ NavbarEditionWrapper.propTypes = {
   dispatch: PropTypes.func,
   auth: PropTypes.object,
   className: PropTypes.string,
-  intl: intlShape.isRequired
-}
+  intl: intlShape.isRequired,
+};
 
-export default injectIntl(NavbarEditionWrapper)
+export default injectIntl(NavbarEditionWrapper);

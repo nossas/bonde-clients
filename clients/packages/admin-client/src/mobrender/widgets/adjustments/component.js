@@ -12,7 +12,7 @@ import {
   FormControl,
   ColorPicker,
   HelpBlock,
-} from 'components/forms';
+} from '../../../components/forms';
 import { SettingsForm } from '../../../ux/components';
 
 const fieldsComponent = {

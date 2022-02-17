@@ -2,9 +2,9 @@
 import React from 'react';
 import { expect } from 'chai';
 import shallowWithIntl from '../../intl/helpers/shallow-with-intl';
-import Pressure from 'mobilizations/widgets/__plugins__/pressure/components';
-import Widget from 'mobrender/components/widget';
-import WidgetOverlay from 'mobrender/components/widget-overlay.connected';
+import Pressure from '../../mobilizations/widgets/__plugins__/pressure/components';
+import Widget from '../../mobrender/components/widget';
+import WidgetOverlay from '../../mobrender/components/widget-overlay.connected';
 import { IntlProvider } from 'react-intl';
 
 const intlProvider = new IntlProvider({ locale: 'en' }, {});

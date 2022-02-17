@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 
 import shallowWithIntl from '../../../intl/helpers/shallow-with-intl';
-import { NavbarEditionWrapper } from 'components/navigation/navbar/navbar-edition-wrapper';
+import { NavbarEditionWrapper } from '../../../components/navigation/navbar/navbar-edition-wrapper';
 import { IntlProvider } from 'react-intl';
 
 const intlProvider = new IntlProvider({ locale: 'en' }, {});

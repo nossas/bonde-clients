@@ -6,16 +6,16 @@ import { connect } from 'react-redux';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { useQuery, gql } from 'bonde-core-tools';
 
-import { Warning } from 'components/notify';
-import { Loading } from 'components/await';
+import { Warning } from '../../../../../../../components/notify';
+import { Loading } from '../../../../../../../components/await';
 import { Button } from '../../../../../../../ux/components';
 import {
   adjustmentsForm,
   AdjustmentsSettingsForm,
-} from 'mobrender/widgets/adjustments';
-import MobSelectors from 'mobrender/redux/selectors';
-import * as CommunitySelectors from 'community/selectors';
-import * as MobActions from 'mobrender/redux/action-creators';
+} from '../../../../../../../mobrender/widgets/adjustments';
+import MobSelectors from '../../../../../../../mobrender/redux/selectors';
+import * as CommunitySelectors from '../../../../../../../community/selectors';
+import * as MobActions from '../../../../../../../mobrender/redux/action-creators';
 import * as Paths from '../../../../../../../paths';
 
 const mapStateToProps = (state, props) => {

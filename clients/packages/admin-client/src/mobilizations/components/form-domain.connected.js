@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { injectIntl } from 'react-intl';
-import { asyncUpdateMobilization } from 'mobrender/redux/action-creators';
+import { asyncUpdateMobilization } from '../../mobrender/redux/action-creators';
 import { isValidDomain } from '../../utils/validation-helper';
 import FormDomain from './form-domain';
 

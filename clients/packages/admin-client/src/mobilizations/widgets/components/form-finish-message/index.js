@@ -10,12 +10,12 @@ import {
   ControlLabel,
   HelpBlock,
   FormControl,
-} from 'components/forms';
+} from '../../../../components/forms';
 import { SettingsForm } from '../../../../ux/components';
-import Editor from 'components/editor-draft-js';
+import Editor from '../../../../components/editor-draft-js';
 import EditorSlate, {
   createEditorContent,
-} from 'mobilizations/widgets/__plugins__/content/components/editor-slate';
+} from '../../../../mobilizations/widgets/__plugins__/content/components/editor-slate';
 import * as styles from './index-scss';
 
 export const FormFinishMessage = (props) => {

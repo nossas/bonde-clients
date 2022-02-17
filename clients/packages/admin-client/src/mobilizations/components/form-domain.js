@@ -8,7 +8,7 @@ import {
   FormControl,
   FormDropdown,
   Raise,
-} from 'components/forms';
+} from '../../components/forms';
 import { isBoolean } from '../../utils/type-checker';
 
 if (require('exenv').canUseDOM) require('./form-domain.scss');

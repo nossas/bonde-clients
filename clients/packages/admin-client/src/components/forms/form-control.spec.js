@@ -4,7 +4,7 @@ import { expect } from 'chai';
 
 import shallowWithIntl from '../../intl/helpers/shallow-with-intl';
 import * as mock from '../../utils/mock';
-import { FormControl } from 'components/forms';
+import { FormControl } from '../../components/forms';
 
 describe('client/components/forms/form-control', () => {
   let wrapper;

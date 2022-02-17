@@ -4,13 +4,13 @@ import { FormattedMessage } from 'react-intl';
 import { Context as SessionContext } from 'bonde-core-tools';
 
 import * as paths from './../../../paths';
-import * as mobilizationUtils from 'mobilizations/utils';
-import { Loading } from 'components/await';
+import * as mobilizationUtils from '../../../mobilizations/utils';
+import { Loading } from '../../../components/await';
 import {
   Sidenav,
   SidenavList,
   SidenavListItem,
-} from 'components/navigation/sidenav';
+} from '../../../components/navigation/sidenav';
 
 const WrappedSidebar = (props) => {
   const { logout } = useContext(SessionContext);

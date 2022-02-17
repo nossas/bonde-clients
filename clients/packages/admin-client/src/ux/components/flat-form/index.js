@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 
-import { FormRedux } from 'components/forms';
+import { FormRedux } from '../../../components/forms';
 import { Button } from '../../../ux/components';
 
 if (require('exenv').canUseDOM) {

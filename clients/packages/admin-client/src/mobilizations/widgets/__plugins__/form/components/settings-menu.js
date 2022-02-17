@@ -1,23 +1,23 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { FormattedMessage } from 'react-intl'
-import * as paths from '../../../../../paths'
-import { Tabs, Tab } from 'components/navigation/tabs'
-import { SettingsPageMenuLayout } from 'components/layout'
+import PropTypes from 'prop-types';
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
+import * as paths from '../../../../../paths';
+import { Tabs, Tab } from '../../../../../components/navigation/tabs';
+import { SettingsPageMenuLayout } from '../../../../../components/layout';
 
 const SettingsMenu = ({ mobilization, widget, location }) => {
-  const fieldsPath = paths.fieldsMobilizationWidget(mobilization.id, widget.id)
-  const formPath = paths.formMobilizationWidget(mobilization.id, widget.id)
-  const formAutofirePath = paths.formAutofire(mobilization.id, widget.id)
-  const formExportPath = paths.formExport(mobilization.id, widget.id)
-  const finishPath = paths.widgetFormSettingsFinish(mobilization.id, widget.id)
+  const fieldsPath = paths.fieldsMobilizationWidget(mobilization.id, widget.id);
+  const formPath = paths.formMobilizationWidget(mobilization.id, widget.id);
+  const formAutofirePath = paths.formAutofire(mobilization.id, widget.id);
+  const formExportPath = paths.formExport(mobilization.id, widget.id);
+  const finishPath = paths.widgetFormSettingsFinish(mobilization.id, widget.id);
 
   return (
     <SettingsPageMenuLayout
       title={
         <FormattedMessage
-          id='form-widget.components--settings-menu.title'
-          defaultMessage='Configure o formulário da sua ação'
+          id="form-widget.components--settings-menu.title"
+          defaultMessage="Configure o formulário da sua ação"
         />
       }
     >
@@ -27,8 +27,8 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={formPath === location.pathname}
           text={
             <FormattedMessage
-              id='form-widget.components--settings-menu.items.adjusts'
-              defaultMessage='Ajustes'
+              id="form-widget.components--settings-menu.items.adjusts"
+              defaultMessage="Ajustes"
             />
           }
         />
@@ -37,8 +37,8 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={fieldsPath === location.pathname}
           text={
             <FormattedMessage
-              id='form-widget.components--settings-menu.items.fields'
-              defaultMessage='Campos do formulário'
+              id="form-widget.components--settings-menu.items.fields"
+              defaultMessage="Campos do formulário"
             />
           }
         />
@@ -47,8 +47,8 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={formAutofirePath === location.pathname}
           text={
             <FormattedMessage
-              id='form-widget.components--settings-menu.items.autofire'
-              defaultMessage='Mensagem agradecimento'
+              id="form-widget.components--settings-menu.items.autofire"
+              defaultMessage="Mensagem agradecimento"
             />
           }
         />
@@ -57,8 +57,8 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={formExportPath === location.pathname}
           text={
             <FormattedMessage
-              id='form-widget.components--settings-menu.items.report'
-              defaultMessage='Relatório'
+              id="form-widget.components--settings-menu.items.report"
+              defaultMessage="Relatório"
             />
           }
         />
@@ -67,20 +67,20 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={finishPath === location.pathname}
           text={
             <FormattedMessage
-              id='form-widget.components--settings-menu.items.post-action'
-              defaultMessage='Pós-inscrição'
+              id="form-widget.components--settings-menu.items.post-action"
+              defaultMessage="Pós-inscrição"
             />
           }
         />
       </Tabs>
     </SettingsPageMenuLayout>
-  )
-}
+  );
+};
 
 SettingsMenu.propTypes = {
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  location: PropTypes.object.isRequired
-}
+  location: PropTypes.object.isRequired,
+};
 
-export default SettingsMenu
+export default SettingsMenu;

@@ -2,7 +2,7 @@ import React from 'react';
 import { expect } from 'chai';
 import shallowWithIntl from '../../../../intl/helpers/shallow-with-intl';
 
-import { FormFinishMessage } from 'mobilizations/widgets/components/form-finish-message';
+import { FormFinishMessage } from '../../../../mobilizations/widgets/components/form-finish-message';
 import { IntlProvider } from 'react-intl';
 
 const intlProvider = new IntlProvider({ locale: 'en' }, {});

@@ -27,11 +27,11 @@ module.exports = {
     // https://jestjs.io/docs/webpack#handling-static-assets
     "^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$": `<rootDir>/packages/admin-client/src/jest/mock-style.js`,
 
-    // Handle module aliases
-    "^components/(.*)$": "<rootDir>/packages/admin-client/src/components/$1",
-    "^mobrender/(.*)$": "<rootDir>/packages/admin-client/src/mobrender/$1",
-    "^mobilizations/(.*)$":
-      "<rootDir>/packages/admin-client/src/mobilizations/$1",
+    // // Handle module aliases
+    // "^components/(.*)$": "<rootDir>/packages/admin-client/src/components/$1",
+    // "^mobrender/(.*)$": "<rootDir>/packages/admin-client/src/mobrender/$1",
+    // "^mobilizations/(.*)$":
+    //   "<rootDir>/packages/admin-client/src/mobilizations/$1",
   },
   transformIgnorePatterns: [
     "/node_modules/",

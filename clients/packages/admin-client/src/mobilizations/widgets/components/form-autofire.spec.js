@@ -4,7 +4,7 @@ import shallowWithIntl from '../../../intl/helpers/shallow-with-intl';
 import { expect } from 'chai';
 
 import * as mock from '../../../utils/mock';
-import { FormAutofire } from 'mobilizations/widgets/components';
+import { FormAutofire } from '../../../mobilizations/widgets/components';
 import { IntlProvider } from 'react-intl';
 
 const intlProvider = new IntlProvider({ locale: 'en' }, {});

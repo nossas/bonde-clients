@@ -7,7 +7,7 @@ import { shallow } from 'enzyme';
 import { expect } from 'chai';
 
 import * as mock from '../../../../utils/mock';
-import { UploadImageField } from 'components/forms';
+import { UploadImageField } from '../../../../components/forms';
 
 describe('client/components/forms/upload-image-field', () => {
   let wrapper;

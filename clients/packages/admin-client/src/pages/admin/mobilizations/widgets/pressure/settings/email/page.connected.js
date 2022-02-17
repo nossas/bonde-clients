@@ -5,8 +5,8 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { injectIntl } from 'react-intl';
 import { toast } from 'react-toastify';
-import MobSelectors from 'mobrender/redux/selectors';
-import * as MobActions from 'mobrender/redux/action-creators';
+import MobSelectors from '../../../../../../../mobrender/redux/selectors';
+import * as MobActions from '../../../../../../../mobrender/redux/action-creators';
 import { messagePressureTargetsRemoveAll } from '../../../../../../../utils/notifications';
 
 import Page from './page';

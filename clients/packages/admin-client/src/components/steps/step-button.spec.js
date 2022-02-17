@@ -5,7 +5,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
-import { StepButton } from 'components/steps';
+import { StepButton } from '../../components/steps';
 
 describe('components/steps/step-button', () => {
   it('should render without crashed', () => {

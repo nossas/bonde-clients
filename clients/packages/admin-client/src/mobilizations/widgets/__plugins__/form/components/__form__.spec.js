@@ -2,7 +2,7 @@
 import React from 'react';
 import { expect } from 'chai';
 import shallowWithIntl from '../../../../../intl/helpers/shallow-with-intl';
-import { Form } from 'mobilizations/widgets/__plugins__/form/components/__form__.connected';
+import { Form } from '../../../../../mobilizations/widgets/__plugins__/form/components/__form__.connected';
 
 describe('client/mobilizations/widgets/__plugins__/form/components/__form__', () => {
   let wrapper;

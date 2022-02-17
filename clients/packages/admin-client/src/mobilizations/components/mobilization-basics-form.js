@@ -8,7 +8,7 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { slugUpdatedMessage } from '../../utils/notifications';
 import { slugify } from '../../utils/string-helper';
 import { SettingsForm } from '../../ux/components';
-import { Code } from 'components/markdown';
+import { Code } from '../../components/markdown';
 import {
   FormRedux,
   FormGroup,
@@ -18,7 +18,7 @@ import {
   Radio,
   HelpBlock,
   UploadImageField,
-} from 'components/forms';
+} from '../../components/forms';
 import * as paths from '../../paths';
 
 export const MobilizationBasicsForm = ({
