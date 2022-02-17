@@ -19,7 +19,7 @@ describe('client/mobilizations/templates/components/template-selectable-list', (
     handleSelectItem: () => {},
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(
       <TemplateSelectableList {...props} intl={intl} />
     );

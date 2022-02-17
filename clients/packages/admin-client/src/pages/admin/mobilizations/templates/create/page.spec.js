@@ -22,7 +22,7 @@ describe('routes/admin/authenticated/sidebar/templates-create/page', () => {
     valid: false,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<Page {...props} intl={intl} />);
   });
 

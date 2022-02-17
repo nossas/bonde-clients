@@ -50,7 +50,7 @@ describe('client/components/forms/form-control', () => {
   });
 
   describe('when it is form inline style', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       const cloneContext = context;
       const formReduxContext = { $formRedux: { formInline: true } };
       wrapper.setContext(Object.assign(cloneContext, formReduxContext));

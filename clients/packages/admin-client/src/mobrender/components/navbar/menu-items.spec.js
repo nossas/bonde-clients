@@ -12,7 +12,7 @@ describe('client/mobrender/components/navbar/menu-items', () => {
     mobilization: { id: 1 },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<MenuItems {...props} />);
   });
 
@@ -37,7 +37,7 @@ describe('client/mobrender/components/navbar/menu-items', () => {
   });
 
   describe('mobile prop enabled', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallow(<MenuItems {...props} mobile />);
     });
 

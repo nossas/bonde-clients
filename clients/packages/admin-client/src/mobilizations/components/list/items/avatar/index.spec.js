@@ -16,7 +16,7 @@ describe('client/mobilizations/components/list/items/avatar', () => {
     },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<Avatar {...props} />);
   });
 

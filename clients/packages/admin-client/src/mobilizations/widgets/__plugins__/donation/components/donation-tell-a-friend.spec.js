@@ -12,7 +12,7 @@ describe('client/mobilizations/widgets/__plugins__/donation/components/donation-
     widget: {},
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<DonationTellAFriend {...props} />);
   });
 

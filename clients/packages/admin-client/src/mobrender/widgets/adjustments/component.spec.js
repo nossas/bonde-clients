@@ -26,7 +26,7 @@ describe('client/mobrender/widgets/adjustments/component', () => {
     asyncWidgetUpdate: mock.noop,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<Page {...props} intl={intl} />);
   });
 

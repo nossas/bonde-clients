@@ -12,7 +12,7 @@ describe('client/mobilizations/widgets/__plugins__/pressure/components/pressure-
     widget: {},
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<PressureTellAFriend {...props} />);
   });
 

@@ -22,7 +22,7 @@ describe('routes/admin/authenticated/sidebar/mobilizations-list/page', () => {
   };
   const context = { router: {} };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<Page {...props} />, { context });
   });
 

@@ -17,7 +17,7 @@ describe('client/mobilizations/widgets/components/finish-message-custom', () => 
     readOnly: true,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<FinishMessageCustom {...props} />);
   });
 

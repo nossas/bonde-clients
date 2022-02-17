@@ -13,7 +13,7 @@ describe('client/community/components/force-download-via-ajax', () => {
     title: 'Foo bar',
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<ForceDownloadViaAjax {...props} />);
   });
 

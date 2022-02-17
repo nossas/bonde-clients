@@ -12,7 +12,7 @@ describe('client/mobilizations/components/list/items/more/menu', () => {
   };
   const context = { router: {} };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<MoreMenu {...props} />, { context });
   });
 

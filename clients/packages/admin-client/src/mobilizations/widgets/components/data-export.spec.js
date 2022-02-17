@@ -19,7 +19,7 @@ describe('client/mobilizations/widgets/components/data-export', () => {
     dataExportMount: mock.noop,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<DataExport {...props} />);
   });
 

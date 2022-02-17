@@ -10,7 +10,7 @@ describe('client/mobilizations/components/list/items/created-at', () => {
   const props = {};
 
   describe('CreatedAt', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallow(<CreatedAt {...props} />);
     });
 
@@ -22,7 +22,7 @@ describe('client/mobilizations/components/list/items/created-at', () => {
   });
 
   describe('Header', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallow(<CreatedAt.Header {...props} />);
     });
 

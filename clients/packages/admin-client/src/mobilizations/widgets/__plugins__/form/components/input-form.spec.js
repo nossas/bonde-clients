@@ -20,7 +20,7 @@ describe('client/mobilizations/widgets/__plugins__/form/components/input-form', 
     },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<InputForm {...props} intl={intl} />);
   });
 

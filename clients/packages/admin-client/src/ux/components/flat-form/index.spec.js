@@ -24,7 +24,7 @@ describe('client/ux/components/flat-form', () => {
   };
   const children = <h1>Foo Bar Children</h1>;
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<FlatForm {...props}>{children}</FlatForm>);
   });
 

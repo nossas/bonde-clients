@@ -1,6 +1,3 @@
-/**
- * @jest-environment jsdom
- */
 import { mocked } from 'ts-jest/utils';
 import formEntry, { Args, formEntryQuery, fillActivist } from './form-entry';
 import graphql from './request-graphql';

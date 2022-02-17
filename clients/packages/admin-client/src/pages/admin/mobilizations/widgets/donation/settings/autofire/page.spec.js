@@ -24,7 +24,7 @@ describe('routes/admin/authenticated/sidebar/widgets-donation-settings/autofire/
     asyncWidgetUpdate: mock.noop,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<Page {...props} intl={intl} />);
   });
 

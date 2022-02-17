@@ -21,7 +21,7 @@ describe('client/mobilizations/widgets/__plugins__/content/components/editor-new
     dispatch: mock.noop,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<EditorNew {...props} />);
   });
 
