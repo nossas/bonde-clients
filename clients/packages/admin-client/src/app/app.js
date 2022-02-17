@@ -8,7 +8,7 @@ import {
 
 import AppRouting from 'pages/app';
 
-import * as t from 'community/action-types';
+import * as t from '../community/action-types';
 
 const Portal = ({ dispatch }) => {
   const { communities, community } = useContext(SessionContext);
