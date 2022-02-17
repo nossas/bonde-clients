@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
 // import { injectIntl, intlShape } from 'react-intl'
 import { SlateEditor, SlateContent } from './packages/slate-editor/src';

@@ -1,6 +1,9 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
 import { shallow } from 'enzyme';
-import { render, waitFor, fireEvent } from '@testing-library/react';
+import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { TranslateContext } from '../../../components/MobilizationClass';
 import Form from '../components/Form';
@@ -18,7 +21,7 @@ const FormI18n = (props: any) => (
   </TranslateContext.Provider>
 );
 
-describe('Pressure Form', function() {
+describe('Pressure Form', function () {
   const widget = {
     id: 1,
     count: 0,
@@ -69,7 +72,7 @@ describe('Pressure Form', function() {
   });
 
   it('should render button "Enviando..." when saving form', () => {
-    const { container, getAllByText } = renderFormPlugin({...props, saving: true });
+    const { container, getAllByText } = renderFormPlugin({ ...props, saving: true });
 
     expect(container.querySelector('button[type="submit"]')).toBeInTheDocument();
     expect(getAllByText('Pressure Saving')).toHaveLength(1);

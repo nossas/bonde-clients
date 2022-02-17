@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+import React from 'react';
 import styled from '@emotion/styled';
 import { useField } from 'react-final-form';
 import Box from './Box';

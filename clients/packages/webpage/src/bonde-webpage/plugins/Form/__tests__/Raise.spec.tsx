@@ -1,9 +1,12 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Raise } from '../components';
 
-describe('Form Raise', function() {
+describe('Form Raise', function () {
   const message = 'Nome não pode ficar em branco';
 
   it('should render raise', () => {

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import { mocked } from 'ts-jest/utils';
 import formEntry, { Args, formEntryQuery, fillActivist } from './form-entry';
 import graphql from './request-graphql';
@@ -64,7 +67,7 @@ describe('activists module form entry tests', () => {
           email: fields[1].value,
           name: fields[0].value
         },
-        input: { fields: fields.map(field => ({...field, required: field.required === 'true' ? true : false})) },
+        input: { fields: fields.map(field => ({ ...field, required: field.required === 'true' ? true : false })) },
         widget_id: args.widget_id
       };
 
@@ -100,7 +103,7 @@ describe('activists module form entry tests', () => {
       email: email.value
     });
 
-    expect(fillActivist([email, {...name, label: 'Nome'}])).toEqual({
+    expect(fillActivist([email, { ...name, label: 'Nome' }])).toEqual({
       first_name: name.value,
       name: name.value,
       email: email.value
@@ -159,7 +162,7 @@ describe('activists module form entry tests', () => {
       last_name: lastName.value
     });
 
-    expect(fillActivist([email, name, {...lastName, label: 'Surname' }])).toEqual({
+    expect(fillActivist([email, name, { ...lastName, label: 'Surname' }])).toEqual({
       first_name: name.value,
       name: `${name.value} ${lastName.value}`,
       email: email.value,
@@ -206,7 +209,7 @@ describe('activists module form entry tests', () => {
       email: email.value
     });
 
-    expect(fillActivist([{...email, label: 'E-mail' }, name])).toEqual({
+    expect(fillActivist([{ ...email, label: 'E-mail' }, name])).toEqual({
       first_name: name.value,
       name: name.value,
       email: email.value
@@ -259,13 +262,13 @@ describe('activists module form entry tests', () => {
       phone: phone.value
     });
 
-    expect(fillActivist([email, name, {...phone, label: 'mobile'}])).toEqual({
+    expect(fillActivist([email, name, { ...phone, label: 'mobile' }])).toEqual({
       first_name: name.value,
       name: name.value,
       email: email.value,
       phone: phone.value
     });
-    
+
     expect(fillActivist([email, name, { ...phone, label: 'portable' }])).toEqual({
       first_name: name.value,
       name: name.value,
