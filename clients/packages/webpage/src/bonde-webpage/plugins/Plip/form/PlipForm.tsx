@@ -18,7 +18,7 @@ export interface PlipFormState {
 }
 
 const required = (field: any) => {
-  return !!field ? undefined : "não pode ficar em branco"
+  return field ? undefined : "não pode ficar em branco"
 };
 
 const mustBeNumber = (whatsapp: any) => (isNaN(whatsapp) && whatsapp != null ? "Digite apenas números" : undefined);

@@ -27,7 +27,7 @@ const FinishDonationMessage = ({
   };
 
   if (success) {
-    const message = !!value ? 'donation: ok' : 'donation: not ok';
+    const message = value ? 'donation: ok' : 'donation: not ok';
     return (
       <TellAFriend
         {...ownProps}

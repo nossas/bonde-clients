@@ -29,12 +29,12 @@ export type DNSProps = {
 export const DNS = styled.div<DNSProps>`
   display: grid;
   grid-template-columns: 500px auto 150px;
-  grid-template-rows: ${props => !!props.header ? '35px' : '60px'};
-  background-color: ${props => !!props.header ? 'none' : '#fff'};
-  border-bottom: ${props => !!props.header ? 'none' : '1px solid #eee'};  
+  grid-template-rows: ${props => props.header ? '35px' : '60px'};
+  background-color: ${props => props.header ? 'none' : '#fff'};
+  border-bottom: ${props => props.header ? 'none' : '1px solid #eee'};  
 
   ${Col} {
-    padding: ${props => !!props.header ? '0 20px 18px' : '18px 20px'};
+    padding: ${props => props.header ? '0 20px 18px' : '18px 20px'};
 
     ${Header.H5} {
       margin: 14px 0 8px;
@@ -79,8 +79,8 @@ export const StatusStyled = styled(Text).attrs({ bold: true, uppercase: true })`
 `;
 
 export const Status = ({ value, labels, activeStatus, inactiveStatus, isActived }: StatusProps) => {
-  const isActive = !!isActived ? isActived() : value === activeStatus;
-  const isDisabled = !!isActived ? !isActived() : value === inactiveStatus;
+  const isActive = isActived ? isActived() : value === activeStatus;
+  const isDisabled = isActived ? !isActived() : value === inactiveStatus;
 
   return (
     <StatusStyled active={isActive} disabled={isDisabled}>

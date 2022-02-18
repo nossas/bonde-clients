@@ -19,5 +19,6 @@
     "noEmit": true,
     "jsx": "react"
   },
+  "include": ["libs/*", "packages/*"],
   "exclude": ["*/**/dist/**", "./out/**/*", "./node_modules/**/*", "**/*stories*", "**/*spec*", "**/*__tests__*", "**/setupTests.ts"],
 }
