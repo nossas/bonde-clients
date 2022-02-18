@@ -31,7 +31,7 @@ describe('activists module pressure tests', () => {
   };
   const OLD_ENV = process.env;
   const SECRET_KEY = "token-de-teste";
-  const token = jwt.sign({ a: '' }, SECRET_KEY);
+  const token = jwt.sign({}, SECRET_KEY);
 
   beforeEach(() => {
     jest.resetModules(); // Most important - it clears the cache

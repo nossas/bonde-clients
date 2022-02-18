@@ -1,26 +1,16 @@
 /**
  * @jest-environment jsdom
  */
-/* eslint-disable no-unused-expressions */
-import sinon from 'sinon';
-import { expect } from 'chai';
-
 import AnalyticsEvents from '../../../mobilizations/widgets/utils/analytics-events';
 
 describe.skip('client/mobilizations/widgets/utils/analytics-events', () => {
-  let sandbox;
+  jest.spyOn(AnalyticsEvents, 'sendEvent');
 
-  // before(() => {
-  //   sandbox = sinon.sandbox.create()
-  //   sandbox.spy(AnalyticsEvents, 'sendEvent')
-  // })
-
-  describe('#formIsFilled', () => {
-    it('should return true when form is filled', () => {
-      expect(AnalyticsEvents.formIsFilled()).to.be.true;
-    });
-
-    expect(AnalyticsEvents.sendEvent).to.be.called;
+  it('should return true when form is filled', () => {
+    const result = AnalyticsEvents.formIsFilled();
+    
+    expect(result).toEqual(true);
+    expect(AnalyticsEvents.sendEvent.calls.length).toEqual(1);
   });
 
   // formSavedData,

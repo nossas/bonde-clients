@@ -101,7 +101,7 @@ describe('client/mobrender/components/widget', () => {
         widget: { ...props.widget, kind: 'donation' },
       });
       expect(
-        widget.find('Apollo(Connect(InjectIntl(Donation)))').length
+        widget.find('FetchDonationGoalStats').length
       ).to.equal(1);
     });
   });
