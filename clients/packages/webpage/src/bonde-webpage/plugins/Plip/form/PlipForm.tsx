@@ -17,16 +17,16 @@ export interface PlipFormState {
   submited: boolean;
 }
 
-const required = (field) => {
+const required = (field: any) => {
   return !!field ? undefined : "não pode ficar em branco"
 };
 
-const mustBeNumber = (whatsapp) => (isNaN(whatsapp) && whatsapp != null ? "Digite apenas números" : undefined);
+const mustBeNumber = (whatsapp: any) => (isNaN(whatsapp) && whatsapp != null ? "Digite apenas números" : undefined);
 
-const minValue = (min) => (whatsapp) =>
+const minValue = (min: any) => (whatsapp: any) =>
   isNaN(whatsapp) || whatsapp.length >= min ? undefined : `Digite o número com o DDD`;
 
-const composeValidators = (...validators) => (field) =>
+const composeValidators = (...validators): any => (field: any) =>
   validators.reduce((error, validator) => error || validator(field), undefined);
 
 const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {

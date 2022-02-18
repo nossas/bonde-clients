@@ -56,6 +56,7 @@
     "recharts": "^2.1.5",
     "slate-editor": "workspace:*",
     "slate-plain-serializer": "^0.7.13",
+    "react-scripts": "3.4.1",
     "slugify": "^1.4.6"
   },
   "devDependencies": {

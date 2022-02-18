@@ -3,7 +3,7 @@ import React from 'react'
 
 // FIXME: Needs to handle assets files to work with SSR
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-if (require('exenv').canUseDOM) require('./Tooltip.css')
+if (require('exenv').canUseDOM) require('./Tooltip.module.css')
 
 const Tooltip = ({ children, ...props }) => (
   <div

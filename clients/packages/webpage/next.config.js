@@ -1,11 +1,24 @@
 /* eslint-disable import/no-extraneous-dependencies */
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const withTM = require('next-transpile-modules')([
+  '@slate-editor/alignment-plugin',
+  '@slate-editor/color-plugin',
+  '@slate-editor/embed-plugin',
+  '@slate-editor/font-size-plugin',
+  '@slate-editor/grid-plugin',
+  '@slate-editor/image-plugin',
+  '@slate-editor/link-plugin',
+  '@slate-editor/list-plugin',
+  '@slate-editor/components',
+]); // pass the modules you would like to see transpiled
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
 
-module.exports = withBundleAnalyzer({
+module.exports = withTM(withBundleAnalyzer({
   poweredByHeader: false,
   trailingSlash: true,
   basePath: '',
@@ -21,5 +34,5 @@ module.exports = withBundleAnalyzer({
     domainPublic: process.env.REACT_APP_DOMAIN_PUBLIC,
     pagarmeKey: process.env.REACT_APP_PAGARME_KEY
   }
-});
+}));
 

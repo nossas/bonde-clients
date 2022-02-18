@@ -105,12 +105,12 @@ const MatchSettings = ({
                     </Header.H4>
                     {error && <Hint color="error">{error.message}</Hint>}
                     <div
-                      css={css`
-                        & textarea {
-                          height: 100px;
-                          margin-bottom: 30px;
-                        }
-                      `}
+                      // css={css`
+                      //   & textarea {
+                      //     height: 100px;
+                      //     margin-bottom: 30px;
+                      //   }
+                      // `}
                     >
                       <TextareaField
                         name={`input.whatsapp.${group.name

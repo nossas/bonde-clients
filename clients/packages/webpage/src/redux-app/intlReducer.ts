@@ -3,7 +3,7 @@ import en from 'react-intl/locale-data/en';
 import es from 'react-intl/locale-data/es';
 import pt from 'react-intl/locale-data/pt';
 
-import localeData from './locale-data';
+import localeData from '../initialI18nStore';
 
 addLocaleData([...pt, ...es, ...en]);
 

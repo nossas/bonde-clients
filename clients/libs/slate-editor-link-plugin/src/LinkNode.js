@@ -6,7 +6,7 @@ import LinkDataModal from './LinkDataModal'
 
 // FIXME: Needs to handle assets files to work with SSR
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-if (require('exenv').canUseDOM) require('./LinkNode.css')
+if (require('exenv').canUseDOM) require('./LinkNode.module.css')
 
 class LinkNode extends Component {
   constructor(props) {

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import graphql from './request-graphql';
 
 window.fetch = jest.fn().mockResolvedValue({

@@ -8,7 +8,7 @@ import DraggableColorPicker from './DraggableColorPicker'
 
 // FIXME: Needs to handle assets files to work with SSR
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-if (require('exenv').canUseDOM) require('./ColorButton.css')
+if (require('exenv').canUseDOM) require('./ColorButton.module.css')
 
 class ColorButton extends Component {
   // eslint-disable-next-line react/no-deprecated
