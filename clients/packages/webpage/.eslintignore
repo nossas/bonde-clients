@@ -1,6 +1,0 @@
-node_modules
-out
-**/*stories*
-**/*spec*
-**/*__tests__*
-**/setupTests.ts

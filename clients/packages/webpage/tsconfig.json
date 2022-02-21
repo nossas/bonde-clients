@@ -35,6 +35,13 @@
     "isolatedModules": true,
     "incremental": true
   },
-  "exclude": ["./out/**/*", "./node_modules/**/*", "**/*stories*", "**/*spec*", "**/*__tests__*", "**/setupTests.ts"],
+  "exclude": [
+    "./out/**/*",
+    "./node_modules/**/*",
+    "**/*stories*",
+    "**/*spec*",
+    "**/*__tests__*",
+    "**/setupTests.ts"
+  ],
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"]
 }
