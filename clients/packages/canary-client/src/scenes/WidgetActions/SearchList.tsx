@@ -15,7 +15,7 @@ type Props = {
   children: (props: RenderProps) => any
 }
 
-const SearchList = ({ header, children, data, empty, loading, renderLoading }: Props) => {
+const SearchList: React.FC<Props> = ({ header, children, data, empty, loading, renderLoading }) => {
   const [datalist, setDatalist] = useState(data);
   const isLoading = typeof loading !== 'undefined' && loading && !!renderLoading;
 
@@ -24,7 +24,7 @@ const SearchList = ({ header, children, data, empty, loading, renderLoading }: P
   }, [data]);
 
   return (
-    <Stack direction="column" spacing={4}>
+    <Stack direction="column" spacing={4} flex={1}>
       <Flex direction={["column", "row"]} justify="space-between">
         {header}
         <SearchInput

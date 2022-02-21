@@ -30,7 +30,7 @@ const Home = ({ community, widgets, loading }: Props): React.ReactElement => {
         </>
       )}
     >
-      <Stack direction="column" spacing={4}>
+      <Stack direction="column" spacing={4} flex={1}>
         {!isMobile ? 
           <section style={{ marginBottom: '15px' }}>
             <Header.H5 uppercase>{t('home.shortcuts.title')}</Header.H5>
@@ -45,7 +45,7 @@ const Home = ({ community, widgets, loading }: Props): React.ReactElement => {
         >
           {({ result }: any) => (
             <Box
-              maxHeight={["500px", "none"]}
+              maxHeight={["725px", "none"]}
               overflowY="auto"
             >
               <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", null, "repeat(4, 1fr)", null, "repeat(6, 1fr)"]} gap={4} rowGap={4}>
