@@ -152,8 +152,39 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                   </div>
                 )}
               </Field>
+              <Field name="color">
+                {({ input }) => (
+                  <div>
+                    <label>Com qual raça/cor você se identifica?</label>
+                    <select {...input}>
+                      <option>selecione entre as opções</option>
+                      <option value="amarela">Amarela</option>
+                      <option value="branca">Branca</option>
+                      <option value="indigena">Indígena</option>
+                      <option value="parda">Parda</option>
+                      <option value="preta">Preta</option>
+                    </select>
+                  </div>
+                )}
+              </Field>
+              <Field name="gender">
+                {({ input }) => (
+                  <div>
+                    <label>Você é...</label>
+                    <select {...input}>
+                      <option>selecione entre as opções</option>
+                      <option value="mulher-cisgenero">Mulher cisgênero</option>
+                      <option value="mulher-transgenero">Mulher transgênero</option>
+                      <option value="homem-cisgenero">Homem cisgênero</option>
+                      <option value="homem-transgenero">Homem transgênero</option>
+                      <option value="nao-sei-responder">Não sei responder</option>
+                      <option value="prefiro-nao-responder">Prefiro não responder</option>
+                      <option value="outro">Outro</option>
+                    </select>
+                  </div>
+                )}
+              </Field>
               <button type="submit" value="submit">{(widget.settings && widget.settings.button_text) || 'Enviar'}</button>
-
               <LGPD />
             </form>
           )
