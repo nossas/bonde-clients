@@ -1,0 +1,12 @@
+name: Deployment clients
+on:
+  push:
+    branches:
+      - "main"
+      - "release/*"
+      - "feature/*"
+      - "hotfix/*"
+
+jobs:
+  tests:
+    uses: ./.github/workflows/tests.yml
