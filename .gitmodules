@@ -1,6 +1,3 @@
-[submodule "clients/libs/components"]
-	path = clients/libs/components
-	url = https://github.com/nossas/bonde-components
 [submodule "clients/libs/core-tools"]
 	path = clients/libs/core-tools
 	url = https://github.com/nossas/bonde-core-tools
