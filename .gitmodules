@@ -1,6 +1,3 @@
-[submodule "clients/libs/core-tools"]
-	path = clients/libs/core-tools
-	url = https://github.com/nossas/bonde-core-tools
 [submodule "apis/api-graphql"]
 	path = apis/api-graphql
 	url = https://github.com/nossas/bonde-apis
