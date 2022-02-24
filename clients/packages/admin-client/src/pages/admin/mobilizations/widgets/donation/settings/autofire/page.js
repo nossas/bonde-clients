@@ -1,14 +1,11 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { Loading } from 'components/await'
-import { FormAutofire } from 'mobilizations/widgets/components'
+import { Loading } from '../../../../../../../components/await';
+import { FormAutofire } from '../../../../../../../mobilizations/widgets/components';
 
-const DonationSettingsAutofirePage = props => !props.widget ? (
-  <Loading />
-) : (
-  <FormAutofire {...props} />
-)
+const DonationSettingsAutofirePage = (props) =>
+  !props.widget ? <Loading /> : <FormAutofire {...props} />;
 
 DonationSettingsAutofirePage.propTypes = {
   // Injected by redux-form
@@ -16,7 +13,7 @@ DonationSettingsAutofirePage.propTypes = {
   // Injected by container
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  asyncWidgetUpdate: PropTypes.func.isRequired
-}
+  asyncWidgetUpdate: PropTypes.func.isRequired,
+};
 
-export default DonationSettingsAutofirePage
+export default DonationSettingsAutofirePage;

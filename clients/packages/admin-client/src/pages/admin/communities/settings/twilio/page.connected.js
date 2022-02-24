@@ -1,9 +1,9 @@
 //
 // @route /community/twilio
 //
-import React from 'react'
+import React from 'react';
 // import { FormattedMessage } from 'react-intl'
-// import { Info } from 'components/notify'
+// import { Info } from '../../../../../components/notify'
 // import { createForm, Field } from 'storybook/forms'
 // import {
 //   combineValidations,
@@ -162,9 +162,7 @@ import React from 'react'
 // export default HOCGraphQL(PageGraphQL)
 
 const PageGraphQL = () => {
-  return (
-    <h3>Override PageGraphQL</h3>
-  );
-}
+  return <h3>Override PageGraphQL</h3>;
+};
 
 export default PageGraphQL;

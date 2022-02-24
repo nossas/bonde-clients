@@ -36,7 +36,7 @@ jobs:
         run: cd clients && pnpm i --no-frozen-lockfile
       
       - name: Run tests
-        run: cd clients && pnpm test
+        run: cd clients && pnpm test && exit 0
       
       # - name: Upload coverage to Codecov
       #   uses: codecov/codecov-action@v2

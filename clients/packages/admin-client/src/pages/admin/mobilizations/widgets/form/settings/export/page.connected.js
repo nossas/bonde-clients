@@ -1,27 +1,30 @@
 //
 // @route /mobilizations/:mobilization_id/widgets/:widget_id/form/export
 //
-import { connect } from 'react-redux'
-import { asyncWidgetDataExport, dataExportMount } from 'mobrender/redux/action-creators'
-import MobSelectors from 'mobrender/redux/selectors'
+import { connect } from 'react-redux';
+import {
+  asyncWidgetDataExport,
+  dataExportMount,
+} from '../../../../../../../mobrender/redux/action-creators';
+import MobSelectors from '../../../../../../../mobrender/redux/selectors';
 
-import Page from './page'
+import Page from './page';
 
 const mapStateToProps = (state, props) => {
-  const selectors = MobSelectors(state, props)
+  const selectors = MobSelectors(state, props);
 
   return {
     loading: state.mobilizations.dataExport.loading,
     error: state.mobilizations.dataExport.error,
     success: state.mobilizations.dataExport.success,
     mobilization: selectors.getMobilization(),
-    widget: selectors.getWidget()
-  }
-}
+    widget: selectors.getWidget(),
+  };
+};
 
 const mapActionsToProps = {
   asyncWidgetDataExport,
-  dataExportMount
-}
+  dataExportMount,
+};
 
-export default connect(mapStateToProps, mapActionsToProps)(Page)
+export default connect(mapStateToProps, mapActionsToProps)(Page);
