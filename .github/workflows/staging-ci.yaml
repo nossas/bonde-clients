@@ -9,4 +9,35 @@ on:
 
 jobs:
   tests:
+    name: Tests for all clients and libs
     uses: ./.github/workflows/tests.yml
+
+  build:
+    name: Build clients app for staging
+    uses: ./.github/workflows/build-clients.yml
+    with:
+      environment: webpage-in-staging
+    secrets:
+      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      REACT_APP_ENVIRONMENT: staging
+      REACT_APP_DOMAIN_ACCOUNTS: https://accounts.staging.bonde.org
+      REACT_APP_DOMAIN_ADMIN: https://app.staging.bonde.org
+      REACT_APP_DOMAIN_ADMIN_CANARY: https://admin-canary.staging.bonde.org
+      REACT_APP_DOMAIN_BOT: https://chatbot.staging.bonde.org
+      REACT_APP_DOMAIN_BETA: https://beta.staging.bonde.org
+      REACT_APP_AWS_BUCKET: bonde-assets-staging
+      REACT_APP_LOGIN_URL: https://accounts.staging.bonde.org/login
+      REACT_APP_DOMAIN_REDES: https://redes.staging.bonde.org
+      REACT_APP_UPLOADS_URL: https://api-rest.staging.bonde.org/uploads
+      REACT_APP_ZENDESK_ORGANIZATIONS: "{\"lawyer\":360269610652,\"individual\":360273031591,\"therapist\":360282119532}"
+      REACT_APP_DOMAIN_PUBLIC: ${{ secrets.REACT_APP_DOMAIN_PUBLIC }}
+      REACT_APP_API_GRAPHQL_SECRET: ${{ secrets.REACT_APP_API_GRAPHQL_SECRET }}
+      REACT_APP_DOMAIN_API_ACTIVISTS: ${{ secrets.REACT_APP_DOMAIN_API_ACTIVISTS }}
+      REACT_APP_DOMAIN_API_GRAPHQL: ${{ secrets.REACT_APP_DOMAIN_API_GRAPHQL }}
+      REACT_APP_DOMAIN_API_REST: ${{ secrets.REACT_APP_DOMAIN_API_REST }}
+      REACT_APP_PAGARME_KEY: ${{ secrets.REACT_APP_PAGARME_KEY }}
+      ACTION_SECRET_KEY: ${{ secrets.ACTION_SECRET_KEY }}
+      AWS_ROUTE_IP: ${{ secrets.AWS_ROUTE_IP }}
+      HOTJAR_ID: ${{ secrets.HOTJAR_ID }}
+      HOTJAR_SV: ${{ secrets.HOTJAR_SV }}
