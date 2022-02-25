@@ -2,6 +2,8 @@
 module.exports = {
   coverageReporters: ["lcov", "text-summary"],
   roots: [
+    "<rootDir>/libs/components/test",
+    "<rootDir>/libs/core-tools/src",
     "<rootDir>/packages/accounts-client/src",
     "<rootDir>/packages/admin-client/src",
     "<rootDir>/packages/canary-client/src",
@@ -15,6 +17,7 @@ module.exports = {
   transform: {
     "^.+\\.(js|jsx|ts|tsx)$": "ts-jest",
   },
+  testEnvironment: "jsdom",
   moduleNameMapper: {
     // Handle CSS imports (with CSS modules)
     // https://jestjs.io/docs/webpack#mocking-css-modules
