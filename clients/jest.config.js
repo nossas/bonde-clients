@@ -3,7 +3,7 @@ module.exports = {
   coverageReporters: ["lcov", "text-summary"],
   roots: [
     "<rootDir>/libs/components/test",
-    "<rootDir>/libs/core-tools/src",
+    "<rootDir>/libs/core-tools/test",
     "<rootDir>/packages/accounts-client/src",
     "<rootDir>/packages/admin-client/src",
     "<rootDir>/packages/canary-client/src",
