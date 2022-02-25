@@ -1,4 +1,4 @@
-name: Deployment clients
+name: Continuous Integration for clients
 on:
   push:
     branches:

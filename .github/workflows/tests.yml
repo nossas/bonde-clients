@@ -1,14 +1,6 @@
-
 name: Reusable tests for apps
 on:
   workflow_call:
-    # inputs:
-    #   username:
-    #     required: true
-    #     type: string
-    # secrets:
-    #   envPAT:
-    #     required: true
 
 jobs:
   tests:
@@ -38,21 +30,11 @@ jobs:
       - name: Run tests
         run: cd clients && pnpm test && exit 0
       
-      # - name: Upload coverage to Codecov
-      #   uses: codecov/codecov-action@v2
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
-      #     fail_ci_if_error: true
-      #     files: ./monorepo/clients/admin/coverage/clover.xml
-      #     flags: unittests
-      #     verbose: true
-
-# jobs:
-#   reusable_workflow_job:
-#     runs-on: ubuntu-latest
-#     environment: production
-#     steps:
-#       - uses: ./.github/actions/my-action
-#         with:
-#           username: ${{ inputs.username }}
-#           token: ${{ secrets.envPAT }}
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+          files: ./clients/lcov
+          flags: unittests
+          verbose: true
