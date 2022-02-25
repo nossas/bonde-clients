@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 /* eslint-disable no-unused-expressions */
 import React from 'react';
 import { expect } from 'chai';
@@ -98,7 +101,7 @@ describe('client/mobrender/components/widget', () => {
         widget: { ...props.widget, kind: 'donation' },
       });
       expect(
-        widget.find('Apollo(Connect(InjectIntl(Donation)))').length
+        widget.find('FetchDonationGoalStats').length
       ).to.equal(1);
     });
   });

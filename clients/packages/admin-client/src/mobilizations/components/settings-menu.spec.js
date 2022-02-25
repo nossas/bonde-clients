@@ -12,7 +12,7 @@ describe('client/mobilizations/components/settings-menu', () => {
     location: { pathname: 'foo/bar' },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<SettingsMenu {...props} />);
   });
 

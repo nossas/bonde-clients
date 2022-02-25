@@ -10,7 +10,7 @@ describe('client/mobilizations/components/list/items/fund-raising', () => {
   const props = {};
 
   describe('FundRaising', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallow(<FundRaising {...props} />);
     });
 
@@ -22,7 +22,7 @@ describe('client/mobilizations/components/list/items/fund-raising', () => {
   });
 
   describe('Header', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallow(<FundRaising.Header {...props} />);
     });
 

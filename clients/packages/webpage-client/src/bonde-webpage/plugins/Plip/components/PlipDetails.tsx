@@ -1,6 +1,5 @@
-// import { BrowserRouter } from "react-router-dom";
-// import { Link } from "react-router-dom";
-import styles from './PlipDetails.module.css';
+import React from 'react';
+import PlipDetailsStyles from './PlipDetailsStyles';
 import PdfButton from './PdfButton';
 
 interface PropsPlipDetails {
@@ -9,7 +8,7 @@ interface PropsPlipDetails {
 
 const PlipDetails = (props: PropsPlipDetails) => {
   return (
-    <div className={styles.PlipDetails}>
+    <PlipDetailsStyles>
       <h3><strong>Eba! Geramos uma ficha para você assinar:</strong></h3>
       <PdfButton dataPdf={props.pdf.data.data?.pdf_data} fileName={props.pdf.data.data?.filename} />
       <ol>
@@ -18,7 +17,7 @@ const PlipDetails = (props: PropsPlipDetails) => {
         <li><strong>Envie a ficha:</strong>Na ficha tem o endereço para o envio dos correios. É só levar até a agência mais próxima de você e enviar!</li>
       </ol>
       <p><strong>A Amazônia conta com você! 🌳✊</strong></p>
-    </div>
+    </PlipDetailsStyles>
   )
 }
 

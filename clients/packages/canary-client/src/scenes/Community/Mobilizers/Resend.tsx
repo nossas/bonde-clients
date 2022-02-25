@@ -41,7 +41,7 @@ const Resend: React.FC<Props> = ({ data: { id, email, role }, refetch }) => {
 
   const onClick = async () => {
     try {
-      if (!!community) {
+      if (community) {
         const { data } = await deleteInvite({ variables: { id } })
 
         if (data.delete_invitations.returning.length > 0) {

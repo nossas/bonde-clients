@@ -10,7 +10,7 @@ describe('client/mobilizations/components/list/items/name', () => {
   let props;
 
   describe('Name', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       props = {};
       wrapper = shallow(<Name {...props} name={''} goal={''} />);
     });
@@ -23,7 +23,7 @@ describe('client/mobilizations/components/list/items/name', () => {
   });
 
   describe('Header', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       props = {};
       wrapper = shallow(<Name.Header {...props} />);
     });

@@ -1,7 +1,7 @@
 import type { PlipForm } from './QueryFiltersProvider';
 
 export const checkStatus = (plipForm: PlipForm): string => {
-  if (!!plipForm.confirmed_signatures) return 'Concluído';
+  if (plipForm.confirmed_signatures) return 'Concluído';
 
   else if (
     !plipForm.confirmed_signatures &&

@@ -19,7 +19,7 @@ describe('client/components/forms/upload-image-field', () => {
     theme: 'classic',
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<UploadImageField {...props} />, { context });
   });
 

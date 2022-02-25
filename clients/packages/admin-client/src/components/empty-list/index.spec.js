@@ -7,7 +7,7 @@ import EmptyList from '../empty-list';
 describe('client/components/empty-list/index', () => {
   let wrapper;
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(
       <EmptyList>
         <h1>Nenhum template criado.</h1>

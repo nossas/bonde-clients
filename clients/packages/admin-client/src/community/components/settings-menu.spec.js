@@ -16,7 +16,7 @@ describe('client/community/components/settings-menu', () => {
     },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<SettingsMenu {...props} />);
   });
 

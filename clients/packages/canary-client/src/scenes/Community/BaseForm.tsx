@@ -120,7 +120,7 @@ const BaseForm: React.FC<Props> = ({ children, formName, success }) => {
             bank_account: bank
           }
         };
-        await updateRecipient({ variables: { input }});
+        await updateRecipient({ variables: { input } });
       }
 
       if (!user.isAdmin) {
@@ -135,7 +135,7 @@ const BaseForm: React.FC<Props> = ({ children, formName, success }) => {
 
       // Update Session
       await updateSession('community', returning[0]);
-    } catch (e) {
+    } catch (e: any) {
       // invalid_permission
       if (e.message === 'invalid_permission') {
         toast(t('messages.invalid_permission'), { type: toast.TYPE.ERROR });

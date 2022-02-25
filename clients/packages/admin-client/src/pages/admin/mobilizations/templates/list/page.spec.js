@@ -21,7 +21,7 @@ describe('routes/admin/authenticated/sidebar/templates-list/page', () => {
     },
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallow(<Page {...props} />);
   });
 

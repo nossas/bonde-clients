@@ -48,9 +48,9 @@ const BtnWhatsapp = ({
               rel="noopener noreferrer"
               style={{ textDecoration: "none" }}
               key={`whatsapp-link-${i}`}
-              css={css`
-                color: ${theme.brand.main};
-              `}
+              // css={css`
+              //   color: ${theme.brand.main};
+              // `}
             >
               {group?.name}
             </a>

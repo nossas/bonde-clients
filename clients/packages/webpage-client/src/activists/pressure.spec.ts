@@ -46,7 +46,7 @@ describe('activists module pressure tests', () => {
 
   it('should make a query to called graphql api with input args', () => {
     mockedGraphql.mockResolvedValue({ data: { activist_pressure_id: 8576 } });
-    jwtSpy.mockReturnValue(token);
+    // jwtSpy.mockReturnValue(token);
 
     return pressure(args)
       .then(() => {
@@ -71,7 +71,7 @@ describe('activists module pressure tests', () => {
 
   it('should input city if preset in activist', () => {
     mockedGraphql.mockResolvedValue({ data: { activist_pressure_id: 8576 } });
-    jwtSpy.mockReturnValue(token);
+    // jwtSpy.mockReturnValue(token);
     const city = 'Belo Horizonte';
     
     return pressure({

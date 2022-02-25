@@ -33,7 +33,7 @@ describe('client/mobilizations/widgets/components/form-finish-message in donatio
     FinishPostDonation: () => <div />,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<FormFinishMessage {...props} intl={intl} />);
   });
 
@@ -96,7 +96,7 @@ describe('client/mobilizations/widgets/components/form-finish-message', () => {
     FinishPostDonation: () => <div />,
   };
 
-  beforeAll(() => {
+  beforeEach(() => {
     wrapper = shallowWithIntl(<FormFinishMessage {...props} intl={intl} />);
   });
 

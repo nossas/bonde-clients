@@ -43,15 +43,4 @@ describe('client/components/forms/form-redux', () => {
       expect(wrapper.props().className).to.be.a.string;
     });
   });
-
-  describe('when pass className prop', () => {
-    const className = 'foo bar';
-    const cloneProps = props;
-    const customProps = { className };
-    // beforeAll(() => {
-    wrapper = shallow(
-      <FormRedux {...Object.assign(cloneProps, customProps)} />
-    );
-    // })
-  });
 });

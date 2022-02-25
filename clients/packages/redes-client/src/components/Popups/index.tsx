@@ -30,7 +30,7 @@ export const getVariables = (
   },
   user: any,
   communityId?: number
-):  MapaMatchVariables | RedesMatchVariables => {
+): MapaMatchVariables | RedesMatchVariables => {
   if (communityId === MAPA_DO_ACOLHIMENTO_COMMUNITY) {
     const { recipient, volunteer } = match
     return {
@@ -64,24 +64,25 @@ export const getVariables = (
     recipientId: match.recipient.id,
     volunteerId: match.volunteer.id,
   }
-  if(user.isAdmin) {
+  if (user.isAdmin) {
     usersForMatch.input["user_id"] = user.id
   }
   return usersForMatch
 };
 
 type Props = {
-  match: {
-    recipient: Individual;
-    volunteer: Omit<Individual, 'userStatus' | 'ticketId' | 'externalId'>;
-  };
+  match: any;
+  // {
+  // recipient: Individual;
+  // volunteer: Omit<Individual, 'userStatus' | 'ticketId' | 'externalId'>;
+  // };
   setModal: (value: boolean) => void;
   isOpen: boolean;
-  createRelationship: (args: { variables: Record<string, any>}) => Promise<any>;
+  createRelationship: (args: { variables: Record<string, any> }) => Promise<any>;
   user: any,
   community?: {
     id: number
-  },  
+  },
   loading: boolean
 }
 
@@ -110,7 +111,7 @@ export default function Popups({
       const customWhatsappLink = createCustomWhatsappLink(match, user.firstName);
       setCustomLink(customWhatsappLink);
       return setData(data);
-    } catch (e) {
+    } catch (e: any) {
       e.graphQLErrors.map((error: any) => console.log(error));
       return setError(e.message);
     }

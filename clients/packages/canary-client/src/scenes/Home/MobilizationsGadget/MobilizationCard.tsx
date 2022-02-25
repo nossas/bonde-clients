@@ -30,7 +30,7 @@ export const MobilizationBox: React.FC<MobilizationBoxProps> = ({
     boxShadow="sm"
     overflow="hidden"
     bg="white"
-    cursor={!!onClick ? "pointer" : "normal"}
+    cursor={onClick ? "pointer" : "normal"}
     onClick={onClick}
   >
     <Image

@@ -10,7 +10,7 @@ describe('client/mobilizations/components/list/items/copy-number', () => {
   const props = {};
 
   describe('CopyNumber', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallow(<CopyNumber {...props} />);
     });
 
@@ -22,7 +22,7 @@ describe('client/mobilizations/components/list/items/copy-number', () => {
   });
 
   describe('Header', () => {
-    beforeAll(() => {
+    beforeEach(() => {
       wrapper = shallow(<CopyNumber.Header {...props} />);
     });
 

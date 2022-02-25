@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 /* eslint-disable react/prop-types */
 import React from 'react'
 
 // FIXME: Needs to handle assets files to work with SSR
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-if (require('exenv').canUseDOM) require('./ModalButton.css')
+if (require('exenv').canUseDOM) require('./ModalButton.module.css')
 
 const Container = ({ children }) => (
   <div className="modal-button--container">

@@ -144,12 +144,10 @@ export async function getServerSideProps({
   // }
 
   const regex = host.match(`(.+).${appDomain}`);
-  // const where = regex
-  //   ? { slug: regex[1].replace(/^www\./, '') }
-  //   // Garante que hosts com ou sem www serão buscados na base de dados com www
-  //   : { custom_domain: `www.${host.replace('www.', '')}` };
-  console.log(regex);
-  const where = { slug: 'plip' };
+  const where = regex
+    ? { slug: regex[1].replace(/^www\./, '') }
+    // Garante que hosts com ou sem www serão buscados na base de dados com www
+    : { custom_domain: `www.${host.replace('www.', '')}` };
 
   const { mobilizations } = await asyncFilterMobilizationsGraphql(where)
   const { blocks } = await asyncFilterBlocksGraphql(where)

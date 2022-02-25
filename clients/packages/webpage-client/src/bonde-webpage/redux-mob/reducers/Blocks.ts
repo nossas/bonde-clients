@@ -16,7 +16,7 @@ type State = {
   error?: any;
 };
 
-export default (
+const _default = (
   state: State = initialState,
   action: { type: string; payload?: any }
 ) => {
@@ -72,12 +72,11 @@ export default (
     case t.DESTROY_BLOCK_FAILURE:
       return { ...state, saving: false, error: action.payload };
     case t.UPDATE_BLOCK_BATCH:
-      const payload = action.payload.blocks.blocks;
       return {
         ...state,
         saving: false,
         data: state.data.map((b: any) => {
-          const block = payload.find((u: any) => u.id === b.id);
+          const block = action.payload.blocks.blocks.find((u: any) => u.id === b.id);
           if (block) return block;
           else return b;
         }),
@@ -88,3 +87,5 @@ export default (
       return state;
   }
 };
+
+export default _default;

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment jsdom
+ */
 import React from 'react';
 import { render, shallow } from 'enzyme';
 import { Button } from '../components';
