@@ -198,6 +198,8 @@ type Organizations = {
 };
 
 const parseZendeskOrganizations = (input?: string) => JSON.parse(input || "");
+console.log("process.env.REACT_APP_ZENDESK_ORGANIZATIONS", process.env.REACT_APP_ZENDESK_ORGANIZATIONS);
+
 export const zendeskOrganizations: Organizations = parseZendeskOrganizations(
   process.env.REACT_APP_ZENDESK_ORGANIZATIONS
 );

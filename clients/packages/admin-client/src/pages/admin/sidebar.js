@@ -13,7 +13,7 @@ import DNSControlSelectors from '../../community/dns-control-selectors';
 import * as DNSControlActions from '../../community/action-creators/dns-control';
 
 // SubRoutes
-import CommunitySettings from './communities/settings';
+import CommunitySettings from './communities/settings/container';
 import MobilizationsContainer from './mobilizations';
 import AccountPage from './account/edit';
 
