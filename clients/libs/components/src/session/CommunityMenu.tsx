@@ -51,13 +51,13 @@ const CommunityMenu = ({
 
           const colorSystem = inverted
             ? {
-                color: isActive ? 'pink.200' : 'white',
-                _hover: isActive ? hoverColor('pink') : hoverColor('gray'),
-              }
+              color: isActive ? 'pink.200' : 'white',
+              _hover: isActive ? hoverColor('pink') : hoverColor('gray'),
+            }
             : {
-                color: 'gray.400',
-                _hover: hoverColor('gray'),
-              };
+              color: 'gray.400',
+              _hover: hoverColor('gray'),
+            };
 
           return (
             <IconButton
@@ -66,7 +66,7 @@ const CommunityMenu = ({
               variant="link"
               colorScheme="gray"
               title={items[key][1]}
-              icon={<IconComponent {...colorSystem} boxSize={4} />}
+              icon={<IconComponent {...colorSystem} boxSize={[0, 0, 4, 4]} />}
               onClick={handleClick(config[key])}
             />
           );
