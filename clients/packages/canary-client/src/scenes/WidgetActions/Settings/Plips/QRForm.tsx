@@ -69,7 +69,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
       input.user_id = user.id;
     }
 
-    insertPlipSignature({ variables: { input }})
+    insertPlipSignature({ variables: { input } })
       .then((resp: any) => {
         setFormValues(resp.data.insert_plip_signatures_one)
       })
@@ -100,7 +100,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
     </Flex>
   ) : (
     <Wizard
-      buttonText={plipSignaturesAgg.aggregate.count > 0 ? 'Confirmar nova ficha' : 'Confirmar'}
+      buttonText={plipSignaturesAgg.aggregate.count > 0 ? 'Confirmar nova ficha' : 'Confirma'}
       onSubmit={handleSubmit}
       initialValues={{
         unique_identifier: code,
@@ -109,7 +109,7 @@ const QRForm: React.FC<Properties> = ({ widget }) => {
     >
       <Wizard.Page>
         <Stack spacing={4} flex={1} py={8}>
-          <Heading fontSize="2xl">Confere aí:</Heading>
+          <Heading fontSize="3xl">Confere aí:</Heading>
           <InputField
             name="unique_identifier"
             label="Código da ficha"
