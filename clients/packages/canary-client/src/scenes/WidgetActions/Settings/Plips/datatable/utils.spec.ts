@@ -8,6 +8,7 @@ describe('Status', () => {
     expected_signatures: 10,
     state: 'SP',
     created_at: new Date().toDateString(),
+    status: 'INSCRITO',
     confirmed_signatures: undefined
   }
 

@@ -1,26 +1,45 @@
-# FROM node:14-alpine AS builder
+FROM node:14-alpine
 
-# ENV PORT 5000
-# ARG NODE_ENV
+# Configure all env vars to build imagem
+ARG SKIP_PREFLIGHT_CHECK
+ARG REACT_APP_ENVIRONMENT
+ARG REACT_APP_DOMAIN_ACCOUNTS
+ARG REACT_APP_DOMAIN_ADMIN
+ARG REACT_APP_DOMAIN_ADMIN_CANARY
+ARG REACT_APP_HASURA_API_URL
+ARG REACT_APP_DOMAIN_BOT
+ARG REACT_APP_DOMAIN_BETA
+ARG REACT_APP_AWS_BUCKET
+ARG REACT_APP_LOGIN_URL
+ARG REACT_APP_DOMAIN_REDES
+ARG REACT_APP_UPLOADS_URL
+ARG REACT_APP_ZENDESK_ORGANIZATIONS_LAWYER
+ARG REACT_APP_ZENDESK_ORGANIZATIONS_INDIVIDUAL
+ARG REACT_APP_ZENDESK_ORGANIZATIONS_THERAPIST
+ARG REACT_APP_DOMAIN_PUBLIC
+ARG REACT_APP_API_GRAPHQL_SECRET
+ARG REACT_APP_DOMAIN_API_ACTIVISTS
+ARG REACT_APP_DOMAIN_API_GRAPHQL
+ARG REACT_APP_DOMAIN_API_REST
+ARG REACT_APP_PAGARME_KEY
+ARG ACTION_SECRET_KEY
+ARG REACT_APP_AWS_ROUTE_IP
+ARG REACT_APP_HOTJAR_ID
+ARG REACT_APP_HOTJAR_SV
 
-# # USER node
-# WORKDIR /usr/src/app
-# COPY package*.json yarn.lock tsconfig*.json pnpm*.yaml ./
-# RUN pnpm i
-# COPY packages packages
-# RUN pnpm m run build
-# EXPOSE 5000 5001 5002 5003 5004
-# CMD ["pnpm", "m", "run", "start"]
+# Print variables config
+RUN env
 
-FROM node:14-alpine AS builder
-ENV PORT 3003
-ARG NODE_ENV
+# Install pnpm to manage dependencies commands to build and start
+WORKDIR /code
 
-# USER node
-WORKDIR /usr/src/app
-COPY package*.json yarn.lock ./
-RUN yarn install --frozen-lockfile
-COPY . /usr/src/app
-RUN yarn build
-EXPOSE 5000 5001 5002 5003 5004
-CMD ["yarn", "start"]
+RUN apk --update add curl
+RUN curl -L https://unpkg.com/@pnpm/self-installer | node
+
+COPY . .
+
+RUN pnpm i --no-frozen-lockfile
+
+RUN pnpm m run prepare --filter {libs}
+
+RUN pnpm m run build --filter {packages}

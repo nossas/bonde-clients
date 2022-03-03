@@ -1,12 +1,12 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-import { expect } from 'chai'
+import React from 'react';
+import { shallow } from 'enzyme';
+import { expect } from 'chai';
 
-import * as mock from 'utils/mock'
-import Page from './page'
+import * as mock from '../../../../../../../utils/mock';
+import Page from './page';
 
 describe('routes/admin/authenticated/sidebar/widgets-form-settings/export/page', () => {
-  let wrapper
+  let wrapper;
   const props = {
     params: { widget_id: '1' },
     loading: false,
@@ -16,17 +16,17 @@ describe('routes/admin/authenticated/sidebar/widgets-form-settings/export/page',
     mobilization: { name: 'Foo bar' },
     // Actions
     asyncWidgetDataExport: mock.noop,
-    dataExportMount: mock.noop
-  }
+    dataExportMount: mock.noop,
+  };
 
-  beforeAll(() => {
-    wrapper = shallow(<Page {...props} />)
-  })
+  beforeEach(() => {
+    wrapper = shallow(<Page {...props} />);
+  });
 
   describe('#render', () => {
     it('should render without crash', () => {
       // eslint-disable-next-line no-unused-expressions
-      expect(wrapper).to.be.ok
-    })
-  })
-})
+      expect(wrapper).to.be.ok;
+    });
+  });
+});

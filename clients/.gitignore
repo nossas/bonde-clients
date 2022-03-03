@@ -5,6 +5,7 @@ node_modules
 /.pnp
 .pnp.js
 packages/**/node_modules
+libs/**/node_modules
 
 # testing
 coverage

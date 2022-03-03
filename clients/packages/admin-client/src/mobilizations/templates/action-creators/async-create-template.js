@@ -1,6 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
 import * as t from '../action-types'
-import AuthSelectors from 'account/redux/selectors';
+import AuthSelectors from '../../../account/redux/selectors';
 
 const AsyncCreateTemplate = template => (dispatch, getState, { api }) => {
   dispatch({ type: t.REQUEST_TEMPLATE_CREATE })

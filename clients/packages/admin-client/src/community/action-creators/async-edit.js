@@ -1,6 +1,6 @@
 /* eslint-disable prefer-promise-reject-errors */
 // import * as t from 'community/action-types'
-import AuthSelectors from 'account/redux/selectors';
+import AuthSelectors from '../../account/redux/selectors';
 
 const asyncEdit = ({ id, ...community }) => (dispatch, getState, { api }) => {
   const headers = AuthSelectors(getState())

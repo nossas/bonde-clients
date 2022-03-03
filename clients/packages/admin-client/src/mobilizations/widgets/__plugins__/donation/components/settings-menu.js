@@ -1,23 +1,26 @@
-import PropTypes from 'prop-types'
-import React from 'react'
-import { FormattedMessage } from 'react-intl'
+import PropTypes from 'prop-types';
+import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import * as paths from 'paths'
-import { Tabs, Tab } from 'components/navigation/tabs'
-import { SettingsPageMenuLayout } from 'components/layout'
+import * as paths from '../../../../../paths';
+import { Tabs, Tab } from '../../../../../components/navigation/tabs';
+import { SettingsPageMenuLayout } from '../../../../../components/layout';
 
 const SettingsMenu = ({ mobilization, widget, location }) => {
-  const donationPath = paths.donation(mobilization.id, widget.id) + '/settings'
-  const donationAdjustmentsPath = paths.donation(mobilization.id, widget.id)
-  const donationAutofirePath = paths.donationAutofire(mobilization.id, widget.id)
-  const donationFinishPath = paths.donationFinish(mobilization.id, widget.id)
+  const donationPath = paths.donation(mobilization.id, widget.id) + '/settings';
+  const donationAdjustmentsPath = paths.donation(mobilization.id, widget.id);
+  const donationAutofirePath = paths.donationAutofire(
+    mobilization.id,
+    widget.id
+  );
+  const donationFinishPath = paths.donationFinish(mobilization.id, widget.id);
 
   return (
     <SettingsPageMenuLayout
       title={
         <FormattedMessage
-          id='donation.components--settings-menu.title'
-          defaultMessage='Configure sua caixa de doação'
+          id="donation.components--settings-menu.title"
+          defaultMessage="Configure sua caixa de doação"
         />
       }
     >
@@ -27,8 +30,8 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={donationAdjustmentsPath === location.pathname}
           text={
             <FormattedMessage
-              id='donation.components--settings-menu.tabs.adjusts'
-              defaultMessage='Ajustes'
+              id="donation.components--settings-menu.tabs.adjusts"
+              defaultMessage="Ajustes"
             />
           }
         />
@@ -37,8 +40,8 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={donationPath === location.pathname}
           text={
             <FormattedMessage
-              id='donation.components--settings-menu.tabs.info'
-              defaultMessage='Dados para doação'
+              id="donation.components--settings-menu.tabs.info"
+              defaultMessage="Dados para doação"
             />
           }
         />
@@ -47,8 +50,8 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={donationAutofirePath === location.pathname}
           text={
             <FormattedMessage
-              id='donation.components--settings-menu.tabs.autofire'
-              defaultMessage='Mensagem agradecimento'
+              id="donation.components--settings-menu.tabs.autofire"
+              defaultMessage="Mensagem agradecimento"
             />
           }
         />
@@ -57,20 +60,21 @@ const SettingsMenu = ({ mobilization, widget, location }) => {
           isActive={donationFinishPath === location.pathname}
           text={
             <FormattedMessage
-              id='donation.components--settings-menu.tabs.post-action'
-              defaultMessage='Pós-doação'
+              id="donation.components--settings-menu.tabs.post-action"
+              defaultMessage="Pós-doação"
             />
           }
         />
       </Tabs>
     </SettingsPageMenuLayout>
-  )
-}
+  );
+};
 
 SettingsMenu.propTypes = {
   mobilization: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
   widget: PropTypes.shape({ id: PropTypes.number.isRequired }).isRequired,
-  location: PropTypes.shape({ pathname: PropTypes.string.isRequired }).isRequired
-}
+  location: PropTypes.shape({ pathname: PropTypes.string.isRequired })
+    .isRequired,
+};
 
-export default SettingsMenu
+export default SettingsMenu;

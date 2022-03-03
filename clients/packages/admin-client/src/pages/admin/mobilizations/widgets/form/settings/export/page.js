@@ -1,12 +1,11 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { Loading } from 'components/await'
-import { DataExport } from 'mobilizations/widgets/components'
+import { Loading } from '../../../../../../../components/await';
+import { DataExport } from '../../../../../../../mobilizations/widgets/components';
 
-const FormSettingsExportPage = props => !props.widget ? <Loading /> : (
-  <DataExport {...props} />
-)
+const FormSettingsExportPage = (props) =>
+  !props.widget ? <Loading /> : <DataExport {...props} />;
 
 FormSettingsExportPage.propTypes = {
   // Injected by react-redux
@@ -17,7 +16,7 @@ FormSettingsExportPage.propTypes = {
   error: PropTypes.object,
   // Injected by container
   widget: PropTypes.object.isRequired,
-  mobilization: PropTypes.object.isRequired
-}
+  mobilization: PropTypes.object.isRequired,
+};
 
-export default FormSettingsExportPage
+export default FormSettingsExportPage;

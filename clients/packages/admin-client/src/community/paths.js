@@ -2,7 +2,7 @@ import urljoin from 'url-join';
 
 const namespace = '/community'
 const adminCanaryDomains = () => {
-    window.location.href = urljoin(process.env.REACT_APP_DOMAIN_ADMIN_CANARY, '/community/domains')
+    window.location.href = urljoin(process.env.REACT_APP_DOMAIN_ADMIN_CANARY || "", '/community/domains')
 }
 
 export const communityAdd = () => `/communities/new`

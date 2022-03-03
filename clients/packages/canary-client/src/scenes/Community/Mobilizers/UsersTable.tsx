@@ -47,11 +47,11 @@ const Delete = ({ row: { original: { id, user } }, refetch }: DeleteProps) => {
           throw DeleteException({
             graphQLErrors: [{ extensions: { code: 'validation-failed' } }]
           })
-        } catch ({ graphQLErrors, ...errors }) {
-          if (graphQLErrors && graphQLErrors.filter((err: any) => err.extensions.code === 'validation-failed').length > 0) {
+        } catch (e: any) {
+          if (e.graphQLErrors && e.graphQLErrors.filter((err: any) => err.extensions.code === 'validation-failed').length > 0) {
             toast(t('mobilizers.form.permission-denied'), { type: toast.TYPE.ERROR })
           } else {
-            console.error({ graphQLErrors, ...errors })
+            console.error({ graphQLErrors: e.graphQLErrors })
           }
         }
       }}

@@ -1,8 +1,8 @@
-import React from 'react'
-import shallowWithIntl from 'intl/helpers/shallow-with-intl'
+import React from 'react';
+import shallowWithIntl from '../../../../intl/helpers/shallow-with-intl';
 
-import * as mock from 'utils/mock'
-import Page from './page'
+import * as mock from '../../../../utils/mock';
+import Page from './page';
 import { IntlProvider } from 'react-intl';
 
 const intlProvider = new IntlProvider({ locale: 'en' }, {});
@@ -12,7 +12,7 @@ describe('routes/admin/authenticated/external/community-new/page', () => {
   const props = {
     fields: {
       name: {},
-      city: {}
+      city: {},
     },
     submitting: false,
     // Actions
@@ -21,10 +21,10 @@ describe('routes/admin/authenticated/external/community-new/page', () => {
     handleSubmit: () => {},
     submitFailed: false,
     dirty: false,
-    valid: false
-  }
+    valid: false,
+  };
 
   it('should render without crashed', () => {
-    shallowWithIntl(<Page {...props} intl={intl} />)
-  })
-})
+    shallowWithIntl(<Page {...props} intl={intl} />);
+  });
+});

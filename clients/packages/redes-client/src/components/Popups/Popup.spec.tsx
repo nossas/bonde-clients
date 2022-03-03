@@ -6,7 +6,7 @@ import faker from "faker/locale/pt_BR";
 import Popups from "./";
 import { FilterProvider } from "../../services/FilterProvider";
 
-describe("Popups", () => {
+describe.skip("Popups", () => {
   const matchUsers = {
     recipient: {
       firstName: faker.name.firstName(),

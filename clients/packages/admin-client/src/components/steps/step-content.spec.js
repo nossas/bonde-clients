@@ -3,7 +3,7 @@ import React from 'react'
 import { expect } from 'chai'
 import { shallow } from 'enzyme'
 
-import { StepContent, StepButton } from 'components/steps'
+import { StepContent, StepButton } from '../../components/steps'
 
 describe('components/steps/step-content', () => {
   let content

@@ -1,10 +1,11 @@
-import PropTypes from 'prop-types'
-import React from 'react'
+import PropTypes from 'prop-types';
+import React from 'react';
 
-import { Loading } from 'components/await'
-import { FormAutofire } from 'mobilizations/widgets/components'
+import { Loading } from '../../../../../../../components/await';
+import { FormAutofire } from '../../../../../../../mobilizations/widgets/components';
 
-const PressureSettingsAutofirePage = props => !props.widget ? <Loading /> : <FormAutofire {...props} />
+const PressureSettingsAutofirePage = (props) =>
+  !props.widget ? <Loading /> : <FormAutofire {...props} />;
 
 PressureSettingsAutofirePage.propTypes = {
   // Injected by redux-form
@@ -12,7 +13,7 @@ PressureSettingsAutofirePage.propTypes = {
   // Injected by container
   mobilization: PropTypes.object.isRequired,
   widget: PropTypes.object.isRequired,
-  asyncWidgetUpdate: PropTypes.func.isRequired
-}
+  asyncWidgetUpdate: PropTypes.func.isRequired,
+};
 
-export default PressureSettingsAutofirePage
+export default PressureSettingsAutofirePage;

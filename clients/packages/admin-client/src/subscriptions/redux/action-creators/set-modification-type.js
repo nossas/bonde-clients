@@ -1,4 +1,5 @@
-import { createAction } from 'utils/redux'
-import * as t from 'subscriptions/redux/action-types'
+import { createAction } from '../../../utils/redux';
+import * as t from '../../../subscriptions/redux/action-types';
 
-export default modificationType => createAction(t.SET_MODIFICATION_TYPE, modificationType)
+export default (modificationType) =>
+  createAction(t.SET_MODIFICATION_TYPE, modificationType);

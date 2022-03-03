@@ -197,10 +197,11 @@ type Organizations = {
   individual: number;
 };
 
-const parseZendeskOrganizations = (input?: string) => JSON.parse(input || "");
-export const zendeskOrganizations: Organizations = parseZendeskOrganizations(
-  process.env.REACT_APP_ZENDESK_ORGANIZATIONS
-);
+export const zendeskOrganizations: Organizations = {
+  lawyer: Number(process.env.REACT_APP_ZENDESK_ORGANIZATIONS_LAWYER),
+  individual: Number(process.env.REACT_APP_ZENDESK_ORGANIZATIONS_INDIVIDUAL),
+  therapist: Number(process.env.REACT_APP_ZENDESK_ORGANIZATIONS_THERAPIST)
+};
 
 export const getAgentZendeskUserId = (
   id?: number | null

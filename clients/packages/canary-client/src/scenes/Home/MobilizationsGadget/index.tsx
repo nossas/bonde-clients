@@ -12,7 +12,7 @@ import GadgetHeader from "../GadgetHeader";
 
 const MobilizationsGadget = (): React.ReactElement => {
   const { t } = useTranslation("home");
-  const { currentUser: user, communities } = useContext(SessionContext);
+  const { currentUser: user, communities, updateSession } = useContext(SessionContext);
 
   const { data, loading } = useQuery(mobilizationsLastUpdated, {
     variables: { userId: user.id },
@@ -45,13 +45,14 @@ const MobilizationsGadget = (): React.ReactElement => {
                 const community = communities.filter(
                   (c: any) => c.id === mobilization.community.id
                 )[0];
-                console.log('community', { community });
-                // storage.setAsyncItem("community", community).then(() => {
-                //   window.location.href = new URL(
-                //     `/${mobilization.id}/edit`,
-                //     process.env.REACT_APP_DOMAIN_ADMIN
-                //   ).href;
-                // });
+                
+                updateSession("community", community)
+                  .then(() => {
+                    window.location.href = new URL(
+                      `/${mobilization.id}/edit`,
+                      process.env.REACT_APP_DOMAIN_ADMIN
+                    ).href;
+                  });
               }
             }}
           />

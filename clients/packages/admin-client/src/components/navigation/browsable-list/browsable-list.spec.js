@@ -1,23 +1,23 @@
 /* eslint-disable no-unused-expressions */
-import React from 'react'
-import { shallow } from 'enzyme'
-import { expect } from 'chai'
+import React from 'react';
+import { shallow } from 'enzyme';
+import { expect } from 'chai';
 
-import { BrowsableList } from 'components/navigation/browsable-list'
+import { BrowsableList } from '../../../components/navigation/browsable-list';
 
 describe('client/components/navigation/browsable-list/browsable-list', () => {
-  let wrapper
+  let wrapper;
   const props = {
-    dispatch: () => {}
-  }
+    dispatch: () => {},
+  };
 
-  beforeAll(() => {
-    wrapper = shallow(<BrowsableList {...props} />)
-  })
+  beforeEach(() => {
+    wrapper = shallow(<BrowsableList {...props} />);
+  });
 
   describe('#render', () => {
     it('should render without crash', () => {
-      expect(wrapper).to.be.ok
-    })
-  })
-})
+      expect(wrapper).to.be.ok;
+    });
+  });
+});

@@ -1,9 +1,10 @@
+/* eslint-disable no-undef */
 import React from 'react'
 
 import { UnorderedListButton, OrderedListButton } from './'
 // FIXME: Needs to handle assets files to work with SSR
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-if (require('exenv').canUseDOM) require('./ListButtonBar.css')
+if (require('exenv').canUseDOM) require('./ListButtonBar.module.css')
 
 
 const ListButtonBar = props => (
