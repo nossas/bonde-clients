@@ -1,10 +1,11 @@
 import React from 'react';
 import { Stack, Image, Text } from '@chakra-ui/react';
-import PerformDropdown, {
+import {
+  PerformDropdown,
   PerformDropdownList,
   PerformDropdownItem,
   PerformDropdownButton,
-} from '../perform-dropdown';
+} from '../ui';
 import CommunityMenu from './CommunityMenu';
 
 import { Session } from './types';

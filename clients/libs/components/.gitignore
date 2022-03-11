@@ -5,3 +5,8 @@ node_modules
 dist
 *.d.ts
 storybook-static
+# build folders
+__dist
+form
+chakra
+icons

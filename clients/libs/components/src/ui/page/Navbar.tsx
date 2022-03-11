@@ -22,7 +22,12 @@ const HomeLink = styled.a`
   }
 `;
 
-const Navbar: React.FC<NavbarProps> = ({ brand, children, indexRoute, fixed = false }) => (
+const Navbar: React.FC<NavbarProps> = ({
+  brand,
+  children,
+  indexRoute,
+  fixed = false,
+}) => (
   <Flex
     position={fixed ? 'fixed' : 'relative'}
     direction="row"

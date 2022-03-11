@@ -1,7 +1,6 @@
 import React, { useState, createContext, useContext, useRef } from 'react';
 import { Button, Box, Fade, useOutsideClick } from '@chakra-ui/react';
-import ArrowUpIcon from '../chakra-theme/icons/ArrowUpIcon';
-import ArrowDownIcon from '../chakra-theme/icons/ArrowDownIcon';
+import { ArrowUpIcon, ArrowDownIcon } from '../../icons';
 
 type DropdownContext = {
   isOpen: boolean;
