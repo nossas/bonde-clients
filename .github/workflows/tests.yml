@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: cd clients && pnpm i --no-frozen-lockfile
       
+      - name: Build components and core-tools to run tests in clients
+        run: cd clients && pnpm m run build --filter bonde-components --filter bonde-core-tools
+
       - name: Run tests
         run: cd clients && pnpm test && exit 0
       
