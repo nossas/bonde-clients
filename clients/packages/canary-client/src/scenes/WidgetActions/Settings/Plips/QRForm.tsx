@@ -1,17 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import {
-  Button,
-  Flex,
-  InputField,
-  Heading,
-  Text,
-  Stack,
-  Alert,
-  AlertIcon,
-  AlertTitle,
-  AlertDescription,
-} from "bonde-components";
+import { InputField } from "bonde-components";
+import { Button, Flex, Heading, Text, Stack } from "bonde-components/chakra";
 import { useMutation, useQuery, gql, Context as SessionContext } from "bonde-core-tools";
 
 import type { Widget } from "../../FetchWidgets";
@@ -117,7 +107,17 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
           Ops! QR Code inválido, tente escanear novamente.
         </Heading>
       </Flex>
-      <Button minH="42px" onClick={() => window.location.href = `/widgets/${widget.id}/settings/workflow?count=${data?.confirmed_signatures || 0}`}>tentar novamente</Button>
+      <Stack>
+        <Button minH="42px" onClick={() => window.location.href = `/widgets/${widget.id}/settings/workflow?count=${data?.confirmed_signatures || 0}`}>tentar novamente</Button>
+        <Button
+          colorScheme="gray"
+          minH="42px"
+          variant="outline"
+          onClick={() => window.location.href = `/widgets/${widget.id}/settings`}
+        >
+          Cancelar
+        </Button>
+      </Stack>
     </>
   ) : (
     <Wizard
@@ -154,7 +154,6 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
           />
         </Stack>
       </Wizard.Page>
-
     </Wizard>
   );
 }
