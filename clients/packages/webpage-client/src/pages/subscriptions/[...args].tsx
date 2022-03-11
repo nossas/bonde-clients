@@ -11,7 +11,7 @@ import {
   Stack,
   Text,
   useToast
-} from 'bonde-ui/src/base';
+} from 'bonde-components/chakra';
 import CreditCardForm from './_components/CreditCardForm';
 import RecurringForm from './_components/RecurringForm';
 import BondeIcon from './_components/BondeIcon';

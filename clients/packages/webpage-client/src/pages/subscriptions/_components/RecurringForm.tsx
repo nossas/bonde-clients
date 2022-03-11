@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { Form, Field } from 'react-final-form'
+import React, { useEffect } from 'react';
 import InputMask from 'react-input-mask';
 import {
   Button,
@@ -11,7 +10,8 @@ import {
   Stack,
   Text,
   useToast
-} from 'bonde-ui/src/base';
+} from 'bonde-components/chakra';
+import { Form, Field, useForm } from 'bonde-components/form';
 import recharge from '../../../apis/rest/recharge';
 
 interface RecurringFormProps {
