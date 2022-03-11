@@ -3,13 +3,12 @@ import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-d
 import {
   Provider as Session
 } from "bonde-core-tools";
+import { Loading, FontsLoader } from 'bonde-components';
 import {
-  Loading,
   ChakraProvider,
-  chakraTheme,
-  FontsLoader,
+  theme as chakraTheme,
   CSSReset
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 // Scenes and Components to make your application
 import BaseLayout from './components/BaseLayout';
 import LoginPage from './scenes/LoginPage';

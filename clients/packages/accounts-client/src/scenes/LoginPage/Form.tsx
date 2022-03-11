@@ -1,12 +1,14 @@
 import React from 'react';
 import {
-  Button,
   ConnectedForm,
   InputField,
   Link as LinkStyled,
-  Stack,
-  Validators,
+  Validators
 } from 'bonde-components';
+import {
+  Button,
+  Stack
+} from 'bonde-components/chakra';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 

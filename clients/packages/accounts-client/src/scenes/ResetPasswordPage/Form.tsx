@@ -1,14 +1,16 @@
 import React from "react";
 import {
-  Button,
   ConnectedForm,
   Header,
   InputField,
-  Link as LinkStyled,
-  Flex,
-  Text,
   Validators,
+  Link as LinkStyled
 } from "bonde-components";
+import {
+  Button,
+  Flex,
+  Text
+} from "bonde-components/chakra"
 import { useMutation, gql } from "bonde-core-tools";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";

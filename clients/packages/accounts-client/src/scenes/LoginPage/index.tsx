@@ -1,5 +1,6 @@
 import * as React from 'react';
-import { Header, Stack } from 'bonde-components';
+import { Header } from 'bonde-components';
+import { Stack } from 'bonde-components/chakra';
 import { useMutation, gql } from 'bonde-core-tools';
 import { useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
