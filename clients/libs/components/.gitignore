@@ -7,6 +7,6 @@ dist
 storybook-static
 # build folders
 __dist
-form
-chakra
-icons
+/form
+/chakra
+/icons
