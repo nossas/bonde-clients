@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, Icon, Grid, GridItem, Box, Stack, Text } from 'bonde-components';
+import { Header, Icon } from 'bonde-components';
+import { Grid, GridItem, Box, Stack, Text } from 'bonde-components/chakra';
 import {
   ConnectDomainIcon,
   InsertDomainIcon,

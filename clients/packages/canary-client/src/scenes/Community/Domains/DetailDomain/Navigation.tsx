@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { Button, Header, Icon, Flex } from 'bonde-components';
+import styled from '@emotion/styled';
+import { Header } from 'bonde-components';
+import { Button, Icon, Flex } from 'bonde-components/chakra';
 import { DNSHostedZone } from '../types';
 import RecordModal from './RecordModal';
 

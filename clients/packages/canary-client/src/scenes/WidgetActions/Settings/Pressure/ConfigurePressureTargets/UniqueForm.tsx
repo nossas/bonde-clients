@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, Text, Stack } from 'bonde-components';
+import { Heading, Text, Stack } from 'bonde-components/chakra';
 import { useTranslation } from 'react-i18next';
 import SubjectBodyFields from './SubjectBodyFields';
 

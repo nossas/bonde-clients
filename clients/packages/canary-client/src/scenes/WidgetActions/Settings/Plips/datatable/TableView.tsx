@@ -11,7 +11,7 @@ import {
   Skeleton,
   Stack,
   Heading
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import EmailFilter from './EmailFilter';
 import ExpectedSignaturesFilter from './ExpectedSignaturesFilter';
 import ExportCSV from './ExportCSV';

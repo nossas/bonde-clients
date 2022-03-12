@@ -20,7 +20,7 @@ import {
   useColorModeValue,
   useFormControl,
   createIcon
-} from "bonde-components";
+} from "bonde-components/chakra";
 
 // Taken from the @chakra-ui/icons package to prevent needing it as a dependency
 // https://github.com/chakra-ui/chakra-ui/blob/main/packages/icons/src/ChevronDown.tsx
@@ -201,7 +201,7 @@ const chakraComponents = {
   // Menu components
   MenuPortal: ({ children }: any) => <Portal>{children}</Portal>,
   Menu: ({ children, ...props }: any) => {
-    const menuStyles = useMultiStyleConfig("Menu");
+    const menuStyles = useMultiStyleConfig("Menu", {});
     return (
       <selectComponents.Menu {...props}>
         <StylesProvider value={menuStyles}>{children}</StylesProvider>
@@ -248,7 +248,7 @@ const chakraComponents = {
     isDisabled,
     selectProps: { size }
   }: any) => {
-    const { item } = useStyles();
+    const { item }: any = useStyles();
     return (
       <Box
         role="button"

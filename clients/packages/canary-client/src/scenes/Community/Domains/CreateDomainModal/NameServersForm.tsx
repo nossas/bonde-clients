@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import {
   Heading,
   Text,
@@ -8,7 +8,7 @@ import {
   Icon,
   Grid,
   GridItem
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import NameServers from '../NameServers';
 import Radio from './Radio';
 

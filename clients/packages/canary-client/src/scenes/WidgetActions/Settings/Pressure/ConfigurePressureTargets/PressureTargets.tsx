@@ -2,8 +2,9 @@ import React from "react";
 import FetchPressureTargets, {
   PressureTarget as PressureTargetsType,
 } from "./FetchPressureTargets";
-import { Text, Icon, CleanButton } from "bonde-components";
-import styled from 'styled-components';
+import { CleanButton } from 'bonde-components';
+import { Text, Icon } from "bonde-components/chakra";
+import styled from '@emotion/styled';
 
 type Props = {
   widgetId: number;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ConnectedForm, toast, Success } from 'bonde-components';
 import { useMutation, gql } from 'bonde-core-tools';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { useTranslation } from 'react-i18next';
 import { Widget } from '../FetchWidgets';
 

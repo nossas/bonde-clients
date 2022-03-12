@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Stack, Grid, GridItem, Table, Tbody, Tr, Td, Text, Flex } from "bonde-components";
+import { Box, Button, Stack, Grid, GridItem, Table, Tbody, Tr, Td, Text, Flex } from "bonde-components/chakra";
 import { Link, useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
@@ -88,7 +88,7 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
 
   return (
     <>
-      <Stack spacing={4} overflowY={isMobile ? "auto" : null} mb={isMobile ? "75px" : null}>
+      <Stack spacing={4} overflowY={isMobile ? "auto" : undefined} mb={isMobile ? "75px" : undefined}>
         <Grid templateColumns={['repeat(2, 1fr)', null, 'repeat(7, 1fr)']} gap={4}>
           <GridItem colSpan={1}>
             <Stack>

@@ -1,5 +1,6 @@
 import React from "react";
-import { Alert, ChartIcon, Text, Stack } from "bonde-components";
+import { Alert, Text, Stack } from 'bonde-components/chakra';
+import { ChartIcon } from 'bonde-components/icons';
 
 type Props = {
   firstEventTimestamp: Date

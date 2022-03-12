@@ -1,5 +1,6 @@
 import React from 'react';
-import { Header, Button, Icon, toast } from 'bonde-components';
+import { Header, Icon, toast } from 'bonde-components';
+import { Button } from 'bonde-components/chakra';
 import { useMutation, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import Table, { Styles } from './Table';

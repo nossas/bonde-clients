@@ -1,6 +1,6 @@
 import React, { useState, useContext } from 'react';
 import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
-import { Button, Modal, ModalOverlay } from 'bonde-components';
+import { Button, Modal, ModalOverlay } from 'bonde-components/chakra';
 import { DNSHostedZone } from '../types';
 import DomainForm from './DomainForm';
 import ConnectDNS from './ConnectDNS';

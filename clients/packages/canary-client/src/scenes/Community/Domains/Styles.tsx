@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Text, Header, Icon, Flex } from 'bonde-components';
+import { Header } from 'bonde-components';
+import { Text, Icon, Flex } from 'bonde-components/chakra';
 
 export type ColProps = {
   align?: string
@@ -11,10 +12,6 @@ export const Col = styled.div<ColProps>`
 
   p {
     text-align: ${props => props.align};
-  }
-
-  ${Text} {
-    word-break: break-all;
   }
 `;
 

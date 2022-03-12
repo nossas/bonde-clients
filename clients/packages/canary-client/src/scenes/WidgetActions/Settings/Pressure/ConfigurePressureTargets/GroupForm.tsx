@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Icon, InputField } from 'bonde-components';
 import {
   Box,
   Button,
-  Icon,
-  IconButton,
-  InputField,
-  Flex,
   FormLabel,
+  Flex,
+  IconButton,
   Text,
   Stack,
   Modal,
@@ -15,7 +14,7 @@ import {
   ModalFooter,
   ModalOverlay,
   ModalHeader
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { FieldArray } from 'react-final-form-arrays';
 import { useTranslation } from 'react-i18next';
 import SubjectBodyFields from './SubjectBodyFields';
@@ -44,10 +43,10 @@ const GroupField = ({ name, group, remove }: GroupFieldProps) => {
       <Flex direction="row" justify="space-between">
         <Text color='#000' style={{ flexGrow: 1 }}>{group.label || 'Nome do grupo'}</Text>
         <Stack direction="row" spacing={2}>
-          <IconButton variant="link" colorScheme="gray" onClick={() => setOpen(true)}>
+          <IconButton aria-label="Edit button" variant="link" colorScheme="gray" onClick={() => setOpen(true)}>
             <Icon name='Pencil' size='small' />
           </IconButton>
-          <IconButton variant="link" colorScheme="gray" onClick={() => setOpenDeleteModal(true)}>
+          <IconButton aria-label="Delete button" variant="link" colorScheme="gray" onClick={() => setOpenDeleteModal(true)}>
             <Icon name='Trash' size='small' />
           </IconButton>
           <DeleteTargetPopup

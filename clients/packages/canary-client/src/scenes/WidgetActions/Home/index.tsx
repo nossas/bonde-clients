@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, Header, Tab, Stack, Grid, GridItem } from "bonde-components"
+import { Header } from "bonde-components"
+import { Box, Tab, Stack, Grid, GridItem } from 'bonde-components/chakra';
 import { useTranslation } from 'react-i18next';
 import { isMobile } from 'react-device-detect';
 import SearchList from '../SearchList';

@@ -1,14 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { InputField, Validators } from 'bonde-components';
 import {
-  InputField,
-  Validators,
   SelectField,
   Grid,
   GridItem,
   Heading,
   Box
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { FieldPrefix, PrefixedField } from './FieldPrefix';
 import BankField from './BankField';
 import * as normalize from './normalize';

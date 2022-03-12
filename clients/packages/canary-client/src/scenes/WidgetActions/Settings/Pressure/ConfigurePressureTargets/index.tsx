@@ -1,18 +1,16 @@
 import React from "react";
+import { toast, Success, RadioField } from 'bonde-components';
 import {
   Heading,
   Text,
-  toast,
   Box,
   Grid,
   GridItem,
   Flex,
-  Success,
   Button,
-  RadioField,
-  Stack,
-  Radio
-} from 'bonde-components';
+  Radio,
+  Stack
+} from 'bonde-components/chakra';
 import { gql, useMutation } from 'bonde-core-tools';
 import arrayMutators from 'final-form-arrays'
 import slugify from 'slugify';

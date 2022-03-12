@@ -1,14 +1,14 @@
 import React from "react";
+import { useField } from 'bonde-components/form';
+import { CloseIcon } from 'bonde-components/icons';
 import {
   FormControl,
   FormLabel,
+  IconButton,
   Box,
   Flex,
   Input,
-  IconButton,
-  CloseIcon,
-  useField
-} from "bonde-components";
+} from "bonde-components/chakra";
 
 interface State {
   tags: string[]
@@ -118,7 +118,7 @@ class TagInput extends React.Component<Props, State> {
                   onClick={() => this.onRemove(index)}
                   colorScheme="gray"
                   icon={<CloseIcon boxSize={2} color="gray.400" />}
-                  size={1}
+                  boxSize={1}
                   ml={2}
                 />
               </Box>

@@ -1,8 +1,7 @@
 import React, { useContext } from "react";
 import { useHistory } from 'react-router-dom';
+import {   Empty, CommunityMenu } from 'bonde-components';
 import {
-  Empty,
-  // Chakra UI
   Button,
   Flex,
   Box,
@@ -11,8 +10,7 @@ import {
   ListItem,
   Stack,
   Image,
-  CommunityMenu
-} from "bonde-components";
+} from "bonde-components/chakra";
 import {
   Context as SessionContext
 } from "bonde-core-tools";
@@ -78,7 +76,6 @@ const CommunitiesScrollBox = ({ communities }: Props): React.ReactElement => {
                 <Button
                   variant="link"
                   colorScheme="black"
-                  textTransform="normal"
                   onClick={() => {
                     session
                       .updateSession('community', c)

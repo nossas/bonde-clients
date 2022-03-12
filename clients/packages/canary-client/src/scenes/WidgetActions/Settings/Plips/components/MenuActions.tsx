@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Stack } from 'bonde-components';
+import { Box, Stack } from 'bonde-components/chakra';
 
 const MenuActions: React.FC = ({ children }) => {
   return (

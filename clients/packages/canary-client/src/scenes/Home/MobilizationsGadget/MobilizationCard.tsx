@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Text, Image, Heading } from 'bonde-components';
+import { Box, Text, Image, Heading } from 'bonde-components/chakra';
 import FallbackImage from "./FallbackImage";
 
 export type MobilizationProps = {

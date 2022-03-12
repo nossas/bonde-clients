@@ -1,18 +1,17 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { InputField, Success } from 'bonde-components';
 import {
-  InputField,
   Heading,
   Text,
   Button,
-  Success,
   Grid,
   GridItem,
   Flex,
   Stack,
   UnorderedList,
   ListItem
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import CommunityForm from '../BaseForm';
 import TwilioIcon from './TwilioIcon';
 

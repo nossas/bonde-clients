@@ -13,12 +13,14 @@ import {
 import {
   Loading,
   ToastContainer,
-  ChakraProvider,
-  chakraTheme,
   FontsLoader,
-  SessionUI,
-  CSSReset
+  SessionUI
 } from 'bonde-components';
+import {
+  ChakraProvider,
+  theme as chakraTheme,
+  CSSReset
+} from 'bonde-components/chakra';
 import { hotjar } from 'react-hotjar';
 import { useTranslation } from 'react-i18next';
 import { ScreenClassProvider } from 'react-grid-system';

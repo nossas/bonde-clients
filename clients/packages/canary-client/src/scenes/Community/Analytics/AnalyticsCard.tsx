@@ -1,16 +1,14 @@
 import React from 'react';
+import { Header, Icon, Loading } from 'bonde-components';
+import { InfoIcon } from 'bonde-components/icons';
 import {
   Button,
   Box,
   Flex,
-  Header,
-  Icon,
   Text,
   Tooltip,
-  InfoIcon,
-  Loading,
   Stack
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import NumberFormat from 'react-number-format';
 import useDownloadCSV from './hooks/useDownloadCSV';
 import type { PathDownload } from './hooks/useDownloadCSV';

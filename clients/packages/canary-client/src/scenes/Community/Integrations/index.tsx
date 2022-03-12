@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link, Route, Switch, useParams, useRouteMatch } from 'react-router-dom';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import {
   Heading,
   Text,
   Box,
-  Link as LinkStyled,
   Stack
-} from 'bonde-components';
+} from 'bonde-components/chakra';
+import { Link as LinkStyled } from 'bonde-components';
 import Mailchimp from './Mailchimp';
 import Twilio from './Twilio';
 

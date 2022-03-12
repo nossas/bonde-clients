@@ -1,106 +1,60 @@
 import React from 'react';
-import styled from 'styled-components';
 import { Route, Switch } from 'react-router-dom';
-import { Header, Navigation, Tab } from 'bonde-components';
-import { Container, Row, Col } from 'react-grid-system';
-// import { useSession } from 'bonde-core-tools'
+import { useHistory } from 'react-router-dom';
+import { ButtonGroup, Button, Box, Container, Stack, Text } from 'bonde-components/chakra';
+import { SettingsIcon } from 'bonde-components/icons';
 import CommunityForm from './CommunityForm';
-// import Mobilizers from './Mobilizers'
-
-const SubHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #000;
-  padding: 0 60px;
-
-  h3 {
-    color: #fff;
-    margin: 10px 0 30px;
-  }
-`;
-
-const PageWrap = styled.div`
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-`;
-
-// const MenuItem = styled.button`
-//   display: flex;
-//   align-items: center;
-//   text-align: left;
-
-//   width: 205px;
-//   height: 96px;
-//   padding: 25px 30px;
-//   margin: 0 18px 5px 0;
-//   background-color: #fff;
-//   text-transform: uppercase;
-//   border: none;
-//   outline: none;
-//   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.28);
-
-//   svg {
-//     margin-right: 15px;
-//   }
-
-//   &:active, &:focus, &:hover {
-//     border: none;
-//     outline: none;
-//   }
-
-//   &:hover {
-//     h5 {
-//       color: #a4a4a4 !important;
-//     }
-
-//     .fill {
-//       path {
-//         fill: #a4a4a4 !important;
-//       }
-//     }
-//   }
-// `
+import Donation from './Donation';
 
 type Props = {
-  match: any
-  // history: any
+  match: any                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 }
 
 const SuperuserPage: React.FC<Props> = ({ match }) => {
+  const history = useHistory();
   return (
-    <PageWrap>
-      <SubHeader>
-        {/** TODO: i18n */}
-        <Header.H3>Superadmin</Header.H3>
-        <Navigation>
-          {/** TODO: i18n */}
-          <Tab active>CRIAR COMUNIDADE</Tab>
-        </Navigation>
-      </SubHeader>
-      <Container fluid style={{ width: "100%", padding: "30px 60px" }}>
-        {/* <Row style={{ marginBottom: '20px' }}>
-          <Col sm={12}>
-            <Header.H5 style={{ marginBottom: '15px' }}>FUNÇÕES</Header.H5>
-          </Col>
-          <Col>
-            <MenuItem onClick={() => history.push(`${match.url}/add`)}>
-              <Icon name='Plus' />
-              <span>Nova comundidade</span>
-            </MenuItem>
-          </Col>
-        </Row> */}
-        <Row>
-          <Col>
-            <Switch>
-              <Route exact path={`${match.path}/add`}>
-                <CommunityForm />
-              </Route>
-            </Switch>
-          </Col>
-        </Row>
+    <Stack>
+      <Box bg="white" px={10} py={8}>
+        <ButtonGroup spacing={6}>
+          <Button
+            onClick={() => history.push(`/superuser/add`)}
+            variant="outline"
+            colorScheme="gray"
+            borderRadius={2}
+            p={4}
+            h='auto'
+          >
+            <Stack align="center">
+              <SettingsIcon />
+              <Text color="gray">Criar comunidade</Text>
+            </Stack>
+          </Button>
+          <Button
+            onClick={() => history.push(`/superuser/donation`)}
+            variant="outline"
+            colorScheme="gray"
+            borderRadius={2}
+            p={4}
+            h='auto'
+          >
+            <Stack align="center">
+              <SettingsIcon />
+              <Text color="gray">Editar doação</Text>
+            </Stack>
+          </Button>
+        </ButtonGroup>
+      </Box>
+      <Container>
+        <Switch>
+          <Route exact path={`${match.path}/add`}>
+            <CommunityForm />
+          </Route>
+          <Route exact path={`${match.path}/donation`}>
+            <Donation />
+          </Route>
+        </Switch>
       </Container>
-    </PageWrap>
+    </Stack>
   );
 };
 

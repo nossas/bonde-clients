@@ -9,7 +9,7 @@ import {
   Flex,
   Stack,
   Heading
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { Status } from './Styles';
 import CreateDomainModal from './CreateDomainModal';
 

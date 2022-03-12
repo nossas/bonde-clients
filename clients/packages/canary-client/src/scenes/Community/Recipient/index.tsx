@@ -1,13 +1,13 @@
 import React from 'react';
+import { Success } from 'bonde-components';
 import {
-  Success,
   Button,
   Flex,
   Text,
   Stack,
   Box,
   Heading
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { useTranslation } from 'react-i18next';
 import AccountPanel from './AccountPanel';
 import TransferPanel from './TransferPanel';

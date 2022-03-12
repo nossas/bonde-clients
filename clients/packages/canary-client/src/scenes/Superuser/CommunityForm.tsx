@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
 import {
-  Button,
   ConnectedForm,
   InputField,
   Validators,
   toast
 } from 'bonde-components';
+import { Button } from 'bonde-components/chakra';
 import { Row, Col } from 'react-grid-system';
 import { useTranslation } from 'react-i18next';
 

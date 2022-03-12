@@ -1,5 +1,6 @@
 import React from "react";
 import { useMutation, gql } from "bonde-core-tools";
+import { toast } from 'bonde-components';
 import {
   Text,
   Button,
@@ -8,9 +9,8 @@ import {
   ModalBody,
   ModalHeader,
   ModalFooter,
-  ModalOverlay,
-  toast
-} from "bonde-components";
+  ModalOverlay
+} from "bonde-components/chakra";
 import { useTranslation } from "react-i18next";
 
 type Props = {
@@ -54,7 +54,7 @@ const DeleteTargetPopup = ({
     }
   };
   return (
-    <Modal isOpen={open}>
+    <Modal isOpen={open} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>{t('settings.pressure.delete.title')}</ModalHeader>

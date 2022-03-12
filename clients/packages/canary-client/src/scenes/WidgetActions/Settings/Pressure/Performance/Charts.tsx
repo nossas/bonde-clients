@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
-import { Flex, Heading, Text, Stack } from "bonde-components";
+import { Flex, Heading, Text, Stack } from "bonde-components/chakra";
 
 export interface ChartsProps {
   pressures: any[]

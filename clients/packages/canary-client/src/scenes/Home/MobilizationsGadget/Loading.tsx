@@ -1,6 +1,6 @@
 import React from 'react';
 import { Panel } from 'bonde-styleguide';
-import { SimpleGrid } from "bonde-components";
+import { SimpleGrid } from "bonde-components/chakra";
 
 type Props = {
   cells?: number

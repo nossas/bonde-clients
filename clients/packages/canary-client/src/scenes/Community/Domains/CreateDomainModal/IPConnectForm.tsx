@@ -1,15 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import { Success, Icon, toast } from 'bonde-components';
 import {
   Heading,
   Text,
-  toast,
-  Success,
-  Icon,
   Grid,
   GridItem,
   Button
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import copy from 'clipboard-copy';
 import Radio from './Radio';
 import { MainTitle } from '../Styles';

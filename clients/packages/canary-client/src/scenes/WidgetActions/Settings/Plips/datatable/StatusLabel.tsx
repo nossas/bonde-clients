@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tag, TagLabel } from 'bonde-components';
+import { Tag, TagLabel } from 'bonde-components/chakra';
 import type { PlipForm } from './QueryFiltersProvider';
 
 const StatusLabel: React.FC<{ plipForm: PlipForm }> = ({ plipForm }) => {

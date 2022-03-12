@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
-import { Tab, Header, Heading, DarkMode } from "bonde-components";
+import { Header } from 'bonde-components';
+import { Tab, Heading, DarkMode } from "bonde-components/chakra";
 import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { Context as SessionContext } from 'bonde-core-tools';

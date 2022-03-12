@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Box, Button, Heading, Text } from "bonde-components";
+import { Stack, Box, Button, Heading, Text } from "bonde-components/chakra";
 import { useLocation, Link } from "react-router-dom";
 import CheckIcon from "../../../../../Icons/CheckIcon";
 

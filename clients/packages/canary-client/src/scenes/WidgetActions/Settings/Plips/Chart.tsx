@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Stack, Heading, Text } from 'bonde-components';
+import { Flex, Stack, Heading, Text } from 'bonde-components/chakra';
 import { ResponsiveContainer, LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip } from 'recharts';
 import { Header } from '../../../../components/CardWithHeader';
 

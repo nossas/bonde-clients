@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
-import { Header, Text, Icon, Box, Flex, Image, Stack } from 'bonde-components';
+import { Text, Icon, Box, Flex, Image, Stack } from 'bonde-components/chakra';
+import { Header } from 'bonde-components';
 import { Context as SessionContext } from 'bonde-core-tools';
 import { Link } from 'react-router-dom';
 import { Widget } from './FetchWidgets';
