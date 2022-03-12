@@ -7,9 +7,9 @@ jest.mock('next/config', () => () => ({
 }))
 
 const rechargeSpy = jest.fn();
-jest.mock('../../../apis/rest/recharge', () => rechargeSpy);
+jest.mock('../src/apis/rest/recharge', () => rechargeSpy);
 
-import RecurringForm from './RecurringForm';
+import RecurringForm from '../src/pages/subscriptions/_components/RecurringForm';
 
 describe('RecurringForm tests', () => {
   const properties = {

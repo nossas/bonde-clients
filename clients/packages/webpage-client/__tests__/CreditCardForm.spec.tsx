@@ -7,9 +7,9 @@ jest.mock('next/config', () => () => ({
 }))
 
 const submitSpy = jest.fn();
-jest.mock('./CreditCardForm/submit', () => submitSpy);
+jest.mock('../src/pages/subscriptions/_components/CreditCardForm/submit', () => submitSpy);
 
-import CreditCardForm from './CreditCardForm';
+import CreditCardForm from '../src/pages/subscriptions/_components/CreditCardForm';
 
 describe('CreditCardForm tests', () => {
   const properties = {

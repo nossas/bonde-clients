@@ -12,9 +12,9 @@ import {
   Text,
   useToast
 } from 'bonde-components/chakra';
-import CreditCardForm from './_components/CreditCardForm';
-import RecurringForm from './_components/RecurringForm';
-import BondeIcon from './_components/BondeIcon';
+import CreditCardForm from '../../components/subscriptions/CreditCardForm';
+import RecurringForm from '../../components/subscriptions/RecurringForm';
+import BondeIcon from '../../components/subscriptions/BondeIcon';
 import cancelDonate from '../../apis/rest/cancel-donate';
 
 interface Subscription {
