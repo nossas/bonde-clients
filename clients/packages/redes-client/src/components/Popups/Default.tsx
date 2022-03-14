@@ -5,7 +5,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader
-} from "bonde-components";
+} from "bonde-components/chakra";
 
 export default function Default({
   title,

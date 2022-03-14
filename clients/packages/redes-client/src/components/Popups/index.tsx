@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
-import { Modal, ModalOverlay, Flex, Stack, Button, Loading, Icon } from "bonde-components";
+import { Loading, Icon } from 'bonde-components';
+import { Modal, ModalOverlay, Flex, Stack, Button } from "bonde-components/chakra";
 
 import { Default, Error } from ".";
 import { useFilterDispatch } from "../../services/FilterProvider";

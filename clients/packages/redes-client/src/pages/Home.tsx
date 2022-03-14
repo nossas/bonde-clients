@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Header, Shortcut, Icon, Empty } from "bonde-components";
 import { Context as SessionContext } from "bonde-core-tools";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { WeeklyStats } from "../components";
 import { useCommunityExtra } from "../services/CommunityExtraProvider";
 import { useFilterDispatch } from "../services/FilterProvider";

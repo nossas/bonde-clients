@@ -1,6 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import { Header, Empty, Stack } from "bonde-components";
+import styled from "@emotion/styled";
+import { Header, Empty } from "bonde-components";
+import { Stack } from 'bonde-components/chakra';
 
 import { useFilter } from "../../services/FilterProvider";
 import { Table, Filters } from "../../components";

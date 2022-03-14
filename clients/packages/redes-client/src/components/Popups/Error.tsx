@@ -8,7 +8,7 @@ import {
   ModalBody,
   ModalHeader,
   ModalFooter
-} from "bonde-components";
+} from "bonde-components/chakra";
 import { Individual } from "../../types";
 
 export default function Error({

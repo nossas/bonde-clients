@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FormSpy } from "bonde-components";
+import { FormSpy } from "bonde-components/form";
 import { diff } from "deep-object-diff";
 
 export default function AutoSaveFilters(props: {

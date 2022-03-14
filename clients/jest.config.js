@@ -7,7 +7,7 @@ module.exports = {
     "<rootDir>/packages/accounts-client/src",
     "<rootDir>/packages/admin-client/src",
     "<rootDir>/packages/canary-client/src",
-    // "<rootDir>/packages/redes-client/src",
+    "<rootDir>/packages/redes-client/src",
     "<rootDir>/packages/webpage-client/src"
   ],
   testMatch: [

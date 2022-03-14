@@ -1,7 +1,7 @@
 /* eslint-disable react/display-name */
 import React from "react";
 import { useQuery, gql } from "bonde-core-tools";
-import { Spinner } from "bonde-components"
+import { Spinner } from "bonde-components/chakra"
 import { CheckCommunity } from "../../components";
 import { zendeskOrganizations } from "../../services/utils";
 import { WeeklyStatsData, MapaWeeklyStatsVars } from "../../types";

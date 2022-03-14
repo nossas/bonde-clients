@@ -1,16 +1,8 @@
 import React from "react";
 import { useCommunityExtra } from "../services/CommunityExtraProvider";
-import {
-  RoundSelectField,
-  RoundInputField,
-  IconButton,
-  Icon,
-  ConnectedForm,
-  Form,
-  Stack,
-  Box
-} from "bonde-components";
-import styled from "styled-components";
+import { RoundSelectField, RoundInputField, ConnectedForm, Form, Icon } from 'bonde-components';
+import { IconButton, Stack, Box } from "bonde-components/chakra";
+import styled from "@emotion/styled";
 import { AutoSaveFilters } from "./";
 
 const WrapForm = styled.div`

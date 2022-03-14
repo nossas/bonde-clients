@@ -6,7 +6,7 @@ import faker from "faker/locale/pt_BR";
 import Popups from "./";
 import { FilterProvider } from "../../services/FilterProvider";
 
-describe.skip("Popups", () => {
+describe("Popups", () => {
   const matchUsers = {
     recipient: {
       firstName: faker.name.firstName(),
@@ -59,7 +59,7 @@ describe.skip("Popups", () => {
       jest.clearAllMocks();
     });
 
-    test("The recipient and volunteer names are correct", () => {
+    it("The recipient and volunteer names are correct", () => {
       const { getByText } = render(
         <FilterProvider>
           <Popups
@@ -123,7 +123,8 @@ describe.skip("Popups", () => {
           expect(textSuccess).toBeInTheDocument();
         });
       });
-      test("links have the correct text", async () => {
+
+      it("links have the correct text", async () => {
         const { getByText } = render(
           <FilterProvider>
             <Popups
@@ -159,6 +160,7 @@ describe.skip("Popups", () => {
         });
       });
     });
+
     describe("The match isn't successful", () => {
       beforeEach(() => {
         createRelationship = jest.fn().mockRejectedValueOnce({
@@ -170,6 +172,7 @@ describe.skip("Popups", () => {
       afterEach(() => {
         jest.clearAllMocks();
       });
+      
       it("should render the error screen", async () => {
         const { getByText } = render(
           <FilterProvider>
