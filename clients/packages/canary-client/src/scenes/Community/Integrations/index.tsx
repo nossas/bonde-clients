@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route, Switch, useParams, useRouteMatch } from 'react-router-dom';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 import {
   Heading,
   Text,

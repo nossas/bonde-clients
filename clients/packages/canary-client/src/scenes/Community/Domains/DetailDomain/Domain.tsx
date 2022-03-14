@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
-import { Success, toast } from 'bonde-components';
+import { Icon, Success, toast } from 'bonde-components';
 import {
   Text,
-  Icon,
   Grid,
   GridItem,
   Stack,

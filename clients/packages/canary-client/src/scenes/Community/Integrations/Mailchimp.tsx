@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputField, Success, } from 'bonde-components';
+import { InputField, Success } from 'bonde-components';
 import {
   Heading,
   Text,

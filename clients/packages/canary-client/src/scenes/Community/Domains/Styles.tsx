@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Header } from 'bonde-components';
-import { Text, Icon, Flex } from 'bonde-components/chakra';
+import { Header, Icon } from 'bonde-components';
+import { Text, Flex } from 'bonde-components/chakra';
 
 export type ColProps = {
   align?: string

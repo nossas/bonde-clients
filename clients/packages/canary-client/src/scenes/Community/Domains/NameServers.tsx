@@ -1,10 +1,9 @@
 import React from 'react';
-import { toast, Success } from 'bonde-components';
+import { toast, Icon, Success } from 'bonde-components';
 import { InfoIcon } from 'bonde-components/icons';
 import {
   Text,
   Tooltip,
-  Icon,
   Grid,
   GridItem,
   Box,
