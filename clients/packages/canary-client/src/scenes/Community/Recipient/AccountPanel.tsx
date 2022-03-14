@@ -1,8 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { InputField, Validators } from 'bonde-components';
+import { SelectField, InputField, Validators } from 'bonde-components';
 import {
-  SelectField,
   Grid,
   GridItem,
   Heading,

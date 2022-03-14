@@ -13,7 +13,7 @@ type Props = {
 const SuperuserPage: React.FC<Props> = ({ match }) => {
   const history = useHistory();
   return (
-    <Stack>
+    <Stack flex={1}>
       <Box bg="white" px={10} py={8}>
         <ButtonGroup spacing={6}>
           <Button

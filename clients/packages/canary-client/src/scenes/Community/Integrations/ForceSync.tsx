@@ -77,12 +77,17 @@ const ForceSync: React.FC = () => {
     }
   }; 
 
-  if (loading) return <Text>Carregando Mailchimp Status</Text>;
-  else if (error) return (
+  if (loading) {
+    return <Text>Carregando Mailchimp Status</Text>;
+  } else if (error) {
+    console.log("ForceSync err: ", error);
+    return (
       <Stack>
         <Text>Ish! Ocorreu um erro e no momento não conseguimos retornar o status da sincronização.</Text>
         <Text>Se o problema persistir, contacte o suporte.</Text>
-      </Stack>);
+      </Stack>
+    );
+  }
 
   if (data.resync_mailchimp_status.waiting > 0) {
     return (
