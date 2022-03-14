@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Route, Switch, useHistory, Redirect } from 'react-router-dom';
-import { Empty } from 'bonde-components';
-import { Flex, Heading, DarkMode, Tab, Container, Stack } from 'bonde-components/chakra';
+import { Tab, Empty } from 'bonde-components';
+import { Flex, Heading, DarkMode, Container, Stack } from 'bonde-components/chakra';
 import { Context as SessionContext } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 // Subroutes
