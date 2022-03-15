@@ -1,5 +1,15 @@
 import React from 'react';
 import {
+  ConnectedForm,
+  InputField,
+  Success,
+  Validators,
+  SelectField,
+  Link,
+  toast
+} from 'bonde-components';
+import { useField } from 'bonde-components/form';
+import {
   Modal,
   ModalContent,
   ModalBody,
@@ -8,19 +18,11 @@ import {
   ModalHeader,
   Text,
   Button,
-  Link,
-  ConnectedForm,
-  InputField,
-  Success,
-  SelectField,
   Grid,
   GridItem,
-  Validators,
   Stack,
-  FormLabel,
-  toast,
-  useField
-} from 'bonde-components';
+  FormLabel
+} from 'bonde-components/chakra';
 import { useMutation, gql } from 'bonde-core-tools';
 import { DNSHostedZone } from '../types';
 

@@ -1,15 +1,15 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { SelectField } from 'bonde-components';
 import {
   Text,
-  SelectField,
   Grid,
   GridItem,
   Heading,
   Stack,
   UnorderedList,
   ListItem
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { FieldPrefix, PrefixedField } from './FieldPrefix';
 import SpyField from '../../../components/SpyField';
 

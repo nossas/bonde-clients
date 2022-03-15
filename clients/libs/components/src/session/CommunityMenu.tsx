@@ -2,10 +2,7 @@ import React from 'react';
 import { IconButton, Stack } from '@chakra-ui/react';
 import { Session, Community } from './types';
 
-import SettingsIcon from '../chakra-theme/icons/SettingsIcon';
-import PagesIcon from '../chakra-theme/icons/PagesIcon';
-import BotIcon from '../chakra-theme/icons/BotIcon';
-import NetIcon from '../chakra-theme/icons/NetIcon';
+import { SettingsIcon, PagesIcon, BotIcon, NetIcon } from '../icons';
 
 const items: any = {
   settings: [SettingsIcon, 'Configurações'],

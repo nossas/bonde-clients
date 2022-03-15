@@ -1,20 +1,22 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from '@emotion/styled';
+import {
+  ConnectedForm,
+  InputField,
+  Hint,
+  Validators
+} from 'bonde-components';
 import {
   Text,
   Button,
   Link,
-  ConnectedForm,
-  InputField,
-  Hint,
-  Validators,
+  FormLabel,
   ModalContent,
   ModalBody,
   ModalHeader,
   ModalFooter,
   Stack
-} from 'bonde-components';
-import { FormLabel } from 'bonde-components';
+} from 'bonde-components/chakra';
 
 const RichText = styled(Text)`
   a {
@@ -51,7 +53,7 @@ const DomainForm: React.FC<Props> = ({ onSubmit, onClose }) => {
               </Stack>
               <Stack spacing={2}>
                 <Stack bg="gray.50" direction="row" align="end" p={2} spacing={1}>
-                  <FormLabel py={1} size="md" textTransform="normal">https://www.</FormLabel>
+                  <FormLabel py={1} size="md" textTransform="lowercase">https://www.</FormLabel>
                   <InputField
                     variant="outline"
                     name='value'

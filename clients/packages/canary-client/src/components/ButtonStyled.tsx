@@ -1,5 +1,5 @@
-import { Button } from "bonde-components";
-import styled from "styled-components";
+import styled from "@emotion/styled";
+import { Button } from "bonde-components/chakra";
 
 const ButtonStyled = styled(Button)`
   width: auto;

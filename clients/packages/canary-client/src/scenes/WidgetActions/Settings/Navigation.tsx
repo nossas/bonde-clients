@@ -1,5 +1,6 @@
 import React from 'react';
-import { Flex, Tab } from 'bonde-components';
+import { Tab } from 'bonde-components';
+import { Flex } from 'bonde-components/chakra';
 import { useTranslation } from 'react-i18next';
 import TabRoute from '../TabRoute';
 import type { Widget } from '../FetchWidgets';

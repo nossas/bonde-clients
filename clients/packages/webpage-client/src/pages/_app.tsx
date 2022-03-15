@@ -1,9 +1,9 @@
 // import { createGlobalStyle, ThemeProvider } from 'styled-components'
 import {
-  UIProvider,
+  CSSReset,
+  ChakraProvider as UIProvider,
   theme,
-} from 'bonde-ui';
-import { CSSReset } from 'bonde-ui/src/base';
+} from 'bonde-components/chakra';
 
 import './_app.css';
 

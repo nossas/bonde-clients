@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Button } from '../src';
+import { Button } from '../src/chakra';
 
 describe('it', () => {
   it('renders without crashing', () => {

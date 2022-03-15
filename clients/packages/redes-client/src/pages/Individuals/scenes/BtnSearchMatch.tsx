@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Button } from "bonde-components";
+import { Button } from "bonde-components/chakra";
 import { Context as SessionContext } from "bonde-core-tools";
 
 import {

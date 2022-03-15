@@ -1,12 +1,12 @@
 import React from "react";
+import { InfoIcon } from 'bonde-components/icons';
 import {
   Stack,
   Heading,
   Flex,
   Text,
-  Tooltip,
-  InfoIcon
-} from "bonde-components";
+  Tooltip
+} from "bonde-components/chakra";
 
 export interface CardProps {
   label?: string

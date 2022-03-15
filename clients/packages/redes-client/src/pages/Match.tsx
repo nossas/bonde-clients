@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Button, Header, Text, Empty, Stack, Flex } from "bonde-components";
+import { Header, Empty } from "bonde-components";
+import { Button, Text, Stack, Flex } from 'bonde-components/chakra';
 import { useMutation, Context as SessionContext } from "bonde-core-tools";
 import { useLocation, useHistory } from "react-router-dom";
 

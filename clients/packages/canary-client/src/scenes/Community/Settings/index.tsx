@@ -1,15 +1,12 @@
 import React, { useContext } from 'react';
 import {
+  Header,
   InputField,
   Success,
   Validators,
-  Text,
-  Header,
-  Box,
-  Flex,
-  S3UploadField,
-  Image
+  S3UploadField
 } from 'bonde-components';
+import { Text, Box, Flex, Image } from 'bonde-components/chakra';
 import { Context as SessionContext } from 'bonde-core-tools';
 import { useTranslation } from "react-i18next";
 import CommunityForm from '../BaseForm';

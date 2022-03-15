@@ -1,7 +1,6 @@
 import React from "react";
+import { useField } from 'bonde-components/form';
 import SlateEditor from "../../../../components/SlateEditor"
-
-import { useField } from 'bonde-components';
 
 const RichInputField = ({ name }: any) => {
   const { input } = useField(name);

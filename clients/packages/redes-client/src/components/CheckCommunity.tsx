@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { Context as SessionContext } from "bonde-core-tools";
 import { Empty } from "bonde-components";
 import { useCommunityExtra } from "../services/CommunityExtraProvider";

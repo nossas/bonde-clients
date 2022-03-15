@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl } from 'bonde-components';
+import { FormControl } from 'bonde-components/chakra';
 import Select from "../components/ChakraReactSelect";
 
 interface Props {

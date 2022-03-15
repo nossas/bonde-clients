@@ -5,9 +5,9 @@ import {
   Heading,
   Text,
   Box,
-  Link as LinkStyled,
   Stack
-} from 'bonde-components';
+} from 'bonde-components/chakra';
+import { Link as LinkStyled } from 'bonde-components';
 import Mailchimp from './Mailchimp';
 import Twilio from './Twilio';
 

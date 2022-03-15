@@ -1,18 +1,14 @@
 import React, { useContext } from 'react';
+import { ConnectedForm, InputField, SelectField, Validators, toast } from 'bonde-components';
 import {
   Button,
-  ConnectedForm,
-  InputField,
-  SelectField,
-  Validators,
   Text,
   Icon,
   Grid,
   GridItem,
   Stack,
   Flex,
-  toast
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { useTranslation } from 'react-i18next';
 import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
 

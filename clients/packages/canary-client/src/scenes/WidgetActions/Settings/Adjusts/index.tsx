@@ -1,16 +1,14 @@
 import React from 'react';
+import { ColorField, InputField, RadioField } from 'bonde-components';
 import {
   Button,
   Box,
-  ColorField,
-  InputField,
   Flex,
-  RadioField,
   Radio,
   Heading,
   Grid,
   GridItem
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { useTranslation } from 'react-i18next';
 import SettingsForm from '../SettingsForm';
 

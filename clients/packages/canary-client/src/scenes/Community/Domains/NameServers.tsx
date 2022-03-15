@@ -1,17 +1,15 @@
 import React from 'react';
+import { toast, Icon, Success } from 'bonde-components';
+import { InfoIcon } from 'bonde-components/icons';
 import {
   Text,
   Tooltip,
-  InfoIcon,
-  toast,
-  Success,
-  Icon,
   Grid,
   GridItem,
   Box,
   Stack,
   Button
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import copy from 'clipboard-copy';
 
 const NameServers = ({ dnsHostedZone }: any) => {

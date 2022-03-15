@@ -1,5 +1,5 @@
-import { Header } from "bonde-components";
 import React from "react";
+import { Header } from "bonde-components";
 import { useRouteMatch, Switch, Route } from "react-router-dom";
 import { useCommunityExtra } from "../../services/CommunityExtraProvider";
 import { MatchSettings } from "./scenes";

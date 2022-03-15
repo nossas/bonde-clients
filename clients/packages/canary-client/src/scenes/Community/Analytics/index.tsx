@@ -1,13 +1,12 @@
 import React, { useContext } from 'react';
 import { Context as SessionContext } from 'bonde-core-tools';
+import { Header, Message } from 'bonde-components';
 import {
-  Header,
   Text,
-  Message,
   Stack,
   Grid,
   GridItem
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import styled from 'styled-components';
 import TotalActivists from './TotalActivists';
 import LastActivists from './LastActivists';

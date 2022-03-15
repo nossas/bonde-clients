@@ -1,22 +1,23 @@
 import React from "react";
-import { css } from "styled-components/macro";
 import { useMutation } from "bonde-core-tools";
 import {
-  Button,
+  TextareaField,
   ConnectedForm,
   Header,
-  Text,
-  TextareaField,
   Validators,
   Card,
   Hint,
   Success,
-  toast,
+  toast
+} from "bonde-components";
+import {
+  Button,
+  Text,
   Stack,
   Flex,
   Grid,
   GridItem
-} from "bonde-components";
+} from 'bonde-components/chakra'
 
 import UPDATE_GROUPS from "../../../graphql/UpdateGroups";
 import { Tip } from ".";

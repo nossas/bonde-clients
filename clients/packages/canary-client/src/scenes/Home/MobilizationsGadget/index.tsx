@@ -3,7 +3,7 @@ import {
   useQuery,
   Context as SessionContext
 } from "bonde-core-tools";
-import { SimpleGrid } from "bonde-components";
+import { SimpleGrid } from "bonde-components/chakra";
 import { useTranslation } from "react-i18next";
 import MobilizationBox, { MobilizationProps } from "./MobilizationCard";
 import mobilizationsLastUpdated from "./query.graphql";

@@ -1,14 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { Flex } from '@chakra-ui/react';
+import { Main, Footer, Navbar } from '../ui';
 import CommunitiesDropdown from './CommunitiesDropdown';
 import UserDropdown from './UserDropdown';
 import Logout from './Logout';
 import { BaseUIProperties } from './types';
-
-import Main from '../page/Main';
-import Footer from '../page/Footer';
-import Navbar from '../page/Navbar';
 
 interface ContentProps {
   isMobile: boolean;
@@ -19,20 +16,23 @@ const Content = styled.div<ContentProps>`
   display: flex;
   flex-grow: 1;
   background-color: ${(props: ContentProps) => props.bgColor};
-  
-  ${(props: ContentProps) => props.isMobile && `
+
+  ${(props: ContentProps) =>
+    props.isMobile &&
+    `
     padding-top: 65px;
     overflow-y: auto;
   `}
 `;
 
-const FooterTool: React.FC<any> = ({ languageTool: LanguageTool }) => LanguageTool ? (
-  <Footer>
-    <LanguageTool />
-  </Footer>
-) : (
-  <Footer />
-)
+const FooterTool: React.FC<any> = ({ languageTool: LanguageTool }) =>
+  LanguageTool ? (
+    <Footer>
+      <LanguageTool />
+    </Footer>
+  ) : (
+    <Footer />
+  );
 
 const BaseUI: React.FC<BaseUIProperties> = ({
   children,
@@ -63,10 +63,7 @@ const BaseUI: React.FC<BaseUIProperties> = ({
           )}
         </Flex>
       </Navbar>
-      <Content
-        isMobile={!!isMobile}
-        bgColor={bgColor || 'rgb(247,247,247)'}
-      >
+      <Content isMobile={!!isMobile} bgColor={bgColor || 'rgb(247,247,247)'}>
         {children}
       </Content>
       {!isMobile ? <FooterTool languageTool={LanguageTool} /> : null}

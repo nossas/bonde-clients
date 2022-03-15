@@ -1,5 +1,6 @@
 import React from "react";
-import { Text, Header, Card } from "bonde-components";
+import { Header, Card } from "bonde-components";
+import { Text } from 'bonde-components/chakra';
 import { Groups } from "../../../types";
 
 const Tip = ({ groups }: { groups: Groups }): React.ReactElement => {

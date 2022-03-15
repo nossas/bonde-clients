@@ -1,15 +1,13 @@
 import React, { useContext } from 'react';
+import { Icon, Success, toast } from 'bonde-components';
 import {
   Text,
-  Icon,
-  toast,
-  Success,
   Grid,
   GridItem,
   Stack,
   Box,
   Button
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { useMutation, gql, Context as SessionContext } from 'bonde-core-tools';
 import { useHistory } from 'react-router-dom';
 import { Status, MainTitle } from '../Styles';

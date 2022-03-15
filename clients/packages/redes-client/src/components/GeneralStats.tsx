@@ -1,6 +1,7 @@
 import React from "react";
-import { Header, Text } from "bonde-components";
-import styled from "styled-components";
+import { Header } from 'bonde-components';
+import { Text } from "bonde-components/chakra";
+import styled from "@emotion/styled";
 import { StatsCard } from "./";
 import { GeneralStatsData } from "../types";
 

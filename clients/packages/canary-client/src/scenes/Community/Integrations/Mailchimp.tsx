@@ -1,18 +1,16 @@
 import React from 'react';
-// import { useQuery, gql } from 'bonde-core-tools';
+import { InputField, Success } from 'bonde-components';
 import {
-  InputField,
   Heading,
   Text,
   Button,
-  Success,
   Grid,
   GridItem,
   Flex,
   Stack,
   UnorderedList,
-  ListItem,
-} from 'bonde-components';
+  ListItem
+} from 'bonde-components/chakra';
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import MailchimpIcon from './MailchimpIcon';

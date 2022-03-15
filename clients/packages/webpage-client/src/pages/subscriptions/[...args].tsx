@@ -11,10 +11,10 @@ import {
   Stack,
   Text,
   useToast
-} from 'bonde-ui/src/base';
-import CreditCardForm from './_components/CreditCardForm';
-import RecurringForm from './_components/RecurringForm';
-import BondeIcon from './_components/BondeIcon';
+} from 'bonde-components/chakra';
+import CreditCardForm from '../../components/subscriptions/CreditCardForm';
+import RecurringForm from '../../components/subscriptions/RecurringForm';
+import BondeIcon from '../../components/subscriptions/BondeIcon';
 import cancelDonate from '../../apis/rest/cancel-donate';
 
 interface Subscription {

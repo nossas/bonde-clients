@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Thead, Tr, Th, Td, Tbody, Stack, Heading } from 'bonde-components';
+import { Table, Thead, Tr, Th, Td, Tbody, Stack, Heading } from 'bonde-components/chakra';
 import type { PlipsForm } from './performance/fetchData';
 
 const PlipsFormTable: React.FC<{ plips: PlipsForm[], total: number }> = ({ plips, total }) => (

@@ -5,7 +5,7 @@ import {
   FormControl,
   Stack,
   createIcon
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import Select from "../components/ChakraReactSelect";
 
 const ArrowLeftIcon = createIcon({

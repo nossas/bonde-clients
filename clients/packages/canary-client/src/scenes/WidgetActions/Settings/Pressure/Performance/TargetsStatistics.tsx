@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Button,
   Heading,
   Stack,
   Table,
@@ -8,9 +9,8 @@ import {
   Tr,
   Th,
   Td,
-  Button,
   Tooltip
-} from "bonde-components";
+} from "bonde-components/chakra";
 import { ActivityFeedEmail } from "./hooks/usePerformance";
 
 const OpenedLabel: React.FC<{ activityFeed: ActivityFeedEmail }> = ({ activityFeed }) => {

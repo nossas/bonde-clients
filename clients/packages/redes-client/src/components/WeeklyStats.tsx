@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Header, Text } from "bonde-components";
+import { Header } from 'bonde-components';
+import { Text } from "bonde-components/chakra";
 
 import { StatsCard } from "./";
 import { MAPA_DO_ACOLHIMENTO_COMMUNITY } from "../services/utils";

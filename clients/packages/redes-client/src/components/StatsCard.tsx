@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Stack } from "bonde-components";
+import { Box, Stack } from "bonde-components/chakra";
 
 const StatsCard = ({ children }: any) => (
   <Box display="flex" bg="white" boxShadow="sm" cursor="pointer" p={2} flex={1}>

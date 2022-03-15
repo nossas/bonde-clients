@@ -1,10 +1,9 @@
 import React, { useState } from "react";
+import { SelectField, SwitchField } from 'bonde-components'
 import {
   Heading,
   Text,
   Button,
-  SwitchField,
-  SelectField,
   Grid,
   GridItem,
   Stack,
@@ -16,7 +15,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalOverlay
-} from "bonde-components";
+} from "bonde-components/chakra";
 import { useTranslation } from "react-i18next";
 
 import SpyField from "../../../../../components/SpyField";

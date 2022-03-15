@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useLocation, Link } from 'react-router-dom';
 import { useMutation, gql } from 'bonde-core-tools';
-import { Button, ConnectedForm, InputField, Header, Link as LinkStyled, Hint, Validators } from 'bonde-components';
+import { ConnectedForm, InputField, Header, Hint, Link as LinkStyled, Validators } from 'bonde-components';
+import { Button } from 'bonde-components/chakra';
 import Container from '../../components/Container';
 
 const { composeValidators, required, min } = Validators;

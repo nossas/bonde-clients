@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Button } from 'bonde-components';
+import { Button } from 'bonde-components/chakra';
 import { gql, useLazyQuery } from 'bonde-core-tools';
 import { createVariables, useQueryFiltersFields } from './QueryFiltersProvider';
 

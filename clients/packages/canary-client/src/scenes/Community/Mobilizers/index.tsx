@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
-import { Loading, Heading, Box, Stack, Button } from 'bonde-components';
+import { Loading } from 'bonde-components';
+import { Heading, Box, Stack, Button } from 'bonde-components/chakra';
 import { Context as SessionContext, useQuery, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
 import UsersTable from './UsersTable';

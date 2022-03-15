@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Redirect } from 'react-router-dom';
-import { Stack } from "bonde-components";
+import { Stack } from "bonde-components/chakra";
 import NameServers from '../NameServers';
 import { DNSHostedZone } from '../types';
 // Scene components

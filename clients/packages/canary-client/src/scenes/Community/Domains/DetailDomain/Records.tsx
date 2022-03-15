@@ -1,16 +1,13 @@
 import React from 'react';
+import { Header, toast, Success, Icon } from 'bonde-components';
 import {
-  Header,
-  Icon,
   Text,
-  toast,
-  Success,
   Grid,
   GridItem,
   Box,
   Button,
   Stack
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { useMutation, gql } from 'bonde-core-tools';
 import { MainTitle } from '../Styles';
 import { DNSHostedZone, DNSRecord } from '../types';

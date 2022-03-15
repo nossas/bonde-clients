@@ -1,8 +1,14 @@
 import React from 'react';
-import { useField, FormField, Label } from 'bonde-components';
+import { FormField, Label } from 'bonde-components';
+import { useField } from 'bonde-components/form';
 import { SketchPicker } from 'react-color';
 
-const ColorField = ({ name, label }: any) => {
+interface ColorFieldProperties {
+  name: string;
+  label: string;
+}
+
+const ColorField: React.FC<ColorFieldProperties> = ({ name, label }) => {
   const { input } = useField(name);
 
   return (

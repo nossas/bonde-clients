@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack, Skeleton } from "bonde-components";
+import { Stack, Skeleton } from "bonde-components/chakra";
 import TargetsStatistics from "./TargetsStatistics";
 import { Widget } from "../../../FetchWidgets";
 import EventsCards from "./EventsCards";

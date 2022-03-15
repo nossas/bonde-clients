@@ -10,9 +10,7 @@ import {
   MenuItem,
   MenuGroup,
 } from '@chakra-ui/react';
-import ArrowDownIcon from '../chakra-theme/icons/ArrowDownIcon';
-import ArrowUpIcon from '../chakra-theme/icons/ArrowUpIcon';
-import CloseIcon from '../chakra-theme/icons/CloseIcon';
+import { ArrowDownIcon, ArrowUpIcon, CloseIcon } from '../icons';
 import { Session } from './types';
 
 interface UserDropdownProperties {

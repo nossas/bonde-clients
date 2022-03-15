@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from 'bonde-core-tools';
-import { Loading, Header, Text } from 'bonde-components';
+import { Loading, Header } from 'bonde-components';
+import { Text } from 'bonde-components/chakra';
 import { useHistory, useLocation } from 'react-router-dom';
 
 const InvalidURL = () => (

@@ -1,6 +1,6 @@
 import React from "react";
 import { gql, useQuery } from "bonde-core-tools";
-import styled from "styled-components";
+import styled from "@emotion/styled";
 import { Loading } from "bonde-components";
 
 import { CheckCommunity } from "../../components";

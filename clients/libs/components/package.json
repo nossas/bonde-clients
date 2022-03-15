@@ -1,14 +1,21 @@
 {
   "version": "0.0.7",
   "license": "MIT",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "__dist/index.js",
+  "module": "__dist/esm/index.js",
+  "typings": "__dist/index.d.ts",
   "files": [
-    "dist"
+    "__dist",
+    "__src",
+    "form",
+    "chakra",
+    "icons"
   ],
   "scripts": {
     "dev": "tsdx watch",
-    "build": "tsdx build",
+    "build": "tsdx build && ./scripts/postbuild.sh",
+    "prepack": "sh ./scripts/prepack.sh",
+    "postpack": "sh ./scripts/postpack.sh",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint --fix",
     "prepare": "tsdx build",
@@ -33,7 +40,6 @@
   },
   "name": "bonde-components",
   "author": "Igor Santos",
-  "module": "dist/bonde-components.esm.js",
   "devDependencies": {
     "@babel/core": "^7.8.7",
     "@storybook/addon-actions": "^5.3.17",

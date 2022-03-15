@@ -1,15 +1,13 @@
 import React from "react";
+import { InputField, TextareaField, Validators } from 'bonde-components';
 import {
   Box,
   Button,
   Flex,
   Grid,
   GridItem,
-  InputField,
-  TextareaField,
-  Heading,
-  Validators
-} from "bonde-components";
+  Heading
+} from "bonde-components/chakra";
 import { useTranslation } from "react-i18next";
 import { Widget } from "../../FetchWidgets";
 import { noSpecialCharacters } from "../../../../services/utils";

@@ -1,4 +1,4 @@
-import { useField } from 'bonde-components';
+import { useField } from 'bonde-components/form';
 
 type ChildrenArgs = {
   value: any

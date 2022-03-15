@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
+import { SearchIcon } from 'bonde-components/icons';
 import {
   InputGroup,
   InputRightElement,
   Input,
   IconButton,
-  SearchIcon,
   Box
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 
 type Props = {
   field: string,
@@ -54,6 +54,7 @@ const SearchInput: React.FC<Props> = ({ data, field, placeholder, onChange }) =>
             // eslint-disable-next-line react/no-children-prop
             children={(
               <IconButton
+                aria-label="Search Button"
                 variant="link"
                 colorScheme="gray"
                 type='submit'

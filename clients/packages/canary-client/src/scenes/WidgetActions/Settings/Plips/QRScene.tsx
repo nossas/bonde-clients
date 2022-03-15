@@ -1,6 +1,7 @@
 import React from "react";
 import QrReader from "react-qr-reader";
-import { Flex, Text, ArrowLeftIcon, IconButton, Stack } from "bonde-components";
+import { ArrowLeftIcon } from "bonde-components/icons";
+import { Flex, Text, IconButton, Stack } from "bonde-components/chakra";
 import styled from "@emotion/styled";
 
 import QRCodeIcon from "./QRCodeIcon";
@@ -41,6 +42,7 @@ const QRScene: React.FC<Properties> = ({ widget }) => {
     <Styles>
       <Flex align="center" justify="space-between" mb={4}>
         <IconButton
+          aria-label="Go back button"
           icon={<ArrowLeftIcon />}
           variant="ghost"
           colorScheme="gray"

@@ -7,12 +7,10 @@ import {
   ToastContainer,
   Main,
   Body,
-  ChakraProvider,
-  chakraTheme,
   FontsLoader,
-  CSSReset,
   SessionUI
 } from 'bonde-components';
+import { ChakraProvider, theme as chakraTheme, CSSReset } from 'bonde-components/chakra';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import * as types from "styled-components/cssprop";
 
@@ -75,6 +73,7 @@ const App = (): React.ReactElement => {
       <FontsLoader />
       <Session
         fetchData
+        protocol={protocol}
         apiGraphQLUrl={apiGraphQLUrl}
         appDomain={appDomain}
       >

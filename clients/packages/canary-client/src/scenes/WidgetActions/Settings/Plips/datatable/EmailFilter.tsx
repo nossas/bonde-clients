@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormControl, Input } from 'bonde-components';
+import { FormControl, Input } from 'bonde-components/chakra';
 import { useQueryFiltersFields } from './QueryFiltersProvider';
 
 const EmailFilter: React.FC = () => {

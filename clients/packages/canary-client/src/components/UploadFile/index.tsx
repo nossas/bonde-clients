@@ -1,6 +1,8 @@
 import React, { useRef } from 'react';
 import ReactS3Uploader from 'react-s3-uploader';
-import { Text, FormLabel, Link, useField, Hint } from 'bonde-components';
+import { Link, Hint } from 'bonde-components';
+import { useField } from 'bonde-components/form';
+import { Text, FormLabel } from 'bonde-components/chakra';
 import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Image from './Image';

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from '@emotion/styled';
 import { Header } from 'bonde-components';
 
 const Panel = styled.div`

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { Input } from '../src';
+import { Input } from '../src/chakra';
 
 describe('it', () => {
   it('renders without crashing', () => {

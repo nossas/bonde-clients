@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Stack, Flex } from "bonde-components";
+import { Stack, Flex } from "bonde-components/chakra";
 import SearchInput from '../../components/SearchInput';
 
 type RenderProps = {

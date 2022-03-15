@@ -1,15 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Icon } from 'bonde-components';
 import {
   Text,
-  Icon,
   Grid,
   GridItem,
   Box,
   Flex,
   Stack,
   Heading
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { Status } from './Styles';
 import CreateDomainModal from './CreateDomainModal';
 

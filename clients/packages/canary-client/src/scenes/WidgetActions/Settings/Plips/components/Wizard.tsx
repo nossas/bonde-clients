@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, FinalForm } from 'bonde-components';
+import { Button } from 'bonde-components/chakra';
+import { Form as FinalForm } from 'bonde-components/form';
 import styled from "@emotion/styled";
 import MenuActions from './MenuActions';
 

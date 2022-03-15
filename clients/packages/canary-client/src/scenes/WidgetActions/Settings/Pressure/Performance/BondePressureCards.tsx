@@ -1,5 +1,5 @@
 import React from "react";
-import { Stack } from "bonde-components";
+import { Stack } from "bonde-components/chakra";
 import Card from "./Card";
 
 type Props = {

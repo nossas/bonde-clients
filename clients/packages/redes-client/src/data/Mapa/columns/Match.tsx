@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
 import React, { ReactElement } from "react";
-import { Button } from "bonde-components";
+import { Button } from "bonde-components/chakra";
 import { CellStatus, CellDate } from "../../../components";
 import { Columns, valueString, Individual, valueAndRow } from "../../../types";
 

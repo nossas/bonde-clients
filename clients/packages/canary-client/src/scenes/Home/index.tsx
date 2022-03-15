@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, SimpleGrid, Box } from "bonde-components";
+import { Container, SimpleGrid, Box } from "bonde-components/chakra";
 import { isMobile } from "react-device-detect";
 import CommunitiesGadget from './CommunitiesGadget';
 import MobilizationsGadget from './MobilizationsGadget';

@@ -1,6 +1,7 @@
 import React from "react";
 // import Card from "./Card";
-import { Flex, InfoIcon, Text, Tooltip, Stack } from "bonde-components";
+import { InfoIcon } from 'bonde-components/icons';
+import { Flex, Text, Stack, Tooltip } from "bonde-components/chakra";
 import { ActivityFeedEvent } from "./hooks/usePerformance";
 import { CardHeader } from "./Card";
 

@@ -1,15 +1,14 @@
 import React, { useContext } from 'react';
 import { useQuery, useMutation, gql, Context as SessionContext } from 'bonde-core-tools';
 import { MailchimpStart } from './types';
+import { toast, Success } from 'bonde-components';
 import {
   Heading,
   Flex,
   Button,
   Text,
-  Stack,
-  Success,
-  toast,  
-} from 'bonde-components';
+  Stack  
+} from 'bonde-components/chakra';
 
 const fetchGraphqlQuery = gql`
 
@@ -78,23 +77,30 @@ const ForceSync: React.FC = () => {
     }
   }; 
 
-  if (loading) return <Text>Carregando Mailchimp Status</Text>;
-  else if (error) return (
+  if (loading) {
+    return <Text>Carregando Mailchimp Status</Text>;
+  } else if (error) {
+    console.log("ForceSync err: ", error);
+    return (
       <Stack>
         <Text>Ish! Ocorreu um erro e no momento não conseguimos retornar o status da sincronização.</Text>
         <Text>Se o problema persistir, contacte o suporte.</Text>
-      </Stack>);
+      </Stack>
+    );
+  }
 
-  if (data.resync_mailchimp_status.waiting > 0){
-    return <Stack>
-      <Heading as="h4" size="sm">Forçar sincronização</Heading>
-      <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
-      <Heading as="h4" size="sm">Status</Heading>
-      <Text size="sm">{data.resync_mailchimp_status.status} ({data.resync_mailchimp_status.completed} de {total(data)})</Text>
-      <Flex justifyContent="flex-end">
-        <Button onClick={done} disabled='true' type='button' marginTop={4}>Sincronizar</Button>
-      </Flex>
-    </Stack>
+  if (data.resync_mailchimp_status.waiting > 0) {
+    return (
+      <Stack>
+        <Heading as="h4" size="sm">Forçar sincronização</Heading>
+        <Text>Sua base no Mailchimp não está atualizada? Tudo bem! Clique em sincronizar pra dar um empurrãozinho:</Text>
+        <Heading as="h4" size="sm">Status</Heading>
+        <Text size="sm">{data.resync_mailchimp_status.status} ({data.resync_mailchimp_status.completed} de {total(data)})</Text>
+        <Flex justifyContent="flex-end">
+          <Button onClick={done} disabled type='button' marginTop={4}>Sincronizar</Button>
+        </Flex>
+      </Stack>
+    );
   } 
 
   return (

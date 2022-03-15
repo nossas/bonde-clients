@@ -1,5 +1,5 @@
 import React from 'react';
-import { Heading, Stack, Flex, DarkMode, Container as Content } from 'bonde-components';
+import { Heading, Stack, Flex, DarkMode, Container as Content } from 'bonde-components/chakra';
 import { isMobile } from 'react-device-detect';
 import TabRoute from './TabRoute';
 

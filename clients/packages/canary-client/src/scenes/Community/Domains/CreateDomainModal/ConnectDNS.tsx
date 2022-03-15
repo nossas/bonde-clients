@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from 'bonde-core-tools';
+import { toast, Success } from 'bonde-components';
 import {
   Button,
-  toast,
-  Success,
   Stack,
   ModalHeader,
   ModalContent,
   ModalBody,
   ModalFooter
-} from 'bonde-components';
+} from 'bonde-components/chakra';
 import { DNSHostedZone } from '../types';
 import NameServersForm from './NameServersForm';
 import IPConnectForm from './IPConnectForm';

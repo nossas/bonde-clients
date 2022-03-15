@@ -1,15 +1,14 @@
 import React from "react";
+import { TextareaField, RadioField } from 'bonde-components';
 import {
 	Box,
 	Button,
 	Flex,
 	Heading,
-	TextareaField,
 	Grid,
 	GridItem,
-	RadioField,
 	Radio
-} from "bonde-components";
+} from "bonde-components/chakra";
 import { useTranslation } from "react-i18next";
 
 import { Widget } from "../../FetchWidgets";
