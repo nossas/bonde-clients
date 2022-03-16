@@ -6,7 +6,7 @@ import styled from "@emotion/styled";
 import { AutoSaveFilters } from "./";
 
 const WrapForm = styled.div`
-  & > ${Form} {
+  & > ${Form.toString()} {
     display: grid;
     width: 100%;
     grid-gap: 15px;
