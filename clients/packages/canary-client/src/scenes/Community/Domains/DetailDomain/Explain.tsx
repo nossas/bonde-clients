@@ -9,13 +9,11 @@ import {
   PropagateDomainIcon
 } from '../Icons';
 import { Status, SmallText } from '../Styles';
-import { DNSHostedZone, Certificate, IsPage } from '../types';
+import { DNSHostedZone } from '../types';
 
 type Props = {
   dnsHostedZone: DNSHostedZone
   dnsIsActivated: boolean
-  certificate?: Certificate
-  isPage?: IsPage
 }
 
 const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
@@ -74,6 +72,11 @@ const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
             <CertifyDomainIcon />
             <Header.H5>Certificar Domínio</Header.H5>
             <SmallText>Quando o domínio for propagado, o BONDE gera <strong>automaticamente </strong>um certificado de segurança. Isso leva poucos minutos.</SmallText>
+            <Status
+              isActived={() => dnsHostedZone.certificates.length > 0}
+              value='done'
+              labels={{ 'done': 'Concluído' }}
+            />
           </Stack>
 
           <Icon name='ArrowRight' size='small' />
@@ -86,13 +89,19 @@ const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
             <SmallText>
               Pronto! Seu domínio está  ativo e disponível para utilizar nas páginas da sua comunidade no BONDE. <a href={`https://app.bonde.org`}>Clique aqui</a> para ver suas páginas.
             </SmallText>
+            <Status
+              isActived={() => dnsHostedZone.certificates[0]?.is_active}
+              value='done'
+              labels={{ 'done': 'Concluído' }}
+            />
           </Stack>
-
           <Icon name='ArrowRight' size='small' />
         </HStack>
       </Flex>
     </Stack>
   );
 }
+
+
 
 export default Explain;
