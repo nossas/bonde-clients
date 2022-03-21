@@ -28,7 +28,7 @@ export const DNS = styled.div<DNSProps>`
   grid-template-columns: 500px auto 150px;
   grid-template-rows: ${props => props.header ? '35px' : '60px'};
   background-color: ${props => props.header ? 'none' : '#fff'};
-  border-bottom: ${props => props.header ? 'none' : '1px solid #eee'};  
+  border-bottom: ${props => props.header ? 'none' : '1px solid #eee'};
 
   ${Col} {
     padding: ${props => props.header ? '0 20px 18px' : '18px 20px'};
@@ -64,13 +64,13 @@ type StatusStyledProps = {
 export const StatusStyled = styled(Text).attrs({ bold: true, uppercase: true })`
   cursor: pointer;
   font-size: 13px !important;
-  color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : props.disabled ? '#FF2B4E' : '#444444'} !important;
+  color: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : props.disabled ? '#ee0099' : '#444444'} !important;
 
   svg {
     margin: 0 5px 3px 0;
 
     g, path {
-      fill: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : props.disabled ? '#FF2B4E' : '#444444'} !important;
+      fill: ${(props: StatusStyledProps) => props.active ? '#50E3C2' : props.disabled ? '#ee0099' : '#444444'} !important;
     }
   }
 `;
@@ -84,20 +84,21 @@ export const Status = ({ value, labels, activeStatus, inactiveStatus, isActived 
       {isActive ? (
         <Flex direction="row">
           <Icon size='small' name='Check' />
-          <span>{labels[value || 'active']}</span>
+          <span>{labels && labels[value || 'active']}</span>
         </Flex>
       ) : inactiveStatus ? (
         <Flex direction="row">
           <Icon size='small' name='Warning' />
-          <span>{labels[value || 'inactive']}</span>
+          <span>{labels && labels[value || 'inactive']}</span>
         </Flex>
       ) : (
-        <Flex direction="row">
+        <Flex direction="row" alignItems="center" >
           <Icon size='small' name='Sync' />
-          <span>{labels[value || '']}</span>
+          <span>{labels && labels[value || 'disabled']}</span>
         </Flex>
-      )}
-    </StatusStyled>
+      )
+      }
+    </StatusStyled >
   );
 }
 

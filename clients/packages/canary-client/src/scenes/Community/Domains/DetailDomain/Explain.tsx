@@ -46,7 +46,7 @@ const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
             <SmallText>Para conseguir usar seu endereço no BONDE, copie os registros abaixo e cole no site onde comprou seu domínio. <a href="http://www.faq.bonde.org/#block-7283" title='FAQ Dominios' target="_blank" rel="noopener noreferrer">Clique aqui</a> para ver o passo a passo.</SmallText>
             <Status
               isActived={() => !!(dnsHostedZone.status !== 'created' || dnsHostedZone.ns_ok)}
-              labels={{ 'active': 'Concluído', 'inactive': 'Inativo' }}
+              labels={{ active: 'Concluído', disabled: 'Aguardando ação' }}
             />
           </Stack>
 
@@ -60,7 +60,7 @@ const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
             <SmallText>O provedor onde você comprou seu domínio faz a propagação. Esse processo pode levar até <strong>48h</strong>.</SmallText>
             <Status
               isActived={() => dnsIsActivated}
-              labels={{ active: 'Concluído', inactive: 'Inativo' }}
+              labels={{ active: 'Concluído', disabled: 'Conferir DNS' }}
             />
           </Stack>
 
@@ -74,8 +74,7 @@ const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
             <SmallText>Quando o domínio for propagado, o BONDE gera <strong>automaticamente </strong>um certificado de segurança. Isso leva poucos minutos.</SmallText>
             <Status
               isActived={() => dnsHostedZone.certificates.length > 0}
-              value='done'
-              labels={{ 'done': 'Concluído' }}
+              labels={{ active: 'Concluído', disabled: 'Em andamento' }}
             />
           </Stack>
 
@@ -91,8 +90,7 @@ const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
             </SmallText>
             <Status
               isActived={() => dnsHostedZone.certificates[0]?.is_active}
-              value='done'
-              labels={{ 'done': 'Concluído' }}
+              labels={{ active: 'Concluído', disabled: 'Em andamento' }}
             />
           </Stack>
           <Icon name='ArrowRight' size='small' />
