@@ -36,3 +36,20 @@
 .editor--content.editable table > tbody >tr > td {
   border-right: 1px solid black;
 }
+
+@import url('./styles/ImageEditLayer.module.scss');
+@import url('./styles/ImageNode.module.scss');
+@import url('./styles/Modal.module.css');
+@import url('./styles/ModalButton.module.css');
+@import url('./styles/ModalContent.module.css');
+@import url('./styles/ModalForm.module.css');
+@import url('./styles/Tooltip.module.css');
+@import url('./styles/ColorButton.module.css');
+@import url('./styles/DraggableColorPicker.module.css');
+@import url('./styles/AlignmentButtonBar.module.css');
+@import url('./styles/EmbedButton.module.css');
+@import url('./styles/EmbedNode.module.css');
+@import url('./styles/FontSizeInput.module.css');
+@import url('./styles/GridButtonBar.module.css');
+@import url('./styles/LinkNode.module.css');
+@import url('./styles/ListButtonBar.module.css');
