@@ -1,14 +1,6 @@
 import React from 'react';
-import { Header, Icon } from 'bonde-components';
-import { Flex, HStack, Stack, Text } from 'bonde-components/chakra';
-import {
-  ActiveDomainIcon,
-  CertifyDomainIcon,
-  ConnectDomainIcon,
-  InsertDomainIcon,
-  PropagateDomainIcon
-} from '../Icons';
-import { Status, SmallText } from '../Styles';
+import { Flex, Stack, Text, Box } from 'bonde-components/chakra';
+import { InsertDomain, ConnectDomain, PropagateDomain, CertifyDomain, ActiveDomain } from './DomainSteps'
 import { DNSHostedZone } from '../types';
 
 type Props = {
@@ -16,7 +8,7 @@ type Props = {
   dnsIsActivated: boolean
 }
 
-const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
+const Explain: React.FC<Props> = ({ dnsHostedZone, dnsIsActivated }) => {
   return (
     <Stack direction="column" spacing={2}>
       <Text fontWeight="semibold" fontSize="sm" textTransform="uppercase">
@@ -24,82 +16,33 @@ const Explain = ({ dnsHostedZone, dnsIsActivated }: Props) => {
       </Text>
 
       <Flex bg="white" px={4} py={6} justifyContent="space-around">
-        <HStack spacing={25}>
-          <Stack align="center" maxW={165}>
-            <InsertDomainIcon />
-            <Header.H5>Inserir domínio</Header.H5>
-            <SmallText>O primeiro passo é comprar o domínio em um site como GoDaddy ou RegistroBR e inserir aqui no BONDE.</SmallText>
-            <Status
-              activeStatus='done'
-              value='done'
-              labels={{ 'done': 'Concluído' }}
-            />
-          </Stack>
+        <InsertDomain />
 
-          <Icon name='ArrowRight' size='small' />
-        </HStack>
+        <ConnectDomain />
 
-        <HStack spacing={25}>
-          <Stack align="center" maxW={185}>
-            <ConnectDomainIcon />
-            <Header.H5>Conectar ao BONDE</Header.H5>
-            <SmallText>Para conseguir usar seu endereço no BONDE, copie os registros abaixo e cole no site onde comprou seu domínio. <a href="http://www.faq.bonde.org/#block-7283" title='FAQ Dominios' target="_blank" rel="noopener noreferrer">Clique aqui</a> para ver o passo a passo.</SmallText>
-            <Status
-              isActived={() => !!(dnsHostedZone.status !== 'created' || dnsHostedZone.ns_ok)}
-              labels={{ active: 'Concluído', disabled: 'Aguardando ação' }}
-            />
-          </Stack>
+        {dnsHostedZone.status != 'propagated' || dnsHostedZone.ns_ok ?
+          <PropagateDomain /> :
+          <Box opacity="45%">
+            <PropagateDomain />
+          </Box>
+        }
 
-          <Icon name='ArrowRight' size='small' />
-        </HStack>
+        {<PropagateDomain /> ?
+          <Box opacity="45%">
+            <CertifyDomain />
+          </Box>
+          : <CertifyDomain />
+        }
 
-        <HStack spacing={25}>
-          <Stack align="center" maxW={165}>
-            <PropagateDomainIcon />
-            <Header.H5>Propagar Domínio</Header.H5>
-            <SmallText>O provedor onde você comprou seu domínio faz a propagação. Esse processo pode levar até <strong>48h</strong>.</SmallText>
-            <Status
-              isActived={() => dnsIsActivated}
-              labels={{ active: 'Concluído', disabled: 'Conferir DNS' }}
-            />
-          </Stack>
-
-          <Icon name='ArrowRight' size='small' />
-        </HStack>
-
-        <HStack spacing={25}>
-          <Stack direction="column" align="center" spacing={2} maxW={165}>
-            <CertifyDomainIcon />
-            <Header.H5>Certificar Domínio</Header.H5>
-            <SmallText>Quando o domínio for propagado, o BONDE gera <strong>automaticamente </strong>um certificado de segurança. Isso leva poucos minutos.</SmallText>
-            <Status
-              isActived={() => dnsHostedZone.certificates.length > 0}
-              labels={{ active: 'Concluído', disabled: 'Em andamento' }}
-            />
-          </Stack>
-
-          <Icon name='ArrowRight' size='small' />
-        </HStack>
-
-        <HStack spacing={25}>
-          <Stack direction="column" align="center" spacing={2} maxW={165}>
-            <ActiveDomainIcon />
-            <Header.H5>Domínio Ativo</Header.H5>
-            <SmallText>
-              Pronto! Seu domínio está  ativo e disponível para utilizar nas páginas da sua comunidade no BONDE. <a href={`https://app.bonde.org`}>Clique aqui</a> para ver suas páginas.
-            </SmallText>
-            <Status
-              isActived={() => dnsHostedZone.certificates[0]?.is_active}
-              labels={{ active: 'Concluído', disabled: 'Em andamento' }}
-            />
-          </Stack>
-          <Icon name='ArrowRight' size='small' />
-        </HStack>
+        {dnsHostedZone.certificates?.length > 0
+          ? <ActiveDomain />
+          : <Box opacity="45%">
+            <ActiveDomain />
+          </Box>
+        }
       </Flex>
     </Stack>
   );
 }
-
-
 
 export default Explain;
