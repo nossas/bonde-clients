@@ -105,7 +105,6 @@ export const ActiveDomain = (dnsHostedZone) => {
           labels={{ active: 'Concluído', disabled: 'Em andamento' }}
         />
       </Stack>
-      <Icon name='ArrowRight' size='small' />
     </HStack>
 
   )
