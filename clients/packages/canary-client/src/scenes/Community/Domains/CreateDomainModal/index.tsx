@@ -6,14 +6,15 @@ import DomainForm from './DomainForm';
 import ConnectDNS from './ConnectDNS';
 
 const createDomainGQL = gql`
-  mutation ($input: DomainInput) {
-    create_domain(input: $input) {
+  mutation ($domain: DomainInput) {
+    create_domain(domain: $domain) {
       comment
       community_id
       created_at
       domain_name
       id
       name_servers
+      status
       ns_ok
       updated_at
     }
@@ -35,8 +36,8 @@ const CreateDomainModal: React.FC<Props> = ({ btnText, refetch }) => {
     try {
       const { data } = await createDomain({
         variables: {
-          input: {
-            domain: value,
+          domain: {
+            domain_name: value,
             community_id: community?.id,
             comment: `Created by ${user.firstName}`
           }
