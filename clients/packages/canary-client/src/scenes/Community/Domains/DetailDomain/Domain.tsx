@@ -96,7 +96,7 @@ const updateDomainGQL = gql`
   mutation ($dns_hosted_zone_id: Int!, $status: dnshostedzonestatus!) {
     update_dns_hosted_zones_by_pk(
       pk_columns: { id: $dns_hosted_zone_id },
-      _set: { status: $status }
+      _set: { status: $status, ns_ok: true }
     ) {
       id
       domain_name
