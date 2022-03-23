@@ -20,7 +20,7 @@ const Explain: React.FC<Props> = ({ dnsHostedZone, dnsIsActivated }) => {
 
         <ConnectDomain />
 
-        {dnsHostedZone.status != 'propagated' || dnsHostedZone.ns_ok ?
+        {dnsHostedZone.status != 'propagated' || !dnsHostedZone.ns_ok ?
           <PropagateDomain /> :
           <Box opacity="45%">
             <PropagateDomain />
