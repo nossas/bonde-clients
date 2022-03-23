@@ -66,14 +66,13 @@ export const PropagateDomain: React.FC<Props> = ({ dnsHostedZone }) => {
           labels={{ active: 'Concluído', disabled: 'Conferir DNS' }}
         />
       </Stack>
-
       <Icon name='ArrowRight' size='small' />
     </HStack>
 
   )
 }
 
-export const CertifyDomain = (dnsHostedZone) => {
+export const CertifyDomain: React.FC<{ dnsHostedZone?: DNSHostedZone }> = ({ dnsHostedZone }) => {
   return (
     <HStack spacing={25}>
       <Stack direction="column" align="center" spacing={2} maxW={165}>
@@ -81,7 +80,7 @@ export const CertifyDomain = (dnsHostedZone) => {
         <Header.H5>Certificar Domínio</Header.H5>
         <SmallText>Quando o domínio for propagado, o BONDE gera <strong>automaticamente </strong>um certificado de segurança. Isso leva poucos minutos.</SmallText>
         <Status
-          isActived={() => dnsHostedZone.certificates?.length > 0}
+          isActived={() => !!dnsHostedZone?.certificates?.length}
           labels={{ active: 'Concluído', disabled: 'Em andamento' }}
         />
       </Stack>

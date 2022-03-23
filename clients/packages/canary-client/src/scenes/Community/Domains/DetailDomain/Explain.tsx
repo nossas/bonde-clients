@@ -20,25 +20,28 @@ const Explain: React.FC<Props> = ({ dnsHostedZone, dnsIsActivated }) => {
 
         <ConnectDomain />
 
-        {dnsHostedZone.status != 'propagated' || !dnsHostedZone.ns_ok ?
-          <PropagateDomain /> :
-          <Box opacity="45%">
-            <PropagateDomain />
-          </Box>
+        {dnsHostedZone.status !== 'propagated' || !dnsHostedZone.ns_ok
+          ? (
+            <Box opacity="45%">
+              <PropagateDomain />
+            </Box>
+          ) : <PropagateDomain dnsHostedZone={dnsHostedZone} />
         }
 
-        {<PropagateDomain /> ?
-          <Box opacity="45%">
-            <CertifyDomain />
-          </Box>
-          : <CertifyDomain />
+        {!(dnsHostedZone.certificates?.length > 0)
+          ? (
+            <Box opacity="45%">
+              <CertifyDomain />
+            </Box>
+          ) : <CertifyDomain dnsHostedZone={dnsHostedZone} />
         }
 
-        {dnsHostedZone.certificates?.length > 0
-          ? <ActiveDomain />
-          : <Box opacity="45%">
-            <ActiveDomain />
-          </Box>
+        {!dnsHostedZone.certificates[0]?.is_active
+          ? (
+            <Box opacity="45%">
+              <ActiveDomain />
+            </Box>
+          ) : <ActiveDomain />
         }
       </Flex>
     </Stack>

@@ -23,7 +23,7 @@ type Props = {
   refetch: any
 }
 
-const Records = ({ dnsHostedZone, refetch }: Props) => {
+const Records: React.FC<Props> = ({ dnsHostedZone, refetch }) => {
   const [deleteRecord] = useMutation(deleteRecordGQL);
 
   return (
@@ -48,7 +48,7 @@ const Records = ({ dnsHostedZone, refetch }: Props) => {
             .dns_records
             .filter((r: DNSRecord) => r.record_type !== 'NS' && r.record_type !== 'SOA')
             .map((dnsRecord: DNSRecord) => (
-              <>
+              <React.Fragment key={dnsRecord.id}>
                 <GridItem>
                   <Header.H5>{dnsRecord.name}</Header.H5>
                 </GridItem>
@@ -90,7 +90,7 @@ const Records = ({ dnsHostedZone, refetch }: Props) => {
                     <Icon name='Trash' size='small' /> Excluir
                   </Button>
                 </GridItem>
-              </>
+              </React.Fragment>
             ))
           }
         </Grid>

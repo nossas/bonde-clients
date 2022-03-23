@@ -11,16 +11,12 @@ import {
 } from 'bonde-components/chakra';
 import NameServers from '../NameServers';
 import Radio from './Radio';
+import { DNSHostedZone } from '../types';
 
 const TopicList = styled.ol`
   margin-left: 20px;
   padding: 18px 0;
 `;
-
-type DNSHostedZone = {
-  id: number
-  name_servers: string[]
-}
 
 type Props = {
   status?: string
