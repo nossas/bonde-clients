@@ -90,7 +90,7 @@ export const CertifyDomain: React.FC<{ dnsHostedZone?: DNSHostedZone }> = ({ dns
   )
 }
 
-export const ActiveDomain = (dnsHostedZone) => {
+export const ActiveDomain: React.FC<{ dnsHostedZone?: DNSHostedZone }> = ({ dnsHostedZone }) => {
   return (
     <HStack spacing={25}>
       <Stack direction="column" align="center" spacing={2} maxW={165}>
@@ -100,7 +100,7 @@ export const ActiveDomain = (dnsHostedZone) => {
           Pronto! Seu domínio está  ativo e disponível para utilizar nas páginas da sua comunidade no BONDE. <a href={`https://app.bonde.org`}>Clique aqui</a> para ver suas páginas.
         </SmallText>
         <Status
-          isActived={() => dnsHostedZone.certificates?.is_active}
+          isActived={() => !!dnsHostedZone?.certificates[0]?.is_active}
           labels={{ active: 'Concluído', disabled: 'Em andamento' }}
         />
       </Stack>

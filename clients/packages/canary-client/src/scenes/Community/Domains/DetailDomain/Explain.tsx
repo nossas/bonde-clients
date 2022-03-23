@@ -9,6 +9,7 @@ type Props = {
 }
 
 const Explain: React.FC<Props> = ({ dnsHostedZone, dnsIsActivated }) => {
+
   return (
     <Stack direction="column" spacing={2}>
       <Text fontWeight="semibold" fontSize="13px" textTransform="uppercase">
@@ -41,7 +42,7 @@ const Explain: React.FC<Props> = ({ dnsHostedZone, dnsIsActivated }) => {
             <Box opacity="45%">
               <ActiveDomain />
             </Box>
-          ) : <ActiveDomain />
+          ) : <ActiveDomain dnsHostedZone={dnsHostedZone} />
         }
       </Flex>
     </Stack>
