@@ -116,13 +116,13 @@ const Domain: React.FC<Omit<Props, 'action'>> = (props) => {
     <Stack direction="column" spacing={2}>
       <Grid templateColumns='500px auto 280px'>
         <GridItem>
-          <MainTitle>Domínio</MainTitle>
+          <MainTitle>DOMÍNIO</MainTitle>
         </GridItem>
         <GridItem>
-          <MainTitle>Status</MainTitle>
+          <MainTitle>STATUS</MainTitle>
         </GridItem>
         <GridItem>
-          <MainTitle>Ações</MainTitle>
+          <MainTitle>AÇÕES</MainTitle>
         </GridItem>
       </Grid>
       <Box bg="white" boxShadow="sm">

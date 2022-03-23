@@ -11,7 +11,7 @@ type Props = {
 const Explain: React.FC<Props> = ({ dnsHostedZone, dnsIsActivated }) => {
   return (
     <Stack direction="column" spacing={2}>
-      <Text fontWeight="semibold" fontSize="sm" textTransform="uppercase">
+      <Text fontWeight="semibold" fontSize="13px" textTransform="uppercase">
         {!dnsIsActivated ? 'Entenda o processo' : 'Detalhes'}
       </Text>
 
@@ -20,7 +20,7 @@ const Explain: React.FC<Props> = ({ dnsHostedZone, dnsIsActivated }) => {
 
         <ConnectDomain />
 
-        {dnsHostedZone.status != 'propagated' || dnsHostedZone.ns_ok ?
+        {dnsHostedZone.status != 'propagated' || !dnsHostedZone.ns_ok ?
           <PropagateDomain /> :
           <Box opacity="45%">
             <PropagateDomain />
