@@ -68,11 +68,11 @@ const handleCheckDNS = ({ dnsHostedZone, refetch, action }: Props) => async () =
 
 const handleDelete = ({ dnsHostedZone, action, refetch, push }: Props) => async () => {
   try {
-    const input = {
+    const domain = {
       dns_hosted_zone_id: dnsHostedZone.id,
       community_id: dnsHostedZone.community.id
     };
-    await action({ variables: { input } });
+    await action({ variables: { domain } });
 
     toast(<Success message='Dominio removido com sucesso.' />, { type: toast.TYPE.SUCCESS });
     refetch();
@@ -87,8 +87,11 @@ const handleDelete = ({ dnsHostedZone, action, refetch, push }: Props) => async 
 
 // Component
 const deleteDomainGQL = gql`
-  mutation ($input: DeleteDomainInput) {
-    delete_domain(input: $input)
+  mutation ($domain: DeleteDomainInput!) {
+    delete_domain(domain: $domain) {
+      id
+      status
+    }
   }
 `;
 
