@@ -13,8 +13,11 @@ import { MainTitle } from '../Styles';
 import { DNSHostedZone, DNSRecord } from '../types';
 
 const deleteRecordGQL = gql`
-  mutation ($input: DeleteRecordsInput) {
-    delete_records(input: $input)
+  mutation ($records: DeleteRecordsInput) {
+    delete_records(records: $records) {
+      dns_hosted_zone_id
+      records
+    }
   }
 `
 
@@ -74,12 +77,12 @@ const Records: React.FC<Props> = ({ dnsHostedZone, refetch }) => {
                     colorScheme="gray"
                     onClick={async () => {
                       try {
-                        const input = {
+                        const records = {
                           dns_hosted_zone_id: dnsHostedZone.id,
                           records: [dnsRecord.id],
                           community_id: dnsHostedZone.community.id
                         };
-                        await deleteRecord({ variables: { input } });
+                        await deleteRecord({ variables: { records } });
                         toast(<Success message='Registro removido com sucesso' />, { type: toast.TYPE.SUCCESS });
                         refetch();
                       } catch (err) {

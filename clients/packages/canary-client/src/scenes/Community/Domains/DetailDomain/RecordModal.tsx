@@ -28,7 +28,14 @@ import { DNSHostedZone } from '../types';
 
 const createRecordGQL = gql`
   mutation ($input: RecordInput) {
-    create_record(input: $input)
+    create_record(record: $input) {
+      name
+      dns_hosted_zone_id
+      record_type
+      value
+      ttl
+      comment
+    }
   }
 `;
 
