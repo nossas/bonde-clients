@@ -68,11 +68,11 @@ const handleCheckDNS = ({ dnsHostedZone, refetch, action }: Props) => async () =
 
 const handleDelete = ({ dnsHostedZone, action, refetch, push }: Props) => async () => {
   try {
-    const input = {
+    const domain = {
       dns_hosted_zone_id: dnsHostedZone.id,
       community_id: dnsHostedZone.community.id
     };
-    await action({ variables: { input } });
+    await action({ variables: { domain } });
 
     toast(<Success message='Dominio removido com sucesso.' />, { type: toast.TYPE.SUCCESS });
     refetch();
@@ -87,8 +87,11 @@ const handleDelete = ({ dnsHostedZone, action, refetch, push }: Props) => async 
 
 // Component
 const deleteDomainGQL = gql`
-  mutation ($input: DeleteDomainInput) {
-    delete_domain(input: $input)
+  mutation ($domain: DeleteDomainInput!) {
+    delete_domain(domain: $domain) {
+      id
+      status
+    }
   }
 `;
 
@@ -96,7 +99,7 @@ const updateDomainGQL = gql`
   mutation ($dns_hosted_zone_id: Int!, $status: dnshostedzonestatus!) {
     update_dns_hosted_zones_by_pk(
       pk_columns: { id: $dns_hosted_zone_id },
-      _set: { status: $status }
+      _set: { status: $status, ns_ok: true }
     ) {
       id
       domain_name
@@ -116,13 +119,13 @@ const Domain: React.FC<Omit<Props, 'action'>> = (props) => {
     <Stack direction="column" spacing={2}>
       <Grid templateColumns='500px auto 280px'>
         <GridItem>
-          <MainTitle>Domínio</MainTitle>
+          <MainTitle>DOMÍNIO</MainTitle>
         </GridItem>
         <GridItem>
-          <MainTitle>Status</MainTitle>
+          <MainTitle>STATUS</MainTitle>
         </GridItem>
         <GridItem>
-          <MainTitle>Ações</MainTitle>
+          <MainTitle>AÇÕES</MainTitle>
         </GridItem>
       </Grid>
       <Box bg="white" boxShadow="sm">

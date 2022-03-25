@@ -13,8 +13,11 @@ import { MainTitle } from '../Styles';
 import { DNSHostedZone, DNSRecord } from '../types';
 
 const deleteRecordGQL = gql`
-  mutation ($input: DeleteRecordsInput) {
-    delete_records(input: $input)
+  mutation ($records: DeleteRecordsInput) {
+    delete_records(records: $records) {
+      dns_hosted_zone_id
+      records
+    }
   }
 `
 
@@ -23,7 +26,7 @@ type Props = {
   refetch: any
 }
 
-const Records = ({ dnsHostedZone, refetch }: Props) => {
+const Records: React.FC<Props> = ({ dnsHostedZone, refetch }) => {
   const [deleteRecord] = useMutation(deleteRecordGQL);
 
   return (
@@ -48,7 +51,7 @@ const Records = ({ dnsHostedZone, refetch }: Props) => {
             .dns_records
             .filter((r: DNSRecord) => r.record_type !== 'NS' && r.record_type !== 'SOA')
             .map((dnsRecord: DNSRecord) => (
-              <>
+              <React.Fragment key={dnsRecord.id}>
                 <GridItem>
                   <Header.H5>{dnsRecord.name}</Header.H5>
                 </GridItem>
@@ -74,12 +77,12 @@ const Records = ({ dnsHostedZone, refetch }: Props) => {
                     colorScheme="gray"
                     onClick={async () => {
                       try {
-                        const input = {
+                        const records = {
                           dns_hosted_zone_id: dnsHostedZone.id,
                           records: [dnsRecord.id],
                           community_id: dnsHostedZone.community.id
                         };
-                        await deleteRecord({ variables: { input } });
+                        await deleteRecord({ variables: { records } });
                         toast(<Success message='Registro removido com sucesso' />, { type: toast.TYPE.SUCCESS });
                         refetch();
                       } catch (err) {
@@ -90,7 +93,7 @@ const Records = ({ dnsHostedZone, refetch }: Props) => {
                     <Icon name='Trash' size='small' /> Excluir
                   </Button>
                 </GridItem>
-              </>
+              </React.Fragment>
             ))
           }
         </Grid>

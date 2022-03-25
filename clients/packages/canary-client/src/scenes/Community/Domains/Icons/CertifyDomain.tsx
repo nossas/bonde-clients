@@ -1,6 +1,6 @@
 import React from "react";
 
-const Icon = () => {
+const Icon: React.FC = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,7 +11,7 @@ const Icon = () => {
     >
       <path
         fill="#000"
-        d="M17.252 28.288l-1.167-1.167-1.487 1.488 2.654 2.654 4.147-4.147-1.487-1.487-2.66 2.66z"
+        d="M17.252 28.288l-1.168-1.167-1.487 1.488 2.655 2.654 4.146-4.147-1.487-1.487-2.66 2.66z"
       ></path>
       <path
         fill="#000"
@@ -21,6 +21,6 @@ const Icon = () => {
   );
 }
 
-Icon.displayName = 'ConnectDomainIcon';
+Icon.displayName = 'CertifyDomainIcon';
 
 export default Icon;

@@ -11,20 +11,21 @@ import {
   Button
 } from 'bonde-components/chakra';
 import copy from 'clipboard-copy';
+import { DNSHostedZone } from './types';
 
-const NameServers = ({ dnsHostedZone }: any) => {
+const NameServers: React.FC<{ dnsHostedZone: DNSHostedZone }> = ({ dnsHostedZone }) => {
   return (
     <Stack direction="column" spacing={2}>
       <Stack direction="row" spacing={2} align="center">
-        <Text fontWeight="semibold" fontSize="sm" textTransform="uppercase">{`Registros de nome (Name servers)`}</Text>
+        <Text fontWeight="semibold" fontSize="13px" textTransform="uppercase">{`Registros de nome (Name servers)`}</Text>
         <Tooltip label='Os registros de nome ("name servers" na gringa) são usados para conectar seu domínio ao BONDE.'>
           <InfoIcon color="gray.300" boxSize={3} />
         </Tooltip>
       </Stack>
       <Box bg="white" boxShadow="sm" p={4}>
         <Grid templateColumns='1fr auto' rowGap={4}>
-          {dnsHostedZone.name_servers.map((ns: string) => (
-            <>
+          {dnsHostedZone.name_servers.map((ns: string, i: number) => (
+            <React.Fragment key={i}>
               <GridItem>
                 <Text>{ns}</Text>
               </GridItem>
@@ -40,7 +41,7 @@ const NameServers = ({ dnsHostedZone }: any) => {
                   <Icon size='small' name='Copy' /> Copiar
                 </Button>
               </GridItem>
-            </>
+            </React.Fragment>
           ))}
         </Grid>
       </Box>
