@@ -41,14 +41,22 @@ const QRScene: React.FC<Properties> = ({ widget }) => {
   return (
     <Styles>
       <Flex align="center" justify="space-between" mb={4}>
-        <IconButton
-          aria-label="Go back button"
-          icon={<ArrowLeftIcon />}
-          variant="ghost"
-          colorScheme="gray"
-          onClick={history.goBack}
-        />
-        <Text textTransform="uppercase">Atualizar dados</Text>
+        <Flex align="center">
+          <IconButton
+            aria-label="Go back button"
+            icon={<ArrowLeftIcon />}
+            variant="ghost"
+            colorScheme="gray"
+            onClick={history.goBack}
+          />
+          <Text
+            fontWeight="900"
+            color="black"
+            textTransform="uppercase"
+            style={{ fontSize: "13px" }}>
+            voltar
+          </Text>
+        </Flex>
       </Flex>
       <Route exact path={match.path}>
         <>
