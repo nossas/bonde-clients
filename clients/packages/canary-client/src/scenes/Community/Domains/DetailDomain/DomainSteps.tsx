@@ -133,13 +133,13 @@ const Steps: React.FC<StepProperties> = ({ dnsHostedZone }) => {
           </>
         }
       >
-        {dns === 'propagated' && certificate === 'active' ? <Status icon="Check">Concluído</Status> : <Status icon="Sync">Em andamento</Status>}
+        {dns === 'propagated' && dnsHostedZone.certificates?.length > 0 ? <Status icon="Check">Concluído</Status> : <Status icon="Sync">Em andamento</Status>}
       </StepWrapper>
       
       <Icon name='ArrowRight' size='small' />
 
       <StepWrapper
-        disabled={dns !== 'propagated' || (dns === 'propagated' && certificate !== 'active')}
+        disabled={dns !== 'propagated' || (dns === 'propagated' && dnsHostedZone.certificates?.length === 0)}
         icon={ActiveDomainIcon}
         title="Domínio Ativo"
         description={
