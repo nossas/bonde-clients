@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form'
 import PlipDetails from '../components/PlipDetails';
-import PlipFormStyles from './PlipFormStyles';
 import LGPD from '../../../components/ux/LGPD';
+import PlipFormStyles from './PlipFormStyles';
 
 type Props = {
   // Function created with createApolloFetch
@@ -17,16 +17,16 @@ export interface PlipFormState {
   submited: boolean;
 }
 
-const required = (field: any) => {
+const required = (field) => {
   return field ? undefined : "não pode ficar em branco"
 };
 
-const mustBeNumber = (whatsapp: any) => (isNaN(whatsapp) && whatsapp != null ? "Digite apenas números" : undefined);
+const mustBeNumber = (whatsapp) => (isNaN(whatsapp) && whatsapp != null ? "Digite apenas números" : undefined);
 
-const minValue = (min: any) => (whatsapp: any) =>
+const minValue = (min) => (whatsapp) =>
   isNaN(whatsapp) || whatsapp.length >= min ? undefined : `Digite o número com o DDD`;
 
-const composeValidators = (...validators): any => (field: any) =>
+const composeValidators = (...validators) => (field) =>
   validators.reduce((error, validator) => error || validator(field), undefined);
 
 const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
@@ -152,8 +152,39 @@ const PlipForm = ({ asyncFillWidget, widget }: Props): JSX.Element => {
                   </div>
                 )}
               </Field>
+              <Field name="color">
+                {({ input }) => (
+                  <div>
+                    <label>Com qual raça/cor você se identifica?</label>
+                    <select {...input}>
+                      <option>selecione entre as opções</option>
+                      <option value="amarela">Amarela</option>
+                      <option value="branca">Branca</option>
+                      <option value="indigena">Indígena</option>
+                      <option value="parda">Parda</option>
+                      <option value="preta">Preta</option>
+                    </select>
+                  </div>
+                )}
+              </Field>
+              <Field name="gender">
+                {({ input }) => (
+                  <div>
+                    <label>Você é...</label>
+                    <select {...input}>
+                      <option>selecione entre as opções</option>
+                      <option value="mulher-cisgenero">Mulher cisgênero</option>
+                      <option value="mulher-transgenero">Mulher transgênero</option>
+                      <option value="homem-cisgenero">Homem cisgênero</option>
+                      <option value="homem-transgenero">Homem transgênero</option>
+                      <option value="nao-sei-responder">Não sei responder</option>
+                      <option value="prefiro-nao-responder">Prefiro não responder</option>
+                      <option value="outro">Outro</option>
+                    </select>
+                  </div>
+                )}
+              </Field>
               <button type="submit" value="submit">{(widget.settings && widget.settings.button_text) || 'Enviar'}</button>
-
               <LGPD />
             </form>
           )

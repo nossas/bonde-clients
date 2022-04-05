@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const PlipFormStyles = styled.div`
+export default styled.div`
   background-color: limegreen;
 
   form {
@@ -74,6 +74,4 @@ const PlipFormStyles = styled.div`
     cursor: pointer;
     margin: 2em 0 0 0;
   }
-`;
-
-export default PlipFormStyles;
+`
