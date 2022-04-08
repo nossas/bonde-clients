@@ -10,7 +10,7 @@ interface Properties {
 const DomainForm: React.FC<Properties> = ({ createNewDomainPath, hostedZones = [] }) => (
   <VStack>
     <Text>Selecione o domínio cadastrado na sua comunidade:</Text>
-    <HStack>
+    <HStack bg="gray.100">
       <Text>https://www.</Text>
       <Field name="domain">
         {({ input }) => (
