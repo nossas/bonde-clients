@@ -1,5 +1,5 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+// import PropTypes from 'prop-types';
+import React from 'react';
 import classnames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 import {
@@ -55,7 +55,7 @@ const InputError = (field) =>
     <Raise error={field.error} componentClass="p" />
   ) : undefined;
 
-class FormDomain extends Component {
+class FormDomain extends React.Component<FormDomainProperties, FormDomainState> {
   constructor(props) {
     super(props);
 
@@ -97,10 +97,10 @@ class FormDomain extends Component {
     this.props.redirectToCreateDNS();
   }
 
-  toggle(key, value) {
+  toggle(key: any, value: any) {
     if (key === 'showExternalDomain') {
       this.props.fields.advancedConfig.onChange(value);
-      const state = { [key]: value };
+      const state: any = { [key]: value };
       if (value === true) {
         state.showSubdomain = false;
         state.showRootDomain = false;
@@ -108,7 +108,7 @@ class FormDomain extends Component {
       }
       this.setState(state);
     } else if (key === 'showSubdomain') {
-      const state = { [key]: value };
+      const state: any = { [key]: value };
       if (value === true) {
         state.showExternalDomain = false;
         state.showRootDomain = false;
@@ -118,7 +118,7 @@ class FormDomain extends Component {
       this.setState(state);
     } else if (key === 'showRootDomain') {
       this.props.fields.rootDomainConfig.onChange(value);
-      const state = { [key]: value };
+      const state: any = { [key]: value };
       if (value === true) {
         state.showSubdomain = false;
         state.showExternalDomain = false;
@@ -137,7 +137,7 @@ class FormDomain extends Component {
       host = host.replace('www.', '');
     }
     return (
-      <div className="h5">
+      <div className="h5 cname-table">
         <p>
           <FormattedMessage
             id="mobilizations.components--form-domain.cname-table.helper-text"
@@ -228,6 +228,7 @@ class FormDomain extends Component {
               values={{
                 link: (
                   <a
+                    className='new-domain-link'
                     href="/"
                     onClick={this.clickHere.bind(this)}
                     target="_self"
@@ -452,17 +453,27 @@ class FormDomain extends Component {
   }
 }
 
-FormDomain.propTypes = {
-  formComponent: PropTypes.any.isRequired,
-  fields: PropTypes.shape({
-    externalDomain: PropTypes.object.isRequired,
-    subdomain: PropTypes.object.isRequired,
-    domain: PropTypes.object.isRequired,
-  }).isRequired,
-  mobilization: PropTypes.object.isRequired,
-  hostedZones: PropTypes.array.isRequired,
-  redirectToCreateDNS: PropTypes.func,
-  isSubdomain: PropTypes.bool,
-};
+interface FormDomainProperties {
+  formComponent: any;
+  fields: {
+    externalDomain: any;
+    subdomain: any;
+    domain: any;
+    advancedConfig: any;
+    rootDomain: any;
+    rootDomainConfig: any;
+  };
+  error?: any;
+  intl: any;
+  mobilization: any;
+  hostedZones: any[];
+  redirectToCreateDNS: any;
+}
+
+interface FormDomainState {
+  showSubdomain: boolean;
+  showExternalDomain: boolean;
+  showRootDomain: boolean;
+}
 
 export default FormDomain;
