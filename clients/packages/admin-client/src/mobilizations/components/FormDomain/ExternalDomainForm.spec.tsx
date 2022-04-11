@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { ListItem, OrderedList, Text } from 'bonde-components/chakra';
-import { Field } from 'bonde-components/form';
+import { Button, ListItem, OrderedList, Text } from 'bonde-components/chakra';
+import { Form, Field } from 'bonde-components/form';
 import ExternalDomainForm from './ExternalDomainForm';
 
 describe('ExternalDomainForm tests', () => {
@@ -9,6 +9,7 @@ describe('ExternalDomainForm tests', () => {
 
   beforeEach(() => {
     wrapper = shallow(<ExternalDomainForm />)
+      .find(Form).renderProp('children')({} as any);
   })
 
   it('should renders is ok', () => {
@@ -19,6 +20,12 @@ describe('ExternalDomainForm tests', () => {
     const text = wrapper.find(Text).at(0);
     expect(text.props().children)
       .toEqual('Insira abaixo o domínio, salve as alterações e siga o passo a passo para configurá-lo:');
+  });
+
+  it('should renders submit button', () => {
+    const button = wrapper.find(Button).at(0);
+    expect(button.props().children).toEqual('Salvar');
+    expect(button.props().type).toEqual('submit');
   });
 
   it('should render domain input', () => {

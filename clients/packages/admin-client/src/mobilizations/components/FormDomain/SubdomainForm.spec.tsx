@@ -1,14 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Text } from 'bonde-components/chakra';
-import { Field } from 'bonde-components/form';
+import { Field, Form } from 'bonde-components/form';
 import SubdomainForm from './SubdomainForm';
 
 describe('SubdomainForm tests', () => {
   let wrapper;
+  let form;
 
   beforeEach(() => {
     wrapper = shallow(<SubdomainForm />);
+    form = wrapper.find(Form).renderProp('children')({} as any);
   });
 
   it('should renders is ok', () => {
@@ -16,13 +18,13 @@ describe('SubdomainForm tests', () => {
   });
 
   it('should render description to explain form', () => {
-    const text = wrapper.find(Text).at(0);
+    const text = form.find(Text).at(0);
     expect(text.props().children)
       .toEqual('Personalize o subdomínio abaixo e clique em salvar para gerar o certificado.');
   });
 
   it('should render subdomain input', () => {
-    const field = wrapper.find(Field).at(0);
+    const field = form.find(Field).at(0);
     expect(field.props().name).toEqual('subdomain');
     
     const input = field.renderProp('children')({ input: {} });
@@ -35,8 +37,9 @@ describe('SubdomainForm tests', () => {
       { domain_name: '.domain2.org.br' }
     ];
     wrapper.setProps({ hostedZones });
+    form = wrapper.find(Form).renderProp('children')({} as any);
 
-    const field = wrapper.find(Field).at(1);
+    const field = form.find(Field).at(1);
     expect(field.props().name).toEqual('domain');
 
     const select = field.renderProp('children')({ input: {} });
