@@ -1,14 +1,14 @@
 import React from 'react';
-import { HStack, Input, ListItem, OrderedList, Text, VStack } from 'bonde-components/chakra';
+import { Stack, Input, ListItem, OrderedList, Text } from 'bonde-components/chakra';
 import { Field } from 'bonde-components/form';
 
 export default () => (
-  <VStack>
+  <Stack direction="column">
     <Text>Insira abaixo o domínio, salve as alterações e siga o passo a passo para configurá-lo:</Text>
-    <HStack>
+    <Stack direction="row">
       <Text>https://www.</Text>
       <Field name="domain">{({ input }) => <Input {...input} placeholder='seudominio.org' />}</Field>
-    </HStack>
+    </Stack>
     <OrderedList>
       <ListItem>Abra o site onde você comprou o domínio (GoDaddy.com, por exemplo);</ListItem>
       <ListItem>Entre nas configurações do domínio que você inseriu no BONDE;</ListItem>
@@ -19,5 +19,5 @@ export default () => (
       <ListItem>Em "Points to", preencha com o seguinte IP: 54.156.173.29</ListItem>
       <ListItem>Em "TTL", selecione "¹/² hour" e clique em "save";</ListItem>
     </OrderedList>  
-  </VStack>
+  </Stack>
 );

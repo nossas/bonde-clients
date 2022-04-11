@@ -6,5 +6,5 @@ export { default as PageHeader } from './page-header'
 //
 // Components that implements FormRedux component
 //
-export { default as FormDomain } from './FormDomain/FormPanel';
+export { default as FormDomain } from './FormDomain';
 export { default as FormShare } from './form-share'
