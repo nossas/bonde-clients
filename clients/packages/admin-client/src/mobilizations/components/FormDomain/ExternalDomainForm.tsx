@@ -2,15 +2,19 @@ import React from 'react';
 import { Stack, Input, ListItem, OrderedList, Text, Button } from 'bonde-components/chakra';
 import { Field, Form } from 'bonde-components/form';
 
-export default () => (
-  <Form onSubmit={(values) => console.log(values)}>
+interface Properties {
+  onSubmit: ({ customDomain }) => Promise<void>;
+}
+
+const ExternalDomainForm: React.FC<Properties> = ({ onSubmit }) => (
+  <Form onSubmit={onSubmit}>
     {({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>
         <Stack direction="column">
           <Text>Insira abaixo o domínio, salve as alterações e siga o passo a passo para configurá-lo:</Text>
           <Stack direction="row">
             <Text>https://www.</Text>
-            <Field name="domain">{({ input }) => <Input {...input} placeholder='seudominio.org' />}</Field>
+            <Field name="customDomain">{({ input }) => <Input {...input} placeholder='seudominio.org' />}</Field>
           </Stack>
           <OrderedList>
             <ListItem>Abra o site onde você comprou o domínio (GoDaddy.com, por exemplo);</ListItem>
@@ -28,3 +32,5 @@ export default () => (
     )}
   </Form>
 );
+
+export default ExternalDomainForm;

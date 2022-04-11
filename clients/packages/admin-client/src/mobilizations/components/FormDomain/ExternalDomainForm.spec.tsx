@@ -6,10 +6,12 @@ import ExternalDomainForm from './ExternalDomainForm';
 
 describe('ExternalDomainForm tests', () => {
   let wrapper;
+  let form;
+  const onSubmit = jest.fn();
 
   beforeEach(() => {
-    wrapper = shallow(<ExternalDomainForm />)
-      .find(Form).renderProp('children')({} as any);
+    wrapper = shallow(<ExternalDomainForm onSubmit={onSubmit} />)
+    form = wrapper.find(Form).renderProp('children')({} as any);
   })
 
   it('should renders is ok', () => {
@@ -17,30 +19,30 @@ describe('ExternalDomainForm tests', () => {
   });
 
   it('should render description to explain form', () => {
-    const text = wrapper.find(Text).at(0);
+    const text = form.find(Text).at(0);
     expect(text.props().children)
       .toEqual('Insira abaixo o domínio, salve as alterações e siga o passo a passo para configurá-lo:');
   });
 
   it('should renders submit button', () => {
-    const button = wrapper.find(Button).at(0);
+    const button = form.find(Button).at(0);
     expect(button.props().children).toEqual('Salvar');
     expect(button.props().type).toEqual('submit');
   });
 
   it('should render domain input', () => {
-    const field = wrapper.find(Field).at(0);
-    expect(field.props().name).toEqual('domain');
+    const field = form.find(Field).at(0);
+    expect(field.props().name).toEqual('customDomain');
 
     const input = field.renderProp('children')({ input: {} });
     expect(input.props().placeholder).toEqual('seudominio.org');
   });
 
   it('should render steps to settings DNS', () => {
-    const orderedList = wrapper.find(OrderedList);
+    const orderedList = form.find(OrderedList);
     expect(orderedList.length).toEqual(1);
 
-    const listItems = wrapper.find(ListItem);
+    const listItems = form.find(ListItem);
 
     expect(listItems.at(0).props().children)
       .toEqual('Abra o site onde você comprou o domínio (GoDaddy.com, por exemplo);');
@@ -58,5 +60,10 @@ describe('ExternalDomainForm tests', () => {
       .toEqual('Em "Points to", preencha com o seguinte IP: 54.156.173.29');
     expect(listItems.at(7).props().children)
       .toEqual('Em "TTL", selecione "¹/² hour" e clique em "save";');
+  });
+
+  it('should call onSubmit with customDomain value', async () => {
+    await wrapper.find(Form).props().onSubmit({ customDomain: 'minhacampanha.org' });
+    expect(onSubmit.mock.calls[0][0]).toEqual({ customDomain: 'minhacampanha.org' });
   });
 });

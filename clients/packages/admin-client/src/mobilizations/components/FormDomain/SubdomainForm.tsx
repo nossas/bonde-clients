@@ -3,11 +3,12 @@ import { Button, Stack, Text, Input, Select } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
 
 interface Properties {
+  onSubmit: ({ customDomain }) => Promise<void>;
   hostedZones?: { domain_name: string }[];
 }
 
-const SubdomainForm: React.FC<Properties> = ({ hostedZones = [] }) => (
-  <Form onSubmit={(values) => console.log(values)}>
+const SubdomainForm: React.FC<Properties> = ({ hostedZones = [], onSubmit }) => (
+  <Form onSubmit={async ({ subdomain, domain }) => await onSubmit({ customDomain: `${subdomain}.${domain}` })}>
   {({ handleSubmit }) => (
     <form onSubmit={handleSubmit}>
       <Stack direction="column">

@@ -12,6 +12,9 @@ import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
 
 const FormPanel = ({ hostedZones }) => {
+  const onSubmit = async ({ customDomain }) => {
+    console.log('submit', { customDomain });
+  }
 
   return (
     <>
@@ -24,13 +27,13 @@ const FormPanel = ({ hostedZones }) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <SubdomainForm hostedZones={hostedZones} />
+            <SubdomainForm onSubmit={onSubmit} hostedZones={hostedZones} />
           </TabPanel>
           <TabPanel>
-            <DomainForm hostedZones={hostedZones} />
+            <DomainForm onSubmit={onSubmit} hostedZones={hostedZones} />
           </TabPanel>
           <TabPanel>
-            <ExternalDomainForm />
+            <ExternalDomainForm onSubmit={onSubmit} />
           </TabPanel>
         </TabPanels>
       </Tabs>
