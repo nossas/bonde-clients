@@ -7,9 +7,10 @@ import DomainForm from './DomainForm';
 describe('DomainForm tests', () => {
   let wrapper;
   let form;
+  const onSubmit = jest.fn();
 
   beforeEach(() => {
-    wrapper = shallow(<DomainForm />)
+    wrapper = shallow(<DomainForm onSubmit={onSubmit} />)
     form = wrapper.find(Form).renderProp('children')({} as any);
   });
 
@@ -31,14 +32,14 @@ describe('DomainForm tests', () => {
 
   it('should render domain select input', () => {
     const hostedZones = [
-      { domain_name: '.domain.org.br' },
-      { domain_name: '.domain2.org.br' }
+      { domain_name: 'domain.org.br' },
+      { domain_name: 'domain2.org.br' }
     ];
     wrapper.setProps({ hostedZones });
     form = wrapper.find(Form).renderProp('children')({} as any);
 
     const field = form.find(Field).at(0);
-    expect(field.props().name).toEqual('domain');
+    expect(field.props().name).toEqual('customDomain');
 
     const select = field.renderProp('children')({ input: {} });
     expect(select.find('option').length).toEqual(hostedZones.length);
@@ -59,5 +60,10 @@ describe('DomainForm tests', () => {
     expect(link.props().children).toEqual('Clique aqui');
     expect(link.props().href).toEqual(path);
     expect(link.props().target).toEqual('_self');
+  });
+
+  it('should call onSubmit with customDomain value', async () => {
+    await wrapper.find(Form).props().onSubmit({ customDomain: 'minhacampanha.org' });
+    expect(onSubmit.mock.calls[0][0]).toEqual({ customDomain: 'minhacampanha.org' });
   });
 });

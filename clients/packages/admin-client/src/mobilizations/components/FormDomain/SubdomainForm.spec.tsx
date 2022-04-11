@@ -7,9 +7,10 @@ import SubdomainForm from './SubdomainForm';
 describe('SubdomainForm tests', () => {
   let wrapper;
   let form;
+  const onSubmit = jest.fn();
 
   beforeEach(() => {
-    wrapper = shallow(<SubdomainForm />);
+    wrapper = shallow(<SubdomainForm onSubmit={onSubmit} />);
     form = wrapper.find(Form).renderProp('children')({} as any);
   });
 
@@ -46,5 +47,10 @@ describe('SubdomainForm tests', () => {
     expect(select.find('option').length).toEqual(hostedZones.length);
     expect(select.find('option').at(0).props().children).toEqual(hostedZones[0].domain_name);
     expect(select.find('option').at(1).props().children).toEqual(hostedZones[1].domain_name);
+  });
+
+  it('should call onSubmit with customDomain value', async () => {
+    await wrapper.find(Form).props().onSubmit({ subdomain: 'minhacampanha', domain: 'nossas.org' });
+    expect(onSubmit.mock.calls[0][0]).toEqual({ customDomain: 'minhacampanha.nossas.org' });
   });
 });
