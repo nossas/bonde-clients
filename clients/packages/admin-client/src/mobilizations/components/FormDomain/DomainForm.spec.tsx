@@ -1,14 +1,16 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Text, Link } from 'bonde-components/chakra';
-import { Field } from 'bonde-components/form';
+import { Text, Link, Button } from 'bonde-components/chakra';
+import { Form, Field } from 'bonde-components/form';
 import DomainForm from './DomainForm';
 
 describe('DomainForm tests', () => {
   let wrapper;
+  let form;
 
   beforeEach(() => {
-    wrapper = shallow(<DomainForm />);
+    wrapper = shallow(<DomainForm />)
+    form = wrapper.find(Form).renderProp('children')({} as any);
   });
 
   it('should renders is ok', () => {
@@ -16,9 +18,15 @@ describe('DomainForm tests', () => {
   });
 
   it('should render description to explain form', () => {
-    const text = wrapper.find(Text).at(0);
+    const text = form.find(Text).at(0);
     expect(text.props().children)
       .toEqual('Selecione o domínio cadastrado na sua comunidade:');
+  });
+
+  it('should renders submit button', () => {
+    const button = form.find(Button).at(0);
+    expect(button.props().children).toEqual('Salvar');
+    expect(button.props().type).toEqual('submit');
   });
 
   it('should render domain select input', () => {
@@ -27,8 +35,9 @@ describe('DomainForm tests', () => {
       { domain_name: '.domain2.org.br' }
     ];
     wrapper.setProps({ hostedZones });
+    form = wrapper.find(Form).renderProp('children')({} as any);
 
-    const field = wrapper.find(Field).at(0);
+    const field = form.find(Field).at(0);
     expect(field.props().name).toEqual('domain');
 
     const select = field.renderProp('children')({ input: {} });
@@ -40,12 +49,13 @@ describe('DomainForm tests', () => {
   it('should render message with link to create new domain', () => {
     const path = 'https://admin-canary.bonde.org/community/settings/domains'
     wrapper.setProps({ createNewDomainPath: path });
+    form = wrapper.find(Form).renderProp('children')({} as any);
 
-    const text = wrapper.find(Text).at(2);
+    const text = form.find(Text).at(2);
     expect(text.props().children)
       .toEqual('Não encontro o domínio na lista?');
 
-    const link = wrapper.find(Link)
+    const link = form.find(Link)
     expect(link.props().children).toEqual('Clique aqui');
     expect(link.props().href).toEqual(path);
     expect(link.props().target).toEqual('_self');

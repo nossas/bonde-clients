@@ -10,7 +10,7 @@ describe('FormPanel tests', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<FormPanel />);
+    wrapper = shallow(<FormPanel hostedZones={[]} />);
   })
 
   it('should renders is ok', () => {

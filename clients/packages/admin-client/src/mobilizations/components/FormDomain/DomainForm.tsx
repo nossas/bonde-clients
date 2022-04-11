@@ -1,6 +1,6 @@
 import React from 'react';
-import { Stack, Text, Select, Link } from 'bonde-components/chakra';
-import { Field } from 'bonde-components/form';
+import { Stack, Text, Select, Link, Button } from 'bonde-components/chakra';
+import { Form, Field } from 'bonde-components/form';
 
 interface Properties {
   createNewDomainPath?: string;
@@ -8,23 +8,30 @@ interface Properties {
 }
 
 const DomainForm: React.FC<Properties> = ({ createNewDomainPath, hostedZones = [] }) => (
-  <Stack direction="column">
-    <Text>Selecione o domínio cadastrado na sua comunidade:</Text>
-    <Stack direction="row" bg="gray.100">
-      <Text>https://www.</Text>
-      <Field name="domain">
-        {({ input }) => (
-          <Select {...input}>
-            {hostedZones.map(({ domain_name: domain }) =>
-              <option key={domain}>{domain}</option>
+  <Form onSubmit={(values) => console.log(values)}>
+  {({ handleSubmit }) => (
+    <form onSubmit={handleSubmit}>
+      <Stack direction="column">
+        <Text>Selecione o domínio cadastrado na sua comunidade:</Text>
+        <Stack direction="row" bg="gray.100">
+          <Text>https://www.</Text>
+          <Field name="domain">
+            {({ input }) => (
+              <Select {...input} placeholder="selecione um domínio">
+                {hostedZones.map(({ domain_name: domain }) =>
+                  <option key={domain}>{domain}</option>
+                )}
+              </Select>
             )}
-          </Select>
-        )}
-      </Field>
-    </Stack>
-    <Text>Não encontro o domínio na lista?</Text>
-    <Text><Link href={createNewDomainPath || '#'} target='_self' >Clique aqui</Link> para cadastrar um novo domínio na comunidade.</Text>
-  </Stack>
+          </Field>
+        </Stack>
+        <Text>Não encontro o domínio na lista?</Text>
+        <Text><Link href={createNewDomainPath || '#'} target='_self' >Clique aqui</Link> para cadastrar um novo domínio na comunidade.</Text>
+        <Button type="submit">Salvar</Button>
+      </Stack>
+    </form>
+  )}
+  </Form>
 );
 
 export default DomainForm;
