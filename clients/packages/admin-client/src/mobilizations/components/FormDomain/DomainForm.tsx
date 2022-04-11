@@ -1,5 +1,5 @@
 import React from 'react';
-import { HStack, VStack, Text, Select, Link } from 'bonde-components/chakra';
+import { Stack, Text, Select, Link } from 'bonde-components/chakra';
 import { Field } from 'bonde-components/form';
 
 interface Properties {
@@ -8,9 +8,9 @@ interface Properties {
 }
 
 const DomainForm: React.FC<Properties> = ({ createNewDomainPath, hostedZones = [] }) => (
-  <VStack>
+  <Stack direction="column">
     <Text>Selecione o domínio cadastrado na sua comunidade:</Text>
-    <HStack bg="gray.100">
+    <Stack direction="row" bg="gray.100">
       <Text>https://www.</Text>
       <Field name="domain">
         {({ input }) => (
@@ -21,10 +21,10 @@ const DomainForm: React.FC<Properties> = ({ createNewDomainPath, hostedZones = [
           </Select>
         )}
       </Field>
-    </HStack>
+    </Stack>
     <Text>Não encontro o domínio na lista?</Text>
     <Text><Link href={createNewDomainPath || '#'} target='_self' >Clique aqui</Link> para cadastrar um novo domínio na comunidade.</Text>
-  </VStack>
+  </Stack>
 );
 
 export default DomainForm;

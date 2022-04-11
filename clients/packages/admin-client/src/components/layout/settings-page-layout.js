@@ -1,21 +1,10 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import classnames from 'classnames'
+import { Flex } from 'bonde-components/chakra'
 
-const SettingsPageLayout = ({ children, className }) => (
-  <div
-    className={classnames(
-      'settings-page-layout flex-auto flex flex-column bg-silver relative',
-      className
-    )}
-  >
+const SettingsPageLayout = ({ children }) => (
+  <Flex flexDir="column" width="100%" height='100vh'>
     {children}
-  </div>
-)
-
-SettingsPageLayout.propTypes = {
-  children: PropTypes.oneOfType([PropTypes.object, PropTypes.array]).isRequired,
-  className: PropTypes.oneOfType([PropTypes.string, PropTypes.array])
-}
+  </Flex>
+);
 
 export default SettingsPageLayout

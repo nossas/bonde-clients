@@ -1,5 +1,5 @@
 import React from 'react';
-import { HStack, VStack, Text, Input, Select } from 'bonde-components/chakra';
+import { Stack, Text, Input, Select } from 'bonde-components/chakra';
 import { Field } from 'bonde-components/form';
 
 interface Properties {
@@ -7,9 +7,9 @@ interface Properties {
 }
 
 const SubdomainForm: React.FC<Properties> = ({ hostedZones = [] }) => (
-  <VStack>
+  <Stack direction="column">
     <Text>Personalize o subdomínio abaixo e clique em salvar para gerar o certificado.</Text>
-    <HStack bg="gray.100">
+    <Stack direction="row" bg="gray.100">
       <Text>https://wwww.</Text>
       <Field name="subdomain">
         {({ input }) => <Input {...input} placeholder="escreva seu subdomínio" />}
@@ -23,8 +23,8 @@ const SubdomainForm: React.FC<Properties> = ({ hostedZones = [] }) => (
           </Select>
         )}
       </Field>
-    </HStack>
-  </VStack>
+    </Stack>
+  </Stack>
 );
 
 export default SubdomainForm;

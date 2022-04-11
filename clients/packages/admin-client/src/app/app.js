@@ -5,6 +5,8 @@ import {
   Provider as Session,
   Context as SessionContext,
 } from 'bonde-core-tools';
+import { FontsLoader } from 'bonde-components';
+import { ChakraProvider, CSSReset, theme } from 'bonde-components/chakra';
 
 import AppRouting from '../pages/app';
 
@@ -48,18 +50,22 @@ const App = ({ messages, locale, store }) => {
   const apiGraphQLUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || `${protocol}://api-graphql.${appDomain}/v1/graphql`;
 
   return (
-    <IntlProvider messages={messages} locale={locale}>
-      <Provider store={store}>
-        <Session
-          fetchData
-          protocol={protocol}
-          apiGraphQLUrl={apiGraphQLUrl}
-          appDomain={appDomain}
-        >
-          <ConnectedPortal />
-        </Session>
-      </Provider>
-    </IntlProvider>
+    <ChakraProvider theme={theme}>
+      <CSSReset />
+      <FontsLoader />
+      <IntlProvider messages={messages} locale={locale}>
+        <Provider store={store}>
+          <Session
+            fetchData
+            protocol={protocol}
+            apiGraphQLUrl={apiGraphQLUrl}
+            appDomain={appDomain}
+          >
+            <ConnectedPortal />
+          </Session>
+        </Provider>
+      </IntlProvider>
+    </ChakraProvider>
   );
 };
 
