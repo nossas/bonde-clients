@@ -6,8 +6,9 @@ import {
   TabList,
   TabPanels,
   TabPanel,
-  Tab
+  Stack
 } from 'bonde-components/chakra';
+import CustomTab from './CustomTab';
 import ExternalDomainForm from './ExternalDomainForm';
 import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
@@ -42,13 +43,13 @@ const FormPanel = ({ hostedZones, mobilization }) => {
   else if (hostedZones.some(rootDomainRegex)) defaultIndex = 1;
 
   return (
-    <>
+    <Stack direction='column' spacing={2}>
       <Heading fontWeight="semibold" fontSize="sm" textTransform="uppercase">Tipo de domínio</Heading>
-      <Tabs variant="enclosed" defaultIndex={defaultIndex}>
+      <Tabs variant="unstyled" mt={0} defaultIndex={defaultIndex}>
         <TabList>
-          <Tab>Subdomínio</Tab>
-          <Tab>Domínio Principal</Tab>
-          <Tab>Domínio Externo</Tab>
+          <CustomTab>Subdomínio</CustomTab>
+          <CustomTab>Domínio Principal</CustomTab>
+          <CustomTab>Domínio Externo</CustomTab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -72,7 +73,7 @@ const FormPanel = ({ hostedZones, mobilization }) => {
           </TabPanel>
         </TabPanels>
       </Tabs>
-    </>
+    </Stack>
   );
 }
 
