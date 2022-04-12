@@ -99,28 +99,64 @@ describe('FormPanel tests', () => {
     expect(mockUpdateMobilization.mock.calls[0][0]).toEqual({
       variables: {
         id: mobilization.id,
-        customDomain
+        customDomain: `www.${customDomain}`
       }
     });
   });
 
-  // it('call useMutation with query to update mobilization', () => {
-  //   const expected = 'xksjdflg';
-  //   mockGql.mockReturnValue(expected);
-  //   shallow(<FormPanel hostedZones={[]} />);
+  describe('select tab when mobilization custom domain is preset', () => {
+    
+    it('should select subdomain tab', () => {
+      const hostedZones = [{ domain_name: 'nossas.link' }]
 
-  //   expect(mockUseMutation.mock.calls.length).toEqual(1);
-  //   // calls position [0] is mock call instace
-  //   // calls position [0][0] is first argument of mock call instance
-  //   expect(mockUseMutation.mock.calls[0][0]).toEqual(expected);
-  //   // call gql with correct mutation
-  //   expect(mockGql.mock.calls[0[0]]).toEqual(`
-  //     mutation ($id: Int!, $customDomain: String!) {
-  //       update_mobilizations_by_pk(pk_columns: { id: $id }, _set: { custom_domain: $customDomain }) {
-  //         id
-  //         custom_domain
-  //       }
-  //     }
-  //   `)
-  // });
+      wrapper = shallow(
+        <FormPanel
+          hostedZones={hostedZones}
+          mobilization={{ id: 3, custom_domain: 'www.campoanha.nossas.link' }} />
+      );
+
+      expect(wrapper.find(Tabs).props().defaultIndex).toEqual(0);
+      expect(wrapper.find(SubdomainForm).props().customDomain).toEqual('www.campoanha.nossas.link');
+    });
+
+    it('should select root domain tab', () => {
+      const hostedZones = [{ domain_name: 'nossas.link' }]
+
+      wrapper = shallow(
+        <FormPanel
+          hostedZones={hostedZones}
+          mobilization={{ id: 3, custom_domain: 'www.nossas.link' }} />
+      );
+
+      expect(wrapper.find(Tabs).props().defaultIndex).toEqual(1);
+      expect(wrapper.find(DomainForm).props().customDomain).toEqual('www.nossas.link');
+    });
+
+    it('should select external domain tab', () => {
+      const hostedZones = [{ domain_name: 'nossas.link' }]
+
+      wrapper = shallow(
+        <FormPanel
+          hostedZones={hostedZones}
+          mobilization={{ id: 3, custom_domain: 'www.customdomain.link' }} />
+      );
+
+      expect(wrapper.find(Tabs).props().defaultIndex).toEqual(2);
+      expect(wrapper.find(ExternalDomainForm).props().customDomain).toEqual('www.customdomain.link');
+    });
+
+    it('should not pass custom domain when defaulIndex not selected', () => {
+      const hostedZones = [{ domain_name: 'nossas.link' }]
+
+      wrapper = shallow(
+        <FormPanel
+          hostedZones={hostedZones}
+          mobilization={{ id: 3, custom_domain: 'www.customdomain.link' }} />
+      );
+
+      expect(wrapper.find(Tabs).props().defaultIndex).toEqual(2);
+      expect(wrapper.find(DomainForm).props().customDomain).toEqual(null);
+      expect(wrapper.find(SubdomainForm).props().customDomain).toEqual(null);
+    });
+  });
 });

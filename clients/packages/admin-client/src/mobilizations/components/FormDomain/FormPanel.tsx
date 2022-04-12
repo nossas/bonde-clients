@@ -13,6 +13,7 @@ import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
 
 const FormPanel = ({ hostedZones, mobilization }) => {
+  // Submit action to update custom domain on mobilization
   const [updateMobilization] = useMutation(
     gql`
       mutation ($id: Int!, $customDomain: String!) {
@@ -25,13 +26,25 @@ const FormPanel = ({ hostedZones, mobilization }) => {
   );
 
   const onSubmit = async ({ customDomain }) => {
-    await updateMobilization({ variables: { id: mobilization.id, customDomain } });
+    await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
   }
+
+  // Active tab by custom domain type
+  let defaultIndex = 0;
+  const { custom_domain: customDomain } = mobilization;
+  /* eslint-disable no-useless-escape */
+  const subdomainRegex = (zone) => new RegExp(`^www\..+\.${zone.domain_name}$`).test(customDomain);
+  const rootDomainRegex = (zone) => new RegExp(`^www\.${zone.domain_name}$`).test(customDomain);
+  /* eslint-disable no-useless-escape */
+
+  if (!customDomain || hostedZones.some(subdomainRegex)) defaultIndex = 0;
+  else if (!!customDomain && !hostedZones.some(subdomainRegex) && !hostedZones.some(rootDomainRegex)) defaultIndex = 2;
+  else if (hostedZones.some(rootDomainRegex)) defaultIndex = 1;
 
   return (
     <>
       <Heading fontWeight="semibold" fontSize="sm" textTransform="uppercase">Tipo de domínio</Heading>
-      <Tabs variant="enclosed">
+      <Tabs variant="enclosed" defaultIndex={defaultIndex}>
         <TabList>
           <Tab>Subdomínio</Tab>
           <Tab>Domínio Principal</Tab>
@@ -39,13 +52,23 @@ const FormPanel = ({ hostedZones, mobilization }) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            <SubdomainForm onSubmit={onSubmit} hostedZones={hostedZones} />
+            <SubdomainForm
+              customDomain={defaultIndex === 0 ? customDomain : null}
+              onSubmit={onSubmit}
+              hostedZones={hostedZones}
+            />
           </TabPanel>
           <TabPanel>
-            <DomainForm onSubmit={onSubmit} hostedZones={hostedZones} />
+            <DomainForm
+              customDomain={defaultIndex === 1 ? customDomain : null}
+              onSubmit={onSubmit}
+              hostedZones={hostedZones}
+            />
           </TabPanel>
           <TabPanel>
-            <ExternalDomainForm onSubmit={onSubmit} />
+            <ExternalDomainForm
+              customDomain={defaultIndex === 2 ? customDomain : null}
+              onSubmit={onSubmit} />
           </TabPanel>
         </TabPanels>
       </Tabs>

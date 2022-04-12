@@ -66,4 +66,9 @@ describe('DomainForm tests', () => {
     await wrapper.find(Form).props().onSubmit({ customDomain: 'minhacampanha.org' });
     expect(onSubmit.mock.calls[0][0]).toEqual({ customDomain: 'minhacampanha.org' });
   });
+
+  it('should set initialValues when passed customDomain', () => {
+    wrapper.setProps({ customDomain: 'www.nossas.link' });
+    expect(wrapper.find(Form).props().initialValues).toEqual({ customDomain: 'nossas.link' });
+  });
 });
