@@ -3,11 +3,12 @@ import { Stack, Input, ListItem, OrderedList, Text, Button } from 'bonde-compone
 import { Field, Form } from 'bonde-components/form';
 
 interface Properties {
+  customDomain?: string;
   onSubmit: ({ customDomain }) => Promise<void>;
 }
 
-const ExternalDomainForm: React.FC<Properties> = ({ onSubmit }) => (
-  <Form onSubmit={onSubmit}>
+const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) => (
+  <Form initialValues={customDomain ? customDomain.replace('www.', '') : null} onSubmit={onSubmit}>
     {({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>
         <Stack direction="column">

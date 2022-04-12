@@ -53,4 +53,14 @@ describe('SubdomainForm tests', () => {
     await wrapper.find(Form).props().onSubmit({ subdomain: 'minhacampanha', domain: 'nossas.org' });
     expect(onSubmit.mock.calls[0][0]).toEqual({ customDomain: 'minhacampanha.nossas.org' });
   });
+
+  it('should set initialValues when passed customDomain', () => {
+    wrapper.setProps({ customDomain: 'www.campanha.nossas.link' });
+    expect(wrapper.find(Form).props().initialValues)
+      .toEqual({ subdomain: 'campanha', domain: 'nossas.link' });
+
+    wrapper.setProps({ customDomain: 'www.campanha-dasfe.nossas-ce.link.org' });
+      expect(wrapper.find(Form).props().initialValues)
+        .toEqual({ subdomain: 'campanha-dasfe', domain: 'nossas-ce.link.org' });
+  });
 });

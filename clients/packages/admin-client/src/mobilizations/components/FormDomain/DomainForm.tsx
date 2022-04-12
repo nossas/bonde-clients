@@ -4,12 +4,16 @@ import { Form, Field } from 'bonde-components/form';
 
 interface Properties {
   createNewDomainPath?: string;
+  customDomain?: string;
   onSubmit: ({ customDomain }) => Promise<void>;
   hostedZones?: { domain_name: string }[];
 }
 
-const DomainForm: React.FC<Properties> = ({ createNewDomainPath, onSubmit, hostedZones = [] }) => (
-  <Form onSubmit={onSubmit}>
+const DomainForm: React.FC<Properties> = ({ customDomain, createNewDomainPath, onSubmit, hostedZones = [] }) => (
+  <Form
+    initialValues={customDomain ? { customDomain: customDomain.replace('www.', '') } : null}
+    onSubmit={onSubmit}
+  >
   {({ handleSubmit }) => (
     <form onSubmit={handleSubmit}>
       <Stack direction="column">
