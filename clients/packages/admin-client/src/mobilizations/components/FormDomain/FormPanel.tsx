@@ -1,4 +1,5 @@
 import React from 'react';
+import { gql, useMutation } from 'bonde-core-tools';
 import {
   Heading,
   Tabs,
@@ -11,9 +12,20 @@ import ExternalDomainForm from './ExternalDomainForm';
 import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
 
-const FormPanel = ({ hostedZones }) => {
+const FormPanel = ({ hostedZones, mobilization }) => {
+  const [updateMobilization] = useMutation(
+    gql`
+      mutation ($id: Int!, $customDomain: String!) {
+        update_mobilizations_by_pk(pk_columns: { id: $id }, _set: { custom_domain: $customDomain }) {
+          id
+          custom_domain
+        }
+      }
+    `
+  );
+
   const onSubmit = async ({ customDomain }) => {
-    console.log('submit', { customDomain });
+    await updateMobilization({ variables: { id: mobilization.id, customDomain } });
   }
 
   return (
