@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Tabs, Tab, TabPanel } from 'bonde-components/chakra';
+import { Tabs, TabPanel } from 'bonde-components/chakra';
+import Tab from './CustomTab';
 import ExternalDomainForm from './ExternalDomainForm';
 import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
@@ -146,7 +147,7 @@ describe('FormPanel tests', () => {
     });
 
     it('should not pass custom domain when defaulIndex not selected', () => {
-      const hostedZones = [{ domain_name: 'nossas.link' }]
+      const hostedZones = [{ domain_name: 'nossas.link' }];
 
       wrapper = shallow(
         <FormPanel
