@@ -20,7 +20,6 @@ type DomainsProps = {
   dnsHostedZones: DNSHostedZone[]
 }
 
-
 const Domains: React.FC<DomainsProps> = ({ dnsHostedZones, refetch }) => (
   <Stack spacing={4}>
     <Flex direction="row" justify="space-between" pb={4}>

@@ -13,35 +13,39 @@ const SubdomainForm: React.FC<Properties> = ({ customDomain, hostedZones = [], o
   const domain = (customDomain?.match(new RegExp(/^www.[\w|-]+.(.+)$/)) || [])[1];
 
   return (
-    <Form
-      initialValues={customDomain ? { subdomain, domain } : null}
-      onSubmit={async ({ subdomain, domain }) => await onSubmit({ customDomain: `${subdomain}.${domain}` })}
-    >
-    {({ handleSubmit }) => (
-      <form onSubmit={handleSubmit}>
-        <Stack direction="column">
-          <Text>Personalize o subdomínio abaixo e clique em salvar para gerar o certificado.</Text>
-          <Stack direction="row" bg="gray.100">
-            <Text>https://wwww.</Text>
-            <Field name="subdomain">
-              {({ input }) => <Input {...input} placeholder="escreva seu subdomínio" />}
-            </Field>
-            <Field name="domain">
-              {({ input }) => (
-                <Select {...input} placeholder="selecione um domínio">
-                  {hostedZones.map(({ domain_name: domain }) =>
-                    <option key={domain}>{domain}</option>
+    <>
+      <Form
+        initialValues={customDomain ? { subdomain, domain } : null}
+        onSubmit={async ({ subdomain, domain }) => await onSubmit({ customDomain: `${subdomain}.${domain}` })}
+      >
+        {({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <Stack direction="column">
+              <Text>Personalize o subdomínio abaixo e clique em salvar para gerar o certificado.</Text>
+              <Stack direction="row" bg="gray.100">
+                <Text ml={3} mt={0.5}>https://www.</Text>
+                <Field name="subdomain" >
+                  {({ input }) => <Input {...input} placeholder="escreva seu subdomínio" />}
+                </Field>
+                <Field name="domain">
+                  {({ input }) => (
+                    <Select {...input} placeholder="selecione um domínio">
+                      {hostedZones.map(({ domain_name: domain }) =>
+                        <option key={domain}>{domain}</option>
+                      )}
+                    </Select>
                   )}
-                </Select>
-              )}
-            </Field>
-          </Stack>
-          <Button type='submit'>Salvar</Button>
-        </Stack>
-      </form>
-    )}
-    </Form>
+                </Field>
+              </Stack>
+              <Button maxW={32} type='submit'>Salvar</Button>
+            </Stack>
+          </form>
+        )}
+      </Form>
+    </>
   );
 }
+
+
 
 export default SubdomainForm;
