@@ -2,13 +2,12 @@ import React from 'react';
 import { Stack, Text, Select, Link, Button, Flex } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
 interface Properties {
-  createNewDomainPath?: string;
   customDomain?: string;
   onSubmit: ({ customDomain }) => Promise<void>;
   hostedZones?: { domain_name: string }[];
 }
 
-const DomainForm: React.FC<Properties> = ({ customDomain, createNewDomainPath, onSubmit, hostedZones = [] }) => (
+const DomainForm: React.FC<Properties> = ({ customDomain, onSubmit, hostedZones = [] }) => (
   <>
     <Form
       initialValues={customDomain ? { customDomain: customDomain.replace('www.', '') } : null}
@@ -31,18 +30,15 @@ const DomainForm: React.FC<Properties> = ({ customDomain, createNewDomainPath, o
               </Field>
             </Flex>
           </Stack>
+
           <Stack mt={7}>
             <Text>Não encontrou o domínio na lista?</Text>
             <Text>
               <Link
                 color="pink.200"
                 fontWeight="bold"
-                onClick={() => {
-                  window.location.href = new URL(
-                    `/community/domains`,
-                    process.env.REACT_APP_DOMAIN_ADMIN_CANARY
-                  ).href;
-                }}>
+                href={process.env.REACT_APP_DOMAIN_ADMIN_CANARY + `/community/domains`}
+              >
                 Clique aqui
               </Link> para cadastrar um novo domínio na comunidade.
             </Text>

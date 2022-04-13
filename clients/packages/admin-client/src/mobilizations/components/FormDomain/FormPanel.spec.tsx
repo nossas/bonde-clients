@@ -17,7 +17,7 @@ jest.mock('bonde-core-tools', () => ({
 }));
 
 // eslint-disable-next-line import/first
-import FormPanel from './FormPanel';
+import { FormPanel } from './FormPanel';
 
 describe('FormPanel tests', () => {
   let wrapper;
@@ -25,7 +25,7 @@ describe('FormPanel tests', () => {
 
   beforeEach(() => {
     wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={[]} />);
-    
+
     jest.clearAllMocks();
   });
 
@@ -48,8 +48,8 @@ describe('FormPanel tests', () => {
       .find(TabPanel)
       .at(position)
       .find(SubdomainForm);
-    
-      expect(form.length).toEqual(1);
+
+    expect(form.length).toEqual(1);
   });
 
   it('should renders domain Tab', () => {
@@ -93,7 +93,7 @@ describe('FormPanel tests', () => {
       .find(TabPanel)
       .at(0)
       .find(SubdomainForm);
-    
+
     await form.props().onSubmit({ customDomain });
 
     expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
@@ -106,7 +106,7 @@ describe('FormPanel tests', () => {
   });
 
   describe('select tab when mobilization custom domain is preset', () => {
-    
+
     it('should select subdomain tab', () => {
       const hostedZones = [{ domain_name: 'nossas.link' }]
 
