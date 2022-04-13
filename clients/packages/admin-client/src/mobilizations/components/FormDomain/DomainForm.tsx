@@ -1,7 +1,6 @@
 import React from 'react';
-import { Stack, Text, Select, Link, Button } from 'bonde-components/chakra';
+import { Stack, Text, Select, Link, Button, Flex } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
-
 interface Properties {
   createNewDomainPath?: string;
   customDomain?: string;
@@ -10,33 +9,49 @@ interface Properties {
 }
 
 const DomainForm: React.FC<Properties> = ({ customDomain, createNewDomainPath, onSubmit, hostedZones = [] }) => (
-  <Form
-    initialValues={customDomain ? { customDomain: customDomain.replace('www.', '') } : null}
-    onSubmit={onSubmit}
-  >
-  {({ handleSubmit }) => (
-    <form onSubmit={handleSubmit}>
-      <Stack direction="column">
-        <Text>Selecione o domínio cadastrado na sua comunidade:</Text>
-        <Stack direction="row" bg="gray.100">
-          <Text>https://www.</Text>
-          <Field name="customDomain">
-            {({ input }) => (
-              <Select {...input} placeholder="selecione um domínio">
-                {hostedZones.map(({ domain_name: domain }) =>
-                  <option key={domain}>{domain}</option>
+  <>
+    <Form
+      initialValues={customDomain ? { customDomain: customDomain.replace('www.', '') } : null}
+      onSubmit={onSubmit}
+    >
+      {({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <Stack direction="column">
+            <Text>Selecione o domínio cadastrado na sua comunidade:</Text>
+            <Flex bg="gray.100">
+              <Text ml={3} mt={0.5}>https://www.</Text>
+              <Field name="customDomain">
+                {({ input }) => (
+                  <Select {...input} ml={1} placeholder="selecione um domínio">
+                    {hostedZones.map(({ domain_name: domain }) =>
+                      <option key={domain}>{domain}</option>
+                    )}
+                  </Select>
                 )}
-              </Select>
-            )}
-          </Field>
-        </Stack>
-        <Text>Não encontro o domínio na lista?</Text>
-        <Text><Link href={createNewDomainPath || '#'} target='_self' >Clique aqui</Link> para cadastrar um novo domínio na comunidade.</Text>
-        <Button type="submit">Salvar</Button>
-      </Stack>
-    </form>
-  )}
-  </Form>
+              </Field>
+            </Flex>
+          </Stack>
+          <Stack mt={7}>
+            <Text>Não encontrou o domínio na lista?</Text>
+            <Text>
+              <Link
+                color="pink.200"
+                fontWeight="bold"
+                onClick={() => {
+                  window.location.href = new URL(
+                    `/community/domains`,
+                    process.env.REACT_APP_DOMAIN_ADMIN_CANARY
+                  ).href;
+                }}>
+                Clique aqui
+              </Link> para cadastrar um novo domínio na comunidade.
+            </Text>
+            <Button maxW={32} type="submit">Salvar</Button>
+          </Stack>
+        </form>
+      )}
+    </Form>
+  </>
 );
 
 export default DomainForm;
