@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text, Stack } from 'bonde-components/chakra';
 import { FormPanel, DomainTypes, Status } from './FormPanel';
+import CertificateStatus from './CertificateStatus';
 
 const FormDomain = ({ mobilization, hostedZones }) => (
   <>
@@ -8,6 +9,7 @@ const FormDomain = ({ mobilization, hostedZones }) => (
       <Stack direction="column" spacing={8}>
         <Text>Defina abaixo o domínio (endereço / URL) para as pessoas acessarem sua página:</Text>
         <FormPanel mobilization={mobilization} hostedZones={hostedZones} />
+        <CertificateStatus customDomain={mobilization.custom_domain} hostedZones={hostedZones} />
       </Stack>
       <DomainTypes />
     </Stack>

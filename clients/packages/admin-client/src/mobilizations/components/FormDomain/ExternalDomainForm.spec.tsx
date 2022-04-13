@@ -38,6 +38,13 @@ describe('ExternalDomainForm tests', () => {
     expect(input.props().placeholder).toEqual('seudominio.org');
   });
 
+  it('should set initialValues with customDomain input', () => {
+    wrapper.setProps({ customDomain: 'www.dominioexterno.com.br' });
+    expect(wrapper.find(Form).props().initialValues).toEqual({
+      customDomain: 'dominioexterno.com.br'
+    });
+  });
+
   it('should render steps to settings DNS', () => {
     const orderedList = form.find(OrderedList);
     expect(orderedList.length).toEqual(1);

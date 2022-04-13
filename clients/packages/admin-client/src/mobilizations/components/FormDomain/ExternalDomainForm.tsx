@@ -8,7 +8,10 @@ interface Properties {
 }
 
 const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) => (
-  <Form initialValues={customDomain ? customDomain.replace('www.', '') : null} onSubmit={onSubmit}>
+  <Form
+    onSubmit={onSubmit}
+    initialValues={customDomain ? {customDomain: customDomain.replace('www.', '')} : null}
+  >
     {({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>
         <Stack >
