@@ -6,14 +6,15 @@ import {
   TabList,
   TabPanels,
   TabPanel,
-  Stack
+  Stack,
+  Text
 } from 'bonde-components/chakra';
 import CustomTab from './CustomTab';
 import ExternalDomainForm from './ExternalDomainForm';
 import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
 
-const FormPanel = ({ hostedZones, mobilization }) => {
+export const FormPanel = ({ hostedZones, mobilization }) => {
   // Submit action to update custom domain on mobilization
   const [updateMobilization] = useMutation(
     gql`
@@ -77,4 +78,27 @@ const FormPanel = ({ hostedZones, mobilization }) => {
   );
 }
 
-export default FormPanel;
+export const DomainTypes = () => (
+  <Stack maxWidth={380}>
+    <Heading
+      fontWeight="bold"
+      fontSize="lg"
+    >
+      Tipos de Domínio
+    </Heading>
+    <Text><b>Subdomínio:</b> endereço personalizado a partir de um domínio que você já cadastrou aqui no BONDE (ex: novacampanha.seudominio.org). </Text>
+    <Text><b>Domínio principal:</b> escolha algum domínio que já foi comprado e cadastrado na comunidade (ex: seudominio.org). </Text>
+    <Text><b>Domínio externo:</b> selecione essa opção para adicionar um novo endereço que você comprou e configurar o DNS externamente. </Text>
+  </Stack>
+)
+
+export const Status = () => (
+  <Stack mt={6}>
+    <Heading fontWeight="semibold" fontSize="sm" textTransform="uppercase">
+      Status
+    </Heading>
+    <Text>Pode levar até 5 minutos para o certificado ser gerado e o endereço ficar disponível.</Text>
+  </Stack>
+)
+
+
