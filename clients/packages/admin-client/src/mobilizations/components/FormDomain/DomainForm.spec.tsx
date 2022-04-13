@@ -48,18 +48,18 @@ describe('DomainForm tests', () => {
   });
 
   it('should render message with link to create new domain', () => {
-    const path = 'https://admin-canary.bonde.org/community/settings/domains'
-    wrapper.setProps({ createNewDomainPath: path });
+    const path = process.env.REACT_APP_DOMAIN_ADMIN_CANARY + '/community/domains'
+
     form = wrapper.find(Form).renderProp('children')({} as any);
 
     const text = form.find(Text).at(2);
     expect(text.props().children)
-      .toEqual('Não encontro o domínio na lista?');
+      .toEqual('Não encontrou o domínio na lista?');
 
     const link = form.find(Link)
     expect(link.props().children).toEqual('Clique aqui');
+
     expect(link.props().href).toEqual(path);
-    expect(link.props().target).toEqual('_self');
   });
 
   it('should call onSubmit with customDomain value', async () => {
