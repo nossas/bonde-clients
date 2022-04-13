@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Input, ListItem, OrderedList, Text, Button } from 'bonde-components/chakra';
+import { Stack, Input, ListItem, OrderedList, Text, Button, Heading, Flex } from 'bonde-components/chakra';
 import { Field, Form } from 'bonde-components/form';
 
 interface Properties {
@@ -11,12 +11,23 @@ const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) =>
   <Form initialValues={customDomain ? customDomain.replace('www.', '') : null} onSubmit={onSubmit}>
     {({ handleSubmit }) => (
       <form onSubmit={handleSubmit}>
-        <Stack direction="column">
+        <Stack >
           <Text>Insira abaixo o domínio, salve as alterações e siga o passo a passo para configurá-lo:</Text>
-          <Stack direction="row">
-            <Text>https://www.</Text>
-            <Field name="customDomain">{({ input }) => <Input {...input} placeholder='seudominio.org' />}</Field>
-          </Stack>
+          <Flex bg="gray.100">
+            <Text ml={3} mt={0.5}>https://www.</Text>
+            <Field name="customDomain">{({ input }) => <Input {...input} ml={1} mb={1} placeholder='seudominio.org' />}</Field>
+          </Flex>
+        </Stack>
+
+        <Stack>
+          <Heading
+            fontWeight="semibold"
+            fontSize="sm"
+            textTransform="uppercase"
+            mt={8}
+          >
+            Passo a passo para configurar o DNS
+          </Heading>
           <OrderedList>
             <ListItem>Abra o site onde você comprou o domínio (GoDaddy.com, por exemplo);</ListItem>
             <ListItem>Entre nas configurações do domínio que você inseriu no BONDE;</ListItem>
@@ -26,12 +37,12 @@ const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) =>
             <ListItem>Em "Host", escreva o subdomínio com e sem "www";</ListItem>
             <ListItem>Em "Points to", preencha com o seguinte IP: 54.156.173.29</ListItem>
             <ListItem>Em "TTL", selecione "¹/² hour" e clique em "save";</ListItem>
-          </OrderedList>  
-          <Button type='submit'>Salvar</Button>
+          </OrderedList>
+          <Button type='submit' maxW={32}>Salvar</Button>
         </Stack>
       </form>
     )}
-  </Form>
+  </Form >
 );
 
 export default ExternalDomainForm;
