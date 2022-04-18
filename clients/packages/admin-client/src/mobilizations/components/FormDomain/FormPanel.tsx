@@ -120,13 +120,4 @@ export const DomainTypes = () => (
   </Stack>
 )
 
-export const Status = () => (
-  <Stack mt={6}>
-    <Heading fontWeight="semibold" fontSize="sm" textTransform="uppercase">
-      Status
-    </Heading>
-    <Text>Pode levar até 5 minutos para o certificado ser gerado e o endereço ficar disponível.</Text>
-  </Stack>
-)
-
 

@@ -11,8 +11,10 @@ const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [
   const certificate = hostedZones.filter((v) => v.domain_name === customDomain?.replace('www.', ''))[0]?.certificates[0];
 
   return (
-    <Stack direction="column" spacing={4}>
-      <Heading>Status</Heading>
+    <Stack mt={6}>
+      <Heading fontWeight="semibold" fontSize="sm" textTransform="uppercase">
+        Status
+      </Heading>
       {!certificate?.is_active
         ? <Text>Pode levar até 5 minutos para o certificado ser gerado e o endereço ficar disponível.</Text>
         : (
