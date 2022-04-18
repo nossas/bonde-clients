@@ -4,12 +4,12 @@ import { Field, Form } from 'bonde-components/form';
 
 interface Properties {
   customDomain?: string;
-  onSubmit: ({ customDomain }) => Promise<void>;
+  onSubmit: ({ customDomain, isExternalDomain }: { customDomain: string, isExternalDomain?: boolean }) => Promise<void>;
 }
 
 const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) => (
   <Form
-    onSubmit={onSubmit}
+    onSubmit={async ({ customDomain }) => await onSubmit({ customDomain, isExternalDomain: true })}
     initialValues={customDomain ? {customDomain: customDomain.replace('www.', '')} : null}
   >
     {({ handleSubmit }) => (

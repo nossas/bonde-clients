@@ -10,11 +10,19 @@ const mockUseMutation = jest.fn();
 mockUseMutation.mockReturnValue([jest.fn()]);
 
 const mockGql = jest.fn();
-
 jest.mock('bonde-core-tools', () => ({
   useMutation: mockUseMutation,
   gql: mockGql
 }));
+
+const mockToast = jest.fn();
+jest.mock('bonde-components/chakra', () => {
+  const ui = jest.requireActual('bonde-components/chakra');
+  return {
+    ...ui,
+    useToast: () => mockToast
+  };
+});
 
 // eslint-disable-next-line import/first
 import { FormPanel } from './FormPanel';
@@ -82,26 +90,80 @@ describe('FormPanel tests', () => {
     expect(form.length).toEqual(1);
   });
 
-  it('call updateMobilization in submit', async () => {
-    const customDomain = 'asdasdas.org';
+  describe('onSubmit validate', () => {
     const mockUpdateMobilization = jest.fn();
-    mockUseMutation.mockReturnValue([mockUpdateMobilization]);
+    const mockCreateDnsHostedZone = jest.fn();
 
-    wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={[]} />);
-    // find ExternalDomainForm inside TabPanel
-    const form = wrapper
-      .find(TabPanel)
-      .at(0)
-      .find(SubdomainForm);
+    beforeEach(() => {
+      mockUseMutation.mockReturnValueOnce([mockUpdateMobilization]);
+      mockUseMutation.mockReturnValueOnce([mockCreateDnsHostedZone]);
+    });
 
-    await form.props().onSubmit({ customDomain });
+    it('should call only updateMobilization if isExternalDomain false', async () => {
+      const customDomain = 'asdasdas.org';
+      wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={[]} />);
+      // find SubdomainForm inside TabPanel
+      const form = wrapper
+        .find(TabPanel)
+        .at(0)
+        .find(SubdomainForm);
+  
+      await form.props().onSubmit({ customDomain });
+  
+      expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
+      expect(mockUpdateMobilization.mock.calls[0][0]).toEqual({
+        variables: {
+          id: mobilization.id,
+          customDomain: `www.${customDomain}`
+        }
+      });
+  
+      expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(0);
+    });
+  
+    it('should call createDnsHostedZone and updateMobilization if isExternalDomain true', async () => {
+      const customDomain = 'asdasdas.org';
+      wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={[]} />);
+      // find ExternalDomainForm inside TabPanel
+      const form = wrapper
+        .find(TabPanel)
+        .at(2)
+        .find(ExternalDomainForm);
+  
+      await form.props().onSubmit({ customDomain, isExternalDomain: true });
+  
+      expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(1);
+      expect(mockCreateDnsHostedZone.mock.calls[0][0]).toEqual({
+        variables: {
+          comment: `mobilization_id:${mobilization.id}`,
+          customDomain: customDomain
+        }
+      });
+      expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
+    });
 
-    expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
-    expect(mockUpdateMobilization.mock.calls[0][0]).toEqual({
-      variables: {
-        id: mobilization.id,
-        customDomain: `www.${customDomain}`
-      }
+    it('should not call updateMobilization when createDnsHostedZone is failed', async () => {
+      mockCreateDnsHostedZone.mockRejectedValueOnce({ message: 'Failed fetch!' });
+
+      const customDomain = 'asdasdas.org';
+      wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={[]} />);
+      // find ExternalDomainForm inside TabPanel
+      const form = wrapper
+        .find(TabPanel)
+        .at(2)
+        .find(ExternalDomainForm);
+  
+      await form.props().onSubmit({ customDomain, isExternalDomain: true });
+  
+      expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(1);
+      expect(mockUpdateMobilization.mock.calls.length).toEqual(0);
+      // Expect call toast failed message
+      expect(mockToast.mock.calls[0][0]).toEqual({
+        title: 'Falha ao submeter formulário',
+        description: 'Failed fetch!',
+        status: 'error',
+        isClosable: true
+      });
     });
   });
 
