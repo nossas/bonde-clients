@@ -7,7 +7,8 @@ import {
   TabPanels,
   TabPanel,
   Stack,
-  Text
+  Text,
+  useToast
 } from 'bonde-components/chakra';
 import CustomTab from './CustomTab';
 import ExternalDomainForm from './ExternalDomainForm';
@@ -15,6 +16,8 @@ import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
 
 export const FormPanel = ({ hostedZones, mobilization }) => {
+  const toast = useToast();
+
   // Submit action to update custom domain on mobilization
   const [updateMobilization] = useMutation(
     gql`
@@ -26,9 +29,34 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
       }
     `
   );
+  const [createDnsHostedZone] = useMutation(
+    gql`
+      mutation ($customDomain: String!, $comment: String!) {
+        insert_dns_hosted_zones_one(
+          object: { domain_name: $customDomain, comment: $comment, is_external_domain: true }
+        ) {
+          id
+          domain_name
+          ns_ok
+        }
+      }
+    `
+  );
 
-  const onSubmit = async ({ customDomain }) => {
-    await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
+  const onSubmit = async ({ customDomain, isExternalDomain = false }: { customDomain: string, isExternalDomain?: boolean }) => {
+    try {
+      if (isExternalDomain) {
+        await createDnsHostedZone({ variables: { customDomain, comment: `mobilization_id:${mobilization.id}` } });
+      }
+      await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
+    } catch (err: any) {
+      toast({
+        title: 'Falha ao submeter formulário',
+        description: err?.message || err,
+        status: 'error',
+        isClosable: true
+      });
+    }
   }
 
   // Active tab by custom domain type

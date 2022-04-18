@@ -38,6 +38,13 @@ describe('ExternalDomainForm tests', () => {
     expect(input.props().placeholder).toEqual('seudominio.org');
   });
 
+  it('should set initialValues with customDomain input', () => {
+    wrapper.setProps({ customDomain: 'www.dominioexterno.com.br' });
+    expect(wrapper.find(Form).props().initialValues).toEqual({
+      customDomain: 'dominioexterno.com.br'
+    });
+  });
+
   it('should render steps to settings DNS', () => {
     const orderedList = form.find(OrderedList);
     expect(orderedList.length).toEqual(1);
@@ -62,8 +69,9 @@ describe('ExternalDomainForm tests', () => {
       .toEqual('Em "TTL", selecione "¹/² hour" e clique em "save";');
   });
 
-  it('should call onSubmit with customDomain value', async () => {
+  it('should call onSubmit with customDomain and isExternalDomain value', async () => {
     await wrapper.find(Form).props().onSubmit({ customDomain: 'minhacampanha.org' });
-    expect(onSubmit.mock.calls[0][0]).toEqual({ customDomain: 'minhacampanha.org' });
+    expect(onSubmit.mock.calls[0][0])
+      .toEqual({ customDomain: 'minhacampanha.org', isExternalDomain: true });
   });
 });

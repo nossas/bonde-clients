@@ -1,0 +1,15 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1,
+    "workspacePrefix": "/home/gloria/Documentos/vscode/bonde-2/bonde/clients"
+  },
+  "1 error pnpm": {
+    "code": "ERR_PNPM_NO_SCRIPT",
+    "err": {
+      "name": "Error",
+      "message": "Missing script: tests",
+      "code": "ERR_PNPM_NO_SCRIPT",
+      "stack": "Error: Missing script: tests\n    at Object.handler (/usr/lib/node_modules/pnpm/dist/pnpm.cjs:120568:15)\n    at async Timeout._onTimeout (/usr/lib/node_modules/pnpm/dist/pnpm.cjs:124590:24)"
+    }
+  }
+}
