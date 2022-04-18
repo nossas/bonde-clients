@@ -31,9 +31,14 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
   );
   const [createDnsHostedZone] = useMutation(
     gql`
-      mutation ($customDomain: String!, $comment: String!) {
+      mutation ($customDomain: String!, $comment: String!, $communityId: Int!) {
         insert_dns_hosted_zones_one(
-          object: { domain_name: $customDomain, comment: $comment, is_external_domain: true }
+          object: {
+            domain_name: $customDomain,
+            comment: $comment,
+            community_id: $communityId,
+            is_external_domain: true
+          }
         ) {
           id
           domain_name
@@ -46,7 +51,13 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
   const onSubmit = async ({ customDomain, isExternalDomain = false }: { customDomain: string, isExternalDomain?: boolean }) => {
     try {
       if (isExternalDomain) {
-        await createDnsHostedZone({ variables: { customDomain, comment: `mobilization_id:${mobilization.id}` } });
+        await createDnsHostedZone({
+          variables: {
+            customDomain,
+            communityId: mobilization.community_id,
+            comment: `mobilization_id:${mobilization.id}`
+          }
+        });
       }
       await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
     } catch (err: any) {
@@ -66,10 +77,11 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
   const subdomainRegex = (zone) => new RegExp(`^www\..+\.${zone.domain_name}$`).test(customDomain);
   const rootDomainRegex = (zone) => new RegExp(`^www\.${zone.domain_name}$`).test(customDomain);
   /* eslint-disable no-useless-escape */
+  const internalHostedZones = hostedZones.filter((dns) => !dns.is_external_domain);
 
-  if (!customDomain || hostedZones.some(subdomainRegex)) defaultIndex = 0;
-  else if (!!customDomain && !hostedZones.some(subdomainRegex) && !hostedZones.some(rootDomainRegex)) defaultIndex = 2;
-  else if (hostedZones.some(rootDomainRegex)) defaultIndex = 1;
+  if (!customDomain || internalHostedZones.some(subdomainRegex)) defaultIndex = 0;
+  else if (!!customDomain && !internalHostedZones.some(subdomainRegex) && !internalHostedZones.some(rootDomainRegex)) defaultIndex = 2;
+  else if (internalHostedZones.some(rootDomainRegex)) defaultIndex = 1;
 
   return (
     <Stack direction='column' spacing={2}>
@@ -85,14 +97,14 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
             <SubdomainForm
               customDomain={defaultIndex === 0 ? customDomain : null}
               onSubmit={onSubmit}
-              hostedZones={hostedZones}
+              hostedZones={internalHostedZones}
             />
           </TabPanel>
           <TabPanel>
             <DomainForm
               customDomain={defaultIndex === 1 ? customDomain : null}
               onSubmit={onSubmit}
-              hostedZones={hostedZones}
+              hostedZones={internalHostedZones}
             />
           </TabPanel>
           <TabPanel>
