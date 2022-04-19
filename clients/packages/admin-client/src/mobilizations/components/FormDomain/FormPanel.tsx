@@ -15,13 +15,6 @@ import ExternalDomainForm from './ExternalDomainForm';
 import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
 
-interface GoogleDNS {
-  Answer: {
-    name: string
-    data: string
-  }[]
-}
-
 const IP_LISTS = [
   '54.85.56.248',
   '3.236.227.166'
@@ -107,10 +100,16 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
             })
           }
         }
+      } else {
+        const hostedZone = internalHostedZones.filter((hz) => customDomain.endsWith(hz.domain_name))[0];
+        if (!hostedZone.ns_ok) {
+          if (await checkDNS(customDomain, 'NS', { ns: hostedZone.name_servers })) {
+            await updateDnsHostedZone({ variables: { id: hostedZone.id } })
+          }
+        }
       }
 
       await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
-
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
     } catch (err: any) {
       toast({
