@@ -10,9 +10,11 @@ const mockUseMutation = jest.fn();
 mockUseMutation.mockReturnValue([jest.fn()]);
 
 const mockGql = jest.fn();
+const mockCheckDNS = jest.fn();
 jest.mock('bonde-core-tools', () => ({
   useMutation: mockUseMutation,
-  gql: mockGql
+  gql: mockGql,
+  checkDNS: mockCheckDNS
 }));
 
 const mockToast = jest.fn();
@@ -173,19 +175,7 @@ describe('FormPanel tests', () => {
 
     it('should call updateDnsHostedZone IP is configured', async () => {
       const customDomain = 'asdasdas.org';
-      window.fetch = jest.fn().mockImplementation((url) => {
-        if (url === `https://dns.google.com/resolve?name=${customDomain}`) {
-          return {
-            json: () => ({
-              Answer: [
-                {
-                  data: '3.236.227.166'
-                }
-              ]
-            })
-          }
-        }
-      });
+      mockCheckDNS.mockResolvedValueOnce(true);
       mockCreateDnsHostedZone.mockResolvedValueOnce({
         data: {
           insert_dns_hosted_zones_one: {

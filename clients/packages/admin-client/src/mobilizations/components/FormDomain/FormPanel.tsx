@@ -1,5 +1,5 @@
 import React from 'react';
-import { gql, useMutation } from 'bonde-core-tools';
+import { gql, useMutation, checkDNS } from 'bonde-core-tools';
 import {
   Heading,
   Tabs,
@@ -27,9 +27,20 @@ const IP_LISTS = [
   '3.236.227.166'
 ]
 
-
 export const FormPanel = ({ hostedZones, mobilization }) => {
   const toast = useToast();
+  // Active tab by custom domain type
+  let defaultIndex = 0;
+  const { custom_domain: customDomain } = mobilization;
+  /* eslint-disable no-useless-escape */
+  const subdomainRegex = (zone) => new RegExp(`^www\..+\.${zone.domain_name}$`).test(customDomain);
+  const rootDomainRegex = (zone) => new RegExp(`^www\.${zone.domain_name}$`).test(customDomain);
+  /* eslint-disable no-useless-escape */
+  const internalHostedZones = hostedZones.filter((dns) => !dns.is_external_domain);
+
+  if (!customDomain || internalHostedZones.some(subdomainRegex)) defaultIndex = 0;
+  else if (!!customDomain && !internalHostedZones.some(subdomainRegex) && !internalHostedZones.some(rootDomainRegex)) defaultIndex = 2;
+  else if (internalHostedZones.some(rootDomainRegex)) defaultIndex = 1;
 
   // Submit action to update custom domain on mobilization
   const [updateMobilization] = useMutation(
@@ -88,9 +99,7 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
 
         // Verify IP configuration to dispatch certificate
         if (data?.insert_dns_hosted_zones_one) {
-          const result = await fetch(`https://dns.google.com/resolve?name=${customDomain}`);
-          const googleDNS: GoogleDNS = await result.json();
-          if (IP_LISTS.filter((ip) => ip === googleDNS.Answer[0]?.data).length === 1) {
+          if (await checkDNS(customDomain, 'A', { ip: IP_LISTS })) {
             await updateDnsHostedZone({
               variables: {
                 id: data?.insert_dns_hosted_zones_one.id
@@ -112,19 +121,6 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
       });
     }
   }
-
-  // Active tab by custom domain type
-  let defaultIndex = 0;
-  const { custom_domain: customDomain } = mobilization;
-  /* eslint-disable no-useless-escape */
-  const subdomainRegex = (zone) => new RegExp(`^www\..+\.${zone.domain_name}$`).test(customDomain);
-  const rootDomainRegex = (zone) => new RegExp(`^www\.${zone.domain_name}$`).test(customDomain);
-  /* eslint-disable no-useless-escape */
-  const internalHostedZones = hostedZones.filter((dns) => !dns.is_external_domain);
-
-  if (!customDomain || internalHostedZones.some(subdomainRegex)) defaultIndex = 0;
-  else if (!!customDomain && !internalHostedZones.some(subdomainRegex) && !internalHostedZones.some(rootDomainRegex)) defaultIndex = 2;
-  else if (internalHostedZones.some(rootDomainRegex)) defaultIndex = 1;
 
   return (
     <Stack direction='column' spacing={2}>
