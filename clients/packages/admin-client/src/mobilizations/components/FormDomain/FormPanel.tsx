@@ -15,6 +15,19 @@ import ExternalDomainForm from './ExternalDomainForm';
 import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
 
+interface GoogleDNS {
+  Answer: {
+    name: string
+    data: string
+  }[]
+}
+
+const IP_LISTS = [
+  '54.85.56.248',
+  '3.236.227.166'
+]
+
+
 export const FormPanel = ({ hostedZones, mobilization }) => {
   const toast = useToast();
 
@@ -47,19 +60,49 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
       }
     `
   );
+  const [updateDnsHostedZone] = useMutation(
+    gql`
+      mutation ($id: Int!) {
+        update_dns_hosted_zones_by_pk(
+          pk_columns: { id: $id }, _set: { ns_ok: true }
+        ) {
+          id
+          domain_name
+          ns_ok
+        }
+      }
+    `
+  );
 
   const onSubmit = async ({ customDomain, isExternalDomain = false }: { customDomain: string, isExternalDomain?: boolean }) => {
     try {
       if (isExternalDomain) {
-        await createDnsHostedZone({
+        // Create dns hosted zone
+        const { data } = await createDnsHostedZone({
           variables: {
             customDomain,
             communityId: mobilization.community_id,
             comment: `mobilization_id:${mobilization.id}`
           }
         });
+
+        // Verify IP configuration to dispatch certificate
+        if (data?.insert_dns_hosted_zones_one) {
+          const result = await fetch(`https://dns.google.com/resolve?name=${customDomain}`);
+          const googleDNS: GoogleDNS = await result.json();
+          if (IP_LISTS.filter((ip) => ip === googleDNS.Answer[0]?.data).length === 1) {
+            await updateDnsHostedZone({
+              variables: {
+                id: data?.insert_dns_hosted_zones_one.id
+              }
+            })
+          }
+        }
       }
+
       await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
+
+      toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
     } catch (err: any) {
       toast({
         title: 'Falha ao submeter formulário',
