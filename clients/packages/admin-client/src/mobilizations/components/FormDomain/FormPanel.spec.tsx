@@ -93,10 +93,14 @@ describe('FormPanel tests', () => {
   describe('onSubmit validate', () => {
     const mockUpdateMobilization = jest.fn();
     const mockCreateDnsHostedZone = jest.fn();
+    const mockUpdateDnsHostedZone = jest.fn();
 
     beforeEach(() => {
       mockUseMutation.mockReturnValueOnce([mockUpdateMobilization]);
       mockUseMutation.mockReturnValueOnce([mockCreateDnsHostedZone]);
+      mockUseMutation.mockReturnValueOnce([mockUpdateDnsHostedZone]);
+      
+      // jest.clearAllMocks();
     });
 
     it('should call only updateMobilization if isExternalDomain false', async () => {
@@ -122,6 +126,7 @@ describe('FormPanel tests', () => {
     });
 
     it('should call createDnsHostedZone and updateMobilization if isExternalDomain true', async () => {
+      mockCreateDnsHostedZone.mockResolvedValueOnce({ data: {} });
       const customDomain = 'asdasdas.org';
       wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={[]} />);
       // find ExternalDomainForm inside TabPanel
@@ -162,6 +167,54 @@ describe('FormPanel tests', () => {
         title: 'Falha ao submeter formulário',
         description: 'Failed fetch!',
         status: 'error',
+        isClosable: true
+      });
+    });
+
+    it('should call updateDnsHostedZone IP is configured', async () => {
+      const customDomain = 'asdasdas.org';
+      window.fetch = jest.fn().mockImplementation((url) => {
+        if (url === `https://dns.google.com/resolve?name=${customDomain}`) {
+          return {
+            json: () => ({
+              Answer: [
+                {
+                  data: '3.236.227.166'
+                }
+              ]
+            })
+          }
+        }
+      });
+      mockCreateDnsHostedZone.mockResolvedValueOnce({
+        data: {
+          insert_dns_hosted_zones_one: {
+            id: 13
+          }
+        }
+      })
+
+      wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={[]} />);
+      // find ExternalDomainForm inside TabPanel
+      const form = wrapper
+        .find(TabPanel)
+        .at(2)
+        .find(ExternalDomainForm);
+
+      await form.props().onSubmit({ customDomain, isExternalDomain: true });
+
+      expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(1);
+      expect(mockUpdateDnsHostedZone.mock.calls.length).toEqual(1);
+      expect(mockUpdateDnsHostedZone.mock.calls[0][0]).toEqual({
+        variables: {
+          id: 13
+        }
+      });
+      expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
+      // Expect call toast success message
+      expect(mockToast.mock.calls[0][0]).toEqual({
+        title: 'Domínio registrado com sucesso!',
+        status: 'success',
         isClosable: true
       });
     });
