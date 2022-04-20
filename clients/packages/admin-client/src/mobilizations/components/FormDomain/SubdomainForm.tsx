@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Stack, Text, Input, Select, Box } from 'bonde-components/chakra';
+import { Button, Stack, Text, Input, Select } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
 
 interface Properties {
@@ -20,26 +20,26 @@ const SubdomainForm: React.FC<Properties> = ({ customDomain, hostedZones = [], o
       >
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Stack>
-              <Text>Personalize o subdomínio abaixo e clique em salvar para gerar o certificado:</Text>
-              <Stack direction="row" bg="gray.100" px={4} py={3} spacing={2} alignItems="center" >
-                <Text>https://www.</Text>
-                <Field name="subdomain" >
-                  {({ input }) => <Input {...input} variant="outline" placeholder="escreva seu subdomínio" />}
-                </Field>
-                <Field name="domain">
-                  {({ input }) => (
-                    <Select {...input} variant='outline' placeholder="selecione um domínio">
-                      {hostedZones.map(({ domain_name: domain }) =>
-                        <option key={domain}>{domain}</option>
-                      )}
-                    </Select>
-                  )}
-                </Field>
+            <Stack direction="column" spacing={7}>
+              <Stack>
+                <Text>Personalize o subdomínio abaixo e clique em salvar para gerar o certificado:</Text>
+                <Stack direction="row" bg="gray.100" px={4} py={3} spacing={2} alignItems="center" >
+                  <Text>https://www.</Text>
+                  <Field name="subdomain" >
+                    {({ input }) => <Input {...input} variant="outline" placeholder="escreva seu subdomínio" />}
+                  </Field>
+                  <Field name="domain">
+                    {({ input }) => (
+                      <Select {...input} variant='outline' placeholder="selecione um domínio">
+                        {hostedZones.map(({ domain_name: domain }) =>
+                          <option key={domain}>{domain}</option>
+                        )}
+                      </Select>
+                    )}
+                  </Field>
+                </Stack>
               </Stack>
-              <Box style={{ marginLeft: "86%" }}>
-                <Button maxW={32} type='submit'>Salvar</Button>
-              </Box>
+              <Button maxW={36} type='submit'>Salvar</Button>
             </Stack>
           </form>
         )}
