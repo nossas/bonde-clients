@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Stack, Text, Input, Select, Flex, Box } from 'bonde-components/chakra';
+import { Button, Stack, Text, Input, Select, Box } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
 
 interface Properties {
@@ -22,21 +22,21 @@ const SubdomainForm: React.FC<Properties> = ({ customDomain, hostedZones = [], o
           <form onSubmit={handleSubmit}>
             <Stack>
               <Text>Personalize o subdomínio abaixo e clique em salvar para gerar o certificado:</Text>
-              <Flex bg="gray.100" height={14} alignItems="center">
-                <Text ml={8}>https://www.</Text>
+              <Stack direction="row" bg="gray.100" px={4} py={3} spacing={2} alignItems="center" >
+                <Text>https://www.</Text>
                 <Field name="subdomain" >
-                  {({ input }) => <Input {...input} variant="outline" ml={1} borderRadius="4px" placeholder="escreva seu subdomínio" />}
+                  {({ input }) => <Input {...input} variant="outline" placeholder="escreva seu subdomínio" />}
                 </Field>
                 <Field name="domain">
                   {({ input }) => (
-                    <Select {...input} ml={1} mr={8} variant='outline' borderRadius="4px" placeholder="selecione um domínio">
+                    <Select {...input} variant='outline' placeholder="selecione um domínio">
                       {hostedZones.map(({ domain_name: domain }) =>
                         <option key={domain}>{domain}</option>
                       )}
                     </Select>
                   )}
                 </Field>
-              </Flex>
+              </Stack>
               <Box style={{ marginLeft: "86%" }}>
                 <Button maxW={32} type='submit'>Salvar</Button>
               </Box>

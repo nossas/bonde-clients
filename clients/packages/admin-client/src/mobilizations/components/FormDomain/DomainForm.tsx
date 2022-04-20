@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Text, Select, Link, Button, Flex, Box } from 'bonde-components/chakra';
+import { Stack, Text, Select, Link, Button, Box } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
 interface Properties {
   customDomain?: string;
@@ -17,18 +17,18 @@ const DomainForm: React.FC<Properties> = ({ customDomain, onSubmit, hostedZones 
         <form onSubmit={handleSubmit}>
           <Stack>
             <Text>Selecione o domínio cadastrado na sua comunidade:</Text>
-            <Flex bg="gray.100" height={14} alignItems="center" >
-              <Text ml={8}>https://www.</Text>
+            <Stack direction="row" bg="gray.100" px={4} py={3} spacing={2} alignItems="center" >
+              <Text>https://www.</Text>
               <Field name="customDomain">
                 {({ input }) => (
-                  <Select {...input} ml={1} mr={8} variant='outline' borderRadius="4px" placeholder="selecione um domínio" >
+                  <Select {...input} variant='outline' placeholder="selecione um domínio" >
                     {hostedZones.map(({ domain_name: domain }) =>
                       <option key={domain}>{domain}</option>
                     )}
                   </Select>
                 )}
               </Field>
-            </Flex>
+            </Stack>
           </Stack>
 
           <Stack mt={7}>
