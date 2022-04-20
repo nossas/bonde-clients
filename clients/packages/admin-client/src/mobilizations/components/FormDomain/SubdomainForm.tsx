@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Stack, Text, Input, Select } from 'bonde-components/chakra';
+import { Button, Flex, Stack, Text, Input, Select } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
 
 interface Properties {
@@ -39,7 +39,9 @@ const SubdomainForm: React.FC<Properties> = ({ customDomain, hostedZones = [], o
                   </Field>
                 </Stack>
               </Stack>
-              <Button maxW={36} type='submit'>Salvar</Button>
+              <Flex justifyContent="flex-end">
+                <Button type='submit'>Salvar</Button>
+              </Flex>
             </Stack>
           </form>
         )}

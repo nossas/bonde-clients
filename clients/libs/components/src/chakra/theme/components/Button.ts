@@ -193,6 +193,7 @@ export default {
     fontWeight: '800',
     textTransform: 'uppercase',
     borderRadius: 0,
+    minW: 36
   },
   sizes,
   variants: {
@@ -205,7 +206,7 @@ export default {
       color: `black`,
       borderRadius: '4px',
       textTransform: 'normal',
-      minW: 'auto',
+      // minW: 'auto',
       _hover: 'none',
       _active: 'none',
       _focus: 'none',
@@ -214,7 +215,7 @@ export default {
       bg: 'transparet',
       borderColor: 'trasparent',
       color,
-      minW: 'auto',
+      // minW: 'auto',
       _hover: {
         color,
       },
@@ -229,7 +230,7 @@ export default {
       bg: 'transparent',
       borderColor: 'transparent',
       color: `black`,
-      minW: 'auto',
+      // minW: 'auto',
       _hover: {
         color: `${colorScheme}.400`,
         borderColor: 'transparent',

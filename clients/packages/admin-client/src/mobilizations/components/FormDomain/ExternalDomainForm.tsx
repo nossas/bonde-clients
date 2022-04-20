@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Input, ListItem, OrderedList, Text, Button, Heading } from 'bonde-components/chakra';
+import { Stack, Input, ListItem, OrderedList, Text, Button, Heading, Flex } from 'bonde-components/chakra';
 import { Field, Form } from 'bonde-components/form';
 
 interface Properties {
@@ -19,7 +19,9 @@ const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) =>
             <Text>Insira abaixo o domínio, salve as alterações e siga o passo a passo para configurá-lo:</Text>
             <Stack direction="row" bg="gray.100" px={4} py={3} spacing={2} alignItems="center" >
               <Text>https://www.</Text>
-              <Field name="customDomain">{({ input }) => <Input {...input} variant="outline" placeholder='seudominio.org' />}</Field>
+              <Field name="customDomain">{({ input }) =>
+                <Input {...input} variant="outline" placeholder='seudominio.org' />
+              }</Field>
             </Stack>
           </Stack>
           <Stack>
@@ -41,7 +43,9 @@ const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) =>
               <ListItem>Em "TTL", selecione "¹/² hour" e clique em "save";</ListItem>
             </OrderedList>
           </Stack>
-          <Button type='submit' maxW={36}>Salvar</Button>
+          <Flex justifyContent="flex-end">
+            <Button type='submit'>Salvar</Button>
+          </Flex>
         </Stack>
       </form>
     )}
