@@ -8,22 +8,13 @@ import {
   Box,
   Button
 } from 'bonde-components/chakra';
-import { useMutation, gql, Context as SessionContext } from 'bonde-core-tools';
+import { useMutation, gql, Context as SessionContext, checkDNS } from 'bonde-core-tools';
 import { useHistory } from 'react-router-dom';
 import { MainTitle } from '../Styles';
 import StatusTags from '../StatusTags';
 import type { DNSHostedZone } from '../types';
 
 // Types
-type Record = {
-  data: string
-  name: string
-}
-
-type CheckDNS = {
-  Answer?: Record[]
-}
-
 type Props = {
   refetch: any
   dnsHostedZone: DNSHostedZone
@@ -35,15 +26,7 @@ type Props = {
 // Actions
 const handleCheckDNS = ({ dnsHostedZone, refetch, action }: Props) => async () => {
   try {
-    const result = await fetch(`https://dns.google.com/resolve?name=${dnsHostedZone.domain_name}&type=NS`);
-    const dns: CheckDNS = await result.json();
-    const nsOK: boolean = dns.Answer ? dns.Answer.reduce(
-      (acc: boolean, el: Record) => acc
-        ? !!(dnsHostedZone.name_servers.find((ns: string) => el.data.replace(/[.]$/, '') === ns))
-        : false,
-      true
-    ) : false;
-
+    const nsOK = checkDNS(dnsHostedZone.domain_name, 'NS', { ns: dnsHostedZone.name_servers });
     if (nsOK) {
       if (dnsHostedZone.status !== 'propagated' || !dnsHostedZone.ns_ok) {
         // Atualiza status do domínio somente quando estiver desatualizado

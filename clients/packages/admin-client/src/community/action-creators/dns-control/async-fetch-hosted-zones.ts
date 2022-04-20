@@ -5,7 +5,12 @@ import * as CommunitySelectors from '../../selectors'
 
 const DNS_HOSTED_ZONES_QUERY = gql`
   query ($community_id: Int!) {
-    dns_hosted_zones(where: { community_id: { _eq: $community_id }, ns_ok: { _eq: true } }) {
+    dns_hosted_zones(
+      where: {
+        community_id: { _eq: $community_id },
+        ns_ok: { _eq: true }
+      }
+    ) {
       domain_name
       status
       ns_ok
@@ -13,6 +18,7 @@ const DNS_HOSTED_ZONES_QUERY = gql`
       delegation_set: response(path: "delegation_set")
       hosted_zone_new: response(path: "HostedZone")
       delegation_set_new: response(path: "DelegationSet")
+      is_external_domain
       
       certificates {
         id
@@ -36,6 +42,7 @@ interface HostedZoneFull {
   hosted_zone?: any;
   delegation_set?: any;
   certificates: Certificate[];
+  is_external_domain?: boolean;
   // remove this field to return result
   hosted_zone_new?: any;
   delegation_set_new?: any;

@@ -4,7 +4,7 @@ import { DNSHostedZone } from './types';
 
 const fetchGraphqlQuery = gql`
   query DNS ($communityId: Int!){
-    dns_hosted_zones (where: { community_id: { _eq: $communityId }}) {
+    dns_hosted_zones (where: { community_id: { _eq: $communityId }, is_external_domain: { _eq: false }}) {
       id
       community {
         id
