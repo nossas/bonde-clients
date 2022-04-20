@@ -1,5 +1,6 @@
-import { Heading, Text, Stack } from 'bonde-components/chakra';
 import React from 'react';
+import { Heading, Text, Stack, Flex } from 'bonde-components/chakra';
+import CheckIcon from "../../../icons/CheckIcon"
 
 interface Properties {
   customDomain?: string;
@@ -19,7 +20,10 @@ const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [
         ? <Text>Pode levar até 5 minutos para o certificado ser gerado e o endereço ficar disponível.</Text>
         : (
           <>
-            <Text>Ativo</Text>
+            <Flex>
+              <CheckIcon />
+              <Text fontSize="sm" color="#50e3c2" textTransform="uppercase">Ativo</Text>
+            </Flex>
             <Text>Endereço ativo e com certificado de segurança.</Text>
           </>
         )

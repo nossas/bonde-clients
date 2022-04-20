@@ -16,9 +16,9 @@ const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) =>
       <form onSubmit={handleSubmit}>
         <Stack >
           <Text>Insira abaixo o domínio, salve as alterações e siga o passo a passo para configurá-lo:</Text>
-          <Flex bg="gray.100">
-            <Text ml={3} mt={0.5}>https://www.</Text>
-            <Field name="customDomain">{({ input }) => <Input {...input} ml={1} mb={1} placeholder='seudominio.org' />}</Field>
+          <Flex bg="gray.100" height={14} alignItems="center">
+            <Text ml={8}>https://www.</Text>
+            <Field name="customDomain">{({ input }) => <Input {...input} ml={1} mr={8} variant="outline" placeholder='seudominio.org' />}</Field>
           </Flex>
         </Stack>
 

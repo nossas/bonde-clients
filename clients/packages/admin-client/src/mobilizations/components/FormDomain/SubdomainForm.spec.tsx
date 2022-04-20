@@ -21,17 +21,17 @@ describe('SubdomainForm tests', () => {
   it('should render description to explain form', () => {
     const text = form.find(Text).at(0);
     expect(text.props().children)
-      .toEqual('Personalize o subdomínio abaixo e clique em salvar para gerar o certificado.');
+      .toEqual('Personalize o subdomínio abaixo e clique em salvar para gerar o certificado:');
   });
 
   it('should render subdomain input', () => {
     const field = form.find(Field).at(0);
     expect(field.props().name).toEqual('subdomain');
-    
+
     const input = field.renderProp('children')({ input: {} });
     expect(input.props().placeholder).toEqual('escreva seu subdomínio');
   });
-  
+
   it('should render domain select input', () => {
     const hostedZones = [
       { domain_name: '.domain.org.br' },
@@ -60,7 +60,7 @@ describe('SubdomainForm tests', () => {
       .toEqual({ subdomain: 'campanha', domain: 'nossas.link' });
 
     wrapper.setProps({ customDomain: 'www.campanha-dasfe.nossas-ce.link.org' });
-      expect(wrapper.find(Form).props().initialValues)
-        .toEqual({ subdomain: 'campanha-dasfe', domain: 'nossas-ce.link.org' });
+    expect(wrapper.find(Form).props().initialValues)
+      .toEqual({ subdomain: 'campanha-dasfe', domain: 'nossas-ce.link.org' });
   });
 });
