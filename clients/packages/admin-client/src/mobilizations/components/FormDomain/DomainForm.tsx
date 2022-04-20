@@ -35,8 +35,7 @@ const DomainForm: React.FC<Properties> = ({ customDomain, onSubmit, hostedZones 
             <Text>Não encontrou o domínio na lista?</Text>
             <Text>
               <Link
-                color="pink.200"
-                fontWeight="bold"
+                variant='highlighted'
                 href={process.env.REACT_APP_DOMAIN_ADMIN_CANARY + `/community/domains`}
               >
                 Clique aqui
