@@ -20,10 +20,11 @@ const SubdomainForm: React.FC<Properties> = ({ customDomain, hostedZones = [], o
       >
         {({ handleSubmit }) => (
           <form onSubmit={handleSubmit}>
-            <Stack direction="column" spacing={7}>
+            <Stack spacing={7}>
               <Stack>
-                <Text>Personalize o subdomínio abaixo e clique em salvar para gerar o certificado:</Text>
-                <Stack direction="row" bg="gray.100" px={4} py={3} spacing={2} alignItems="center" >
+                <Text><b>Subdomínio</b> é um endereço personalizado a partir de um domínio que você já cadastrou aqui no BONDE (ex: campanha.seudominio.org).</Text>
+                <Text>Personalize o subdomínio abaixo e clique em salvar:</Text>
+                <Stack direction="row" bg="gray.100" maxW={670} px={4} py={3} spacing={2} alignItems="center" >
                   <Text>https://www.</Text>
                   <Field name="subdomain" >
                     {({ input }) => <Input {...input} variant="outline" placeholder="escreva seu subdomínio" />}
@@ -49,7 +50,5 @@ const SubdomainForm: React.FC<Properties> = ({ customDomain, hostedZones = [], o
     </>
   );
 }
-
-
 
 export default SubdomainForm;

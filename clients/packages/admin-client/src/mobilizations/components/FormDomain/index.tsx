@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Stack } from 'bonde-components/chakra';
-import { FormPanel, DomainTypes } from './FormPanel';
+import { FormPanel } from './FormPanel';
 import CertificateStatus from './CertificateStatus';
 
 const FormDomain = ({ mobilization, hostedZones }) => (
@@ -10,7 +10,6 @@ const FormDomain = ({ mobilization, hostedZones }) => (
       <FormPanel mobilization={mobilization} hostedZones={hostedZones} />
       <CertificateStatus customDomain={mobilization.custom_domain} hostedZones={hostedZones} />
     </Stack>
-    <DomainTypes />
   </Stack>
 );
 

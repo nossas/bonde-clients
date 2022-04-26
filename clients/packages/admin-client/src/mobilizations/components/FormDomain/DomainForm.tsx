@@ -15,10 +15,10 @@ const DomainForm: React.FC<Properties> = ({ customDomain, onSubmit, hostedZones 
     >
       {({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
-          <Stack direction="column" spacing={7}>
+          <Stack spacing={7}>
             <Stack>
-              <Text>Selecione o domínio cadastrado na sua comunidade:</Text>
-              <Stack direction="row" bg="gray.100" px={4} py={3} spacing={2} alignItems="center" >
+              <Text>Escolha algum <b>domínio principal</b> que já foi comprado e cadastrado no BONDE:</Text>
+              <Stack direction="row" bg="gray.100" maxW={610} px={4} py={3} spacing={2} alignItems="center" >
                 <Text>https://www.</Text>
                 <Field name="customDomain">
                   {({ input }) => (

@@ -16,8 +16,9 @@ const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) =>
       <form onSubmit={handleSubmit}>
         <Stack direction="column" spacing={7}>
           <Stack>
-            <Text>Insira abaixo o domínio, salve as alterações e siga o passo a passo para configurá-lo:</Text>
-            <Stack direction="row" bg="gray.100" px={4} py={3} spacing={2} alignItems="center" >
+            <Text><b>Domínio externo</b> é a opção indicada para adicionar um novo endereço que você comprou e configurar o DNS externamente.</Text>
+            <Text>Insira abaixo o domínio, salve as alterações e siga o passo a passo abaixo para configurar o DNS:</Text>
+            <Stack direction="row" bg="gray.100" maxW={610} px={4} py={3} spacing={2} alignItems="center" >
               <Text>https://www.</Text>
               <Field name="customDomain">{({ input }) =>
                 <Input {...input} variant="outline" placeholder='seudominio.org' />

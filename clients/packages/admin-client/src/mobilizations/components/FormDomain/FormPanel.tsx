@@ -122,7 +122,7 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
   }
 
   return (
-    <Stack direction='column' spacing={2}>
+    <Stack minW={[200, 400, 400, 400, 1047]} spacing={2}>
       <Heading fontWeight="semibold" fontSize="sm" textTransform="uppercase">Tipo de domínio</Heading>
       <Tabs variant="unstyled" mt={0} defaultIndex={defaultIndex}>
         <TabList ml={-4}>
@@ -155,19 +155,5 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
     </Stack>
   );
 }
-
-export const DomainTypes = () => (
-  <Stack maxWidth={380}>
-    <Heading
-      fontWeight="bold"
-      fontSize="lg"
-    >
-      Tipos de Domínio
-    </Heading>
-    <Text><b>Subdomínio:</b> endereço personalizado a partir de um domínio que você já cadastrou aqui no BONDE (ex: novacampanha.seudominio.org). </Text>
-    <Text><b>Domínio principal:</b> escolha algum domínio que já foi comprado e cadastrado na comunidade (ex: seudominio.org). </Text>
-    <Text><b>Domínio externo:</b> selecione essa opção para adicionar um novo endereço que você comprou e configurar o DNS externamente. </Text>
-  </Stack>
-)
 
 
