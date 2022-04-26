@@ -20,8 +20,11 @@ describe('ExternalDomainForm tests', () => {
 
   it('should render description to explain form', () => {
     const text = form.find(Text).at(0);
+    const text2 = form.find(Text).at(1);
     expect(text.props().children)
-      .toEqual('Insira abaixo o domínio, salve as alterações e siga o passo a passo para configurá-lo:');
+      .toEqual([<b>Domínio externo</b>, ' é a opção indicada para adicionar um novo endereço que você comprou e configurar o DNS externamente.'])
+    expect(text2.props().children)
+      .toEqual('Insira abaixo o domínio, salve as alterações e siga o passo a passo abaixo para configurar o DNS:');
   });
 
   it('should renders submit button', () => {

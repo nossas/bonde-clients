@@ -21,7 +21,7 @@ describe('DomainForm tests', () => {
   it('should render description to explain form', () => {
     const text = form.find(Text).at(0);
     expect(text.props().children)
-      .toEqual('Selecione o domínio cadastrado na sua comunidade:');
+      .toEqual(['Escolha algum ', <b>domínio principal</b>, ' que já foi comprado e cadastrado no BONDE:']);
   });
 
   it('should renders submit button', () => {

@@ -20,8 +20,11 @@ describe('SubdomainForm tests', () => {
 
   it('should render description to explain form', () => {
     const text = form.find(Text).at(0);
+    const text2 = form.find(Text).at(1);
     expect(text.props().children)
-      .toEqual('Personalize o subdomínio abaixo e clique em salvar para gerar o certificado:');
+      .toEqual([<b>Subdomínio</b>, ' é um endereço personalizado a partir de um domínio que você já cadastrou aqui no BONDE (ex: campanha.seudominio.org).']);
+    expect(text2.props().children)
+      .toEqual('Personalize o subdomínio abaixo e clique em salvar:')
   });
 
   it('should render subdomain input', () => {
