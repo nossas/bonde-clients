@@ -7,7 +7,6 @@ interface Properties {
   hostedZones?: any[];
 }
 
-
 const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [] }) => {
   const certificate = hostedZones.filter((v) => v.domain_name === customDomain?.replace('www.', ''))[0]?.certificates[0];
 
@@ -17,14 +16,18 @@ const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [
         Status
       </Heading>
       {!certificate?.is_active
-        ? <Text>Pode levar até 5 minutos para o certificado ser gerado e o endereço ficar disponível.</Text>
+        ?
+        <>
+          <Text fontSize="sm" fontWeight="bold" >Inativo</Text>
+          <Text>Pode levar até 5 minutos para o certificado ser gerado e o endereço ficar disponível.</Text>
+        </>
         : (
           <>
             <Flex>
               <CheckIcon />
-              <Text fontSize="sm" color="#50e3c2" textTransform="uppercase">Ativo</Text>
+              <Text fontSize="sm" color="green.200" fontWeight="bold" textTransform="uppercase">Ativo</Text>
             </Flex>
-            <Text>Endereço ativo e com certificado de segurança.</Text>
+            <Text>O endereço <b>{hostedZones[0].domain_name}</b> está ativo e com certificado de segurança.</Text>
           </>
         )
       }
