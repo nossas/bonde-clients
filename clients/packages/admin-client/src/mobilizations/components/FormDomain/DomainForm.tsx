@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Flex, Text, Select, Link, Button } from 'bonde-components/chakra';
+import { Stack, Text, Select, Link, Button, Box } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
 interface Properties {
   customDomain?: string;
@@ -42,10 +42,11 @@ const DomainForm: React.FC<Properties> = ({ customDomain, onSubmit, hostedZones 
                 </Link> para cadastrar um novo domínio na comunidade.
               </Text>
             </Stack>
-            <Flex justifyContent="flex-end">
-              <Button type='submit'>Salvar</Button>
-            </Flex>
+            <Box position="absolute" top={1} right={62}>
+              <Button colorScheme="black" size="md" type='submit'>Salvar</Button>
+            </Box>
           </Stack>
+
         </form>
       )}
     </Form>
