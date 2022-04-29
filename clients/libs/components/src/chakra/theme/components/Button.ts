@@ -168,25 +168,6 @@ const variantSolid: SystemStyleFunction = ({ colorScheme: c }): any => {
     color: 'white',
   };
 
-  if (c === 'black') {
-    return {
-      color: 'white',
-      bg: 'black',
-      maxW: '100',
-      minH: '51',
-      borderRadius: '3px',
-      fontSize: '1.1rem',
-      _hover: {
-        bg: 'gray.400',
-        color: 'white',
-      },
-      _active: {
-        bg: 'transparent',
-      },
-      fontWeight: 'bold',
-    };
-  }
-
   return {
     bg: `${c}.200`,
     borderRadius: '50px',

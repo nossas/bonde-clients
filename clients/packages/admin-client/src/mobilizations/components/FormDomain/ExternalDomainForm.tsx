@@ -1,6 +1,7 @@
 import React from 'react';
-import { Stack, Input, ListItem, OrderedList, Text, Button, Heading, Box } from 'bonde-components/chakra';
+import { Stack, Input, ListItem, OrderedList, Text, Heading } from 'bonde-components/chakra';
 import { Field, Form } from 'bonde-components/form';
+import { DarkButton } from './DarkButton';
 
 interface Properties {
   customDomain?: string;
@@ -44,9 +45,9 @@ const ExternalDomainForm: React.FC<Properties> = ({ customDomain, onSubmit }) =>
               <ListItem>Em "TTL", selecione "¹/² hour" e clique em "save";</ListItem>
             </OrderedList>
           </Stack>
-          <Box position="absolute" top={1} right={62}>
-            <Button colorScheme="black" size="md" type='submit'>Salvar</Button>
-          </Box>
+          <DarkButton>
+            Salvar
+          </DarkButton>
         </Stack>
       </form>
     )}

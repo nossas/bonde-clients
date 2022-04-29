@@ -1,6 +1,7 @@
 import React from 'react';
 import { Stack, Text, Select, Link, Button, Box } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
+import { DarkButton } from './DarkButton';
 interface Properties {
   customDomain?: string;
   onSubmit: ({ customDomain }) => Promise<void>;
@@ -18,7 +19,7 @@ const DomainForm: React.FC<Properties> = ({ customDomain, onSubmit, hostedZones 
           <Stack spacing={7}>
             <Stack>
               <Text>Escolha algum <b>domínio principal</b> que já foi comprado e cadastrado no BONDE:</Text>
-              <Stack direction="row" bg="gray.100" maxW={610} px={4} py={3} spacing={2} alignItems="center" >
+              <Stack direction="row" bg="gray.100" maxW={610} px={4} py={3} spacing={2} alignItems="center">
                 <Text>https://www.</Text>
                 <Field name="customDomain">
                   {({ input }) => (
@@ -42,9 +43,9 @@ const DomainForm: React.FC<Properties> = ({ customDomain, onSubmit, hostedZones 
                 </Link> para cadastrar um novo domínio na comunidade.
               </Text>
             </Stack>
-            <Box position="absolute" top={1} right={62}>
-              <Button colorScheme="black" size="md" type='submit'>Salvar</Button>
-            </Box>
+            <DarkButton>
+              Salvar
+            </DarkButton>
           </Stack>
 
         </form>

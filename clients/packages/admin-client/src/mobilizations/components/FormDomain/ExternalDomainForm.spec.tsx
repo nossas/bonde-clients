@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { Button, ListItem, OrderedList, Text } from 'bonde-components/chakra';
+import { ListItem, OrderedList, Text } from 'bonde-components/chakra';
+import { DarkButton } from './DarkButton';
 import { Form, Field } from 'bonde-components/form';
 import ExternalDomainForm from './ExternalDomainForm';
 
@@ -28,9 +29,8 @@ describe('ExternalDomainForm tests', () => {
   });
 
   it('should renders submit button', () => {
-    const button = form.find(Button).at(0);
+    const button = form.find(DarkButton).at(0);
     expect(button.props().children).toEqual('Salvar');
-    expect(button.props().type).toEqual('submit');
   });
 
   it('should render domain input', () => {
