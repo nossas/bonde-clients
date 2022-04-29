@@ -125,10 +125,10 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
     <Stack minW={[200, 400, 400, 400, 1047]} spacing={2}>
       <Heading fontWeight="semibold" fontSize="sm" textTransform="uppercase">Tipo de domínio</Heading>
       <Tabs variant="unstyled" mt={0} defaultIndex={defaultIndex}>
-        <TabList ml={-4}>
-          <CustomTab>Subdomínio</CustomTab>
-          <CustomTab>Domínio Principal</CustomTab>
-          <CustomTab>Domínio Externo</CustomTab>
+        <TabList ml={-4} textColor="gray.400">
+          <CustomTab textTransform="uppercase">Subdomínio</CustomTab>
+          <CustomTab textTransform="uppercase">Domínio Principal</CustomTab>
+          <CustomTab textTransform="uppercase">Domínio Externo</CustomTab>
         </TabList>
         <TabPanels ml={-4}>
           <TabPanel>
