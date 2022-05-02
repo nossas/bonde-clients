@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { Text } from 'bonde-components/chakra';
+import { DarkButton } from './DarkButton';
 import { Field, Form } from 'bonde-components/form';
 import SubdomainForm from './SubdomainForm';
 
@@ -25,6 +26,11 @@ describe('SubdomainForm tests', () => {
       .toEqual([<b>Subdomínio</b>, ' é um endereço personalizado a partir de um domínio que você já cadastrou aqui no BONDE (ex: campanha.seudominio.org).']);
     expect(text2.props().children)
       .toEqual('Personalize o subdomínio abaixo e clique em salvar:')
+  });
+
+  it('should renders submit button', () => {
+    const button = form.find(DarkButton).at(0);
+    expect(button.props().children).toEqual('Salvar');
   });
 
   it('should render subdomain input', () => {

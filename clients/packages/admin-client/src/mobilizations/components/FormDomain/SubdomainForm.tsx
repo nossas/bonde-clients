@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Stack, Text, Input, Select, Box } from 'bonde-components/chakra';
+import { Stack, Text, Input, Select } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
+import { DarkButton } from './DarkButton';
 
 interface Properties {
   onSubmit: ({ customDomain }) => Promise<void>;
@@ -40,9 +41,9 @@ const SubdomainForm: React.FC<Properties> = ({ customDomain, hostedZones = [], o
                   </Field>
                 </Stack>
               </Stack>
-              <Box position="absolute" top={1} right={62}>
-                <Button colorScheme="black" size="md" type='submit'>Salvar</Button>
-              </Box>
+              <DarkButton>
+                Salvar
+              </DarkButton>
             </Stack>
           </form>
         )}
