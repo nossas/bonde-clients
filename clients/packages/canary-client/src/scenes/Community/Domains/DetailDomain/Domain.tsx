@@ -26,7 +26,7 @@ type Props = {
 // Actions
 const handleCheckDNS = ({ dnsHostedZone, refetch, action }: Props) => async () => {
   try {
-    const nsOK = checkDNS(dnsHostedZone.domain_name, 'NS', { ns: dnsHostedZone.name_servers });
+    const nsOK = await checkDNS(dnsHostedZone.domain_name, 'NS', { ns: dnsHostedZone.name_servers });
     if (nsOK) {
       if (dnsHostedZone.status !== 'propagated' || !dnsHostedZone.ns_ok) {
         // Atualiza status do domínio somente quando estiver desatualizado
