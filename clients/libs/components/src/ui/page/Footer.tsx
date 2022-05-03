@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Bonde from '../content/Bonde';
 import theme from '../base/theme';
 
-const Footer = styled(({ className, children }) => (
+const Footer = styled(({ className, children }: any) => (
   <div className={className}>
     <Bonde />
     {children}
