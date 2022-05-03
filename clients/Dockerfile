@@ -38,7 +38,7 @@ RUN curl -L https://unpkg.com/@pnpm/self-installer | node
 
 COPY . .
 
-RUN pnpm i --no-frozen-lockfile
+RUN pnpm i
 
 RUN pnpm m run build --filter {libs}
 
