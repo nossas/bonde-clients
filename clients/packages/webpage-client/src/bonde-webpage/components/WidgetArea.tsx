@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const WidgetArea = ({
   block,
@@ -19,14 +18,6 @@ const WidgetArea = ({
       />
     </div>
   );
-};
-
-WidgetArea.propsTypes = {
-  block: PropTypes.object,
-  widget: PropTypes.object,
-  /* Component responsible to render a widget logic,
-   * receive { widget } props */
-  widgetComponent: PropTypes.any.isRequired,
 };
 
 export default WidgetArea;

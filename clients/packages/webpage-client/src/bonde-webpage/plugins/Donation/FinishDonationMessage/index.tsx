@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import FormSelect from './FormSelect';
 import TellAFriend from '../TellAFriend';
-// import PropTypes from 'prop-types'
 // import { TellAFriend } from '..';
 // import { FormattedMessage } from 'react-intl';
 

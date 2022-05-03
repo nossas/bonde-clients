@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-// import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { Translate } from  '../../../MobilizationClass';
 import { Wrap } from './styles';
 
@@ -30,11 +28,6 @@ const TwitterShareButton = ({ href, text }: any) => {
     )}
     </Translate>
   );
-};
-
-TwitterShareButton.propTypes = {
-  href: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
 };
 
 export default TwitterShareButton;

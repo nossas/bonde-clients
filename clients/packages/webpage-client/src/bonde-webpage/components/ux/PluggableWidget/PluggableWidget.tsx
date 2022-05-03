@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Overlay from './Overlay';
 
 const PluggableWidget = (props: any) => {
@@ -42,15 +41,6 @@ const PluggableWidget = (props: any) => {
 PluggableWidget.defaultProps = {
   editable: false,
   plugins: [],
-};
-
-PluggableWidget.propTypes = {
-  block: PropTypes.object.isRequired,
-  widget: PropTypes.object.isRequired,
-  plugins: PropTypes.array,
-  editable: PropTypes.bool,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
 };
 
 export default PluggableWidget;
