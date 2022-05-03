@@ -1,6 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-// import { FormattedMessage, injectIntl, intlShape } from 'react-intl'
 import { Translate } from '../../../MobilizationClass';
 import { Wrap } from './styles';
 
@@ -24,10 +22,6 @@ const FacebookShareButton = ({ href }: any) => {
     )}
     </Translate>
   );
-};
-
-FacebookShareButton.propTypes = {
-  href: PropTypes.string.isRequired,
 };
 
 export default FacebookShareButton;
