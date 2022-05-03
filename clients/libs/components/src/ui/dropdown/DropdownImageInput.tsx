@@ -17,7 +17,7 @@ interface DropdownImageInputProps {
   clickable?: boolean;
 }
 
-const DropdownImageInput = styled(({ className, value }) => {
+const DropdownImageInput = styled(({ className, value }: any) => {
   const { img, label } = value;
   return (
     <div className={className}>
@@ -25,7 +25,7 @@ const DropdownImageInput = styled(({ className, value }) => {
       {label}
     </div>
   );
-})<DropdownImageInputProps>`
+}) <DropdownImageInputProps>`
   display: flex;
   flex-grow: 1;
   align-items: center;

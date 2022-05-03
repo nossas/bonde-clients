@@ -18,7 +18,7 @@ interface DropdownImageItemProps {
   clickable?: boolean;
 }
 
-const DropdownImageItem = styled(({ className, value }) => {
+const DropdownImageItem = styled(({ className, value }: any) => {
   const { img, label } = value;
   return (
     <div className={className}>
@@ -26,7 +26,7 @@ const DropdownImageItem = styled(({ className, value }) => {
       {label}
     </div>
   );
-})<DropdownImageItemProps>`
+}) <DropdownImageItemProps>`
   display: flex;
   padding: 10px 25px;
   flex-grow: 1;

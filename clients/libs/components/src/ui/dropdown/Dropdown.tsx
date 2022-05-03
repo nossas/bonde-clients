@@ -53,7 +53,7 @@ const DropdownFluidList = styled.div<DropdownFluidListProps>`
   `}
 `;
 
-const DropdownFluidInput = styled(({ children, className, onToggle, open }) => (
+const DropdownFluidInput = styled(({ children, className, onToggle, open }: any) => (
   <div className={className} onClick={onToggle}>
     {children}
     <Icon name={!open ? 'ArrowDown' : 'ArrowUp'} color="#fff" size="small" />
@@ -136,17 +136,17 @@ const Dropdown: React.FC<DropdownProps> = ({
                   typeof value === 'string'
                     ? true
                     : typeof value.clickable === 'undefined'
-                    ? true
-                    : value.clickable;
+                      ? true
+                      : value.clickable;
 
                 const itemProps = {
                   clickable,
                   onClick: !clickable
                     ? null
                     : () => {
-                        onSelect(value);
-                        setOpen(false);
-                      },
+                      onSelect(value);
+                      setOpen(false);
+                    },
                 };
 
                 return (

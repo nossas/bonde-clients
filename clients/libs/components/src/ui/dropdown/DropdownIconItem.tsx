@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Icon from '../content/Icon';
 
-const DropdownIconItem = styled(({ className, value, onClick }) => {
+const DropdownIconItem = styled(({ className, value, onClick }: any) => {
   const { icon, label } = value;
 
   return (
