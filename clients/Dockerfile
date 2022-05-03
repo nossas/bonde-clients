@@ -38,8 +38,10 @@ RUN curl -L https://unpkg.com/@pnpm/self-installer | node
 
 COPY . .
 
+ENV SKIP_PREFLIGHT_CHECK=true
+
 RUN pnpm i
 
-RUN pnpm m run build --filter {libs}
+RUN pnpm --filter "./libs/**" m run build
 
-RUN pnpm m run build --filter {packages}
+RUN pnpm --filter "./packages/**" m run build
