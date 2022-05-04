@@ -135,14 +135,14 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
             <SubdomainForm
               customDomain={defaultIndex === 0 ? customDomain : null}
               onSubmit={onSubmit}
-              hostedZones={internalHostedZones}
+              hostedZones={internalHostedZones.filter((dns) => dns.ns_ok)}
             />
           </TabPanel>
           <TabPanel>
             <DomainForm
               customDomain={defaultIndex === 1 ? customDomain : null}
               onSubmit={onSubmit}
-              hostedZones={internalHostedZones}
+              hostedZones={internalHostedZones.filter((dns) => dns.ns_ok)}
             />
           </TabPanel>
           <TabPanel>
