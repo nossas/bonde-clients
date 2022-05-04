@@ -7,8 +7,7 @@ const DNS_HOSTED_ZONES_QUERY = gql`
   query ($community_id: Int!) {
     dns_hosted_zones(
       where: {
-        community_id: { _eq: $community_id },
-        ns_ok: { _eq: true }
+        community_id: { _eq: $community_id }
       }
     ) {
       domain_name
@@ -19,7 +18,7 @@ const DNS_HOSTED_ZONES_QUERY = gql`
       hosted_zone_new: response(path: "HostedZone")
       delegation_set_new: response(path: "DelegationSet")
       is_external_domain
-      
+
       certificates {
         id
         domain

@@ -101,8 +101,25 @@ describe('FormPanel tests', () => {
       mockUseMutation.mockReturnValueOnce([mockUpdateMobilization]);
       mockUseMutation.mockReturnValueOnce([mockCreateDnsHostedZone]);
       mockUseMutation.mockReturnValueOnce([mockUpdateDnsHostedZone]);
-      
+
       // jest.clearAllMocks();
+    });
+
+    it('should render for subdomain and domain form only ns_ok true', () => {
+      const hostedZones = [
+        { domain_name: 'nossas.org', is_external_domain: false, ns_ok: true },
+        { domain_name: 'nossas.link', is_external_domain: false, ns_ok: false },
+        { domain_name: 'external.link', is_external_domain: true, ns_ok: false }
+      ]
+
+      wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={hostedZones} />);
+      const form = wrapper
+        .find(TabPanel)
+        .at(0)
+        .find(SubdomainForm);
+
+      expect(form.props().hostedZones)
+        .toEqual(hostedZones.filter((domain) => !domain.is_external_domain && domain.ns_ok))
     });
 
     it('should call only updateMobilization if isExternalDomain false', async () => {
@@ -214,7 +231,7 @@ describe('FormPanel tests', () => {
 
     it('should call updateDnsHostedZone if dns is ok', async () => {
       const hostedZones = [
-        { id: 14, domain_name: 'nossas.link', is_external_domain: false, name_servers: ['ok.dasd-ws.org', 'tsd-12.dasd-ws.uk'] },
+        { id: 14, domain_name: 'nossas.link', is_external_domain: false, name_servers: ['ok.dasd-ws.org', 'tsd-12.dasd-ws.uk'], ns_ok: false },
         { id: 13, domain_name: 'outrodominio.org', is_external_domain: true, ns_ok: true }
       ]
       const customDomain = 'campanha.nossas.link';
@@ -250,7 +267,7 @@ describe('FormPanel tests', () => {
   describe('select tab when mobilization custom domain is preset', () => {
 
     it('should select subdomain tab', () => {
-      const hostedZones = [{ domain_name: 'nossas.link' }]
+      const hostedZones = [{ domain_name: 'nossas.link', is_external_domain: false, ns_ok: true }]
 
       wrapper = shallow(
         <FormPanel
@@ -263,7 +280,7 @@ describe('FormPanel tests', () => {
     });
 
     it('should select root domain tab', () => {
-      const hostedZones = [{ domain_name: 'nossas.link' }]
+      const hostedZones = [{ domain_name: 'nossas.link', is_external_domain: false, ns_ok: true }]
 
       wrapper = shallow(
         <FormPanel
