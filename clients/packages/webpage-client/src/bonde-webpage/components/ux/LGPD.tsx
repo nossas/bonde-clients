@@ -34,7 +34,16 @@ export default ({ color }: any) => {
         return (
           <Text color={color}>
             <Trans i18nKey="Disclaimer">
-              {`Ao inserir seus dados, você concorda em ter seus dados compartilhados com os organizadores dessa página e aceita receber emails de atualização, conforme descrito na `}
+              {`Ao inserir seus dados, você concorda em ter seus dados compartilhados com os organizadores dessa página e aceita receber emails de atualização, conforme descrito nos `}
+              <a
+                href='/static/termos-de-uso-plip.pdf'
+                title={t('Terms')}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                termos de uso
+              </a>
+              {` da campanha e na `}
               <a
                 href={politicalLink}
                 title={t('Political')}
