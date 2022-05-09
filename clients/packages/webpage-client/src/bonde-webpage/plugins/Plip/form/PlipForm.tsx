@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Field } from 'react-final-form'
 import PlipDetails from '../components/PlipDetails';
-import LGPD from '../../../components/ux/LGPD';
 import PlipFormStyles from './PlipFormStyles';
+import PlipLGPD from './PlipLGPD';
 
 type Props = {
   // Function created with createApolloFetch
@@ -37,7 +37,7 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
   }
 
   let title = 'Clique para configurar seu formulário...'
-  if (widget.settings && widget.settings.call_to_action){
+  if (widget.settings && widget.settings.call_to_action) {
     title = widget.settings.call_to_action
   }
 
@@ -75,7 +75,7 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
                   <input {...input} type="text" placeholder="Insira seu e-mail" />
                   {meta.error && meta.touched && <span>Email {meta.error}</span>}
                 </div>
-          )}
+              )}
             </Field>
 
             <Field name="state" validate={required}>
@@ -179,7 +179,7 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
               )}
             </Field>
             <button type="submit" value="submit">{(widget.settings && widget.settings.button_text) || 'Enviar'}</button>
-            <LGPD />
+            <PlipLGPD />
           </form>
         )}
       </Form>
