@@ -1,7 +1,8 @@
 import React from 'react';
-import { Stack, Text, Select, Link, Button, Box } from 'bonde-components/chakra';
+import { Stack, Text, Select, Link } from 'bonde-components/chakra';
 import { Form, Field } from 'bonde-components/form';
 import { DarkButton } from './DarkButton';
+
 interface Properties {
   customDomain?: string;
   onSubmit: ({ customDomain }) => Promise<void>;

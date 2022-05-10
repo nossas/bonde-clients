@@ -283,13 +283,13 @@ describe('FormPanel tests', () => {
 
       expect(mockCheckDNS.mock.calls.length).toEqual(0);
       expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(0);
+      expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
       expect(mockCreateOrUpdateCertificate.mock.calls.length).toEqual(1);
       expect(mockCreateOrUpdateCertificate.mock.calls[0][0]).toEqual({
         variables: {
           dns_hosted_zone_id: hostedZones[0].id
         }
       });
-      expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
       // Expect call toast success message
       expect(mockToast.mock.calls[0][0]).toEqual({
         title: 'Domínio registrado com sucesso!',

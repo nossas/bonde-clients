@@ -10,6 +10,7 @@ const DNS_HOSTED_ZONES_QUERY = gql`
         community_id: { _eq: $community_id }
       }
     ) {
+      id
       domain_name
       status
       ns_ok

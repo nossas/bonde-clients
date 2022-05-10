@@ -7,7 +7,6 @@ import {
   TabPanels,
   TabPanel,
   Stack,
-  Text,
   useToast
 } from 'bonde-components/chakra';
 import CustomTab from './CustomTab';
@@ -92,6 +91,7 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
 
   const onSubmit = async ({ customDomain, isExternalDomain = false }: { customDomain: string, isExternalDomain?: boolean }) => {
     try {
+      const hostedZone = internalHostedZones.filter((hz) => customDomain.endsWith(hz.domain_name))[0];
       if (isExternalDomain) {
         // Create dns hosted zone
         const { data } = await createDnsHostedZone({
@@ -113,17 +113,20 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
           }
         }
       } else {
-        const hostedZone = internalHostedZones.filter((hz) => customDomain.endsWith(hz.domain_name))[0];
-        if (!hostedZone.ns_ok) {
+        if (!hostedZone?.ns_ok) {
           if (await checkDNS(customDomain, 'NS', { ns: hostedZone.name_servers })) {
             await updateDnsHostedZone({ variables: { id: hostedZone.id } })
           }
-        } else {
-          await createOrUpdateCertificate({ variables: { dns_hosted_zone_id: hostedZone.id } });
         }
       }
 
       await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
+
+      // update certificate is the final request because make a fetch customDomains
+      if (hostedZone?.ns_ok) {
+        await createOrUpdateCertificate({ variables: { dns_hosted_zone_id: hostedZone.id } });
+      }
+
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
     } catch (err: any) {
       toast({
