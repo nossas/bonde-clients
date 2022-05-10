@@ -77,6 +77,18 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
       }
     `
   );
+  const [createOrUpdateCertificate] = useMutation(
+    gql`
+      mutation ($dns_hosted_zone_id: Int!) {
+        create_or_update_certificate(dns_hosted_zone_id: $dns_hosted_zone_id) {
+          id
+          is_active
+          domain
+          dns_hosted_zone_id
+        }
+      }
+    `
+  );
 
   const onSubmit = async ({ customDomain, isExternalDomain = false }: { customDomain: string, isExternalDomain?: boolean }) => {
     try {
@@ -106,6 +118,8 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
           if (await checkDNS(customDomain, 'NS', { ns: hostedZone.name_servers })) {
             await updateDnsHostedZone({ variables: { id: hostedZone.id } })
           }
+        } else {
+          await createOrUpdateCertificate({ variables: { dns_hosted_zone_id: hostedZone.id } });
         }
       }
 

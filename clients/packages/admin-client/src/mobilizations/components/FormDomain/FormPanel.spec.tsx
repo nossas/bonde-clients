@@ -96,12 +96,13 @@ describe('FormPanel tests', () => {
     const mockUpdateMobilization = jest.fn();
     const mockCreateDnsHostedZone = jest.fn();
     const mockUpdateDnsHostedZone = jest.fn();
+    const mockCreateOrUpdateCertificate = jest.fn();
 
     beforeEach(() => {
       mockUseMutation.mockReturnValueOnce([mockUpdateMobilization]);
       mockUseMutation.mockReturnValueOnce([mockCreateDnsHostedZone]);
       mockUseMutation.mockReturnValueOnce([mockUpdateDnsHostedZone]);
-
+      mockUseMutation.mockReturnValueOnce([mockCreateOrUpdateCertificate]);
       // jest.clearAllMocks();
     });
 
@@ -252,6 +253,40 @@ describe('FormPanel tests', () => {
       expect(mockUpdateDnsHostedZone.mock.calls[0][0]).toEqual({
         variables: {
           id: hostedZones[0].id
+        }
+      });
+      expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
+      // Expect call toast success message
+      expect(mockToast.mock.calls[0][0]).toEqual({
+        title: 'Domínio registrado com sucesso!',
+        status: 'success',
+        isClosable: true
+      });
+    });
+
+    it('should call createOrUpdateCertificate if dns is ok', async () => {
+      const hostedZones = [
+        { id: 14, domain_name: 'nossas.link', is_external_domain: false, name_servers: ['ok.dasd-ws.org', 'tsd-12.dasd-ws.uk'], ns_ok: true },
+        { id: 13, domain_name: 'outrodominio.org', is_external_domain: true, ns_ok: true }
+      ]
+      const customDomain = 'campanha.nossas.link';
+      mockCheckDNS.mockResolvedValueOnce(true);
+
+      wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={hostedZones} />);
+      // find ExternalDomainForm inside TabPanel
+      const form = wrapper
+        .find(TabPanel)
+        .at(0)
+        .find(SubdomainForm);
+
+      await form.props().onSubmit({ customDomain });
+
+      expect(mockCheckDNS.mock.calls.length).toEqual(0);
+      expect(mockCreateDnsHostedZone.mock.calls.length).toEqual(0);
+      expect(mockCreateOrUpdateCertificate.mock.calls.length).toEqual(1);
+      expect(mockCreateOrUpdateCertificate.mock.calls[0][0]).toEqual({
+        variables: {
+          dns_hosted_zone_id: hostedZones[0].id
         }
       });
       expect(mockUpdateMobilization.mock.calls.length).toEqual(1);
