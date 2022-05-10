@@ -13,8 +13,8 @@ const PlipDetails = (props: PropsPlipDetails) => {
       <PdfButton dataPdf={props.pdf.data.data?.pdf_data} fileName={props.pdf.data.data?.filename} />
       <ol>
         <li><strong>Imprima sua ficha:</strong> Não pode imprimir agora? Tudo bem! Já enviamos uma cópia da ficha no seu e-mail também.</li>
-        <li><strong>Colete assinaturas:</strong>Assine e chame mais pessoas para assinar também.</li>
-        <li><strong>Envie a ficha:</strong>Na ficha tem o endereço para o envio dos correios. É só levar até a agência mais próxima de você e enviar!</li>
+        <li><strong>Colete assinaturas:</strong> Assine e chame mais pessoas para assinar também.</li>
+        <li><strong>Envie a ficha:</strong> Na ficha tem o endereço para o envio dos correios. É só levar até a agência mais próxima de você e enviar!</li>
       </ol>
       <p><strong>A Amazônia conta com você! 🌳✊</strong></p>
     </PlipDetailsStyles>
