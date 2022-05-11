@@ -24,7 +24,7 @@ export class MobilizationsEditPage extends Component {
         arrayUtil.distinct
       );
       return (
-        <div className="flex flex-auto overflow-hidden">
+        <div style={{ display: 'flex', flex: '1 1 auto', overflow: 'hidden' }}>
           <Mobilization editable history={this.props.history} />
           <GoogleFontsLoader fonts={fonts} />
         </div>

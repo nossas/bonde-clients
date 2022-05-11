@@ -176,7 +176,7 @@ const Sidebar = ({
           />
         </SidenavList>
       </Sidenav>
-      <div className="flex flex-auto" style={{ marginLeft: 80 }}>
+      <div style={{ display: 'flex', flex: '1 1 auto', marginLeft: 80 }}>
         {children}
       </div>
     </div>
