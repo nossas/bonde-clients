@@ -24,6 +24,7 @@ const DNS_HOSTED_ZONES_QUERY = gql`
         id
         domain
         is_active
+        dns_hosted_zone_id
       }
     }
   }

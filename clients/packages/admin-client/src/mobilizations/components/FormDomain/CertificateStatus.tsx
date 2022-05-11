@@ -2,17 +2,35 @@ import React from 'react';
 import { Heading, Text, Stack, Flex } from 'bonde-components/chakra';
 import CheckIcon from "../../../icons/CheckIcon"
 import LoadingIcon from "../../../icons/LoadingIcon"
-interface Properties {
-  customDomain?: string;
-  hostedZones?: any[];
+
+interface Certificate {
+  id: number;
+  domain: string;
+  is_active: boolean;
+  dns_hosted_zone_id: number;
 }
 
-// TODO:
-// - Tipar hostedZone de acordo com o fetch hosted zone
+interface HostedZone {
+  id: number;
+  domain_name: string;
+  status: string;
+  ns_ok?: boolean;
+  hosted_zone?: any;
+  delegation_set?: any;
+  is_external_domain: boolean;
+  certificates: Certificate[];
+}
+
+interface Properties {
+  customDomain?: string;
+  hostedZones?: HostedZone[];
+}
 
 const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [] }) => {
-  const domain: any | undefined = hostedZones.filter((v) => v.domain_name === customDomain?.replace('www.', ''))[0];
-  const hasCertificate = domain?.certificates[0]?.is_active === true
+  const domain: any | undefined = hostedZones.filter(
+    (v) => customDomain?.endsWith(v.domain_name)
+  )[0];
+  const hasCertificate = domain?.certificates[0]?.is_active
   const isExternalDomain = domain?.is_external_domain
   const failedIp = !domain?.ns_ok && isExternalDomain
 

@@ -20,6 +20,18 @@ export default (state = initialState, action = {}) => {
         fetching: false,
         data: action.payload
       }
+    case t.UPDATE_DNS_HOSTED_ZONE:
+      return {...state,
+        data: state.data.map((hostedZone) => {
+          if (hostedZone.id === action.payload.id) {
+            return {
+              ...hostedZone,
+              ...action.payload
+            }
+          }
+          return hostedZone;
+        })
+      }
     case t.FETCH_DNS_HOSTED_ZONES_FAILURE:
       return {...state,
         fetching: false,

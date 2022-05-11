@@ -13,13 +13,26 @@ import CustomTab from './CustomTab';
 import ExternalDomainForm from './ExternalDomainForm';
 import DomainForm from './DomainForm';
 import SubdomainForm from './SubdomainForm';
+// TODO: rever import
+import { connect } from 'react-redux';
+import * as dnsControlActions from '../../../community/action-creators/dns-control';
 
 const IP_LISTS = [
   '54.85.56.248',
   '3.236.227.166'
 ]
 
-export const FormPanel = ({ hostedZones, mobilization }) => {
+interface FormPanelProperties {
+  hostedZones: any[];
+  mobilization: any;
+  updateDomain?: (dnsHostedZone: any, mobilization?: any) => void;
+}
+
+export const FormPanel: React.FC<FormPanelProperties> = ({
+  hostedZones,
+  mobilization,
+  updateDomain
+}) => {
   const toast = useToast();
   // Active tab by custom domain type
   let defaultIndex = 0;
@@ -120,13 +133,22 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
         }
       }
 
-      await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
+      const { data: { update_mobilizations_by_pk } } = await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
 
       // update certificate is the final request because make a fetch customDomains
-      if (hostedZone?.ns_ok) {
-        await createOrUpdateCertificate({ variables: { dns_hosted_zone_id: hostedZone.id } });
+      let certificate;
+      if (hostedZone?.ns_ok && !isExternalDomain) {
+        const { data } = await createOrUpdateCertificate({ variables: { dns_hosted_zone_id: hostedZone.id } });
+        certificate = data?.create_or_update_certificate;
       }
-
+      
+      updateDomain && updateDomain(
+        {
+          ...hostedZone,
+          certificates: certificate ? [certificate] : []
+        },
+        { ...mobilization, ...update_mobilizations_by_pk }
+      );
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
     } catch (err: any) {
       toast({
@@ -173,4 +195,4 @@ export const FormPanel = ({ hostedZones, mobilization }) => {
   );
 }
 
-
+export default connect(undefined, { updateDomain: dnsControlActions.updateDomain })(FormPanel);

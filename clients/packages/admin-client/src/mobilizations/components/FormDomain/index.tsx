@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, Stack } from 'bonde-components/chakra';
-import { FormPanel } from './FormPanel';
+import FormPanel from './FormPanel';
 import CertificateStatus from './CertificateStatus';
 
 const FormDomain = ({ mobilization, hostedZones }) => (
