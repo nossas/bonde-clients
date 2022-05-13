@@ -60,7 +60,7 @@ const PdfButton = (props: PdfButtonProps): React.ReactElement => {
   // console.log("renderAsLink", renderAsLink);
   if (renderAsMessage) {
     return (
-      <p>Confira seu e-mail! Sua ficha foi enviada lá.</p>
+      <a className="disabled" href="javascript:void(0);"><EyeIcon />Confira seu e-mail! Sua ficha foi enviada lá</a>
     )
   } else if (renderAsLink) {
     return (

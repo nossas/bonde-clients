@@ -38,6 +38,20 @@ const PlipDetailsStyles = styled.div`
     margin: 20px;
     font-family: Arial;
     border: none;
+
+  }
+
+  a.disabled {
+    padding: 2em;
+    text-transform: none;
+    background-color: #eeeeee;
+    max-width: 25rem;
+    color: #000000;
+    font-weight: bold;
+  }
+  a.disabled > svg > path{
+    fill: #000000;
+    stroke: #000000;
   }
 
   a > svg {
