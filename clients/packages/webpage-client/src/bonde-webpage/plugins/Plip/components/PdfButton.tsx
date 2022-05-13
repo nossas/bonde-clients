@@ -3,7 +3,7 @@ import { saveAs } from 'file-saver';
 import EyeIcon from '../icons/EyeIcon';
 
 /* Helper function */
-const b64toBlob = (b64Data: string, contentType='', sliceSize=512) => {
+const b64toBlob = (b64Data: string, contentType = '', sliceSize = 512) => {
   const byteCharacters = atob(b64Data);
   const byteArrays: Uint8Array[] = [];
 
@@ -19,7 +19,7 @@ const b64toBlob = (b64Data: string, contentType='', sliceSize=512) => {
     byteArrays.push(byteArray);
   }
 
-  const blob = new Blob(byteArrays, {type: contentType});
+  const blob = new Blob(byteArrays, { type: contentType });
   return blob;
 }
 
@@ -30,7 +30,7 @@ interface PdfButtonProps {
 
 const useIosWithChrome = () => {
   if (typeof navigator !== 'undefined') {
-    console.log("userAgent", navigator.userAgent);
+    // console.log("userAgent", navigator.userAgent);
     const isIos = Boolean(navigator.userAgent.match(/iPhone|iPad|iPod/i));
     const isChrome = Boolean(navigator.userAgent.match(/Chrome/i));
 
@@ -40,12 +40,29 @@ const useIosWithChrome = () => {
   return false;
 }
 
-const PdfButton = (props: PdfButtonProps) => {
-  const renderAsLink = useIosWithChrome();
-  const blob = b64toBlob(props.dataPdf.replace('data:application/pdf;filename=generated.pdf;base64,',''));
+const useWithInstagram = () => {
+  if (typeof navigator !== 'undefined') {
+    // console.log("userAgent", navigator.userAgent);
+    const isInstagram = Boolean(navigator.userAgent.match(/Instagram/i));
 
-  console.log("renderAsLink", renderAsLink);
-  if (renderAsLink) {
+    return isInstagram;
+  }
+
+  return false;
+}
+
+const PdfButton = (props: PdfButtonProps): React.ReactElement => {
+  const renderAsLink = useIosWithChrome();
+  const renderAsMessage = useWithInstagram();
+
+  const blob = b64toBlob(props.dataPdf.replace('data:application/pdf;filename=generated.pdf;base64,', ''));
+
+  // console.log("renderAsLink", renderAsLink);
+  if (renderAsMessage) {
+    return (
+      <p>Confira seu e-mail! Sua ficha foi enviada lá.</p>
+    )
+  } else if (renderAsLink) {
     return (
       <a
         href={URL.createObjectURL(blob)}
@@ -54,7 +71,7 @@ const PdfButton = (props: PdfButtonProps) => {
       >
         <EyeIcon />
         Ver ficha de assinatura
-      </a>   
+      </a>
     );
   }
 
