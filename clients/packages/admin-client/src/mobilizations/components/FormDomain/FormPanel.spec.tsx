@@ -204,6 +204,21 @@ describe('FormPanel tests', () => {
           }
         }
       })
+      mockUpdateMobilization.mockResolvedValueOnce({
+        data: {
+          update_mobilization_by_pk: {
+            id: 1,
+            custom_domain: customDomain
+          }
+        }
+      })
+      mockCreateOrUpdateCertificate.mockResolvedValueOnce({
+        data: {
+          create_or_update_certificate: {
+            is_active: true
+          }
+        }
+      })
 
       wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={[]} />);
       // find ExternalDomainForm inside TabPanel
@@ -237,6 +252,21 @@ describe('FormPanel tests', () => {
       ]
       const customDomain = 'campanha.nossas.link';
       mockCheckDNS.mockResolvedValueOnce(true);
+      mockUpdateMobilization.mockResolvedValueOnce({
+        data: {
+          update_mobilization_by_pk: {
+            id: 1,
+            custom_domain: customDomain
+          }
+        }
+      })
+      mockCreateOrUpdateCertificate.mockResolvedValueOnce({
+        data: {
+          create_or_update_certificate: {
+            is_active: true
+          }
+        }
+      })
 
       wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={hostedZones} />);
       // find ExternalDomainForm inside TabPanel
@@ -271,6 +301,21 @@ describe('FormPanel tests', () => {
       ]
       const customDomain = 'campanha.nossas.link';
       mockCheckDNS.mockResolvedValueOnce(true);
+      mockUpdateMobilization.mockResolvedValueOnce({
+        data: {
+          update_mobilization_by_pk: {
+            id: 1,
+            custom_domain: customDomain
+          }
+        }
+      })
+      mockCreateOrUpdateCertificate.mockResolvedValueOnce({
+        data: {
+          create_or_update_certificate: {
+            is_active: true
+          }
+        }
+      })
 
       wrapper = shallow(<FormPanel mobilization={mobilization} hostedZones={hostedZones} />);
       // find ExternalDomainForm inside TabPanel
