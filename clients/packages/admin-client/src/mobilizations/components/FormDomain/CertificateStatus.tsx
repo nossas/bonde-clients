@@ -49,7 +49,7 @@ const CertificateStatus: React.FC<Properties> = ({ customDomain, hostedZones = [
       )}
 
       {/* GERANDO CERTIFICADO  */}
-      {customDomain && !domain?.certificates[0] && !isExternalDomain && (
+      {customDomain && !domain?.certificates[0]?.is_active && !isExternalDomain && (
         <>
           <Flex >
             <LoadingIcon />
