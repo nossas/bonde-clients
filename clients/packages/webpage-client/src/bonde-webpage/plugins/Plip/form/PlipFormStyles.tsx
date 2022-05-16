@@ -10,6 +10,8 @@ export default styled.div`
   h2 {
     color: #fff;
     text-align: center;
+    font-size: 20px;
+    font-weight: bold;
   }
 
   label {
