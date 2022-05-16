@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   Button,
+  Text,
   Flex,
   FormControl,
   Stack,
@@ -21,6 +22,7 @@ const ArrowRightIcon = createIcon({
 })
 
 interface Props {
+  loading?: boolean;
   onChangePage: (pageIndex: number) => void;
   onPreviousPage: () => void;
   onNextPage: () => void;
@@ -30,7 +32,8 @@ interface Props {
 }
 
 const Pagination: React.FC<Props> = ({
-  onChangePage,
+  // onChangePage,
+  loading,
   onChangeLimit,
   onPreviousPage,
   onNextPage,
@@ -63,7 +66,8 @@ const Pagination: React.FC<Props> = ({
       >
         <ArrowLeftIcon />
       </Button>
-      {Array.from({ length: pages + 1 }, (_: any, key: number) => (
+      <Text fontWeight="bold">{!loading ? `${pageIndex + 1} de ${pages + 1}` : "..."}</Text>
+      {/* {Array.from({ length: pages + 1 }, (_: any, key: number) => (
         <Button
           variant='outline'
           colorScheme="gray"
@@ -72,8 +76,8 @@ const Pagination: React.FC<Props> = ({
           disabled={pageIndex === key}
         >
           {key + 1}
-        </Button>  
-      ))}
+        </Button>
+      ))} */}
       <Button
         variant='outline'
         colorScheme="gray"

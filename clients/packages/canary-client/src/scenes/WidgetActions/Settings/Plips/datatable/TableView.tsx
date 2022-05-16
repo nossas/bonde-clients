@@ -69,6 +69,7 @@ const PlipsFormTable: React.FC<any> = ({ widgetId }) => {
       <Table variant="simple" bg="white">
         <TableCaption>
           <Pagination
+            loading={loading}
             onChangePage={onChangePage}
             onChangeLimit={onChangeLimit}
             onPreviousPage={onPreviousPage}
