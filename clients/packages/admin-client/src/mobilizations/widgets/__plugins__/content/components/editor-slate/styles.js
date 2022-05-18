@@ -25,10 +25,10 @@ export default {
     border: '3px solid #0275d8'
   },
   toolbar: {
-    position: 'absolute',
+    position: 'fixed',
     top: 0,
-    left: 0,
-    width: '100%',
+    left: '80px',
+    minWidth: '95%',
     zIndex: 5,
     display: 'none'
   },
