@@ -17,12 +17,15 @@ const Block = styled.div`
 
 const getBackgroundStyle = (block: any) => {
   if (block.bg_image) {
-
+    // dynamic optimization must be configured
     if ("REACT_APP_DOMAIN_IMAGINARY" in process.env) {
-      return {
-        background: `url('${process.env.REACT_APP_DOMAIN_IMAGINARY}/convert?url=${block.bg_image}&type=auto') no-repeat`,
-        backgroundSize: 'cover',
-      };
+      // gif files should not be optimized
+      if (!block.bg_image.match(/gif$/i)) {
+        return {
+          background: `url('${process.env.REACT_APP_DOMAIN_IMAGINARY}/convert?url=${block.bg_image}&type=auto') no-repeat`,
+          backgroundSize: 'cover',
+        };
+      }
     }
     return {
       background: `url('${block.bg_image}') no-repeat`,
@@ -52,8 +55,7 @@ const Section = (props: SectionProps) => {
     anchor,
     block,
     widgets,
-    widgetComponent,
-    extraWidgetProps,
+    mobilization,
     editable,
     wrapper: BlockWrapper,
   } = props;
@@ -76,8 +78,7 @@ const Section = (props: SectionProps) => {
                 key={`widget-${widget.id}`}
                 block={block}
                 widget={widget}
-                widgetComponent={widgetComponent}
-                extraWidgetProps={extraWidgetProps}
+                mobilization={mobilization}
               />
             )}
           </Block>
@@ -105,17 +106,13 @@ type SectionProps = {
    * customize the rendering of your block, get block and editable
    * as property. */
   wrapper?: any;
+  mobilization: any;
   /* Data structure of block, passed to blockWrapper component */
   block: any;
   /* True if mobilization is editable mode */
   editable: boolean;
   /* Array of widgets related on Section */
   widgets: any[];
-  /* Component responsible to render a widget logic,
-   * receive { widget } props */
-  widgetComponent: any;
-  // TODO: documentation
-  extraWidgetProps: any;
 };
 
 export default Section;
