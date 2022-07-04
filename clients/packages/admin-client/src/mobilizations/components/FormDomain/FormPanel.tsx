@@ -105,7 +105,7 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
   const onSubmit = async ({ customDomain, isExternalDomain = false }: { customDomain: string, isExternalDomain?: boolean }) => {
     try {
       const hostedZone = internalHostedZones.filter((hz) => customDomain.endsWith(hz.domain_name))[0];
-      if (isExternalDomain) {
+      if (isExternalDomain && mobilization.community_id) {
         // Create dns hosted zone
         const { data } = await createDnsHostedZone({
           variables: {
@@ -127,7 +127,7 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
         }
       } else {
         if (!hostedZone?.ns_ok) {
-          if (await checkDNS(customDomain, 'NS', { ns: hostedZone.name_servers })) {
+          if (await checkDNS(customDomain, 'NS', { ns: hostedZone?.name_servers })) {
             await updateDnsHostedZone({ variables: { id: hostedZone.id } })
           }
         }
@@ -141,7 +141,7 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
         const { data } = await createOrUpdateCertificate({ variables: { dns_hosted_zone_id: hostedZone.id } });
         certificate = data?.create_or_update_certificate;
       }
-      
+
       updateDomain && updateDomain(
         {
           ...hostedZone,
@@ -151,12 +151,22 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
       );
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
     } catch (err: any) {
-      toast({
-        title: 'Falha ao submeter formulário',
-        description: err?.message || err,
-        status: 'error',
-        isClosable: true
-      });
+      if (!customDomain) {
+        toast({
+          title: 'Falha ao atualizar o domínio',
+          description: 'O endereço não pode ficar em branco',
+          status: 'error',
+          isClosable: true
+        })
+      }
+      else {
+        toast({
+          title: 'Falha ao atualizar o domínio',
+          description: 'Esse endereço já está sendo usado em outra página.',
+          status: 'error',
+          isClosable: true
+        })
+      }
     }
   }
 
