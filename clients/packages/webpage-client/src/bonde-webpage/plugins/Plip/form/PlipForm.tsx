@@ -84,15 +84,16 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
                   <label>Estado* </label>
                   <select {...input}>
                     <option>Selecione o Estado</option>
+                    <option value="EX">Estrangeiro</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
                     <option value="AM">Amazonas</option>
                     <option value="BA">Bahia</option>
                     <option value="CE">Ceará</option>
                     <option value="DF">Distrito Federal</option>
                     <option value="ES">Espírito Santo</option>
                     <option value="GO">Goiás</option>
-                    <option value="AP">Amapá</option>
                     <option value="MA">Maranhão</option>
                     <option value="MT">Mato Grosso</option>
                     <option value="MS">Mato Grosso do Sul</option>
@@ -111,7 +112,6 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
                     <option value="SP">São Paulo</option>
                     <option value="SE">Sergipe</option>
                     <option value="TO">Tocantins</option>
-                    <option value="EX">Estrangeiro</option>
                   </select>
                   {meta.error && meta.touched && <span>Estado {meta.error}</span>}
                 </div>
