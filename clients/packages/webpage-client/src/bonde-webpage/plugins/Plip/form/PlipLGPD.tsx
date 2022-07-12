@@ -22,7 +22,7 @@ const Text = styled.span<Props>`
 export default ({ color }: any) => {
   return (
     <Text color={color}>
-      {`Ao inserir seus dados, você concorda em ter seus dados compartilhados com os organizadores dessa página e aceita receber emails de atualização, conforme descrito nos `}
+      {`Ao inserir seus dados, você concorda em ter seus dados compartilhados com os organizadores dessa página e aceita receber comunicações de atualização, conforme descrito nos `}
       <a
         href='/static/termos-de-uso-plip.pdf'
         title={'Termos de uso'}
