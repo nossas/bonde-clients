@@ -26,6 +26,7 @@ export default async function fetchSignatures(req: NextApiRequest, res: NextApiR
   if (method === "GET") {
     const signaturesTotal = await client.query({
       query,
+      fetchPolicy: "no-cache"
     })
     return res.status(200).json({
       data: signaturesTotal
