@@ -83,7 +83,7 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
                 <div>
                   <label>Estado* </label>
                   <select {...input}>
-                    <option>Selecione o Estado</option>
+                    <option value="" disabled selected>Selecione o Estado</option>
                     <option value="EX">Estrangeiro</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
@@ -134,7 +134,7 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
                 <div>
                   <label>Quantidade de Assinaturas* </label>
                   <select {...input}>
-                    <option>selecione a quantidade de assinaturas</option>
+                    <option value="" disabled selected>selecione a quantidade de assinaturas</option>
                     <option value="10">10</option>
                     <option value="20">20</option>
                     <option value="50">50</option>
@@ -151,7 +151,7 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
                 <div>
                   <label>Com qual raça/cor você se identifica?</label>
                   <select {...input}>
-                    <option>selecione entre as opções</option>
+                    <option value="" disabled selected>selecione entre as opções</option>
                     <option value="amarela">Amarela</option>
                     <option value="branca">Branca</option>
                     <option value="indigena">Indígena</option>
@@ -166,7 +166,7 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
                 <div>
                   <label>Você é...</label>
                   <select {...input}>
-                    <option>selecione entre as opções</option>
+                    <option value="" disabled selected>selecione entre as opções</option>
                     <option value="mulher-cisgenero">Mulher cisgênero</option>
                     <option value="mulher-transgenero">Mulher transgênero</option>
                     <option value="homem-cisgenero">Homem cisgênero</option>
