@@ -19,8 +19,8 @@ const ExpectedSignaturesFilter: React.FC<Props> = ({ onChange }) => {
           { value: 20, label: '20' },
           { value: 50, label: '50' },
           { value: 100, label: '100' },
-          { value: 100, label: '500' },
-          { value: 100, label: '1000' },
+          { value: 500, label: '500' },
+          { value: 1000, label: '1000' },
         ]}
         onChange={(item: any) => {
           onChange(item.value);
