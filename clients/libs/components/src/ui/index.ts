@@ -11,7 +11,6 @@ export { default as BModal } from './content/Modal';
 export { default as CleanButton } from './content/CleanButton';
 export { default as BTable } from './content/Table';
 export { default as Pagination } from './content/Pagination';
-export { default as SubHeader } from './content/SubHeader';
 export { default as Card } from './content/Card';
 export { Message } from './content/Tooltip';
 

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useHistory } from 'react-router-dom';
-import {   Empty, CommunityMenu } from 'bonde-components';
+import { Empty, CommunityMenu } from 'bonde-components';
 import {
   Button,
   Flex,

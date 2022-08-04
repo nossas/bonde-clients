@@ -168,7 +168,7 @@ const variantLink: SystemStyleFunction = (props) => {
     height: "auto",
     lineHeight: "normal",
     verticalAlign: "baseline",
-    color: mode(`white`, `white`)(props),
+    color: mode(`black`, `white`)(props),
     _hover: {
       textDecoration: "underline",
       _disabled: {
