@@ -1,19 +1,26 @@
 import React from "react";
-import {
-  Navigation,
-  Tab,
-  Header as Heading,
-  SubHeader,
-} from "bonde-components";
+import { Tab } from "bonde-components";
+import { Flex, Heading, Stack } from "bonde-components/chakra"
 import { Link, useRouteMatch } from "react-router-dom";
 import { useFilterDispatch } from "../services/FilterProvider"
 
 const Header = (): React.ReactElement => {
   const dispatch = useFilterDispatch()
   return (
-    <SubHeader>
-      <Heading.H3>Redes</Heading.H3>
-      <Navigation>
+    <Stack
+      bgColor="black"
+      padding="0 60px"
+      spacing={4}
+    >
+      <Heading
+        as="h2"
+        size="xl"
+        color="white"
+      >
+        Redes
+      </Heading>
+
+      <Flex>
         <Link to="/">
           <Tab
             active={
@@ -26,11 +33,11 @@ const Header = (): React.ReactElement => {
             Início
           </Tab>
         </Link>
-        <Link 
-          to="/pessoas" 
-          onClick={() => dispatch({ 
-            type: "order_by", 
-            value: [{ created_at: 'asc'}]
+        <Link
+          to="/pessoas"
+          onClick={() => dispatch({
+            type: "order_by",
+            value: [{ created_at: 'asc' }]
           })}
         >
           <Tab
@@ -68,8 +75,8 @@ const Header = (): React.ReactElement => {
             Configurações
           </Tab>
         </Link>
-      </Navigation>
-    </SubHeader>
+      </Flex>
+    </Stack>
   )
 }
 
