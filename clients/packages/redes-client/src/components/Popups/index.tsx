@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Loading, Icon } from 'bonde-components';
-import { Modal, ModalOverlay, Flex, Stack, Button } from "bonde-components/chakra";
+import { Modal, ModalOverlay, Flex, Stack, Button, Link as CLink, ModalCloseButton } from "bonde-components/chakra";
 
 import { Default, Error } from ".";
 import { useFilterDispatch } from "../../services/FilterProvider";
@@ -118,8 +118,9 @@ export default function Popups({
   };
 
   return (
-    <Modal isCentered isOpen={isOpen} onClose={() => setModal(false)}>
+    <Modal isCentered isOpen={isOpen} onClose={() => setModal(false)} size="xs">
       <ModalOverlay />
+
       {isOpen && !error && !data && !loading && (
         <Default
           title="Confirma?"
@@ -142,49 +143,58 @@ export default function Popups({
           title="Eba!"
           text={`Uma relação foi criada entre ${match.recipient.firstName} e ${match.volunteer.firstName}.`}
           MainBtn={
-            <Link
-              to={"/matches"}
-              onClick={() =>
-                dispatch({
-                  type: "relationships",
-                  value: {
-                    query: `${match.recipient.email}`,
-                    agent: {
-                      label: `${user.firstName} ${user.lastName || ""}`,
-                      value: user.id,
-                    },
-                  },
-                })
-              }
-              style={{ textDecoration: "none" }}
-            >
-              <Button variant="link">Ver relação</Button>
-            </Link>
+            <>
+              <ModalCloseButton size='sm' mt={3} />
+
+            </>
+
           }
           SecondaryBtn={
-            <Stack spacing={4}>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={customLink.volunteerUrl}
+            <Stack justifyContent="center">
+              <Stack spacing={4}>
+                <CLink
+
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={customLink.volunteerUrl}
+                  style={{ textDecoration: "none" }}
+
+                >
+                  <Button width={260}>
+                    <Icon name="Whatsapp" size="small" color="white" />
+                    {match.volunteer.firstName}
+                  </Button>
+                </CLink>
+                <CLink
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={customLink.recipientUrl}
+                  style={{ textDecoration: "none" }}
+                >
+                  <Button width={260}>
+                    <Icon name="Whatsapp" size="small" color="white" boxSize={4} />
+                    {match.recipient.firstName}
+                  </Button>
+                </CLink>
+              </Stack>
+              <Link
+                to={"/matches"}
+                onClick={() =>
+                  dispatch({
+                    type: "relationships",
+                    value: {
+                      query: `${match.recipient.email}`,
+                      agent: {
+                        label: `${user.firstName} ${user.lastName || ""}`,
+                        value: user.id,
+                      },
+                    },
+                  })
+                }
                 style={{ textDecoration: "none" }}
               >
-                <Button>
-                  <Icon name="Whatsapp" size="small" />
-                  {match.volunteer.firstName}
-                </Button>
-              </a>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={customLink.recipientUrl}
-                style={{ textDecoration: "none" }}
-              >
-                <Button>
-                  <Icon name="Whatsapp" size="small" />
-                  {match.recipient.firstName}
-                </Button>
-              </a>
+                <Button variant="link">Ver relação</Button>
+              </Link>
             </Stack>
           }
         />

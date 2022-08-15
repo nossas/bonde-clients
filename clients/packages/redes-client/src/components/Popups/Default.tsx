@@ -21,7 +21,7 @@ export default function Default({
   return (
     <ModalContent>
       <ModalHeader>{title}</ModalHeader>
-      <ModalBody>
+      <ModalBody mt={-5}>
         <Text>{text}</Text>
       </ModalBody>
       <ModalFooter justifyContent="space-between">
