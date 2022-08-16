@@ -162,6 +162,26 @@ const variantGhost: SystemStyleFunction = props => {
   };
 };
 
+const variantLink: SystemStyleFunction = (props) => {
+  return {
+    padding: 0,
+    height: "auto",
+    lineHeight: "normal",
+    verticalAlign: "baseline",
+    color: mode(`black`, `white`)(props),
+    _hover: {
+      textDecoration: "underline",
+      _disabled: {
+        textDecoration: "none",
+      },
+    },
+    _active: {
+      color: mode(`pink.200`, `pink.200`)(props),
+    },
+  }
+}
+
+
 const variantSolid: SystemStyleFunction = ({ colorScheme: c }): any => {
   const _disabled = {
     bg: 'gray.100',
@@ -200,6 +220,7 @@ export default {
     outline: variantOutline,
     ghost: variantGhost,
     solid: variantSolid,
+    link: variantLink,
     tag: ({ colorScheme }: StyleFunctionProps): any => ({
       bg: `${colorScheme}.100`,
       borderColor: 'trasparent',
