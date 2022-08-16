@@ -11,6 +11,13 @@ query {
       }
     }
   }
+  plips_aggregate(where: {widget_id: {_eq: 70801}}, distinct_on: unique_identifier) {
+    aggregate {
+      sum {
+        users: id
+      }
+    }
+  }
   plip_signatures_aggregate(where: {widget_id: {_eq: 70801}}) {
      aggregate {
       sum {
