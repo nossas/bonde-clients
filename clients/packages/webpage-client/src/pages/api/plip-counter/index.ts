@@ -23,11 +23,9 @@ query {
 
 const activistsQuery = gql`
 query {
-  plips_aggregate(where: {widget_id: {_eq: 70801}}, distinct_on: unique_identifier) {
+  plips_aggregate(distinct_on: unique_identifier, where: {widget_id: {_eq: 70801}, created_at: {_gt: "2022-05-11"}}) {
     aggregate {
-      sum {
-        id
-      }
+      count(columns: id, distinct: true)
     }
   }
 }
