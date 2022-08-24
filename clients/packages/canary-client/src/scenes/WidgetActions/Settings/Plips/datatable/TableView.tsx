@@ -55,7 +55,7 @@ const PlipsFormTable: React.FC<any> = ({ widgetId }) => {
         color="gray.400"
         textTransform="uppercase"
       >
-        Todas as fichas ({total})
+        Fichas geradas ({total})
       </Heading>
       <Flex direction='row' justify="space-between" align='end'>
         <Stack direction='row' spacing={4}>
@@ -81,25 +81,25 @@ const PlipsFormTable: React.FC<any> = ({ widgetId }) => {
         {loading
           ? <Skeleton width="100%" h="530px" />
           : (
-          <>
-            <Thead>
-              <Tr>
-                <Th>Nome</Th>
-                <Th>E-mail</Th>
-                <Th>Whatsapp</Th>
-                <Th>Estado</Th>
-                <Th>Assinaturas</Th>
-                <Th>Data da inscrição</Th>
-                <Th>Status</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {data?.plips
-                // eslint-disable-next-line react/display-name
-                .map((pf: any) => <Row data={pf} />)}
-            </Tbody>
-          </>
-        )}
+            <>
+              <Thead>
+                <Tr>
+                  <Th>Nome</Th>
+                  <Th>E-mail</Th>
+                  <Th>Whatsapp</Th>
+                  <Th>Estado</Th>
+                  <Th>Assinaturas</Th>
+                  <Th>Data da inscrição</Th>
+                  <Th>Status</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {data?.plips
+                  // eslint-disable-next-line react/display-name
+                  .map((pf: any) => <Row data={pf} />)}
+              </Tbody>
+            </>
+          )}
       </Table>
     </Stack>
   );
