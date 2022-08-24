@@ -2,7 +2,7 @@ import React, { createContext, useContext, useState } from 'react';
 import { gql, useQuery } from "bonde-core-tools";
 
 export const QUERY = gql`
-  query ($where: plips_bool_exp, $limit: Int!, $offset: Int!) {
+  query ($where: plips_bool_exp, $where2: plip_signatures_bool_exp, $limit: Int!, $offset: Int!) {
     plips(
       where: $where,
       limit: $limit,
@@ -17,10 +17,20 @@ export const QUERY = gql`
       created_at
       status
     }
-
     plips_aggregate(where: $where) {
       aggregate {
         count
+      }
+    }
+    plip_signatures(where: $where2, distinct_on: unique_identifier) {
+      plips {
+        expected_signatures
+        name: form_data(path: "name")
+        email: form_data(path: "email")
+        whatsapp: form_data(path: "whatsapp")
+        state
+        confirmed_signatures
+        created_at
       }
     }
   }
@@ -84,7 +94,7 @@ export interface QueryFilters extends
   SignatureFilters,
   EmailFilters {
 
-  }
+}
 
 // PlipForm and PlipResult resolves only plips query
 export interface PlipForm {
@@ -140,7 +150,7 @@ export const createVariables = ({
   email
 }: VariablesOpts): any => {
   // Pagination default
-  const variables: any = limit !== undefined  && pageIndex !== undefined ? {
+  const variables: any = limit !== undefined && pageIndex !== undefined ? {
     offset: limit * pageIndex,
     limit
   } : {}
@@ -166,7 +176,7 @@ export const createVariables = ({
   if (states.length > 0) {
     where['_and'].push({
       '_or': states.map((state) => ({
-        'state': { '_eq': state } 
+        'state': { '_eq': state }
       }))
     })
   }
@@ -176,7 +186,7 @@ export const createVariables = ({
     where['expected_signatures'] = { _eq: signatures };
   }
 
-  return { ...variables, where };
+  return { ...variables, where, where2: where };
 }
 
 interface Props {
@@ -302,7 +312,7 @@ export interface FieldFilters extends
   SignatureFilters,
   EmailFilters {
 
-  }
+}
 
 export const useQueryFiltersFields = (): FieldFilters => {
   const {
