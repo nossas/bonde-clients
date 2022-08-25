@@ -26,17 +26,18 @@ import QueryFiltersProvider, {
 
 const Row: React.FC<any> = ({ activist }) => (
   <Tr>
-    <Td>{activist.name}</Td>
+    <Td fontWeight="bold">{activist.name}</Td>
     <Td>{activist.email}</Td>
     <Td>{activist.state}</Td>
-    <Td>{activist.confirmed_signatures || 0}</Td>
-    <Td>{new Date(activist.created_at).toLocaleDateString()}</Td>
+    <Td isNumeric>{activist.expected_signatures || 0}</Td>
+    <Td isNumeric>{activist.confirmed_signatures || 0}</Td>
+    <Td >{new Date(activist.created_at).toLocaleDateString()}</Td>
     <Td>{activist.whatsapp}</Td>
   </Tr>
 );
 
 const SignaturesTable: React.FC<any> = ({ widgetId }) => {
-  const { data, total, loading } = useQueryFiltersData();
+  const { data, confirmedTotal, loading } = useQueryFiltersData();
   const { pages, pageIndex, onChangePage, onNextPage, onPreviousPage } = useQueryFiltersPage();
   const { onChangeLimit } = useQueryFiltersLimit();
   const { onChangeSignatures, onChangeStates } = useQueryFiltersFields();
@@ -50,7 +51,7 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
         color="gray.400"
         textTransform="uppercase"
       >
-        Fichas entregues ({total})
+        Fichas entregues ({confirmedTotal})
       </Heading>
       <Flex direction='row' justify="space-between" align='end'>
         <Stack direction='row' spacing={4}>
@@ -60,7 +61,7 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
         </Stack>
         <ExportCSV widgetId={widgetId} fileName="relatorio-plips" />
       </Flex>
-      <Table variant="simple" bg="white">
+      <Table variant="simple" bg="white" maxH="500px">
         <TableCaption>
           <Pagination
             loading={loading}
@@ -81,7 +82,8 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
                   <Th>Nome</Th>
                   <Th>E-mail</Th>
                   <Th>Estado</Th>
-                  <Th>Assinaturas</Th>
+                  <Th isNumeric>Assinaturas esperadas</Th>
+                  <Th isNumeric>Assinaturas entregues</Th>
                   <Th>Data Registro</Th>
                   <Th>Whatsapp</Th>
                 </Tr>

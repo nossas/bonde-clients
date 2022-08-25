@@ -22,8 +22,8 @@ export const QUERY = gql`
         count
       }
     }
-    plip_signatures(where: $where2, distinct_on: unique_identifier) {
-      plips {
+    plip_signatures(where: $where2, order_by: {created_at: desc}, limit: $limit, offset: $offset) {
+      plips(distinct_on: unique_identifier) {
         expected_signatures
         name: form_data(path: "name")
         email: form_data(path: "email")
@@ -31,6 +31,11 @@ export const QUERY = gql`
         state
         confirmed_signatures
         created_at
+      }
+    }
+    plip_signatures_aggregate(where: $where2) {
+      aggregate {
+        count
       }
     }
   }
@@ -43,6 +48,7 @@ export interface DataQuery {
   error?: any;
   // total is aggregate count without limit or offset
   total: number;
+  confirmedTotal: number;
 }
 
 export interface LimitFilters {
@@ -115,6 +121,7 @@ const dummyf = () => {
 const context = createContext<QueryFilters>({
   loading: true,
   total: 0,
+  confirmedTotal: 0,
   pages: 0,
   pageIndex: 0,
   onChangePage: dummyf,
@@ -210,7 +217,8 @@ const QueryFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
   });
 
   const total = data?.plips_aggregate.aggregate.count || 0;
-  const pages = Math.round(total / limit) - 1;
+  const confirmedTotal = data?.plip_signatures_aggregate.aggregate.count || 0;
+  const pages = Math.round(total || confirmedTotal / limit) - 1;
 
   return (
     <context.Provider
@@ -219,6 +227,7 @@ const QueryFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
         loading,
         error,
         total,
+        confirmedTotal,
         pageIndex,
         pages: pages === -1 ? 0 : pages,
         onChangePage: (i: number) => {
@@ -229,7 +238,7 @@ const QueryFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
         },
         onNextPage: () => {
           const newPageIndex = pageIndex + 1;
-          if (newPageIndex <= total) {
+          if (newPageIndex <= total || confirmedTotal) {
             refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, status, states, signatures, email }));
             setPageIndex(newPageIndex)
           }
@@ -289,9 +298,9 @@ const QueryFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
 export default QueryFiltersProvider;
 
 export const useQueryFiltersData = (): DataQuery => {
-  const { data, loading, error, total } = useContext(context);
+  const { data, loading, error, total, confirmedTotal } = useContext(context);
 
-  return { data, loading, error, total };
+  return { data, loading, error, total, confirmedTotal };
 }
 
 export const useQueryFiltersPage = (): PageFilters => {
