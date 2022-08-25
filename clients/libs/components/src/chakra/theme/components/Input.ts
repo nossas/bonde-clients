@@ -37,7 +37,7 @@ export default {
         },
       },
     }),
-    outline: ({ colorScheme }: SystemStyleObject): SystemStyleObject => ({
+    outline: ({ colorScheme }: Props): SystemStyleObject => ({
       field: {
         bg: 'white',
         borderColor: 'gray.200',
