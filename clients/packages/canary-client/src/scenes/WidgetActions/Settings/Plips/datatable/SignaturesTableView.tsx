@@ -24,6 +24,17 @@ import QueryFiltersProvider, {
   useQueryFiltersFields
 } from './QueryFiltersProvider';
 
+const Row: React.FC<any> = ({ activist }) => (
+  <Tr>
+    <Td>{activist.name}</Td>
+    <Td>{activist.email}</Td>
+    <Td>{activist.state}</Td>
+    <Td>{activist.confirmed_signatures || 0}</Td>
+    <Td>{new Date(activist.created_at).toLocaleDateString()}</Td>
+    <Td>{activist.whatsapp}</Td>
+  </Tr>
+);
+
 const SignaturesTable: React.FC<any> = ({ widgetId }) => {
   const { data, total, loading } = useQueryFiltersData();
   const { pages, pageIndex, onChangePage, onNextPage, onPreviousPage } = useQueryFiltersPage();
@@ -76,14 +87,7 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
                 </Tr>
               </Thead>
               <Tbody>
-                <Tr>
-                  <Td>{data?.plip_signatures.name}</Td>
-                  <Td>{data?.plip_signatures.email}</Td>
-                  <Td>{data?.plip_signatures.state}</Td>
-                  <Td>{data?.plip_signatures.confirmed_signatures}</Td>
-                  <Td>{data?.plip_signatures.created_at}</Td>
-                  <Td>{data?.plip_signatures.whatsapp}</Td>
-                </Tr>
+                {data?.plip_signatures.map((pf: any) => pf.plips?.map((pf2: any) => <Row activist={pf2} />))}
               </Tbody>
             </>
           )}
