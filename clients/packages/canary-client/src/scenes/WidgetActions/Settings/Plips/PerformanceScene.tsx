@@ -164,13 +164,39 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
           </GridItem>
         </Grid>
         {!isMobile && (
-          <Tabs>
-            <TabList>
-              <Tab>
-                Fichas entregues
+          <Tabs >
+            <TabList style={{ fontWeight: 800 }} >
+              <Tab
+                fontSize="sm"
+                _focus={{
+                  boxShadow: 'none',
+                }}
+                _selected={{
+                  color: "pink.200",
+                  borderBottom: "2px solid",
+                  borderColor: "pink.200",
+                  borderBottomHeight: "1px"
+                }}
+                _hover={{
+                  color: "gray.400"
+                }}>
+                FICHAS ENTREGUES
               </Tab>
-              <Tab>
-                Inscrições
+              <Tab
+                fontSize="sm"
+                _focus={{
+                  boxShadow: 'none',
+                }}
+                _selected={{
+                  color: "pink.200",
+                  borderBottom: "2px solid",
+                  borderColor: "pink.200",
+                  borderBottomHeight: "2px"
+                }}
+                _hover={{
+                  color: "gray.400"
+                }}>
+                INSCRIÇÕES
               </Tab>
             </TabList>
 
