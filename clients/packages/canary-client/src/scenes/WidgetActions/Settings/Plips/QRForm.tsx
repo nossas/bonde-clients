@@ -128,7 +128,8 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
       onSubmit={handleSubmit}
       initialValues={{
         unique_identifier: code,
-        confirmed_signatures: plipForm?.expected_signatures
+        confirmed_signatures: plipForm?.expected_signatures,
+        state: plipForm?.state
       }}
     >
       <Wizard.Page>
