@@ -2,7 +2,7 @@ import React from 'react';
 import { FormControl } from 'bonde-components/chakra';
 import Select from "../components/ChakraReactSelect";
 
-const STATES = [
+export const STATES = [
   { value: "AC", label: "AC" },
   { value: "AL", label: "AL" },
   { value: "AM", label: "AM" },

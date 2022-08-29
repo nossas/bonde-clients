@@ -1,10 +1,11 @@
 import React, { useState, useContext } from "react";
 import { Link, useParams } from "react-router-dom";
-import { InputField } from "bonde-components";
+import { InputField, SelectField } from "bonde-components";
 import { Button, Flex, Heading, Text, Stack } from "bonde-components/chakra";
 import { useMutation, useQuery, gql, Context as SessionContext } from "bonde-core-tools";
 
 import type { Widget } from "../../FetchWidgets";
+import { STATES } from "./datatable/StatesFilter";
 import Wizard from "./components/Wizard";
 import useQueryParams from "./useQueryParams";
 
@@ -39,6 +40,7 @@ const INSERT_PLIP_SIGNATURE_FORM = gql`
       id
       created_at
       confirmed_signatures
+      state
     }
   }
 `;
@@ -58,10 +60,11 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
   if (loading) return <p>Carregando formulário...</p>;
   if (error) return <p>Failed!</p>
 
-  const handleSubmit = ({ unique_identifier, confirmed_signatures }: any) => {
+  const handleSubmit = ({ unique_identifier, confirmed_signatures, state }: any) => {
     const input: any = {
       unique_identifier,
       confirmed_signatures,
+      state,
       widget_id: widget.id
     }
 
@@ -152,6 +155,13 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
             name="confirmed_signatures"
             label="Total de assinaturas"
           />
+          <SelectField
+            name="state"
+            label="Estado"
+          >
+            {STATES.map(({ value, label }) =>
+              <option key={value} value={value}>{label}</option>)}
+          </SelectField>
         </Stack>
       </Wizard.Page>
     </Wizard>
