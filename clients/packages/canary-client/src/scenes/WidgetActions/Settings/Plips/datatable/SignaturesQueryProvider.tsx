@@ -2,33 +2,29 @@ import React, { createContext, useContext, useState } from 'react';
 import { gql, useQuery } from "bonde-core-tools";
 
 export const QUERY = gql`
-  query ($where: plip_signatures_bool_exp, $limit: Int!, $offset: Int!) {
-    plip_signatures(where: $where, order_by: {created_at: desc}, limit: $limit, offset: $offset) {
-      plips(distinct_on: unique_identifier) {
-        expected_signatures
-        name: form_data(path: "name")
-        email: form_data(path: "email")
-        whatsapp: form_data(path: "whatsapp")
-        state
-        confirmed_signatures
-        created_at
-      }
-    }
-    plip_signatures_aggregate(where: $where) {
-      aggregate {
-        count
-      }
+  query ($where: plips_bool_exp, $limit: Int!, $offset: Int!) {
+    plips(
+      where: $where,
+      limit: $limit,
+      offset: $offset
+    ) {
+      name: form_data(path: "name")
+      email: form_data(path: "email")
+      whatsapp: form_data(path: "whatsapp")
+      state
+      expected_signatures
+      confirmed_signatures
+      created_at
+      status
     }
   }
 `;
 
 export interface DataQuery {
-  // T generic type is query result like { plips: PlipForm[] }
   data?: any;
   loading: boolean;
   error?: any;
-  // total is aggregate count without limit or offset
-  confirmedTotal: number;
+
 }
 
 export interface LimitFilters {
@@ -38,10 +34,8 @@ export interface LimitFilters {
 
 // Page filters
 export interface PageFilters {
-  pages: number;
   pageIndex: number;
   onChangePage: (i: number) => void;
-  onNextPage: () => void;
   onPreviousPage: () => void;
 }
 
@@ -99,11 +93,8 @@ const dummyf = () => {
 
 const context = createContext<QueryFilters>({
   loading: true,
-  confirmedTotal: 0,
-  pages: 0,
   pageIndex: 0,
   onChangePage: dummyf,
-  onNextPage: dummyf,
   onPreviousPage: dummyf,
   limit: 0,
   onChangeLimit: dummyf,
@@ -181,8 +172,6 @@ const QueryFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
     variables: createVariables({ widgetId, limit, pageIndex, states, signatures, email })
   });
 
-  const confirmedTotal = data?.plip_signatures_aggregate.aggregate.count || 0;
-  const pages = Math.round(confirmedTotal / limit) - 1;
 
   return (
     <context.Provider
@@ -190,20 +179,11 @@ const QueryFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
         data,
         loading,
         error,
-        confirmedTotal,
         pageIndex,
-        pages: pages === -1 ? 0 : pages,
         onChangePage: (i: number) => {
           if (i !== pageIndex) {
             refetch(createVariables({ widgetId, limit, pageIndex: i, states, signatures, email }));
             setPageIndex(i)
-          }
-        },
-        onNextPage: () => {
-          const newPageIndex = pageIndex + 1;
-          if (newPageIndex <= confirmedTotal) {
-            refetch(createVariables({ widgetId, limit, pageIndex: newPageIndex, states, signatures, email }));
-            setPageIndex(newPageIndex)
           }
         },
         onPreviousPage: () => {
@@ -253,15 +233,15 @@ const QueryFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
 export default QueryFiltersProvider;
 
 export const useQueryFiltersData = (): DataQuery => {
-  const { data, loading, error, confirmedTotal } = useContext(context);
+  const { data, loading, error } = useContext(context);
 
-  return { data, loading, error, confirmedTotal };
+  return { data, loading, error };
 }
 
 export const useQueryFiltersPage = (): PageFilters => {
-  const { pages, pageIndex, onChangePage, onNextPage, onPreviousPage } = useContext(context);
+  const { pageIndex, onChangePage, onPreviousPage } = useContext(context);
 
-  return { pages, pageIndex, onChangePage, onNextPage, onPreviousPage };
+  return { pageIndex, onChangePage, onPreviousPage };
 }
 
 export const useQueryFiltersLimit = (): LimitFilters => {

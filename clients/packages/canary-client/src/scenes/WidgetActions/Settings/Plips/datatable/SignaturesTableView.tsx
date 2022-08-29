@@ -22,7 +22,12 @@ import QueryFiltersProvider, {
   useQueryFiltersLimit,
   useQueryFiltersPage,
   useQueryFiltersFields
-} from './QueryFiltersProvider';
+} from './SignaturesQueryProvider';
+
+import BCreatedAtFilterProvider, {
+  useQueryBFiltersData,
+  useQueryBFiltersPage
+} from './CreatedAtProvider';
 
 const Row: React.FC<any> = ({ activist }) => (
   <Tr>
@@ -36,9 +41,17 @@ const Row: React.FC<any> = ({ activist }) => (
   </Tr>
 );
 
+const CreatedAtRow: React.FC<any> = ({ activist }) => (
+  <Tr>
+    <Td >{new Date(activist.created_at).toLocaleDateString()}</Td>
+  </Tr>
+);
+
 const SignaturesTable: React.FC<any> = ({ widgetId }) => {
-  const { data, confirmedTotal, loading } = useQueryFiltersData();
-  const { pages, pageIndex, onChangePage, onNextPage, onPreviousPage } = useQueryFiltersPage();
+  const { data, loading } = useQueryFiltersData();
+  const { data2, confirmedTotal } = useQueryBFiltersData();
+  const { pageIndex, onChangePage, onPreviousPage } = useQueryFiltersPage();
+  const { pages, onNextPage } = useQueryBFiltersPage();
   const { onChangeLimit } = useQueryFiltersLimit();
   const { onChangeSignatures, onChangeStates } = useQueryFiltersFields();
 
@@ -89,7 +102,8 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
                 </Tr>
               </Thead>
               <Tbody>
-                {data?.plip_signatures.map((pf: any) => pf.plips?.map((pf2: any) => <Row activist={pf2} />))}
+                {data?.plips.map((pf: any) => <Row activist={pf} />)}
+                {data2?.plip_signatures.map((pf: any) => pf.plips?.map((pf2: any) => <CreatedAtRow activist={pf2} />))}
               </Tbody>
             </>
           )}
@@ -101,9 +115,11 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
 const SignaturesTableView: React.FC<{ widgetId: number }> = ({ widgetId }) => {
   return (
     <QueryFiltersProvider widgetId={widgetId}>
+      <BCreatedAtFilterProvider widgetId={widgetId}>
 
-      <SignaturesTable widgetId={widgetId} />
+        <SignaturesTable widgetId={widgetId} />
 
+      </BCreatedAtFilterProvider>
     </QueryFiltersProvider>
   )
 };
