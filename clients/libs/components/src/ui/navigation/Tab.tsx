@@ -15,18 +15,20 @@ const Tab: React.FC<TabProps> = ({ children, active, onClick }) => {
     color: defaultColor,
   };
 
-  if (!active) {
-    defaultStylesProps.color = 'white';
+  if (!active && colorMode === 'light') {
+    defaultStylesProps.color = 'black';
     defaultStylesProps._hover = {
-      color: 'gray.200'
+      color: 'gray.200',
     };
   }
-  if (colorMode === 'dark' && active) {
-    defaultStylesProps.borderBottomWidth = '2px';
-    defaultStylesProps.borderBottomStyle = 'solid';
-    defaultStylesProps.borderBottomColor = 'pink.200';
-    defaultStylesProps.color = 'white'
+
+  if (!active && colorMode === 'dark') {
+    defaultStylesProps.color = 'white';
+    defaultStylesProps._hover = {
+      color: 'gray.200',
+    };
   }
+
   if (active) {
     defaultStylesProps.color = 'pink.200';
     defaultStylesProps._hover = {

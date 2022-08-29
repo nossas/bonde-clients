@@ -68,7 +68,7 @@ const Settings: React.FC<Props> = ({ widgets }) => {
     <Container
       title={widget.block.mobilization.name}
       navigation={({ push, is }: NavigationArgs) => (
-        <DarkMode>
+        <>
           {!isMobile ? (
             <Tab
               onClick={() => {
@@ -85,14 +85,13 @@ const Settings: React.FC<Props> = ({ widgets }) => {
               {t('settings.navigation.edit')}
             </Tab>
           ) : null}
-
           <Tab
             active={is(/\/widgets\/\d+\/settings\/*/)}
             onClick={() => push(`settings`)}
           >
             {t('settings.navigation.settings')}
           </Tab>
-        </DarkMode>
+        </>
       )}
     >
       {/* Corpo */}
