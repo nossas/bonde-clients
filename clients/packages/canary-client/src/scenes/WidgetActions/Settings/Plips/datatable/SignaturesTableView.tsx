@@ -17,41 +17,55 @@ import ExpectedSignaturesFilter from './ExpectedSignaturesFilter';
 import ExportCSV from './ExportCSV';
 import Pagination from './Pagination';
 import StateFilter from './StatesFilter';
-import QueryFiltersProvider, {
+import SignaturesFiltersProvider, {
   useQueryFiltersData,
   useQueryFiltersLimit,
   useQueryFiltersPage,
   useQueryFiltersFields
 } from './SignaturesQueryProvider';
 
-import BCreatedAtFilterProvider, {
-  useQueryBFiltersData,
-  useQueryBFiltersPage
-} from './CreatedAtProvider';
+interface PlipSignature {
+  confirmed_signatures: number
+  created_at: string
 
-const Row: React.FC<any> = ({ activist }) => (
-  <Tr>
-    <Td fontWeight="bold">{activist.name}</Td>
-    <Td>{activist.email}</Td>
-    <Td>{activist.state}</Td>
-    <Td isNumeric>{activist.expected_signatures || 0}</Td>
-    <Td isNumeric>{activist.confirmed_signatures || 0}</Td>
-    <Td >{new Date(activist.created_at).toLocaleDateString()}</Td>
-    <Td>{activist.whatsapp}</Td>
-  </Tr>
-);
+  plips: {
+    name: string
+    email: string
+    whatsapp: string
+    expected_signatures: number
+    state: string
+    status: string
+  }[]
+}
 
-const CreatedAtRow: React.FC<any> = ({ activist }) => (
-  <Tr>
-    <Td >{new Date(activist.created_at).toLocaleDateString()}</Td>
-  </Tr>
-);
+const Row: React.FC<{ plipSignature: PlipSignature }> = ({ plipSignature }) => {
+  // TODO: verificar assinaturas / fichas com mais de 1 registro
+  const plipForm = plipSignature.plips[0]
+
+  return (
+    <Tr>
+      <Td fontWeight="bold">{plipForm.name}</Td>
+      <Td>{plipForm.email}</Td>
+      <Td>{plipForm.state}</Td>
+      <Td isNumeric>{plipForm.expected_signatures || 0}</Td>
+      <Td isNumeric>{plipSignature.confirmed_signatures || 0}</Td>
+      <Td >{new Date(plipSignature.created_at).toLocaleDateString()}</Td>
+      <Td>{plipForm.whatsapp}</Td>
+    </Tr>
+  );
+}
+
+// const CreatedAtRow: React.FC<any> = ({ activist }) => (
+//   <Tr>
+//     <Td >{new Date(activist.created_at).toLocaleDateString()}</Td>
+//   </Tr>
+// );
 
 const SignaturesTable: React.FC<any> = ({ widgetId }) => {
   const { data, loading } = useQueryFiltersData();
-  const { data2, confirmedTotal } = useQueryBFiltersData();
-  const { pageIndex, onChangePage, onPreviousPage } = useQueryFiltersPage();
-  const { pages, onNextPage } = useQueryBFiltersPage();
+  // const { data2, confirmedTotal } = useQueryBFiltersData();
+  const { pageIndex, onChangePage, onPreviousPage, onNextPage, pages } = useQueryFiltersPage();
+  // const { pages, onNextPage } = useQueryBFiltersPage();
   const { onChangeLimit } = useQueryFiltersLimit();
   const { onChangeSignatures, onChangeStates } = useQueryFiltersFields();
 
@@ -64,7 +78,7 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
         color="gray.400"
         textTransform="uppercase"
       >
-        Fichas entregues ({confirmedTotal})
+        Fichas entregues (??)
       </Heading>
       <Flex direction='row' justify="space-between" align='end'>
         <Stack direction='row' spacing={4}>
@@ -94,16 +108,15 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
                 <Tr>
                   <Th>Nome</Th>
                   <Th>E-mail</Th>
-                  <Th>Estado</Th>
-                  <Th isNumeric>Assinaturas esperadas</Th>
+                  <Th>Estado (??)</Th>
+                  <Th isNumeric>Assinaturas esperadas (??)</Th>
                   <Th isNumeric>Assinaturas entregues</Th>
                   <Th>Data Registro</Th>
                   <Th>Whatsapp</Th>
                 </Tr>
               </Thead>
               <Tbody>
-                {data?.plips.map((pf: any) => <Row activist={pf} />)}
-                {data2?.plip_signatures.map((pf: any) => pf.plips?.map((pf2: any) => <CreatedAtRow activist={pf2} />))}
+                {data?.plip_signatures.map((ps: any) => <Row plipSignature={ps} />)}
               </Tbody>
             </>
           )}
@@ -114,13 +127,9 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
 
 const SignaturesTableView: React.FC<{ widgetId: number }> = ({ widgetId }) => {
   return (
-    <QueryFiltersProvider widgetId={widgetId}>
-      <BCreatedAtFilterProvider widgetId={widgetId}>
-
-        <SignaturesTable widgetId={widgetId} />
-
-      </BCreatedAtFilterProvider>
-    </QueryFiltersProvider>
+    <SignaturesFiltersProvider widgetId={widgetId}>
+      <SignaturesTable widgetId={widgetId} />
+    </SignaturesFiltersProvider>
   )
 };
 
