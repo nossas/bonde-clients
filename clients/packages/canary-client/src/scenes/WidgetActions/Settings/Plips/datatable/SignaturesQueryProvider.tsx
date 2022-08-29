@@ -6,8 +6,7 @@ export const QUERY = gql`
     plip_signatures(
       where: $where,
       limit: $limit,
-      offset: $offset,
-      distinct_on: [unique_identifier]
+      offset: $offset
     ) {
       confirmed_signatures
       created_at
@@ -190,6 +189,10 @@ const SignaturesFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
 
   const total = data?.plip_signatures_aggregate.aggregate.count || 0;
   const pages = Math.round(total / limit) - 1;
+  console.log("TOTAL ->", total)
+  console.log("LIMIT ->", limit)
+  console.log("PAGES ->", pages)
+
 
   return (
     <context.Provider

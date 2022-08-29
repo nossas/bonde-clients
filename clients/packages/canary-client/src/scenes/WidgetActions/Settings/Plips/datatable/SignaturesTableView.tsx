@@ -64,7 +64,7 @@ const Row: React.FC<{ plipSignature: PlipSignature }> = ({ plipSignature }) => {
 const SignaturesTable: React.FC<any> = ({ widgetId }) => {
   const { data, loading } = useQueryFiltersData();
   // const { data2, confirmedTotal } = useQueryBFiltersData();
-  const { pageIndex, onChangePage, onPreviousPage, onNextPage, pages } = useQueryFiltersPage();
+  const { pageIndex, onChangePage, onPreviousPage, onNextPage, pages, total } = useQueryFiltersPage();
   // const { pages, onNextPage } = useQueryBFiltersPage();
   const { onChangeLimit } = useQueryFiltersLimit();
   const { onChangeSignatures, onChangeStates } = useQueryFiltersFields();
@@ -78,7 +78,7 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
         color="gray.400"
         textTransform="uppercase"
       >
-        Fichas entregues (??)
+        Fichas entregues ({total})
       </Heading>
       <Flex direction='row' justify="space-between" align='end'>
         <Stack direction='row' spacing={4}>
@@ -108,8 +108,8 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
                 <Tr>
                   <Th>Nome</Th>
                   <Th>E-mail</Th>
-                  <Th>Estado (??)</Th>
-                  <Th isNumeric>Assinaturas esperadas (??)</Th>
+                  <Th>Estado</Th>
+                  <Th isNumeric>Assinaturas esperadas</Th>
                   <Th isNumeric>Assinaturas entregues</Th>
                   <Th>Data Registro</Th>
                   <Th>Whatsapp</Th>

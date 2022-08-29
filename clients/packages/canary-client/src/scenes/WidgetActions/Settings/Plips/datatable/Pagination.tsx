@@ -66,7 +66,7 @@ const Pagination: React.FC<Props> = ({
       >
         <ArrowLeftIcon />
       </Button>
-      <Text fontWeight="bold">{!loading ? `${pageIndex + 1} de ${((pages) / 10 + 1).toFixed()}` : "..."}</Text>
+      <Text fontWeight="bold">{!loading ? `${pageIndex + 1} de ${(pages + 1)}` : "..."}</Text>
       <Button
         variant='outline'
         colorScheme="gray"
