@@ -18,7 +18,7 @@ const Tab: React.FC<TabProps> = ({ children, active, onClick }) => {
   if (!active && colorMode === 'light') {
     defaultStylesProps.color = 'black';
     defaultStylesProps._hover = {
-      color: 'gray.200',
+      color: 'gray.400',
     };
   }
 
