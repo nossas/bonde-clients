@@ -6,7 +6,8 @@ export const QUERY = gql`
     plip_signatures(
       where: $where,
       limit: $limit,
-      offset: $offset
+      offset: $offset,
+      order_by: {created_at: desc}
     ) {
       confirmed_signatures
       created_at
