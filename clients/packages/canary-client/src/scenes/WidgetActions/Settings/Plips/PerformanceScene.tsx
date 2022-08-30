@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Stack, Grid, GridItem, Table, Tbody, Tr, Td, Text, Flex } from "bonde-components/chakra";
+import { Box, Button, Stack, Grid, GridItem, Table, Tbody, Tr, Td, Text, Flex, Tabs, TabList, Tab, TabPanel, TabPanels } from "bonde-components/chakra";
 import { Link, useLocation } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 
@@ -10,6 +10,7 @@ import MenuActions from "./components/MenuActions";
 import PlipsFormTable from './datatable/TableView';
 import { usePerformanceQuery } from "./performance/fetchData";
 import eleitorado from "./performance/eleitorado";
+import SignaturesTableView from "./datatable/SignaturesTableView";
 
 interface Properties {
   widget: Widget
@@ -54,7 +55,7 @@ const calcPercentage = (value = 0, total = 0): number => {
 
 const Percent = ({ value = 0, total = 0 }) => {
   const percent = calcPercentage(value, total);
-  
+
   let color = 'inherit';
   if (percent > 0.2) color = 'pink.300';
   if (percent > 0.3) color = 'green.300';
@@ -120,16 +121,16 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
               <Box bg="white">
                 <Table>
                   <Tbody>
-                  {data?.states_signatures
-                    .filter((ss) => !!ss.state)
-                    .sort((a, b) => {
-                      const bpercent = calcPercentage(b.confirmed_signatures, eleitorado.states[b.state] * eleitorado.goal.state);
-                      const apercent = calcPercentage(a.confirmed_signatures, eleitorado.states[a.state] * eleitorado.goal.state);
-                      return bpercent - apercent
-                    })
-                    .splice(0, isMobile ? 5 : 7)
-                    // eslint-disable-next-line react/display-name
-                    .map((ss, index) => <Row key={index} data={ss} />)}
+                    {data?.states_signatures
+                      .filter((ss) => !!ss.state)
+                      .sort((a, b) => {
+                        const bpercent = calcPercentage(b.confirmed_signatures, eleitorado.states[b.state] * eleitorado.goal.state);
+                        const apercent = calcPercentage(a.confirmed_signatures, eleitorado.states[a.state] * eleitorado.goal.state);
+                        return bpercent - apercent
+                      })
+                      .splice(0, isMobile ? 5 : 7)
+                      // eslint-disable-next-line react/display-name
+                      .map((ss, index) => <Row key={index} data={ss} />)}
                   </Tbody>
                 </Table>
               </Box>
@@ -163,7 +164,52 @@ const PerformanceScene: React.FC<Properties> = ({ widget }) => {
           </GridItem>
         </Grid>
         {!isMobile && (
-          <PlipsFormTable widgetId={widget.id} />
+          <Tabs >
+            <TabList style={{ fontWeight: 800 }} >
+              <Tab
+                fontSize="sm"
+                _focus={{
+                  boxShadow: 'none',
+                }}
+                _selected={{
+                  color: "pink.200",
+                  borderBottom: "2px solid",
+                  borderColor: "pink.200",
+                  borderBottomHeight: "1px"
+                }}
+                _hover={{
+                  color: "gray.400"
+                }}>
+                FICHAS ENTREGUES
+              </Tab>
+              <Tab
+                fontSize="sm"
+                _focus={{
+                  boxShadow: 'none',
+                }}
+                _selected={{
+                  color: "pink.200",
+                  borderBottom: "2px solid",
+                  borderColor: "pink.200",
+                  borderBottomHeight: "2px"
+                }}
+                _hover={{
+                  color: "gray.400"
+                }}>
+                INSCRIÇÕES
+              </Tab>
+            </TabList>
+
+            <TabPanels>
+              <TabPanel>
+                <SignaturesTableView widgetId={widget.id} />
+              </TabPanel>
+              <TabPanel>
+                <PlipsFormTable widgetId={widget.id} />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+
         )}
       </Stack>
       {isMobile && (

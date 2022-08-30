@@ -1,6 +1,6 @@
 import React from "react";
 import { Tab } from "bonde-components";
-import { Flex, Heading, Stack } from "bonde-components/chakra"
+import { DarkMode, Flex, Heading, Stack } from "bonde-components/chakra"
 import { Link, useRouteMatch } from "react-router-dom";
 import { useFilterDispatch } from "../services/FilterProvider"
 
@@ -21,60 +21,62 @@ const Header = (): React.ReactElement => {
       </Heading>
 
       <Flex>
-        <Link to="/">
-          <Tab
-            active={
-              !!useRouteMatch({
-                path: "/",
-                exact: true,
-              })
-            }
+        <DarkMode>
+          <Link to="/">
+            <Tab
+              active={
+                !!useRouteMatch({
+                  path: "/",
+                  exact: true,
+                })
+              }
+            >
+              Início
+            </Tab>
+          </Link>
+          <Link
+            to="/pessoas"
+            onClick={() => dispatch({
+              type: "order_by",
+              value: [{ created_at: 'asc' }]
+            })}
           >
-            Início
-          </Tab>
-        </Link>
-        <Link
-          to="/pessoas"
-          onClick={() => dispatch({
-            type: "order_by",
-            value: [{ created_at: 'asc' }]
-          })}
-        >
-          <Tab
-            active={
-              !!useRouteMatch({
-                path: "/pessoas",
-                exact: false,
-              })
-            }
-          >
-            Pessoas
-          </Tab>
-        </Link>
-        <Link to="/matches">
-          <Tab
-            active={
-              !!useRouteMatch({
-                path: "/matches",
-                exact: false,
-              })
-            }
-          >
-            Relações
-          </Tab>
-        </Link>
-        <Link to="/configuracoes/match">
-          <Tab
-            active={
-              !!useRouteMatch({
-                path: "/configuracoes/match",
-                exact: false,
-              })
-            }
-          >
-            Configurações
-          </Tab>
-        </Link>
+            <Tab
+              active={
+                !!useRouteMatch({
+                  path: "/pessoas",
+                  exact: false,
+                })
+              }
+            >
+              Pessoas
+            </Tab>
+          </Link>
+          <Link to="/matches">
+            <Tab
+              active={
+                !!useRouteMatch({
+                  path: "/matches",
+                  exact: false,
+                })
+              }
+            >
+              Relações
+            </Tab>
+          </Link>
+          <Link to="/configuracoes/match">
+            <Tab
+              active={
+                !!useRouteMatch({
+                  path: "/configuracoes/match",
+                  exact: false,
+                })
+              }
+            >
+              Configurações
+            </Tab>
+          </Link>
+        </DarkMode>
       </Flex>
     </Stack>
   )

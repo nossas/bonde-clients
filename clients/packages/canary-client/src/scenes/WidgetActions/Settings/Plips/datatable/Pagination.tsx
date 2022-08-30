@@ -49,9 +49,9 @@ const Pagination: React.FC<Props> = ({
             size='sm'
             placeholder="Mostrar 10"
             options={[
-              { value: 10, label: 'Mostrar 10'},
-              { value: 20, label: 'Mostrar 20'},
-              { value: 30, label: 'Mostrar 30'},
+              { value: 10, label: 'Mostrar 10' },
+              { value: 20, label: 'Mostrar 20' },
+              { value: 30, label: 'Mostrar 30' },
             ]}
             onChange={(item: any) => onChangeLimit(item.value)}
           />
@@ -66,18 +66,7 @@ const Pagination: React.FC<Props> = ({
       >
         <ArrowLeftIcon />
       </Button>
-      <Text fontWeight="bold">{!loading ? `${pageIndex + 1} de ${pages + 1}` : "..."}</Text>
-      {/* {Array.from({ length: pages + 1 }, (_: any, key: number) => (
-        <Button
-          variant='outline'
-          colorScheme="gray"
-          borderRadius={2}
-          onClick={() => onChangePage(key)}
-          disabled={pageIndex === key}
-        >
-          {key + 1}
-        </Button>
-      ))} */}
+      <Text fontWeight="bold">{!loading ? `${pageIndex + 1} de ${(pages + 1)}` : "..."}</Text>
       <Button
         variant='outline'
         colorScheme="gray"
