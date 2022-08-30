@@ -13,7 +13,6 @@ import {
   Heading
 } from 'bonde-components/chakra';
 import EmailFilter from './EmailFilter';
-import ExpectedSignaturesFilter from './ExpectedSignaturesFilter';
 import ExportCSV from './ExportCSV';
 import Pagination from './Pagination';
 import StateFilter from './StatesFilter';
@@ -27,6 +26,7 @@ import SignaturesFiltersProvider, {
 interface PlipSignature {
   confirmed_signatures: number
   created_at: string
+  state: string
 
   plips: {
     name: string
@@ -46,8 +46,7 @@ const Row: React.FC<{ plipSignature: PlipSignature }> = ({ plipSignature }) => {
     <Tr>
       <Td fontWeight="bold">{plipForm.name}</Td>
       <Td>{plipForm.email}</Td>
-      <Td>{plipForm.state}</Td>
-      <Td isNumeric>{plipForm.expected_signatures || 0}</Td>
+      <Td>{plipSignature.state}</Td>
       <Td isNumeric>{plipSignature.confirmed_signatures || 0}</Td>
       <Td >{new Date(plipSignature.created_at).toLocaleDateString()}</Td>
       <Td>{plipForm.whatsapp}</Td>
@@ -67,7 +66,7 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
   const { pageIndex, onChangePage, onPreviousPage, onNextPage, pages, total } = useQueryFiltersPage();
   // const { pages, onNextPage } = useQueryBFiltersPage();
   const { onChangeLimit } = useQueryFiltersLimit();
-  const { onChangeSignatures, onChangeStates } = useQueryFiltersFields();
+  const { onChangeStates, onChangeEmail } = useQueryFiltersFields();
 
   return (
     <Stack spacing={4}>
@@ -82,8 +81,7 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
       </Heading>
       <Flex direction='row' justify="space-between" align='end'>
         <Stack direction='row' spacing={4}>
-          <EmailFilter />
-          <ExpectedSignaturesFilter onChange={onChangeSignatures} />
+          <EmailFilter onChange={onChangeEmail} />
           <StateFilter onChange={onChangeStates} />
         </Stack>
         <ExportCSV widgetId={widgetId} fileName="relatorio-plips" />
@@ -109,7 +107,6 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
                   <Th>Nome</Th>
                   <Th>E-mail</Th>
                   <Th>Estado</Th>
-                  <Th isNumeric>Assinaturas esperadas</Th>
                   <Th isNumeric>Assinaturas entregues</Th>
                   <Th>Data Registro</Th>
                   <Th>Whatsapp</Th>

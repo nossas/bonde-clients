@@ -44,7 +44,7 @@ const PlipsFormTable: React.FC<any> = ({ widgetId }) => {
   const { data, total, loading } = useQueryFiltersData();
   const { pages, pageIndex, onChangePage, onNextPage, onPreviousPage } = useQueryFiltersPage();
   const { onChangeLimit } = useQueryFiltersLimit();
-  const { onChangeStatus, onChangeSignatures, onChangeStates } = useQueryFiltersFields();
+  const { onChangeStatus, onChangeSignatures, onChangeStates, onChangeEmail } = useQueryFiltersFields();
 
   return (
     <Stack spacing={4}>
@@ -59,7 +59,7 @@ const PlipsFormTable: React.FC<any> = ({ widgetId }) => {
       </Heading>
       <Flex direction='row' justify="space-between" align='end'>
         <Stack direction='row' spacing={4}>
-          <EmailFilter />
+          <EmailFilter onChange={onChangeEmail} />
           <ExpectedSignaturesFilter onChange={onChangeSignatures} />
           <StateFilter onChange={onChangeStates} />
           <StatusFilter onChange={onChangeStatus} />

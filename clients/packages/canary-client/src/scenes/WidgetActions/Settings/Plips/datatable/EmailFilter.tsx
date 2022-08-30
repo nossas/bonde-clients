@@ -1,9 +1,11 @@
 import React from 'react';
 import { FormControl, Input } from 'bonde-components/chakra';
-import { useQueryFiltersFields } from './QueryFiltersProvider';
 
-const EmailFilter: React.FC = () => {
-  const { onChangeEmail } = useQueryFiltersFields()
+interface Props {
+  onChange: (value?: string) => void
+}
+
+const EmailFilter: React.FC<Props> = ({ onChange }) => {
   return (
     <FormControl minW="200px">
       <Input
@@ -19,9 +21,9 @@ const EmailFilter: React.FC = () => {
                 /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
               )
           ) {
-            onChangeEmail(evt.target.value);
+            onChange(evt.target.value);
           } else if (evt?.target?.value.length === 0) {
-            onChangeEmail(undefined);
+            onChange(undefined);
           }
         }}
       />

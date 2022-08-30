@@ -10,6 +10,7 @@ export const QUERY = gql`
     ) {
       confirmed_signatures
       created_at
+      state
 
       plips {
         name: form_data(path: "name")
@@ -150,14 +151,13 @@ export const createVariables = ({
     where['plips']['form_data'] = { _contains: { email: email } };
   }
 
-
   // States filter
   if (states.length > 0) {
-    where['plips']['_and'].push({
+    where['_and'] = [{
       '_or': states.map((state) => ({
         'state': { '_eq': state }
       }))
-    })
+    }]
   }
 
   // Signatures filter
@@ -189,10 +189,6 @@ const SignaturesFiltersProvider: React.FC<Props> = ({ children, widgetId }) => {
 
   const total = data?.plip_signatures_aggregate.aggregate.count || 0;
   const pages = Math.round(total / limit) - 1;
-  console.log("TOTAL ->", total)
-  console.log("LIMIT ->", limit)
-  console.log("PAGES ->", pages)
-
 
   return (
     <context.Provider
