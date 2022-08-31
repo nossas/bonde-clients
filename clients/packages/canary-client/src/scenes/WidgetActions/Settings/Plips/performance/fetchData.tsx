@@ -60,15 +60,14 @@ const PLIP_PERFORMANCE_QUERY = gql`
       }
     }
 
-    states_signatures: plips_by_state(
-      where: {
-        widget_id: { _eq: $widget_id }
+    states_signatures: plip_signatures_by_state(
+      args: {
+        widget_id: $widget_id
       }
     ) {
       state
       expected_signatures
       confirmed_signatures
-      subscribers
     }
 
     subscribers_range: plips_subscribers_range(
