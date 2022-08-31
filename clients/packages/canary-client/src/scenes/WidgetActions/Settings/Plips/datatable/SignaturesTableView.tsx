@@ -39,7 +39,6 @@ interface PlipSignature {
 }
 
 const Row: React.FC<{ plipSignature: PlipSignature }> = ({ plipSignature }) => {
-  // TODO: verificar assinaturas / fichas com mais de 1 registro
   const plipForm = plipSignature.plips[0]
 
   return (
@@ -47,18 +46,12 @@ const Row: React.FC<{ plipSignature: PlipSignature }> = ({ plipSignature }) => {
       <Td fontWeight="bold">{plipForm.name}</Td>
       <Td>{plipForm.email}</Td>
       <Td>{plipSignature.state}</Td>
-      <Td isNumeric>{plipSignature.confirmed_signatures || 0}</Td>
-      <Td >{new Date(plipSignature.created_at).toLocaleDateString()}</Td>
+      <Td>{plipSignature.confirmed_signatures || 0}</Td>
+      <Td>{new Date(plipSignature.created_at).toLocaleDateString()}</Td>
       <Td>{plipForm.whatsapp}</Td>
     </Tr>
   );
 }
-
-// const CreatedAtRow: React.FC<any> = ({ activist }) => (
-//   <Tr>
-//     <Td >{new Date(activist.created_at).toLocaleDateString()}</Td>
-//   </Tr>
-// );
 
 const SignaturesTable: React.FC<any> = ({ widgetId }) => {
   const { data, loading } = useQueryFiltersData();
@@ -107,7 +100,7 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
                   <Th>Nome</Th>
                   <Th>E-mail</Th>
                   <Th>Estado</Th>
-                  <Th isNumeric>Assinaturas entregues</Th>
+                  <Th>Assinaturas entregues</Th>
                   <Th>Data Registro</Th>
                   <Th>Whatsapp</Th>
                 </Tr>

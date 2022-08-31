@@ -15,7 +15,7 @@ const Navigation: React.FC<NavigationProps> = ({ widget }) => {
   return (
     <TabRoute>
       {({ push, is }) => (
-        <Flex direction="row">
+        <Flex direction="row" mb={3}>
           {widget.kind === "pressure" ? (
             <>
               <Tab
@@ -38,12 +38,12 @@ const Navigation: React.FC<NavigationProps> = ({ widget }) => {
               </Tab>
             </>
           ) : (
-              <Tab
-                active={is(/\/widgets\/\d+\/settings\/*$/)}
-                onClick={() => push("")}
-              >
-                {t("settings.navigation.performance")}
-              </Tab>
+            <Tab
+              active={is(/\/widgets\/\d+\/settings\/*$/)}
+              onClick={() => push("")}
+            >
+              {t("settings.navigation.performance")}
+            </Tab>
           )}
           <Tab
             active={is(/\/widgets\/\d+\/settings\/adjusts\/*$/)}
