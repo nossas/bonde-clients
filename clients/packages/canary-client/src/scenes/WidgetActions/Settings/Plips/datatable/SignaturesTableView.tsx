@@ -13,7 +13,7 @@ import {
   Heading
 } from 'bonde-components/chakra';
 import EmailFilter from './EmailFilter';
-import ExportCSV from './ExportCSV';
+import SignaturesExportCSV from './SignaturesExportCSV';
 import Pagination from './Pagination';
 import StateFilter from './StatesFilter';
 import SignaturesFiltersProvider, {
@@ -55,9 +55,7 @@ const Row: React.FC<{ plipSignature: PlipSignature }> = ({ plipSignature }) => {
 
 const SignaturesTable: React.FC<any> = ({ widgetId }) => {
   const { data, loading } = useQueryFiltersData();
-  // const { data2, confirmedTotal } = useQueryBFiltersData();
   const { pageIndex, onChangePage, onPreviousPage, onNextPage, pages, total } = useQueryFiltersPage();
-  // const { pages, onNextPage } = useQueryBFiltersPage();
   const { onChangeLimit } = useQueryFiltersLimit();
   const { onChangeStates, onChangeEmail } = useQueryFiltersFields();
 
@@ -77,7 +75,7 @@ const SignaturesTable: React.FC<any> = ({ widgetId }) => {
           <EmailFilter onChange={onChangeEmail} />
           <StateFilter onChange={onChangeStates} />
         </Stack>
-        <ExportCSV widgetId={widgetId} fileName="relatorio-plips" />
+        <SignaturesExportCSV widgetId={widgetId} fileName="relatorio-plips" />
       </Flex>
       <Table variant="simple" bg="white" maxH="500px">
         <TableCaption>
