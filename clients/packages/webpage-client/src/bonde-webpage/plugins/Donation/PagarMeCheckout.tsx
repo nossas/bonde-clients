@@ -48,14 +48,19 @@ const PagarMeCheckout = (props: Props | any) => {
       const checkout = new window.PagarMeCheckout.Checkout({
         encryption_key: props.pagarmeKey || 'setup env var',
         success: (data: any) => {
-          data.subscription = formValues.paymentType !== 'unique';
-          data.recurring_period = formValues.recurringPeriod;
-          data.mobilization_id = mobilization.id;
-          data.widget_id = widget.id;
-          data.amount = amount;
+          const genRequestPayload = {
+            widget_id: widget.id,
+            card_hash: data.card_hash,
+            payment_method: data.payment_method,
+            amount: amount,
+            customer: data.customer,
+            subscription: formValues.paymentType !== 'unique',
+            period: formValues.recurringPeriod,
+            mobilization_id: mobilization.id
+          };
 
           return props
-            .createTransaction(data)
+            .createTransaction(genRequestPayload)
             .then((resp: any) => {
               // TODO: analyticsEvents.donationFinishRequest()
               return resolve({ donation: resp.data });
