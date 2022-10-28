@@ -84,7 +84,7 @@ const PlipForm: React.FC<Props> = ({ asyncFillWidget, widget }) => {
                   <label>Estado* </label>
                   <select {...input}>
                     <option value="" disabled selected>Selecione o Estado</option>
-                    <option value="EX">Estrangeiro</option>
+                    <option value="EX">Internacional</option>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
                     <option value="AP">Amapá</option>
