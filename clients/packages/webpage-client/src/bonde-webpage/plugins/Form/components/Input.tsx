@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
+import { memo } from 'react';
 
 const Select = styled.select`
   border-radius: 2px;
@@ -57,7 +58,7 @@ export const renderFieldKind = ({ field, name, onChange, onBlur }: Props) => {
         aria-label={name}
       >
         <option value="">{'Selecione...'}</option>
-        {field.placeholder.split(',').map(function(v: any, index: number) {
+        {field.placeholder.split(',').map(function (v: any, index: number) {
           return (
             <option value={v} key={`dropdown-option-${index}`}>
               {v}
@@ -102,4 +103,4 @@ const Input = ({ field, name, ...props }: Props) => {
   );
 };
 
-export default Input;
+export default memo(Input);
