@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import React, { memo } from 'react';
 
 import {
   Button,
@@ -78,6 +78,7 @@ const PressureForm = ({
     label: groupTarget.label,
     value: groupTarget.identify,
   }));
+  const MemoBeforeStandardFields = memo(BeforeStandardFields)
 
   // Teste de pressões com assuntos randomicos
   let {
@@ -165,7 +166,7 @@ const PressureForm = ({
                       </SelectField>
                     </WrapInputs>
                   )}
-                  {BeforeStandardFields && <BeforeStandardFields />}
+                  {BeforeStandardFields && <MemoBeforeStandardFields />}
                   <WrapInputs>
                     <InputField
                       label={t('Pressure Name Label')}
