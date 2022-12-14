@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from '@emotion/styled';
 
 type Props = {
@@ -19,7 +19,7 @@ const Text = styled.span<Props>`
 `;
 
 // eslint-disable-next-line react/display-name
-export default ({ color }: any) => {
+export default memo(({ color }: any) => {
   return (
     <Text color={color}>
       {`Ao inserir seus dados, você concorda em ter seus dados compartilhados com os organizadores dessa página e aceita receber comunicações de atualização, conforme descrito nos `}
@@ -43,4 +43,4 @@ export default ({ color }: any) => {
       {`. Você pode cancelar o recebimento desses e-mails a qualquer momento.`}
     </Text>
   );
-};
+});

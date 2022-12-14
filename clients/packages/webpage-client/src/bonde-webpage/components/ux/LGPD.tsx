@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import styled from '@emotion/styled';
 import { Translate } from '../MobilizationClass';
 
@@ -20,7 +20,7 @@ const Text = styled.span<Props>`
 `;
 
 // eslint-disable-next-line react/display-name
-export default ({ color }: any) => {
+export default memo(({ color }: any) => {
   return (
     <Translate>
       {({ t, Trans, mobilization }) => {
@@ -48,4 +48,4 @@ export default ({ color }: any) => {
       }}
     </Translate>
   );
-};
+});
