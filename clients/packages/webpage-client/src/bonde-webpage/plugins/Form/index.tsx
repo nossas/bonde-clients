@@ -11,13 +11,13 @@ import { getFieldName, validate, fields, addValueToFields } from './utils';
 
 type Props = {
   mobilization:
-    | {
-        body_font: string;
-        header_font: string;
-        main_color?: string;
-        id: number;
-      }
-    | Record<any, any>;
+  | {
+    body_font: string;
+    header_font: string;
+    main_color?: string;
+    id: number;
+  }
+  | Record<any, any>;
   widget: {
     settings: {
       finish_message_type?: string;
@@ -58,10 +58,10 @@ const Header = styled.h2`
   font-weight: normal;
 `;
 
-const WrapInputs = styled.div`
+const WrapInputs = React.memo(styled.div`
   display: grid;
   grid-row-gap: 1rem;
-`;
+`);
 
 const renderCallToAction = ({ settings }: any) => {
   const callToAction = (
@@ -90,7 +90,7 @@ const renderFields = (
             onChange={handleChange}
             onBlur={
               // eslint-disable-next-line @typescript-eslint/no-empty-function
-              Number(index) === 0 ? analyticsEvents.formIsFilled() : () => {}
+              Number(index) === 0 ? analyticsEvents.formIsFilled() : () => { }
             }
             field={field}
           />
