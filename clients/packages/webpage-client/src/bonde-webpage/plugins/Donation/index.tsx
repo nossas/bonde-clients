@@ -8,7 +8,7 @@ type DonationStylesProps = {
   mainColor: string;
 };
 
-const DonationStyles = styled.div<DonationStylesProps>`
+const DonationStyles = React.memo(styled.div<DonationStylesProps>`
   text-align: center;
   border-radius: 3px 3px 0 0;
   background: #fff;
@@ -26,7 +26,7 @@ const DonationStyles = styled.div<DonationStylesProps>`
     content: ' ';
     display: table;
   }
-`;
+`);
 
 type Props = {
   extraProps: {
