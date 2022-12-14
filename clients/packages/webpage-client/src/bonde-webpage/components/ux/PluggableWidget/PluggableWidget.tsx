@@ -1,5 +1,5 @@
 // import dynamic from 'next/dynamic'
-import React from 'react';
+import React, { useMemo } from 'react';
 import Overlay from './Overlay';
 import FormPlugin from './../../../../components/FormConnected';
 import PressureEmailPlugin from './../../../../components/PressureEmailConnected';
@@ -11,7 +11,7 @@ import {
   DraftPlugin,
 } from '../../../../bonde-webpage';
 
-const PluggableWidget = (props: any) => {
+const PluggableWidget = React.memo((props: any) => {
   const getOptions = (plugin: any) => {
     let options = { noOverlay: !props.editable };
     if (typeof plugin?.options === 'function') {
@@ -55,11 +55,12 @@ const PluggableWidget = (props: any) => {
     },
   ];
 
-  const plugin: any = plugins.find(
-    (p: any) => p.kind === widget.kind
-  );
+  const MemoPlugin: any = useMemo(() => {
+    return plugins.find(
+      (p: any) => p.kind === widget.kind)
+  }, [])
 
-  const { noOverlay } = getOptions(plugin);
+  const { noOverlay } = getOptions(MemoPlugin);
   const widgetProps = {
     block,
     widget,
@@ -72,12 +73,12 @@ const PluggableWidget = (props: any) => {
       onEdit={() => onEdit && onEdit(widget)}
       onDelete={() => onDelete && onDelete(widget)}
     >
-      <plugin.component {...widgetProps} />
+      <MemoPlugin.component {...widgetProps} />
     </Overlay>
   ) : (
-    <plugin.component {...widgetProps} />
+    <MemoPlugin.component {...widgetProps} />
   );
-};
+}) as any;
 
 PluggableWidget.defaultProps = {
   editable: false,
