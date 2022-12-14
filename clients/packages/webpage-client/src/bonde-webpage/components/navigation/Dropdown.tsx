@@ -23,7 +23,7 @@ interface WrapperStyledProps {
   open?: boolean;
 }
 
-const WrapperStyled = styled.div<WrapperStyledProps>`
+const WrapperStyled = React.memo(styled.div<WrapperStyledProps>`
   ${props => !props.open && `display: none;`}
   background-color: rgba(0,0,0,.5);
   border-radius: 3px;
@@ -34,7 +34,7 @@ const WrapperStyled = styled.div<WrapperStyledProps>`
   right: 0;
   top: 37px;
   margin: calc(1em - 2px);
-`;
+`);
 
 interface DropdownMenuProps {
   className?: string;
