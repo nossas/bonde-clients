@@ -63,7 +63,7 @@ const WrapInputs = React.memo(styled.div`
   grid-row-gap: 1rem;
 `);
 
-const renderCallToAction = ({ settings }: any) => {
+const RenderCallToAction = React.memo(({ settings }: any) => {
   const callToAction = (
     settings.call_to_action
       ? settings.call_to_action
@@ -71,14 +71,13 @@ const renderCallToAction = ({ settings }: any) => {
   ).replace('\n', '<br/><br/>');
 
   return <Header>{callToAction}</Header>;
-};
+});
 
-const renderFields = (
-  {
-    analyticsEvents,
-    widget: { settings },
-  }: Pick<Props, 'analyticsEvents' | 'widget'>,
-  handleChange: any
+const RenderFields = ({
+  analyticsEvents,
+  widget: { settings },
+  handleChange,
+}: any
 ) => {
   return (
     <WrapInputs>
@@ -100,10 +99,8 @@ const renderFields = (
   );
 };
 
-const renderButton = (
-  { widget }: Pick<Props, 'widget'>,
-  success: boolean,
-  loading: boolean
+const RenderButton = React.memo((
+  { widget, success, loading }: any,
 ) => (
   <>
     <Button
@@ -113,7 +110,7 @@ const renderButton = (
     />
     <LGPD color="#fff" />
   </>
-);
+));
 
 const renderErrors = (errors: Array<any>) => {
   return (
@@ -177,16 +174,17 @@ const FormPlugin = (props: Props) => {
         {({ t }: any) => (
           <WrapForm backgroundColor={bgcolor}>
             <form onSubmit={handleSubmit(t)} noValidate={true}>
-              {renderCallToAction(widget)}
-              {renderFields(props, handleChange)}
+              <RenderCallToAction settings={widget.settings} />
+              <RenderFields
+                analyticsEvents={props.analyticsEvents}
+                widget={props.widget}
+                handleChange={handleChange}
+              />
               {errors.length > 0 && renderErrors(errors)}
               {widget.settings.fields &&
                 widget.settings.fields.length > 0 &&
-                renderButton(
-                  props,
-                  status === 'fulfilled',
-                  status === 'pending'
-                )}
+                <RenderButton widget={props.widget} success={status === 'fulfilled'} loading={status === 'pending'} />
+              }
             </form>
           </WrapForm>
         )}
