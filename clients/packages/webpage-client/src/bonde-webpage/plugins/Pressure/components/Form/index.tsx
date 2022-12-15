@@ -79,6 +79,7 @@ const PressureForm = ({
     value: groupTarget.identify,
   }));
   const MemoBeforeStandardFields = memo(BeforeStandardFields)
+  const MemoAfterSantardFields = memo(AfterStandardFields)
 
   // Teste de pressões com assuntos randomicos
   let {
@@ -231,7 +232,7 @@ const PressureForm = ({
                       />
                     </WrapInputs>
                   )}
-                  {AfterStandardFields && <AfterStandardFields />}
+                  {AfterStandardFields && <MemoAfterSantardFields />}
                 </WrapFields>
                 {errors.length >= 1 && (
                   <>
