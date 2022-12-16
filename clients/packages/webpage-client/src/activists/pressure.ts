@@ -62,6 +62,13 @@ const pressure = async ({ payload, widget }: Args): Promise<any> => {
       pressureInput.email_body = mail.body;
     }
 
+    // Teste de pressões com assuntos randomicos
+    if (widget.id == 75246) {
+    // if (widget.id == 23194) {
+      pressureInput.email_subject = mail.subject;
+      pressureInput.email_body = mail.body;
+    }
+
     const variables = {
       activist: input,
       widget_id: widget.id,
