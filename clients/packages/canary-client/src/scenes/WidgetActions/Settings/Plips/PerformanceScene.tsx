@@ -62,7 +62,7 @@ const ValueWithLabel: React.FC<Props> = ({ value, label, variant = "md" }) =>
 
 const PerformanceScene: React.FC<Properties> = ({ widget }) => {
   const { pathname } = useLocation();
-  const { data, loading, error } = usePerformanceQuery(widget.id);
+  const { data, loading, error } = usePerformanceQuery(widget.id, isMobile);
 
   if (loading) return <Text>Carregando dados de performance</Text>;
   if (error) return <Text color="red">{JSON.stringify(error)}</Text>;
