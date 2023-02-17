@@ -238,6 +238,13 @@ export const validate = (values, { intl }) => {
     });
   }
 
+  if (!values.subthemes) {
+    errors.subthemes = intl.formatMessage({
+      id: 'mobilizations.components--basics-form.subthemes.validation.required',
+      defaultMessage: 'Insira o tema da mobilização',
+    });
+  }
+
   return errors;
 };
 
