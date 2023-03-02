@@ -157,6 +157,7 @@ export async function getServerSideProps({
   const { widgets } = await asyncFilterWidgetsGraphql(where)
 
   const widgetsCount = widgets.filter((widget) => widget.kind == 'pressure' && widget.settings?.pressure_type == 'group').length
+
   if (widgetsCount > 0) {
     const { targets } = await asyncFilterTargetsGraphql(where)
     return { props: { mobilization: mobilizations[0], blocks, widgets, targets } };
