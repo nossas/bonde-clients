@@ -66,3 +66,12 @@ export type BlockGraphQL = {
   name?: string
   position: number
 }
+
+export type TargetGraphQL = {
+  identify: string
+  label: string
+  targets: any[]
+  email_subject?: string
+  email_body?: string
+  widget_id: number
+}
