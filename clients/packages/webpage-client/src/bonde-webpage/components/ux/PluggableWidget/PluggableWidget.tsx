@@ -22,7 +22,7 @@ const PluggableWidget = React.memo((props: any) => {
     return options;
   };
 
-  const { block, widget, onEdit, onDelete, mobilization } = props;
+  const { block, widget, onEdit, onDelete, mobilization, targets } = props;
   const plugins = [
     {
       kind: 'draft',
@@ -66,6 +66,7 @@ const PluggableWidget = React.memo((props: any) => {
     widget,
     mobilization,
     editable: false,
+    targets
   };
 
   return !noOverlay ? (

@@ -3,7 +3,6 @@ import React, { useReducer } from 'react';
 import { Translate } from '../../../components/MobilizationClass';
 import { Count, Form, Targets } from '../components';
 import { GroupTarget } from '../components/Targets';
-import FetchTargets from '../FetchTargets';
 import { Header } from '../styles';
 import { getTargetList } from '../utils';
 import EmailFields from './EmailFields';
@@ -120,48 +119,48 @@ export const EmailPressure = ({
 
   const handleSubmit =
     (t: any) =>
-    ({ targetsInput, ...data }: any): Promise<any> | any => {
-      if (targetList.length < 1 && !targetsInput) {
-        dispatch({
-          type: 'failed',
-          payload: [t('Pressure TargetBlank Validation')],
-        });
-      } else {
-        dispatch({ type: 'fetching' });
-
-        const payload = {
-          activist: {
-            firstname: data.name,
-            lastname: data.lastname,
-            email: data.email,
-            city: data.city || null,
-            state: data.state || null,
-          },
-          targets_id: targetsInput,
-          mail: {
-            disableEditField,
-            subject: data.subject,
-            body: data.body,
-          },
-          form_data: data,
-        };
-
-        return asyncFillWidget({ payload, widget })
-          .then((data: any) => {
-            if (!data.create_email_pressure) throw new Error('pressure_failed');
-
-            analyticsEvents && analyticsEvents.pressureSavedData();
-            return dispatch({ type: 'success', payload: data });
-          })
-          .catch((_e: any) => {
-            // console.log('e', e);
-            return dispatch({
-              type: 'failed',
-              payload: [t('Pressure Network Failed')],
-            });
+      ({ targetsInput, ...data }: any): Promise<any> | any => {
+        if (targetList.length < 1 && !targetsInput) {
+          dispatch({
+            type: 'failed',
+            payload: [t('Pressure TargetBlank Validation')],
           });
-      }
-    };
+        } else {
+          dispatch({ type: 'fetching' });
+
+          const payload = {
+            activist: {
+              firstname: data.name,
+              lastname: data.lastname,
+              email: data.email,
+              city: data.city || null,
+              state: data.state || null,
+            },
+            targets_id: targetsInput,
+            mail: {
+              disableEditField,
+              subject: data.subject,
+              body: data.body,
+            },
+            form_data: data,
+          };
+
+          return asyncFillWidget({ payload, widget })
+            .then((data: any) => {
+              if (!data.create_email_pressure) throw new Error('pressure_failed');
+
+              analyticsEvents && analyticsEvents.pressureSavedData();
+              return dispatch({ type: 'success', payload: data });
+            })
+            .catch((_e: any) => {
+              // console.log('e', e);
+              return dispatch({
+                type: 'failed',
+                payload: [t('Pressure Network Failed')],
+              });
+            });
+        }
+      };
 
   if (state.data) {
     const {
@@ -243,8 +242,10 @@ export const EmailPressure = ({
 };
 
 // Wrapper All Plugin to get targets group
-const EmailPressureTargets = ({ targets, ...props }: any) => (
+const EmailPressureTargets = ({ targets, ...props }: any) => {
+  return (
     <EmailPressure pressureTargets={targets} {...props} />
-);
+  );
+}
 
 export default EmailPressureTargets;

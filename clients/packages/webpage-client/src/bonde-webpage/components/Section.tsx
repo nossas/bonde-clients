@@ -79,7 +79,7 @@ const Section = (props: SectionProps) => {
                 key={`widget-${widget.id}`}
                 block={block}
                 widget={widget}
-                targets={targets?.map((targetGroup) => targetGroup.widget_id = widget.id)}
+                targets={targets?.filter((targetGroup) => targetGroup.widget_id = widget.id)}
                 mobilization={mobilization}
               />
             )}
