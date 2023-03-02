@@ -42,6 +42,8 @@ export interface MobilizationProps {
   // blockWrapper: PropTypes.any,
   /* Array of widgets object used on render. */
   widgets: any[];
+  /* Fetch targets when widget is pressure with group targes */
+  targets?: any[];
   mobilization: any;
   /* Component responsible to render a widget logic,
    * receive { widget } props */
@@ -103,6 +105,7 @@ class Mobilization extends React.Component<
       linkTo,
       blockWidgetsRef,
       widgets,
+      targets,
       mobilization,
       // widgetComponent,
       footerComponent: FooterComponent,
@@ -133,6 +136,7 @@ class Mobilization extends React.Component<
                 anchor={linkTo(b)}
                 block={b}
                 editable={!!editable}
+                targets={targets}
                 widgets={blockWidgetsRef ? blockWidgetsRef(b, widgets) : []}
               />
             ))}

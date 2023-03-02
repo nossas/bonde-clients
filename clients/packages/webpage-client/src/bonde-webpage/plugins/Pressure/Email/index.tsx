@@ -243,16 +243,8 @@ export const EmailPressure = ({
 };
 
 // Wrapper All Plugin to get targets group
-const EmailPressureTargets = ({ asyncFetchTargets, ...props }: any) => (
-  <FetchTargets
-    asyncFetchTargets={asyncFetchTargets}
-    widgetId={props.widget.id}
-  >
-    {({ data }: any) =>
-      <EmailPressure pressureTargets={data} {...props} />
-      // <h2>EmailPressure Loaded</h2>
-    }
-  </FetchTargets>
+const EmailPressureTargets = ({ targets, ...props }: any) => (
+    <EmailPressure pressureTargets={targets} {...props} />
 );
 
 export default EmailPressureTargets;

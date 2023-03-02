@@ -55,6 +55,7 @@ const Section = (props: SectionProps) => {
     anchor,
     block,
     widgets,
+    targets,
     mobilization,
     editable,
     wrapper: BlockWrapper,
@@ -78,6 +79,7 @@ const Section = (props: SectionProps) => {
                 key={`widget-${widget.id}`}
                 block={block}
                 widget={widget}
+                targets={targets?.map((targetGroup) => targetGroup.widget_id = widget.id)}
                 mobilization={mobilization}
               />
             )}
@@ -113,6 +115,8 @@ type SectionProps = {
   editable: boolean;
   /* Array of widgets related on Section */
   widgets: any[];
+  /* Array of target groups related Mobilization */
+  targets?: any[];
 };
 
 export default Section;

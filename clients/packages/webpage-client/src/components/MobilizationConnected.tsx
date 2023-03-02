@@ -10,6 +10,7 @@ export interface MobilizationProperties {
   mobilization: any;
   blocks: any[];
   widgets: any[];
+  targets?: any[];
   blocksIsLoaded: boolean;
 }
 
@@ -17,6 +18,7 @@ const MobilizationConnected = ({
   mobilization,
   blocks,
   widgets,
+  targets,
   blocksIsLoaded,
 }: MobilizationProperties): JSX.Element => {
   const { t, i18n } = useTranslation();
@@ -34,6 +36,7 @@ const MobilizationConnected = ({
         linkTo={(b: any) => `block-${b.id}`}
         blocks={blocks}
         widgets={widgets}
+        targets={targets}
         // widgetComponent={PluggableWidget}
         footerComponent={Footer}
         colorScheme={colorScheme}

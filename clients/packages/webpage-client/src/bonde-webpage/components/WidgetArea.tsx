@@ -5,6 +5,7 @@ import {
 const WidgetArea = ({
   block,
   widget,
+  targets,
   mobilization
 }: any) => {
   const { sm_size, md_size, lg_size } = widget;
@@ -16,6 +17,7 @@ const WidgetArea = ({
         block={block}
         widget={widget}
         mobilization={mobilization}
+        targets={targets}
       />
     </div>
   );
