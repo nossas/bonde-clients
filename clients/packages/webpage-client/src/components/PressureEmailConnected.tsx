@@ -16,7 +16,7 @@ const PressureEmailConnected = (props: any) =>
         await fetch('/api/data/targets', {
           method: 'post',
           body: JSON.stringify(args),
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' }
         })
       ).json()
     }
@@ -25,7 +25,7 @@ const PressureEmailConnected = (props: any) =>
         await fetch('/api/actions/pressure', {
           method: 'post',
           body: JSON.stringify(args),
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 'Content-Type': 'application/json' }
         })
       ).json()
     }

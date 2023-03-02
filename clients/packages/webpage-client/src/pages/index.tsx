@@ -7,6 +7,7 @@ import Error404 from './404';
 import asyncFilterBlocksGraphql from '../apis/graphql/filterBlocks';
 import asyncFilterMobilizationsGraphql from '../apis/graphql/filterMobilizations';
 import asyncFilterWidgetsGraphql from '../apis/graphql/filterWidgets';
+import asyncFilterTargetsGraphql from '../apis/graphql/filterTargets';
 import MeuRioStyles from '../components/MeuRioStyles';
 import Styles from '../bonde-webpage/Styles';
 import MobilizationConnected from '../components/MobilizationConnected';
@@ -14,14 +15,14 @@ import resources from "../initialI18nStore";
 
 const { publicRuntimeConfig } = getConfig()
 
-
 interface PageProperties {
   mobilization: any;
   blocks: any[];
   widgets: any[];
+  targets?: any[];
 }
 
-function Page({ mobilization, blocks, widgets }: PageProperties) {
+function Page({ mobilization, blocks, widgets, targets }: PageProperties) {
   if (!mobilization) return <Error404 />;
 
   i18n
@@ -111,6 +112,7 @@ function Page({ mobilization, blocks, widgets }: PageProperties) {
             blocks={blocks}
             widgets={widgets}
             blocksIsLoaded
+            targets={targets}
           />
         </I18nextProvider>
       </MeuRioStyles>
@@ -153,6 +155,12 @@ export async function getServerSideProps({
   const { mobilizations } = await asyncFilterMobilizationsGraphql(where)
   const { blocks } = await asyncFilterBlocksGraphql(where)
   const { widgets } = await asyncFilterWidgetsGraphql(where)
+
+  const widgetsCount = widgets.filter((widget) => widget.kind == 'pressure' && widget.settings?.pressure_type == 'group').length
+  if (widgetsCount > 0) {
+    const { targets } = await asyncFilterTargetsGraphql(where)
+    return { props: { mobilization: mobilizations[0], blocks, widgets, targets } };
+  }
 
   // Pass data to the page via props
   return { props: { mobilization: mobilizations[0], blocks, widgets } };
