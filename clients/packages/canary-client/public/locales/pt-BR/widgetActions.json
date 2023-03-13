@@ -57,14 +57,16 @@
         "email_body": "Corpo do e-mail para os alvos",
         "group_label": "Nome do grupo de alvos",
         "select_label": "Nome do campo de seleção",
-        "disable_edit_field": "Desabilitar edição de assunto e corpo do email?"
+        "disable_edit_field": "Desabilitar edição de assunto e corpo do email?",
+        "is_subject_list": "Habilitar assuntos alternados?"
       },
       "placeholder": {
         "targets": "Nome do alvo 1 <nome1@alvo.org>;Nome do alvo 2 <nome2@alvo.org>",
         "email_subject": "Escreva um assunto",
         "email_body": "Escreva aqui o email...",
         "group_label": "Ex. Rio de Janeiro",
-        "select_label": "Ex: Selecione seu estado"
+        "select_label": "Ex: Selecione seu estado",
+        "is_subject_list": "Escreva um assunto e pressione [ENTER]"
       },
       "button": {
         "cancel": "Cancelar",

@@ -146,7 +146,7 @@ export interface TagInputFieldProps {
   name: string
   label?: string
   placeholder?: string
-  validate: (value?: any, allValues?: any, meta?: any) => any
+  validate?: (value?: any, allValues?: any, meta?: any) => any
 }
 
 const TagInputField: React.FC<TagInputFieldProps> = ({ name, validate, ...props }) => {

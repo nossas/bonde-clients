@@ -78,7 +78,8 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
       initialValues={{
         settings: {
           ...widget.settings,
-          pressure_type: widget.settings.pressure_type || 'unique'
+          pressure_type: widget.settings.pressure_type || 'unique',
+          is_subject_list: widget.settings.is_subject_list || 'n'
         },
         groups: widget.groups
       }}
@@ -124,6 +125,7 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
                         Defina abaixo quem serão os alvos da sua campanha de pressão e o e-mail que será enviado para eles:
                       </Text>
                     </Stack>
+
                     <RadioField
                       name='settings.pressure_type'
                       label={t('settings.pressure.label.pressure_type')}
@@ -133,8 +135,18 @@ const ConfigurePressureTargets = ({ widget, updateCache }: Props): React.ReactEl
                     </RadioField>
 
                     {value === 'unique'
-                      ? <UniqueFormFields />
-                      : <GroupFormFields form={form} />
+                      ? (
+                        <>
+                          <RadioField
+                            name='settings.is_subject_list'
+                            label={t('settings.pressure.label.is_subject_list')}
+                          >
+                            <Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
+                            <Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
+                          </RadioField>
+                          <UniqueFormFields />
+                        </>
+                      ) : <GroupFormFields form={form} />
                     }
 
                     <RadioField

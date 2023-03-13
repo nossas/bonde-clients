@@ -1,7 +1,10 @@
 import React from 'react';
 import { InputField, TextareaField } from 'bonde-components';
+import { Stack } from 'bonde-components/chakra';
 import { useTranslation } from 'react-i18next';
+
 import TagInputField from "./TagInputField";
+import SpyField from '../../../../../components/SpyField';
 
 type SubjectBodyFieldsProps = {
   prefix?: string
@@ -34,24 +37,35 @@ const SubjectBodyFields: React.FC<SubjectBodyFieldsProps> = ({ prefix, emailSubj
   const emailBody = emailBodyName ? emailBodyName : 'pressure_body';
 
   return (
-    <>
+    <Stack spacing={4}>
       <TagInputField
         label={t('settings.pressure.label.targets')}
         placeholder="Nome do alvo <nome@alvo.org>"
         name={prefix ? prefix + ".targets" : "targets"}
         validate={validate}
       />
-      <InputField
-        name={prefix ? prefix + `.${emailSubject}` : emailSubject}
-        placeholder={t('settings.pressure.placeholder.email_subject')}
-        label={t('settings.pressure.label.email_subject')}
-      />
+      <SpyField field="settings.is_subject_list">
+        {({ value }: { value: string }) => value === 'n'
+        ?
+          <InputField
+            name={prefix ? prefix + `.${emailSubject}` : emailSubject}
+            placeholder={t('settings.pressure.placeholder.email_subject')}
+            label={t('settings.pressure.label.email_subject')}
+          />
+         : 
+          <TagInputField
+            label={t('settings.pressure.label.email_subject')}
+            name={prefix ? prefix + '.subject_list' : '.subject_list'}
+            placeholder={t('settings.pressure.placeholder.is_subject_list')}
+          />
+        }
+      </SpyField>
       <TextareaField
         name={prefix ? prefix + `.${emailBody}` : emailBody}
         placeholder={t('settings.pressure.placeholder.email_body')}
         label={t('settings.pressure.label.email_body')}
       />
-    </>
+    </Stack>
   );
 }
 
