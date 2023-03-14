@@ -135,6 +135,13 @@ const FormPlugin = (props: Props) => {
 
     const fieldsWithValue = addValueToFields(widget.settings.fields, values);
 
+    // returns user email with lowercase letters
+    fieldsWithValue.map((field: any) => {
+      if (field.kind === 'email') {
+        return field.value = field.value?.toLowerCase();
+      }
+    });
+
     const errors = validate(fieldsWithValue, { t });
 
     if (errors.length > 0) {
