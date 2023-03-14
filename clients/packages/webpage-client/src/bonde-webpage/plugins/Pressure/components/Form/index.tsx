@@ -43,6 +43,8 @@ type Props = {
       pressure_type?: string | 'unique' | 'group';
       select_label?: string;
       show_state?: string;
+      is_subject_list?: string | 's' | 'n';
+      subject_list?: string[]
     };
   };
   BeforeStandardFields?: any;
@@ -67,7 +69,8 @@ const PressureForm = ({
       show_state: showState,
       main_color: buttonColor,
       button_text: buttonText,
-      // pressure_subject: subject = '',
+      is_subject_list: isSubjectList = 'n',
+      subject_list: subjectList = [],
       pressure_body: body = '',
       pressure_type,
       select_label,
@@ -88,37 +91,12 @@ const PressureForm = ({
     }
   } = widget;
 
-  if (widget.id == 75246) {
-  // if (widget.id == 23194) {
-    const random_subjects_list = [
-      "Ministro Lewandowski, o Brasil conta com você",
-      "Queremos o fim do Orçamento Secreto",
-      "Ministro, conto com você pelo fim do Orçamento Secreto",
-      "Queremos transparência nos gastos públicos",
-      "Contamos com o seu voto pelo fim do Orçamento Secreto",
-      "Caro Ministro, você pode dar um presente para os brasileiros",
-      "O Orçamento Secreto não pode continuar!",
-      "Fim do Orçamento Secreto Já, Ministro!",
-      "Excelentíssimo Ministro, a corrupção não pode prevalecer!",
-      "Ministro Lewandowski, o maior escândalo de corrupção tá em suas mãos",
-      "O seu voto pode salvar a nossa democracia, Ministro",
-      "Mais transparência para o país",
-      "Transparência no orçamento público",
-      "Julgamento do Orçamento Secreto",
-      "Ministro, o Brasil precisa do seu voto",
-      "Democracia com transparência",
-      "Ministro Lewandowski, vote pela transparência!",
-      "Ministro, eu quero o fim do orçamento secreto",
-      "A transparência nos gastos está nas suas mãos, Ministro",
-      "Ministro, contamos com o senhor",
-      "Ministro, o seu voto é nossa última chance"
-    ];
-
+  if (isSubjectList === 's') {
     const min = Math.ceil(0);
-    const max = Math.floor(random_subjects_list.length - 1);
+    const max = Math.floor(subjectList.length - 1);
     const position = Math.floor(Math.random() * (max - min + 1)) + min;
 
-    subject = random_subjects_list[position] as string
+    subject = subjectList[position] as string
   }
 
   return (
