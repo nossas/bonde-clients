@@ -23,6 +23,7 @@ export type Payload = {
 
 export type Widget = {
   id: number;
+  settings: any;
 };
 
 export interface Args {

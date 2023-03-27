@@ -19,6 +19,7 @@ export type Payload = {
 
 export type Widget = {
   id: number;
+  settings: any;
 };
 
 export interface Args {
@@ -57,7 +58,7 @@ const pressure = async ({ payload, widget }: Args): Promise<any> => {
       token: jwt.sign({}, process.env.ACTION_SECRET_KEY || ''),
     };
 
-    if (mail.disableEditField !== 's') {
+    if (mail.disableEditField !== 's' || widget.settings.is_subject_list === 's') {
       pressureInput.email_subject = mail.subject;
       pressureInput.email_body = mail.body;
     }

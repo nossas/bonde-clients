@@ -26,7 +26,8 @@ describe('activists module pressure tests', () => {
       }
     },
     widget: {
-      id: 345
+      id: 345,
+      settings: {}
     }
   };
   const OLD_ENV = process.env;
