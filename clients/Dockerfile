@@ -35,7 +35,8 @@ RUN env
 WORKDIR /code
 
 RUN apk --update add curl
-RUN curl -L https://unpkg.com/@pnpm/self-installer | node
+
+RUN curl -L https://unpkg.com/@pnpm/self-installer | env PNPM_VERSION=7.26.1 node
 
 COPY . .
 
