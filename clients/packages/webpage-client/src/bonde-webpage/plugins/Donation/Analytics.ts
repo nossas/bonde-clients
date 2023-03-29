@@ -12,7 +12,7 @@ const DONATION_FINISHED = {
 
 const donationSetValue = () => sendEvent(DONATION_STARTED);
 const donationFinishRequest = (value: string) =>
-  sendEvent({ ...DONATION_FINISHED, label: value });
+  sendEvent({ ...DONATION_FINISHED, label: value, value });
 
 const Analytics = {
   donationSetValue,
