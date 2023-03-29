@@ -119,7 +119,7 @@ const DonationPlugin: React.FC<Props> = ({
         },
         customerData: donationCustomerData,
       }).then((res: any) => {
-        analyticsEvents.donationFinishRequest();
+        analyticsEvents.donationFinishRequest(res.donation.amount);
         setDonation(res.donation);
         setLoading(false);
       });
