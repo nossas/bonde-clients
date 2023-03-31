@@ -62,7 +62,7 @@ type Props = {
   };
   analyticsEvents: {
     donationSetValue: () => void;
-    donationFinishRequest: () => void;
+    donationFinishRequest: (value?: string) => void;
   };
   overrides: any;
 };
@@ -119,7 +119,7 @@ const DonationPlugin: React.FC<Props> = ({
         },
         customerData: donationCustomerData,
       }).then((res: any) => {
-        analyticsEvents.donationFinishRequest(res.donation.amount);
+        analyticsEvents.donationFinishRequest(String(res.donation.amount).slice(0, -2));
         setDonation(res.donation);
         setLoading(false);
       });
