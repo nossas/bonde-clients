@@ -39,6 +39,13 @@ const columns = (
       bold: true,
     },
     {
+      accessor: "tipoDeAcolhimento",
+      Header: "Tipo de Acolhimento",
+      Cell: ({ value }: valueString): ReactElement => (
+        <span>{value || "-"}</span>
+      ),
+    },
+    {
       accessor: "email",
       Header: "E-mail",
       Cell: ({ value }: valueString): ReactElement => (
