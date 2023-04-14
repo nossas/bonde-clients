@@ -71,7 +71,7 @@ const VOLUNTEERS_FOR_MATCH = gql`
 `;
 
 const RECIPIENTS_FOR_MATCH = gql`
-  query RecipientsForMatch($recipientOrganizationId: bigint_comparison_exp!) {
+  query RecipientsForMatch($recipientOrganizationId: bigint_comparison_exp!, $ticketSubject: String_comparison_exp) {
     recipients: solidarity_tickets(
       where: {
         status: { _nin: ["deleted", "solved"] }
@@ -81,6 +81,7 @@ const RECIPIENTS_FOR_MATCH = gql`
             "encaminhamento__realizado_para_serviço_público"
           ]
         }
+        subject: $ticketSubject
         individual: {
           organization_id: $recipientOrganizationId
           condition: { _eq: "inscrita" }
@@ -149,14 +150,39 @@ const FetchIndividualsForMatch = ({
   let variables;
   let query;
 
-  if (organizationId !== zendeskOrganizations["individual"]) {
+
+  if (organizationId === 360269610652) {
     variables = {
       recipientOrganizationId: {
         _eq: zendeskOrganizations["individual"],
       },
+      ticketSubject: {
+        _similar: "%Jurídico%"
+      }
     };
     query = RECIPIENTS_FOR_MATCH;
-  } else {
+  } else if (organizationId === 360282119532) {
+    variables = {
+      recipientOrganizationId: {
+        _eq: zendeskOrganizations["individual"],
+      },
+      ticketSubject: {
+        _similar: "%Psicológico%"
+      }
+    };
+    query = RECIPIENTS_FOR_MATCH;
+  } else if (organizationId !== zendeskOrganizations["individual"]) {
+    variables = {
+      recipientOrganizationId: {
+        _eq: zendeskOrganizations["individual"],
+      },
+      ticketSubject: {
+        _similar: "%%"
+      }
+    };
+    query = RECIPIENTS_FOR_MATCH;
+  }
+  else {
     variables = {
       volunteerOrganizationId: {
         _eq: getVolunteerOrganizationId(subject),
