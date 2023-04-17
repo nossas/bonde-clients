@@ -2,6 +2,7 @@ import { Individual } from "../Individuals";
 
 export interface Columns {
   accessor?: string;
+  id?: any
   Header: any;
   Cell?: (arg0: any) => string | React.ReactElement | null;
   className?: string;

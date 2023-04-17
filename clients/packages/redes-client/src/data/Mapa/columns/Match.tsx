@@ -18,7 +18,6 @@ const columns = (
       Header: "Nome",
       Cell: ({
         row: { original },
-        value,
       }: {
         row: { original: Individual };
         value: number;
@@ -28,7 +27,7 @@ const columns = (
             target="_blank"
             rel="noopener noreferrer"
             style={{ textDecoration: "none", color: "inherit" }}
-            href={`https://mapadoacolhimento.zendesk.com/agent/users/${value}/requested_tickets`}
+            href={`https://mapadoacolhimento.zendesk.com/agent/tickets/${original.ticketId}`}
           >
             <span>{original.firstName}</span>
           </a>
@@ -39,22 +38,30 @@ const columns = (
       bold: true,
     },
     {
-      accessor: "tipoDeAcolhimento",
+      accessor: "id",
       Header: "Tipo de Acolhimento",
-      Cell: ({ value }: valueString): ReactElement => (
-        <span>{value || "-"}</span>
-      ),
+      id: "ticket",
+      Cell: ({
+        row: { original },
+      }): ReactElement | any => {
+        return original.firstName ? (
+          <a
+            target="_blank"
+
+            style={{ textDecoration: "none", color: "inherit" }}
+            href={`https://mapadoacolhimento.zendesk.com/agent/tickets/${original.ticketId}`}
+          >
+            <span>{original.subject?.substring(1, original.subject.indexOf(']'))}</span>
+            {console.log("ORIGINAL =>>>", original)}
+          </a>
+        ) : (
+          "-"
+        );
+      }
     },
     {
       accessor: "email",
       Header: "E-mail",
-      Cell: ({ value }: valueString): ReactElement => (
-        <span>{value || "-"}</span>
-      ),
-    },
-    {
-      accessor: "occupationArea",
-      Header: "Área de ocupação",
       Cell: ({ value }: valueString): ReactElement => (
         <span>{value || "-"}</span>
       ),
