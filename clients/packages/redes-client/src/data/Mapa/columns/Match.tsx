@@ -18,46 +18,74 @@ const columns = (
       Header: "Nome",
       Cell: ({
         row: { original },
+        value
       }: {
         row: { original: Individual };
         value: number;
       }): ReactElement | string => {
-        return original.firstName ? (
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ textDecoration: "none", color: "inherit" }}
-            href={`https://mapadoacolhimento.zendesk.com/agent/tickets/${original.ticketId}`}
-          >
-            <span>{original.firstName}</span>
-          </a>
-        ) : (
-          "-"
-        );
+        if (original.organizationId != 360273031591) {
+          return original.firstName ? (
+            <a
+              target="_blank"
+              style={{ textDecoration: "none", color: "inherit" }}
+              href={`https://mapadoacolhimento.zendesk.com/agent/users/${value}/requested_tickets`}
+            >
+              <span>{original.firstName}</span>
+              {console.log("ORIGINAL =>>>", original)}
+            </a>
+          ) : (
+            "-"
+          );
+        } else {
+          return original.firstName ? (
+            <a
+              target="_blank"
+              style={{ textDecoration: "none", color: "inherit" }}
+              href={`https://mapadoacolhimento.zendesk.com/agent/tickets/${original.ticketId}`}
+            >
+              <span>{original.firstName}</span>
+              {console.log("ORIGINAL =>>>", original)}
+            </a>
+          ) : (
+            "-"
+          );
+        }
       },
       bold: true,
     },
     {
       accessor: "id",
       Header: "Tipo de Acolhimento",
+      className: isVolunteerSelected ? "hide" : "",
       id: "ticket",
       Cell: ({
         row: { original },
       }): ReactElement | any => {
-        return original.firstName ? (
-          <a
-            target="_blank"
-
-            style={{ textDecoration: "none", color: "inherit" }}
-            href={`https://mapadoacolhimento.zendesk.com/agent/tickets/${original.ticketId}`}
-          >
-            <span>{original.subject?.substring(1, original.subject.indexOf(']'))}</span>
-            {console.log("ORIGINAL =>>>", original)}
-          </a>
-        ) : (
-          "-"
-        );
+        if (original.organizationId == 360273031591) {
+          return original.firstName ? (
+            <a
+              target="_blank"
+              style={{ textDecoration: "none", color: "inherit" }}
+              href={`https://mapadoacolhimento.zendesk.com/agent/tickets/${original.ticketId}`}
+            >
+              <span>{original.subject?.substring(1, original.subject.indexOf(']'))}</span>
+              {console.log("ORIGINAL =>>>", original)}
+            </a>
+          ) : (
+            "-"
+          );
+        } else {
+          return null
+        }
       }
+    },
+    {
+      accessor: "occupationArea",
+      className: !isVolunteerSelected ? "hide" : "",
+      Header: "Área de ocupação",
+      Cell: ({ value }: valueString): ReactElement => (
+        <span>{value || "-"}</span>
+      ),
     },
     {
       accessor: "email",
