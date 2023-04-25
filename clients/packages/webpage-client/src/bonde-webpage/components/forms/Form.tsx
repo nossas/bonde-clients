@@ -15,8 +15,8 @@ const FormStyled = styled.form<FormStyledProperties>`
 export interface FormProps extends FormFinalProps, FormStyledProperties {
   children(formProps: FormRenderProps): any;
   onSubmit(values: any): void;
-  initialValues: any;
-  mutators: any;
+  initialValues?: any;
+  mutators?: any;
 }
 
 const Form: React.FC<FormProps> = ({

@@ -23,10 +23,22 @@ const composeValidators = (...validators: any) => (value: any) =>
     undefined
   );
 
+// Regex to validate phone numver in E.164 format
+// Validating only BRA phone numbers for now
+const regexPhoneE164 = /^\+\d{12,13}$/;
+
+const isValidPhoneE164 = ({ code, invalid }: { code: string; invalid: string }) =>
+  (value: string) => {
+    const phoneE164 = /^\+/.test(value) ? value : `+${value}`;
+    const message = [11, 12].includes(phoneE164.length) ? code : invalid;
+    return regexPhoneE164.test(phoneE164) ? undefined : message;
+  };
+
 export default {
   isEmail,
   required,
   min,
   max,
+  isValidPhoneE164,
   composeValidators,
 };
