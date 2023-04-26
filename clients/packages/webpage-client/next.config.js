@@ -33,6 +33,9 @@ module.exports = withTM(
       domainApiGraphqlWs: process.env.REACT_APP_DOMAIN_API_GRAPHQL_WS,
       domainPublic: process.env.REACT_APP_DOMAIN_PUBLIC,
       pagarmeKey: process.env.REACT_APP_PAGARME_KEY,
+      
+      openApiUrl: process.env.REACT_APP_OPENAPI_URL,
+      openApiToken: process.env.REACT_APP_OPENAPI_TOKEN
     },
   })
 );

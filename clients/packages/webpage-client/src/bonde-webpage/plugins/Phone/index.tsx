@@ -13,13 +13,6 @@ import Calling from './Calling';
 import TellAFriend from "./TellAFriend";
 import type { Target, Call } from './types';
 
-
-// const apiUrl = 'https://openapi.staging.bonde.org'
-const groupApiToken = 'xxxxx'
-const apiUrl = 'http://127.0.0.1:8000'
-const targetsEndpoint = '/api/campaigns/1/phone/targets/'
-const phoneEndpoint = '/api/campaigns/1/phone/'
-
 const PhoneAreaStyled = styled.div`
   background-color: #fff;
 `
@@ -107,10 +100,7 @@ const PhoneWidget = (props: any) => {
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(apiUrl + targetsEndpoint, {
-        method: 'GET',
-        headers: { 'Content-Type': 'application/json', 'OpenAPI-Token': groupApiToken },
-      })
+      const response = await fetch(`/api/phone/${props.widget.id}/targets`)
 
       // console log here to determine how to set products
       setTargets((await response.json()) as Target[])
@@ -124,9 +114,9 @@ const PhoneWidget = (props: any) => {
       targets: targets.map((target) => target.id)
     }
 
-    const response = await fetch(apiUrl + phoneEndpoint, {
+    const response = await fetch(`/api/phone/${props.widget.id}/create`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'OpenAPI-Token': groupApiToken },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload)
     })
 
@@ -138,7 +128,6 @@ const PhoneWidget = (props: any) => {
   if (targets.length > 0 && !!call) {
     headerComponent = (
       <Calling
-        apiUrl={apiUrl}
         target={targets[0] as any}
         call={call}
         emitChange={setCall}

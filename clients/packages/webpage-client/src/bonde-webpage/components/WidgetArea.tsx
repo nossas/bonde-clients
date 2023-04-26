@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import {
   PluggableWidget,
 } from '../';
+
+
 const WidgetArea = ({
   block,
   widget,

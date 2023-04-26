@@ -38,18 +38,17 @@ const CallDuration = () => {
 
 
 interface Props {
-  apiUrl: string
   target: Target
   call: Call
   emitChange: (call?: Call) => void
   pollInterval?: number
 }
 
-const CallingWidget = ({ apiUrl, target, call, emitChange, pollInterval = 500 }: Props) => {
+const CallingWidget = ({ target, call, emitChange, pollInterval = 500 }: Props) => {
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
-        const response = await fetch(`${apiUrl}${call.url}`, {
+        const response = await fetch(call.url, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' }
         })
