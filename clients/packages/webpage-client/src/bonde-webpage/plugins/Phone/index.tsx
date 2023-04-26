@@ -191,7 +191,7 @@ const PhoneWidget = (props: any) => {
               <FormControlStyled>
                 <SelectField
                   label="Estado"
-                  name="state"
+                  name="person.postal_address.region"
                   validate={Validators.required("Preenchimento obrigatório")}
                 >
                   <option value="AC">Acre</option>
@@ -228,7 +228,7 @@ const PhoneWidget = (props: any) => {
             {showCity === 's' && (
               <FormControlStyled>
                 <InputField
-                  name="city"
+                  name="person.postal_address.locality"
                   label="Cidade"
                   placeholder="Insira sua cidade"
                   validate={Validators.required("Preenchimento obrigatório")}
