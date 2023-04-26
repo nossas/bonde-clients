@@ -53,7 +53,7 @@ const widgetsByCommunityGQL = gql`
 
 export type Widget = {
   id: number
-  kind: 'pressure' | 'form' | 'donation' | 'plip'
+  kind: 'pressure' | 'form' | 'donation' | 'plip' | 'phone'
   block: {
     mobilization: {
       image?: string

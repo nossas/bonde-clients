@@ -43,7 +43,7 @@ const WidgetButton: React.FC<Props> = ({ widget }) => {
     }
   };
 
-  if (kind === 'pressure' || kind === 'plip') {
+  if (kind === 'pressure' || kind === 'plip' || kind === 'phone') {
     linkProps = { to: `/widgets/${id}/settings` };
   }
 

@@ -24,13 +24,17 @@ type Props = {
 
 const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement => {
 	const { t } = useTranslation("widgetActions");
+	const {
+		finish_message: finishMessage,
+		finish_message_type: finishMessageType
+	} = widget.settings || {}
 
 	// Parse older finish messages saved like text
-	const finish_message = !!widget.settings.finish_message && typeof widget.settings.finish_message === 'string'
-		? JSON.parse(widget.settings.finish_message)
-		: widget.settings.finish_message
+	const newFinishMessage = !!finishMessage && typeof finishMessage === 'string'
+		? JSON.parse(finishMessage)
+		: finishMessage
 		;
-	const finish_message_type = widget.settings.finish_message_type || 'share';
+	const newFinishMessageType = finishMessageType || 'share';
 
 	return (
 		<SettingsForm
@@ -41,8 +45,8 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 			initialValues={{
 				settings: {
 					...widget.settings,
-					finish_message,
-					finish_message_type
+					finish_message: newFinishMessage,
+					finish_message_type: newFinishMessageType
 				}
 			}}
 		>

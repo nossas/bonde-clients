@@ -12,39 +12,48 @@ interface NavigationProps {
 const Navigation: React.FC<NavigationProps> = ({ widget }) => {
   const { t } = useTranslation("widgetActions");
 
+  let tabs;
+
+  if (widget.kind === 'pressure') {
+    tabs = ({ is, push }: any) => (
+      <>
+        <Tab
+          active={is(/\/widgets\/\d+\/settings\/*$/)}
+          onClick={() => push("")}
+        >
+          {t("settings.navigation.performance")}
+        </Tab>
+        <Tab
+          active={is(/\/widgets\/\d+\/settings\/targets\/*$/)}
+          onClick={() => push("/targets")}
+        >
+          {t("settings.navigation.targets")}
+        </Tab>
+        <Tab
+          active={is(/\/widgets\/\d+\/settings\/sending\/*$/)}
+          onClick={() => push(`/sending`)}
+        >
+          {t("settings.navigation.sending")}
+        </Tab>
+      </>
+    )
+  } else if (widget.kind !== 'phone') {
+    tabs = ({ is, push }: any) => (
+      <Tab
+        active={is(/\/widgets\/\d+\/settings\/*$/)}
+        onClick={() => push("")}
+      >
+        {t("settings.navigation.performance")}
+      </Tab>
+    )
+  }
+
   return (
     <TabRoute>
       {({ push, is }) => (
         <Flex direction="row" mb={3}>
-          {widget.kind === "pressure" ? (
-            <>
-              <Tab
-                active={is(/\/widgets\/\d+\/settings\/*$/)}
-                onClick={() => push("")}
-              >
-                {t("settings.navigation.performance")}
-              </Tab>
-              <Tab
-                active={is(/\/widgets\/\d+\/settings\/targets\/*$/)}
-                onClick={() => push("/targets")}
-              >
-                {t("settings.navigation.targets")}
-              </Tab>
-              <Tab
-                active={is(/\/widgets\/\d+\/settings\/sending\/*$/)}
-                onClick={() => push(`/sending`)}
-              >
-                {t("settings.navigation.sending")}
-              </Tab>
-            </>
-          ) : (
-            <Tab
-              active={is(/\/widgets\/\d+\/settings\/*$/)}
-              onClick={() => push("")}
-            >
-              {t("settings.navigation.performance")}
-            </Tab>
-          )}
+          {tabs && tabs({ push, is })}
+
           <Tab
             active={is(/\/widgets\/\d+\/settings\/adjusts\/*$/)}
             onClick={() => push(`/adjusts`)}

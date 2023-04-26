@@ -32,7 +32,7 @@ const Home = ({ community, widgets, loading }: Props): React.ReactElement => {
       )}
     >
       <Stack direction="column" spacing={4} flex={1}>
-        {!isMobile ? 
+        {!isMobile ?
           <section style={{ marginBottom: '15px' }}>
             <Header.H5 uppercase>{t('home.shortcuts.title')}</Header.H5>
             <Shortcuts community={community} />
@@ -50,11 +50,11 @@ const Home = ({ community, widgets, loading }: Props): React.ReactElement => {
               overflowY="auto"
             >
               <Grid templateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", null, "repeat(4, 1fr)", null, "repeat(6, 1fr)"]} gap={4} rowGap={4}>
-              {result.map((w: Widget, index: number) => (
-                <GridItem key={`widget-button-${index}`}>
-                  <WidgetButton key={w.id} widget={w} />
-                </GridItem>
-              ))}
+                {result.map((w: Widget, index: number) => (
+                  <GridItem key={`widget-button-${index}`}>
+                    <WidgetButton key={w.id} widget={w} />
+                  </GridItem>
+                ))}
               </Grid>
             </Box>
           )}
