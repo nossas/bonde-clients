@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "@emotion/styled";
 import {
   Button,
   Form,
@@ -11,82 +10,13 @@ import LGPD from "../../components/ux/LGPD";
 
 import Calling from './Calling';
 import TellAFriend from "./TellAFriend";
-import type { Target, Call } from './types';
+import type { Campaign, Call } from './types';
+import { HeadingStyled, PhoneAreaStyled, FormControlStyled, FormFooterAreaStyled, CounterAreaStyled, TargetAreaStyled } from './styles'
 
-const PhoneAreaStyled = styled.div`
-  background-color: #fff;
-`
-
-const TargetAreaStyled = styled.div`
-  background-color: #eeeeee;
-  padding: 15px 26px;
-  font-family: inherit;
-
-  .title {
-    color: #4c4c4c;
-    font-size: 0.8em;
-    // margin: 0 0 12px 0;
-    font-weight: 700;
-  }
-
-  .loading {
-    display: block;
-  }
-
-  ul {
-    list-style-type: none;
-    margin: 5px 0 5px -40px;
-    display: flex;
-    flex-direction: row;
-  }
-
-  li {
-    font-size: 0.8rem;
-    color: #222;
-    font-weight: 700;
-    background-color: #fff;
-    padding: 0.5rem 1rem;
-    margin-right: 0.5rem;
-    border-radius: 3px;
-  }
-`
-
-const FormControlStyled = styled.div`
-  padding: 1rem 2rem 0.5rem;
-  border-bottom: 1px solid #eee;
-`
-
-const FormFooterAreaStyled = styled.div<{ color: string }>`
-  padding: 1rem 2rem 0.5rem;
-
-  button {
-    background-color: ${props => props.color};
-  }
-`
-
-
-const HeadingStyled = styled.h2<{
-  bgColor: string
-}>`
-  background-color: ${(props: any) => props.bgColor};
-  font-family: inherit;
-  color: #fff;
-  display: grid;
-  justify-items: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  padding: 1rem 2rem;
-  margin: 0;
-  border-radius: 3px 3px 0 0;
-  font-weight: 400;
-  text-align: center;
-`
 
 
 const PhoneWidget = (props: any) => {
-  const [targets, setTargets] = useState<Target[]>([]);
+  const [campaign, setCampaign] = useState<Campaign | undefined>(undefined);
   const [call, setCall] = useState<Call | undefined>();
 
   const {
@@ -96,14 +26,15 @@ const PhoneWidget = (props: any) => {
     show_state: showState = 'n',
     main_color: mainColor = '#f23392',
     button_text: buttonText = 'Ligar',
+    count_text: countText,
   } = props.widget?.settings || {};
 
   React.useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch(`/api/phone/${props.widget.id}/targets`)
+      const response = await fetch(`/api/campaigns/${props.widget.id}/`)
 
       // console log here to determine how to set products
-      setTargets((await response.json()) as Target[])
+      setCampaign((await response.json()) as Campaign)
     }
     fetchData()
   }, [])
@@ -111,7 +42,7 @@ const PhoneWidget = (props: any) => {
   const submit = async (values) => {
     const payload = {
       ...values,
-      targets: targets.map((target) => target.id)
+      targets: campaign?.details.targets.map((target) => target.id)
     }
 
     const response = await fetch(`/api/phone/${props.widget.id}/create`, {
@@ -125,18 +56,18 @@ const PhoneWidget = (props: any) => {
 
   let headerComponent;
 
-  if (targets.length > 0 && !!call) {
+  if (!!campaign && !!call) {
     headerComponent = (
       <Calling
-        target={targets[0] as any}
+        target={campaign.details.targets[0] as any}
         call={call}
         emitChange={setCall}
       />
     )
-  } else if (targets.length > 0 && !call) {
+  } else if (!!campaign && !call) {
     headerComponent = (
       <ul>
-        {targets.map((item) => (
+        {campaign.details.targets.map((item) => (
           <li key={`target-${item.id}`}>{item.name}</li>
         ))}
       </ul>
@@ -151,7 +82,9 @@ const PhoneWidget = (props: any) => {
     <PhoneAreaStyled>
       <HeadingStyled bgColor={mainColor}>{callToAction || titleText}</HeadingStyled>
       <TargetAreaStyled>
-        <span className="title">{`Quem vai pressionar? (${targets.length} ${targets.length > 1 ? 'alvos' : 'alvo'})`}</span>
+        <span className="title">
+          {`Quem vai pressionar? (${campaign?.details.targets.length} ${(campaign?.details.targets.length || 0) > 1 ? 'alvos' : 'alvo'})`}
+        </span>
         {headerComponent}
       </TargetAreaStyled>
       <Form onSubmit={submit}>
@@ -242,6 +175,18 @@ const PhoneWidget = (props: any) => {
           </>
         )}
       </Form>
+      {countText && (
+        <CounterAreaStyled color={mainColor}>
+          {!campaign ? (
+            <span>Carregando</span>
+          ) : (
+            <>
+              <p className="number">{campaign?.details.total}</p>
+              <p className="desc">{countText}</p>
+            </>
+          )}
+        </CounterAreaStyled>
+      )}
     </PhoneAreaStyled>
   ) : (
     <TellAFriend {...props} />

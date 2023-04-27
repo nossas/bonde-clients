@@ -19,7 +19,7 @@ const campaign_id = 1;
 export default async (req: Request, res: any) => {
     if (req.method === 'GET') {
         // const { widget_id } = req.query
-        const endpoint = `${openApiUrl}/api/campaigns/${campaign_id}/phone/targets/`;
+        const endpoint = `${openApiUrl}/api/campaigns/${campaign_id}/`;
         const response = await fetch(endpoint, {
             method: 'GET',
             headers: { 'Content-Type': 'application/json', 'OpenAPI-Token': openApiToken }
