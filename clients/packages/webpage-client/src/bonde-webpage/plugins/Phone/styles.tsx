@@ -3,6 +3,10 @@ import styled from "@emotion/styled";
 
 export const PhoneAreaStyled = styled.div`
   background-color: #fff;
+
+  pre {
+    padding: 1rem 2rem 0.5rem;
+  }
 `
 
 export const TargetAreaStyled = styled.div`
@@ -85,12 +89,12 @@ export const CounterAreaStyled = styled.div<{
   padding: 2rem;
   border-radius: 0 0 3px 3px;
 
-  p:first-child {
+  .count {
     font-weight: 300;
     font-size: 2.15rem;
     color: ${props => props.color};
   }
-  p {
+  .desc {
     font-weight: 700;
     font-size: 1.25rem;
   }

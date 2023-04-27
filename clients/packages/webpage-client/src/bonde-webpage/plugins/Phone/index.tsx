@@ -7,6 +7,7 @@ import {
   SelectField
 } from "../../components/forms";
 import LGPD from "../../components/ux/LGPD";
+import CountUp from "react-countup";
 
 import Calling from './Calling';
 import TellAFriend from "./TellAFriend";
@@ -27,6 +28,7 @@ const PhoneWidget = (props: any) => {
     main_color: mainColor = '#f23392',
     button_text: buttonText = 'Ligar',
     count_text: countText,
+    briefing
   } = props.widget?.settings || {};
 
   React.useEffect(() => {
@@ -92,20 +94,6 @@ const PhoneWidget = (props: any) => {
           <>
             <FormControlStyled>
               <InputField
-                name='person.phone_number'
-                label="Telefone"
-                placeholder="Insira seu telefone. Ex: +5511987654321"
-                validate={Validators.composeValidators(
-                  Validators.required("Preenchimento obrigatório"),
-                  Validators.isValidPhoneE164({
-                    code: 'Informe o código do país e o DDD com dois dígitos. Ex: +5511',
-                    invalid: 'Telefone inválido'
-                  })
-                )}
-              />
-            </FormControlStyled>
-            <FormControlStyled>
-              <InputField
                 name="person.given_name"
                 label="Seu nome"
                 placeholder="Insira seu nome"
@@ -117,7 +105,31 @@ const PhoneWidget = (props: any) => {
                 name="person.family_name"
                 label="Sobrenome"
                 placeholder="Insira seu sobrenome"
-                validate={Validators.required("Preenchimento obrigatório")}
+              />
+            </FormControlStyled>
+            <FormControlStyled>
+              <InputField
+                name='person.email_address'
+                label="Email"
+                placeholder="Insira seu email"
+                validate={Validators.composeValidators(
+                  Validators.required("Preenchimento obrigatório"),
+                  Validators.isEmail("Insira um e-mail válido")
+                )}
+              />
+            </FormControlStyled>
+            <FormControlStyled>
+              <InputField
+                name='person.phone_number'
+                label="Telefone"
+                placeholder="Insira seu telefone. Ex: +5511987654321"
+                validate={Validators.composeValidators(
+                  Validators.required("Preenchimento obrigatório"),
+                  Validators.isValidPhoneE164({
+                    code: 'Informe o código do país e o DDD com dois dígitos. Ex: +5511',
+                    invalid: 'Telefone inválido'
+                  })
+                )}
               />
             </FormControlStyled>
             {showState === 's' && (
@@ -158,7 +170,7 @@ const PhoneWidget = (props: any) => {
                 </SelectField>
               </FormControlStyled>
             )}
-            {showCity === 's' && (
+            {showCity === 'city-true' && (
               <FormControlStyled>
                 <InputField
                   name="person.postal_address.locality"
@@ -167,6 +179,9 @@ const PhoneWidget = (props: any) => {
                   validate={Validators.required("Preenchimento obrigatório")}
                 />
               </FormControlStyled>
+            )}
+            {briefing && (
+              <pre>{briefing}</pre>
             )}
             <FormFooterAreaStyled color={mainColor}>
               <Button type="submit">{buttonText}</Button>
@@ -181,7 +196,12 @@ const PhoneWidget = (props: any) => {
             <span>Carregando</span>
           ) : (
             <>
-              <p className="number">{campaign?.details.total}</p>
+              <CountUp
+                className="count"
+                start={0}
+                end={campaign?.details.total}
+                duration={5}
+              />
               <p className="desc">{countText}</p>
             </>
           )}

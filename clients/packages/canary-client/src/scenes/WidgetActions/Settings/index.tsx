@@ -16,6 +16,7 @@ import Autofire from "./Autofire";
 import ConfigurePostAction from "./ConfigurePostAction";
 import Performance from "./Pressure";
 import Plips from "./Plips";
+import Phone from "./Phone";
 
 type Props = {
   widgets: Widget[];
@@ -41,6 +42,12 @@ const RoutesByKind: React.FC<RoutesByKindProps> = ({ widget, updateCache }) => {
         <Plips widget={widget} />
       </Route>
     )
+  } else if (widget.kind === 'phone') {
+    return (
+      <Route path={`${match.path}`}>
+        <Phone widget={widget} updateCache={updateCache} />
+      </Route>
+    )
   }
   return <div />
 }
@@ -49,7 +56,7 @@ const Settings: React.FC<Props> = ({ widgets }) => {
   const [widgetsCached, setWidgetsCached] = useState(widgets);
   const match = useRouteMatch();
   const { t } = useTranslation('widgetActions');
-  const { community, updateSession } = useContext(SessionContext);
+  const { community, updateSession }: any = useContext(SessionContext);
 
   const { widgetId }: any = useParams();
   const widget = widgetsCached.filter((w: Widget) => w.id === Number(widgetId))[0];

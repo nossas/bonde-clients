@@ -12,6 +12,7 @@ const CallingStyled = styled.div`
 
 const CallerStyled = styled.div`
   background-color: #ffd500;
+  padding: 10px 20px;
 
   .caller {
     display: grid;

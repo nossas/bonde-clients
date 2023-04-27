@@ -46,6 +46,15 @@ const Navigation: React.FC<NavigationProps> = ({ widget }) => {
         {t("settings.navigation.performance")}
       </Tab>
     )
+  } else if (widget.kind === 'phone') {
+    tabs = ({ is, push }: any) => (
+      <Tab
+        active={is(/\/widgets\/\d+\/settings\/*$/)}
+        onClick={() => push("")}
+      >
+        Telefone
+      </Tab>
+    )
   }
 
   return (
