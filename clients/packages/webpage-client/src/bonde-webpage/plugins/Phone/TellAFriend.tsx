@@ -1,7 +1,7 @@
 import React from 'react';
 
 // import { FormattedMessage } from 'react-intl'
-import { Translate } from '../../components/MobilizationClass';
+// import { Translate } from '../../components/MobilizationClass';
 import TellAFriendBase from '../../components/ux/TellAFriendBase';
 
 type Props = {
@@ -25,17 +25,17 @@ const PhoneTellAFriend = ({
   widget,
   ...props
 }: Props) => (
-  <Translate>
-    {({ t }: any) => (
-      <TellAFriendBase
-        preview={preview}
-        mobilization={mobilization}
-        widget={widget}
-        message={t('Pressure Post Action')}
-        {...props}
-      />
-    )}
-  </Translate>
+  // <Translate>
+  //   {({ t }: any) => (
+  <TellAFriendBase
+    preview={preview}
+    mobilization={mobilization}
+    widget={widget}
+    message="Ligação realizada"
+    {...props}
+  />
+  //   )}
+  // </Translate>
 );
 
 export default PhoneTellAFriend;
