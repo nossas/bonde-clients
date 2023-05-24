@@ -77,7 +77,7 @@ export default (mobilization, widget, { intl }) => [
   },
   {
     component: () => <div>Pressão por telefone</div>,
-    kind: 'pressure-phone',
+    kind: 'phone',
     // TODO: propriedades relacionadas ao draft
     svgIcon: PressurePhoneIcon,
     label: intl.formatMessage({
