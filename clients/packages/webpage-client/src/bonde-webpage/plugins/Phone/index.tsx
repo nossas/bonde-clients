@@ -12,7 +12,12 @@ import CountUp from "react-countup";
 import Calling from './Calling';
 import type { Campaign, Call } from './types';
 import { HeadingStyled, PhoneAreaStyled, FormControlStyled, FormFooterAreaStyled, CounterAreaStyled, TargetAreaStyled } from './styles'
+import styled from "@emotion/styled";
 
+const Briefing = styled.p`
+  padding: 1rem 2rem;
+  color: #464545;
+`;
 
 
 const PhoneWidget = (props: any) => {
@@ -182,7 +187,7 @@ const PhoneWidget = (props: any) => {
                 </FormControlStyled>
               )}
               {briefing && (
-                <pre>{briefing}</pre>
+                <Briefing>{briefing}</Briefing>
               )}
               <FormFooterAreaStyled color={mainColor}>
                 <Button type="submit">{buttonText}</Button>
