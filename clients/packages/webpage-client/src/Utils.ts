@@ -7,8 +7,8 @@ const Utils = {
     const domain = publicRuntimeConfig.domainPublic || 'staging.bonde.org';
 
     return mobilization?.custom_domain
-      ? `http://${mobilization?.custom_domain}`
-      : `http://${mobilization?.slug}.${domain}`;
+      ? `https://${mobilization?.custom_domain}`
+      : `https://${mobilization?.slug}.${domain}`;
   },
   imageUrl: '/static/images/check-mark-image.png'
 }
