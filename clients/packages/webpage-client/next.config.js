@@ -35,7 +35,8 @@ module.exports = withTM(
       pagarmeKey: process.env.REACT_APP_PAGARME_KEY,
       
       openApiUrl: process.env.REACT_APP_OPENAPI_URL,
-      openApiToken: process.env.REACT_APP_OPENAPI_TOKEN
+      openApiToken: process.env.REACT_APP_OPENAPI_TOKEN,
+      openApiCampaignId: process.env.REACT_APP_OPENAPI_CAMPAIGN_ID
     },
   })
 );

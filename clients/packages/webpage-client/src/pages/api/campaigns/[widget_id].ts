@@ -10,11 +10,12 @@ interface Request {
 const {
     publicRuntimeConfig: {
         openApiUrl,
-        openApiToken
+        openApiToken,
+        openApiCampaignId
     }
 } = getConfig()
 
-const campaign_id = 1;
+const campaign_id = openApiCampaignId;
 
 export default async (req: Request, res: any) => {
     if (req.method === 'GET') {
