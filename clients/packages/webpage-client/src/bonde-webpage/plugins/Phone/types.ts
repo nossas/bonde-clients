@@ -13,7 +13,7 @@ export interface Campaign {
   }
 }
 
-export type StatusCall = 'created' | 'queued' | 'initiated' | 'ringing' | 'in-progress' | 'completed'
+export type StatusCall = 'created' | 'queued' | 'initiated' | 'ringing' | 'in-progress' | 'completed' | 'no-answer'
 
 export interface Call {
   action_id?: number

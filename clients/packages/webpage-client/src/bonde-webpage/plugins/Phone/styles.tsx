@@ -26,13 +26,16 @@ export const TargetAreaStyled = styled.div`
   }
 
   ul {
+    overflow: auto;
     list-style-type: none;
-    margin: 5px 0 5px -40px;
+    margin: 5px 0 5px 0;
+    padding: 0 0 5px;
     display: flex;
     flex-direction: row;
   }
 
   li {
+    cursor:pointer;
     font-size: 0.8rem;
     color: #222;
     font-weight: 700;
@@ -40,6 +43,11 @@ export const TargetAreaStyled = styled.div`
     padding: 0.5rem 1rem;
     margin-right: 0.5rem;
     border-radius: 3px;
+    min-width: 150px;
+  }
+
+  li.active {
+    background-color: lightgray;
   }
 `
 

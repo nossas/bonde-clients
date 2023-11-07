@@ -23,6 +23,7 @@ const Briefing = styled.p`
 const PhoneWidget = (props: any) => {
   const [campaign, setCampaign] = useState<Campaign | undefined>(undefined);
   const [call, setCall] = useState<Call | undefined>();
+  const [target, setTarget] = useState<number | undefined>(undefined);
 
   const {
     call_to_action: callToAction,
@@ -49,7 +50,8 @@ const PhoneWidget = (props: any) => {
   const submit = async (values) => {
     const payload = {
       ...values,
-      targets: campaign?.details.targets.map((target) => target.id)
+      targets: [target]
+      // targets: campaign?.details.targets.map((target) => target.id)
     }
 
     const response = await fetch(`/api/phone/${props.widget.id}/create`, {
@@ -75,7 +77,7 @@ const PhoneWidget = (props: any) => {
     headerComponent = (
       <ul>
         {campaign.details.targets.map((item) => (
-          <li key={`target-${item.id}`}>{item.name}</li>
+          <li key={`target-${item.id}`} className={item.id === target ? "active" : ""} onClick={() => setTarget(item.id)}>{item.name}</li>
         ))}
       </ul>
     )
@@ -85,13 +87,13 @@ const PhoneWidget = (props: any) => {
     )
   }
 
-  if (call?.status !== 'completed') {
+  if (call?.status !== 'completed' && call?.status !== 'no-answer') {
     return (
       <PhoneAreaStyled>
         <HeadingStyled bgColor={mainColor}>{callToAction || titleText}</HeadingStyled>
         <TargetAreaStyled>
           <span className="title">
-            {`Quem vai pressionar? (${campaign?.details.targets.length} ${(campaign?.details.targets.length || 0) > 1 ? 'alvos' : 'alvo'})`}
+            {`Quem vai pressionar? (${campaign?.details.targets.length || 0} ${(campaign?.details.targets.length || 0) > 1 ? 'alvos' : 'alvo'})`}
           </span>
           {headerComponent}
         </TargetAreaStyled>
