@@ -29,6 +29,8 @@ const regexPhoneE164 = /^\+\d{12,13}$/;
 
 const isValidPhoneE164 = ({ code, invalid }: { code: string; invalid: string }) =>
   (value: string) => {
+    value = value.replace("(", "").replace(")", "").replace("-", "").split(" ").join("")
+
     const phoneE164 = /^\+/.test(value) ? value : `+${value}`;
     const message = [11, 12].includes(phoneE164.length) ? code : invalid;
     return regexPhoneE164.test(phoneE164) ? undefined : message;

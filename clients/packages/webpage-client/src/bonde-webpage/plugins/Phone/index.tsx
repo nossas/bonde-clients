@@ -47,9 +47,14 @@ const PhoneWidget = (props: any) => {
     fetchData()
   }, [])
 
-  const submit = async (values) => {
+  const submit = async ({ person, ...values }) => {
+    const phone_number = person.phone_number.replace("(", "").replace(")", "").replace("-", "").split(" ").join("")
     const payload = {
       ...values,
+      person: {
+        ...person,
+        phone_number: phone_number
+      },
       targets: [target]
       // targets: campaign?.details.targets.map((target) => target.id)
     }
@@ -131,6 +136,7 @@ const PhoneWidget = (props: any) => {
                   name='person.phone_number'
                   label="Telefone"
                   placeholder="Insira seu telefone. Ex: +5511987654321"
+                  mask="+55 (99) 9 9999-9999"
                   validate={Validators.composeValidators(
                     Validators.required("Preenchimento obrigatório"),
                     Validators.isValidPhoneE164({

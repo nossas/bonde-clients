@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import { useField } from 'react-final-form';
+import InputMask from 'react-input-mask';
+
 import Box from './Box';
 import Label from './Label';
 import Raise from './Raise';
@@ -24,6 +26,7 @@ export interface InputFieldProperties {
   label?: string;
   validate?: any;
   disabled?: boolean;
+  mask?: string;
 }
 
 const InputField: React.FC<InputFieldProperties> = ({
@@ -32,7 +35,8 @@ const InputField: React.FC<InputFieldProperties> = ({
   type,
   label,
   disabled,
-  validate
+  validate,
+  mask
 }) => {
   const { input, meta } = useField(name, { validate });
 
@@ -42,12 +46,18 @@ const InputField: React.FC<InputFieldProperties> = ({
         {label && <Label>{label}</Label>}
         {meta.touched && meta.error && <Raise>{meta.error}</Raise>}
       </Box>
-      <InputStyled
-        {...input}
-        disabled={disabled}
-        placeholder={placeholder}
-        type={type || input.type}
-      />
+      {mask ? (
+        <InputMask mask={mask} value={input.value} onChange={input.onChange}>
+          {(inputProps) => <InputStyled {...inputProps} type="tel" disableUnderline />}
+        </InputMask>
+      ) : (
+        <InputStyled
+          {...input}
+          disabled={disabled}
+          placeholder={placeholder}
+          type={type || input.type}
+        />
+      )}
     </>
   );
 }
