@@ -46,6 +46,7 @@
     "webpack-cli": "^4.10.0"
   },
   "scripts": {
+    "prepare": "webpack --mode production",
     "build": "webpack --mode production",
     "postbuild": "tsc --declaration --declarationDir build --stripInternal --emitDeclarationOnly"
   }
