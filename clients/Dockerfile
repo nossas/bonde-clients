@@ -46,4 +46,4 @@ RUN pnpm i
 
 RUN pnpm --filter "./libs/slate-*" --filter "./libs/core-tools" --filter "./libs/ckeditor5-*" m run build
 
-RUN pnpm --filter "./packages/accounts-client" --filter "./packages/canary-client" --filter "./packages/redes-client" --filter "./packages/admin-client" m run build
+RUN pnpm --filter "./packages/accounts-client" --filter "./packages/canary-client" --filter "./packages/admin-client" m run build
