@@ -52,7 +52,7 @@ services:
       traefik.http.routers.admin-canary.tls.certresolver: myresolver
 
   redes:
-    image: ${DOCKER_IMAGE:-nossas/bonde-clients:v7.7.2}
+    image: ${DOCKER_REDES_IMAGE:-nossas/bonde-clients:v7.7.2}
     command: pnpm --filter redes-client start
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     pull_policy: always
@@ -69,7 +69,7 @@ services:
       traefik.http.routers.redes.tls.certresolver: myresolver
 
   public:
-    image: ${DOCKER_IMAGE:-nossas/bonde-clients:v7.7.2}
+    image: ${DOCKER_WEBPAGE_IMAGE:-nossas/bonde-clients:v7.7.2}
     command: pnpm --filter webpage-client start
     restart: "${DOCKER_RESTART_POLICY:-unless-stopped}"
     pull_policy: always
