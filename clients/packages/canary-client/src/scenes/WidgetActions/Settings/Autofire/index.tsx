@@ -96,10 +96,9 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                       config={{
                         simpleUpload: {
                           uploadUrl: process.env.REACT_APP_UPLOADS_URL,
-                          withCredentials: true,
+                          withCredentials: false,
                           headers: {
-                            "X-CSRF-TOKEN": "CSRF-Token",
-                            Authorization: "Bearer <JSON Web Token>"
+                            "Access-Control-Allow-Origin": "*",
                           }
                         }
                       }}
