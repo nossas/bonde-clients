@@ -40,7 +40,7 @@ const { required, composeValidators, isEmail } = Validators;
 const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
   const { t } = useTranslation("widgetActions");
 
-  const [editorData, setEditorData] = useState(t("settings.autofire.placeholder.emailBody"));
+  const [editorData, setEditorData] = useState(widget.settings.email_body);
 
   return (
     <Styles>
