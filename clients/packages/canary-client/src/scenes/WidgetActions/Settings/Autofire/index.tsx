@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 import { Widget } from "../../FetchWidgets";
 import { noSpecialCharacters } from "../../../../services/utils";
 import SettingsForm from '../SettingsForm';
+import EmailMetrics from './EmailMetrics';
 
 type Props = {
   widget: Widget;
@@ -78,6 +79,9 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                 <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
               </Flex>
             </Box>
+          </GridItem>
+          <GridItem colSpan={[12, 12, 6]}>
+            <EmailMetrics widgetId={widget.id} />
           </GridItem>
         </Grid>
       )}
