@@ -11,7 +11,7 @@ import { BlockQuote } from '@ckeditor/ckeditor5-block-quote';
 import { CloudServices } from '@ckeditor/ckeditor5-cloud-services';
 import type { EditorConfig } from '@ckeditor/ckeditor5-core';
 import { Essentials } from '@ckeditor/ckeditor5-essentials';
-import { FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
+import { FontBackgroundColor, FontColor, FontFamily, FontSize } from '@ckeditor/ckeditor5-font';
 import { Heading } from '@ckeditor/ckeditor5-heading';
 import { GeneralHtmlSupport } from '@ckeditor/ckeditor5-html-support';
 import {
@@ -45,6 +45,7 @@ class Editor extends ClassicEditor {
 		Bold,
 		CloudServices,
 		Essentials,
+		FontBackgroundColor,
 		FontColor,
 		FontFamily,
 		FontSize,
@@ -88,6 +89,7 @@ class Editor extends ClassicEditor {
 				'blockQuote',
 				'alignment',
 				'|',
+				'FontBackgroundColor',
 				'fontColor',
 				'fontFamily',
 				'fontSize',
