@@ -30,6 +30,7 @@ const Styles = styled.div`
   }
 `
 
+
 type Props = {
   widget: Widget;
   updateCache: any;
@@ -94,12 +95,8 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                       data={editorData}
                       editor={ClassicEditor}
                       config={{
-                        simpleUpload: {
-                          uploadUrl: process.env.REACT_APP_UPLOADS_URL,
-                          withCredentials: false,
-                          headers: {
-                            "Access-Control-Allow-Origin": "*",
-                          }
+                        s3Upload: {
+                          signingUrl: process.env.REACT_APP_UPLOADS_URL
                         }
                       }}
                       onChange={(event, editor) => {

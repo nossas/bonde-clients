@@ -1199,7 +1199,9 @@ importers:
   packages/canary-client:
     specifiers:
       '@chakra-ui/react': ^1.6.6
+      '@ckeditor/ckeditor5-core': 41.4.2
       '@ckeditor/ckeditor5-react': ^7.0.0
+      '@ckeditor/ckeditor5-upload': 41.4.2
       '@emotion/react': ^11
       '@emotion/styled': ^11
       '@fnando/cnpj': ^1.0.2
@@ -1260,7 +1262,9 @@ importers:
       typescript: ^3
     dependencies:
       '@chakra-ui/react': 1.8.9_dnoalyp3hhsiu7ozfgwknin7ia
-      '@ckeditor/ckeditor5-react': 7.0.0
+      '@ckeditor/ckeditor5-core': 41.4.2
+      '@ckeditor/ckeditor5-react': 7.0.0_5anerf2hje5ndmftpqr7pxnefy
+      '@ckeditor/ckeditor5-upload': 41.4.2
       '@emotion/react': 11.6.0
       '@emotion/styled': 11.11.5_@emotion+react@11.6.0
       '@fnando/cnpj': 1.0.2
@@ -6808,7 +6812,7 @@ packages:
       '@emotion/react': '>=10.0.35'
       react: '>=16.8.6'
     dependencies:
-      '@emotion/react': 11.6.0_4i3xo6dz6apzhebz25wvccraoy
+      '@emotion/react': 11.6.0_3r2q4vqikxqiwlpkbpcd6cn6l4
       react: 17.0.2
     dev: false
 
@@ -7364,7 +7368,7 @@ packages:
       '@chakra-ui/react-env': 1.1.6_react@17.0.2
       '@chakra-ui/system': 1.12.1_2c4bchdcbjuysgfianrru6iy3q
       '@chakra-ui/utils': 1.10.4
-      '@emotion/react': 11.6.0_4i3xo6dz6apzhebz25wvccraoy
+      '@emotion/react': 11.6.0_3r2q4vqikxqiwlpkbpcd6cn6l4
       '@emotion/styled': 11.11.5_kkhqicprxlu6q33iq5g7sydvnq
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -7561,7 +7565,7 @@ packages:
       '@chakra-ui/transition': 1.4.8_n2argv7ng3tf56dasmod6pcm2a
       '@chakra-ui/utils': 1.10.4
       '@chakra-ui/visually-hidden': 1.1.6_5qblqjf622vzzkdskgddihcrca
-      '@emotion/react': 11.6.0_4i3xo6dz6apzhebz25wvccraoy
+      '@emotion/react': 11.6.0_3r2q4vqikxqiwlpkbpcd6cn6l4
       '@emotion/styled': 11.11.5_kkhqicprxlu6q33iq5g7sydvnq
       framer-motion: 4.1.17_sfoxds7t5ydpegc3knd667wn6m
       react: 17.0.2
@@ -7606,7 +7610,7 @@ packages:
       '@chakra-ui/system': 1.12.1_2c4bchdcbjuysgfianrru6iy3q
       '@chakra-ui/theme': 1.14.1_@chakra-ui+system@1.12.1
       '@chakra-ui/utils': 1.10.4
-      '@emotion/react': 11.6.0_4i3xo6dz6apzhebz25wvccraoy
+      '@emotion/react': 11.6.0_3r2q4vqikxqiwlpkbpcd6cn6l4
       '@emotion/styled': 11.11.5_kkhqicprxlu6q33iq5g7sydvnq
       react: 17.0.2
     dev: false
@@ -7746,7 +7750,7 @@ packages:
       '@chakra-ui/react-utils': 1.2.3_react@17.0.2
       '@chakra-ui/styled-system': 1.19.0
       '@chakra-ui/utils': 1.10.4
-      '@emotion/react': 11.6.0_4i3xo6dz6apzhebz25wvccraoy
+      '@emotion/react': 11.6.0_3r2q4vqikxqiwlpkbpcd6cn6l4
       '@emotion/styled': 11.11.5_kkhqicprxlu6q33iq5g7sydvnq
       react: 17.0.2
       react-fast-compare: 3.2.0
@@ -8036,6 +8040,11 @@ packages:
     resolution: {integrity: sha512-yXVVEy+lEmyvYwTxn76Ff53fK/qJphf9stoBF4kFKKK/Tfi59EMog2Ctk3iIkLLyt74KmxzvuCXZwE00wDqfLA==}
     dependencies:
       ckeditor5: 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-alignment/41.4.2:
@@ -8118,6 +8127,11 @@ packages:
       '@ckeditor/ckeditor5-table': 41.4.2
       '@ckeditor/ckeditor5-typing': 41.4.2
       '@ckeditor/ckeditor5-ui': 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-build-balloon/41.4.2:
@@ -8143,6 +8157,11 @@ packages:
       '@ckeditor/ckeditor5-paste-from-office': 41.4.2
       '@ckeditor/ckeditor5-table': 41.4.2
       '@ckeditor/ckeditor5-typing': 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-build-classic/41.4.2:
@@ -8168,6 +8187,11 @@ packages:
       '@ckeditor/ckeditor5-paste-from-office': 41.4.2
       '@ckeditor/ckeditor5-table': 41.4.2
       '@ckeditor/ckeditor5-typing': 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-build-decoupled-document/41.4.2:
@@ -8195,6 +8219,11 @@ packages:
       '@ckeditor/ckeditor5-paste-from-office': 41.4.2
       '@ckeditor/ckeditor5-table': 41.4.2
       '@ckeditor/ckeditor5-typing': 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-build-inline/41.4.2:
@@ -8250,6 +8279,11 @@ packages:
       '@ckeditor/ckeditor5-paste-from-office': 41.4.2
       '@ckeditor/ckeditor5-table': 41.4.2
       '@ckeditor/ckeditor5-typing': 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-ckbox/41.4.2:
@@ -8291,6 +8325,11 @@ packages:
     resolution: {integrity: sha512-rgDrpEonA2AchfvgYaeb/olMk/HYxUK4B8XPqs+nJxLmBraTv2lANsgsMbwsqAIiRjT9MknmJdX+CEbqljgL/w==}
     dependencies:
       ckeditor5: 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-code-block/41.4.2:
@@ -8375,6 +8414,11 @@ packages:
     dependencies:
       ckeditor5: 41.4.2
       lodash-es: 4.17.21
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-editor-classic/41.4.2:
@@ -8382,6 +8426,11 @@ packages:
     dependencies:
       ckeditor5: 41.4.2
       lodash-es: 4.17.21
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-editor-decoupled/41.4.2:
@@ -8389,6 +8438,11 @@ packages:
     dependencies:
       ckeditor5: 41.4.2
       lodash-es: 4.17.21
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-editor-inline/41.4.2:
@@ -8408,6 +8462,11 @@ packages:
     dependencies:
       ckeditor5: 41.4.2
       lodash-es: 4.17.21
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-engine/41.4.2:
@@ -8441,6 +8500,11 @@ packages:
       '@ckeditor/ckeditor5-ui': 41.4.2
       ckeditor5: 41.4.2
       lodash-es: 4.17.21
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-font/41.4.2:
@@ -8480,6 +8544,11 @@ packages:
     resolution: {integrity: sha512-le+6melLc8lQTPBWppnWXWaX16KXcvXz8ZOO4uuD7+w5JrtRheEG1N35nTblpeT+QcyBjL9mSu519xReL2qjBA==}
     dependencies:
       ckeditor5: 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-html-embed/41.4.2:
@@ -8636,9 +8705,14 @@ packages:
     resolution: {integrity: sha512-jby5YQ2QowGdDCshPq5Ej11wTFcBZP2dYhQTu6fRZRc+mdihKCILxh0rwBgBOCCf+buflx8RYp/WKd76Kcuq5g==}
     dependencies:
       ckeditor5: 41.4.2
+    transitivePeerDependencies:
+      - bufferutil
+      - canvas
+      - supports-color
+      - utf-8-validate
     dev: false
 
-  /@ckeditor/ckeditor5-react/7.0.0:
+  /@ckeditor/ckeditor5-react/7.0.0_5anerf2hje5ndmftpqr7pxnefy:
     resolution: {integrity: sha512-9JWs5145ltuiioAuvF3xdoV660DCx1FPtTC6b1e1yXxcUgBAMSM8cmNKhzt+9vUS4RCdXVQsUFSS17cgjBX23A==}
     engines: {node: '>=18.0.0'}
     peerDependencies:
@@ -8649,6 +8723,7 @@ packages:
       '@ckeditor/ckeditor5-watchdog': '>=41.3.1'
       react: ^16.13.1 || ^17.0.0 || ^18.0.0
     dependencies:
+      '@ckeditor/ckeditor5-core': 41.4.2
       prop-types: 15.8.1
     dev: false
 
@@ -8682,11 +8757,6 @@ packages:
     dependencies:
       '@ckeditor/ckeditor5-ui': 41.4.2
       ckeditor5: 41.4.2
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - supports-color
-      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-source-editing/41.4.2:
@@ -8707,11 +8777,6 @@ packages:
     dependencies:
       ckeditor5: 41.4.2
       lodash-es: 4.17.21
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - supports-color
-      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-table/41.4.2:
@@ -8720,11 +8785,6 @@ packages:
       '@ckeditor/ckeditor5-ui': 41.4.2
       ckeditor5: 41.4.2
       lodash-es: 4.17.21
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - supports-color
-      - utf-8-validate
     dev: false
 
   /@ckeditor/ckeditor5-theme-lark/41.4.2:
@@ -8794,11 +8854,6 @@ packages:
     dependencies:
       ckeditor5: 41.4.2
       lodash-es: 4.17.21
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - supports-color
-      - utf-8-validate
     dev: false
 
   /@cnakazawa/watch/1.0.4:
@@ -9267,7 +9322,7 @@ packages:
       '@babel/runtime': 7.24.7
       '@emotion/babel-plugin': 11.11.0
       '@emotion/is-prop-valid': 1.2.2
-      '@emotion/react': 11.6.0_4i3xo6dz6apzhebz25wvccraoy
+      '@emotion/react': 11.6.0_3r2q4vqikxqiwlpkbpcd6cn6l4
       '@emotion/serialize': 1.1.4
       '@emotion/use-insertion-effect-with-fallbacks': 1.0.1_react@17.0.2
       '@emotion/utils': 1.2.1
@@ -15017,6 +15072,24 @@ packages:
       xml2js: 0.6.2
     dev: false
 
+  /aws-sdk/2.1649.0:
+    resolution: {integrity: sha512-iKwUomvBwzlrcX83PU60SW8KgLP+zNSQtl+lVnJkxRdbehS/p/wTdofby88TgMGDBHrWppreiaYC1fToB8Wznw==}
+    engines: {node: '>= 10.0.0'}
+    requiresBuild: true
+    dependencies:
+      buffer: 4.9.2
+      events: 1.1.1
+      ieee754: 1.1.13
+      jmespath: 0.16.0
+      querystring: 0.2.0
+      sax: 1.2.1
+      url: 0.10.3
+      util: 0.12.5
+      uuid: 8.0.0
+      xml2js: 0.6.2
+    dev: false
+    optional: true
+
   /aws-sign2/0.7.0:
     resolution: {integrity: sha512-08kcGqnYf/YmjoRhfxyu+CLxBjUtHLXLXX/vUfx9l2LYzG3c1m61nrpyFUZI6zeS+Li/wWMMidD9KgrqtGq3mA==}
 
@@ -17215,7 +17288,7 @@ packages:
     resolution: {integrity: sha512-xq+q3SRMOxGivLhBNaUdC64hDTQwejJ+H0T/NB1XMtTVEwNTrfFF3gAxiyW0Bu/xWEGhjVKgUcMhCrUy2+uCWg==}
     dependencies:
       base64-js: 1.5.1
-      ieee754: 1.1.13
+      ieee754: 1.2.1
       isarray: 1.0.0
 
   /buffer/5.7.1:
@@ -20278,6 +20351,7 @@ packages:
   /errno/0.1.8:
     resolution: {integrity: sha512-dJ6oBr5SQ1VSd9qkk7ByRgb/1SH4JZjCHSW/mr63/QcXO9zLVxvJ6Oy13nio03rxpSnVDDjFor75SjVeZWPW/A==}
     hasBin: true
+    requiresBuild: true
     dependencies:
       prr: 1.0.1
 
@@ -23638,10 +23712,10 @@ packages:
 
   /ieee754/1.1.13:
     resolution: {integrity: sha512-4vf7I2LYV/HaWerSo3XmlMkp5eZ83i+/CDluXi/IGTs/O1sejBNhTtnxzmRZfvOUqj7lZjqHkeTvpgSFDlWZTg==}
+    dev: false
 
   /ieee754/1.2.1:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
-    dev: true
 
   /iferr/0.1.5:
     resolution: {integrity: sha512-DUNFN5j7Tln0D+TxzloUjKB+CtVu6myn0JEFak6dG18mNt9YkQ6lzGCdafwofISZ1lLF3xRHJ98VKy9ynkcFaA==}
@@ -27028,6 +27102,7 @@ packages:
   /make-dir/2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
     engines: {node: '>=6'}
+    requiresBuild: true
     dependencies:
       pify: 4.0.1
       semver: 5.7.2
@@ -27340,6 +27415,7 @@ packages:
     resolution: {integrity: sha512-x0Vn8spI+wuJ1O6S7gnbaQg8Pxh4NNHb7KSINmEWKiPE4RKOplvijn+NkmYmmRgP68mc70j2EbeTFRsrswaQeg==}
     engines: {node: '>=4'}
     hasBin: true
+    requiresBuild: true
 
   /mime/2.6.0:
     resolution: {integrity: sha512-USPkMeET31rOMiarsBNIHZKLGgvKc/LrjofAnBlOttf5ajRvqiRA8QsenbcooctK6d6Ts6aqZXBA+XbkKthiQg==}
@@ -31727,7 +31803,7 @@ packages:
       prop-types: 15.8.1
       uuid: 3.4.0
     optionalDependencies:
-      aws-sdk: 2.1639.0
+      aws-sdk: 2.1649.0
     dev: false
 
   /react-scripts/3.4.1_folnupnbsrp55x5wyhghjb4wly:
@@ -37772,7 +37848,7 @@ packages:
     resolution: {integrity: sha512-T4rieHaC1EXcES0Kxxj4JWgaUQHDk+qwHcYOCFHfiwKz7tOVPLq7Hjq9dM1WCMhylqMEfP7hMcOIChvotiZegA==}
     engines: {node: '>=4.0.0'}
     dependencies:
-      sax: 1.2.1
+      sax: 1.4.1
       xmlbuilder: 11.0.1
     dev: false
 
