@@ -71,7 +71,9 @@ class Adapter {
                     const imgUrl = xhr.responseURL.split("?")[0];
                     console.log("S3Upload Success ---->", { url: imgUrl });
                     return resolve({
-                        url: imgUrl
+                        urls: {
+                            default: imgUrl
+                        }
                     });
                 });
 
