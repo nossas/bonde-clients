@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import styled from 'styled-components';
 
@@ -9,16 +9,16 @@ import {
   Flex,
   Grid,
   GridItem,
-  Heading,
-  FormLabel
+  Heading
 } from "bonde-components/chakra";
 
-import ClassicEditor from "ckeditor5-custom-build";
-import { CKEditor } from "@ckeditor/ckeditor5-react";
+
 
 import { noSpecialCharacters } from "../../../../services/utils";
 import { Widget } from "../../FetchWidgets";
 import SettingsForm from '../SettingsForm';
+
+import CKEditor5Field from "./CKEditor5Field";
 
 const Styles = styled.div`
   .emailBody {
@@ -41,7 +41,7 @@ const { required, composeValidators, isEmail } = Validators;
 const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
   const { t } = useTranslation("widgetActions");
 
-  const [editorData, setEditorData] = useState(widget.settings.email_body);
+  console.log("settings", { settings: widget.settings });
 
   return (
     <Styles>
@@ -87,27 +87,13 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                     required(t("settings.autofire.validators.required"))
                   )}
                 />
-                <Flex className="emailBody" direction="column">
-                    <FormLabel className="emailBody--label" htmlFor="editor">
-                      {t("settings.autofire.label.emailBody")}
-                    </FormLabel>
-                    <CKEditor
-                      data={editorData}
-                      editor={ClassicEditor}
-                      config={{
-                        s3Upload: {
-                          signingUrl: process.env.REACT_APP_UPLOADS_URL
-                        }
-                      }}
-                      onChange={(event, editor) => {
-                        const data = editor.getData();
-                        setEditorData(data);
-                      }}
-                      validate={composeValidators(
-                        required(t("settings.autofire.validators.required"))
-                      )}
-                    />
-                </Flex>
+                <CKEditor5Field
+                  name="settings.email_text"
+                  label={t("settings.autofire.label.emailBody")}
+                  validate={composeValidators(
+                    required(t("settings.autofire.validators.required"))
+                  )}
+                />
                 <Flex justify='end'>
                   <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
                 </Flex>
