@@ -3,8 +3,8 @@ import { useQuery, gql } from 'bonde-core-tools';
 import { Box, Text, Heading, Stat, StatLabel, StatNumber, Divider, StatGroup, Tooltip, Flex } from 'bonde-components/chakra';
 
 const GET_EMAIL_STATS = gql`
-  query EmailStats($widget_id: Int!) {
-    email_stats(widget_id: $widget_id) {
+  query EmailStats($widget_id: Int!, $category: String) {
+    email_stats(widget_id: $widget_id, category: $category) {
       stats {
         open
         delivered
@@ -23,7 +23,7 @@ type EmailMetricsProps = {
 
 const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
   const { data, loading, error } = useQuery(GET_EMAIL_STATS, {
-    variables: { widget_id: widgetId }
+    variables: { widget_id: widgetId, category: "autofire" }
   });
 
   if (error) {
