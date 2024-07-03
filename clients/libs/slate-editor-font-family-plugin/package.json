@@ -29,7 +29,7 @@
     "build": "babel src --out-dir dist --copy-files"
   },
   "dependencies": {
-    "@slate-editor/utils": "^5.1.2",
+    "@slate-editor/utils": "workspace:*",
     "classnames": "^2.2.5",
     "react": "^17",
     "react-dom": "^17"

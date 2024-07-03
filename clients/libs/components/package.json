@@ -1,5 +1,5 @@
 {
-  "version": "0.0.7",
+  "version": "0.2.0",
   "license": "MIT",
   "main": "__dist/index.js",
   "module": "__dist/esm/index.js",
@@ -18,7 +18,6 @@
     "postpack": "sh ./scripts/postpack.sh",
     "test": "tsdx test --passWithNoTests",
     "lint": "tsdx lint --fix",
-    "prepare": "tsdx build",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
