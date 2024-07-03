@@ -27,13 +27,15 @@ const EmailMetricsStyled = styled.div`
 const GET_EMAIL_STATS = gql`
   query EmailStats($widget_id: Int!, $category: String) {
     email_stats(widget_id: $widget_id, category: $category) {
+      total
       stats {
-        open
-        delivered
-        bounced
         processed
+        delivered
+        open
+        bounce
+        dropped
+        spamreport
         click
-        total
       }
     }
   }
@@ -55,13 +57,17 @@ const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
 
   if (loading) return 'Carregando...';
 
-  const { open, delivered, bounced, processed, click, total } = data.email_stats.stats;
+  const { total, stats } = data.email_stats;
+  const { open, delivered, bounce, processed, click, dropped, spamreport } = stats;
   
   const openRate = total > 0 ? (open / total * 100).toFixed(2) : 0;
   const deliveredRate = total > 0 ? (delivered / total * 100).toFixed(2) : 0;
-  const bouncedRate = total > 0 ? (bounced / total * 100).toFixed(2) : 0;
+  const bounceRate = total > 0 ? (bounce / total * 100).toFixed(2) : 0;
   const processedRate = total > 0 ? (processed / total * 100).toFixed(2) : 0;
   const clickRate = open > 0 ? (click / open * 100).toFixed(2) : 0;
+  const droppedRate = total > 0 ? (dropped / total * 100).toFixed(2) : 0;
+  const spamReportRate = total > 0 ? (spamreport / total * 100).toFixed(2) : 0;
+
 
   return (
     <EmailMetricsStyled>
@@ -131,7 +137,7 @@ const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
             </Stat>
 
             <Stat>
-              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{bouncedRate}%</StatNumber>
+              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{bounceRate}%</StatNumber>
               <Flex align="center">
                 <StatLabel textTransform="uppercase" mr={2}>BOUNCE</StatLabel>
                 <Tooltip label='Percentual de e-mails que não foram entregues aos destinatários devido a endereços inválidos ou outros problemas de entrega.' fontSize='md'>
@@ -140,12 +146,32 @@ const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
               </Flex>
             </Stat>
           </StatGroup>
-          <StatGroup>
+          <StatGroup pb={6}>
             <Stat>
               <StatNumber className="emailStat--number" as="b" fontSize="4xl">{processedRate}%</StatNumber>
               <Flex align="center">
                 <StatLabel textTransform="uppercase" mr={2}>PROCESSADOS</StatLabel>
                 <Tooltip label='O e-mail foi aceito pelo sistema e está pronto para ser enviado. ' fontSize='md'>
+                  <IconInfo />
+                </Tooltip>
+              </Flex>
+            </Stat>
+            <Stat>
+              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{droppedRate}%</StatNumber>
+              <Flex align="center">
+                <StatLabel textTransform="uppercase" mr={2}>DESCARTADOS</StatLabel>
+                <Tooltip label='Percentual de destinatários que optaram por cancelar a inscrição na lista de e-mails em relação ao total de e-mails enviados.' fontSize='md'>
+                  <IconInfo />
+                </Tooltip>
+              </Flex>
+            </Stat>
+          </StatGroup>
+          <StatGroup>
+            <Stat>
+              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{spamReportRate}%</StatNumber>
+              <Flex align="center">
+                <StatLabel textTransform="uppercase" mr={2}>SPAM</StatLabel>
+                <Tooltip label='Percentual de e-mails que foram marcados como spam pelos destinatários.' fontSize='md'>
                   <IconInfo />
                 </Tooltip>
               </Flex>
