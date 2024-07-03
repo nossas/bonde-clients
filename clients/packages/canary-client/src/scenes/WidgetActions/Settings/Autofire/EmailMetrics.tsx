@@ -56,6 +56,12 @@ const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
   if (loading) return 'Carregando...';
 
   const { open, delivered, bounced, processed, click, total } = data.email_stats.stats;
+  
+  const openRate = total > 0 ? (open / total * 100).toFixed(2) : 0;
+  const deliveredRate = total > 0 ? (delivered / total * 100).toFixed(2) : 0;
+  const bouncedRate = total > 0 ? (bounced / total * 100).toFixed(2) : 0;
+  const processedRate = total > 0 ? (processed / total * 100).toFixed(2) : 0;
+  const clickRate = open > 0 ? (click / open * 100).toFixed(2) : 0;
 
   return (
     <EmailMetricsStyled>
@@ -89,7 +95,7 @@ const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
           </Flex>
           <StatGroup>
             <Stat>
-              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{open}</StatNumber>
+              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{openRate}%</StatNumber>
               <Flex align="center">
                 <StatLabel textTransform="uppercase" mr={2}>ABERTOS</StatLabel>
                 <Tooltip label='Porcentagem de e-mails que foram realmente abertos pelos destinatários.' fontSize='md'>
@@ -99,7 +105,7 @@ const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
             </Stat>
 
             <Stat>
-              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{delivered}</StatNumber>
+              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{deliveredRate}%</StatNumber>
               <Flex align="center">
                 <StatLabel textTransform="uppercase" mr={2}>ENTREGUES</StatLabel>
                 <Tooltip label='E-mail aceito pelo servidor do destinatário (Gmail, Yahoo, etc.), mas ainda não necessariamente na caixa de entrada.' fontSize='md'>
@@ -115,7 +121,7 @@ const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
        <Box pt={6}>
           <StatGroup pb={6}>
             <Stat>
-              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{click}</StatNumber>
+              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{clickRate}%</StatNumber>
               <Flex align="center">
                 <StatLabel textTransform="uppercase" mr={2}>CLIQUES</StatLabel>
                 <Tooltip label='Percentual de destinatários que clicaram em links dentro dos e-mails em relação ao total de e-mails abertos.' fontSize='md'>
@@ -125,7 +131,7 @@ const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
             </Stat>
 
             <Stat>
-              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{bounced}</StatNumber>
+              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{bouncedRate}%</StatNumber>
               <Flex align="center">
                 <StatLabel textTransform="uppercase" mr={2}>BOUNCE</StatLabel>
                 <Tooltip label='Percentual de e-mails que não foram entregues aos destinatários devido a endereços inválidos ou outros problemas de entrega.' fontSize='md'>
@@ -136,7 +142,7 @@ const EmailMetrics = ({ widgetId }: EmailMetricsProps) => {
           </StatGroup>
           <StatGroup>
             <Stat>
-              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{processed}</StatNumber>
+              <StatNumber className="emailStat--number" as="b" fontSize="4xl">{processedRate}%</StatNumber>
               <Flex align="center">
                 <StatLabel textTransform="uppercase" mr={2}>PROCESSADOS</StatLabel>
                 <Tooltip label='O e-mail foi aceito pelo sistema e está pronto para ser enviado. ' fontSize='md'>
