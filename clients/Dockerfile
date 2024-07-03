@@ -44,6 +44,6 @@ ENV SKIP_PREFLIGHT_CHECK=true
 
 RUN pnpm i
 
-RUN pnpm --filter "./libs/**" m run build
+RUN pnpm --filter "./libs/slate-*" --filter "./libs/core-tools" --filter "./libs/ckeditor5-*" m run build
 
-RUN pnpm --filter "./packages/**" m run build
+RUN pnpm --filter "./packages/accounts-client" --filter "./packages/canary-client" --filter "./packages/admin-client" m run build

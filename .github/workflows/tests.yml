@@ -39,7 +39,7 @@ jobs:
         run: cd clients && pnpm i
 
       - name: Build components and core-tools to run tests in clients
-        run: cd clients && pnpm --filter "./libs/**" m run build
+        run: cd clients && pnpm --filter "./libs/slate-*" --filter "./libs/core-tools" --filter "./libs/ckeditor5-*" m run build
 
       - name: Run tests
         run: cd clients && pnpm test
