@@ -131,6 +131,13 @@
             "no": "Não"
           }
         },
+        "phone": {
+          "title": "Incluir campo de telefone?",
+          "radio": {
+            "yes": "Sim",
+            "no": "Não"
+          }
+        },
         "main_color": {
           "label": "Cor padrão",
           "tooltip": "Selecione a cor no box abaixo ou insira o valor em hex, por exemplo: #DC3DCE"

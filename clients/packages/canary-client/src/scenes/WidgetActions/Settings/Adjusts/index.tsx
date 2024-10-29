@@ -26,6 +26,7 @@ const AdjustsFields = ({ widget, updateCache }: any) => {
         settings: {
           show_city: "city-false",
           show_state: "n",
+          show_phone: "n",
           ...widget.settings
         }
       }}
@@ -70,6 +71,15 @@ const AdjustsFields = ({ widget, updateCache }: any) => {
                   >
                     <Radio value='city-true'>{t('settings.adjusts.fields.city.radio.yes')}</Radio>
                     <Radio value='city-false'>{t('settings.adjusts.fields.city.radio.no')}</Radio>
+                  </RadioField>
+
+                  <RadioField
+                    name='settings.show_phone'
+                    label={t('settings.adjusts.fields.phone.title')}
+                    columns="auto auto 1fr"
+                  >
+                    <Radio value='s'>{t('settings.adjusts.fields.phone.radio.yes')}</Radio>
+                    <Radio value='n'>{t('settings.adjusts.fields.phone.radio.no')}</Radio>
                   </RadioField>
                 </>
               )}
