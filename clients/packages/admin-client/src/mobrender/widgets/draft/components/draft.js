@@ -8,7 +8,7 @@ if (require('exenv').canUseDOM) require('./draft.scss');
 const Draft = ({ mobilization, widget, update, intl, ...extraProps }) => {
   const updateKind = (props) => update({ ...widget, ...props });
   const widgetsConfig = widgets(mobilization, widget, { intl }).filter(
-    (w) => w.kind !== 'draft'
+    (w) => w.kind !== 'draft' && w.kind !== 'donation'
   );
 
   return (

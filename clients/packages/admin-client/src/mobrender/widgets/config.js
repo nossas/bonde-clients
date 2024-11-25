@@ -3,8 +3,7 @@ import { Draft } from './draft/components';
 import {
   Pressure,
   Form,
-  Content,
-  Donation,
+  Content
 } from '../../mobilizations/widgets/__plugins__';
 import { PressureEmailIcon, PressurePhoneIcon } from './icons';
 import { createEditorContent } from '../../mobilizations/widgets/__plugins__/content/components/editor-slate';
@@ -98,7 +97,7 @@ export default (mobilization, widget, { intl }) => [
     redirect: Paths.pressure(mobilization.id, widget.id),
   },
   {
-    component: Donation,
+    component: () => <div>Doação desativada</div>,
     kind: 'donation',
     // TODO: propriedades relacionadas ao draft
     icon: 'money',
