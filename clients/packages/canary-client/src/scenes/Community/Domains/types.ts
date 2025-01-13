@@ -3,10 +3,6 @@ export type Community = {
   name: string
 }
 
-export type Certificate = {
-  is_active: boolean
-}
-
 export type DNSRecord = {
   id: number
   name: string
@@ -25,7 +21,6 @@ export type DNSHostedZone = {
   status: 'created' | 'propagating' | 'propagated'
   hosted_zone: any
   name_servers: string[]
-  certificates: Certificate[]
   dns_records: DNSRecord[]
   created_at: string;
   updated_at: string;

@@ -70,7 +70,7 @@ interface StepProperties {
 }
 
 const Steps: React.FC<StepProperties> = ({ dnsHostedZone }) => {
-  const { dns, certificate } = getStatus(dnsHostedZone);
+  const { dns } = getStatus(dnsHostedZone);
 
   return (
     <SimpleGrid
@@ -133,13 +133,13 @@ const Steps: React.FC<StepProperties> = ({ dnsHostedZone }) => {
           </>
         }
       >
-        {dns === 'propagated' && dnsHostedZone.certificates?.length > 0 ? <Status icon="Check">Concluído</Status> : <Status icon="Sync">Em andamento</Status>}
+        {dns === 'propagated' ? <Status icon="Check">Concluído</Status> : <Status icon="Sync">Em andamento</Status>}
       </StepWrapper>
       
       <Icon name='ArrowRight' size='small' />
 
       <StepWrapper
-        disabled={dns !== 'propagated' || (dns === 'propagated' && dnsHostedZone.certificates?.length === 0)}
+        disabled={dns !== 'propagated'}
         icon={ActiveDomainIcon}
         title="Domínio Ativo"
         description={
@@ -148,7 +148,7 @@ const Steps: React.FC<StepProperties> = ({ dnsHostedZone }) => {
           </>
         }
       >
-        {dns === 'propagated' && certificate === 'active' ? <Status icon="Check">Concluído</Status> : <Status icon="Sync">Em andamento</Status>}
+        {dns === 'propagated' ? <Status icon="Check">Concluído</Status> : <Status icon="Sync">Em andamento</Status>}
       </StepWrapper>
     </SimpleGrid>
   );

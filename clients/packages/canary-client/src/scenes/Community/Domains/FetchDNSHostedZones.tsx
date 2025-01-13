@@ -19,10 +19,6 @@ const fetchGraphqlQuery = gql`
       name_servers_rest: response(path: "delegation_set.name_servers")
       name_servers: response(path: "DelegationSet.NameServers")
 
-      certificates {
-        is_active
-      }
-
       dns_records {
         id
         name

@@ -24,9 +24,6 @@ describe("StatusTags", () => {
     // Propagando
     expect(wrapper.find(Tag).at(0).props().colorScheme).toEqual('yellow');
     expect(wrapper.find(Tag).at(0).props().children).toEqual('Propagando');
-    // Certificado pendente
-    expect(wrapper.find(Tag).at(1).props().colorScheme).toEqual('yellow');
-    expect(wrapper.find(Tag).at(1).props().children).toEqual('Certificado pendente');
   });
 
   it('should be render two Tags to propagated and certificate pending', () => {
@@ -36,20 +33,14 @@ describe("StatusTags", () => {
     // Propagando
     expect(wrapper.find(Tag).at(0).props().colorScheme).toEqual('green');
     expect(wrapper.find(Tag).at(0).props().children).toEqual('Propagado');
-    // Certificado pendente
-    expect(wrapper.find(Tag).at(1).props().colorScheme).toEqual('yellow');
-    expect(wrapper.find(Tag).at(1).props().children).toEqual('Certificado pendente');
   });
 
   it('should be render two Tags to propagated and certificated', () => {
-    const wrapper = shallow(<StatusTags dnsHostedZone={{ ...dnsHostedZone, status: 'propagated', ns_ok: true, certificates: [{ is_active: true }] }} />)
+    const wrapper = shallow(<StatusTags dnsHostedZone={{ ...dnsHostedZone, status: 'propagated', ns_ok: true }} />)
 
     expect(wrapper.find(Tag).length).toEqual(2);
     // Propagando
     expect(wrapper.find(Tag).at(0).props().colorScheme).toEqual('green');
     expect(wrapper.find(Tag).at(0).props().children).toEqual('Propagado');
-    // Certificado pendente
-    expect(wrapper.find(Tag).at(1).props().colorScheme).toEqual('green');
-    expect(wrapper.find(Tag).at(1).props().children).toEqual('Certificado');
   });
 })
