@@ -89,18 +89,6 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
       }
     `
   );
-  const [createOrUpdateCertificate] = useMutation(
-    gql`
-      mutation ($dns_hosted_zone_id: Int!) {
-        create_or_update_certificate(dns_hosted_zone_id: $dns_hosted_zone_id) {
-          id
-          is_active
-          domain
-          dns_hosted_zone_id
-        }
-      }
-    `
-  );
 
   const onSubmit = async ({ customDomain, isExternalDomain = false }: { customDomain: string, isExternalDomain?: boolean }) => {
     try {
@@ -135,18 +123,8 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
 
       const { data: { update_mobilizations_by_pk } } = await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
 
-      // update certificate is the final request because make a fetch customDomains
-      let certificate;
-      if (hostedZone?.ns_ok && !isExternalDomain) {
-        const { data } = await createOrUpdateCertificate({ variables: { dns_hosted_zone_id: hostedZone.id } });
-        certificate = data?.create_or_update_certificate;
-      }
-
       updateDomain && updateDomain(
-        {
-          ...hostedZone,
-          certificates: certificate ? [certificate] : []
-        },
+        { ...hostedZone },
         { ...mobilization, ...update_mobilizations_by_pk }
       );
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
