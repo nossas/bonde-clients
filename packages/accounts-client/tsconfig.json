@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "include": [
+    "src"
+  ],
+  "compilerOptions": {
+    "noFallthroughCasesInSwitch": true,
+    "jsx": "react-jsx"
+  }
+}
