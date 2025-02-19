@@ -5,12 +5,6 @@ volumes:
     driver: local
   s3_data:
     driver: local
-  pgmaster_data:
-    driver: local
-  portainer_data:
-    driver: local
-  portainer_agent_data:
-    driver: local
 
 services:
   traefik:
@@ -43,11 +37,11 @@ services:
       - traefik.http.services.traefik.loadbalancer.server.port=8080
 
   api-graphql:
-    image: hasura/graphql-engine:v2.3.0
+    image: hasura/graphql-engine:v2.44.0
     restart: always
     environment:
       - HASURA_GRAPHQL_DATABASE_URL=${HASURA_GRAPHQL_DATABASE_URL:-postgres://user:pass@postgres:5432/bonde}
-      - HASURA_GRAPHQL_ENABLE_CONSOLE=${HASURA_GRAPHQL_ENABLE_CONSOLE:-'false'}
+      - HASURA_GRAPHQL_ENABLE_CONSOLE=${HASURA_GRAPHQL_ENABLE_CONSOLE:-false}
       - HASURA_GRAPHQL_ADMIN_SECRET=${HASURA_GRAPHQL_ADMIN_SECRET:-segredo123}
       - HASURA_GRAPHQL_JWT_SECRET=${HASURA_GRAPHQL_JWT_SECRET}
       - HASURA_GRAPHQL_UNAUTHORIZED_ROLE=${HASURA_GRAPHQL_UNAUTHORIZED_ROLE:-anonymous}

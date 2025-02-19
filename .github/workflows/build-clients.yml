@@ -83,8 +83,8 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
-          context: ./clients
-          file: ./clients/Dockerfile
+          context: ./
+          file: ./Dockerfile
           build-args: |
             SKIP_PREFLIGHT_CHECK=true
             "REACT_APP_ENVIRONMENT=${{ secrets.REACT_APP_ENVIRONMENT }}"
