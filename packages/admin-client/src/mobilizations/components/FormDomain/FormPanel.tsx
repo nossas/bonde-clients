@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { gql, useMutation } from 'bonde-core-tools';
 import {
   Stack,
@@ -62,9 +62,11 @@ interface FormPanelProperties {
 
 export const FormPanel: React.FC<FormPanelProperties> = ({
   hostedZones,
-  mobilization
+  mobilization: olMobilization
 }) => {
+  const [mobilization, setMobilization] = useState(olMobilization);
   const toast = useToast();
+  const domains = hostedZones.map((el) => el.domain_name);
 
   // Submit action to update custom domain on mobilization
   const [updateMobilization] = useMutation(
@@ -93,17 +95,55 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
     
     const customDomain = e.target.customDomain.value;
 
-    try {
-      if (mobilization.custom_domain && mobilization.custom_domain !== customDomain) {
-        const removeDomain = mobilization.custom_domain?.replace("www", "")
-        await routerAddOperation({ variables: { domains: [removeDomain, `www.${removeDomain}`], operation: "remove" }});  
+    if (customDomain && !domains.includes(customDomain)) {
+      // Valida subdomínios
+      const parts = customDomain.split('.');
+  
+      if (parts.length < 2) {
+        toast({
+          title: 'Falha ao atualizar o domínio',
+          description: 'Esse domínio não é válido.',
+          status: 'error',
+          isClosable: true
+        })
+        return;
       }
+    
+      // Pega todos os segmentos, exceto o primeiro (subdomínio)
+      const rootDomain = parts.slice(1).join('.'); 
 
-      if (customDomain) {
+      if (!domains.includes(rootDomain)) {
+        toast({
+          title: 'Falha ao atualizar o domínio',
+          description: 'Você precisa usar um domínio cadastrado na Comunidade',
+          status: 'error',
+          isClosable: true
+        })
+        return;
+      }
+    }
+
+    try {
+      const mobilizationCustomDomain = mobilization.custom_domain?.replace("www.", "")
+      console.log("mobilizationCustomDomain", mobilizationCustomDomain)
+      console.log("customDomain", customDomain)
+      
+      if (mobilizationCustomDomain && customDomain && mobilizationCustomDomain !== customDomain) {
+        await routerAddOperation({ variables: { domains: [mobilizationCustomDomain, `www.${mobilizationCustomDomain}`], operation: "remove" }}); 
         await routerAddOperation({ variables: { domains: [customDomain, `www.${customDomain}`], operation: "append" }});
         await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
-      } else {
+
+        setMobilization({...mobilization, custom_domain: `www.${customDomain}`});
+      } else if (!mobilizationCustomDomain && customDomain) {
+        await routerAddOperation({ variables: { domains: [customDomain, `www.${customDomain}`], operation: "append" }});
+        await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
+
+        setMobilization({...mobilization, custom_domain: `www.${customDomain}`});
+      } else if (mobilizationCustomDomain && !customDomain) {
+        await routerAddOperation({ variables: { domains: [mobilizationCustomDomain, `www.${mobilizationCustomDomain}`], operation: "remove" }}); 
         await updateMobilization({ variables: { id: mobilization.id, customDomain: null } });
+
+        setMobilization({...mobilization, custom_domain: null});
       }
 
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
@@ -134,7 +174,7 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
         <form onSubmit={handleSubmit} autoComplete='off'>
           <DomainAutocomplete
             name="customDomain"
-            domains={hostedZones.map(item => item.domain_name)}
+            domains={domains}
             initialValue={mobilization.custom_domain ? mobilization.custom_domain.replace('www.', '') : null}
           />
           <button type="submit">Salvar</button>
