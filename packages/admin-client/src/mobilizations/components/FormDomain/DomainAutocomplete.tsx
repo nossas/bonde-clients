@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const DomainAutocomplete = ({ name, domains }) => {
-  const [inputValue, setInputValue] = useState("");
-  const [suggestions, setSuggestions] = useState(domains);
+const DomainAutocomplete = ({ name, initialValue, domains }) => {
+  const [inputValue, setInputValue] = useState(initialValue || "");
+  const [suggestions, setSuggestions] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   
   const handleChange = (e) => {
@@ -11,6 +11,7 @@ const DomainAutocomplete = ({ name, domains }) => {
     setSelectedIndex(-1);
     
     if (value.includes(".")) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [subdomain, root] = value.split(".").slice(-2);
       setSuggestions(domains.filter(domain => domain.startsWith(root)));
     } else {
@@ -23,6 +24,8 @@ const DomainAutocomplete = ({ name, domains }) => {
       setSelectedIndex((prevIndex) => (prevIndex < suggestions.length - 1 ? prevIndex + 1 : prevIndex));
     } else if (e.key === "ArrowUp") {
       setSelectedIndex((prevIndex) => (prevIndex > 0 ? prevIndex - 1 : 0));
+    } else if (e.key === "Escape") {
+      setSuggestions([])
     } else if (e.key === "Enter" && selectedIndex >= 0) {
       e.preventDefault();
       completeSelection(suggestions[selectedIndex]);
@@ -31,21 +34,25 @@ const DomainAutocomplete = ({ name, domains }) => {
 
   const completeSelection = (suggestion) => {
     const parts = inputValue.split(".");
-    parts[parts.length - 1] = suggestion;
-    setInputValue(parts.join("."));
+    const prefix = parts.slice(0, 1).join(".");
+
+    const newValue = prefix ? `${prefix}.${suggestion}` : suggestion;
+
+    setInputValue(newValue);
     setSuggestions([]);
     setSelectedIndex(-1);
   };
 
   return (
-    <div>
+    <div className="domain-autocomplete">
       <input 
         type="text"
         name={name}
         value={inputValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
-        placeholder="Digite um domínio..."
+        placeholder="Digite um domínio personalizado"
+        onBlur={() => setSuggestions([])}
       />
       {suggestions.length > 0 && (
         <ul>
