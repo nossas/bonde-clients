@@ -1,164 +1,69 @@
-# Bonde Client
+# BONDE Clients
 
-<p>
-  <a href="https://hub.docker.com/r/nossas/bonde-client/builds">
-    <img
-      alt="Docker Build Status"
-      src="https://img.shields.io/docker/build/nossas/bonde-client.svg"
-    />
-  </a>
-  <br />
-  <a href="https://github.com/nossas/bonde-client/blob/master/LICENSE">
-    <img
-      alt="Licence"
-      src="https://img.shields.io/github/license/nossas/bonde-client.svg"
-    />
-  </a>
-  <a href="https://conventionalcommits.org">
-    <img
-      alt="Conventional Commits"
-      src="https://img.shields.io/badge/Conventional%20Commits-1.0.0--beta.1-brightgreen.svg"
-    />
-  </a>
-</p>
+O **BONDE Clients** é um conjunto de aplicações cliente desenvolvidas em Node.js que fazem parte do ecossistema Bonde. Essas aplicações são gerenciadas em um monorepo utilizando o gerenciador de pacotes [pnpm](https://pnpm.io/).
 
-## Requirements
+## Requisitos
 
-Before start installing, change `.bashrc` to add nvm and arkade to user's path.
+- **Node.js**: Utilize a versão 14.x. Recomenda-se o uso do [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm) para gerenciar diferentes versões do Node.js.
+- **pnpm**: Versão 7.x.
+- **npm**: Versão 6.x.
 
-```
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+## Instalação
 
-export PATH=$PATH:$HOME/.arkade/bin/
-```
+1. **Instale o NVM**:
 
-Install Python2
+   ```bash
+   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+   ```
 
-```
-sudo apt install python2
-```
+   Após a instalação, reinicie seu terminal ou execute:
 
-Install NodeJS **v14** with a litle help of my friend: [nvm](https://github.com/nvm-sh/nvm), node version manager.
+   ```bash
+   source ~/.nvm/nvm.sh
+   ```
 
-```
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.37.0/install.sh | bash
-```
+2. **Instale e use a versão 14 do Node.js**:
 
-To handle dependencies at monorepo, [pnpm](https://github.com/pnpm/pnpm)
+   ```bash
+   nvm install 14
+   nvm use 14
+   ```
 
-```
-curl -L https://raw.githubusercontent.com/pnpm/self-installer/master/install.js | PNPM_VERSION=7 node
-```
+3. **Instale o pnpm**:
 
-```
-pnpm i
-pnpm m run dev
-```
+   ```bash
+   npm install -g pnpm@7
+   ```
 
-Finally, we will populate our enviroment configs to each client package. We recommend copy our example in each case.
+## Configuração
 
-Now when you change an client applications, you can see what happens locally! Go to: http://app.bonde.devel:5000 and change the content of component`Header.H1` at `client/packages/accounts-client/src/scenes/LoginPage/index.tsx#L31` to `Hello World`. After few seconds you should see the page updated.
+1. **Instale as dependências**:
 
-## Second Stage Development
+   ```bash
+   pnpm install
+   ```
 
-After make some changes on any application and want to share with the world, we use [Waypoint](https://github.com/hashicorp/waypoint/) from hashicorp. The tools enable more granular ways to build, deploy and release in general task connected with Continuos Integration(CI) and Continuous Deploy(CD).
+2. **Configure as variáveis de ambiente**:
 
-We recommend to install [Arkade](https://github.com/alexellis/arkade) - cli to install others cli tools, like kubectl, k3d or kind.
+   Cada aplicação cliente dentro do diretório `packages` possui suas próprias variáveis de ambiente. Navegue até o diretório de cada cliente e configure as variáveis conforme necessário.
 
-```
-curl -sLS https://dl.get-arkade.dev | sudo sh
-arkade get kubectl
+   Por exemplo, para o `accounts-client`:
+
+   ```bash
+   cd packages/accounts-client
+   # Configure suas variáveis de ambiente aqui no arquivo .env
+   ```
+
+## Ambiente de Desenvolvimento
+
+Para iniciar os serviços em modo de desenvolvimento, execute o seguinte comando a partir do diretório raiz:
+
+```bash
+pnpm --filter accounts-client --filter canary-client --filter admin-client run dev
 ```
 
-We recommend to install waypoint via apt-get:
+Este comando iniciará simultaneamente os clientes `accounts-client`, `canary-client` e `admin-client` em modo de desenvolvimento. O uso do `--filter` permite especificar quais pacotes devem ser afetados pelo comando, garantindo que apenas os clientes desejados sejam iniciados.
 
-```
-curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+## Arquitetura BONDE completa
 
-sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-
-sudo apt-get update && sudo apt-get install waypoint
-```
-
-VERY IMPORTANT: The build are executed locally with local variables. CHECK ENV VARS BEFORE BUILD.
-
-Then as configured in waypoint.hcl file, deploy must occurs and and url should appears in the end of command.
-
-```
-waypoint init
-
-waypoint up
-```
-
-## Third Stage Development
-
-Next steps are how to create a local enviroment to host BONDE.
-
-First, install [Docker](https://docker.com)
-
-```
-curl https://get.docker.com | sh
-
-sudo usermod -aG docker $USER
-```
-
-Then, install [Arkade](https://github.com/alexellis/arkade) - cli to install others tools, like kubectl, k3d or kind.
-
-```
-curl -sLS https://dl.get-arkade.dev | sudo sh
-```
-
-```
-arkade get kubectl
-arkade get k3d
-```
-
-Or create a local context `k3d create c`
-
-```
-kubectl get nodes
-```
-
-To work with remote enviroments, you should configure kubernetes and setup env variables to corret domain and path.
-
-## Client Defaults
-
-Build and tests based on [Create React App with Typescript](https://create-react-app.dev/)
-
-**Commands**
-
-- Tests:
-
-```sh
-pnpm m run tests # pnpm m run coverage
-```
-
-- Development server:
-
-```sh
-pnpm m run start
-```
-
-- Production build:
-
-```sh
-pnpm m run prepare --filter {libs}
-pnpm m run build --filter {libs}
-pnpm m run dev --filter {packages}
-# pnpm m run start
-```
-
-## How to add new env variables to build
-
-Add them inside the `.drone.yml` file. That's where CI setup lives, so when needed, add enviroment variables inside the "enviroment" indentation.
-
-```yml
-build:
-  enviroment:
-    - ENV=FOOBAR
-```
-
-You'll need to specify them inside the "build" (staging) and "production-build" (production) indentation. Therefore, change the env according to what you'll need in each enviroment.
-
-PS: Don't add secret envs in there, this file is public and so will be the tokens/sensity info you'll be inserting there.
+Para executar a estrutura backend completa do BONDE utilize o [repositório central de desenvolvimento](https://github.com/nossas/bonde?tab=readme-ov-file#bonde---ambiente-de-desenvolvimento).
