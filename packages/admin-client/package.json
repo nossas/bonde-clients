@@ -96,7 +96,7 @@
   },
   "scripts": {
     "start": "serve -s build",
-    "dev": "PORT=5001 react-scripts start",
+    "dev": "PORT=8282 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
