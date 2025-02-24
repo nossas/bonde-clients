@@ -130,7 +130,7 @@ const App: React.FC = () => {
 
   console.info('Build environment:', envConfig);
   // App URL
-  const protocol = envConfig === 'development' ? 'http' : 'https';
+  const protocol = 'https'
   const appDomain = process.env.REACT_APP_DOMAIN_PUBLIC || 'bonde.devel';
 
   const apiGraphQLUrl = process.env.REACT_APP_DOMAIN_API_GRAPHQL || `${protocol}://api-graphql.${appDomain}/v1/graphql`;
