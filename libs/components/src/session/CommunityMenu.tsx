@@ -2,12 +2,11 @@ import React from 'react';
 import { IconButton, Stack } from '@chakra-ui/react';
 import { Session, Community } from './types';
 
-import { SettingsIcon, PagesIcon, BotIcon, NetIcon } from '../icons';
+import { SettingsIcon, PagesIcon, BotIcon } from '../icons';
 
 const items: any = {
   settings: [SettingsIcon, 'Configurações'],
   mobilization: [PagesIcon, 'Mobilizações'],
-  redes: [NetIcon, 'Redes'],
   chatbot: [BotIcon, 'Chatbot'],
 };
 
