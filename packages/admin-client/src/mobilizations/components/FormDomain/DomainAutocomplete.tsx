@@ -36,8 +36,11 @@ const DomainAutocomplete = ({ name, initialValue, domains }) => {
   const completeSelection = (suggestion) => {
     const parts = inputValue.split(".");
     const prefix = parts.slice(0, 1).join(".");
+    let newValue = prefix ? `${prefix}.${suggestion}` : suggestion;
 
-    const newValue = prefix ? `${prefix}.${suggestion}` : suggestion;
+    if (suggestion.startsWith(inputValue)) {
+      newValue = suggestion;
+    }
 
     setInputValue(newValue);
     setSuggestions([]);
