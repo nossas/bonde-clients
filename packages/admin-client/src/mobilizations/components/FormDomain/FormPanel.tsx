@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { gql, useMutation } from 'bonde-core-tools';
 import {
   Stack,
@@ -58,18 +58,19 @@ const Styled = styled.div`
 interface FormPanelProperties {
   hostedZones: any[];
   mobilization: any;
+  updateMobilization: (obj: any) => void
 }
 
 export const FormPanel: React.FC<FormPanelProperties> = ({
   hostedZones,
-  mobilization: olMobilization
+  mobilization,
+  updateMobilization
 }) => {
-  const [mobilization, setMobilization] = useState(olMobilization);
   const toast = useToast();
   const domains = hostedZones.map((el) => el.domain_name);
 
   // Submit action to update custom domain on mobilization
-  const [updateMobilization] = useMutation(
+  const [asyncUpdateMobilization] = useMutation(
     gql`
       mutation ($id: Int!, $customDomain: String) {
         update_mobilizations_by_pk(pk_columns: { id: $id }, _set: { custom_domain: $customDomain }) {
@@ -83,9 +84,7 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
   const [routerAddOperation] = useMutation(
     gql`
       mutation ($domains: [String]!, $operation: String!) {
-        router_add_operation(operation: $operation, domains: $domains) {
-          message
-        }
+        router_add_operation(operation: $operation, domains: $domains)
       }
     `
   );
@@ -131,19 +130,19 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
       if (mobilizationCustomDomain && customDomain && mobilizationCustomDomain !== customDomain) {
         await routerAddOperation({ variables: { domains: [mobilizationCustomDomain, `www.${mobilizationCustomDomain}`], operation: "remove" }}); 
         await routerAddOperation({ variables: { domains: [customDomain, `www.${customDomain}`], operation: "append" }});
-        await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
+        await asyncUpdateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
 
-        setMobilization({...mobilization, custom_domain: `www.${customDomain}`});
+        updateMobilization({...mobilization, custom_domain: `www.${customDomain}`});
       } else if (!mobilizationCustomDomain && customDomain) {
         await routerAddOperation({ variables: { domains: [customDomain, `www.${customDomain}`], operation: "append" }});
-        await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
+        await asyncUpdateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
 
-        setMobilization({...mobilization, custom_domain: `www.${customDomain}`});
+        updateMobilization({...mobilization, custom_domain: `www.${customDomain}`});
       } else if (mobilizationCustomDomain && !customDomain) {
         await routerAddOperation({ variables: { domains: [mobilizationCustomDomain, `www.${mobilizationCustomDomain}`], operation: "remove" }}); 
-        await updateMobilization({ variables: { id: mobilization.id, customDomain: null } });
+        await asyncUpdateMobilization({ variables: { id: mobilization.id, customDomain: null } });
 
-        setMobilization({...mobilization, custom_domain: null});
+        updateMobilization({...mobilization, custom_domain: null});
       }
 
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
@@ -156,11 +155,10 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
           status: 'error',
           isClosable: true
         })
-      }
-      else {
+      } else {
         toast({
           title: 'Falha ao atualizar o domínio',
-          description: 'Esse endereço já está sendo usado em outra página.',
+          description: err.message || 'Esse endereço já está sendo usado em outra página.',
           status: 'error',
           isClosable: true
         })
