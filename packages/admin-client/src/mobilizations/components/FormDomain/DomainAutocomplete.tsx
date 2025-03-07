@@ -1,15 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 const DomainAutocomplete = ({ name, initialValue, domains }) => {
   const [inputValue, setInputValue] = useState(initialValue || "");
   const [suggestions, setSuggestions] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
-  
+  const containerRef = useRef(null); // Ref para a div do autocomplete
+
   const handleChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
     setSelectedIndex(-1);
-    
+
     if (value.includes(".")) {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const [subdomain, root] = value.split(".").slice(-2);
@@ -43,24 +44,36 @@ const DomainAutocomplete = ({ name, initialValue, domains }) => {
     setSelectedIndex(-1);
   };
 
+  const handleClickOutside = (evt) => {
+    if (containerRef.current && !containerRef.current.contains(evt.target)) {
+      setSuggestions([]);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  }, []);
+
   return (
-    <div className="domain-autocomplete">
-      <input 
+    <div className="domain-autocomplete" ref={containerRef}>
+      <input
         type="text"
         name={name}
         value={inputValue}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
         placeholder="Digite um domínio personalizado"
-        onBlur={() => setSuggestions([])}
       />
       {suggestions.length > 0 && (
         <ul>
           {suggestions.map((suggestion, index) => (
-            <li 
-              key={suggestion} 
+            <li
+              key={suggestion}
               onClick={() => completeSelection(suggestion)}
-              style={{ backgroundColor: index === selectedIndex ? "#ddd" : "transparent" }}
+              className={`${index === selectedIndex ? "active" : ""}`}
             >
               {suggestion}
             </li>

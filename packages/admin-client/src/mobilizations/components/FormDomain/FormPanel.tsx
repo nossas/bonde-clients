@@ -37,6 +37,10 @@ const Styled = styled.div`
         
         li {
           padding: 10px 20px;
+
+          &:hover, &.active {
+            background-color: #c7c7c7;
+          }
         }
       }
     }
