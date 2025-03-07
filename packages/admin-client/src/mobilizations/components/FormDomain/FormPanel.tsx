@@ -10,8 +10,19 @@ import { connect } from 'react-redux';
 import * as dnsControlActions from '../../../community/action-creators/dns-control';
 
 import DomainAutocomplete from './DomainAutocomplete';
+import SSLChecker from './SSLChecker';
 
 const Styled = styled.div`
+  .ssl-checker {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #c7c7c7;
+    margin-bottom: 10px;
+
+    button:hover {
+      text-decoration: underline;
+    }
+  }
+
   form {
     width: 100%;
     display: flex;
@@ -128,8 +139,8 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
 
     try {
       const mobilizationCustomDomain = mobilization.custom_domain?.replace("www.", "")
-      console.log("mobilizationCustomDomain", mobilizationCustomDomain)
-      console.log("customDomain", customDomain)
+      // console.log("mobilizationCustomDomain", mobilizationCustomDomain)
+      // console.log("customDomain", customDomain)
       
       if (mobilizationCustomDomain && customDomain && mobilizationCustomDomain !== customDomain) {
         await routerAddOperation({ variables: { domains: [mobilizationCustomDomain, `www.${mobilizationCustomDomain}`], operation: "remove" }}); 
@@ -173,6 +184,8 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
   return (
     <Stack minW={[200, 400, 400, 400, 1047]} spacing={2}>
       <Styled>
+        <SSLChecker url={`https://${mobilization.custom_domain}`} />
+
         <form onSubmit={handleSubmit} autoComplete='off'>
           <DomainAutocomplete
             name="customDomain"
