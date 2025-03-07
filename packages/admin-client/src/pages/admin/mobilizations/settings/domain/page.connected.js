@@ -4,6 +4,7 @@
 import { connect } from 'react-redux';
 
 import MobSelectors from '../../../../../mobrender/redux/selectors';
+import * as t from '../../../../../mobrender/redux/action-types';
 import DNSControlSelectors from '../../../../../community/dns-control-selectors';
 import Page from './page';
 
@@ -12,4 +13,13 @@ const mapStateToProps = (state, props) => ({
   hostedZones: DNSControlSelectors(state).dnsHostedZones().getList(),
 });
 
-export default connect(mapStateToProps)(Page);
+const mapDispatchToProps = {
+  updateMobilization: (mobilization) => (dispatch, getState) => {
+    dispatch({
+      type: t.UPDATE_MOBILIZATION_SUCCESS,
+      payload: mobilization
+    })
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Page);
