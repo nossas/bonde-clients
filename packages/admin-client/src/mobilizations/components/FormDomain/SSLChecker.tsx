@@ -1,4 +1,28 @@
 import React, { useState, useEffect } from "react";
+import styled from "styled-components";
+
+
+const SSLCheckerStyled = styled.div`
+  padding: 20px;
+  background: #e6e6e6;
+
+  button {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+  }
+
+  .retry-time {
+    font-size: 14px;
+    color: red;
+  }
+`
+
+const BoxStyled = styled.div`
+    margin-bottom: 15px;
+`
+
 
 function SSLChecker({ url }) {
     const [status, setStatus] = useState("Verificando...");
@@ -67,12 +91,28 @@ function SSLChecker({ url }) {
         }
     }, [status, timeLeft]);
 
+    let statusLabel = <span>Verificando...</span>
+
+    if (status == "OK") {
+        statusLabel = <span> &#10004; SSL ativo!</span>
+    } else if (status == "Falhou") {
+        statusLabel = <span> &#9888; O SSL não está ativo no momento</span>
+    }
+
     return (
-        <div className="ssl-checker">
-            <p><strong>Status SSL:</strong> {status}</p>
-            {lastChecked && <p><strong>Última verificação:</strong> {lastChecked} | <button onClick={checkSSL}>Reverificar Agora</button></p>}
-            {status === "Falhou" && <p>Nova verificação em {timeLeft}s</p>}
-        </div>
+        <SSLCheckerStyled>
+            <BoxStyled>
+                <p><strong>Certificado SSL</strong></p>
+                <p>O certificado SSL garante que sua página seja acessada com segurança. Se ele falhar, alguns navegadores podem bloquear o acesso ou exibir alertas de segurança.</p>
+            </BoxStyled>
+            <BoxStyled>
+                <p><strong>Status SSL:</strong>{statusLabel}</p>
+                {lastChecked && <p><strong>Última verificação:</strong> {lastChecked}</p>}
+                <button onClick={checkSSL}>Reverificar Agora</button>
+                {status === "Falhou" && <p className="retry-time">* Próxima tentativa automática em {timeLeft} segundos</p>}
+            </BoxStyled>
+            <p className="info"><strong>Importante: </strong>A verificação acontece automaticamente a cada 1 minuto e pode levar até 5 minutos para completar. Caso necessário, entre em contato via suporte.</p>
+        </SSLCheckerStyled>
     );
 }
 

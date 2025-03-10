@@ -12,61 +12,31 @@ import * as dnsControlActions from '../../../community/action-creators/dns-contr
 import DomainAutocomplete from './DomainAutocomplete';
 import SSLChecker from './SSLChecker';
 
-const Styled = styled.div`
-  .ssl-checker {
-    padding-bottom: 10px;
-    border-bottom: 1px solid #c7c7c7;
-    margin-bottom: 10px;
+const FormStyled = styled.form`
+  width: 100%;
+  display: flex;
+  align-items: start;
 
-    button:hover {
-      text-decoration: underline;
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+
+    &:hover {
+      opacity: 0.8;
     }
   }
+`
 
-  form {
-    width: 100%;
-    display: flex;
-    align-items: start;
+const HeadStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 
-    .domain-autocomplete {
-      flex: 1;
-
-      input {
-        width: 100%;
-        padding: 10px 20px;
-      }
-
-      ul {
-        border-top: 1px solid #c7c7c7;
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        background-color: white;
-
-        max-height: 200px;
-        overflow: auto;
-        
-        li {
-          padding: 10px 20px;
-
-          &:hover, &.active {
-            background-color: #c7c7c7;
-          }
-        }
-      }
-    }
-
-    button[type="submit"] {
-      padding: 10px 20px;
-      background-color: black;
-      color: white;
-      border: none;
-      outline: none;
-
-      &:hover {
-        opacity: 0.8;
-      }
-    }
+  .unlink {
+    text-decoration: underline;
   }
 `
 
@@ -182,19 +152,25 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
   }
 
   return (
-    <Stack minW={[200, 400, 400, 400, 1047]} spacing={2}>
-      <Styled>
-        <SSLChecker url={`https://${mobilization.custom_domain}`} />
+    <Stack minW={[200, 400, 400, 400, 1047]} spacing={8}>
+      <HeadStyled>
+        <p><strong>Escolha um domínio para sua página</strong></p>
+        <p>Use um domínio já configurado ou crie um subdomínio a partir dele para personalizar o endereço da sua página. Por exemplo, se o domínio disponível for <span className="unlink">minhacampanha.org</span>, você pode usar <span className="unlink">minhacampanha.org</span> ou criar um subdomínio como <span className="unlink">acao.minhacampanha.org</span>.</p>
+        <p><strong>Importante: </strong>O domínio principal precisa ter sido previamente configurado na sua comunidade do BONDE.</p>
+      </HeadStyled>
 
-        <form onSubmit={handleSubmit} autoComplete='off'>
-          <DomainAutocomplete
-            name="customDomain"
-            domains={domains}
-            initialValue={mobilization.custom_domain ? mobilization.custom_domain.replace('www.', '') : null}
-          />
-          <button type="submit">Salvar</button>
-        </form>
-      </Styled>
+      <FormStyled onSubmit={handleSubmit} autoComplete='off'>
+        <DomainAutocomplete
+          name="customDomain"
+          domains={domains}
+          initialValue={mobilization.custom_domain ? mobilization.custom_domain.replace('www.', '') : null}
+          helpText="* Digite para ver os domínios disponíveis - ao digitar, as opções configuradas aparecerão."
+        />
+        <button type="submit">Salvar</button>
+      </FormStyled>
+      {mobilization.custom_domain && (
+        <SSLChecker url={`https://${mobilization.custom_domain}`} />
+      )}
     </Stack>
   );
 }

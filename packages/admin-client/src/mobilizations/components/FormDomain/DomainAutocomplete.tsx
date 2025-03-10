@@ -1,6 +1,44 @@
 import React, { useState, useRef, useEffect } from "react";
+import styled from "styled-components";
 
-const DomainAutocomplete = ({ name, initialValue, domains }) => {
+
+const DomainAutocompleteStyled = styled.div`
+  position: relative;
+  flex: 1;
+
+  input {
+    width: 100%;
+    padding: 10px 20px;
+  }
+
+  ul {
+    position: absolute;
+    width: 100%;
+    border-top: 1px solid #c7c7c7;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+
+    max-height: 200px;
+    overflow: auto;
+    
+    li {
+      padding: 10px 20px;
+
+      &:hover, &.active {
+        background-color: #c7c7c7;
+      }
+    }
+  }
+  
+  .help-text {
+    font-size: 14px;
+  }
+`
+
+
+const DomainAutocomplete = ({ name, initialValue, domains, helpText }) => {
   const [inputValue, setInputValue] = useState(initialValue || "");
   const [suggestions, setSuggestions] = useState([]);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -61,7 +99,7 @@ const DomainAutocomplete = ({ name, initialValue, domains }) => {
   }, []);
 
   return (
-    <div className="domain-autocomplete" ref={containerRef}>
+    <DomainAutocompleteStyled ref={containerRef}>
       <input
         type="text"
         name={name}
@@ -83,7 +121,8 @@ const DomainAutocomplete = ({ name, initialValue, domains }) => {
           ))}
         </ul>
       )}
-    </div>
+      {helpText && <span className="help-text">{helpText}</span>}
+    </DomainAutocompleteStyled>
   );
 };
 
