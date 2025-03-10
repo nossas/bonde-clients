@@ -1,56 +1,63 @@
 import React from 'react';
-import { gql, useMutation, checkDNS } from 'bonde-core-tools';
+import { gql, useMutation } from 'bonde-core-tools';
 import {
-  Heading,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel,
   Stack,
   useToast
 } from 'bonde-components/chakra';
-import CustomTab from './CustomTab';
-import ExternalDomainForm from './ExternalDomainForm';
-import DomainForm from './DomainForm';
-import SubdomainForm from './SubdomainForm';
+import styled from "styled-components";
 // TODO: rever import
 import { connect } from 'react-redux';
 import * as dnsControlActions from '../../../community/action-creators/dns-control';
 
-const IP_LISTS = [
-  '54.85.56.248',
-  '3.236.227.166'
-]
+import DomainAutocomplete from './DomainAutocomplete';
+import SSLChecker from './SSLChecker';
+
+const FormStyled = styled.form`
+  width: 100%;
+  display: flex;
+  align-items: start;
+
+  button[type="submit"] {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+`
+
+const HeadStyled = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  .unlink {
+    text-decoration: underline;
+  }
+`
 
 interface FormPanelProperties {
   hostedZones: any[];
   mobilization: any;
-  updateDomain?: (dnsHostedZone: any, mobilization?: any) => void;
+  updateMobilization: (obj: any) => void
 }
 
 export const FormPanel: React.FC<FormPanelProperties> = ({
   hostedZones,
   mobilization,
-  updateDomain
+  updateMobilization
 }) => {
   const toast = useToast();
-  // Active tab by custom domain type
-  let defaultIndex = 0;
-  const { custom_domain: customDomain } = mobilization;
-  /* eslint-disable no-useless-escape */
-  const subdomainRegex = (zone) => new RegExp(`^www\..+\.${zone.domain_name}$`).test(customDomain);
-  const rootDomainRegex = (zone) => new RegExp(`^www\.${zone.domain_name}$`).test(customDomain);
-  /* eslint-disable no-useless-escape */
-  const internalHostedZones = hostedZones.filter((dns) => !dns.is_external_domain);
-
-  if (!customDomain || internalHostedZones.some(subdomainRegex)) defaultIndex = 0;
-  else if (!!customDomain && !internalHostedZones.some(subdomainRegex) && !internalHostedZones.some(rootDomainRegex)) defaultIndex = 2;
-  else if (internalHostedZones.some(rootDomainRegex)) defaultIndex = 1;
+  const domains = hostedZones.map((el) => el.domain_name);
 
   // Submit action to update custom domain on mobilization
-  const [updateMobilization] = useMutation(
+  const [asyncUpdateMobilization] = useMutation(
     gql`
-      mutation ($id: Int!, $customDomain: String!) {
+      mutation ($id: Int!, $customDomain: String) {
         update_mobilizations_by_pk(pk_columns: { id: $id }, _set: { custom_domain: $customDomain }) {
           id
           custom_domain
@@ -58,77 +65,74 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
       }
     `
   );
-  const [createDnsHostedZone] = useMutation(
+
+  const [routerAddOperation] = useMutation(
     gql`
-      mutation ($customDomain: String!, $comment: String!, $communityId: Int!) {
-        insert_dns_hosted_zones_one(
-          object: {
-            domain_name: $customDomain,
-            comment: $comment,
-            community_id: $communityId,
-            is_external_domain: true
-          }
-        ) {
-          id
-          domain_name
-          ns_ok
-        }
-      }
-    `
-  );
-  const [updateDnsHostedZone] = useMutation(
-    gql`
-      mutation ($id: Int!) {
-        update_dns_hosted_zones_by_pk(
-          pk_columns: { id: $id }, _set: { ns_ok: true }
-        ) {
-          id
-          domain_name
-          ns_ok
-        }
+      mutation ($domains: [String]!, $operation: String!) {
+        router_add_operation(operation: $operation, domains: $domains)
       }
     `
   );
 
-  const onSubmit = async ({ customDomain, isExternalDomain = false }: { customDomain: string, isExternalDomain?: boolean }) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    const customDomain = e.target.customDomain.value;
+
+    if (customDomain && !domains.includes(customDomain)) {
+      // Valida subdomínios
+      const parts = customDomain.split('.');
+  
+      if (parts.length < 2) {
+        toast({
+          title: 'Falha ao atualizar o domínio',
+          description: 'Esse domínio não é válido.',
+          status: 'error',
+          isClosable: true
+        })
+        return;
+      }
+    
+      // Pega todos os segmentos, exceto o primeiro (subdomínio)
+      const rootDomain = parts.slice(1).join('.'); 
+
+      if (!domains.includes(rootDomain)) {
+        toast({
+          title: 'Falha ao atualizar o domínio',
+          description: 'Você precisa usar um domínio cadastrado na Comunidade',
+          status: 'error',
+          isClosable: true
+        })
+        return;
+      }
+    }
+
     try {
-      const hostedZone = internalHostedZones.filter((hz) => customDomain.endsWith(hz.domain_name))[0];
-      if (isExternalDomain && mobilization.community_id) {
-        // Create dns hosted zone
-        const { data } = await createDnsHostedZone({
-          variables: {
-            customDomain,
-            communityId: mobilization.community_id,
-            comment: `mobilization_id:${mobilization.id}`
-          }
-        });
+      const mobilizationCustomDomain = mobilization.custom_domain?.replace("www.", "")
+      // console.log("mobilizationCustomDomain", mobilizationCustomDomain)
+      // console.log("customDomain", customDomain)
+      
+      if (mobilizationCustomDomain && customDomain && mobilizationCustomDomain !== customDomain) {
+        await routerAddOperation({ variables: { domains: [mobilizationCustomDomain, `www.${mobilizationCustomDomain}`], operation: "remove" }}); 
+        await routerAddOperation({ variables: { domains: [customDomain, `www.${customDomain}`], operation: "append" }});
+        await asyncUpdateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
 
-        // Verify IP configuration to dispatch certificate
-        if (data?.insert_dns_hosted_zones_one) {
-          if (await checkDNS(customDomain, 'A', { ip: IP_LISTS })) {
-            await updateDnsHostedZone({
-              variables: {
-                id: data?.insert_dns_hosted_zones_one.id
-              }
-            })
-          }
-        }
-      } else {
-        if (!hostedZone?.ns_ok) {
-          if (await checkDNS(customDomain, 'NS', { ns: hostedZone?.name_servers })) {
-            await updateDnsHostedZone({ variables: { id: hostedZone.id } })
-          }
-        }
+        updateMobilization({...mobilization, custom_domain: `www.${customDomain}`});
+      } else if (!mobilizationCustomDomain && customDomain) {
+        await routerAddOperation({ variables: { domains: [customDomain, `www.${customDomain}`], operation: "append" }});
+        await asyncUpdateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
+
+        updateMobilization({...mobilization, custom_domain: `www.${customDomain}`});
+      } else if (mobilizationCustomDomain && !customDomain) {
+        await routerAddOperation({ variables: { domains: [mobilizationCustomDomain, `www.${mobilizationCustomDomain}`], operation: "remove" }}); 
+        await asyncUpdateMobilization({ variables: { id: mobilization.id, customDomain: null } });
+
+        updateMobilization({...mobilization, custom_domain: null});
       }
 
-      const { data: { update_mobilizations_by_pk } } = await updateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
-
-      updateDomain && updateDomain(
-        { ...hostedZone },
-        { ...mobilization, ...update_mobilizations_by_pk }
-      );
       toast({ title: 'Domínio registrado com sucesso!', status: 'success', isClosable: true });
     } catch (err: any) {
+      console.log("err", err);
       if (!customDomain) {
         toast({
           title: 'Falha ao atualizar o domínio',
@@ -136,11 +140,10 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
           status: 'error',
           isClosable: true
         })
-      }
-      else {
+      } else {
         toast({
           title: 'Falha ao atualizar o domínio',
-          description: 'Esse endereço já está sendo usado em outra página.',
+          description: err.message || 'Esse endereço já está sendo usado em outra página.',
           status: 'error',
           isClosable: true
         })
@@ -149,36 +152,25 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
   }
 
   return (
-    <Stack minW={[200, 400, 400, 400, 1047]} spacing={2}>
-      <Heading fontWeight="semibold" fontSize="sm" textTransform="uppercase">Tipo de domínio</Heading>
-      <Tabs variant="unstyled" mt={0} defaultIndex={defaultIndex}>
-        <TabList ml={-4} textColor="gray.400">
-          <CustomTab textTransform="uppercase">Subdomínio</CustomTab>
-          <CustomTab textTransform="uppercase">Domínio Principal</CustomTab>
-          <CustomTab textTransform="uppercase">Domínio Externo</CustomTab>
-        </TabList>
-        <TabPanels ml={-4}>
-          <TabPanel>
-            <SubdomainForm
-              customDomain={defaultIndex === 0 ? customDomain : null}
-              onSubmit={onSubmit}
-              hostedZones={internalHostedZones.filter((dns) => dns.ns_ok)}
-            />
-          </TabPanel>
-          <TabPanel>
-            <DomainForm
-              customDomain={defaultIndex === 1 ? customDomain : null}
-              onSubmit={onSubmit}
-              hostedZones={internalHostedZones.filter((dns) => dns.ns_ok)}
-            />
-          </TabPanel>
-          <TabPanel>
-            <ExternalDomainForm
-              customDomain={defaultIndex === 2 ? customDomain : null}
-              onSubmit={onSubmit} />
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+    <Stack minW={[200, 400, 400, 400, 1047]} spacing={8}>
+      <HeadStyled>
+        <p><strong>Escolha um domínio para sua página</strong></p>
+        <p>Use um domínio já configurado ou crie um subdomínio a partir dele para personalizar o endereço da sua página. Por exemplo, se o domínio disponível for <span className="unlink">minhacampanha.org</span>, você pode usar <span className="unlink">minhacampanha.org</span> ou criar um subdomínio como <span className="unlink">acao.minhacampanha.org</span>.</p>
+        <p><strong>Importante: </strong>O domínio principal precisa ter sido previamente configurado na sua comunidade do BONDE.</p>
+      </HeadStyled>
+
+      <FormStyled onSubmit={handleSubmit} autoComplete='off'>
+        <DomainAutocomplete
+          name="customDomain"
+          domains={domains}
+          initialValue={mobilization.custom_domain ? mobilization.custom_domain.replace('www.', '') : null}
+          helpText="* Digite para ver os domínios disponíveis - ao digitar, as opções configuradas aparecerão."
+        />
+        <button type="submit">Salvar</button>
+      </FormStyled>
+      {mobilization.custom_domain && (
+        <SSLChecker url={`https://${mobilization.custom_domain}`} />
+      )}
     </Stack>
   );
 }
