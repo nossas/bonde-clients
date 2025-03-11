@@ -18,8 +18,7 @@ import { noSpecialCharacters } from "../../../../services/utils";
 import { Widget } from "../../FetchWidgets";
 import SettingsForm from '../SettingsForm';
 import EmailMetrics from './EmailMetrics';
-
-import CKEditor5Field from "./CKEditor5Field";
+import CKEditor5Field from "../CKEditor5Field";
 
 const Styles = styled.div`
   .emailBody {

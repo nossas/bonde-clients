@@ -16,6 +16,7 @@ import SpyField from "../../../../components/SpyField";
 import SettingsForm from '../SettingsForm';
 import DefaultPostAction from "./DefaultPostAction";
 import RichInputField from "./RichInputField";
+import CKEditor5Field from '../CKEditor5Field';
 
 type Props = {
 	widget: Widget;
@@ -36,6 +37,9 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 		;
 	const newFinishMessageType = finishMessageType || 'share';
 
+	// Verifica se o registro já usa o "custom"
+	const hasCustomOption = !!finishMessage;
+
 	return (
 		<SettingsForm
 			widget={widget}
@@ -46,7 +50,8 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 				settings: {
 					...widget.settings,
 					finish_message: newFinishMessage,
-					finish_message_type: newFinishMessageType
+					finish_message_type: newFinishMessageType,
+					finish_message_html_text: widget.settings?.finish_message_html_text || ''
 				}
 			}}
 		>
@@ -68,18 +73,26 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 												<Radio value='share'>
 													{t("settings.finish.radio.share")}
 												</Radio>
-												<Radio value='custom'>
-													{t("settings.finish.radio.custom")}
+												{/* Mostra a opção "custom" apenas se já existir */}
+												{hasCustomOption && (
+													<Radio value='custom'>
+														{t("settings.finish.radio.custom")}
+													</Radio>
+												)}
+												<Radio value='html'>
+													{t("settings.finish.radio.html")}
 												</Radio>
 											</RadioField>
 											{value === 'share' ? (
-												<TextareaField
-													label={t("settings.finish.default.whatsapp.label")}
-													name="settings.whatsapp_text"
-													placeholder={t("settings.finish.default.whatsapp.placeholder")}
-												/>
+											<TextareaField
+												label={t("settings.finish.default.whatsapp.label")}
+												name="settings.whatsapp_text"
+												placeholder={t("settings.finish.default.whatsapp.placeholder")}
+											/>
+											) : value === 'custom' ? (
+											<RichInputField name='settings.finish_message' />
 											) : (
-												<RichInputField name='settings.finish_message' />
+											<CKEditor5Field name='settings.finish_message_html_text' />
 											)}
 											<Flex justify='end'>
 												<Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
