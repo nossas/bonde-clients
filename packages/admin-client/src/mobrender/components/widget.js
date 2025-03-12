@@ -26,9 +26,16 @@ const Widget = ({
   );
 
   const widgetFilter = (w) => w.kind === widget.kind;
-  const widgetConfig = widgets(mobilization, widget, { intl }).filter(
+
+  const filteredWidgets = widgets(mobilization, widget, { intl }).filter(
     widgetFilter
-  )[0];
+  );
+
+  if (filteredWidgets.length === 0) {
+    return <p>Widget Not Found!</p>
+  }
+
+  const widgetConfig = filteredWidgets[0]
   const { component: Component, redirect } = widgetConfig;
 
   const widgetComponent = (

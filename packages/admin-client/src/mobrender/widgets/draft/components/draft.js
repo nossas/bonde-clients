@@ -12,7 +12,7 @@ const Draft = ({ mobilization, widget, update, intl, ...extraProps }) => {
   );
 
   return (
-    <div className="draft-widget widget center rounded lightgray clearfix">
+    <div id={`widget-${widget.id}`} className="draft-widget widget center rounded lightgray clearfix">
       {widgetsConfig
         .filter((wc) => wc.kind !== 'plip')
         .map((wc, index) => {

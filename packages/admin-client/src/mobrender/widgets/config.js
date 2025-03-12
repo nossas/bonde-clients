@@ -3,7 +3,8 @@ import { Draft } from './draft/components';
 import {
   Pressure,
   Form,
-  Content
+  Content,
+  Busao0800
 } from '../../mobilizations/widgets/__plugins__';
 import { PressureEmailIcon, PressurePhoneIcon } from './icons';
 import { createEditorContent } from '../../mobilizations/widgets/__plugins__/content/components/editor-slate';
@@ -129,4 +130,10 @@ export default (mobilization, widget, { intl }) => [
     label: 'PLIP',
     redirect: '/plip/edit',
   },
+  {
+    component: Busao0800,
+    kind: 'busao0800',
+    icon: 'doubt',
+    label: 'Busao0800'
+  }
 ];
