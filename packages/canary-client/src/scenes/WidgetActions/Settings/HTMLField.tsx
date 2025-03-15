@@ -46,11 +46,28 @@ const S3UploadHandler = async (blobInfo: any, progress: any) => {
   return s3creds.signedUrl.split("?")[0];
 }
 
+const tinyInitSettings = {
+  plugins: [
+    // Core editing features
+    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+    // Your account includes a free trial of TinyMCE premium features
+    // Try the most popular premium features until Mar 28, 2025:
+    'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
+  ],
+  toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+  tinycomments_mode: 'embedded',
+  tinycomments_author: 'Author name',
+  ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+  images_upload_handler: S3UploadHandler
+}
+
 
 const HTMLField = ({
   name,
   helpText,
   label,
+  initialValue,
+  mergetags = [],
   ...config
 }: any) => {
   const editorRef = useRef(null);
@@ -76,31 +93,10 @@ const HTMLField = ({
       </Flex>
       <Editor
         onInit={(_evt, editor) => editorRef.current = editor}
-        onChange={(_evt) => {
-          if (editorRef.current) {
-            input.onChange(editorRef.current.getContent());
-          }
-        }}
+        onChange={(_evt) => input.onChange(editorRef.current.getContent())}
         apiKey="lyj3aw60et8nqrq11ldco7tu88juep7r9c6669mw2y0k391b"
-        init={{
-          plugins: [
-            // Core editing features
-            'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-            // Your account includes a free trial of TinyMCE premium features
-            // Try the most popular premium features until Mar 28, 2025:
-            'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf'
-          ],
-          toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-          tinycomments_mode: 'embedded',
-          tinycomments_author: 'Author name',
-          mergetags_list: [
-            { value: 'First.Name', title: 'First Name' },
-            { value: 'Email', title: 'Email' },
-          ],
-          ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-          images_upload_handler: S3UploadHandler
-        }}
-        initialValue={input.value || ''}
+        init={{ ...tinyInitSettings, mergetags_list: mergetags }}
+        initialValue={initialValue}
       />
     </FormControl>
   )

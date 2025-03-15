@@ -16,7 +16,8 @@ import SpyField from "../../../../components/SpyField";
 import SettingsForm from '../SettingsForm';
 import DefaultPostAction from "./DefaultPostAction";
 import RichInputField from "./RichInputField";
-import HTMLField from '../HTMLField';
+import HTMLField from "../HTMLField";
+import HTMLPreview from "../HTMLPreview";
 
 type Props = {
 	widget: Widget;
@@ -40,12 +41,17 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 	// Verifica se o registro já usa o "custom"
 	const hasCustomOption = !!finishMessage;
 
+	const mergetags = [
+		{ value: 'First.Name', title: '' },
+		{ value: 'Email', title: 'Email' },
+	]
+
 	return (
 		<SettingsForm
 			widget={widget}
-			afterSubmit={async (values:any, result:any) => {
-        updateCache(result.data.update_widgets.returning[0])
-      }}
+			afterSubmit={async (values: any, result: any) => {
+				updateCache(result.data.update_widgets.returning[0])
+			}}
 			initialValues={{
 				settings: {
 					...widget.settings,
@@ -84,15 +90,15 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 												</Radio>
 											</RadioField>
 											{value === 'share' ? (
-											<TextareaField
-												label={t("settings.finish.default.whatsapp.label")}
-												name="settings.whatsapp_text"
-												placeholder={t("settings.finish.default.whatsapp.placeholder")}
-											/>
+												<TextareaField
+													label={t("settings.finish.default.whatsapp.label")}
+													name="settings.whatsapp_text"
+													placeholder={t("settings.finish.default.whatsapp.placeholder")}
+												/>
 											) : value === 'custom' ? (
-											<RichInputField name='settings.finish_message' />
+												<RichInputField name='settings.finish_message' />
 											) : (
-											<HTMLField name='settings.finish_message_html_text' />
+												<HTMLField name='settings.finish_message_html_text' initialValue={widget.settings.finish_message_html_text} mergetags={mergetags} />
 											)}
 											<Flex justify='end'>
 												<Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
@@ -101,6 +107,7 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 									</GridItem>
 									<GridItem colSpan={[12, 12, 6]}>
 										{value === 'share' && <DefaultPostAction />}
+										{value === 'html' && <HTMLPreview name="settings.finish_message_html_text" />}
 									</GridItem>
 								</>
 							)}
