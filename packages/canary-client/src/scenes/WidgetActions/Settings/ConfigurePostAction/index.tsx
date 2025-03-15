@@ -16,7 +16,7 @@ import SpyField from "../../../../components/SpyField";
 import SettingsForm from '../SettingsForm';
 import DefaultPostAction from "./DefaultPostAction";
 import RichInputField from "./RichInputField";
-import CKEditor5Field from '../CKEditor5Field';
+import HTMLField from '../HTMLField';
 
 type Props = {
 	widget: Widget;
@@ -92,7 +92,7 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 											) : value === 'custom' ? (
 											<RichInputField name='settings.finish_message' />
 											) : (
-											<CKEditor5Field name='settings.finish_message_html_text' />
+											<HTMLField name='settings.finish_message_html_text' />
 											)}
 											<Flex justify='end'>
 												<Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
