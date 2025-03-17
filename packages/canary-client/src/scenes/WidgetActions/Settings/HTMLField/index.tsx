@@ -1,11 +1,25 @@
 import React, { useRef } from "react";
+import { isMobile } from 'react-device-detect';
 import { FormControl, FormLabel, Flex, Tooltip, Stack } from "bonde-components/chakra";
 import { Hint } from "bonde-components";
 import { InfoIcon } from "bonde-components/icons";
 import { useField } from "bonde-components/form";
 
 import { Editor } from "@tinymce/tinymce-react";
-import sharingPlugin from "./plugins/sharing";
+
+// Importa o CSS e os temas diretamente do TinyMCE instalado localmente
+import 'tinymce/tinymce';
+import 'tinymce/icons/default';
+import 'tinymce/themes/silver';
+import 'tinymce/models/dom';
+import 'tinymce/plugins/lists';
+import 'tinymce/plugins/link';
+import 'tinymce/plugins/image';
+import 'tinymce/plugins/wordcount';
+
+// Estilo do editor
+import 'tinymce/skins/ui/oxide/skin.min.css';
+import 'tinymce/skins/content/default/content.min.css';
 
 
 const S3UploadHandler = async (blobInfo: any, progress: any) => {
@@ -48,24 +62,41 @@ const S3UploadHandler = async (blobInfo: any, progress: any) => {
 }
 
 const tinyInitSettings = {
+  // plugins: [
+  //   // Core editing features
+  //   'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+  //   // Your account includes a free trial of TinyMCE premium features
+  //   // Try the most popular premium features until Mar 28, 2025:
+  //   // 
+  //   "sharingplugin"
+  // ],
+  license_key: "gpl",
+  // menubar: false,
   plugins: [
-    // Core editing features
-    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-    // Your account includes a free trial of TinyMCE premium features
-    // Try the most popular premium features until Mar 28, 2025:
-    'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf',
-    // 
-    "sharingplugin"
+    "advlist", "anchor", "autolink", "charmap", "code",
+    "fullscreen", "help", "image", "insertdatetime",
+    "link", "lists", "media", "preview", "searchreplace",
+    "table", "visualblocks", "wordcount", "sharing"
   ],
-  toolbar: 'sharingbutton | undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-  tinycomments_mode: 'embedded',
-  tinycomments_author: 'Author name',
-  ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
+  toolbar:
+      "undo redo | bold italic underline | " +
+      "alignleft aligncenter alignright alignjustify | " +
+      "bullist numlist outdent indent | " +
+      "link image media sharing | table | code fullscreen preview",
+  menu: {
+    insert: { title: "Inserir", items: "link image media table sharing" }
+  },
   images_upload_handler: S3UploadHandler,
-  setup: (editor) => {
-    // Registra o plugin com caixa de diálogo
-    sharingPlugin(editor);
+  sharing_is_mobile: isMobile,
+  skin: false,  // Necessário para evitar erro de skin ao usar localmente
+  content_css: false, // Evita erro de CSS ao rodar sem CDN
+  external_plugins: {
+    sharing: "/tinymce/plugins/sharing/index.js"
   }
+  // setup: (editor) => {
+  //   // Registra o plugin com caixa de diálogo
+  //   sharingPlugin(editor);
+  // }
 }
 
 
@@ -99,9 +130,9 @@ const HTMLField = ({
         )}
       </Flex>
       <Editor
+        tinymceScriptSrc="/tinymce/tinymce.min.js"
         onInit={(_evt, editor) => editorRef.current = editor}
         onChange={(_evt) => input.onChange(editorRef.current.getContent())}
-        apiKey="lyj3aw60et8nqrq11ldco7tu88juep7r9c6669mw2y0k391b"
         init={{ ...tinyInitSettings, mergetags_list: mergetags }}
         initialValue={initialValue}
       />

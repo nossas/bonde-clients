@@ -60,6 +60,7 @@
     "slate-editor": "workspace:*",
     "slate-plain-serializer": "^0.7.13",
     "slugify": "^1.4.6",
+    "tinymce": "^7.7.1",
     "typescript": "^3"
   },
   "devDependencies": {
