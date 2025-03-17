@@ -16,6 +16,18 @@ import 'tinymce/plugins/lists';
 import 'tinymce/plugins/link';
 import 'tinymce/plugins/image';
 import 'tinymce/plugins/wordcount';
+import 'tinymce/plugins/advlist';
+import 'tinymce/plugins/anchor';
+import 'tinymce/plugins/autolink';
+import 'tinymce/plugins/charmap';
+import 'tinymce/plugins/code';
+import 'tinymce/plugins/fullscreen';
+import 'tinymce/plugins/insertdatetime';
+import 'tinymce/plugins/media';
+import 'tinymce/plugins/preview';
+import 'tinymce/plugins/searchreplace';
+import 'tinymce/plugins/table';
+import 'tinymce/plugins/visualblocks';
 
 // Estilo do editor
 import 'tinymce/skins/ui/oxide/skin.min.css';
@@ -62,19 +74,10 @@ const S3UploadHandler = async (blobInfo: any, progress: any) => {
 }
 
 const tinyInitSettings = {
-  // plugins: [
-  //   // Core editing features
-  //   'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-  //   // Your account includes a free trial of TinyMCE premium features
-  //   // Try the most popular premium features until Mar 28, 2025:
-  //   // 
-  //   "sharingplugin"
-  // ],
   license_key: "gpl",
-  // menubar: false,
   plugins: [
     "advlist", "anchor", "autolink", "charmap", "code",
-    "fullscreen", "help", "image", "insertdatetime",
+    "fullscreen", "image", "insertdatetime",
     "link", "lists", "media", "preview", "searchreplace",
     "table", "visualblocks", "wordcount", "sharing"
   ],
@@ -89,14 +92,12 @@ const tinyInitSettings = {
   images_upload_handler: S3UploadHandler,
   sharing_is_mobile: isMobile,
   skin: false,  // Necessário para evitar erro de skin ao usar localmente
-  content_css: false, // Evita erro de CSS ao rodar sem CDN
+  content_css: [
+    "/styles/plugins/sharing.css"
+  ], // Evita erro de CSS ao rodar sem CDN
   external_plugins: {
     sharing: "/tinymce/plugins/sharing/index.js"
   }
-  // setup: (editor) => {
-  //   // Registra o plugin com caixa de diálogo
-  //   sharingPlugin(editor);
-  // }
 }
 
 
