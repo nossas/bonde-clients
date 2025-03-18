@@ -82,7 +82,7 @@ const tinyInitSettings = {
     "table", "visualblocks", "wordcount", "sharing"
   ],
   toolbar:
-      "undo redo | bold italic underline | " +
+      "mergetags | undo redo | bold italic underline | " +
       "alignleft aligncenter alignright alignjustify | " +
       "bullist numlist outdent indent | " +
       "link image media sharing | table | code fullscreen preview",
@@ -93,10 +93,12 @@ const tinyInitSettings = {
   sharing_is_mobile: isMobile,
   skin: false,  // Necessário para evitar erro de skin ao usar localmente
   content_css: [
-    "/styles/plugins/sharing.css"
+    "/styles/plugins/sharing.css",
+    "/styles/plugins/mergetags.css"
   ], // Evita erro de CSS ao rodar sem CDN
   external_plugins: {
-    sharing: "/tinymce/plugins/sharing/index.js"
+    sharing: "/tinymce/plugins/sharing/index.js",
+    mergetags: "/tinymce/plugins/mergetags/index.js"
   }
 }
 
