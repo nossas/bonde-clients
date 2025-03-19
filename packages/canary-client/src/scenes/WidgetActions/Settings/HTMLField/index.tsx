@@ -79,25 +79,27 @@ const tinyInitSettings = {
     "advlist", "anchor", "autolink", "charmap", "code",
     "fullscreen", "image", "insertdatetime",
     "link", "lists", "media", "preview", "searchreplace",
-    "table", "visualblocks", "wordcount", "sharing"
+    "table", "visualblocks", "wordcount", "social"
   ],
   toolbar:
-      "mergetags | undo redo | bold italic underline | " +
+      "social | mergetags | undo redo | bold italic underline | " +
       "alignleft aligncenter alignright alignjustify | " +
       "bullist numlist outdent indent | " +
-      "link image media sharing | table | code fullscreen preview",
-  menu: {
-    insert: { title: "Inserir", items: "link image media table sharing" }
-  },
+      "link image media | table | code fullscreen preview",
+  // menu: {
+  //   insert: { title: "Inserir", items: "link image media table" }
+  // },
   images_upload_handler: S3UploadHandler,
   sharing_is_mobile: isMobile,
+  sharing_url_default: "https://minhacampanha.com.br",
   skin: false,  // Necessário para evitar erro de skin ao usar localmente
+  contextmenu: "social link image",
   content_css: [
-    "/styles/plugins/sharing.css",
+    "/styles/plugins/social.css",
     "/styles/plugins/mergetags.css"
   ], // Evita erro de CSS ao rodar sem CDN
   external_plugins: {
-    sharing: "/tinymce/plugins/sharing/index.js",
+    social: "/tinymce/plugins/social/index.js",
     mergetags: "/tinymce/plugins/mergetags/index.js"
   }
 }
@@ -108,7 +110,7 @@ const HTMLField = ({
   helpText,
   label,
   initialValue,
-  mergetags = [],
+  init = {},
   ...config
 }: any) => {
   const editorRef = useRef(null);
@@ -137,7 +139,7 @@ const HTMLField = ({
         onInit={(_evt, editor) => editorRef.current = editor}
         onChange={(_evt) => input.onChange(editorRef.current.getContent({ format: "clean" }))}
         initialValue={initialValue}
-        init={{ ...tinyInitSettings, mergetags_list: mergetags }}
+        init={{ ...tinyInitSettings, ...init }}
       />
     </FormControl>
   )

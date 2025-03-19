@@ -7,7 +7,9 @@
             const parser = new DOMParser();
             const doc = parser.parseFromString(e.content || editor.getContent({ format: "html" }), "text/html");
             // Manipula apenas quando o conteúdo é inserido de maneira clean, sem as tags de estilização
-            if (doc.querySelectorAll("span.mergetags").length === 0) {
+            // e direto pelo metódo editor.setContent()
+            // Usar o e.set evita manipular o conteúdo quando outro plugin usar o insertContent
+            if (e.set && doc.querySelectorAll("span.mergetags").length === 0) {
                 let content = editor.getContent({ format: "html" });
                 content = content.replace(/\{\{\s*(.*?)\s*\}\}/g, '<span class="mergetags" contenteditable="false"><span class="mergetags-affix">{{</span>$1<span class="mergetags-affix">}}</span></span>')
                 editor.setContent(content);
