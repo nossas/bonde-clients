@@ -135,9 +135,9 @@ const HTMLField = ({
       <Editor
         tinymceScriptSrc="/tinymce/tinymce.min.js"
         onInit={(_evt, editor) => editorRef.current = editor}
-        onChange={(_evt) => input.onChange(editorRef.current.getContent())}
-        init={{ ...tinyInitSettings, mergetags_list: mergetags }}
+        onChange={(_evt) => input.onChange(editorRef.current.getContent({ format: "clean" }))}
         initialValue={initialValue}
+        init={{ ...tinyInitSettings, mergetags_list: mergetags }}
       />
     </FormControl>
   )
