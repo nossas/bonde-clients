@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import { isMobile } from 'react-device-detect';
 import { FormControl, FormLabel, Flex, Tooltip, Stack } from "bonde-components/chakra";
 import { Hint } from "bonde-components";
@@ -90,8 +90,6 @@ const tinyInitSettings = {
   //   insert: { title: "Inserir", items: "link image media table" }
   // },
   images_upload_handler: S3UploadHandler,
-  sharing_is_mobile: isMobile,
-  sharing_url_default: "https://minhacampanha.com.br",
   skin: false,  // Necessário para evitar erro de skin ao usar localmente
   contextmenu: "social link image",
   content_css: [
@@ -115,6 +113,15 @@ const HTMLField = ({
 }: any) => {
   const editorRef = useRef(null);
   const { input, meta } = useField(name, config);
+
+  useEffect(() => {
+    return () => {
+      if (editorRef.current) {
+        editorRef.current.remove();
+        editorRef.current = null;
+      }
+    };
+  }, []);
 
   return (
     <FormControl
