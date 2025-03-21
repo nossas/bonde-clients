@@ -19,6 +19,24 @@ import RichInputField from "./RichInputField";
 import HTMLField from "../HTMLField";
 import HTMLPreview from "../HTMLPreview";
 
+
+const defaultPostActionHTML = `
+<div><h2 style="text-align: center;">E-mail enviado!</h2>
+<p>&nbsp;</p>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://hub-central.s3.us-east-1.amazonaws.com/assets/check-mark-image.png" alt="Icone de sucesso" width="100" height="100"></p>
+<p>&nbsp;</p>
+<div>
+<div style="text-align: center;">Compartilhe com sua galera para aumentarmos nosso impacto!</div>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;">
+<a class="social facebook" contenteditable="false" href="https://www.facebook.com/sharer.php?u={{SHARE_URL}}" target="_blank" rel="noopener noreferrer">Compartilhar no Facebook</a>
+<a class="social twitter" contenteditable="false" href="https://twitter.com/intent/tweet?text={{SHARE_TWITTER_TEXT}}&amp;url={{SHARE_URL}}" target="_blank" rel="noopener noreferrer">Compartilhar no Twitter</a>
+<a class="social whatsapp" contenteditable="false" href="https://web.whatsapp.com/send?text={{SHARE_URL}}" target="_blank" rel="noopener noreferrer">Compartilhar no Whatsapp</a>
+<br>
+</div>
+</div></div>
+`;
+
 type Props = {
 	widget: Widget;
 	updateCache: any;
@@ -57,7 +75,7 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 					...widget.settings,
 					finish_message: newFinishMessage,
 					finish_message_type: newFinishMessageType,
-					finish_message_html_text: widget.settings?.finish_message_html_text || ''
+					finish_message_html_text: widget.settings?.finish_message_html_text || ""
 				}
 			}}
 		>
@@ -98,7 +116,23 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 											) : value === 'custom' ? (
 												<RichInputField name='settings.finish_message' />
 											) : (
-												<HTMLField name='settings.finish_message_html_text' initialValue={widget.settings.finish_message_html_text} mergetags={mergetags} />
+												<HTMLField
+													name='settings.finish_message_html_text'
+													initialValue={widget.settings.finish_message_html_text}
+													init={{
+														mergetags_list: mergetags,
+														social_share_url: widget.block.mobilization.custom_domain,
+														social_twitter_text: widget.block.mobilization.twitter_share_text,
+														templates_list: [
+															{
+																"title": "Mensagem padrão",
+																"content": defaultPostActionHTML
+																	.replace(/\{\{SHARE_URL\}\}/g, widget.block.mobilization.custom_domain || "")
+																	.replace(/\{\{SHARE_TWITTER_TEXT\}\}/, widget.block.mobilization.twitter_share_text || "")
+															}
+														]
+													}}
+												/>
 											)}
 											<Flex justify='end'>
 												<Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
