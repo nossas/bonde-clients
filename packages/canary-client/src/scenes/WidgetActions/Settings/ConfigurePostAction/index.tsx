@@ -70,6 +70,13 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 		if (widget.settings.show_state === "s") {
 			mergetags_list.push({ value: "state", text: "Estado" });
 		}
+	} else if (widget.kind === "busao0800") {
+		mergetags_list.push({ value: "full_name", text: "Nome" });
+		mergetags_list.push({ value: "email", text: "Email" });
+		mergetags_list.push({ value: "n_employees", text: "Número de colaboradores" });
+		mergetags_list.push({ value: "transportation_cost", text: "Valor total gasto com Vale Transporte" });
+		mergetags_list.push({ value: "totalCost", text: "Valor total gasto" });
+		mergetags_list.push({ value: "saveMoney", text: "Valor Economizado" });
 	}
 
 	return (
