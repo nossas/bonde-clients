@@ -37,7 +37,7 @@ const Navigation: React.FC<NavigationProps> = ({ widget }) => {
         </Tab>
       </>
     )
-  } else if (widget.kind !== 'phone') {
+  } else if (widget.kind !== 'phone' && widget.kind !== "busao0800") {
     tabs = ({ is, push }: any) => (
       <Tab
         active={is(/\/widgets\/\d+\/settings\/*$/)}

@@ -49,10 +49,10 @@ const Widget = ({
         <WidgetOverlay
           widget={widget}
           onEdit={() => {
-            if (widget.kind === 'pressure') {
+            if (widget.kind === 'pressure' || widget.kind === "busao0800") {
               const url = urljoin(
                 process.env.REACT_APP_DOMAIN_ADMIN_CANARY,
-                `/widgets/${widget.id}/settings`
+                `/widgets/${widget.id}/settings/adjusts`
               );
               window.open(url, '_self');
             } else if (widget.kind === 'plip') {

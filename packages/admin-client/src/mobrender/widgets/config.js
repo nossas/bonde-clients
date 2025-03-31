@@ -134,6 +134,7 @@ export default (mobilization, widget, { intl }) => [
     component: Busao0800,
     kind: 'busao0800',
     icon: 'doubt',
-    label: 'Busao0800'
+    label: 'Busao0800',
+    redirect: Paths.settings(mobilization.id, widget.id)
   }
 ];
