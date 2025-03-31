@@ -18,7 +18,7 @@ import { noSpecialCharacters } from "../../../../services/utils";
 import { Widget } from "../../FetchWidgets";
 import SettingsForm from '../SettingsForm';
 import EmailMetrics from './EmailMetrics';
-import CKEditor5Field from "../CKEditor5Field";
+import HTMLField from "../HTMLField";
 
 const Styles = styled.div`
   .emailBody {
@@ -87,8 +87,9 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                     required(t("settings.autofire.validators.required"))
                   )}
                 />
-                <CKEditor5Field
+                <HTMLField
                   name="settings.email_text"
+                  initialValue={widget.settings.email_text}
                   label={t("settings.autofire.label.emailBody")}
                   validate={composeValidators(
                     required(t("settings.autofire.validators.required"))

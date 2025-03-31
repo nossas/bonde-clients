@@ -1,0 +1,7 @@
+.mergetags .mergetags-affix {
+    color: #349beb;
+}
+
+.mergetags.selected {
+    background-color: rgba(0, 0, 255, 0.2); /* Leve fundo azul */
+}
