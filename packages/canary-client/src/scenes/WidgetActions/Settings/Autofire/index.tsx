@@ -89,6 +89,7 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                 />
                 <HTMLField
                   name="settings.email_text"
+                  initialValue={widget.settings.email_text}
                   label={t("settings.autofire.label.emailBody")}
                   validate={composeValidators(
                     required(t("settings.autofire.validators.required"))

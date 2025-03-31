@@ -22,7 +22,6 @@ import HTMLPreview from "../HTMLPreview";
 
 const defaultPostActionHTML = `
 <div><h2 style="text-align: center;">E-mail enviado!</h2>
-<p>&nbsp;</p>
 <p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://hub-central.s3.us-east-1.amazonaws.com/assets/check-mark-image.png" alt="Icone de sucesso" width="100" height="100"></p>
 <p>&nbsp;</p>
 <div>
@@ -59,10 +58,19 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 	// Verifica se o registro já usa o "custom"
 	const hasCustomOption = !!finishMessage;
 
-	const mergetags = [
-		{ value: 'First.Name', title: '' },
-		{ value: 'Email', title: 'Email' },
-	]
+	const mergetags_list: any = []
+
+	if (widget.kind === "pressure") {
+		mergetags_list.push({ value: "name", text: "Nome" });
+		mergetags_list.push({ value: "lastname", text: "Sobrenome" });
+		mergetags_list.push({ value: "email", text: "Email" });
+		if (widget.settings.show_city === "s" || widget.settings.show_city === "city-true") {
+			mergetags_list.push({ value: "city", text: "Cidade" });
+		}
+		if (widget.settings.show_state === "s") {
+			mergetags_list.push({ value: "state", text: "Estado" });
+		}
+	}
 
 	return (
 		<SettingsForm
@@ -120,7 +128,7 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 													name='settings.finish_message_html_text'
 													initialValue={widget.settings.finish_message_html_text}
 													init={{
-														mergetags_list: mergetags,
+														mergetags_list: mergetags_list,
 														social_share_url: widget.block.mobilization.custom_domain,
 														social_twitter_text: widget.block.mobilization.twitter_share_text,
 														templates_list: [
