@@ -95,7 +95,7 @@
         });
 
         const insertTag = (editor, value) => {
-            editor.insertContent(`<span class="mergetags" contenteditable="false"><span class="mergetags-affix">{{</span>${value}<span class="mergetags-affix">}}</span></span>`);
+            editor.insertContent(`<span class="mergetags"><span class="mergetags-affix">{{</span>${value}<span class="mergetags-affix">}}</span></span>`);
             editor.selection.collapse(false);
         }
 
