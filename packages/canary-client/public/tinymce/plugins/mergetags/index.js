@@ -95,14 +95,21 @@
         });
 
         const insertTag = (editor, value) => {
-            editor.insertContent(`<span class="mergetags"><span class="mergetags-affix">{{</span>${value}<span class="mergetags-affix">}}</span></span>`);
+            editor.insertContent(
+              `<span class="mergetags" data-variable="${value}" contenteditable="false">
+                <span class="mergetags-affix">{{</span>
+                <span class="mergetags-value" contenteditable="true">${value}</span>
+                <span class="mergetags-affix">}}</span>
+              </span>`
+            );
+            // Posiciona o cursor após a variável
             editor.selection.collapse(false);
-        }
+          };
 
         return {
             getMetadata: function () {
                 return {
-                    name: "Váriaveis"
+                    name: "Váriaveis"   
                 };
             }
         };
