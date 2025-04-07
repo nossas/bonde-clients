@@ -26,9 +26,16 @@ const Widget = ({
   );
 
   const widgetFilter = (w) => w.kind === widget.kind;
-  const widgetConfig = widgets(mobilization, widget, { intl }).filter(
+
+  const filteredWidgets = widgets(mobilization, widget, { intl }).filter(
     widgetFilter
-  )[0];
+  );
+
+  if (filteredWidgets.length === 0) {
+    return <p>Widget Not Found!</p>
+  }
+
+  const widgetConfig = filteredWidgets[0]
   const { component: Component, redirect } = widgetConfig;
 
   const widgetComponent = (
@@ -42,10 +49,10 @@ const Widget = ({
         <WidgetOverlay
           widget={widget}
           onEdit={() => {
-            if (widget.kind === 'pressure') {
+            if (widget.kind === 'pressure' || widget.kind === "busao0800") {
               const url = urljoin(
                 process.env.REACT_APP_DOMAIN_ADMIN_CANARY,
-                `/widgets/${widget.id}/settings`
+                `/widgets/${widget.id}/settings/adjusts`
               );
               window.open(url, '_self');
             } else if (widget.kind === 'plip') {

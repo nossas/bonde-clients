@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Header, Tab } from 'bonde-components';
 import { Heading } from "bonde-components/chakra";
-import { useParams, useRouteMatch, Route, Switch } from "react-router-dom";
+import { useParams, useRouteMatch, Route, Switch, Redirect } from "react-router-dom";
 import { useTranslation } from 'react-i18next';
 import { Context as SessionContext } from 'bonde-core-tools';
 import { isMobile } from "react-device-detect";
@@ -47,6 +47,14 @@ const RoutesByKind: React.FC<RoutesByKindProps> = ({ widget, updateCache }) => {
       <Route path={`${match.path}`}>
         <Phone widget={widget} updateCache={updateCache} />
       </Route>
+    )
+  } else {
+    console.log("asdadasdasdasd");
+    return (
+      <Redirect
+        from={`${match.path}`}
+        to={`/widgets/${widget.id}/settings/adjusts`}
+      />
     )
   }
   return <div />

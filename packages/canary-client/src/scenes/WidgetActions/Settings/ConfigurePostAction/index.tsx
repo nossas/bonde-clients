@@ -16,7 +16,25 @@ import SpyField from "../../../../components/SpyField";
 import SettingsForm from '../SettingsForm';
 import DefaultPostAction from "./DefaultPostAction";
 import RichInputField from "./RichInputField";
-import CKEditor5Field from '../CKEditor5Field';
+import HTMLField from "../HTMLField";
+import HTMLPreview from "../HTMLPreview";
+
+
+const defaultPostActionHTML = `
+<div><h2 style="text-align: center;">E-mail enviado!</h2>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="https://hub-central.s3.us-east-1.amazonaws.com/assets/check-mark-image.png" alt="Icone de sucesso" width="100" height="100"></p>
+<p>&nbsp;</p>
+<div>
+<div style="text-align: center;">Compartilhe com sua galera para aumentarmos nosso impacto!</div>
+<div style="text-align: center;">&nbsp;</div>
+<div style="text-align: center;">
+<a class="social facebook" contenteditable="false" href="https://www.facebook.com/sharer.php?u={{SHARE_URL}}" target="_blank" rel="noopener noreferrer">Compartilhar no Facebook</a>
+<a class="social twitter" contenteditable="false" href="https://twitter.com/intent/tweet?text={{SHARE_TWITTER_TEXT}}&amp;url={{SHARE_URL}}" target="_blank" rel="noopener noreferrer">Compartilhar no Twitter</a>
+<a class="social whatsapp" contenteditable="false" href="https://web.whatsapp.com/send?text={{SHARE_URL}}" target="_blank" rel="noopener noreferrer">Compartilhar no Whatsapp</a>
+<br>
+</div>
+</div></div>
+`;
 
 type Props = {
 	widget: Widget;
@@ -40,18 +58,40 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 	// Verifica se o registro já usa o "custom"
 	const hasCustomOption = !!finishMessage;
 
+	const mergetags_list: any = []
+
+	if (widget.kind === "pressure") {
+		mergetags_list.push({ value: "name", text: "Nome" });
+		mergetags_list.push({ value: "lastname", text: "Sobrenome" });
+		mergetags_list.push({ value: "email", text: "Email" });
+		if (widget.settings.show_city === "s" || widget.settings.show_city === "city-true") {
+			mergetags_list.push({ value: "city", text: "Cidade" });
+		}
+		if (widget.settings.show_state === "s") {
+			mergetags_list.push({ value: "state", text: "Estado" });
+		}
+	} else if (widget.kind === "busao0800") {
+		mergetags_list.push({ value: "first_name", text: "Nome" });
+		mergetags_list.push({ value: "last_name", text: "Sobrenome" });
+		mergetags_list.push({ value: "email", text: "Email" });
+		mergetags_list.push({ value: "nEmployees", text: "Número de colaboradores" });
+		mergetags_list.push({ value: "cost", text: "Valor total gasto com Vale Transporte" });
+		mergetags_list.push({ value: "newCost", text: "Valor total gasto com Busão 0800" });
+		mergetags_list.push({ value: "saveMoney", text: "Valor Economizado com Busão 0800" });
+	}
+
 	return (
 		<SettingsForm
 			widget={widget}
-			afterSubmit={async (values:any, result:any) => {
-        updateCache(result.data.update_widgets.returning[0])
-      }}
+			afterSubmit={async (values: any, result: any) => {
+				updateCache(result.data.update_widgets.returning[0])
+			}}
 			initialValues={{
 				settings: {
 					...widget.settings,
 					finish_message: newFinishMessage,
 					finish_message_type: newFinishMessageType,
-					finish_message_html_text: widget.settings?.finish_message_html_text || ''
+					finish_message_html_text: widget.settings?.finish_message_html_text || ""
 				}
 			}}
 		>
@@ -84,15 +124,31 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 												</Radio>
 											</RadioField>
 											{value === 'share' ? (
-											<TextareaField
-												label={t("settings.finish.default.whatsapp.label")}
-												name="settings.whatsapp_text"
-												placeholder={t("settings.finish.default.whatsapp.placeholder")}
-											/>
+												<TextareaField
+													label={t("settings.finish.default.whatsapp.label")}
+													name="settings.whatsapp_text"
+													placeholder={t("settings.finish.default.whatsapp.placeholder")}
+												/>
 											) : value === 'custom' ? (
-											<RichInputField name='settings.finish_message' />
+												<RichInputField name='settings.finish_message' />
 											) : (
-											<CKEditor5Field name='settings.finish_message_html_text' />
+												<HTMLField
+													name='settings.finish_message_html_text'
+													initialValue={widget.settings.finish_message_html_text}
+													init={{
+														mergetags_list: mergetags_list,
+														social_share_url: widget.block.mobilization.custom_domain,
+														social_twitter_text: widget.block.mobilization.twitter_share_text,
+														templates_list: [
+															{
+																"title": "Mensagem padrão",
+																"content": defaultPostActionHTML
+																	.replace(/\{\{SHARE_URL\}\}/g, widget.block.mobilization.custom_domain || "")
+																	.replace(/\{\{SHARE_TWITTER_TEXT\}\}/, widget.block.mobilization.twitter_share_text || "")
+															}
+														]
+													}}
+												/>
 											)}
 											<Flex justify='end'>
 												<Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
@@ -101,6 +157,7 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 									</GridItem>
 									<GridItem colSpan={[12, 12, 6]}>
 										{value === 'share' && <DefaultPostAction />}
+										{value === 'html' && <HTMLPreview name="settings.finish_message_html_text" />}
 									</GridItem>
 								</>
 							)}

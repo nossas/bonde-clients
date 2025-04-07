@@ -5,6 +5,7 @@ const labels: Record<string, { title: string; count: string }> = {
   phone: { title: "Telefone", count: "pressões" },
   "pressure-phone": { title: "Telefone", count: "pressões" },
   plip: { title: "PLIP", count: "formulários" },
+  busao0800: { title: "Busão 0800", count: "" }
 };
 
 type Label = {

@@ -93,9 +93,9 @@ function SSLChecker({ url }) {
 
     let statusLabel = <span>Verificando...</span>
 
-    if (status == "OK") {
+    if (status === "OK") {
         statusLabel = <span> &#10004; SSL ativo!</span>
-    } else if (status == "Falhou") {
+    } else if (status === "Falhou") {
         statusLabel = <span> &#9888; O SSL não está ativo no momento</span>
     }
 

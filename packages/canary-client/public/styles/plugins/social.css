@@ -1,0 +1,37 @@
+/* Estilos do plugin social */
+
+a.social {
+    display: block;
+    padding: 2rem;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin: 10px 0px;
+    font-size: 0.875rem;
+    color: white;
+    text-align: center;
+}
+
+.social.whatsapp {
+    background-color: rgb(76, 236, 104);
+}
+
+.social.whatsapp:hover {
+    background-color: rgb(76, 236, 104, 0.6);
+}
+
+.social.facebook {
+    background-color: rgb(45, 136, 237);
+}
+
+.social.facebook:hover {
+    background-color: rgb(45, 136, 237, 0.6);
+}
+
+.social.twitter {
+    background-color: rgb(61, 209, 244);
+}
+
+.social.twitter:hover {
+    background-color: rgb(61, 209, 244, 0.6);
+}

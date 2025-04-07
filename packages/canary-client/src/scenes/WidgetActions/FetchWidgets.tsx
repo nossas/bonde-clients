@@ -31,6 +31,9 @@ const widgetsByCommunityGQL = gql`
           name
           community_id
           id
+          custom_domain
+          slug
+          twitter_share_text
         }
       }
       groups: pressure_targets {
@@ -53,13 +56,16 @@ const widgetsByCommunityGQL = gql`
 
 export type Widget = {
   id: number
-  kind: 'pressure' | 'form' | 'donation' | 'plip' | 'phone'
+  kind: 'pressure' | 'form' | 'donation' | 'plip' | 'phone' | "busao0800"
   block: {
     mobilization: {
       image?: string
       name: string
       community_id: number
       id: number
+      custom_domain?: string
+      slug: string
+      twitter_share_text?: string
     }
   }
   groups: {
