@@ -109,7 +109,7 @@
         return {
             getMetadata: function () {
                 return {
-                    name: "Váriaveis"   
+                    name: "Váriaveis"
                 };
             }
         };
