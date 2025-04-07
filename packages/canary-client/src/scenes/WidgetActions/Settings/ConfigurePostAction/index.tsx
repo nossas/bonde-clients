@@ -71,12 +71,13 @@ const ConfigurePostAction = ({ widget, updateCache }: Props): React.ReactElement
 			mergetags_list.push({ value: "state", text: "Estado" });
 		}
 	} else if (widget.kind === "busao0800") {
-		mergetags_list.push({ value: "full_name", text: "Nome" });
+		mergetags_list.push({ value: "first_name", text: "Nome" });
+		mergetags_list.push({ value: "last_name", text: "Sobrenome" });
 		mergetags_list.push({ value: "email", text: "Email" });
-		mergetags_list.push({ value: "n_employees", text: "Número de colaboradores" });
-		mergetags_list.push({ value: "transportation_cost", text: "Valor total gasto com Vale Transporte" });
-		mergetags_list.push({ value: "totalCost", text: "Valor total gasto" });
-		mergetags_list.push({ value: "saveMoney", text: "Valor Economizado" });
+		mergetags_list.push({ value: "nEmployees", text: "Número de colaboradores" });
+		mergetags_list.push({ value: "cost", text: "Valor total gasto com Vale Transporte" });
+		mergetags_list.push({ value: "newCost", text: "Valor total gasto com Busão 0800" });
+		mergetags_list.push({ value: "saveMoney", text: "Valor Economizado com Busão 0800" });
 	}
 
 	return (
