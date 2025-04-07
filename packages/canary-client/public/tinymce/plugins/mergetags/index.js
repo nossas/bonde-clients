@@ -15,7 +15,7 @@
             // Usar o e.set evita manipular o conteúdo quando outro plugin usar o insertContent
             if (!e.isSettingContent && e.set && doc.querySelectorAll("span.mergetags").length === 0 && /\{\{\s*\w+\s*\}\}/.test(content)) {
                 let content = editor.getContent({ format: "html" });
-                content = content.replace(/\{\{\s*(.*?)\s*\}\}/g, '<span class="mergetags" contenteditable="false"><span class="mergetags-affix">{{</span>$1<span class="mergetags-affix">}}</span></span>')
+                content = content.replace(/\{\{\s*(.*?)\s*\}\}/g, '<span class="mergetags" contenteditable="false" data-mce-cef-wrappable="true"><span class="mergetags-affix">{{</span>$1<span class="mergetags-affix">}}</span></span>')
                 // Usa isSettingsContent para garantir que esse método não sera invocado mais de uma vez
                 editor.setContent(content, { isSettingContent: true });
             }
@@ -95,7 +95,7 @@
         });
 
         const insertTag = (editor, value) => {
-            editor.insertContent(`<span class="mergetags" contenteditable="false"><span class="mergetags-affix">{{</span>${value}<span class="mergetags-affix">}}</span></span>`);
+            editor.insertContent(`<span class="mergetags" contenteditable="false" data-mce-cef-wrappable="true"><span class="mergetags-affix">{{</span>${value}<span class="mergetags-affix">}}</span></span>`);
             editor.selection.collapse(false);
         }
 
