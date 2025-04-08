@@ -78,10 +78,11 @@ const tinyInitSettings = {
     "advlist", "anchor", "autolink", "charmap", "code",
     "fullscreen", "image", "insertdatetime",
     "link", "lists", "media", "preview", "searchreplace",
-    "table", "visualblocks", "wordcount", "social", "templates"
+    "table", "visualblocks", "wordcount", "social", "templates",
+    "conditional"
   ],
   toolbar:
-      "templates social mergetags | undo redo | bold italic underline | " +
+      "templates social mergetags conditional | undo redo | bold italic underline | " +
       "alignleft aligncenter alignright alignjustify | " +
       "bullist numlist outdent indent | " +
       "link image media | table | code fullscreen preview",
@@ -100,7 +101,8 @@ const tinyInitSettings = {
   external_plugins: {
     social: "/tinymce/plugins/social/index.js",
     mergetags: "/tinymce/plugins/mergetags/index.js",
-    templates: "/tinymce/plugins/templates/index.js"
+    templates: "/tinymce/plugins/templates/index.js",
+    conditional: "/tinymce/plugins/conditional/index.js"
   },
   default_font_stack: ['Source Sans Pro','Proxima Nova', 'sans-serif']
 }
