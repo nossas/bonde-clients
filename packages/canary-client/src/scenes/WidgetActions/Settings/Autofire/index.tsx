@@ -94,6 +94,7 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                   validate={composeValidators(
                     required(t("settings.autofire.validators.required"))
                   )}
+                  mode="email"
                 />
                 <Flex justify='end'>
                   <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>
