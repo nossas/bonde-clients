@@ -139,7 +139,8 @@ const HTMLField = ({
       force_br_newlines: true,
       force_p_newlines: false,
       convert_newlines_to_brs: true,
-      remove_linebreaks: false
+      remove_trailing_brs: true,
+      newline_behavior: "invert"
     }
   }
 
