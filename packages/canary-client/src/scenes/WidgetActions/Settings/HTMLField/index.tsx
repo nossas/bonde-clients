@@ -133,15 +133,13 @@ const HTMLField = ({
     tinyInitSettings.contextmenu = "social " + tinyInitSettings.contextmenu
     tinyInitSettings.toolbar = "templates social mergetags conditional | " + tinyInitSettings.toolbar
   } else if (mode === "email") {
-    tinyInitSettings = {
-      // Configs para e-mail
-      forced_root_block: false,
-      force_br_newlines: true,
-      force_p_newlines: false,
-      convert_newlines_to_brs: true,
-      remove_trailing_brs: true,
-      newline_behavior: "invert"
-    }
+    // Configs para e-mail
+    tinyInitSettings.forced_root_block = false;
+    tinyInitSettings.force_br_newlines = true;
+    tinyInitSettings.force_p_newlines = false;
+    tinyInitSettings.convert_newlines_to_brs = true;
+    tinyInitSettings.remove_trailing_brs = true;
+    tinyInitSettings.newline_behavior = true;
   }
 
 
