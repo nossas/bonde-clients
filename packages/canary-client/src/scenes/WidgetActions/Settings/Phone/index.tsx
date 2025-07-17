@@ -1,5 +1,4 @@
-import React from "react";
-import { toast, Success, RadioField, TextareaField } from 'bonde-components';
+import React, { useState, useEffect } from 'react';
 import {
   Heading,
   Text,
@@ -8,22 +7,16 @@ import {
   GridItem,
   Flex,
   Button,
-  Radio,
-  Stack
+  Input
 } from 'bonde-components/chakra';
+import { toast, Success, TextareaField } from 'bonde-components';
 import { gql, useMutation } from 'bonde-core-tools';
-import arrayMutators from 'final-form-arrays';
-import slugify from 'slugify';
 import { useTranslation } from 'react-i18next';
 
-import SpyField from '../../../../../components/SpyField';
-import { Widget } from '../../../FetchWidgets';
-import SettingsForm from '../../SettingsForm';
-import UniqueFormFields, { UniqueFormExplainCard } from "./UniqueForm";
-import GroupFormFields from './GroupForm';
-import { Targets } from "../../../../Community/Domains/Icons";
+import { Widget } from '../../FetchWidgets';
+import SettingsForm from '../SettingsForm';
+import { Targets } from '../../../Community/Domains/Icons';
 
-// 🎯 Novo mutation sem campos de email
 const upsertPhoneTargets = gql`
   mutation ($input: [pressure_targets_insert_input!]!) {
     insert_pressure_targets(
@@ -35,31 +28,11 @@ const upsertPhoneTargets = gql`
     ) {
       returning {
         targets
-        identify
         label
       }
     }
   }
 `;
-
-type GroupTarget = {
-  identify: string
-}
-
-const diff = (arr1: GroupTarget[], arr2: GroupTarget[]): GroupTarget[] => {
-  const ret: GroupTarget[] = [];
-  arr1.forEach((g1: any) => {
-    const g2 = arr2.find((g: any) => g.identify === g1.identify);
-
-    if (!!g2 && !Object.is(g2, g1)) {
-      ret.push(g1);
-    } else if (!g2) {
-      ret.push(g1);
-    }
-  })
-
-  return ret;
-}
 
 type Props = {
   widget: Widget
@@ -70,96 +43,100 @@ const ConfigurePhonePressureTargets = ({ widget, updateCache }: Props): React.Re
   const [upsert] = useMutation(upsertPhoneTargets);
   const { t } = useTranslation('widgetActions');
 
+  // local state para targets
+  const [targets, setTargets] = useState<{ name: string; phone: string }[]>(
+    widget.targets || [{ name: '', phone: '' }]
+  );
+
+  const addTarget = () => {
+    setTargets([...targets, { name: '', phone: '' }]);
+  };
+
+  const removeTarget = (index: number) => {
+    const newTargets = [...targets];
+    newTargets.splice(index, 1);
+    setTargets(newTargets);
+  };
+
+  const updateTarget = (index: number, field: 'name' | 'phone', value: string) => {
+    const newTargets = [...targets];
+    newTargets[index][field] = value;
+    setTargets(newTargets);
+  };
+
   return (
     <SettingsForm
       widget={widget}
       initialValues={{
         settings: {
           ...widget.settings,
-          pressure_type: widget.settings.pressure_type || 'unique',
-        },
-        groups: widget.groups
+        }
       }}
-      mutators={{ ...arrayMutators }}
-      afterSubmit={async ({ groups, settings }: any) => {
-        if (groups && JSON.stringify(groups) !== JSON.stringify(widget.groups)) {
-          try {
-            const variables = {
-              input: diff(groups, widget.groups as any).map((g: any) => ({
-                targets: g.targets,
-                label: g.label,
-                identify: !g.identify ? slugify(g.label, { lower: true }) : g.identify,
-                widget_id: widget.id
-              }))
-            }
-            await upsert({ variables });
-            updateCache({ ...widget, settings, groups });
-            toast(<Success message={t('settings.pressure.targets.success')} />, { type: toast.TYPE.SUCCESS });
-          } catch (err) {
-            console.error('err', { err });
-            toast((err as any).message, { type: toast.TYPE.ERROR });
-          }
-        } else {
-          updateCache({ ...widget, settings });
+      afterSubmit={async ({ settings }: any) => {
+        try {
+          const variables = {
+            input: [{
+              widget_id: widget.id,
+              label: 'default',
+              targets,
+            }]
+          };
+          await upsert({ variables });
+          updateCache({ ...widget, settings, targets });
+          toast(<Success message="Alvos atualizados com sucesso!" />, { type: toast.TYPE.SUCCESS });
+        } catch (err) {
+          console.error('err', { err });
+          toast((err as any).message, { type: toast.TYPE.ERROR });
         }
       }}
     >
-      {({ form, submitting, dirty, invalid }: any) => (
+      {({ submitting, dirty, invalid }: any) => (
         <Box bg="white" p={6} boxShadow="sm">
           <Grid templateColumns="repeat(12, 1fr)" gap={16}>
             <GridItem colSpan={[12, 12, 1]}>
               <Targets />
             </GridItem>
             <GridItem colSpan={[12, 12, 6]}>
-              <SpyField field='settings.pressure_type'>
-                {({ value }: any) => (
-                  <>
-                    <Stack spacing={2} mb={4}>
-                      <Heading as="h3" size="xl">Alvos</Heading>
-                      <Text fontSize="18px" color="gray.400">
-                        Defina abaixo quem serão os alvos da sua campanha de pressão telefônica:
-                      </Text>
-                    </Stack>
+              <Heading as="h3" size="xl" mb={2}>Pressão por telefone</Heading>
+              <Text fontSize="18px" color="gray.400" mb={4}>
+                Configure abaixo o roteiro da ligação e os alvos com nome e telefone:
+              </Text>
 
-                    <RadioField
-                      name='settings.pressure_type'
-                      label={t('settings.pressure.label.pressure_type')}
-                    >
-                      <Radio value='unique'>{t('settings.pressure.radio.unique')}</Radio>
-                      <Radio value='group'>{t('settings.pressure.radio.group')}</Radio>
-                    </RadioField>
+              <TextareaField
+                name="settings.call_script"
+                label="Roteiro da ligação"
+                placeholder="Sugira o que o ativista pode falar durante a ligação"
+              />
 
-                    {value === 'unique'
-                      ? (
-                        <>
-                          <TextareaField
-                            name="settings.call_script"
-                            label="Roteiro da ligação"
-                            placeholder="Sugira o que o ativista pode falar durante a ligação"
-                          />
-                          <UniqueFormFields />
-                        </>
-                      ) : <GroupFormFields form={form} />
-                    }
+              {targets.map((target, index) => (
+                <Box key={index} mt={4} p={4} borderWidth="1px" borderRadius="md">
+                  <Input
+                    value={target.name}
+                    onChange={(e) => updateTarget(index, 'name', e.target.value)}
+                    placeholder="Nome do alvo"
+                    mb={2}
+                  />
+                  <Input
+                    value={target.phone}
+                    onChange={(e) => updateTarget(index, 'phone', e.target.value)}
+                    placeholder="Telefone"
+                    mb={2}
+                  />
+                  <Button mt={1} size="sm" variant="outline" onClick={() => removeTarget(index)}>
+                    Remover
+                  </Button>
+                </Box>
+              ))}
 
-                    <RadioField
-                      name='settings.disable_edit_field'
-                      label={t('settings.pressure.label.disable_edit_field')}
-                    >
-                      <Radio value='s'>{t('settings.pressure.radio.yes')}</Radio>
-                      <Radio value='n'>{t('settings.pressure.radio.no')}</Radio>
-                    </RadioField>
-                  </>
-                )}
-              </SpyField>
-              <Flex justify='end'>
-                <Button disabled={submitting || !dirty || invalid} type='submit'>
+              <Button mt={4} onClick={addTarget}>
+                Adicionar alvo
+              </Button>
+
+              <Flex justify="end" mt={6}>
+                <Button disabled={submitting || invalid} type="submit">
                   {t('settings.defaultForm.submit')}
                 </Button>
               </Flex>
-            </GridItem>
-            <GridItem colSpan={[12, 12, 5]}>
-              <UniqueFormExplainCard />
             </GridItem>
           </Grid>
         </Box>

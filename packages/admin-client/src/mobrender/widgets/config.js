@@ -76,7 +76,7 @@ export default (mobilization, widget, { intl }) => [
     redirect: Paths.pressure(mobilization.id, widget.id),
   },
   {
-    component: () => <div>Pressão por telefone</div>,
+    component: Pressure,
     kind: 'phone',
     // TODO: propriedades relacionadas ao draft
     svgIcon: PressurePhoneIcon,
@@ -95,7 +95,7 @@ export default (mobilization, widget, { intl }) => [
         defaultMessage: 'Ligar',
       }),
     },
-    redirect: Paths.pressure(mobilization.id, widget.id),
+    redirect: Paths.settings(mobilization.id, widget.id),
   },
   {
     component: () => <div>Doação desativada</div>,
