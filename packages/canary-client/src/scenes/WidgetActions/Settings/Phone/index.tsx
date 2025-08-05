@@ -64,20 +64,23 @@ const ConfigurePhonePressureTargets = ({ widget, updateCache }: Props): React.Re
     setTargets(newTargets);
   };
 
+  const initialValues = React.useMemo(() => ({
+    settings: {
+      ...widget.settings,
+    }
+  }), [widget.settings]);
+
   return (
     <SettingsForm
       widget={widget}
-      initialValues={{
-        settings: {
-          ...widget.settings,
-        }
-      }}
+      initialValues={initialValues}
       afterSubmit={async ({ settings }: any) => {
         try {
           const variables = {
             input: [{
               widget_id: widget.id,
               label: 'default',
+              identify: `phone-pressure-${widget.id}`,
               targets,
             }]
           };
