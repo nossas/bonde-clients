@@ -55,7 +55,7 @@ const Widget = ({
                 `/widgets/${widget.id}/settings/adjusts`
               );
               window.open(url, '_self');
-            } else if (widget.kind === 'plip') {
+            } else if (widget.kind === 'plip' || widget.kind === "phone") {
               const url = urljoin(
                 process.env.REACT_APP_DOMAIN_ADMIN_CANARY,
                 `/widgets/${widget.id}/settings`
