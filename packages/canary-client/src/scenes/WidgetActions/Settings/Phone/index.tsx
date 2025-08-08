@@ -11,6 +11,7 @@ import {
 } from 'bonde-components/chakra';
 import { useField } from "bonde-components/form";
 import { useTranslation } from 'react-i18next';
+import _ from 'lodash';
 
 import { Widget } from '../../FetchWidgets';
 import SettingsForm from '../SettingsForm';
@@ -54,6 +55,7 @@ const ConfigurePhonePressureTargets = ({ widget, updateCache }: Props): React.Re
                 label="Roteiro da ligação"
                 placeholder="Sugira o que o ativista pode falar durante a ligação"
                 mode="default"
+                initialValue={widget.settings.call_script}
               />
 
               <TargetsField name="settings.targets" initialValue={widget.settings.targets} />
@@ -78,7 +80,7 @@ const TargetsField = ({ name, initialValue }: { name: string, initialValue?: any
   const { input } = useField(name, { initialValue });
 
   const updateTarget = (index: number, field: 'name' | 'phone', value: string) => {
-    const newTargets = [...input.value];
+    const newTargets = _.cloneDeep(input.value);
     newTargets[index][field] = value;
     input.onChange(newTargets);
   };
