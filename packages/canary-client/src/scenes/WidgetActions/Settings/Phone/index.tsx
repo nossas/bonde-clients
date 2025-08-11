@@ -97,7 +97,7 @@ const TargetsField = ({ name, initialValue }: { name: string, initialValue?: any
 
   return (
     <>
-    {input.value.map((target, index) => (
+    {(input.value || []).map((target, index) => (
       <Box key={index} mt={4} p={4} borderWidth="1px" borderRadius="md">
         <Input
           value={target.name}
