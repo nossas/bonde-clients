@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   Heading,
   Text,
@@ -9,30 +9,14 @@ import {
   Button,
   Input
 } from 'bonde-components/chakra';
-import { toast, Success, TextareaField } from 'bonde-components';
-import { gql, useMutation } from 'bonde-core-tools';
+import { useField } from "bonde-components/form";
 import { useTranslation } from 'react-i18next';
+import _ from 'lodash';
 
 import { Widget } from '../../FetchWidgets';
 import SettingsForm from '../SettingsForm';
 import { Targets } from '../../../Community/Domains/Icons';
-
-const upsertPhoneTargets = gql`
-  mutation ($input: [pressure_targets_insert_input!]!) {
-    insert_pressure_targets(
-      objects: $input,
-      on_conflict: {
-        constraint: unique_identify_widget_id,
-        update_columns: [label, targets]
-      }
-    ) {
-      returning {
-        targets
-        label
-      }
-    }
-  }
-`;
+import HTMLField from "../HTMLField";
 
 type Props = {
   widget: Widget
@@ -40,57 +24,18 @@ type Props = {
 }
 
 const ConfigurePhonePressureTargets = ({ widget, updateCache }: Props): React.ReactElement => {
-  const [upsert] = useMutation(upsertPhoneTargets);
   const { t } = useTranslation('widgetActions');
-
-  // local state para targets
-  const [targets, setTargets] = useState<{ name: string; phone: string }[]>(
-    widget.targets || [{ name: '', phone: '' }]
-  );
-
-  const addTarget = () => {
-    setTargets([...targets, { name: '', phone: '' }]);
-  };
-
-  const removeTarget = (index: number) => {
-    const newTargets = [...targets];
-    newTargets.splice(index, 1);
-    setTargets(newTargets);
-  };
-
-  const updateTarget = (index: number, field: 'name' | 'phone', value: string) => {
-    const newTargets = [...targets];
-    newTargets[index][field] = value;
-    setTargets(newTargets);
-  };
-
-  const initialValues = React.useMemo(() => ({
-    settings: {
-      ...widget.settings,
-    }
-  }), [widget.settings]);
 
   return (
     <SettingsForm
       widget={widget}
-      initialValues={initialValues}
-      afterSubmit={async ({ settings }: any) => {
-        try {
-          const variables = {
-            input: [{
-              widget_id: widget.id,
-              label: 'default',
-              identify: `phone-pressure-${widget.id}`,
-              targets,
-            }]
-          };
-          await upsert({ variables });
-          updateCache({ ...widget, settings, targets });
-          toast(<Success message="Alvos atualizados com sucesso!" />, { type: toast.TYPE.SUCCESS });
-        } catch (err) {
-          console.error('err', { err });
-          toast((err as any).message, { type: toast.TYPE.ERROR });
+      initialValues={{
+        settings: {
+          ...widget.settings,
         }
+      }}
+      afterSubmit={async (_: any, result: any) => {
+        updateCache(result.data.update_widgets.returning[0]);
       }}
     >
       {({ submitting, dirty, invalid }: any) => (
@@ -105,35 +50,15 @@ const ConfigurePhonePressureTargets = ({ widget, updateCache }: Props): React.Re
                 Configure abaixo o roteiro da ligação e os alvos com nome e telefone:
               </Text>
 
-              <TextareaField
+              <HTMLField
                 name="settings.call_script"
                 label="Roteiro da ligação"
                 placeholder="Sugira o que o ativista pode falar durante a ligação"
+                mode="default"
+                initialValue={widget.settings.call_script}
               />
 
-              {targets.map((target, index) => (
-                <Box key={index} mt={4} p={4} borderWidth="1px" borderRadius="md">
-                  <Input
-                    value={target.name}
-                    onChange={(e) => updateTarget(index, 'name', e.target.value)}
-                    placeholder="Nome do alvo"
-                    mb={2}
-                  />
-                  <Input
-                    value={target.phone}
-                    onChange={(e) => updateTarget(index, 'phone', e.target.value)}
-                    placeholder="Telefone"
-                    mb={2}
-                  />
-                  <Button mt={1} size="sm" variant="outline" onClick={() => removeTarget(index)}>
-                    Remover
-                  </Button>
-                </Box>
-              ))}
-
-              <Button mt={4} onClick={addTarget}>
-                Adicionar alvo
-              </Button>
+              <TargetsField name="settings.targets" initialValue={widget.settings.targets} />
 
               <Flex justify="end" mt={6}>
                 <Button disabled={submitting || invalid} type="submit">
@@ -149,3 +74,51 @@ const ConfigurePhonePressureTargets = ({ widget, updateCache }: Props): React.Re
 };
 
 export default ConfigurePhonePressureTargets;
+
+
+const TargetsField = ({ name, initialValue }: { name: string, initialValue?: any[] }) => {
+  const { input } = useField(name, { initialValue });
+
+  const updateTarget = (index: number, field: 'name' | 'phone', value: string) => {
+    const newTargets = _.cloneDeep(input.value);
+    newTargets[index][field] = value;
+    input.onChange(newTargets);
+  };
+
+  const removeTarget = (index: number) => {
+    const newTargets = [...input.value];
+    newTargets.splice(index, 1);
+    input.onChange(newTargets);
+  };
+
+  const addTarget = () => {
+    input.onChange([...input.value, { name: "", phone: "" }])
+  }
+
+  return (
+    <>
+    {input.value.map((target, index) => (
+      <Box key={index} mt={4} p={4} borderWidth="1px" borderRadius="md">
+        <Input
+          value={target.name}
+          onChange={(e) => updateTarget(index, 'name', e.target.value)}
+          placeholder="Nome do alvo"
+          mb={2}
+        />
+        <Input
+          value={target.phone}
+          onChange={(e) => updateTarget(index, 'phone', e.target.value)}
+          placeholder="Telefone"
+          mb={2}
+        />
+        <Button mt={1} size="sm" variant="outline" onClick={() => removeTarget(index)}>
+          Remover
+        </Button>
+      </Box>
+    ))}
+      <Button mt={4} onClick={addTarget}>
+        Adicionar alvo
+      </Button>
+    </>
+  );
+}
