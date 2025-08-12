@@ -16,6 +16,7 @@ const GET_PLIP_SIGNATURES = gql`
       expected_signatures
       state: form_data(path: "state")
       name: form_data(path: "name")
+      team: form_data(path: "team")
       created_at
     }
 
@@ -141,6 +142,7 @@ export const QRForm: React.FC<Properties> = ({ widget }) => {
           />
           <Text>
             Ficha de <strong>{plipForm?.state}</strong> gerada por <strong>{plipForm?.name}</strong>
+            {plipForm?.team ? `, da equipe ${plipForm.team}` : ''}
             {plipSignaturesAgg.aggregate.count > 0
               ? `, que já enviou ${plipSignaturesAgg.aggregate.sum.confirmed_signatures} assinaturas anteriormente.`
               : `.`
