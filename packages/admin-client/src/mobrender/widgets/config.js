@@ -4,7 +4,8 @@ import {
   Pressure,
   Form,
   Content,
-  Busao0800
+  Busao0800,
+  PhonePressure
 } from '../../mobilizations/widgets/__plugins__';
 import { PressureEmailIcon, PressurePhoneIcon } from './icons';
 import { createEditorContent } from '../../mobilizations/widgets/__plugins__/content/components/editor-slate';
@@ -76,26 +77,12 @@ export default (mobilization, widget, { intl }) => [
     redirect: Paths.pressure(mobilization.id, widget.id),
   },
   {
-    component: () => <div>Pressão por telefone</div>,
+    component: PhonePressure,
     kind: 'phone',
     // TODO: propriedades relacionadas ao draft
     svgIcon: PressurePhoneIcon,
-    label: intl.formatMessage({
-      id: 'widgets.config--pressure-phone.label',
-      defaultMessage: 'Pressão por telefone',
-    }),
-    settings: {
-      main_color: '#f23392',
-      title_text: intl.formatMessage({
-        id: 'widgets.config--pressure-phone.default.title',
-        defaultMessage: 'Ligue para quem pode tomar essa decisão',
-      }),
-      button_text: intl.formatMessage({
-        id: 'widgets.config--pressure-phone.default.button-text',
-        defaultMessage: 'Ligar',
-      }),
-    },
-    redirect: Paths.pressure(mobilization.id, widget.id),
+    label: 'PhonePressure',
+    redirect: Paths.settings(mobilization.id, widget.id),
   },
   {
     component: () => <div>Doação desativada</div>,
