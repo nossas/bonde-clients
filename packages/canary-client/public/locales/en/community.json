@@ -78,6 +78,16 @@
             "step1": "Click {strongPhoneNumber} ({strongHashtag} symbol in the left menu)",
             "step2": "Choose which number Twilio wants to use"
           }
+        },
+        "turnio_api_key": {
+          "label": "Turn.io API Key",
+          "placeholder": "Enter here the \"List ID\"",
+          "help": {
+            "title": "Where to get this information?",
+            "step1": "After logging in as administrator in turn.io, click on your username. A menu will appear, click the {listStrong} option.",
+            "step2": "Select the corresponding list and follow the steps: {settingsStrong}> {listAndDefaultsStrong}",
+            "step3": "Now just paste in the field below the contents of the right column below the title {listIdStrong}"
+          }
         }
       },
       "buttons": {

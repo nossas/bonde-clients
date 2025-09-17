@@ -78,6 +78,16 @@
             "step1": "Clique em {strongPhoneNumber} (símbolo de {strongHashtag} no menu da esquerda)",
             "step2": "Escolha qual número do Twilio quer usar"
           }
+        },
+        "turnio_api_key": {
+          "label": "Turn.io API Key",
+          "placeholder": "Insira aqui o conteúdo de \"API key\"",
+          "help": {
+            "title": "Onde encontro essa informação?",
+            "step1": "Faça login na sua conta no Turn.io e clique no seu nome de usuário. Você vai ver um menu surgir, clique na opção {accountStrong}.",
+            "step2": "Depois, siga os passos: {extrasStrong} > {apiKeysStrong} > {yourApiKeysStrong} > {createKeyStrong}",
+            "step3": "Agora é só copiar o código e colar no campo abaixo {apiKeyStrong}."
+          }
         }
       },
       "buttons": {
