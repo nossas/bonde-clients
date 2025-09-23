@@ -42,7 +42,7 @@ const TurnIoPanel: React.FC = () => {
               <Stack>
                 <Heading as="h4" size="lg">Integrar</Heading>
                 <InputField
-                  name='community.turnio_api_key'
+                  name='community.integrations.turnio.api_key'
                   label={t('integrations.form.fields.turnio_api_key.label')}
                   helpText={
                     <>

@@ -30,7 +30,8 @@
       "sending": "Envio",
       "adjusts": "Ajustes",
       "autofire": "Mensagem de Agradecimento",
-      "finish": "Pós-Ação"
+      "finish": "Pós-Ação",
+      "integrations": "Integrações"
     },
     "defaultForm": {
       "error": "Houve um erro ao salvar o formulário",
@@ -184,6 +185,15 @@
           "twitter": "Compartilhar no Twitter",
           "whatsapp": "Compartilhar no Whatsapp"
         }
+      }
+    },
+    "integrations": {
+      "title": "Integrações",
+      "radio": {
+        "activeTurnioQuestion": "Turn.io",
+        "customField": "Customizar campo",
+        "radioYes": "Habilitar",
+        "radioNo": "Desabilitar"
       }
     }
   }

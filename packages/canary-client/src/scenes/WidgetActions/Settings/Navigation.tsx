@@ -81,6 +81,12 @@ const Navigation: React.FC<NavigationProps> = ({ widget }) => {
           >
             {t("settings.navigation.finish")}
           </Tab>
+          <Tab
+            active={is(/\/widgets\/\d+\/settings\/integrations\/*$/)}
+            onClick={() => push(`/integrations`)}
+          >
+            {t("settings.navigation.integrations")}
+          </Tab>
         </Flex>
       )}
     </TabRoute>
