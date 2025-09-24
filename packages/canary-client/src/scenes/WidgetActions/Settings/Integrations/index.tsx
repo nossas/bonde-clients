@@ -19,7 +19,7 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
   return (
     <SettingsForm
       widget={widget}
-      afterSubmit={async (values:any, result:any) => {
+      afterSubmit={async (values: any, result: any) => {
         updateCache(result.data.update_widgets.returning[0])
       }}
       initialValues={{
@@ -27,11 +27,15 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
           webhook_enabled: "n",
           email_integration: "n",
           sync_frequency: "daily",
+          share: "n",
+          turnio: {
+            custom_field: widget.settings?.turnio?.custom_field || ""
+          },
           ...widget.settings
         }
       }}
     >
-      {({ submitting, dirty }: any) => (
+      {({ submitting, dirty, values }: any) => (
         <Grid templateColumns="repeat(12, 1fr)" gap={16}>
           <GridItem colSpan={[12, 12, 6]}>
             <Box bg="white" p={6} boxShadow="sm">
@@ -45,6 +49,14 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
                 <Radio value='s'>{t('settings.integrations.radio.radioYes')}</Radio>
                 <Radio value='n'>{t('settings.integrations.radio.radioNo')}</Radio>
               </RadioField>
+
+              {values?.settings?.share === 's' && (
+                <InputField
+                  name='settings.turnio.custom_field'
+                  label={t('settings.integrations.customField')}
+                  placeholder={t('settings.integrations.customFieldPlaceholder')}
+                />
+              )}
 
               <Flex justify='end'>
                 <Button disabled={submitting || !dirty} type='submit'>{t('settings.defaultForm.submit')}</Button>

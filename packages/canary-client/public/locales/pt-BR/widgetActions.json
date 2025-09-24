@@ -189,9 +189,10 @@
     },
     "integrations": {
       "title": "Integrações",
+      "customField": "Customizar campo",
+      "customFieldPlaceholder": "Escreva o nome de identificação no turn.io. ex: busao_0800",
       "radio": {
         "activeTurnioQuestion": "Turn.io",
-        "customField": "Customizar campo",
         "radioYes": "Habilitar",
         "radioNo": "Desabilitar"
       }
