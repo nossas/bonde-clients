@@ -81,7 +81,7 @@
         },
         "turnio_api_key": {
           "label": "Turn.io API Key",
-          "placeholder": "Insira aqui o conteúdo de \"API key\"",
+          "placeholder": "Insira aqui o conteúdo da sua \"API key\"",
           "help": {
             "title": "Onde encontro essa informação?",
             "step1": "Faça login na sua conta no Turn.io e clique no seu nome de usuário. Você vai ver um menu surgir, clique na opção {accountStrong}.",

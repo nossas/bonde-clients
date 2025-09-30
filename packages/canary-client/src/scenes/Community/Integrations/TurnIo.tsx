@@ -33,7 +33,7 @@ const TurnIoPanel: React.FC = () => {
             <Stack spacing={6}>
               <Stack spacing={2}>
                 <Heading as="h3" size="xl">Turn.io</Heading>
-                <Text>Descrição turn.io</Text>
+                <Text>Conecte-se ao Turn.io para se comunicar com sua comunidade via WhatsApp, usando fluxos de mensagens personalizados e segmentação.</Text>
               </Stack>
               <Stack spacing={2}>
                 <Heading as="h4" size="lg" >Pra começar</Heading>
@@ -47,10 +47,7 @@ const TurnIoPanel: React.FC = () => {
                   helpText={
                     <>
                       <p><b>Onde encontro essa informação?</b></p>
-                      <p>Faça login na sua conta no Turn.io e <b>clique no seu nome</b> de usuário.</p>
-                      <p>Você vai ver um menu surgir, clique na opção account.</p>
-                      <p>Depois, siga os passos: <b>{`Extras > API keys > Your API keys > Create a Key`}</b></p>
-                      <p>Agora é só <b>copiar o código</b> e colar aqui no campo.</p>
+                      <p>Faça login na sua conta do Turn.io e <b>acesse o Settings,</b> para encontrar a chave da API</p>
                     </>
                   }
                   placeholder={t('integrations.form.fields.turnio_api_key.placeholder')}
@@ -68,13 +65,16 @@ const TurnIoPanel: React.FC = () => {
                 <Heading as="h4" size="lg">Funcionalidades</Heading>
                 <UnorderedList>
                   <ListItem>
-                    <Text>Descrição turn.io</Text>
+                    <Text>Comunicação por WhatsApp com as pessoas da sua comunidade.</Text>
                   </ListItem>
                   <ListItem>
-                    <Text>Descrição turn.io</Text>
+                    <Text>Segmentação de pessoas baseada nas ações feitas nas mobilizações do BONDE.</Text>
                   </ListItem>
                   <ListItem>
-                    <Text>Comunicação segmentada para reengajar membros da comunidade.</Text>
+                    <Text>Criação de fluxos de mensagens personalizadas para engajar participantes.</Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text>Envio de mensagens em massa ou direcionadas para grupos específicos.</Text>
                   </ListItem>
                 </UnorderedList>
               </Stack>
@@ -83,6 +83,9 @@ const TurnIoPanel: React.FC = () => {
                 <UnorderedList>
                   <ListItem>
                     <Text>Não precisa saber programar :)</Text>
+                  </ListItem>
+                  <ListItem>
+                    <Text>Integração feita copiando e colando a chave de API.</Text>
                   </ListItem>
                   <ListItem>
                     <Text>Ferramenta em inglês.</Text>
@@ -94,7 +97,8 @@ const TurnIoPanel: React.FC = () => {
               </Stack>
               <Stack spacing={2}>
                 <Heading as="h4" size="lg">Observações</Heading>
-                <Text>Os segmentos criados pelo BONDE no Turn.io seguem esse formato: M999P000, M999F000, M999D000 (M=Mobilização, P=Pressão, F=Formulário, D=Doação)</Text>
+                <Text>Necessário ter uma conta ativa no Turn.io para integrar.</Text>
+                <Text>Para ativar a integração em uma campanha é necessário criar um campo customizado nas configurações de uma widget/tática vinculada à campanha.</Text>
               </Stack>
             </Stack>
           </GridItem>

@@ -13,6 +13,8 @@ import {
 import { useTranslation } from 'react-i18next';
 import { gql, useQuery } from "bonde-core-tools";
 import SettingsForm from '../SettingsForm';
+import { Link } from "react-router-dom";
+
 
 const CHECK_TURNIO_KEY = gql`
   query CheckTurnioKey($widgetId: Int!) {
@@ -94,9 +96,16 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
               >
                 <Text fontWeight="bold" mb={2}>⚠️ Integração não configurada</Text>
                 <Text>
-                  Para usar a integração com o Turn.io, é necessário configurar a chave da API 
-                  nas configurações da comunidade.
+                  Para usar o Turn.io nesta mobilização, você precisa configurar a 
+                  chave da API nas configurações da comunidade.
                 </Text>
+                <Button 
+                  as={Link} 
+                  to="/community/integrations/turnio"
+                  mt={4}
+                >
+                  Configurar turn.io
+                </Button>
               </Box>
               ) : (
                 <>
@@ -114,6 +123,14 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
                       name='settings.turnio.custom_field'
                       label={t('settings.integrations.customField')}
                       placeholder={t('settings.integrations.customFieldPlaceholder')}
+                      helpText={
+                          <>
+                            <p><b>O que é isso?</b></p>
+                            <p>É o nome usado para identificar essa mobilização dentro do Turn.io.</p>
+                            <p>Escolha algo curto e fácil de reconhecer, <b> como busao_0800.</b></p>
+                            <p>Use letras minúsculas, números e o caractere _ (sublinhado).</p>
+                          </>
+                        }
                     />
                   )}
                 </>
