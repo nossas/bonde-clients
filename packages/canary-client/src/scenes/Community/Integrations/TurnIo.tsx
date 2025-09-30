@@ -14,7 +14,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import TurnIoIcon from './TurnIoIcon';
-import ForceSync from './ForceSync';
 
 const TurnIoPanel: React.FC = () => {
   const { t } = useTranslation('community');
@@ -56,7 +55,6 @@ const TurnIoPanel: React.FC = () => {
                   <Button type='submit' disabled={submitting || !dirty} marginTop={4}>Conectar ao Turn.io</Button>
                 </Flex>
               </Stack>
-              <ForceSync />
             </Stack>
           </GridItem>
           <GridItem colSpan={[12, null, null, 4]}>
