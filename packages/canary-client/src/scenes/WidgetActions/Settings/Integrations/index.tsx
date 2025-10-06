@@ -50,9 +50,9 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
   const hasTurnioKey = React.useMemo(() => {
     const integrations = data?.widgets_by_pk?.block?.mobilization?.community?.integrations;
     if (!integrations) return false;
-    
+
     try {
-      const integrationsObj = typeof integrations === 'string' 
+      const integrationsObj = typeof integrations === 'string'
         ? JSON.parse(integrations)
         : integrations;
       return !!(integrationsObj?.turnio?.api_key);
@@ -68,7 +68,7 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
         createdCustomField = await createCustomField({
           variables: {
             params: {
-              custom_field: values.settings.turnio.custom_field,
+              custom_field: values.settings?.turnio?.custom_field,
               widget_id: widget.id
             }
           }
@@ -101,7 +101,7 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
           webhook_enabled: "n",
           email_integration: "n",
           sync_frequency: "daily",
-          share: widget.settings?.turnio?.custom_field ? "s":"n",
+          share: widget.settings?.turnio?.custom_field ? "s" : "n",
           turnio: {
             custom_field: widget.settings?.turnio?.custom_field || ""
           },
@@ -118,21 +118,21 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
               </Heading>
 
               {!hasTurnioKey ? (
-                <Box 
-                  p={4} 
-                  bg="yellow.50" 
-                  border="1px" 
-                  borderColor="yellow.200" 
+                <Box
+                  p={4}
+                  bg="yellow.50"
+                  border="1px"
+                  borderColor="yellow.200"
                   borderRadius="md"
                   mb={4}
                 >
-                  <Text fontWeight="bold" mb={2}>⚠️ Integração não configurada</Text>
+                  <Text fontWeight="bold" mb={2}><span role="img" aria-label="alert">⚠️</span> Integração não configurada</Text>
                   <Text>
-                    Para usar o Turn.io nesta mobilização, você precisa configurar a 
+                    Para usar o Turn.io nesta mobilização, você precisa configurar a
                     chave da API nas configurações da comunidade.
                   </Text>
-                  <Button 
-                    as={Link} 
+                  <Button
+                    as={Link}
                     to="/community/integrations/turnio"
                     mt={4}
                   >
@@ -152,7 +152,7 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
 
                   {values?.settings?.share === 's' && (
                     <InputField
-                      disabled={widget.settings.turnio?.custom_field && widget.settings.turnio?.created_at}
+                      disabled={widget.settings?.turnio?.custom_field && widget.settings?.turnio?.created_at}
                       name='settings.turnio.custom_field'
                       label={t('settings.integrations.customField')}
                       placeholder={t('settings.integrations.customFieldPlaceholder')}
@@ -170,8 +170,8 @@ const IntegrationsFields = ({ widget, updateCache }: any) => {
               )}
 
               <Flex justify='end'>
-                <Button 
-                  disabled={submitting || !dirty || !hasTurnioKey || widget.settings.turnio?.custom_field && widget.settings.turnio?.created_at} 
+                <Button
+                  disabled={submitting || !dirty || !hasTurnioKey || (widget.settings?.turnio?.custom_field && widget.settings?.turnio?.created_at)}
                   type='submit'
                 >
                   {t('settings.defaultForm.submit')}
