@@ -55,10 +55,10 @@ const ConfigurePhonePressureTargets = ({ widget, updateCache }: Props): React.Re
                 label="Roteiro da ligação"
                 placeholder="Sugira o que o ativista pode falar durante a ligação"
                 mode="default"
-                initialValue={widget.settings.call_script}
+                initialValue={widget.settings?.call_script}
               />
 
-              <TargetsField name="settings.targets" initialValue={widget.settings.targets} />
+              <TargetsField name="settings.targets" initialValue={widget.settings?.targets} />
 
               <Flex justify="end" mt={6}>
                 <Button disabled={submitting || invalid} type="submit">
