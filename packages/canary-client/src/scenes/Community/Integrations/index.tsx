@@ -10,6 +10,7 @@ import {
 import { Link as LinkStyled } from 'bonde-components';
 import Mailchimp from './Mailchimp';
 import Twilio from './Twilio';
+import Turnio from './TurnIo';
 
 const MenuStyled = styled.div`
   ${LinkStyled} {
@@ -37,8 +38,9 @@ const SettingsPage = () => {
       </Stack>
       <Stack mb={4}>
         <MenuStyled>
-          <LinkStyled component={Link} to={path.replace(':name', 'mailchimp')} className={name === 'mailchimp' ? 'active' : ''}>Comunicação</LinkStyled>
-          <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Pressão</LinkStyled>
+          <LinkStyled component={Link} to={path.replace(':name', 'mailchimp')} className={name === 'mailchimp' ? 'active' : ''}>Mailchimp</LinkStyled>
+          <LinkStyled component={Link} to={path.replace(':name', 'twilio')} className={name === 'twilio' ? 'active' : ''}>Twilio</LinkStyled>
+          <LinkStyled component={Link} to={path.replace(':name', 'turnio')} className={name === 'turnio' ? 'active' : ''}>Turn.io</LinkStyled>
         </MenuStyled>
       </Stack>
 
@@ -50,6 +52,9 @@ const SettingsPage = () => {
           </Route>
           <Route exact path={path.replace(':name', 'twilio')}>
             <Twilio />
+          </Route>
+          <Route exact path={path.replace(':name', 'turnio')}>
+            <Turnio />
           </Route>
         </Switch>
       </Box>

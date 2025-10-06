@@ -36,7 +36,8 @@
       "performance": "Performance",
       "adjusts": "Ajustes",
       "autofire": "Mensagem de Agradecimento",
-      "finish": "Pós-Ação"
+      "finish": "Pós-Ação",
+      "integrations": "Integrações"
     },
     "defaultForm": {
       "error": "Houve um erro ao salvar o formulário",
@@ -160,6 +161,16 @@
         "sendersEmail": "Adicione o email do remetente",
         "emailSubject": "Adicione o assunto do email",
         "emailBody": "Adicione o corpo do email"
+      }
+    },
+    "integrations": {
+      "title": "Integrações",
+      "customField": "Customizar campo",
+      "customFieldPlaceholder": "Digite o nome de identificação (ex.: busao_0800)",
+      "radio": {
+        "activeTurnioQuestion": "Turn.io",
+        "radioYes": "Habilitar",
+        "radioNo": "Desabilitar"
       }
     }
   }

@@ -17,6 +17,7 @@ import ConfigurePostAction from "./ConfigurePostAction";
 import Performance from "./Pressure";
 import Plips from "./Plips";
 import Phone from "./Phone";
+import IntegrationsFields from "./Integrations";
 
 type Props = {
   widgets: Widget[];
@@ -133,6 +134,9 @@ const Settings: React.FC<Props> = ({ widgets }) => {
         </Route>
         <Route exact path={`${match.path}/finish`}>
           <ConfigurePostAction widget={widget} updateCache={updateCache} />
+        </Route>
+        <Route exact path={`${match.path}/integrations`}>
+          <IntegrationsFields widget={widget} updateCache={updateCache} />
         </Route>
         {/* Render scenes to settings widget by kind */}
         <RoutesByKind widget={widget} updateCache={updateCache} />

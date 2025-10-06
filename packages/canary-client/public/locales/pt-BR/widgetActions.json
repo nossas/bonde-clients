@@ -30,7 +30,8 @@
       "sending": "Envio",
       "adjusts": "Ajustes",
       "autofire": "Mensagem de Agradecimento",
-      "finish": "Pós-Ação"
+      "finish": "Pós-Ação",
+      "integrations": "Integrações"
     },
     "defaultForm": {
       "error": "Houve um erro ao salvar o formulário",
@@ -184,6 +185,16 @@
           "twitter": "Compartilhar no Twitter",
           "whatsapp": "Compartilhar no Whatsapp"
         }
+      }
+    },
+    "integrations": {
+      "title": "Integrações",
+      "customField": "Customizar campo",
+      "customFieldPlaceholder": "Digite o nome de identificação (ex.: busao_0800)",
+      "radio": {
+        "activeTurnioQuestion": "Turn.io",
+        "radioYes": "Habilitar",
+        "radioNo": "Desabilitar"
       }
     }
   }

@@ -78,6 +78,16 @@
             "step1": "Haz click en {strongPhoneNumber} (símbolo de {strongHashtag} en el menú a la mano izquierda)",
             "step2": "Escoge qué número de Twilio quieres usar"
           }
+        },
+        "turnio_api_key": {
+          "label": "Turn.io API Key",
+          "placeholder": "Inserta aquí el \"ID de la lista\"",
+          "help": {
+            "title": "¿Dónde encuentro esta información?",
+            "step1": "Inicia sesión en tu cuenta de Turn.io y haz click en tu nombre de usuario. Aparecerá un menú, haz click en la opción {listStrong}.",
+            "step2": "Selecciona la lista correspondiente y sigue los siguientes pasos: {settingsStrong} > {listAndDefaultsStrong}",
+            "step3": "Ahora solo tienes que pegar en el campo de abajo el contenido de la columna a la mano derecha, debajo del título {listIdStrong}"
+          }
         }
       },
       "buttons": {
