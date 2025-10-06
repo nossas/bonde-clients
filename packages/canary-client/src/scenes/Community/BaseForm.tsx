@@ -24,6 +24,7 @@ const UpdateCommunityGQL = gql`
         email_template_from
         modules
         signature
+        integrations
         recipient {
           id
           pagarme_recipient_id
