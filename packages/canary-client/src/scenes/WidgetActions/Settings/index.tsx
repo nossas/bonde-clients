@@ -50,7 +50,6 @@ const RoutesByKind: React.FC<RoutesByKindProps> = ({ widget, updateCache }) => {
       </Route>
     )
   } else {
-    console.log("asdadasdasdasd");
     return (
       <Redirect
         from={`${match.path}`}
