@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 import { ConnectedForm, toast } from 'bonde-components';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Context as SessionContext, useMutation, gql } from 'bonde-core-tools';
 import { useTranslation } from 'react-i18next';
+
 import _ from 'lodash';
 
 const UpdateCommunityGQL = gql`
@@ -78,6 +80,11 @@ const BaseForm: React.FC<Props> = ({ children, formName, success }) => {
   const { t } = useTranslation('community');
   const [updateRecipient] = useMutation(UpdateRecipientGQL);
   const [updateCommunity] = useMutation(UpdateCommunityGQL);
+  const history = useHistory();
+  const location = useLocation();
+
+  const queryParams = new URLSearchParams(location.search);
+  const redirect = queryParams.get('redirect');
 
   const submit = async ({
     community: {
@@ -136,6 +143,10 @@ const BaseForm: React.FC<Props> = ({ children, formName, success }) => {
 
       // Update Session
       await updateSession('community', returning[0]);
+
+      if (redirect) {
+        history.push(redirect);
+      }
     } catch (e: any) {
       // invalid_permission
       if (e.message === 'invalid_permission') {
