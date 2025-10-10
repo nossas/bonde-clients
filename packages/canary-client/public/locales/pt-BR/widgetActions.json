@@ -45,6 +45,7 @@
       "radio": {
         "unique": "Um grupo de alvos",
         "group": "Mais de um grupo de alvos (Ex: Por estado)",
+        "singleShot": "Disparo único",
         "yes": "Sim",
         "no": "Não"
       },
