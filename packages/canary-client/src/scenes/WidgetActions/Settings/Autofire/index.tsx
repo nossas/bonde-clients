@@ -188,7 +188,7 @@ const AutofireForm = ({ widget, updateCache }: Props): React.ReactElement => {
                   Enviar Email de Teste
                 </Heading>
                 <Text mb={4} color="gray.600">
-                  Envie um email de teste para verificar como ele ficará antes de ativar o autofire.
+                  Envie um email de teste para verificar como ele ficará antes do lançamento oficial da campanha.
                 </Text>
                 <FormControl mb={4}>
                   <FormLabel>Email para teste</FormLabel>
