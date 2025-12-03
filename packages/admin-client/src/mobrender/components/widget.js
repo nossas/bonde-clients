@@ -62,7 +62,11 @@ const Widget = ({
               );
               window.open(url, '_self');
             } else {
-              history.push(redirect);
+              const url = urljoin(
+                process.env.REACT_APP_DOMAIN_ADMIN_CANARY,
+                `/widgets/${widget.id}/settings/fields`
+              );
+              window.open(url, '_self');
             }
           }}
           onDelete={() => {

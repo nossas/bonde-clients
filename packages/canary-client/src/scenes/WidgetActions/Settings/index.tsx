@@ -12,6 +12,7 @@ import Labels from "../Labels";
 import Navigation from './Navigation';
 import Adjusts from './Adjusts';
 import Autofire from "./Autofire";
+import Fields from "./Fields";
 
 import ConfigurePostAction from "./ConfigurePostAction";
 import Performance from "./Pressure";
@@ -50,7 +51,6 @@ const RoutesByKind: React.FC<RoutesByKindProps> = ({ widget, updateCache }) => {
       </Route>
     )
   } else {
-    console.log("asdadasdasdasd");
     return (
       <Redirect
         from={`${match.path}`}
@@ -138,6 +138,11 @@ const Settings: React.FC<Props> = ({ widgets }) => {
         <Route exact path={`${match.path}/integrations`}>
           <IntegrationsFields widget={widget} updateCache={updateCache} />
         </Route>
+        {widget.kind === "form" && (
+          <Route exact path={`${match.path}/fields`}>
+            <Fields widget={widget} updateCache={updateCache} />
+          </Route>
+        )}
         {/* Render scenes to settings widget by kind */}
         <RoutesByKind widget={widget} updateCache={updateCache} />
       </Switch>

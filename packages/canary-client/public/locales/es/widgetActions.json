@@ -37,7 +37,8 @@
       "adjusts": "Ajustes",
       "autofire": "Mensagem de Agradecimento",
       "finish": "Pós-Ação",
-      "integrations": "Integrações"
+      "integrations": "Integrações",
+      "fields": "Campos"
     },
     "defaultForm": {
       "error": "Houve um erro ao salvar o formulário",
@@ -172,6 +173,10 @@
         "radioYes": "Habilitar",
         "radioNo": "Desabilitar"
       }
+    },
+    "fields": {
+      "title": "Campos",
+      "description": "Aqui você pode criar os campos do seu formulário"
     }
   }
 }
