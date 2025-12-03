@@ -117,7 +117,7 @@ const FieldsFormContent = ({ fields, setFields, hasChanges, submitting, form, in
                 </Grid>
 
                 <FormControl mb={4}>
-                  <FormLabel>Placeholder</FormLabel>
+                  <FormLabel>Texto de ajuda</FormLabel>
                   <Input
                     value={field.placeholder}
                     onChange={(e) => updateField(index, 'placeholder', e.target.value)}
@@ -126,7 +126,7 @@ const FieldsFormContent = ({ fields, setFields, hasChanges, submitting, form, in
                 </FormControl>
 
                 <FormControl display="flex" alignItems="center">
-                  <FormLabel mb={0}>
+                  <FormLabel mb={0} mr={2}>
                     Campo obrigatório?
                   </FormLabel>
                   <Switch
