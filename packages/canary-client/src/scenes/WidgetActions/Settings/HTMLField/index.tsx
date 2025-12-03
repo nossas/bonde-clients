@@ -133,13 +133,23 @@ const HTMLField = ({
     tinyInitSettings.contextmenu = "social " + tinyInitSettings.contextmenu
     tinyInitSettings.toolbar = "templates social mergetags conditional | " + tinyInitSettings.toolbar
   } else if (mode === "email") {
-    // Configs para e-mail
-    tinyInitSettings.forced_root_block = false;
-    tinyInitSettings.force_br_newlines = true;
-    tinyInitSettings.force_p_newlines = false;
-    tinyInitSettings.convert_newlines_to_brs = true;
-    tinyInitSettings.remove_trailing_brs = true;
-    tinyInitSettings.newline_behavior = true;
+    tinyInitSettings.forced_root_block = '';  // Remove wrapper de parágrafo
+    tinyInitSettings.force_br_newlines = true;  // Força uso de <br>
+    tinyInitSettings.force_p_newlines = false;  // Não usa <p>
+    tinyInitSettings.convert_newlines_to_brs = true;  // Converte \n em <br>
+    
+    tinyInitSettings.setup = (editor: any) => {
+      editor.on('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          editor.execCommand('mceInsertContent', false, '<br><br>');
+        }
+        else if (e.key === 'Enter' && e.shiftKey) {
+          e.preventDefault();
+          editor.execCommand('mceInsertContent', false, '<br>');
+        }
+      });
+    };
   }
 
 
@@ -164,7 +174,7 @@ const HTMLField = ({
       <Editor
         tinymceScriptSrc="/tinymce/tinymce.min.js"
         onInit={(_evt, editor) => editorRef.current = editor}
-        onChange={(_evt) => input.onChange(editorRef.current.getContent({ format: "clean" }))}
+        onChange={(_evt) => input.onChange(editorRef.current.getContent({ format: "html" }))}
         initialValue={initialValue}
         init={{ ...tinyInitSettings, ...init }}
       />
