@@ -15,6 +15,7 @@ import { useTranslation } from 'react-i18next';
 import CommunityForm from '../BaseForm';
 import TurnIoIcon from './TurnIoIcon';
 
+
 const TurnIoPanel: React.FC = () => {
   const { t } = useTranslation('community');
 
@@ -43,6 +44,7 @@ const TurnIoPanel: React.FC = () => {
                 <InputField
                   name='community.integrations.turnio.api_key'
                   label={t('integrations.form.fields.turnio_api_key.label')}
+                  type="password"
                   helpText={
                     <>
                       <p><b>Onde encontro essa informação?</b></p>
