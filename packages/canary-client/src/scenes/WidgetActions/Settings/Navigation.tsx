@@ -63,6 +63,16 @@ const Navigation: React.FC<NavigationProps> = ({ widget }) => {
         <Flex direction="row" mb={3}>
           {tabs && tabs({ push, is })}
 
+          {/* Aba Fields apenas para widgets do tipo form */}
+          {widget.kind === "form" && (
+            <Tab
+              active={is(/\/widgets\/\d+\/settings\/fields\/*$/)}
+              onClick={() => push(`/fields`)}
+            >
+              {t("settings.navigation.fields")}
+            </Tab>
+          )}
+
           <Tab
             active={is(/\/widgets\/\d+\/settings\/adjusts\/*$/)}
             onClick={() => push(`/adjusts`)}
