@@ -1,24 +1,66 @@
-import * as t from '../action-types'
-import { createAction } from './create-action'
-import AuthSelectors from '../../../account/redux/selectors'
+import { GraphQLClient, gql } from 'graphql-request';
+import * as t from '../action-types';
+import { createAction } from './create-action';
 
-import MobSelectors from '../selectors'
+import MobSelectors from '../selectors';
 
-export default ({ mobilization_id: mobilizationId, ...values }) => (dispatch, getState, { api }) => {
-  const credentials = AuthSelectors(getState()).getCredentials()
+const graphQLClient = new GraphQLClient(process.env.REACT_APP_DOMAIN_API_GRAPHQL || '', { credentials: 'include' });
+
+export const ADD_BLOCK_MUTATION = gql`
+mutation ($block: blocks_insert_input!) {
+  insert_blocks_one(object: $block) {
+    id
+    mobilization_id
+    created_at
+    updated_at
+    bg_class
+    position
+    hidden
+    bg_image
+    name
+    menu_hidden
+    deleted_at
+
+    widgets {
+      id
+      block_id
+      kind
+      settings
+      sm_size
+      md_size
+      lg_size
+      created_at
+      updated_at
+      exported_at
+    }
+  }
+}
+`
+
+export default ({ widgets_attributes, ...blockAttrs }) => (dispatch, getState, { api }) => {
   const lastPosition = MobSelectors(getState()).getBlockLastPosition()
-  const block = { ...values, position: lastPosition + 1 }
+  const block = {
+    ...blockAttrs,
+    widgets: {
+      data: widgets_attributes
+    },
+    position: lastPosition + 1
+  }
 
   dispatch(createAction(t.ADD_BLOCK_REQUEST))
-  return api
-    .post(`/mobilizations/${mobilizationId}/blocks`, { block }, { headers: credentials })
-    .then(res => {
-      const { widgets_attributes, ...data } = res.data
-      dispatch(createAction(t.ADD_BLOCK_SUCCESS, data))
-      dispatch(createAction(t.ADD_WIDGETS_SUCCESS, widgets_attributes.sort((a, b) => a.id - b.id)))
+  return graphQLClient.request(
+    ADD_BLOCK_MUTATION,
+    { block }
+  ).then(response => {
+    const { widgets, ...block } = response.insert_blocks_one;
+    dispatch(createAction(t.ADD_BLOCK_SUCCESS, block))
+    widgets.forEach((widget) => {
+      console.log("widget", widget);
+      dispatch(createAction(t.ADD_WIDGETS_SUCCESS, widget))
     })
-    .catch(ex => {
-      dispatch(createAction(t.ADD_BLOCK_FAILURE, ex))
-      return Promise.reject(ex)
-    })
+    return Promise.resolve(response.insert_blocks_one)
+  }).catch(ex => {
+    dispatch(createAction(t.ADD_BLOCK_FAILURE, ex))
+    return Promise.reject(ex)
+  });
 }
