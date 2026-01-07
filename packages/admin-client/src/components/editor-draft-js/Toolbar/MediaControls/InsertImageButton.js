@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ReactS3Uploader from 'react-s3-uploader'
+import { getSignedUrl } from '../../../../graphql/upload-s3'
 
 class InsertImageButton extends Component {
   constructor (props) {
@@ -42,7 +43,7 @@ class InsertImageButton extends Component {
           <i className='fa fa-image' />
         </button>
         <ReactS3Uploader
-          signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
+          getSignedUrl={getSignedUrl}
           accept='image/*'
           onProgress={this.handleUploadProgress.bind(this)}
           onError={this.handleUploadError.bind(this)}

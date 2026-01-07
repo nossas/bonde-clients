@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ReactS3Uploader from 'react-s3-uploader'
+import { getSignedUrl } from "../../../../graphql/upload-s3";
 
 if (require('exenv').canUseDOM) require('./upload-image-field.scss')
 
@@ -70,7 +71,8 @@ class UploadImageField extends Component {
     // if theme === 'classic'
     return loading ? <i className='fa fa-spin fa-refresh' /> : (
       <ReactS3Uploader
-        signingUrl={signingUrl}
+        // signingUrl={signingUrl}
+        getSignedUrl={getSignedUrl}
         accept='image/*'
         onProgress={this.onProgress.bind(this)}
         onError={this.onError.bind(this)}

@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactS3Uploader from 'react-s3-uploader'
+import { getSignedUrl } from '../../graphql/upload-s3'
 
 class WYSIHTMLToolbarInsertImage extends React.Component {
   constructor (props, context) {
@@ -35,7 +36,7 @@ class WYSIHTMLToolbarInsertImage extends React.Component {
         <div>
           <ReactS3Uploader
             className='input col-11 inline-block'
-            signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
+            getSignedUrl={getSignedUrl}
             accept='image/*'
             onProgress={this.handleUploadProgress.bind(this)}
             onError={this.handleUploadError.bind(this)}

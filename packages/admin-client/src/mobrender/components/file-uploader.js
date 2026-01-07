@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import ReactS3Uploader from 'react-s3-uploader';
+import { getSignedUrl } from '../../graphql/upload-s3';
 import { Progress } from '../../components/await';
 
 const FileUploader = ({ file, onRemove, progress, onProgress, onFinish }) => (
@@ -28,7 +29,7 @@ const FileUploader = ({ file, onRemove, progress, onProgress, onFinish }) => (
         <ReactS3Uploader
           className="input border-none white m0 bg-darken-4"
           accept="image/*"
-          signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
+          getSignedUrl={getSignedUrl}
           onProgress={(percent) => onProgress(percent)}
           onFinish={(image) => {
             const url = image.signedUrl.substring(

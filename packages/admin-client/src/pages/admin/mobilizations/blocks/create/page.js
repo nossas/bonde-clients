@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import ReactS3Uploader from 'react-s3-uploader';
+import { getSignedUrl } from '../../../../../graphql/upload-s3';
 
 import * as paths from '../../../../../paths';
 
@@ -131,7 +132,7 @@ class BlocksCreatePage extends Component {
                     ) : (
                       <ReactS3Uploader
                         id="blockBackgroundImage"
-                        signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
+                        getSignedUrl={getSignedUrl}
                         accept="image/*"
                         onProgress={(progress) =>
                           !this.state.uploading &&
