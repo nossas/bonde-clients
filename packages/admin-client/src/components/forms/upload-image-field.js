@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom'
 import ReactS3Uploader from 'react-s3-uploader'
+import { getSignedUrl } from '../../graphql/upload-s3'
 
 class UploadImageField extends Component {
   constructor (props) {
@@ -34,7 +35,7 @@ class UploadImageField extends Component {
 
   render () {
     const { loading } = this.state
-    const { className, signingUrl, theme } = this.props
+    const { className, theme } = this.props
     const { $formGroup: { value } } = this.context
 
     let content = (<i className='fa fa-image' />)
@@ -56,7 +57,7 @@ class UploadImageField extends Component {
             {content}
           </button>
           <ReactS3Uploader
-            signingUrl={signingUrl}
+            getSignedUrl={getSignedUrl}
             accept='image/*'
             onProgress={this.onProgress.bind(this)}
             onError={this.onError.bind(this)}
@@ -69,7 +70,7 @@ class UploadImageField extends Component {
     // if theme === 'classic'
     return loading ? <i className='fa fa-spin fa-refresh' /> : (
       <ReactS3Uploader
-        signingUrl={signingUrl}
+        getSignedUrl={getSignedUrl}
         accept='image/*'
         onProgress={this.onProgress.bind(this)}
         onError={this.onError.bind(this)}
@@ -97,7 +98,6 @@ UploadImageField.contextTypes = {
 
 UploadImageField.propTypes = {
   className: PropTypes.string,
-  signingUrl: PropTypes.string.isRequired,
   theme: PropTypes.oneOf(['classic', 'icon'])
 }
 

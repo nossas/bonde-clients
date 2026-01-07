@@ -10,8 +10,7 @@ const logoutOnCanary = () => {
 };
 
 const api = axios.create({
-  baseURL:
-    process.env.REACT_APP_DOMAIN_API_REST || 'http://api-rest.bonde.devel',
+  baseURL: "http://deprecated-url",
 });
 
 const middlewares = [promise];

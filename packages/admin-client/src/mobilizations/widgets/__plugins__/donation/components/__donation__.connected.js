@@ -6,16 +6,12 @@ import AnalyticsEvents from '../../../../../mobilizations/widgets/utils/analytic
 import { asyncDonationTransactionCreate } from '../action-creators';
 
 import * as graphqlQueries from '../../../../../graphql/queries';
-import { factoryDonation } from '../../../../../mobrender-v2/widgets/donation';
-import { FinishMessageCustom } from '../../../../../mobilizations/widgets/components';
-import DonationTellAFriend from './donation-tell-a-friend';
-import DonationFinishPostDonation from './donation-finish-post-donation';
 
-const Donation = factoryDonation({
-  finishMessageCustom: FinishMessageCustom,
-  tellAFriend: DonationTellAFriend,
-  finishPostDonation: DonationFinishPostDonation,
-});
+const Donation = () => {
+  return (
+    <p>Widget de Doação descontinuada.</p>
+  )
+}
 
 const mapStateToProps = (state) => ({
   donationCustomerData: state.mobilizations.plugins.donation.customerData,

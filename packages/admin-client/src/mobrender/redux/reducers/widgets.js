@@ -67,7 +67,7 @@ export default (state = initialState, action = {}) => {
       }
     case t.ADD_WIDGETS_SUCCESS:
       return {...state,
-        data: [...state.data, ...getWidget(action.payload)]
+        data: [...state.data, getWidget(action.payload)]
       }
     case t.SET_WIDGET_LIST:
       return { ...state, data: action.payload }

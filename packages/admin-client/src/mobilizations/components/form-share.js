@@ -72,9 +72,7 @@ const FormShare = ({
             defaultMessage="Imagem"
           />
         </ControlLabel>
-        <UploadImageField
-          signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
-        />
+        <UploadImageField />
       </FormGroup>
 
       <div className="facebook-share-title-container col col-7">
