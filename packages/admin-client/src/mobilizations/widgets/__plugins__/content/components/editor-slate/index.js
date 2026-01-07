@@ -33,6 +33,7 @@ import { GridPlugin, GridButtonBar } from '@slate-editor/grid-plugin';
 import { EmbedPlugin, EmbedButton } from '@slate-editor/embed-plugin';
 
 import { connect } from 'react-redux';
+import { getSignedUrl } from '../../../../../../graphql/upload-s3';
 import {
   genericSaveSuccess,
   notify,
@@ -147,7 +148,7 @@ class EditorSlate extends Component {
             />
             <ImageButton
               className={classNames.button}
-              signingUrl={`${process.env.REACT_APP_DOMAIN_API_REST}/uploads`}
+              getSignedUrl={getSignedUrl}
             />
             <ColorButton
               className={classNames.button}

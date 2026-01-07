@@ -15,7 +15,15 @@ class ImageButton extends Component {
     }
   }
   render () {
-    const { value, onChange, className, style, signingUrl, outerState, type } = this.props
+    const { value, onChange, className, style, signingUrl, getSignedUrl, outerState, type } = this.props
+    const defaultProps = {}
+    if (signingUrl) {
+      defaultProps.signingUrl = signingUrl
+    }
+    if (getSignedUrl) {
+      defaultProps.getSignedUrl = getSignedUrl
+    }
+
     return (
       <div style={{ display: 'inline-block' }}>
         <Button
@@ -42,7 +50,7 @@ class ImageButton extends Component {
           <FontAwesome name='image' />
         </Button>
         <ReactS3Uploader
-          signingUrl={signingUrl}
+          {...defaultProps}
           accept='image/*'
           onProgress={progress => { this.setState({ progress }) }}
           onError={e => console.error('[SlateEditor][ImagePlugin]:', e)}

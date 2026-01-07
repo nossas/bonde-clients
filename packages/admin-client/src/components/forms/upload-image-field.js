@@ -35,7 +35,7 @@ class UploadImageField extends Component {
 
   render () {
     const { loading } = this.state
-    const { className, signingUrl, theme } = this.props
+    const { className, theme } = this.props
     const { $formGroup: { value } } = this.context
 
     let content = (<i className='fa fa-image' />)
@@ -70,7 +70,7 @@ class UploadImageField extends Component {
     // if theme === 'classic'
     return loading ? <i className='fa fa-spin fa-refresh' /> : (
       <ReactS3Uploader
-        signingUrl={signingUrl}
+        getSignedUrl={getSignedUrl}
         accept='image/*'
         onProgress={this.onProgress.bind(this)}
         onError={this.onError.bind(this)}
@@ -98,7 +98,6 @@ UploadImageField.contextTypes = {
 
 UploadImageField.propTypes = {
   className: PropTypes.string,
-  signingUrl: PropTypes.string.isRequired,
   theme: PropTypes.oneOf(['classic', 'icon'])
 }
 
