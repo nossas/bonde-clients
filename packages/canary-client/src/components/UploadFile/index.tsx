@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import styled from 'styled-components';
 import Image from './Image';
 import UploadImageIcon from './UploadImageIcon';
+import { useUploadS3 } from '../../graphql/upload-s3';
 
 interface UploadFieldProps {
   scale?: number
@@ -58,6 +59,7 @@ const Upload: React.FC<Props> = ({ label, name, imageScale, validate, disabled }
   // const [image, setImage] = useState<string>('');
   const { input, meta } = useField(name, { validate });
   const { t } = useTranslation('app');
+  const { getSignedUrl } = useUploadS3();
 
   const onProgress = (args: any) => {
     console.log('onProgress', { args });
@@ -76,6 +78,17 @@ const Upload: React.FC<Props> = ({ label, name, imageScale, validate, disabled }
     uploadInput?.current.click();
   }
 
+  const getSignedUrlWrapper = (file: any, callback: any) => {
+    getSignedUrl(file)
+      .then((signedUrl: string) => {
+        callback({ signedUrl });
+      })
+      .catch((error: any) => {
+        console.error('Error getting signed URL:', error);
+        callback({ error });
+      });
+  };
+
   return (
     <UploadField scale={imageScale}>
       <button onClick={handleClick} title={t('upload.button')} disabled={disabled}>
@@ -89,7 +102,7 @@ const Upload: React.FC<Props> = ({ label, name, imageScale, validate, disabled }
         <Text>{t('upload.information')}</Text>
         {meta.touched && meta.error && <Hint color='error'>{meta.error}</Hint>}
         <ReactS3Uploader
-          signingUrl={process.env.REACT_APP_UPLOADS_URL}
+          getSignedUrl={getSignedUrlWrapper}
           accept="image/*"
           onProgress={onProgress}
           onError={onError}

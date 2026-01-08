@@ -3,14 +3,14 @@ import {
   Header,
   InputField,
   Success,
-  Validators,
-  S3UploadField
+  Validators
 } from 'bonde-components';
 import { Text, Box, Flex, Image } from 'bonde-components/chakra';
 import { Context as SessionContext } from 'bonde-core-tools';
 import { useTranslation } from "react-i18next";
 import CommunityForm from '../BaseForm';
 import ButtonStyled from '../../../components/ButtonStyled';
+import Upload from '../../../components/UploadFile/index';
 const { isEmail } = Validators;
 
 export const isValidFromEmail = (value: string): string | undefined => {
@@ -37,12 +37,10 @@ const SettingsPage: React.FC = () => {
         <Box bg="white" p={6} w="50%">
           {hasPerm ? (
             <>
-              <S3UploadField
+              <Upload
                 label={t('info.form.fields.image.label')}
-                helpText={t('app:upload.information')}
                 name='community.image'
                 disabled={!hasPerm}
-                signingUrl={process.env.REACT_APP_UPLOADS_URL}
               />
               <InputField
                 name='community.name'

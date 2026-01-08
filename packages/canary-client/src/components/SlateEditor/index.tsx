@@ -15,6 +15,7 @@ import { ImagePlugin, ImageButton } from "@slate-editor/image-plugin";
 import { ColorPlugin, ColorButton, ColorStateModel } from "@slate-editor/color-plugin";
 import { GridPlugin, GridButtonBar } from "@slate-editor/grid-plugin";
 import { EmbedPlugin, EmbedButton } from "@slate-editor/embed-plugin";
+import { useUploadS3 } from '../../graphql/upload-s3';
 
 const Styles = styled.div`
   .editor--root {
@@ -155,50 +156,54 @@ type RichEditorProps = {
   onChange: any
 }
 
-const RichEditor = ({ value, onChange }: RichEditorProps) => (
-  <Styles>
-    <div className='header'>
-      <Header.H5 uppercase>Customização</Header.H5>
-      <Header.H5 uppercase>Preview</Header.H5>
-    </div>
-    <SlateEditor
-      plugins={plugins}
-      initialState={value}
-      onChange={onChange}
-    >
-      {/* Toolbar */}
-      <SlateToolbar className='buttons'>
-        <BoldButton className={classNames.button} />
-        <ItalicButton className={classNames.button} />
-        <UnderlineButton className={classNames.button} />
-        <AlignmentButtonBar className={classNames.button} />
-        <StrikethroughButton className={classNames.button} />
-        <LinkButton className={classNames.button} />
-        <ImageButton
-          className={classNames.button}
-          signingUrl={process.env.REACT_APP_UPLOADS_URL}
-        />
-        <ListButtonBar className={classNames.button} />
-        <ColorButton
-          className={classNames.button}
-          initialState={colorPluginOptions}
-          pickerDefaultPosition={{ x: -520, y: 17 }}
-        />
-        <EmbedButton className={classNames.button} />
-        <GridButtonBar className={classNames.button} />
-      </SlateToolbar>
-      {/* Toolbar */}
-      <SlateToolbar className='inputs'>
-        <FontFamilyDropdown className={classNames.dropdown} />
-        <FontSizeInput
-          {...fontSizePluginOptions}
-          className={classNames.input}
-        />
-      </SlateToolbar>
-      {/* Content */}
-      <SlateContent />
-    </SlateEditor>
-  </Styles>
-);
+const RichEditor = ({ value, onChange }: RichEditorProps) => {
+  const { getSignedUrl } = useUploadS3();
+  
+  return (
+    <Styles>
+      <div className='header'>
+        <Header.H5 uppercase>Customização</Header.H5>
+        <Header.H5 uppercase>Preview</Header.H5>
+      </div>
+      <SlateEditor
+        plugins={plugins}
+        initialState={value}
+        onChange={onChange}
+      >
+        {/* Toolbar */}
+        <SlateToolbar className='buttons'>
+          <BoldButton className={classNames.button} />
+          <ItalicButton className={classNames.button} />
+          <UnderlineButton className={classNames.button} />
+          <AlignmentButtonBar className={classNames.button} />
+          <StrikethroughButton className={classNames.button} />
+          <LinkButton className={classNames.button} />
+          <ImageButton
+            className={classNames.button}
+            getSignedUrl={getSignedUrl}
+          />
+          <ListButtonBar className={classNames.button} />
+          <ColorButton
+            className={classNames.button}
+            initialState={colorPluginOptions}
+            pickerDefaultPosition={{ x: -520, y: 17 }}
+          />
+          <EmbedButton className={classNames.button} />
+          <GridButtonBar className={classNames.button} />
+        </SlateToolbar>
+        {/* Toolbar */}
+        <SlateToolbar className='inputs'>
+          <FontFamilyDropdown className={classNames.dropdown} />
+          <FontSizeInput
+            {...fontSizePluginOptions}
+            className={classNames.input}
+          />
+        </SlateToolbar>
+        {/* Content */}
+        <SlateContent />
+      </SlateEditor>
+    </Styles>
+  );
+};
 
 export default RichEditor;
