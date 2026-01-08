@@ -6,6 +6,8 @@ import { useField } from "bonde-components/form";
 
 import { Editor } from "@tinymce/tinymce-react";
 
+import { asyncGetSignedUrl } from '../../../../graphql/upload-s3'
+
 // Importa o CSS e os temas diretamente do TinyMCE instalado localmente
 import 'tinymce/tinymce';
 import 'tinymce/icons/default';
@@ -41,23 +43,10 @@ const S3UploadHandler = async (blobInfo: any, progress: any) => {
 
   if (!filename) throw new Error("No filename found");
 
-  // URL da API que fornece a URL assinada do S3
-  const signingUrl = process.env.REACT_APP_UPLOADS_URL;
-  const queryString = `?objectName=${filename}&contentType=${encodeURIComponent(contentType)}`;
-
-  // Obtendo a URL assinada para upload no S3
-  const response = await fetch(signingUrl + queryString, {
-    headers: {
-      'Content-Type': 'application/json',
-      'Access-Control-Allow-Origin': '*'
-    }
-  })
-  if (!response.ok) throw new Error("Failed to get signed URL from S3");
-
-  const s3creds = await response.json();
+  const s3creds = await asyncGetSignedUrl(file);
 
   // Fazendo upload da imagem para o S3
-  const uploadResponse = await fetch(s3creds.signedUrl, {
+  const uploadResponse = await fetch(s3creds?.signedUrl, {
     method: "PUT",
     body: file,
     headers: {
@@ -69,7 +58,7 @@ const S3UploadHandler = async (blobInfo: any, progress: any) => {
   if (!uploadResponse.ok) throw new Error("S3 upload failed");
 
   // Retorna a URL pública da imagem armazenada
-  return s3creds.signedUrl.split("?")[0];
+  return s3creds?.signedUrl.split("?")[0];
 }
 
 
