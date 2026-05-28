@@ -66,14 +66,6 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
     `
   );
 
-  const [routerAddOperation] = useMutation(
-    gql`
-      mutation ($domains: [String]!, $operation: String!) {
-        router_add_operation(operation: $operation, domains: $domains)
-      }
-    `
-  );
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -113,18 +105,14 @@ export const FormPanel: React.FC<FormPanelProperties> = ({
       // console.log("customDomain", customDomain)
       
       if (mobilizationCustomDomain && customDomain && mobilizationCustomDomain !== customDomain) {
-        await routerAddOperation({ variables: { domains: [mobilizationCustomDomain, `www.${mobilizationCustomDomain}`], operation: "remove" }}); 
-        await routerAddOperation({ variables: { domains: [customDomain, `www.${customDomain}`], operation: "append" }});
         await asyncUpdateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
 
         updateMobilization({...mobilization, custom_domain: `www.${customDomain}`});
       } else if (!mobilizationCustomDomain && customDomain) {
-        await routerAddOperation({ variables: { domains: [customDomain, `www.${customDomain}`], operation: "append" }});
         await asyncUpdateMobilization({ variables: { id: mobilization.id, customDomain: `www.${customDomain}` } });
 
         updateMobilization({...mobilization, custom_domain: `www.${customDomain}`});
       } else if (mobilizationCustomDomain && !customDomain) {
-        await routerAddOperation({ variables: { domains: [mobilizationCustomDomain, `www.${mobilizationCustomDomain}`], operation: "remove" }}); 
         await asyncUpdateMobilization({ variables: { id: mobilization.id, customDomain: null } });
 
         updateMobilization({...mobilization, custom_domain: null});
