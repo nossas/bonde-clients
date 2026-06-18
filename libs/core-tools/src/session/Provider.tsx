@@ -40,6 +40,7 @@ const FETCH_SESSION_QUERY = gql`
       email_template_from
       modules
       signature
+      integrations
 
       recipient {
         id
