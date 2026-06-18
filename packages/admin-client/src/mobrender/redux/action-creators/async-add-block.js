@@ -39,10 +39,18 @@ mutation ($block: blocks_insert_input!) {
 
 export default ({ widgets_attributes, ...blockAttrs }) => (dispatch, getState, { api }) => {
   const lastPosition = MobSelectors(getState()).getBlockLastPosition()
+  const now = new Date().toISOString();
+  
   const block = {
     ...blockAttrs,
+    created_at: now,     
+    updated_at: now,      
     widgets: {
-      data: widgets_attributes
+      data: widgets_attributes.map(widget => ({
+        ...widget,
+        created_at: now,  
+        updated_at: now 
+      }))
     },
     position: lastPosition + 1
   }
