@@ -33,12 +33,14 @@ const LoginPage: React.FC<LoginPageProps> = ({ to }) => {
         onSubmit={async (values: any) => {
           try {
             const { data } = await authenticate({ variables: values });
-            if (data.authenticate) {
-              // Redirect form after login on session
-              const urlParams = new URLSearchParams(search);
-              const nextUrl = urlParams.get('next');
-              window.location.href = nextUrl ? nextUrl : to;
-            }
+            
+              if (data.authenticate?.token) {
+                localStorage.setItem('token', data.authenticate.token);
+
+                const urlParams = new URLSearchParams(search);
+                const nextUrl = urlParams.get('next');
+                window.location.href = nextUrl ? nextUrl : to;
+              }
           } catch (err) {
             if ((err as any).graphQLErrors && (err as any).graphQLErrors.filter((e: any) => e.message === 'email_password_dismatch').length > 0) {
               // return { email: 'Ops! Email ou senha incorretos' };
